@@ -47,7 +47,8 @@ stardust/
 │       ├── logo.<ext>                # extracted logo
 │       └── media/                    # extracted images, with original URLs
 ├── prototypes/
-│   └── <slug>.html                   # before/after side-by-side prototype
+│   ├── <slug>.html                   # before/after viewer (user-facing review surface)
+│   └── <slug>-proposed.html          # proposed redesign on its own (live-mode iteration target, migration source)
 └── migrated/
     └── <slug>.html                   # final redesigned static HTML page
 ```
@@ -74,12 +75,26 @@ Owner: `$stardust extract`. Per-page parsed model. Schema lives in
 Owner: `$stardust extract`. Logo + media extracted from the live site.
 Filenames preserve the source basename plus a hash to avoid collisions.
 
-### `stardust/prototypes/<slug>.html`
-Owner: `$stardust prototype`. A self-contained HTML file with two
-iframes side-by-side: left = current page (rendered from
-`stardust/current/pages/<slug>.json` against the **current** DESIGN.md),
-right = proposed redesign (rendered against the **target** DESIGN.md).
-Provenance block in HEAD.
+### `stardust/prototypes/<slug>.html` and `<slug>-proposed.html`
+Owner: `$stardust prototype`. Two files per page (see
+`skills/prototype/reference/before-after-shell.md` for the contract):
+
+- **`<slug>.html`** — the **viewer**. Self-contained HTML with two
+  iframes side-by-side: left = current page (live URL, screenshot
+  fallback, or landmarks-text fallback), right = the proposed
+  redesign (loaded from `<slug>-proposed.html`). Header strip with
+  swap/approve/stash/live-mode actions. The user-facing review
+  surface.
+- **`<slug>-proposed.html`** — the **proposed redesign on its own**.
+  Self-contained, complete HTML page rendered against the target
+  `DESIGN.md`. The file `$impeccable live` iterates on; the file
+  `$stardust migrate` later re-derives from for the final migrated
+  page.
+
+Both carry provenance blocks in `<head>`. The proposed file's
+provenance lists the active direction it was rendered against; when
+direction changes, the page is flagged `stale` in `state.json` and
+the viewer surfaces the staleness in the header strip.
 
 ### `stardust/migrated/<slug>.html`
 Owner: `$stardust migrate`. Final redesigned static page. No iframe
