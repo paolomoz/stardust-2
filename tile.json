@@ -1,0 +1,14 @@
+{
+  "name": "adobe/stardust",
+  "description": "Redesign an existing website to make it better. Built on top of impeccable.",
+  "skills": {
+    "stardust": "skills/stardust/SKILL.md",
+    "stardust:extract": "skills/extract/SKILL.md",
+    "stardust:direct": "skills/direct/SKILL.md",
+    "stardust:prototype": "skills/prototype/SKILL.md",
+    "stardust:migrate": "skills/migrate/SKILL.md"
+  },
+  "softDependencies": [
+    "impeccable"
+  ]
+}
