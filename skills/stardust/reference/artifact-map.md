@@ -49,8 +49,17 @@ stardust/
 ├── prototypes/
 │   ├── <slug>.html                   # before/after viewer (user-facing review surface)
 │   └── <slug>-proposed.html          # proposed redesign on its own (live-mode iteration target, migration source)
-└── migrated/
-    └── <slug>.html                   # final redesigned static HTML page
+└── migrated/                       # deployable static HTML site
+    ├── index.html                   # the home page (slug "home" -> root)
+    ├── <slug>/
+    │   └── index.html               # one per non-home slug (URL-faithful nesting)
+    ├── docs/api/index.html          # multi-segment slugs nest naturally
+    ├── assets/
+    │   ├── logo.<ext>               # copied from current/assets/
+    │   ├── favicon.<ext>            # copied from current/assets/
+    │   └── media/                   # only files referenced by migrated pages
+    ├── robots.txt                   # minimal
+    └── sitemap.xml                  # derived from migrated inventory
 ```
 
 ### `stardust/state.json`
@@ -96,9 +105,23 @@ provenance lists the active direction it was rendered against; when
 direction changes, the page is flagged `stale` in `state.json` and
 the viewer surfaces the staleness in the header strip.
 
-### `stardust/migrated/<slug>.html`
-Owner: `$stardust migrate`. Final redesigned static page. No iframe
-shell — just the redesigned page itself. Provenance block in HEAD.
+### `stardust/migrated/`
+Owner: `$stardust migrate`. A deployable static HTML site. The slug →
+output-path mapping (`home` → `index.html`, `pricing` →
+`pricing/index.html`, `docs__api` → `docs/api/index.html`) is detailed
+in `skills/migrate/reference/migration-procedure.md` § Output path
+mapping.
+
+Each page is a self-contained HTML file with a stardust:migrate
+provenance block as the first child of `<head>`, the `:root` block
+exposing the current DESIGN.md tokens, structural data attributes on
+every section, and asset references rewritten to relative paths
+under `assets/`.
+
+The migrated tree is **incremental and idempotent**. Re-running
+migrate writes only pages whose source has changed (sha-compared in
+provenance). Migration is per-page — the user can migrate part of
+the site today and the rest later.
 
 ---
 
