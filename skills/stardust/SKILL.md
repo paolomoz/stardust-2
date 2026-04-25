@@ -105,3 +105,4 @@ read. Format conventions in `reference/artifact-map.md`.
 - `reference/impeccable-command-map.md` — when to reach for each of the 23 impeccable commands.
 - `reference/state-machine.md` — page lifecycle, stale rules, state report format.
 - `reference/artifact-map.md` — every file stardust reads or writes, with ownership and provenance shape.
+- `reference/divergence-toolkit.md` — anti-mediocrity device. Default-moves list, deterministic seed, font decks, role-naming rule. Consumed by `direct` (when authoring target tokens) and `prototype` (when generating variants).

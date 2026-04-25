@@ -5,18 +5,29 @@ how its provenance block is shaped.
 
 ---
 
-## Project root (impeccable's territory — stardust reads, occasionally writes)
+## Project root (impeccable's format — stardust authors directly)
 
-| Path             | Owner       | Stardust writes when                           | Stardust reads when                    |
-|------------------|-------------|------------------------------------------------|----------------------------------------|
-| `PRODUCT.md`     | impeccable  | `$stardust direct` seeds it via `$impeccable teach` | every sub-command (target strategy)    |
-| `DESIGN.md`      | impeccable  | `$stardust direct` seeds it via `$impeccable document` | `prototype`, `migrate`               |
-| `DESIGN.json`    | impeccable  | `$stardust direct` seeds it via `$impeccable document` | `prototype`, `migrate`               |
-| `AGENTS.md`      | impeccable  | never (read-only for stardust)                 | every sub-command (Design Context)     |
+| Path             | Format owner | Stardust writes when                                         | Stardust reads when                    |
+|------------------|--------------|--------------------------------------------------------------|----------------------------------------|
+| `PRODUCT.md`     | impeccable   | `$stardust direct` authors it from the resolved direction    | every sub-command (target strategy)    |
+| `DESIGN.md`      | impeccable   | `$stardust direct` authors it from the resolved direction + brand surface | `prototype`, `migrate`     |
+| `DESIGN.json`    | impeccable   | `$stardust direct` authors it from the resolved direction + brand surface | `prototype`, `migrate`     |
+| `AGENTS.md`      | impeccable   | never (read-only for stardust)                               | every sub-command (Design Context)     |
 
-Stardust never edits these files behind impeccable's back. When
-seeding them, stardust delegates to `$impeccable teach` and `$impeccable
-document` rather than writing the files directly.
+Stardust authors `PRODUCT.md`, `DESIGN.md`, and `DESIGN.json` **directly**,
+treating impeccable's `reference/teach.md` and `reference/document.md` as
+**format specs** rather than runtime commands. Reasoning: by the time
+`$stardust direct` runs, the user has already gone through stardust's
+intent-reasoning interview — re-running impeccable's interview would
+duplicate questions. The resolved direction in `stardust/direction.md`
+carries every answer impeccable's interviews would surface.
+
+Users who want impeccable to validate or refine the project-root files
+can run `$impeccable teach` or `$impeccable document` directly at any
+time; stardust does not own those commands and will not interfere.
+
+The same direct-authoring pattern is used for the descriptive files
+under `stardust/current/` written by `$stardust extract`.
 
 ---
 
