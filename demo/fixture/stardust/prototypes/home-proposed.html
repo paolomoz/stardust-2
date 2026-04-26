@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy: stardust:prototype (with $impeccable craft)
+  writtenAt: 2026-04-26T13:45:00Z
+  page: home
+  pageUrl: https://aurora-coffee.example.com/
+  iteratedVia: impeccable:live (sessionId: ac-home-1745670000)
+  againstDirection: stardust/direction.md (Active 2026-04-26T13:15:00Z)
+  readArtifacts:
+    - stardust/current/pages/home.json
+    - DESIGN.md
+    - DESIGN.json
+  divergenceVersion: v1.0 (stardust v2)
+  fontDeck: zine-maximalist
+  paletteSource: library:Vintage Cottage Charm (recommended_index=1, picked_index=1)
+  stardustVersion: 0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F1F7ED">
+<title>Aurora Coffee — Send-it nine ways from Sunday</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=DM+Serif+Display&family=Homemade+Apple&family=Special+Elite&display=swap">
+<style>
+:root {
+  --heading-font-family: "Abril Fatface", Georgia, serif;
+  --body-font-family:    "DM Serif Display", Georgia, serif;
+  --mono-font-family:    "Special Elite", ui-monospace, monospace;
+  --script-font-family:  "Homemade Apple", cursive;
+
+  --heading-xxl: clamp(3rem, 9vw, 7rem);
+  --heading-xl:  clamp(2.5rem, 6vw, 4rem);
+  --heading-lg:  2.25rem;
+  --heading-md:  1.5rem;
+  --body:        1.125rem;
+  --body-sm:     1rem;
+
+  --line-height-heading: 0.95;
+  --line-height-body:    1.55;
+
+  --color-bg:     #F1F7ED;
+  --color-fg:     #54494B;
+  --color-accent: #B33951;
+  --color-sage:   #91C7B1;
+  --color-pollen: #E3D081;
+
+  --spacing-xs:  4px;
+  --spacing-sm:  8px;
+  --spacing-md:  16px;
+  --spacing-lg:  24px;
+  --spacing-xl:  48px;
+  --spacing-2xl: 96px;
+
+  --section-padding: 96px;
+  --max-width:       1180px;
+  --radius:          0px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--body-font-family);
+  font-size: var(--body);
+  line-height: var(--line-height-body);
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-lg); }
+a { color: inherit; }
+
+/* Header / nav -- intentionally low-key, NOT a sticky SaaS top nav */
+header[data-section] {
+  border-bottom: 1px solid var(--color-fg);
+  padding: var(--spacing-md) 0;
+}
+header .row { display: flex; align-items: baseline; justify-content: space-between; gap: var(--spacing-lg); flex-wrap: wrap; }
+.brand {
+  font-family: var(--heading-font-family);
+  font-size: 1.75rem;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  color: var(--color-fg);
+  line-height: 1;
+}
+nav.main ul { list-style: none; padding: 0; margin: 0; display: flex; gap: var(--spacing-lg); flex-wrap: wrap; }
+nav.main a {
+  color: var(--color-fg); text-decoration: none;
+  font-family: var(--mono-font-family); font-size: 0.875rem;
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+nav.main a:hover { color: var(--color-accent); }
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  font-family: var(--mono-font-family);
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border: 0;
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.btn-primary { background: var(--color-accent); color: var(--color-bg); }
+.btn-primary:hover { transform: translateX(4px); }
+.btn-primary:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 4px; }
+.btn-secondary {
+  background: transparent; color: var(--color-fg);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-fg);
+}
+.btn-secondary:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+
+/* Pill meta */
+.pill {
+  display: inline-block;
+  background: var(--color-sage); color: var(--color-fg);
+  font-family: var(--mono-font-family); font-size: 0.75rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 9999px;
+}
+
+/* Marginalia (Homemade Apple) -- max twice per page */
+.marginalia {
+  font-family: var(--script-font-family);
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--color-fg);
+  border-left: 1px solid var(--color-fg);
+  padding-left: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+}
+
+/* Hero -- riso-print headline */
+section[data-section="hero"] { padding: var(--spacing-2xl) 0 var(--spacing-2xl); }
+.hero-meta {
+  font-family: var(--mono-font-family);
+  font-size: 0.875rem; letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-fg);
+  margin-bottom: var(--spacing-lg);
+  display: flex; gap: var(--spacing-md); flex-wrap: wrap; align-items: center;
+}
+.hero-meta::before { content: "§ 01 ·"; }
+.riso-display {
+  position: relative;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-xxl);
+  line-height: var(--line-height-heading);
+  letter-spacing: -0.02em;
+  color: var(--color-fg);
+  margin: 0 0 var(--spacing-lg);
+  max-width: 14ch;
+}
+.riso-display .ghost {
+  position: absolute; inset: 0;
+  color: var(--color-sage);
+  transform: translateX(4px);
+  z-index: -1;
+  pointer-events: none;
+  user-select: none;
+}
+.hero p.lede {
+  font-size: 1.375rem; line-height: 1.45;
+  max-width: 48ch;
+  margin: 0 0 var(--spacing-xl);
+}
+.hero p.lede em { font-style: italic; color: var(--color-accent); }
+.hero-cta { display: flex; gap: var(--spacing-lg); align-items: center; flex-wrap: wrap; }
+
+/* Editorial split: 3 / 5 ratio, alternating side */
+section[data-section="this-week"] {
+  padding: var(--spacing-2xl) 0;
+  border-top: 1px solid var(--color-fg);
+}
+.editorial-split {
+  display: grid;
+  grid-template-columns: 3fr 5fr;
+  gap: var(--spacing-2xl);
+  align-items: start;
+}
+.editorial-split .left h2 {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-xl);
+  line-height: 0.95; letter-spacing: -0.02em;
+  margin: 0 0 var(--spacing-md);
+}
+.editorial-split .left .meta {
+  font-family: var(--mono-font-family);
+  font-size: 0.8125rem; letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-fg);
+}
+.editorial-split .right p { font-size: 1.25rem; line-height: 1.5; margin: 0 0 var(--spacing-md); max-width: 56ch; }
+.editorial-split .right p:first-child::first-letter {
+  font-family: var(--heading-font-family);
+  font-size: 3.5em;
+  float: left;
+  line-height: 0.85;
+  padding-right: 0.08em;
+  margin-top: 0.06em;
+  color: var(--color-accent);
+}
+
+/* Sage surface section: alternates the page ground */
+section[data-section="how"] {
+  padding: var(--spacing-2xl) 0;
+  background: var(--color-sage);
+}
+section[data-section="how"] .editorial-split { grid-template-columns: 5fr 3fr; }
+section[data-section="how"] h2 { font-family: var(--heading-font-family); font-size: var(--heading-lg); line-height: 1.05; margin: 0 0 var(--spacing-md); }
+section[data-section="how"] p { font-size: 1.125rem; line-height: 1.55; margin: 0 0 var(--spacing-md); max-width: 56ch; }
+
+/* Cup-note callouts */
+section[data-section="cup-notes"] {
+  padding: var(--spacing-2xl) 0;
+  border-top: 1px solid var(--color-fg);
+}
+section[data-section="cup-notes"] h2 {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-xl); line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--spacing-xl);
+  max-width: 18ch;
+}
+.cup-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-xl);
+}
+.cup {
+  border-top: 2px solid var(--color-fg);
+  padding-top: var(--spacing-md);
+}
+.cup .pill { margin-bottom: var(--spacing-md); }
+.cup h3 {
+  font-family: var(--heading-font-family);
+  font-size: 1.75rem; line-height: 1.05; letter-spacing: -0.01em;
+  margin: 0 0 var(--spacing-sm);
+}
+.cup .farm {
+  font-family: var(--mono-font-family);
+  font-size: 0.8125rem; letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-fg);
+  margin-bottom: var(--spacing-md);
+}
+.cup p.notes { font-style: italic; margin: 0 0 var(--spacing-md); font-size: 1.125rem; line-height: 1.45; }
+.cup .roast {
+  font-family: var(--mono-font-family);
+  font-size: 0.75rem; letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* CTA band */
+section[data-section="cta-band"] {
+  padding: var(--spacing-2xl) 0;
+  background: var(--color-accent); color: var(--color-bg);
+  text-align: center;
+}
+section[data-section="cta-band"] h2 {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-xl); line-height: 0.95; letter-spacing: -0.02em;
+  margin: 0 auto var(--spacing-md);
+  max-width: 18ch;
+}
+section[data-section="cta-band"] p { font-size: 1.125rem; margin: 0 0 var(--spacing-xl); }
+section[data-section="cta-band"] .btn-primary { background: var(--color-bg); color: var(--color-accent); }
+section[data-section="cta-band"] .btn-primary:hover { background: var(--color-pollen); color: var(--color-fg); transform: translateX(4px); }
+
+/* Footer */
+footer[data-section] {
+  padding: var(--spacing-2xl) 0 var(--spacing-xl);
+  border-top: 1px solid var(--color-fg);
+  font-family: var(--mono-font-family);
+  font-size: 0.8125rem; letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+footer .row { display: flex; justify-content: space-between; gap: var(--spacing-lg); flex-wrap: wrap; }
+footer ul { list-style: none; padding: 0; margin: 0; display: flex; gap: var(--spacing-lg); flex-wrap: wrap; }
+footer a { color: var(--color-fg); text-decoration: none; }
+footer a:hover { color: var(--color-accent); }
+footer .signoff { color: var(--color-fg); }
+
+@media (max-width: 880px) {
+  :root { --section-padding: 64px; }
+  .editorial-split, section[data-section="how"] .editorial-split { grid-template-columns: 1fr; gap: var(--spacing-xl); }
+  .cup-grid { grid-template-columns: 1fr; }
+  nav.main { display: none; }
+  .riso-display { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<header data-section="masthead" data-intent="orient" data-layout="contained">
+  <div class="wrap row">
+    <a class="brand" href="/">Aurora Coffee</a>
+    <nav class="main">
+      <ul>
+        <li><a href="/coffee">Beans</a></li>
+        <li><a href="/subscribe">Subscriptions</a></li>
+        <li><a href="/cafe">Cafe</a></li>
+        <li><a href="/about">Notes</a></li>
+        <li><a href="/account">Account</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section data-section="hero" data-intent="emotional hook" data-layout="full-bleed">
+    <div class="wrap">
+      <div class="hero-meta">
+        <span>Issue №&nbsp;14</span>
+        <span>Roasted Tuesday</span>
+        <span class="pill">Single origin</span>
+      </div>
+      <h1 class="riso-display">
+        Send-it nine ways from Sunday.
+        <span class="ghost" aria-hidden="true">Send-it nine ways from Sunday.</span>
+      </h1>
+      <p class="lede">
+        We bought 14 sacks of Yirgacheffe G1 from <em>Halo Hartume</em>. Roast date is up to us. Bag, brew, and Sunday-morning routine are up to you.
+      </p>
+      <p class="marginalia">
+        — single farmer.<br>seven days of cup notes.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="/subscribe">Start a subscription</a>
+        <a class="btn btn-secondary" href="/shop">Or shop one bag</a>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="this-week" data-intent="value proposition" data-layout="split-media" data-items="1">
+    <div class="wrap editorial-split">
+      <div class="left">
+        <h2>What's in the kitchen this week.</h2>
+        <p class="meta">Updated Mondays · 7am Pacific</p>
+      </div>
+      <div class="right">
+        <p>One Ethiopian Yirgacheffe at the front, two Colombians on rotation, and a Costa Rican honey we've been holding for five months. Each bag ships within 48 hours of roast date — which we print, in plain words, on the side of the bag in Special Elite.</p>
+        <p>You pick the bag. We pick the brew method. <em>Or vice versa.</em> The roast date is up to us, because the roast date is the only thing on this site that's not up for opinion.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="how" data-intent="build trust" data-layout="split-media" data-items="1">
+    <div class="wrap editorial-split">
+      <div class="left">
+        <h2>How we got here.</h2>
+        <p>Started in 2018. Two people. One Probat. The decision to <em>not</em> grow into a chain has been the load-bearing constraint of every year since. We sample 100+ lots a season and roast about a dozen of them.</p>
+        <p>We name the farms. We list the varietal. We tell you the elevation. None of this is a flex — it's the floor.</p>
+      </div>
+      <div class="right">
+        <p class="marginalia">
+          Probat machines are<br>1 / 1 each. Ours is from<br>1979. Calibrated weekly.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="cup-notes" data-intent="discovery" data-layout="grid" data-items="3">
+    <div class="wrap">
+      <h2>This week's cup notes.</h2>
+      <div class="cup-grid">
+        <div class="cup">
+          <span class="pill">Single origin</span>
+          <h3>Yirgacheffe G1</h3>
+          <p class="farm">Ethiopia · Halo Hartume · 2,050m</p>
+          <p class="notes">Bergamot, white peach, honeysuckle. Long finish.</p>
+          <p class="roast">Roasted Tue · light</p>
+        </div>
+        <div class="cup">
+          <span class="pill">Single origin</span>
+          <h3>Inza Honey</h3>
+          <p class="farm">Colombia · Finca La Esperanza · 1,800m</p>
+          <p class="notes">Golden raisin, dark cocoa, brown sugar. Heavy body.</p>
+          <p class="roast">Roasted Tue · medium</p>
+        </div>
+        <div class="cup">
+          <span class="pill">Single origin</span>
+          <h3>Tarrazú White Honey</h3>
+          <p class="farm">Costa Rica · Finca Don Carlos · 1,750m</p>
+          <p class="notes">Stone fruit, almond, panela. Soft, drinkable.</p>
+          <p class="roast">Roasted Tue · medium-light</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="cta-band" data-intent="drive action" data-layout="full-bleed">
+    <div class="wrap">
+      <h2>Pick a bag. Set a cadence. The rest is up to us.</h2>
+      <p>From $18 / bag · free shipping over $40 · skip or cancel any week</p>
+      <a class="btn btn-primary" href="/subscribe">Start a subscription</a>
+    </div>
+  </section>
+
+</main>
+
+<footer data-section="footer" data-intent="orient" data-layout="contained">
+  <div class="wrap row">
+    <span class="signoff">Aurora Coffee · MOD. 2026 · Pacific Northwest</span>
+    <ul>
+      <li><a href="/cafe">Cafe</a></li>
+      <li><a href="/farmers">Farmers</a></li>
+      <li><a href="/notes">Notes</a></li>
+      <li><a href="/privacy">Privacy</a></li>
+      <li><a href="https://instagram.com/auroracoffee">Instagram</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

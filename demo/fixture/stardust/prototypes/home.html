@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy: stardust:prototype (viewer)
+  writtenAt: 2026-04-26T13:45:00Z
+  page: home
+  pageUrl: https://aurora-coffee.example.com/
+  proposedFile: ./home-proposed.html
+  againstDirection: stardust/direction.md (Active 2026-04-26T13:15:00Z)
+  readArtifacts:
+    - stardust/current/pages/home.json
+    - stardust/current/current-rendering.html (BEFORE iframe source)
+    - stardust/prototypes/home-proposed.html (PROPOSED iframe source)
+    - DESIGN.md
+    - DESIGN.json
+  synthesizedInputs: []
+  stardustVersion: 0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>home — before/after — Aurora Coffee</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; }
+body {
+  background: #0e0d0c;
+  color: #f0eee9;
+  font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  letter-spacing: 0;
+  display: flex; flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+header.shell, footer.shell {
+  background: #1a1816;
+  border-bottom: 1px solid #2a2724;
+  padding: 0 16px;
+  display: flex; align-items: center; gap: 16px;
+  flex-shrink: 0;
+}
+header.shell { height: 48px; }
+footer.shell { height: 32px; border-bottom: 0; border-top: 1px solid #2a2724; font-size: 12px; }
+
+.shell .pill {
+  display: inline-flex; align-items: center;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid #3a3633;
+  border-radius: 2px;
+  color: #cfc9bf;
+}
+.shell .label { font-weight: 600; color: #f0eee9; }
+.shell .meta { color: #9b958a; }
+.shell .grow { flex: 1; }
+
+.shell .actions { display: flex; gap: 6px; }
+.shell button, .shell a.btn {
+  font: inherit; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 6px 12px;
+  background: transparent;
+  color: #f0eee9;
+  border: 1px solid #3a3633;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.1s ease, border-color 0.1s ease;
+}
+.shell button:hover, .shell a.btn:hover { background: #2a2724; border-color: #4a4642; }
+.shell button.primary { background: #B33951; border-color: #B33951; color: white; }
+.shell button.primary:hover { background: #c04461; border-color: #c04461; }
+
+footer.shell .direction-title { color: #f0eee9; font-style: italic; }
+footer.shell a { color: #cfc9bf; text-decoration: none; border-bottom: 1px dotted #4a4642; }
+footer.shell a:hover { color: #B33951; border-bottom-color: #B33951; }
+
+.split {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 4px 1fr;
+  min-height: 0;
+}
+.pane {
+  position: relative;
+  background: white;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  min-height: 0;
+}
+.pane-label {
+  position: absolute; top: 0; left: 0;
+  background: rgba(20, 18, 16, 0.92);
+  color: #f0eee9;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 4px 10px;
+  border-bottom-right-radius: 2px;
+  z-index: 10;
+}
+.pane iframe {
+  flex: 1;
+  width: 100%;
+  border: 0;
+  background: white;
+}
+.divider {
+  background: #2a2724;
+  cursor: col-resize;
+  position: relative;
+}
+.divider::before {
+  content: ""; position: absolute; inset: 0; left: -3px; right: -3px;
+}
+.divider::after {
+  content: ""; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2px; height: 24px;
+  background: #4a4642;
+  border-radius: 1px;
+}
+
+.pane.before { background: #FAF7F2; }
+.pane.after  { background: #F1F7ED; }
+
+@media (max-width: 720px) {
+  .split { grid-template-columns: 1fr; grid-template-rows: 1fr 4px 1fr; }
+  .divider { cursor: row-resize; }
+  .divider::after { width: 24px; height: 2px; }
+}
+</style>
+</head>
+<body>
+
+<header class="shell">
+  <span class="pill">PAGE</span>
+  <span class="label">home</span>
+  <span class="meta">stardust/prototypes/home.html</span>
+  <span class="grow"></span>
+  <div class="actions">
+    <button id="swap" title="Swap sides">⇄ swap</button>
+    <button id="stash" title="Stash this version">stash</button>
+    <a class="btn" href="https://github.com/paolomoz/stardust-2/blob/claude/refactor-stardust-plugin-PiI3P/skills/prototype/reference/before-after-shell.md" target="_blank" rel="noopener">live mode</a>
+    <button class="primary" id="approve" title="Approve this prototype">✓ approve</button>
+  </div>
+</header>
+
+<div class="split" id="split">
+  <div class="pane before" id="paneA">
+    <span class="pane-label">CURRENT · live URL</span>
+    <iframe src="../current/current-rendering.html" title="Current Aurora Coffee site"></iframe>
+  </div>
+  <div class="divider" role="separator" aria-orientation="vertical"></div>
+  <div class="pane after" id="paneB">
+    <span class="pane-label">PROPOSED · target DESIGN.md</span>
+    <iframe src="./home-proposed.html" title="Proposed Aurora Coffee redesign"></iframe>
+  </div>
+</div>
+
+<footer class="shell">
+  <span class="meta">DIRECTION</span>
+  <span class="direction-title">"make it more expressive for a young audience"</span>
+  <span class="grow"></span>
+  <a href="../direction.md">stardust/direction.md →</a>
+</footer>
+
+<script>
+// Swap sides
+document.getElementById('swap').addEventListener('click', () => {
+  const a = document.getElementById('paneA');
+  const b = document.getElementById('paneB');
+  a.classList.toggle('before'); a.classList.toggle('after');
+  b.classList.toggle('before'); b.classList.toggle('after');
+  const split = document.getElementById('split');
+  split.insertBefore(b, a);
+});
+
+// Approve / stash are demo affordances in this static fixture
+document.getElementById('approve').addEventListener('click', () => {
+  alert('In a live $stardust prototype session, this posts an "approve" event so the agent can mark state.json:\n\n  pages.home.status: prototyped → approved\n\nIn this static fixture, the page is already at status="migrated".');
+});
+document.getElementById('stash').addEventListener('click', () => {
+  alert('In a live session, this would copy home-proposed.html to home-proposed-stash-<ts>.html and start the next iteration fresh.');
+});
+
+// Drag the divider
+(() => {
+  const split = document.getElementById('split');
+  const divider = split.querySelector('.divider');
+  let dragging = false;
+  divider.addEventListener('mousedown', () => { dragging = true; document.body.style.cursor = 'col-resize'; });
+  document.addEventListener('mouseup',   () => { dragging = false; document.body.style.cursor = ''; });
+  document.addEventListener('mousemove', (e) => {
+    if (!dragging) return;
+    const rect = split.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const pct = Math.max(15, Math.min(85, (x / rect.width) * 100));
+    split.style.gridTemplateColumns = `${pct}fr 4px ${100 - pct}fr`;
+  });
+})();
+</script>
+</body>
+</html>
