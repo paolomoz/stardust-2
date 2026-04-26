@@ -137,6 +137,49 @@ fallback. Resolve the PROPOSED iframe source as a relative path to
    Append a new provenance entry with `iteratedVia: impeccable:live
    (sessionId: <id>)`.
 
+#### Iteration paths
+
+Refinement after the initial render can take three forms. They are
+not mutually exclusive — a single page can move through all three
+across its lifetime.
+
+1. **Live picker (default).** The user clicks an element + an action
+   inside `$impeccable live`'s browser picker. Live emits a
+   `generate` event with `action ∈ {bolder, quieter, distill, polish,
+   typeset, colorize, layout, adapt, animate, delight, overdrive,
+   impeccable, <freeform>}`. The agent (driving the poll loop) plans
+   three variants for that element and writes them into
+   `<slug>-proposed.html`. Live owns the action vocabulary at this
+   level; stardust does not re-implement it.
+
+2. **Chat-driven (when not in live).** The user gives a refinement
+   phrase in chat — *"make the hero bolder for home"*, *"tighten the
+   cup-note grid"*, *"less corporate"*. The agent:
+   - Reads the phrase against
+     `skills/stardust/reference/intent-dimensions.md` to identify
+     which axes it moves.
+   - Consults
+     `skills/stardust/reference/impeccable-command-map.md` to pick
+     the matching impeccable command (often `bolder`, `quieter`,
+     `distill`, `typeset`, `colorize`, or `layout`).
+   - Shows the resolved plan to the user before executing.
+   - Runs the chosen command against `<slug>-proposed.html` (or a
+     specific section within it, when the phrase scopes one).
+   - Re-validates per Phase 2 (`:root` block, data attributes,
+     anti-toolbox audit clean, impeccable hard rules) and updates
+     the proposed file's provenance.
+
+3. **Direct impeccable invocation.** The user runs an impeccable
+   command directly — `$impeccable bolder
+   stardust/prototypes/home-proposed.html`. Stardust isn't in the
+   loop; the viewer iframes whatever's on disk. This is fine and
+   documented as a supported escape hatch.
+
+The "open and reasoned" principle from the master skill applies to
+path 2: the agent reasons publicly about the phrase before running
+any command, and never silently maps a refinement to a fixed
+command.
+
 ### Phase 5 — Approval
 
 Approval is **explicit**. Stardust does not auto-approve.
@@ -222,6 +265,12 @@ are last-write-wins; warn the user if they explicitly try.
   attribute vocabulary (cross-cutting, used by prototype + migrate).
 - `skills/stardust/reference/divergence-toolkit.md` —
   anti-mediocrity rules consumed during render and live iteration.
+- `skills/stardust/reference/intent-dimensions.md` — the 7-axis
+  vocabulary used to read a chat-driven refinement phrase
+  (iteration path 2).
+- `skills/stardust/reference/impeccable-command-map.md` — when to
+  reach for each impeccable command. Consulted during chat-driven
+  iteration (path 2) to pick the command for a refinement phrase.
 - `skills/stardust/reference/state-machine.md` — page lifecycle
   and stale rules.
 - `skills/stardust/reference/artifact-map.md` — provenance shape.
