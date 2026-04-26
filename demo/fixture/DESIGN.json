@@ -1,0 +1,170 @@
+{
+  "_provenance": {
+    "writtenBy": "stardust:direct",
+    "writtenAt": "2026-04-26T13:15:00Z",
+    "readArtifacts": [
+      "stardust/direction.md",
+      "stardust/current/_brand-extraction.json",
+      "skills/direct/reference/palettes/library.json"
+    ],
+    "synthesizedInputs": [],
+    "stardustVersion": "0.2.0"
+  },
+  "schemaVersion": 2,
+  "generatedAt": "2026-04-26T13:15:00Z",
+  "title": "Aurora Coffee",
+
+  "extensions": {
+    "colorMeta": {
+      "ink":    { "role": "Ink",    "use": "primary text, deepest grounds",                    "oklch": "oklch(35% 0.014 22)" },
+      "ground": { "role": "Ground", "use": "page background",                                  "oklch": "oklch(96% 0.013 132)" },
+      "sage":   { "role": "Sage",   "use": "secondary surface, button hover, accent panels",   "oklch": "oklch(75% 0.054 154)" },
+      "rose":   { "role": "Rose",   "use": "primary CTAs (anchor)",                            "oklch": "oklch(50% 0.165 14)" },
+      "pollen": { "role": "Pollen", "use": "decorative on dark surfaces only",                 "oklch": "oklch(86% 0.097 95)" }
+    },
+
+    "typographyMeta": {
+      "headingFamily": { "name": "Abril Fatface",     "stack": "\"Abril Fatface\", Georgia, serif", "weights": [400] },
+      "bodyFamily":    { "name": "DM Serif Display",  "stack": "\"DM Serif Display\", Georgia, serif", "weights": [400] },
+      "monoFamily":    { "name": "Special Elite",     "stack": "\"Special Elite\", ui-monospace, monospace", "weights": [400] },
+      "scriptFamily":  { "name": "Homemade Apple",    "stack": "\"Homemade Apple\", cursive", "weights": [400] },
+      "scaleRatio": 5.6
+    },
+
+    "shadows": [],
+
+    "motion": {
+      "easing": "cubic-bezier(0.25, 1, 0.5, 1)",
+      "durations": { "instant": "100ms", "snappy": "150ms", "smooth": "300ms" },
+      "preferredProperties": ["transform", "opacity"]
+    },
+
+    "breakpoints": {
+      "containerMaxWidth": "1180px",
+      "rtl": false
+    },
+
+    "componentStyle": {
+      "buttons": {
+        "primary":   { "background": "#B33951", "color": "#F1F7ED", "borderRadius": "0px",     "padding": "12px 24px", "fontFamily": "Special Elite", "fontWeight": 400, "letterSpacing": "0.04em", "textTransform": "uppercase", "shadow": "none", "hoverDelta": "shift +4px x" },
+        "secondary": { "background": "transparent", "color": "#54494B", "borderRadius": "0px", "padding": "12px 24px", "fontFamily": "Special Elite", "fontWeight": 400, "letterSpacing": "0.04em", "textTransform": "uppercase", "shadow": "none", "border": "0", "underline": "1px solid #54494B" }
+      },
+      "cards": null,
+      "inputs": { "borderRadius": "0px", "padding": "10px 12px", "border": "1px solid #54494B", "focusRing": "0 0 0 2px #B33951" },
+      "dualCTAPattern": "primary-then-underlined-link",
+      "pillMeta": { "background": "#91C7B1", "color": "#54494B", "borderRadius": "9999px", "padding": "4px 10px", "fontFamily": "Special Elite", "letterSpacing": "0.04em", "textTransform": "uppercase" }
+    },
+
+    "voice": {
+      "examples": {
+        "do": [
+          "Single origin · Ethiopia · Yirgacheffe · roasted Tuesday",
+          "We bought 14 sacks. Send-it nine ways from Sunday.",
+          "Bag is up to you. Brew is up to you. Roast date is up to us."
+        ],
+        "dont": [
+          "Lovingly roasted single-origin coffee, delivered.",
+          "Crafted with care, brewed for you.",
+          "Thoughtfully sourced from farms we love."
+        ]
+      }
+    },
+
+    "divergence": {
+      "toolkit_version": "v1.0 (stardust v2)",
+      "seed": {
+        "input": "Aurora Coffee|2026-04-26",
+        "decade": "1970s",
+        "craft": "Riso print",
+        "register": "zine",
+        "ground_family": "monochrome-tint",
+        "picked_by": "deterministic",
+        "overrides": []
+      },
+      "font_deck": "zine-maximalist",
+      "anti_toolbox_count": 1,
+      "anti_toolbox_hits": [
+        {
+          "move": "Hard non-blur drop shadow on display headlines (offset 6-14px)",
+          "justification": "the riso-print register requires flat-fill misregistration as its signature; the offset shadow reads as the print-bleed, not as the assistant's stencil reflex. Implemented as a 4px x-axis offset between two flat fills (Ink + Sage), no blur, no opacity. Removing the offset would remove the entire print metaphor."
+        }
+      ],
+      "off_toolbox_moves": [
+        {
+          "move": "Editorial-split asymmetric IA (3/5 ratio, alternating sides)",
+          "rationale": "replaces the three-up feature card grid that is the category-conventional default; the asymmetric 3/5 ratio with side-flip on alternate sections is specific to Aurora's content shape (one feature has long body copy, the others are tag-led) and would not transfer unchanged to another brand"
+        }
+      ],
+      "audit_adjustments": [],
+      "references_used": [
+        { "source": "user-supplied",   "trend": "indie publishing",            "tag": "off-toolbox" },
+        { "source": "user-supplied",   "trend": "riso print",                  "tag": "off-toolbox" },
+        { "source": "agent-suggested", "trend": "Bandcamp editorial density",  "tag": "off-toolbox" }
+      ],
+      "palette_source": {
+        "library_version": "v0.6.0",
+        "candidates": [
+          { "name": "Earthy Green",            "ground_family": "monochrome-tint", "hue_bias": "green", "saturation_level": 2, "energy": 2 },
+          { "name": "Vintage Cottage Charm",   "ground_family": "monochrome-tint", "hue_bias": "green", "saturation_level": 4, "energy": 4 },
+          { "name": "Forest Hues",             "ground_family": "monochrome-tint", "hue_bias": "teal",  "saturation_level": 4, "energy": 4 },
+          { "name": "Autumn Harvest",          "ground_family": "monochrome-tint", "hue_bias": "warm",  "saturation_level": 3, "energy": 3 },
+          { "name": "Warm Embrace",            "ground_family": "monochrome-tint", "hue_bias": "warm",  "saturation_level": 4, "energy": 3 }
+        ],
+        "recommended_index": 1,
+        "picked_index": 1,
+        "picked_palette": {
+          "name": "Vintage Cottage Charm",
+          "source": "https://coolors.co/54494b-f1f7ed-91c7b1-b33951-e3d081",
+          "anchor": "#B33951",
+          "hexes": ["#54494B", "#F1F7ED", "#91C7B1", "#B33951", "#E3D081"]
+        }
+      }
+    }
+  },
+
+  "components": [
+    {
+      "name": "button-primary",
+      "html": "<button class=\"ds-btn-primary\">Start a subscription</button>",
+      "css": ".ds-btn-primary { background: #B33951; color: #F1F7ED; font-family: 'Special Elite', ui-monospace, monospace; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; padding: 12px 24px; border: 0; border-radius: 0; cursor: pointer; transition: transform 0.15s cubic-bezier(0.25,1,0.5,1); } .ds-btn-primary:hover { transform: translateX(4px); } .ds-btn-primary:focus-visible { outline: 2px solid #54494B; outline-offset: 2px; }"
+    },
+    {
+      "name": "button-secondary",
+      "html": "<button class=\"ds-btn-secondary\">Shop beans</button>",
+      "css": ".ds-btn-secondary { background: transparent; color: #54494B; font-family: 'Special Elite', ui-monospace, monospace; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; padding: 12px 0; border: 0; border-bottom: 1px solid #54494B; cursor: pointer; } .ds-btn-secondary:focus-visible { outline: 2px solid #B33951; outline-offset: 2px; }"
+    },
+    {
+      "name": "pill-meta",
+      "html": "<span class=\"ds-pill\">Single origin</span>",
+      "css": ".ds-pill { display: inline-block; background: #91C7B1; color: #54494B; font-family: 'Special Elite', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 10px; border-radius: 9999px; }"
+    }
+  ],
+
+  "narrative": {
+    "northStar": "Indie publishing meets specialty coffee. Print-feeling, name-led, asymmetric on purpose. Built for Gen Z buyers who care about the bag design as much as the bean.",
+    "overview": "Aurora Coffee's redesigned visual system replaces the generic SaaS-cafe template with a Vintage Cottage Charm palette, a zine-maximalist deck (Abril Fatface display, DM Serif Display body, Special Elite meta, Homemade Apple marginalia), flat-fill riso-print misregistration on display type, and asymmetric editorial layouts.",
+    "keyCharacteristics": [
+      "Sage as surface, rose as anchor, mustard as decoration",
+      "Square corners on every primary surface; pills reserved for meta tags",
+      "No box-shadows; flat-fill 4px x-axis misregistration is the elevation vocabulary",
+      "Marginalia in Homemade Apple, capped at twice per page",
+      "Names over adjectives in copy"
+    ],
+    "rules": [
+      "Banned marketing adjectives (artisanal, crafted, premium, lovingly, thoughtfully, uncompromising, bespoke).",
+      "No exclamation points except in quoted outbursts.",
+      "Em-dashes welcome; semicolons earned."
+    ],
+    "dos": [
+      "Lead with farm name, country, cup notes, roast date.",
+      "Set marginalia in Homemade Apple where a footnote would go.",
+      "Use Sage as a whole-section surface; flip to Ground on alternate sections."
+    ],
+    "donts": [
+      "Use blue anywhere — even in an SVG icon.",
+      "Set body text in Special Elite — readability collapses past three lines.",
+      "Use a three-up feature card grid as the IA after the hero.",
+      "Add box-shadows; the flat-fill misregistration is the elevation language."
+    ]
+  }
+}

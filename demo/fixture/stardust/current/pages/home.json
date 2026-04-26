@@ -1,0 +1,128 @@
+{
+  "_provenance": {
+    "writtenBy": "stardust:extract",
+    "writtenAt": "2026-04-26T12:05:00Z",
+    "readArtifacts": ["https://aurora-coffee.example.com/"],
+    "synthesizedInputs": [],
+    "stardustVersion": "0.2.0"
+  },
+  "slug": "home",
+  "url": "https://aurora-coffee.example.com/",
+  "finalUrl": "https://aurora-coffee.example.com/",
+  "title": "Aurora Coffee — Lovingly roasted single-origin coffee",
+  "metaDescription": "Single-origin specialty coffee, roasted in small batches and delivered within 48 hours.",
+  "og": {
+    "title": "Aurora Coffee",
+    "description": "Single-origin specialty coffee, roasted in small batches.",
+    "image": "https://aurora-coffee.example.com/og.jpg",
+    "type": "website",
+    "siteName": "Aurora Coffee"
+  },
+  "themeColor": { "light": "#FAF7F2", "dark": null },
+  "language": "en",
+
+  "headings": [
+    { "level": 1, "text": "Lovingly roasted single-origin coffee, delivered.", "id": "hero-h1", "domPath": "main > section.hero > h1", "style": { "fontFamily": "Inter", "fontWeight": 700, "fontSize": "clamp(2.5rem, 6vw, 4rem)", "lineHeight": 1.1, "letterSpacing": "-0.025em", "color": "rgb(31, 27, 23)" } },
+    { "level": 2, "text": "Why Aurora",                                       "id": "why",      "domPath": "main > section.features > h2", "style": { "fontFamily": "Inter", "fontWeight": 600, "fontSize": "2rem", "lineHeight": 1.2, "letterSpacing": "-0.02em", "color": "rgb(31, 27, 23)" } },
+    { "level": 3, "text": "Single origin",                                   "id": "f-1",      "domPath": "main > section.features .card:nth-child(1) > h3", "style": { "fontFamily": "Inter", "fontWeight": 600, "fontSize": "1.25rem", "lineHeight": 1.3, "letterSpacing": "normal", "color": "rgb(31, 27, 23)" } },
+    { "level": 3, "text": "Small batch",                                     "id": "f-2",      "domPath": "main > section.features .card:nth-child(2) > h3", "style": { "fontFamily": "Inter", "fontWeight": 600, "fontSize": "1.25rem", "lineHeight": 1.3, "letterSpacing": "normal", "color": "rgb(31, 27, 23)" } },
+    { "level": 3, "text": "Subscription, your way",                          "id": "f-3",      "domPath": "main > section.features .card:nth-child(3) > h3", "style": { "fontFamily": "Inter", "fontWeight": 600, "fontSize": "1.25rem", "lineHeight": 1.3, "letterSpacing": "normal", "color": "rgb(31, 27, 23)" } },
+    { "level": 2, "text": "Trusted by local cafes",                          "id": "proof",    "domPath": "main > section.proof > h2", "style": { "fontFamily": "Inter", "fontWeight": 500, "fontSize": "1rem", "lineHeight": 1.5, "letterSpacing": "0.08em", "color": "rgb(156, 147, 137)" } }
+  ],
+
+  "landmarks": [
+    {
+      "tag": "header",
+      "role": "banner",
+      "id": null,
+      "classes": ["site-header"],
+      "innerText": "Aurora Coffee Coffee Subscriptions Cafe About Account",
+      "children": [
+        { "tag": "nav", "role": "navigation", "id": null, "classes": ["main-nav"], "purpose": "nav", "headlineRef": null, "innerTextSummary": "Coffee Subscriptions Cafe About Account", "wordCount": 5 }
+      ]
+    },
+    {
+      "tag": "main",
+      "role": "main",
+      "id": null,
+      "classes": [],
+      "innerText": "...",
+      "children": [
+        { "tag": "section", "role": null, "id": "hero", "classes": ["hero"],     "purpose": "hero",         "headlineRef": 0, "innerTextSummary": "Lovingly roasted single-origin coffee, delivered. We work directly with farmers and roast in small batches.", "wordCount": 22 },
+        { "tag": "section", "role": null, "id": null,   "classes": ["features"], "purpose": "feature-list", "headlineRef": 1, "innerTextSummary": "Why Aurora. Single origin, Small batch, Subscription your way.",                                          "wordCount": 14 },
+        { "tag": "section", "role": null, "id": null,   "classes": ["proof"],    "purpose": "social-proof", "headlineRef": 5, "innerTextSummary": "Trusted by local cafes (logo strip)",                                                                  "wordCount": 6 },
+        { "tag": "section", "role": null, "id": null,   "classes": ["cta-band"], "purpose": "cta-band",     "headlineRef": null, "innerTextSummary": "Start your subscription today.",                                                                   "wordCount": 5 }
+      ]
+    },
+    {
+      "tag": "footer",
+      "role": "contentinfo",
+      "id": null,
+      "classes": ["site-footer"],
+      "innerText": "Shop ... Cafe ... Company ... Legal ...",
+      "children": [
+        { "tag": "div", "role": null, "id": null, "classes": ["footer-block"], "purpose": "footer-nav", "headlineRef": null, "innerTextSummary": "Shop / Cafe / Company / Legal", "wordCount": 8 }
+      ]
+    }
+  ],
+
+  "ctas": [
+    { "label": "Start a subscription", "href": "/subscribe", "tag": "a", "domPath": "main > section.hero > a.btn-primary",            "style": { "backgroundColor": "rgb(59, 130, 246)", "color": "rgb(255, 255, 255)", "fontFamily": "Inter", "fontWeight": 600, "borderRadius": "8px", "padding": "12px 24px", "boxShadow": "0 1px 2px rgba(0,0,0,0.06)" }, "appearsAbove": "fold" },
+    { "label": "Shop beans",           "href": "/shop",      "tag": "a", "domPath": "main > section.hero > a.btn-secondary",          "style": { "backgroundColor": "transparent",        "color": "rgb(59, 130, 246)", "fontFamily": "Inter", "fontWeight": 500, "borderRadius": "8px", "padding": "12px 24px", "boxShadow": "none" },                       "appearsAbove": "fold" },
+    { "label": "Start a subscription", "href": "/subscribe", "tag": "a", "domPath": "main > section.cta-band > a.btn-primary",        "style": { "backgroundColor": "rgb(59, 130, 246)", "color": "rgb(255, 255, 255)", "fontFamily": "Inter", "fontWeight": 600, "borderRadius": "8px", "padding": "12px 24px", "boxShadow": "0 1px 2px rgba(0,0,0,0.06)" }, "appearsAbove": "below-fold" }
+  ],
+
+  "links": {
+    "internal": [
+      { "href": "/coffee",        "text": "Coffee",         "domPath": "header nav a:nth-child(1)" },
+      { "href": "/subscribe",     "text": "Subscriptions",  "domPath": "header nav a:nth-child(2)" },
+      { "href": "/cafe",          "text": "Cafe",           "domPath": "header nav a:nth-child(3)" },
+      { "href": "/about",         "text": "About",          "domPath": "header nav a:nth-child(4)" },
+      { "href": "/account",       "text": "Account",        "domPath": "header nav a:nth-child(5)" }
+    ],
+    "external": [
+      { "href": "https://instagram.com/auroracoffee",   "text": "Instagram",   "domPath": "footer .socials a:nth-child(1)" }
+    ]
+  },
+
+  "media": {
+    "images": [
+      {
+        "src": "https://aurora-coffee.example.com/img/hero-beans.jpg",
+        "srcset": null,
+        "alt": "A burlap sack of green coffee beans",
+        "naturalWidth": 2400,
+        "naturalHeight": 1600,
+        "localPath": "stardust/current/assets/media/hero-beans-a3f9.jpg"
+      }
+    ],
+    "inlineSvgs": [],
+    "videos": [],
+    "iframes": []
+  },
+
+  "forms": [],
+
+  "widgets": {
+    "modals": [],
+    "accordions": [],
+    "tabs": []
+  },
+
+  "perSectionStyle": [
+    { "sectionRef": "main > section.hero",     "purpose": "hero",         "background": { "color": "rgb(250, 247, 242)", "hasImage": true,  "hasGradient": false }, "text": { "dominantColor": "rgb(31, 27, 23)" }, "spacing": { "paddingBlock": "96px", "paddingInline": "48px", "gap": "24px" }, "borderRadius": "0",   "fontFamilies": ["Inter"], "shadowsUsed": [] },
+    { "sectionRef": "main > section.features", "purpose": "feature-list", "background": { "color": "rgb(255, 255, 255)", "hasImage": false, "hasGradient": false }, "text": { "dominantColor": "rgb(31, 27, 23)" }, "spacing": { "paddingBlock": "96px", "paddingInline": "48px", "gap": "24px" }, "borderRadius": "12px","fontFamilies": ["Inter"], "shadowsUsed": ["0 4px 16px rgba(0,0,0,0.08)"] },
+    { "sectionRef": "main > section.proof",    "purpose": "social-proof", "background": { "color": "rgb(250, 247, 242)", "hasImage": false, "hasGradient": false }, "text": { "dominantColor": "rgb(156, 147, 137)" }, "spacing": { "paddingBlock": "64px", "paddingInline": "48px", "gap": "32px" }, "borderRadius": "0",   "fontFamilies": ["Inter"], "shadowsUsed": [] },
+    { "sectionRef": "main > section.cta-band", "purpose": "cta-band",     "background": { "color": "rgb(31, 27, 23)",   "hasImage": false, "hasGradient": false }, "text": { "dominantColor": "rgb(255, 255, 255)" }, "spacing": { "paddingBlock": "96px", "paddingInline": "48px", "gap": "16px" }, "borderRadius": "0",   "fontFamilies": ["Inter"], "shadowsUsed": [] }
+  ],
+
+  "screenshot": "stardust/current/assets/screenshots/home.png",
+
+  "stats": {
+    "wordCount": 318,
+    "ctaCount": 3,
+    "internalLinkCount": 5,
+    "externalLinkCount": 1,
+    "imageCount": 1
+  }
+}

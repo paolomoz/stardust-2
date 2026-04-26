@@ -1,0 +1,69 @@
+{
+  "_provenance": {
+    "writtenBy": "stardust:migrate",
+    "writtenAt": "2026-04-26T14:30:00Z",
+    "stardustVersion": "0.2.0"
+  },
+  "site": {
+    "originUrl": "https://aurora-coffee.example.com",
+    "extractedAt": "2026-04-26T12:00:00Z",
+    "pageCap": 25,
+    "totalDiscovered": 3,
+    "crawled": 3
+  },
+  "direction": {
+    "resolvedAt": "2026-04-26T13:15:00Z",
+    "phrase": "make it more expressive for a young audience",
+    "directionFile": "stardust/direction.md"
+  },
+  "pages": [
+    {
+      "slug": "home",
+      "url": "https://aurora-coffee.example.com/",
+      "title": "Aurora Coffee",
+      "status": "migrated",
+      "history": [
+        { "status": "extracted",   "at": "2026-04-26T12:05:00Z" },
+        { "status": "directed",    "at": "2026-04-26T13:15:00Z" },
+        { "status": "prototyped",  "at": "2026-04-26T13:45:00Z" },
+        { "status": "approved",    "at": "2026-04-26T14:10:00Z" },
+        { "status": "migrated",    "at": "2026-04-26T14:30:00Z" }
+      ],
+      "stale": false,
+      "staleReason": null,
+      "currentStatePath": "stardust/current/pages/home.json",
+      "prototypePath":    "stardust/prototypes/home.html",
+      "migratedPath":     "stardust/migrated/index.html"
+    },
+    {
+      "slug": "menu",
+      "url": "https://aurora-coffee.example.com/menu",
+      "title": "Menu — Aurora Coffee",
+      "status": "directed",
+      "history": [
+        { "status": "extracted",   "at": "2026-04-26T12:06:00Z" },
+        { "status": "directed",    "at": "2026-04-26T13:15:00Z" }
+      ],
+      "stale": false,
+      "staleReason": null,
+      "currentStatePath": "stardust/current/pages/menu.json",
+      "prototypePath":    null,
+      "migratedPath":     null
+    },
+    {
+      "slug": "about",
+      "url": "https://aurora-coffee.example.com/about",
+      "title": "About — Aurora Coffee",
+      "status": "directed",
+      "history": [
+        { "status": "extracted",   "at": "2026-04-26T12:07:00Z" },
+        { "status": "directed",    "at": "2026-04-26T13:15:00Z" }
+      ],
+      "stale": false,
+      "staleReason": null,
+      "currentStatePath": "stardust/current/pages/about.json",
+      "prototypePath":    null,
+      "migratedPath":     null
+    }
+  ]
+}

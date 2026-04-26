@@ -1,0 +1,127 @@
+{
+  "_provenance": {
+    "writtenBy": "stardust:extract",
+    "writtenAt": "2026-04-26T12:08:00Z",
+    "readArtifacts": [
+      "https://aurora-coffee.example.com/",
+      "stardust/current/pages/home.json"
+    ],
+    "synthesizedInputs": [],
+    "stardustVersion": "0.2.0"
+  },
+  "site": {
+    "name": "Aurora Coffee",
+    "tagline": "Lovingly roasted single-origin coffee.",
+    "originUrl": "https://aurora-coffee.example.com"
+  },
+  "logo": {
+    "source": "synthesized",
+    "sourceSelector": null,
+    "localPath": "stardust/current/assets/logo.svg",
+    "format": "svg",
+    "intrinsicWidth": 256,
+    "intrinsicHeight": 256,
+    "synthesized": true,
+    "synthesizedBasis": "No real logo found — synthesized initials AC for the fixture."
+  },
+  "palette": [
+    { "role": "background",   "value": "#FAF7F2", "occurrences": 4218, "sourceSelectors": ["body", ".container"] },
+    { "role": "text-primary", "value": "#1F1B17", "occurrences": 1247, "sourceSelectors": ["h1", "h2", "p"] },
+    { "role": "primary",      "value": "#3B82F6", "occurrences": 312,  "sourceSelectors": [".btn-primary", "a"] },
+    { "role": "accent-1",     "value": "#7B5E3F", "occurrences": 89,   "sourceSelectors": [".icon-accent"] },
+    { "role": "border",       "value": "#E8E2D7", "occurrences": 156,  "sourceSelectors": [".card", "input"] }
+  ],
+  "type": {
+    "headingFamily": {
+      "name": "Inter",
+      "stack": "\"Inter\", system-ui, sans-serif",
+      "weights": [600, 700],
+      "sizes": ["clamp(2rem, 5vw, 3rem)", "1.875rem", "1.5rem"],
+      "lineHeights": [1.15, 1.2, 1.25],
+      "letterSpacing": ["-0.02em"],
+      "sourceSelectors": ["h1", "h2"]
+    },
+    "bodyFamily": {
+      "name": "Inter",
+      "stack": "\"Inter\", system-ui, sans-serif",
+      "weights": [400, 500],
+      "sizes": ["1rem", "0.9375rem"],
+      "lineHeights": [1.55, 1.5],
+      "letterSpacing": ["normal"],
+      "sourceSelectors": ["p", "li"]
+    },
+    "monoFamily": null,
+    "scaleRatio": 1.25,
+    "loadStrategy": "swap"
+  },
+  "spacing": {
+    "baseUnit": 4,
+    "scale": [4, 8, 12, 16, 24, 32, 48, 64, 96],
+    "sectionPadding": "96px",
+    "containerMaxWidth": "1200px",
+    "gridGap": "24px"
+  },
+  "motifs": {
+    "borderRadius": { "primary": "8px", "pill": "9999px" },
+    "shadows": [
+      { "value": "0 1px 2px rgba(0,0,0,0.06)", "uses": "buttons" },
+      { "value": "0 4px 16px rgba(0,0,0,0.08)", "uses": "cards" }
+    ],
+    "gradients": [],
+    "patterns": [
+      { "name": "hero-with-image",   "evidence": "home hero uses split-half image+copy" },
+      { "name": "feature-3up",       "evidence": "three-column features grid (Origin, Roast, Subscribe)" },
+      { "name": "social-proof-logos", "evidence": "logo strip after hero" },
+      { "name": "footer-mega",       "evidence": "four-column mega-footer" }
+    ]
+  },
+  "componentStyle": {
+    "buttons": {
+      "primary": {
+        "background": "#3B82F6",
+        "color": "#FFFFFF",
+        "borderRadius": "8px",
+        "padding": "12px 24px",
+        "fontWeight": 600,
+        "shadow": "0 1px 2px rgba(0,0,0,0.06)",
+        "hoverDelta": "darken 5%"
+      },
+      "secondary": {
+        "background": "transparent",
+        "color": "#3B82F6",
+        "borderRadius": "8px",
+        "padding": "12px 24px",
+        "fontWeight": 500,
+        "border": "1px solid #3B82F6"
+      }
+    },
+    "dualCTAPattern": "primary-then-secondary-link",
+    "cards": {
+      "background": "#FFFFFF",
+      "borderRadius": "12px",
+      "padding": "24px",
+      "shadow": "0 4px 16px rgba(0,0,0,0.08)",
+      "border": "1px solid #E8E2D7"
+    },
+    "inputs": {
+      "borderRadius": "8px",
+      "padding": "10px 12px",
+      "border": "1px solid #D6CFC1",
+      "focusRing": "0 0 0 3px rgba(59,130,246,0.2)"
+    }
+  },
+  "voice": {
+    "heroHeadline": "Lovingly roasted single-origin coffee, delivered.",
+    "heroSubcopy": "We work directly with farmers and roast in small batches. Crafted with care, brewed for you.",
+    "primaryCTALabel": "Start a subscription",
+    "ctaSamples": ["Start a subscription", "Shop beans", "Visit the cafe", "Read our story"],
+    "navItems": ["Coffee", "Subscriptions", "Cafe", "About", "Account"],
+    "footerHeadings": ["Shop", "Cafe", "Company", "Legal"],
+    "firstParagraph": "Aurora Coffee is a small specialty roaster founded in 2018. We source single-origin beans from farms we've visited, roast in small batches, and ship within 48 hours of roast.",
+    "tone": {
+      "guess": "professional-warm",
+      "evidence": "warm marketing-adjective palette ('lovingly', 'thoughtfully', 'crafted'), short sentences, second-person address"
+    }
+  },
+  "register": "brand"
+}
