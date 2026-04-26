@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy: demo:pick-palette.mjs
+  writtenAt: 2026-04-26T12:52:34.972Z
+  description: bold maximalist playful pop carnival
+  libraryVersion: v0.6.0
+  candidatesScored: 127
+  recommendedIndex: 3
+  recommendedPalette: Warm Autumn Glow
+  pickedAt: 2026-04-26
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palette pick — stardust v2 demo</title>
+<style>
+:root {
+  --bg:     #EAE2B7;
+  --fg:     #003049;
+  --accent: #003049;
+  --card:   #FCBF49;
+  --line:   color-mix(in oklab, #003049 14%, transparent);
+  --muted:  color-mix(in oklab, #003049 60%, transparent);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 48px;
+  --space-6: 96px;
+
+  --radius: 4px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font: 17px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  letter-spacing: -0.005em;
+  padding: var(--space-5) var(--space-4) var(--space-6);
+}
+.container { max-width: 1100px; margin: 0 auto; }
+
+header.page {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+header.page h1 {
+  font-size: clamp(40px, 6vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  margin: 0 0 var(--space-3);
+}
+header.page .desc {
+  font-size: 21px;
+  line-height: 1.4;
+  color: var(--muted);
+  margin: 0 0 var(--space-4);
+  max-width: 64ch;
+}
+header.page .desc q {
+  color: var(--fg);
+  font-style: italic;
+}
+header.page .descriptor {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-2) var(--space-4);
+  margin: 0;
+  padding: var(--space-3) 0 0;
+  border-top: 1px solid var(--line);
+}
+header.page .descriptor dt {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-weight: 600;
+}
+header.page .descriptor dd {
+  margin: 2px 0 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+header.page .descriptor dd .null { color: var(--muted); font-weight: 400; }
+
+ol.candidates {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+ol.candidates .candidate.recommended { grid-column: 1 / -1; }
+
+li.candidate {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: transform 0.15s ease;
+}
+li.candidate:hover { transform: translateY(-2px); }
+li.candidate.recommended {
+  border: 2px solid var(--accent);
+  padding: var(--space-5);
+  gap: var(--space-4);
+}
+
+li.candidate header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+li.candidate .num {
+  display: inline-flex;
+  width: 32px; height: 32px;
+  align-items: center;
+  justify-content: center;
+  background: var(--fg);
+  color: var(--bg);
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 15px;
+}
+li.candidate.recommended .num {
+  width: 44px; height: 44px;
+  font-size: 21px;
+  background: var(--accent);
+  color: #EAE2B7;
+}
+li.candidate .badge {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  background: var(--accent);
+  color: #EAE2B7;
+  padding: 4px 8px;
+  border-radius: 2px;
+  margin-right: auto;
+}
+li.candidate h2 {
+  margin: 0;
+  font-size: 21px;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+}
+li.candidate.recommended h2 { font-size: 28px; }
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  height: 88px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+li.candidate.recommended .swatches { height: 132px; }
+.swatch {
+  background: var(--c);
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-2);
+}
+.swatch.anchor::after {
+  content: "";
+  position: absolute;
+  top: 6px; right: 6px;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.25);
+}
+.swatch .hex {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  padding: 2px 4px;
+  border-radius: 2px;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+.swatch:hover .hex { opacity: 1; }
+
+li.candidate footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-2);
+}
+.tag {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 11px;
+  padding: 3px 6px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  color: var(--muted);
+}
+.source {
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+.source:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+footer.page {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 14px;
+}
+footer.page .prompt { color: var(--fg); font-weight: 500; }
+footer.page .lib    { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 12px; }
+
+@media (max-width: 720px) {
+  ol.candidates { grid-template-columns: 1fr; }
+  ol.candidates .candidate.recommended { grid-column: auto; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="page">
+    <h1>Palette pick</h1>
+    <p class="desc">Description: <q>bold maximalist playful pop carnival</q></p>
+    <dl class="descriptor">
+      <dt>energy</dt><dd>5</dd><dt>contrast</dt><dd>5</dd><dt>saturation</dt><dd>5</dd><dt>hue bias</dt><dd>rainbow</dd><dt>ground family</dt><dd>saturated</dd>
+    </dl>
+  </header>
+
+  <main>
+    <ol class="candidates">
+      
+<li class="candidate" data-index="1">
+  <header>
+    <span class="num">1</span>
+    
+    <h2>Dark Sunset</h2>
+  </header>
+  <div class="swatches" aria-label="palette swatches"><span class="swatch" style="--c:#335C67" title="#335C67"><span class="hex">#335C67</span></span><span class="swatch anchor" style="--c:#FFF3B0" title="#FFF3B0 · anchor"><span class="hex">#FFF3B0</span></span><span class="swatch" style="--c:#E09F3E" title="#E09F3E"><span class="hex">#E09F3E</span></span><span class="swatch" style="--c:#9E2A2B" title="#9E2A2B"><span class="hex">#9E2A2B</span></span><span class="swatch" style="--c:#540B0E" title="#540B0E"><span class="hex">#540B0E</span></span></div>
+  <footer>
+    <div class="tags"><span class="tag">ground: saturated</span><span class="tag">hue: rainbow</span><span class="tag">sat: 5/5</span><span class="tag">energy: 4/5</span></div>
+    <a class="source" href="https://coolors.co/335c67-fff3b0-e09f3e-9e2a2b-540b0e" target="_blank" rel="noopener">coolors.co source &rarr;</a>
+  </footer>
+</li>
+<li class="candidate" data-index="2">
+  <header>
+    <span class="num">2</span>
+    
+    <h2>Neutral Harmony Bliss</h2>
+  </header>
+  <div class="swatches" aria-label="palette swatches"><span class="swatch" style="--c:#F4F1DE" title="#F4F1DE"><span class="hex">#F4F1DE</span></span><span class="swatch" style="--c:#E07A5F" title="#E07A5F"><span class="hex">#E07A5F</span></span><span class="swatch" style="--c:#3D405B" title="#3D405B"><span class="hex">#3D405B</span></span><span class="swatch" style="--c:#81B29A" title="#81B29A"><span class="hex">#81B29A</span></span><span class="swatch anchor" style="--c:#F2CC8F" title="#F2CC8F · anchor"><span class="hex">#F2CC8F</span></span></div>
+  <footer>
+    <div class="tags"><span class="tag">ground: saturated</span><span class="tag">hue: rainbow</span><span class="tag">sat: 5/5</span><span class="tag">energy: 4/5</span></div>
+    <a class="source" href="https://coolors.co/f4f1de-e07a5f-3d405b-81b29a-f2cc8f" target="_blank" rel="noopener">coolors.co source &rarr;</a>
+  </footer>
+</li>
+<li class="candidate" data-index="3">
+  <header>
+    <span class="num">3</span>
+    
+    <h2>Summer Sky</h2>
+  </header>
+  <div class="swatches" aria-label="palette swatches"><span class="swatch" style="--c:#072AC8" title="#072AC8"><span class="hex">#072AC8</span></span><span class="swatch" style="--c:#1E96FC" title="#1E96FC"><span class="hex">#1E96FC</span></span><span class="swatch" style="--c:#A2D6F9" title="#A2D6F9"><span class="hex">#A2D6F9</span></span><span class="swatch anchor" style="--c:#FCF300" title="#FCF300 · anchor"><span class="hex">#FCF300</span></span><span class="swatch" style="--c:#FFC600" title="#FFC600"><span class="hex">#FFC600</span></span></div>
+  <footer>
+    <div class="tags"><span class="tag">ground: saturated</span><span class="tag">hue: rainbow</span><span class="tag">sat: 5/5</span><span class="tag">energy: 4/5</span></div>
+    <a class="source" href="https://coolors.co/072ac8-1e96fc-a2d6f9-fcf300-ffc600" target="_blank" rel="noopener">coolors.co source &rarr;</a>
+  </footer>
+</li>
+<li class="candidate recommended" data-index="4">
+  <header>
+    <span class="num">4</span>
+    <span class="badge">RECOMMENDED</span>
+    <h2>Warm Autumn Glow</h2>
+  </header>
+  <div class="swatches" aria-label="palette swatches"><span class="swatch anchor" style="--c:#003049" title="#003049 · anchor"><span class="hex">#003049</span></span><span class="swatch" style="--c:#D62828" title="#D62828"><span class="hex">#D62828</span></span><span class="swatch" style="--c:#F77F00" title="#F77F00"><span class="hex">#F77F00</span></span><span class="swatch" style="--c:#FCBF49" title="#FCBF49"><span class="hex">#FCBF49</span></span><span class="swatch" style="--c:#EAE2B7" title="#EAE2B7"><span class="hex">#EAE2B7</span></span></div>
+  <footer>
+    <div class="tags"><span class="tag">ground: saturated</span><span class="tag">hue: rainbow</span><span class="tag">sat: 5/5</span><span class="tag">energy: 4/5</span></div>
+    <a class="source" href="https://coolors.co/003049-d62828-f77f00-fcbf49-eae2b7" target="_blank" rel="noopener">coolors.co source &rarr;</a>
+  </footer>
+</li>
+<li class="candidate" data-index="5">
+  <header>
+    <span class="num">5</span>
+    
+    <h2>Bright Bold Colors</h2>
+  </header>
+  <div class="swatches" aria-label="palette swatches"><span class="swatch anchor" style="--c:#F9C80E" title="#F9C80E · anchor"><span class="hex">#F9C80E</span></span><span class="swatch" style="--c:#F86624" title="#F86624"><span class="hex">#F86624</span></span><span class="swatch" style="--c:#EA3546" title="#EA3546"><span class="hex">#EA3546</span></span><span class="swatch" style="--c:#662E9B" title="#662E9B"><span class="hex">#662E9B</span></span><span class="swatch" style="--c:#43BCCD" title="#43BCCD"><span class="hex">#43BCCD</span></span></div>
+  <footer>
+    <div class="tags"><span class="tag">ground: saturated</span><span class="tag">hue: rainbow</span><span class="tag">sat: 5/5</span><span class="tag">energy: 3/5</span></div>
+    <a class="source" href="https://coolors.co/f9c80e-f86624-ea3546-662e9b-43bccd" target="_blank" rel="noopener">coolors.co source &rarr;</a>
+  </footer>
+</li>
+    </ol>
+  </main>
+
+  <footer class="page">
+    <span class="prompt">Tell the assistant a number (1&ndash;5), a palette name, or &ldquo;refine&rdquo; to change the description.</span>
+    <span class="lib">stardust palette library v0.6.0 &middot; 127 palettes</span>
+  </footer>
+</div>
+</body>
+</html>
