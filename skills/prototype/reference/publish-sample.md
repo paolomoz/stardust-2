@@ -145,6 +145,53 @@ combine into a single "not eligible" message.
    project — these are the inputs the publish flow reads to
    author `meta.json`.
 
+### Phase 1.5 — Backup originals (mandatory before any transform)
+
+If Phase 2 is going to **modify** the user's project files (rename
+variants to canonical names by writing in place, strip placeholder
+markup at the user's request, regenerate provenance, etc.), copy
+the originals first to a per-publish backup directory **inside the
+user's project**:
+
+```
+<user-project>/stardust/_pre-publish-backup/<showcase-slug>/<ts>/
+  ├── home-variant-a-proposed.html       (original, byte-for-byte)
+  ├── home-variant-b-proposed.html
+  ├── home-variant-c-proposed.html
+  └── _backup-manifest.json               (timestamps + sha256 + reason)
+```
+
+`<ts>` is an ISO date-and-second timestamp so multiple publish
+attempts on the same slug each get their own backup.
+
+The backup is **mandatory** because:
+
+1. Many user projects are not git-tracked. The publish flow
+   cannot rely on `git stash` / `git checkout` to recover.
+2. Errors in the publish flow (or the user changing their mind
+   mid-way) need a recovery path that doesn't depend on the
+   agent's conversation log being intact.
+
+The flow does **not** delete the backup at the end of a successful
+publish. The user can inspect, diff, or restore. Backups older than
+30 days can be cleaned up by the user manually; the publish flow
+never deletes them on its own.
+
+**Default no-op path.** When Phase 2 only *reads* from the user's
+project (file copy into a worktree of the upstream stardust repo;
+no in-place modifications) — which is the typical case — the
+backup step is still run for symmetry but produces a small
+`_backup-manifest.json` with `transformsApplied: []`. The
+`pre-publish-backup/` folder always exists after a publish; the
+manifest documents whether anything was actually transformed.
+
+This Phase exists because of a real recurrence risk
+(`STARDUST-FEEDBACK.md F-018` — the destructive-edit incident
+during the fiserv-com publish dry-run). The agent attempted to
+clear `[data-placeholder]` elements in place; the project was
+not git-tracked; the originals were lost. Backup-first prevents
+this class of failure.
+
 ### Phase 2 — Stage the sample
 
 Compute the showcase slug per `--sample-slug` rules:
