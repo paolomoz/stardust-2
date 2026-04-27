@@ -1,0 +1,533 @@
+<!--
+stardust:provenance
+  writtenBy: stardust:prototype
+  writtenAt: 2026-04-27T00:00:00Z
+  page: home
+  variant: C — Product-forward
+  pageUrl: https://www.fiserv.com/en.html
+  againstDirection: stardust/direction.md
+  readArtifacts:
+    - stardust/current/pages/home.json
+    - stardust/current/_brand-extraction.json
+    - DESIGN.md
+    - DESIGN.json
+  divergenceVersion: brand-faithful (Mode A) — most-committed of the three variants
+  fontDeck: brand-inherited
+  paletteSource: inherited from brand surface, with single accent-cta variant
+  unsourcedContent: []
+  
+  stardustVersion: 0.2.0
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Financial Services Technology, Mobile Banking, Payments | Fiserv</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,500;0,700;1,500;1,700&display=swap');
+:root {
+  --color-bg: #ffffff;
+  --color-surface: #f6f7f9;
+  --color-surface-2: #eef0f5;
+  --color-text: #0e0e0e;
+  --color-text-muted: #3c3c3c;
+  --color-text-subtle: #666666;
+  --color-primary: #002754;
+  --color-primary-deep: #001434;
+  --color-secondary: #237cb8;
+  --color-accent: #fb6400;
+  --color-accent-soft: #fff5ed;
+  --color-rule: #e3e6ec;
+  --radius-1: 4px;
+  --radius-card: 8px;
+  --shadow-1: 0 4px 12px rgb(0 39 84 / 0.08);
+  --shadow-2: 0 12px 32px rgb(0 39 84 / 0.14);
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-heading: 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --container: 1200px;
+  --section-pad: 64px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:var(--font-body); color:var(--color-text); line-height:1.55; font-size:16px; -webkit-font-smoothing:antialiased}
+.container{max-width:var(--container); margin:0 auto; padding:0 32px}
+h1,h2,h3,h4,h5{margin:0; font-family:var(--font-heading); font-weight:300; letter-spacing:-0.01em; color:var(--color-text); line-height:1.15}
+p{margin:0}
+a{color:inherit; text-decoration:none}
+.eyebrow{font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-subtle)}
+.eyebrow--accent{color:var(--color-accent)}
+
+/* ---------- header (Variant C: tightened, with sales CTA) ---------- */
+header{position:sticky; top:0; z-index:50; background:var(--color-bg); border-bottom:1px solid var(--color-rule)}
+header .bar{display:flex; align-items:center; gap:32px; height:72px}
+.wordmark{font-family:var(--font-heading); font-weight:700; font-size:22px; color:var(--color-accent); letter-spacing:-0.02em; line-height:1}
+.wordmark .dot{display:inline-block; margin-left:1px}
+nav.primary{display:flex; gap:24px; flex:1}
+nav.primary a{font-size:15px; color:var(--color-text); font-weight:500; padding:8px 0; position:relative}
+nav.primary a:hover{color:var(--color-accent)}
+nav.primary a.has-pop::after{content:""; display:inline-block; width:6px; height:6px; border:1.5px solid currentColor; border-left:0; border-top:0; transform:rotate(45deg) translateY(-3px); margin-left:6px}
+.utilities{display:flex; gap:12px; align-items:center}
+.icon-btn{width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; color:var(--color-text-muted); border:0; background:transparent; cursor:pointer; border-radius:var(--radius-1)}
+.icon-btn:hover{background:var(--color-surface)}
+
+.regional{background:var(--color-surface); border-bottom:1px solid var(--color-rule); padding:10px 0; font-size:14px; color:var(--color-text-muted)}
+.regional .bar{display:flex; align-items:center; gap:16px; justify-content:center}
+.regional .actions{display:flex; gap:8px}
+.btn-outline{background:transparent; color:var(--color-text); border:1px solid var(--color-rule); padding:6px 14px; border-radius:var(--radius-1); font-size:13px; cursor:pointer}
+.btn-solid{background:var(--color-text); color:#fff; border:1px solid var(--color-text); padding:6px 14px; border-radius:var(--radius-1); font-size:13px; cursor:pointer}
+.dismiss{margin-left:auto; background:transparent; border:0; color:var(--color-text-subtle); cursor:pointer; padding:0 4px}
+
+/* Buttons */
+.ds-btn-primary{
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--color-accent); color:#fff;
+  font-weight:600; font-size:16px; padding:14px 24px;
+  border:0; border-radius:var(--radius-1); cursor:pointer;
+  transition:background 120ms ease, transform 120ms ease;
+}
+.ds-btn-primary:hover{background:#d65500; transform:translateY(-1px)}
+.ds-btn-primary--navy{background:var(--color-primary)}
+.ds-btn-primary--navy:hover{background:var(--color-primary-deep)}
+.ds-btn-primary--ghost{background:transparent; color:var(--color-text); border:1px solid var(--color-text)}
+.ds-btn-primary--ghost:hover{background:var(--color-text); color:#fff; transform:none}
+.ds-link-cta{display:inline-flex; align-items:center; gap:8px; font-weight:600; color:var(--color-text); border-bottom:1px solid var(--color-text); padding:0 0 2px 0; transition:all 120ms ease}
+.ds-link-cta:hover{color:var(--color-accent); border-color:var(--color-accent)}
+.ds-link-cta--inverted{color:#fff; border-color:#fff}
+.ds-link-cta--inverted:hover{color:var(--color-accent); border-color:var(--color-accent)}
+
+/* ===================================================
+   HERO — Variant C: tighter brand statement + dual CTA
+   =================================================== */
+.hero{
+  padding:64px 0 0;
+  background:var(--color-bg);
+  position:relative;
+  overflow:hidden;
+}
+.hero .container{display:grid; grid-template-columns: 1.4fr 1fr; gap:64px; align-items:center; min-height:520px}
+.hero h1{
+  font-size:clamp(48px, 6.5vw, 76px);
+  line-height:1.02; font-weight:300; letter-spacing:-0.02em;
+  margin:24px 0 24px; max-width:14ch;
+}
+.hero h1 em{font-family:var(--font-display); font-style:italic; font-weight:500; color:var(--color-accent)}
+.hero .lede{font-size:19px; color:var(--color-text-muted); line-height:1.55; max-width:46ch; margin-bottom:32px}
+.hero .cta-row{display:flex; gap:16px; flex-wrap:wrap; align-items:center}
+.hero .product-strip{
+  margin-top:48px; padding:24px 0; border-top:1px solid var(--color-rule);
+  display:flex; gap:32px; align-items:center; font-size:13px; color:var(--color-text-subtle);
+  letter-spacing:.04em; text-transform:uppercase; flex-wrap:wrap;
+}
+.hero .product-strip span:first-child{font-weight:600}
+.hero .product-strip a{font-weight:600; color:var(--color-text); border-bottom:1px solid transparent; transition:border-color 120ms}
+.hero .product-strip a:hover{border-color:var(--color-accent); color:var(--color-accent)}
+
+/* Hero visual: a stacked product mosaic */
+.hero-visual{position:relative; height:520px}
+.hero-card{
+  position:absolute;
+  background:#fff; border:1px solid var(--color-rule); border-radius:var(--radius-card);
+  padding:20px; box-shadow:var(--shadow-1);
+  display:flex; flex-direction:column; gap:12px;
+}
+.hero-card .ribbon{display:flex; align-items:center; gap:8px; color:var(--color-text-subtle); font-size:12px; font-weight:500; letter-spacing:.04em; text-transform:uppercase}
+.hero-card .ribbon::before{content:""; width:8px; height:8px; background:var(--color-accent); border-radius:50%}
+.hero-card .pname{font-size:18px; font-weight:600; letter-spacing:-0.01em}
+.hero-card .row{display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-top:1px solid var(--color-rule); font-size:13px}
+.hero-card .row:first-of-type{border-top:0}
+.hero-card .row strong{font-weight:600}
+.hero-card .row .pos{color:#0a8a4a; font-weight:600}
+.hero-card .row .neg{color:var(--color-accent); font-weight:600}
+
+.hero-card.h-1{top:0; left:0; width:280px; transform:rotate(-2deg); animation:floatA 6s ease-in-out infinite}
+.hero-card.h-2{top:60px; right:0; width:300px; transform:rotate(2deg); animation:floatB 7s ease-in-out infinite}
+.hero-card.h-3{bottom:0; left:40px; width:300px; transform:rotate(-1deg); animation:floatC 8s ease-in-out infinite}
+@keyframes floatA{0%,100%{transform:rotate(-2deg) translateY(0)}50%{transform:rotate(-2deg) translateY(-8px)}}
+@keyframes floatB{0%,100%{transform:rotate(2deg) translateY(0)}50%{transform:rotate(2deg) translateY(8px)}}
+@keyframes floatC{0%,100%{transform:rotate(-1deg) translateY(0)}50%{transform:rotate(-1deg) translateY(-6px)}}
+
+.hero-card .bar-chart{display:flex; align-items:flex-end; gap:6px; height:60px; padding:8px 0}
+.hero-card .bar-chart > span{flex:1; background:var(--color-primary); border-radius:2px}
+.hero-card .bar-chart > span.peak{background:var(--color-accent)}
+.hero-card .terminal{
+  background:#fff; border:1px dashed var(--color-rule); padding:16px; border-radius:var(--radius-1);
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  font-size:14px;
+}
+.hero-card .terminal .price{font-family:var(--font-display); font-size:32px; font-weight:500; letter-spacing:-0.02em; color:var(--color-text)}
+.hero-card .terminal .swipe{padding:6px 14px; background:var(--color-accent); color:#fff; border-radius:999px; font-size:12px; font-weight:600}
+
+/* ---------- proof strip ---------- */
+.proof-strip{background:var(--color-primary); color:#fff; padding:56px 0; position:relative}
+.proof-strip .stats{display:grid; grid-template-columns:repeat(4, 1fr); gap:32px; align-items:end}
+.stat .num{font-family:var(--font-display); font-style:italic; font-weight:500; color:#fff; font-size:56px; line-height:1; letter-spacing:-0.02em}
+.stat .num span.unit{font-style:normal; color:var(--color-accent); font-family:var(--font-heading); font-weight:300}
+.stat .label{display:block; margin-top:12px; color:rgb(255 255 255 / 0.75); font-size:13px; line-height:1.4}
+.proof-strip .ph-flag{display:inline-block; font-family:ui-monospace, monospace; font-size:11px; color:var(--color-accent); letter-spacing:.08em; border:1px dashed var(--color-accent); padding:2px 8px; margin-top:8px}
+
+/* ---------- products section ---------- */
+.section{padding:var(--section-pad) 0}
+.section--alt{background:var(--color-surface)}
+.section h2{font-size:clamp(32px, 4vw, 48px); font-weight:300; max-width:24ch; letter-spacing:-0.01em}
+.section h2 em{font-family:var(--font-display); font-style:italic; font-weight:500; color:var(--color-accent)}
+.section .lede{font-size:18px; color:var(--color-text-muted); max-width:60ch; margin-top:16px}
+.section-head{margin-bottom:48px; display:flex; justify-content:space-between; align-items:flex-end; gap:32px; flex-wrap:wrap}
+
+.products{display:grid; grid-template-columns:repeat(2, 1fr); gap:24px}
+.product-card{
+  background:var(--color-bg);
+  border:1px solid var(--color-rule);
+  border-radius:var(--radius-card);
+  padding:0; overflow:hidden;
+  display:flex; flex-direction:column;
+  transition:transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.product-card:hover{transform:translateY(-4px); box-shadow:var(--shadow-2); border-color:transparent}
+.product-card .pc-visual{
+  height:200px; background:var(--color-surface); position:relative; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+}
+.product-card .pc-visual::before{content:""; position:absolute; inset:0; background:linear-gradient(135deg, rgb(0 39 84 / 0.04) 0%, transparent 100%)}
+.product-card .pc-body{padding:32px; display:flex; flex-direction:column; gap:16px; flex:1}
+.product-card .pc-row{display:flex; justify-content:space-between; align-items:center}
+.product-card .pc-eyebrow{font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-subtle)}
+.product-card .pc-name{font-family:var(--font-heading); font-size:32px; font-weight:300; letter-spacing:-0.02em; color:var(--color-text)}
+.product-card .pc-name em{font-family:var(--font-display); font-style:italic; font-weight:500; color:var(--color-accent)}
+.product-card .pc-tagline{font-size:17px; color:var(--color-text); font-weight:500}
+.product-card .pc-desc{font-size:15px; color:var(--color-text-muted); line-height:1.6}
+.product-card .pc-actions{display:flex; gap:16px; align-items:center; margin-top:auto; padding-top:8px}
+.product-card .pc-actions .ds-link-cta{font-size:14px}
+.product-card .pc-actions .meta{margin-left:auto; font-size:12px; color:var(--color-text-subtle); letter-spacing:.04em; text-transform:uppercase}
+
+/* product card visual mocks */
+.mock-clover{
+  width:60%; aspect-ratio:1.2; background:#fff; border-radius:8px; box-shadow:var(--shadow-1);
+  display:flex; flex-direction:column; padding:14px; gap:6px;
+}
+.mock-clover .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:6px; flex:1}
+.mock-clover .grid > div{background:var(--color-surface); border-radius:4px}
+.mock-clover .grid > div:nth-child(2){background:var(--color-accent)}
+.mock-clover .pad{height:30px; background:var(--color-primary); border-radius:4px; margin-top:4px}
+.mock-carat{
+  width:80%; height:140px; background:#fff; border-radius:8px; box-shadow:var(--shadow-1);
+  padding:14px; display:flex; flex-direction:column; gap:6px;
+  font-family:ui-monospace, monospace; font-size:11px; color:var(--color-text-muted);
+}
+.mock-carat .api-line{padding:2px 0}
+.mock-carat .key{color:var(--color-secondary)}
+.mock-carat .val{color:var(--color-accent)}
+.mock-finxact{
+  width:80%; background:#fff; border-radius:8px; box-shadow:var(--shadow-1); padding:14px; display:flex; flex-direction:column; gap:6px;
+}
+.mock-finxact .row-h{display:flex; justify-content:space-between; align-items:center; font-size:11px; color:var(--color-text-subtle); padding-bottom:6px; border-bottom:1px solid var(--color-rule)}
+.mock-finxact .acct{display:flex; justify-content:space-between; padding:6px 0; font-size:12px}
+.mock-finxact .acct strong{font-family:var(--font-display); font-style:italic; color:var(--color-text); font-weight:500}
+.mock-forum{
+  width:80%; height:140px; background:linear-gradient(135deg, var(--color-primary) 0%, #003a7a 100%);
+  border-radius:8px; padding:18px; color:#fff;
+  display:flex; flex-direction:column; justify-content:space-between;
+}
+.mock-forum .label{font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:rgb(255 255 255 / 0.6)}
+.mock-forum .h{font-family:var(--font-display); font-style:italic; font-size:22px; font-weight:500}
+.mock-forum .date{font-size:12px; color:var(--color-accent)}
+
+/* ---------- audience strip (de-emphasized) ---------- */
+.audience-strip{
+  display:grid; grid-template-columns:repeat(4, 1fr);
+  border-top:1px solid var(--color-rule);
+}
+.audience-strip a{
+  padding:32px; border-right:1px solid var(--color-rule);
+  display:flex; flex-direction:column; gap:8px;
+  transition:background 200ms ease;
+}
+.audience-strip a:last-child{border-right:0}
+.audience-strip a:hover{background:var(--color-bg)}
+.audience-strip h3{font-size:18px; font-weight:600}
+.audience-strip p{font-size:14px; color:var(--color-text-muted)}
+
+/* ---------- logos band ---------- */
+.logos-band{padding:48px 0; background:var(--color-bg); border-top:1px solid var(--color-rule); border-bottom:1px solid var(--color-rule)}
+.logos-band .lede{color:var(--color-text-subtle); font-size:13px; letter-spacing:.04em; text-align:center; margin-bottom:24px}
+.logo-row{display:grid; grid-template-columns:repeat(7, 1fr); gap:32px; align-items:center}
+.logo-row .lg{font-family:var(--font-display); font-weight:700; font-style:italic; letter-spacing:-0.04em; color:var(--color-text-subtle); font-size:22px; text-align:center; filter:saturate(0); opacity:.7}
+.logo-row .lg.s2{font-family:var(--font-heading); font-weight:700; font-style:normal; font-size:18px; letter-spacing:-0.02em}
+.logo-row .lg.s3{font-family:var(--font-body); font-weight:300; font-style:normal; font-size:18px; letter-spacing:.4em; text-transform:uppercase}
+.logo-row .lg.s4{font-family:var(--font-display); font-weight:500; font-size:20px; letter-spacing:0}
+.logo-row .lg.s5{font-family:var(--font-heading); font-weight:600; font-size:17px}
+
+/* ---------- editorial / story ---------- */
+.split{display:grid; grid-template-columns:1fr 1fr; gap:0; align-items:stretch}
+.split--reverse > .split-img{order:2}
+.split-img{background-size:cover; background-position:center; min-height:480px}
+.split-copy{padding:64px; display:flex; flex-direction:column; justify-content:center}
+.split-copy .eyebrow{margin-bottom:16px; display:block}
+.split-copy h2{margin-bottom:16px; font-size:clamp(28px, 3vw, 40px)}
+.split-copy p{font-size:18px; color:var(--color-text-muted); line-height:1.6; margin-bottom:24px; max-width:46ch}
+
+/* CTA */
+.cta-band{background:var(--color-primary); color:#fff; padding:80px 0; text-align:center}
+.cta-band h2{color:#fff; font-size:clamp(36px, 5vw, 56px); font-weight:300; max-width:24ch; margin:0 auto}
+.cta-band h2 em{font-family:var(--font-display); font-style:italic; color:var(--color-accent); font-weight:500}
+.cta-band .row{display:flex; gap:16px; justify-content:center; margin-top:32px; flex-wrap:wrap}
+
+/* footer */
+footer{background:var(--color-primary-deep); color:rgb(255 255 255 / 0.85); padding:64px 0 32px; font-size:14px; line-height:1.6}
+footer .top{display:grid; grid-template-columns: 280px repeat(4, 1fr); gap:32px; margin-bottom:48px}
+footer .top h4{color:#fff; font-size:14px; font-weight:600; margin:0 0 16px; letter-spacing:.04em; text-transform:uppercase}
+footer ul{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px}
+footer ul a{color:rgb(255 255 255 / 0.75)}
+footer ul a:hover{color:var(--color-accent)}
+footer .brand{color:rgb(255 255 255 / 0.72); font-size:14px}
+footer .brand .wordmark{color:var(--color-accent); font-size:32px; margin-bottom:16px; display:block}
+footer .social{display:flex; gap:12px; margin-top:24px}
+footer .social a{width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; border:1px solid rgb(255 255 255 / 0.25); border-radius:var(--radius-1); color:rgb(255 255 255 / 0.85)}
+footer .social a:hover{border-color:var(--color-accent); color:var(--color-accent)}
+footer .legal{border-top:1px solid rgb(255 255 255 / 0.15); padding-top:24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; color:rgb(255 255 255 / 0.55); font-size:12px}
+footer .legal .links{display:flex; gap:24px}
+
+/* responsive */
+@media (max-width: 1100px){
+  .hero .container{grid-template-columns:1fr}
+  .hero-visual{height:380px; margin-top:32px}
+  .products{grid-template-columns:1fr}
+  .audience-strip{grid-template-columns:repeat(2, 1fr)}
+  .audience-strip a:nth-child(2n){border-right:0}
+}
+@media (max-width: 800px){
+  .split{grid-template-columns:1fr}
+  .split--reverse > .split-img{order:0}
+  .split-copy{padding:48px 32px}
+  .proof-strip .stats{grid-template-columns:repeat(2, 1fr); gap:32px}
+  .logo-row{grid-template-columns:repeat(3, 1fr); row-gap:16px}
+  footer .top{grid-template-columns:1fr 1fr}
+  nav.primary{display:none}
+}
+@media (max-width: 560px){
+  :root{--section-pad:48px}
+  .container{padding:0 20px}
+  .hero{padding:48px 0 0}
+  .hero h1{font-size:42px}
+  .audience-strip{grid-template-columns:1fr}
+  .audience-strip a{border-right:0; border-bottom:1px solid var(--color-rule)}
+  .stat .num{font-size:44px}
+  .product-card .pc-name{font-size:28px}
+  footer .top{grid-template-columns:1fr}
+  .regional .bar{flex-wrap:wrap; justify-content:flex-start}
+  .hero-visual{height:340px}
+  .hero-card{transform:scale(0.85)}
+}
+@media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important}}
+</style>
+</head>
+<body data-variant="C">
+
+  <!-- =========== HEADER =========== -->
+  <header data-section="header" data-intent="navigation" data-layout="sticky-bar">
+    <div class="container bar">
+      <a href="/" aria-label="Fiserv home" class="wordmark">fiserv<span class="dot">.</span></a>
+      <nav class="primary" aria-label="Primary">
+        <a href="#" class="has-pop">Products</a>
+        <a href="#" class="has-pop">Who We Serve</a>
+        <a href="#">Insights</a>
+        <a href="#">Developers</a>
+        <a href="#">About</a>
+        <a href="#">Careers</a>
+      </nav>
+      <div class="utilities">
+        <button class="icon-btn" aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <button class="icon-btn" aria-label="Region"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></button>
+        <a class="ds-btn-primary" href="#" style="padding:10px 18px; font-size:14px">Talk to sales</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========== REGIONAL BANNER =========== -->
+  <div class="regional" data-section="regional-banner" data-intent="geo-switch">
+    <div class="container bar">
+      <span>You may be interested in visiting our local site for relevant content specific to your location.</span>
+      <div class="actions">
+        <button class="btn-outline">Switzerland</button>
+        <button class="btn-solid">Continue</button>
+      </div>
+      <button class="dismiss" aria-label="Dismiss">×</button>
+    </div>
+  </div>
+
+  <!-- =========== HERO =========== -->
+  <section class="hero" data-section="hero" data-intent="brand-statement-with-product-mosaic" data-layout="split-2-1">
+    <div class="container">
+      <div>
+        <span class="eyebrow eyebrow--accent">Five products. One stack.</span>
+        <h1>Fiserv moves <em>more</em> than money.</h1>
+        <p class="lede">Clover, Carat, Finxact, Forum and AppMarket — the products that 10,000+ banks and 6 million+ merchants run on every day.</p>
+        <div class="cta-row">
+          <a class="ds-btn-primary" href="#">See solutions <span aria-hidden="true">→</span></a>
+          <a class="ds-btn-primary ds-btn-primary--ghost" href="#">Talk to sales</a>
+        </div>
+        <div class="product-strip">
+          <span>Jump to</span>
+          <a href="#products">Clover</a>
+          <a href="#products">Carat</a>
+          <a href="#products">Finxact</a>
+          <a href="#products">Forum 2026</a>
+          <a href="#products">AppMarket</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-card h-1">
+          <span class="ribbon">Clover · POS</span>
+          <span class="pname">Beans &amp; Co · Today</span>
+          <div class="terminal">
+            <span class="price">$48.20</span>
+            <span class="swipe">Tap to pay</span>
+          </div>
+        </div>
+        <div class="hero-card h-2">
+          <span class="ribbon">Carat · API</span>
+          <span class="pname">Volume · 7d</span>
+          <div class="bar-chart">
+            <span style="height:30%"></span>
+            <span style="height:55%"></span>
+            <span style="height:42%"></span>
+            <span style="height:70%"></span>
+            <span style="height:60%"></span>
+            <span class="peak" style="height:90%"></span>
+            <span style="height:75%"></span>
+          </div>
+          <div class="row"><span>Authorisation</span><strong class="pos">99.7%</strong></div>
+          <div class="row"><span>Avg. response</span><strong>184ms</strong></div>
+        </div>
+        <div class="hero-card h-3">
+          <span class="ribbon">Finxact · Core</span>
+          <span class="pname">Cards issued · today</span>
+          <div class="row" style="border-top:0; padding-top:0"><span style="font-size:12px; color:var(--color-text-subtle); letter-spacing:.08em; text-transform:uppercase">Live ledger</span><strong style="font-family:var(--font-display); font-style:italic; font-weight:500; color:var(--color-text); font-size:24px">+12,408</strong></div>
+          <div class="row"><span>Real-time settlement</span><strong class="pos">on</strong></div>
+          <div class="row"><span>Compliance</span><strong>SOC 2 · PCI L1</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== PROOF STRIP =========== -->
+  <!-- =========== PRODUCTS =========== -->
+  <!-- =========== LOGOS =========== -->
+  <!-- =========== AUDIENCE STRIP (third tier) =========== -->
+  <section class="section section--alt" data-section="audience-grid" data-intent="buyer-routing-tertiary">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Or browse by who you are</span>
+          <h2>Audience-led <em>routes</em>.</h2>
+        </div>
+      </div>
+      <nav class="audience-strip" aria-label="Audience routes">
+        <a href="#"><h3>Financial Institutions →</h3><p>Banks, credit unions, large FIs.</p></a>
+        <a href="#"><h3>Enterprises →</h3><p>Large merchants, telcos, utilities.</p></a>
+        <a href="#"><h3>Fintechs →</h3><p>API-first, sponsorship, processing.</p></a>
+        <a href="#"><h3>Small Businesses →</h3><p>Clover and the back-office to run it.</p></a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- =========== INSTITUTIONAL =========== -->
+  <section class="split" data-section="about" data-intent="institutional-story">
+    <div class="split-img" style="background-image:url('../current/assets/media/bg-08d7d2.jpg')" role="img" aria-label="Fiserv signage on the Milwaukee headquarters"></div>
+    <div class="split-copy">
+      <span class="eyebrow">About Fiserv</span>
+      <h2>Moving money. <em>Advancing</em> commerce.</h2>
+      <p>For more than three decades, Fiserv has been the infrastructure beneath the world's payments and banking. We're a Fortune 250 fintech with a single, plain-spoken job: keep the money moving — securely, reliably, at scale.</p>
+      <a class="ds-link-cta" href="#">Read more about Fiserv →</a>
+    </div>
+  </section>
+
+  <section class="split split--reverse" data-section="life" data-intent="employer-brand">
+    <div class="split-img" style="background-image:url('../current/assets/media/bg-a89e93.jpg')" role="img" aria-label="Two Fiserv associates in an office"></div>
+    <div class="split-copy">
+      <span class="eyebrow">Life at Fiserv</span>
+      <h2>40,000+ associates. <em>One</em> mission.</h2>
+      <p>We hire engineers, bankers, designers, risk specialists and operators in every region we serve. Every role moves money for someone, somewhere.</p>
+      <a class="ds-link-cta" href="#">Explore careers →</a>
+    </div>
+  </section>
+
+  <!-- =========== CTA BAND =========== -->
+  <section class="cta-band" data-section="cta-band" data-intent="primary-cta-repeat">
+    <div class="container">
+      <h2>Ready to ship on the <em>biggest</em> stack in money?</h2>
+      <div class="row">
+        <a class="ds-btn-primary" href="#">Talk to sales</a>
+        <a class="ds-link-cta ds-link-cta--inverted" href="#">See the developer portal</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== FOOTER =========== -->
+  <footer data-section="footer" data-intent="global-footer">
+    <div class="container">
+      <div class="top">
+        <div class="brand">
+          <span class="wordmark">fiserv<span style="color:var(--color-accent)">.</span></span>
+          Helping clients achieve best-in-class results across every part of the money system.
+          <div class="social" aria-label="Social">
+            <a href="#" aria-label="LinkedIn"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0H5a5 5 0 0 0-5 5v14a5 5 0 0 0 5 5h14a5 5 0 0 0 5-5V5a5 5 0 0 0-5-5ZM8 19H5V8h3v11ZM6.5 6.5a1.75 1.75 0 1 1 0-3.5 1.75 1.75 0 0 1 0 3.5ZM20 19h-3v-5.5c0-3-3-2.75-3 0V19h-3V8h3v1.6c1.4-2.59 6-2.78 6 2.48V19Z"/></svg></a>
+            <a href="#" aria-label="X"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.654l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25h6.819l4.713 6.231 5.458-6.231Z"/></svg></a>
+            <a href="#" aria-label="Facebook"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24h11.494v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 0-1.794.715-1.794 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.732 0 1.325-.593 1.325-1.325V1.325C24 .593 23.407 0 22.675 0z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.897 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.897-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zM12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4>Products</h4>
+          <ul>
+            <li><a href="#">Clover</a></li>
+            <li><a href="#">Carat</a></li>
+            <li><a href="#">Finxact</a></li>
+            <li><a href="#">Forum 2026</a></li>
+            <li><a href="#">AppMarket</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Solutions</h4>
+          <ul>
+            <li><a href="#">Financial Institutions</a></li>
+            <li><a href="#">Enterprises</a></li>
+            <li><a href="#">Fintechs</a></li>
+            <li><a href="#">Small Businesses</a></li>
+            <li><a href="#">Public Sector</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>About</h4>
+          <ul>
+            <li><a href="#">Who We Are</a></li>
+            <li><a href="#">Executive Leadership</a></li>
+            <li><a href="#">Corporate Social Responsibility</a></li>
+            <li><a href="#">Newsroom</a></li>
+            <li><a href="#">Investor Relations</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Developers</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Partner support</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="legal">
+        <span>© 2026 Fiserv, Inc. All rights reserved.</span>
+        <span class="links">
+          <a href="#">Privacy Notice</a>
+          <a href="#">Cookie Notice</a>
+          <a href="#">Acceptable Use</a>
+          <a href="#">Terms</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

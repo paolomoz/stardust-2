@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 2,
+  "slug": "fiserv-com",
+  "title": "Fiserv — moves more than money",
+  "tagline": "From a content-grid corporate home to a brand-faithful redesign with three multi-variant theses (proof-at-the-top, JTBD doorways, product-forward).",
+
+  "source": {
+    "url": "https://www.fiserv.com",
+    "register": "brand",
+    "category": "B2B fintech · payments + banking infrastructure",
+    "extractedAt": "2026-04-27"
+  },
+
+  "direction": {
+    "phrase": "redesign this home page to make it better",
+    "movements": [
+      "register: brand (inherited)",
+      "ground-family: stark-white (user-constraint, brand-faithful override)",
+      "type-scale: ad-hoc → modular major-third 1.25",
+      "ia: audience-only → audience + JTBD doorways"
+    ],
+    "seed": {
+      "input": "fiserv.com|2026-04-27",
+      "decade": "2025-now",
+      "craft": "editorial-news-business",
+      "register": "brand",
+      "groundFamily": "stark-white",
+      "pickedBy": "anchor-implied: incumbent-modern · user-constraint on ground"
+    },
+    "fontDeck": {
+      "name": "brand-inherited",
+      "pickedBy": "user-constraint"
+    },
+    "palette": {
+      "name": "Fiserv brand-pinned",
+      "source": "inherited from stardust/current/_brand-extraction.json",
+      "anchor": "#002754",
+      "pickedBy": "user-constraint",
+      "brandFaithfulInversions": [
+        "pure-white retention",
+        "hex format retention"
+      ]
+    },
+    "antiToolbox": {
+      "hits": 0,
+      "justified": 0,
+      "note": "No anti-toolbox moves invoked — the resolved direction is brand-faithful (palette + type pinned), so divergence-toolkit § 1 has nothing to flag."
+    }
+  },
+
+  "variants": [
+    {
+      "id": "A",
+      "name": "Proof at the top",
+      "dominantDimension": "decade",
+      "thesis": "Hero leads with high-contrast headline + designed surface; the editorial-news register (decade-dominant) reads first. Audience-grid + about/life follow. Content sourced from captured pages/home.json; the proof-tiles, customer-logos, and named-products sections from the original render were trimmed before publish to keep claims to verified scope (10K+ FIs, 6M+ merchants from fiserv.com/about).",
+      "proposedFile": "proposed-A.html",
+      "isPrimary": true
+    },
+    {
+      "id": "B",
+      "name": "Doorways (job-to-be-done first)",
+      "dominantDimension": "register",
+      "thesis": "Hero question + 5-doorway JTBD chooser as the primary IA — Accept payments / Issue a card / Run a bank / Embed finance / Modernise a core. The brand register (verb-led routing) reads first; audience-grid recedes to a secondary nav. proof-strip and customer-logos sections trimmed before publish.",
+      "proposedFile": "proposed-B.html"
+    },
+    {
+      "id": "C",
+      "name": "Product-forward",
+      "dominantDimension": "craft",
+      "thesis": "Hero leads with the product list (Clover, Carat, Finxact). The editorial-news craft (named platforms first) reads first. The original render included 5 cards (with Forum and AppMarket); both were trimmed since Forum is the conference and AppMarket is a Clover sub-product, not peer platforms. proof-strip and customer-logos sections also trimmed.",
+      "proposedFile": "proposed-C.html"
+    }
+  ],
+
+  "createdAt": "2026-04-27",
+  "stardustVersion": "0.2.0",
+  "submittedBy": "paolomoz",
+  "license": "Apache-2.0",
+  "thumbnail": "thumbnail.svg",
+
+  "_provenance": {
+    "writtenBy": "stardust:prototype --publish-sample (this session)",
+    "writtenAt": "2026-04-27",
+    "readArtifacts": [
+      "/Users/paolo/excat/tmp/st2-6-fiserv/stardust/state.json",
+      "/Users/paolo/excat/tmp/st2-6-fiserv/stardust/direction.md",
+      "/Users/paolo/excat/tmp/st2-6-fiserv/DESIGN.md",
+      "/Users/paolo/excat/tmp/st2-6-fiserv/DESIGN.json",
+      "/Users/paolo/excat/tmp/st2-6-fiserv/stardust/current/PRODUCT.md",
+      "/Users/paolo/excat/tmp/st2-6-fiserv/stardust/current/_brand-extraction.json",
+      "/Users/paolo/excat/tmp/st2-6-fiserv/stardust/current/pages/home.json"
+    ],
+    "trimNote": "All three variants had data-placeholder elements (proof-tiles, customer-logos, products) flagged in their _provenance.unsourcedContent[]. The publish flow refuses on non-empty unsourcedContent[]; rather than fabricate content, the unsourced sections were removed before publish. Each variant's primary thesis is preserved (A: editorial-led hero; B: JTBD chooser; C: product list trimmed to Clover/Carat/Finxact)."
+  }
+}
