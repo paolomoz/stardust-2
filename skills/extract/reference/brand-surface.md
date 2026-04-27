@@ -147,6 +147,16 @@ role-named.
 
 Aggregation rules:
 
+- **Discard non-colors before aggregation.** `rgba(*, 0)`,
+  `rgba(0, 0, 0, 0)`, the literal string `transparent`, and any
+  CSS color whose alpha channel is 0 are not colors — they are
+  "no color." If a section's `background-color` resolves to one
+  of these, the section inherits its parent's effective background;
+  the transparent value must not enter the palette aggregation.
+  Picking up `rgba(255, 255, 255, 0)` as a `surface` role with high
+  occurrence count (because most elements default to transparent
+  backgrounds in CSS) is a real bug observed on
+  theroadhome.org (`STARDUST-FEEDBACK.md F-003`).
 - Cluster colors within `ΔE < 5` (CIE76 in Lab space) and pick the
   most frequent member as the cluster representative.
 - Pure `#000` and `#fff` are kept verbatim — do **not** silently tint

@@ -174,6 +174,8 @@ the mechanical baseline.
 | `T-logo-variants` | Single logo variant captured | `_brand-extraction.json#logo` | Always emits — current locator chain only captures first hit | "Only one logo variant captured ({source}). The redesign will need a monochrome / inverted / SVG variant set; direct should plan that." |
 | `T-color-imbalance` | Palette color used for text only or fill only | `_brand-extraction.json#palette[].usedAs` | Any color (excluding pure black, pure white, and `text-primary`/`text-secondary` roles) where `usedAs` contains only `["text"]` or only `["background"]` | "Color {value} ({role}) appears as {usedAs[0]} only — never as {missing contexts}. Direct will need to decide: drop, expand, or keep as accent." |
 | `T-no-tokens` | Site ships no design tokens | aggregated `pages/*.json#cssCustomProperties` | Empty across every page | "No CSS custom properties defined. The current site has no design-token layer; the migration target will introduce tokens, which is a structural change worth calling out to the user." |
+| `T-tokens-unused` | Tokens defined but visually unapplied | aggregated `pages/*.json#cssCustomProperties` + `_brand-extraction.json#palette[role="primary"].value` | A `--primary` / `--secondary` / `--success` / `--info` / `--warning` / `--danger` custom property exists with a value matching a known framework default (Bootstrap 4/5: `#007bff`, `#6c757d`, `#28a745`, `#17a2b8`, `#ffc107`, `#dc3545`; Tailwind `slate-500`/`gray-500`; Material defaults) AND the brand's actual computed primary palette differs from that token value | "Design tokens defined but unused: `--primary` ships as `<token-value>` (likely a {framework} default) while the brand's actual primary is `<palette-primary>`. The token layer exists in name only — the migration target will need to either rewire components to consume tokens or replace the token values to match the brand." |
+| `T-img-alt-generic` | Generic alt-text widespread | aggregated `pages/*.json#media.images[].alt` | ≥1 image with alt text matching one of `{ "logo", "image", "picture", "photo", "img", "icon" }` exactly (case-insensitive, trimmed) | "Generic alt text found: {N} image(s) carry alt text equal to a stock placeholder ({matched values}). Distinct from empty alt — these images claim a label but the label is content-free. WordPress / page-builder default; failing screen readers." |
 | `T-embed-dominance` | Embed-dominated page exists | `pages/*.json#embedDominance.dominated` | True on ≥1 page | "Page(s) {slug list} have primary content inside a cross-origin embed ({src host}); brand-surface tokens for those pages were not captured. Direct will need to decide whether the redesign targets the host page or the embed surface." |
 | `T-img-alt-empty` | Empty `alt` text widespread | aggregated `pages/*.json#media.images[].alt` | ≥30% of images have empty or whitespace-only `alt` | "{N}% of images carry empty alt text. Accessibility issue and a content-sourcing decision for direct." |
 | `T-nav-conflict` | Two top-nav items compete for the same audience action | aggregated `pages/*.json#landmarks[?role==banner|navigation]` heading-sequence | ≥2 nav items whose labels match an action-conflict pair (see § Action-conflict pairs) | "Top-nav contains both {label A} and {label B}; these typically compete for the same user moment. Direct should resolve which is primary." |
@@ -183,6 +185,38 @@ When a rule's data is unavailable (e.g. crawl too small for
 cross-page detection), skip the rule silently. The Tensions section
 is allowed to be empty — that itself is a signal about either the
 site or the crawl scope.
+
+### Card consolidation
+
+When a single rule (matched by `id`) fires more than 3 times,
+render a **single consolidated card** instead of N individual
+cards. The body lists the matching items in a comma-separated
+phrase or a small inline table, depending on data shape.
+
+Concrete rule: if `tensions.filter(t => t.id === '<rule-id>').length > 3`,
+collapse to one card with:
+
+- `tag` — the rule id (unchanged).
+- `title` — the rule's plural framing (e.g. "Multiple palette
+  colors used in only one context" instead of the per-color
+  "Color {value} ({role}) appears as {usedAs[0]} only").
+- `body` — a short summary line + an inline `<ul>` or comma-list
+  of the matching items, each with the relevant data.
+- `source` — citation unchanged.
+
+Apply consolidation to per-element rules: `T-color-imbalance`,
+`T-link-content-free`, `T-img-alt-empty`, `T-img-alt-generic`,
+`T-tokens-unused`, and any future rule whose trigger fires once
+per element rather than once per site.
+
+Per-site rules (`T-scale`, `T-no-tokens`, `T-logo-variants`,
+`T-temporal-mark`, `T-nav-conflict`) cannot fire more than once
+by construction; consolidation is a no-op for them.
+
+Without consolidation a single noisy rule swamps the Tensions
+section — observed on theroadhome.org where `T-color-imbalance`
+fired 8 times and pushed every other tension below the fold
+(`STARDUST-FEEDBACK.md F-004`).
 
 ### Card layout
 

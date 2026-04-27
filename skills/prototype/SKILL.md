@@ -201,10 +201,11 @@ Render `stardust/prototypes/<slug>.html` per
 `reference/before-after-shell.md` § `<slug>.html`. Two-iframe layout,
 header strip with action buttons, footer strip with direction title.
 
-Resolve the CURRENT iframe source per the resolution order in the
-reference: live URL first, screenshot fallback, landmarks-text
-fallback. Resolve the PROPOSED iframe source as a relative path to
-`<slug>-proposed.html`.
+Resolve the CURRENT pane source per the resolution order in the
+reference: screenshot first (default — always works), live URL via
+"Try live" toggle (opt-in), landmarks-text fallback only when the
+screenshot is missing. Resolve the PROPOSED iframe source as a
+relative path to `<slug>-proposed.html`.
 
 ### Phase 4 — Open and iterate
 
@@ -336,9 +337,12 @@ flag and update `againstDirection` to the new active direction.
 - **Validation failure (:root block missing, data attributes missing,
   unjustified anti-toolbox hit, impeccable rule violation).** Do not
   write the file. Surface the specific failure and a suggested fix.
-- **Live URL unreachable for the CURRENT iframe.** Fall back to
-  screenshot, then to landmarks text. Note the fallback in the viewer
-  header strip.
+- **CURRENT pane has no screenshot.** Fall through to live URL (if
+  the screenshot file is missing post-extract), then to landmarks
+  text. Note the fallback in the viewer header strip. The default
+  pane source is the screenshot per `reference/before-after-shell.md`
+  § Iframes; the live URL is opt-in via the "Try live" toggle for
+  CSP reasons (`STARDUST-FEEDBACK.md F-001`).
 - **`$impeccable live` not available.** Fall back to `--no-iterate`
   behaviour and tell the user the iteration step requires impeccable
   live.

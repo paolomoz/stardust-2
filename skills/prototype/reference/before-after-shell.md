@@ -47,15 +47,37 @@ analytics, no fonts.
 ### Iframes
 
 **Left (CURRENT).**
-Source resolution order:
-1. Live URL from `state.json` (`pages[<slug>].url`). Default. Loads in
-   a sandboxed iframe with `sandbox="allow-scripts allow-same-origin"`.
-2. If the live URL is unreachable (offline run, login wall), fall
-   back to the screenshot at
-   `stardust/current/assets/screenshots/<slug>.png` displayed at
-   1:1 in an `<img>` (not an iframe).
-3. If neither is available, render an empty state with the page's
-   captured `landmarks` summary as a text-only outline.
+Source resolution order (screenshot-default):
+
+1. **Screenshot** at
+   `stardust/current/assets/screenshots/<slug>.png` displayed in an
+   `<img>`. **Default.** Always works, no embedding question, no CSP
+   risk.
+2. **Live URL** from `state.json` (`pages[<slug>].url`), exposed as
+   an opt-in "Try live" toggle in the viewer header strip. Loads
+   in a sandboxed iframe with
+   `sandbox="allow-scripts allow-same-origin"`.
+3. **Landmarks-text fallback** — render the page's captured
+   `landmarks` summary as a text-only outline. Used only when the
+   screenshot is missing AND the live URL is unreachable.
+
+The screenshot-default order is a flip from v0.1, which loaded the
+live URL first and fell back to screenshot only on network failure.
+Most production sites send `Content-Security-Policy: frame-ancestors`
+that silently blocks iframe embedding (no `onerror` event fires —
+the iframe just paints empty), so the v0.1 chain produced a blank
+CURRENT pane on the majority of real sites tested
+(`STARDUST-FEEDBACK.md F-001`). The screenshot is already captured
+during extract per `playwright-recipe.md` § Capture list (14); using
+it as the default eliminates the failure mode entirely.
+
+The "Try live" toggle remains useful when reviewing a page that
+*does* allow embedding (own staging environments, sites without
+CSP, localhost), or when the user wants to test interactive
+behavior. The toggle replaces the current iframe with the live URL
+inline; if it fails to load (CSP block, offline, login wall), the
+toggle button surfaces a "site refused embedding" notice and
+reverts to screenshot.
 
 **Right (PROPOSED).**
 Source: `srcdoc` of the relative path to `<slug>-proposed.html` (or
