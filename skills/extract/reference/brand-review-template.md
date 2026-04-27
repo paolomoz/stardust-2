@@ -41,7 +41,7 @@ The template reads from:
 | `stardust/current/PRODUCT.md` | Voice, personas, content pillars, register, brand personality |
 | `stardust/current/DESIGN.md` | Frontmatter tokens (colors, typography, rounded, spacing) |
 | `stardust/current/DESIGN.json` | `extensions` block — motifs, voice, componentStyle, systemComponents, scaleAudit |
-| `stardust/current/_brand-extraction.json` | Palette, type, motifs, system components, voice, register, embed-dominated pages |
+| `stardust/current/_brand-extraction.json` | Palette, type, motifs, system components, voice, voiceTable (CTA + heading frequency, tone metrics), crossPromo, register, embed-dominated pages |
 | `stardust/current/pages/<slug>.json` | Per-page data: heading outlines, CTAs, components inventory, embedDominance, cssCustomProperties |
 | `stardust/current/_crawl-log.json` | Coverage data: pages crawled, filtered, wait summary |
 | `stardust/current/assets/screenshots/<slug>.png` | Thumbnails strip |
@@ -56,73 +56,75 @@ worth surfacing in the coverage callout.
 
 ## Section contract
 
-Render in this exact order. Sections marked `*` are current-state
-additions absent from the v1 target board.
+What each section **contains**. Section **order** and **styling** are
+mandated by § Styling rules → § Section ordering (canonical) below.
+Sections marked `*` are current-state additions absent from the v1
+target board. Sections marked `?` render only when the source data
+exists.
 
-1. **Coverage callout `*`** — the very top. "Extracted N of M pages
-   (~X% DESIGN coverage)" + a one-line list of page-types not
-   covered. The reviewer sees what's missing before they trust
-   anything below.
-2. **Masthead** — site name, tagline (from PRODUCT.md or
-   `og:site_name`), logo, origin URL, extraction timestamp.
-3. **Coverage thumbnails strip `*`** — viewport screenshot row of
-   every extracted page (already on disk per
-   `playwright-recipe.md` § Capture list (14)). Each thumbnail
-   labelled with slug + an `observed/inferred/synthesized` badge if
-   the page contributed to a non-mechanical section below.
-4. **Color palette** — render each palette entry as a swatch with
-   value, role, occurrences, `usedAs` chips, and the top 3 source
-   pages. Pure black/white kept verbatim (per
-   `brand-surface.md` § Palette aggregation rules).
-5. **Typography** — heading family, body family, mono family if any.
-   Render real samples ("The quick brown fox" + numerals + symbols)
-   in each family at each captured size. Show `scaleAudit.kind` —
-   "modular (major-third, 1.250)" or "ad-hoc" with the observed
-   ratios listed.
-6. **Voice** — heroHeadline, heroSubcopy, firstParagraph, ctaSamples,
-   navItems, footerHeadings. Render as actual prose blocks, not
-   bullet lists. Tone guess shown as a tag, not a claim ("guess:
-   professional-warm" with evidence string).
-7. **Tensions `*`** — see § Tensions below. **Positioned right after
-   Voice and before Motifs** so the reviewer sees what to argue with
-   before the visual deep dive.
-8. **Motifs** — primary/secondary/pill border-radius with example
-   blocks rendered at each radius. Shadow stack — render three
-   sample boxes with shadows applied. Gradient inventory rendered as
-   gradient strips. Patterns listed with `evidence` strings.
-9. **Components** — render representative samples from
-   `componentStyle`: primary button, secondary button, ghost button,
-   card, input. Each rendered live (in HTML/CSS) with the captured
-   token values. This is the highest-density "does this look like
-   the site?" check.
-10. **System components `*`** — for each entry in
-    `_brand-extraction.json` § systemComponents, render the verbatim
-    `exampleBlock` with a `appears on N/M pages` badge and the list
-    of pages it appears on. The reviewer immediately sees what
-    repeats across the site.
-11. **Spacing & shape** — `baseUnit`, `scale[]`, `sectionPadding`,
-    `containerMaxWidth`, `gridGap`. Render the scale as a row of
-    boxes whose widths reflect each value.
-12. **Photography / imagery** — sample 6–12 images from
-    `media.images[]` across pages. Show alt text under each — sites
-    with empty `alt` everywhere are themselves a tension.
-13. **Content pillars** — extracted from `PRODUCT.md`'s structure;
-    render the pillars as the navigation of a typical page-type tour.
-14. **Personas** — from `PRODUCT.md`. Mark with `inferred` badge if
-    PRODUCT.md derived them rather than the site stating them.
-15. **Logo & favicons** — masthead logo at multiple sizes (32, 64,
-    256), favicon at 16/32, dark-on-light and light-on-dark
-    backgrounds. Flag with a tension if only one variant captured
-    (`brand-surface.md`'s logo locator stops at first hit).
-16. **Embed-dominated pages `*`** — section appears only when one or
-    more pages have `embedDominance.dominated: true`. Render the
-    screenshot at thumbnail size with a link to the iframe `src` and
-    a callout: "primary content lives in a third-party embed —
-    visual style not captured."
+- **Masthead** — site name, hero line (`brand.voice.heroHeadline`,
+  rendered as `p.hero-line` in `var(--accent)`), tagline
+  (`og:description` or `metaDescription`), origin URL.
+- **Coverage callout `*`** — three stat boxes: pages extracted,
+  wait strategy + avg ms, brand-surface summary. List failures in
+  accent color if `_crawl-log.json#crawl.failures[]` is non-empty.
+- **Pages `*`** — viewport screenshot grid. Each thumbnail labelled
+  with page title + slug pathname in monospace.
+- **Color palette** — swatch grid. Each swatch shows value, role,
+  occurrences, `usedAs` list, top-3 source pages. Pure black/white
+  kept verbatim (per `brand-surface.md` § Palette aggregation rules).
+- **Typography** — real specimens at each captured heading size +
+  weight + line-height + letter-spacing. Body specimen uses real
+  captured first-paragraph text. `scaleAudit.kind` shown as a badge
+  (`modular {name}` or `No modular scale`).
+- **Voice** — three voice cards (hero headline, tagline, first
+  paragraph). Then **CTA frequency table** from
+  `voiceTable.ctaFrequency` (top 8, pill-rendered labels). Then
+  **repeated-heading list** from `voiceTable.headingFrequency`
+  (≥3 pages, two-column layout). Then **tone metrics** in three stat
+  boxes (`headingsUppercasePercent`, `distinctHeadings`,
+  `distinctCtaLabels`). Tone guess shown as a tag in the section
+  header, not a claim.
+- **Tensions `*`** — 2-column grid; see § Tensions below for
+  detector rules and § Section ordering for layout requirements.
+- **Motifs** — radius card grid (one per distinct radius value,
+  sorted by occurrence count) plus a shadow demo card. Each card
+  renders the actual motif at the captured value using
+  `var(--primary)`.
+- **Components** — left-bordered list of detected component types
+  with cross-page counts and pattern names from `motifs.patterns`.
+- **Cross-promo reproduction `*` `?`** — render only when
+  `brand.crossPromo.detected === true`. A near-actual reproduction
+  of the site-wide block: anchor heading + cluster headings as tiles,
+  rendered close-to-source colors. **Mandatory when detected** — it
+  is the most load-bearing repeated block; missing it means `direct`
+  decides its fate blind.
+- **System components `*` `?`** — landmark fingerprint matches
+  (header / footer / nav). Listed with kind tag, occurrence count,
+  heading sequence, CTA labels.
+- **Logo & favicons** — flex row with `<img>` and a `<dl>` of
+  metadata. Required dt/dd: Source, File (format + intrinsic size),
+  Variants captured, Variants not captured. Flag with a tension if
+  only one variant captured (`brand-surface.md`'s logo locator stops
+  at first hit).
+- **Spacing & shape** — `baseUnit`, observed scale visualized as a
+  bar row (height proportional to value), then a "Radii revisited"
+  pill row showing each captured radius value as a labeled pill.
+- **Embed-dominated pages `*` `?`** — render only when one or more
+  pages have `embedDominance.dominated: true`. Screenshot + iframe
+  src + a callout: "primary content lives in a third-party embed —
+  visual style not captured."
+- **Footer** — provenance paragraph (which artifacts the review
+  read), "What's next" line pointing at `/stardust:direct`, and a
+  badge legend.
+
+Optional sections from PRODUCT.md (Photography / imagery, Content
+pillars, Personas) render only when source data is available; they
+are not core to the current-state review.
 
 For each section, render only if the source data exists. Missing
-sections do **not** error — they're omitted, and the coverage
-callout (§1) reflects what's missing.
+sections do **not** error — they're omitted, and the Coverage callout
+reflects what's missing.
 
 ---
 
@@ -240,33 +242,199 @@ surfaces another pair worth catching.
 
 ## Styling rules
 
-The review is a single HTML file. Constraints:
+The review is a single HTML file. The previous (v0.1) spec said only
+"render in the brand's own colors and typography" and let the renderer
+choose its layout — the result was a generic shell with the brand's
+palette dropped in. The brand's own visual language has to be the
+**chrome**, not just the **content**. The rules below are prescriptive
+on layout moves that materially affect whether the review feels like
+the site.
 
-- **No external JavaScript.** Sticky nav uses CSS `position: sticky`.
-  Tab-like navigation between sections is anchor-link based.
+### Hard constraints
+
+- **Single HTML file.** Embedded CSS in a `<style>` block in `<head>`.
+  No external stylesheets.
+- **No external JavaScript.** Anchor-link navigation only. Sticky nav
+  uses CSS `position: sticky`.
 - **No external font loads** unless the brand already loads them on
   the live site — in which case use the same `<link>` the live site
   uses (read from a representative page). Otherwise, use the captured
   font stacks with system fallbacks.
-- **Embedded CSS only.** No external stylesheets. The `<style>` block
-  goes in `<head>`.
-- **Render in the brand's own colors and typography.** The page
-  background is the captured `palette[role="background"]`, body text
-  is `palette[role="text-primary"]`, headings use `type.headingFamily.stack`,
-  body uses `type.bodyFamily.stack`. The review feels like the site.
-- **Sticky table of contents** down the left side at ≥1024px wide;
-  collapses to a top-bar on narrower viewports.
-- **Print-friendly.** A reviewer should be able to print it to PDF
-  and have all sections paginate cleanly.
+- **Print-friendly.** A reviewer must be able to print to PDF and have
+  all sections paginate cleanly.
+
+### Visual language: brand-faithful chrome
+
+- **CSS custom properties at `:root`.** Define `--primary`,
+  `--primary-dark`, `--accent`, `--secondary`, `--text`, `--text-muted`,
+  `--surface`, `--surface-alt`, `--border`, `--display`, `--body`. All
+  values come from `_brand-extraction.json`. Never inject brand-external
+  tokens (no AI-default cyan/purple, no `#7B997C` greens, no
+  `#faf9f6`-family creams unless extracted).
+- **Color resolution.** The review's `--primary` is the most-frequent
+  *saturated* palette color (skip pure black/white and pale tints —
+  saturation = max-min channel difference > 30 and max < 240). The
+  literal `palette[role="primary"]` may not be the visual anchor; the
+  most-saturated frequent color usually is.
+
+  **Fallback chain** when no palette entry qualifies as saturated
+  (monochromatic / desaturated / earth-tone brands):
+
+  1. `palette[role="primary"]` — the role-tagged primary, even if
+     pale.
+  2. If still empty, a generic neutral primary (`#147aff` is the
+     renderer-reference default; choose any accessible blue — the
+     review will surface a `_provenance.notes` line explaining no
+     saturated brand color was found).
+
+  The fallback is part of the spec, not a renderer-private fail-safe:
+  a fresh agent reading this section must produce the same result as
+  the reference renderer on a fully-desaturated brand.
+- **`--primary-dark` must share `--primary`'s hue family**, not just
+  rank second by occurrence. Pick the saturated palette entry whose
+  hue distance to `--primary` is ≤ 30° **and** whose luminance is
+  lower; if none exists, derive `--primary-dark` by darkening
+  `--primary` ~30% algorithmically. Picking the second-most-frequent
+  saturated color blindly will land on a different hue family on
+  multi-accent palettes (e.g. teal-and-purple) and the top nav +
+  headings will read as the wrong brand color. This is the single
+  most common rendering miss — it must be hue-anchored, not
+  occurrence-anchored.
+- **`--accent` should differ from `--primary` in hue by ≥60°** when
+  possible. **Fallback chain:**
+
+  1. Saturated palette entry with `hueDistance(palette, --primary) > 60°`
+     and not equal to `--primary` or `--primary-dark`.
+  2. `palette[role="secondary"]` if present.
+  3. `--primary` itself (the chrome will read as monochromatic — that
+     matches a monochromatic brand and is the correct outcome).
+
+  Same rule as `--primary`'s fallback: the spec must be self-sufficient
+  so monochromatic brands produce a correct review without renderer-
+  side guesswork.
+- **Heading uppercase rule.** If
+  `voiceTable.toneMetrics.headingsUppercasePercent ≥ 25`, apply
+  `text-transform: uppercase` to H1/H2/H3/H4 in the review and to
+  badges and pill labels. Otherwise leave mixed-case. The review
+  inherits the site's heading convention.
+- **Display font for all headings + UI chrome.** H1, H2, H3, H4,
+  badges, pills, labels, table headers, nav links — all use
+  `var(--display)`. Body prose uses `var(--body)`.
+
+### Top sticky nav (mandatory)
+
+A horizontal top sticky nav, **not** a left-side sidebar. The brand's
+own header is almost always horizontal; matching that is part of "feels
+like the site." Specifically:
+
+- `position: sticky; top: 0;` with `background: var(--primary-dark);`
+  and white text.
+- Display font, uppercase, letter-spacing 1.5px, font-size 12px.
+- Strong site-name label on the left (`{brand.site.name} · Current state`).
+- Anchor links to every visible section; pill-shaped on hover
+  (`border-radius: 150px; background: rgba(255,255,255,0.18);`).
+- Collapses via `flex-wrap: wrap;` on narrow viewports — no separate
+  mobile menu.
+
+### Section ordering (canonical)
+
+Render in this order. Sections marked `?` render only when source data
+exists.
+
+1. **Masthead** — site name, hero line (`voice.heroHeadline`),
+   tagline (`og:description` or `metaDescription`), origin URL.
+2. **Coverage callout** — three stat boxes in a row: pages
+   extracted, wait strategy + avg ms, brand-surface summary.
+   Failures listed in accent color if any.
+3. **Pages** — viewport screenshot grid, 4-column at ≥1024px wide.
+   Each thumbnail labelled with page title + slug-as-monospace.
+4. **Palette** — swatch grid, ≥4 columns. Each swatch ≥200×200px
+   with a 96px chip, role label (display font uppercase),
+   monospace hex, occurrence count + `usedAs` chips, top-3 source
+   pages.
+5. **Typography** — real specimens at every captured heading size,
+   weight, line-height, letter-spacing. Each row labelled
+   `H1 · {family} {weight} / {size} / {line-height}` in monospace.
+   Body specimen uses real captured first-paragraph text. Scale
+   audit shown as a badge (`modular {name}` or `No modular scale`).
+6. **Voice** — three voice cards (hero headline · tagline · first
+   paragraph). Then **CTA frequency table** (`voiceTable.ctaFrequency`,
+   top 8) with pill-rendered labels. Then **repeated-heading list**
+   (`voiceTable.headingFrequency`, ≥3 pages, two-column layout).
+   Then **tone metrics** in three stat boxes
+   (`headingsUppercasePercent`, `distinctHeadings`,
+   `distinctCtaLabels`).
+7. **Tensions** — 2-column grid. Each tension card has
+   `border-left: 4px solid var(--accent)`. Three lines max per card:
+   `<tag>` (e.g. `T-scale`), `<h4>` title, `<p>` body, source citation
+   in the footer. The accent border-left is mandatory — it visually
+   marks tensions as decisions for `direct`, distinct from descriptive
+   sections elsewhere.
+8. **Motifs** — radius card grid (one card per distinct radius value,
+   sorted by occurrence count descending), plus a shadow demo card.
+   Each card renders the actual motif (a colored box at the captured
+   border-radius, a sample shadow on a surface) using `var(--primary)`.
+9. **Components** — left-bordered list (`border-left: 3px solid
+   var(--primary)`) of detected component types with cross-page
+   counts and pattern names from `motifs.patterns`.
+10. **Cross-promo reproduction `?`** — render only when
+    `brand.crossPromo.detected === true`. A near-actual reproduction
+    of the site-wide block: `var(--primary-dark)` background,
+    `border: 4px dashed var(--primary)`, "Reproduction · approximate"
+    tag in `var(--accent)`, anchor heading + cluster headings as
+    tiles. This is mandatory when detected — it is the single most
+    load-bearing page block; missing it from the review means
+    `direct` makes a decision blind.
+11. **System components `?`** — landmark fingerprint matches
+    (header/footer/nav). Listed with kind tag, occurrence count,
+    heading sequence, CTA labels. Render only if
+    `systemComponents.length > 0`.
+12. **Logo** — flex row with `<img>` on the left (≤280px wide) and a
+    `<dl>` of metadata on the right. Required dt/dd pairs: Source,
+    File (with format and intrinsic size), Variants captured,
+    Variants not captured.
+13. **Spacing & shape** — base unit, scale visualized as a row of
+    bars (height proportional to value), then a "Radii revisited"
+    pill row showing each captured radius value as a labeled pill.
+14. **Embed-dominated pages `?`** — render only when one or more
+    pages have `embedDominance.dominated: true`.
+15. **Footer** — provenance paragraph (which artifacts the review
+    read), "What's next" line pointing at `/stardust:direct`, badge
+    legend.
+
+### Component dimensions and density
+
+- **Color swatches** ≥80×80px chip minimum (96px recommended). Role,
+  hex, `usedAs`, top-3 source pages all visible without hover.
+- **Page thumbnails** at 16/10 aspect ratio, ≥220px wide.
+- **Tension cards** 2-column grid at ≥720px viewport, single column
+  below.
+- **Motif demo boxes** ≥60×60px, larger for pill radii.
+- **Voice cards** full-width, padded 20–24px, surface-alt background.
+- **Coverage callout** 3-column row, each box flex-1 with min-width
+  220px.
 
 ### Color contrast
 
-If the captured `text-primary` on `background` fails WCAG AA
-(contrast ratio < 4.5:1), the template overrides with
-`#0f1217` on `#ffffff` for the review's body copy and surfaces a
-tension card (`T-contrast`, not in the rule table above — the
-template adds this contextually because it directly affects the
-review's own readability).
+If captured `text-primary` on `background` fails WCAG AA (contrast
+< 4.5:1), the template overrides with `#0f1217` on `#ffffff` for the
+review's body copy and surfaces a tension card (`T-contrast`, not in
+the rule table above — the template adds this contextually because it
+directly affects the review's own readability).
+
+### What "feels like the site" means in practice
+
+If a reviewer who knows the live site looks at the review and the
+chrome reads as a different brand, the renderer has failed regardless
+of the content accuracy. Concrete checks:
+
+- Top nav uses brand color. ✓ if filled with `--primary-dark`,
+  ✗ if neutral gray or white.
+- H2s use the brand's display font, not the review's body font. ✓
+- Tension borders, pill backgrounds, badge fills draw from the
+  captured palette. ✓
+- The cross-promo reproduction (if applicable) approximates the site's
+  actual block, not a generic CTA card. ✓
 
 ---
 

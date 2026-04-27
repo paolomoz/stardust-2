@@ -47,6 +47,8 @@ values, and carries a source citation.
   "componentStyle": { /* see § Component style */ },
   "systemComponents": [ /* see § System components */ ],
   "voice": { /* see § Voice */ },
+  "voiceTable": { /* see § Voice table */ },
+  "crossPromo": { /* see § Cross-promo */ },
   "register": "brand"             // "brand" | "product" | "ambiguous"
 }
 ```
@@ -393,6 +395,118 @@ DESIGN.json.
 The `tone.guess` is a heuristic — never present it as ground truth in
 the user report. `direct` will use it as one of several signals, not
 as a fact.
+
+## § Voice table
+
+Cross-page aggregations that fuel the brand-review's data tables. The
+`voice` block above samples the home page; `voiceTable` aggregates
+across **all extracted pages** so the review can show frequency, not
+just examples.
+
+```json
+{
+  "ctaFrequency": [
+    { "label": "Donate", "total": 35, "pageCount": 10, "pages": ["home", "about-us", ...] },
+    { "label": "Read More", "total": 56, "pageCount": 5, "pages": [...] }
+  ],
+  "headingFrequency": [
+    { "text": "Looking for immediate shelter?", "total": 22, "pageCount": 10, "level": 2 },
+    { "text": "Get Involved",                   "total": 11, "pageCount": 9,  "level": 3 }
+  ],
+  "toneMetrics": {
+    "headingsTotal": 312,
+    "headingsUppercasePercent": 44,
+    "distinctHeadings": 153,
+    "distinctCtaLabels": 40
+  }
+}
+```
+
+Aggregation rules:
+
+- `ctaFrequency` — built from every `pages/*.json#ctas[].label`. To
+  catch styled `<a>` links the visual-button heuristic missed (e.g.
+  WordPress sites that style links as buttons via classes), also
+  include link texts that match the closed list below. Match is
+  case-insensitive after trimming whitespace; full-string equality
+  only (no partial / fuzzy matching).
+
+  ```
+  donate, donate now, give, give now, support us, contribute,
+  read more, learn more, more info, see more, view more, view, more,
+  discover more, explore, overview,
+  sign up, signup, subscribe, register, join, create account,
+  contact, contact us, get in touch, talk to us, reach out, say hello,
+  get help, get involved, find help,
+  volunteer, share, download, submit,
+  here, click here, read this, this
+  ```
+
+  These mirror and slightly expand the CTA equivalence buckets in
+  `brand-review-template.md § CTA equivalence buckets`; the buckets
+  drive the `T-cta-vocab` Tensions detector, while this list drives
+  the `voiceTable.ctaFrequency` aggregation.
+
+  Sort by `total` descending; on ties, sort by `pageCount` descending.
+  Cap retained list at 8 entries; the rest are dropped (the
+  brand-review table renders the top 8).
+
+  **Closed list.** The list is exhaustive for v0.2; do not extend at
+  runtime. When a real run surfaces a missing CTA verb worth
+  catching, add it here in spec, not in the renderer. Fuzzy /
+  edit-distance matching is tracked as a v0.3 issue
+  (`brand-review-template.md § Open issues for v0.3`).
+- `headingFrequency` — built from every `pages/*.json#headings[].text`.
+  Filter to entries with `pageCount >= 3`. Sort by `total`, then
+  `pageCount`. This is the strongest signal of repeated site-wide
+  blocks (e.g. a "Looking for immediate shelter?" cross-promo).
+- `toneMetrics.headingsUppercasePercent` — fraction of headings whose
+  text equals its uppercase form. The brand-review uses
+  `≥ 25` as the threshold to apply `text-transform: uppercase` to
+  H1/H2/H3 in the review chrome.
+- `toneMetrics.distinctHeadings` and `distinctCtaLabels` — set sizes
+  across all pages. High distinct-CTA counts (>20) often signal
+  vocabulary fragmentation; the Tensions detector
+  (`brand-review-template.md § Detectors`, `T-cta-vocab`) consumes
+  this.
+
+## § Cross-promo
+
+A cluster of repeated headings + CTAs that appears on most interior
+pages. Almost always the most load-bearing site-wide repeated block
+(call-to-action band, footer cross-promo, "looking for X?" panel).
+Detection runs **after** `headingFrequency` is built.
+
+```json
+{
+  "detected": true,
+  "anchorHeading": "Looking for immediate shelter?",
+  "cluster": [
+    { "text": "Looking for immediate shelter?",  "total": 22, "pageCount": 10, "overlap": 10 },
+    { "text": "Experiencing a housing crisis?",  "total": 12, "pageCount": 10, "overlap": 9  },
+    { "text": "Please call: 211",                "total": 11, "pageCount": 10, "overlap": 9  }
+  ],
+  "pages": ["about-us", "donate", "events", ...],
+  "pageCount": 10,
+  "totalPages": 24
+}
+```
+
+Detection algorithm:
+
+1. Take the most-frequent entry in `headingFrequency` as the anchor.
+2. Find all pages whose headings include the anchor text — call this
+   the anchor-page set.
+3. For each top-12 entry in `headingFrequency`, count how many
+   anchor-pages also contain it (`overlap`). Keep entries where
+   `overlap / anchorPages.size >= 0.6`.
+4. If the resulting cluster has ≥ 2 entries, emit a cross-promo
+   record.
+
+When detected, the brand-review **must** render a cross-promo
+reproduction section (`brand-review-template.md § Section ordering →
+Cross-promo reproduction`). Set `detected: false` and emit `null` for
+the rest when no cluster meets the threshold.
 
 ## § Embed-dominated pages
 
