@@ -53,7 +53,28 @@ How much space and rhythm the design uses. Often stated as "airy" vs
 
 - Anchors: `airy`, `balanced`, `packed`.
 - Tied to `layout` and `polish` impeccable commands.
-- `packed` is the default for `product` register; `airy` for `brand`.
+- **Defaults:** `packed` for `product` register; **`balanced` for
+  `brand` register.** `airy` is the right default only when the
+  page is editorial-led with deep per-section density (NYT
+  Opinion-tier longform, Pentagram nonprofit, This American Life
+  editorial). For the more common brand-register cases —
+  multi-audience IA, civic / direct-services nonprofits, B2B
+  landing pages with multiple paths — `airy` produces visually
+  inert pages where 96px section padding × 7+ short sections
+  reads as whitespace-as-padding, not whitespace-as-breath. Pick
+  `airy` only when the page genuinely has editorial-density per
+  section.
+
+  Tier-to-tokens propagation when direct authors `DESIGN.md`:
+
+  | tier | `spacing.sectionPadding.desktop` | guidance |
+  |---|---|---|
+  | `airy` | 96px | editorial-led, deep per-section density |
+  | `balanced` | 64–72px | brand-register default; multi-audience or short sections |
+  | `packed` | 40–48px | `product` register or data-dense sites |
+
+  See `direct/SKILL.md` § Phase 1 for the one-shot prompt direct
+  uses when the user's phrase doesn't move the density axis.
 
 ## 5. Distinctiveness
 

@@ -53,34 +53,183 @@ Worked examples in
 `skills/stardust/reference/intent-examples.md` calibrate the style.
 Hard ceiling on questions: two per turn, no exceptions.
 
+#### Density tuning (one-shot, only when unmoved)
+
+When the user's phrase does **not** move the `density` axis (per
+`reference/intent-dimensions.md` § 4), and the resolved register is
+`brand`, ask one short follow-up — count it within the two-question
+ceiling:
+
+> Density tuning — (a) airy (NYT-Opinion-tier breathing, ~96px
+> section padding), (b) balanced (calm but compact, ~64–72px),
+> (c) packed (data-dense, ~40–48px). Default for brand-register
+> sites with multi-audience IA is **(b) balanced**; pick (a) only
+> when the page is editorial-led with deep per-section density.
+
+If the user answers, stamp the chosen tier in `direction.md` §
+Movements as `density: <tier>`. If unanswered, default to
+**balanced** (not airy) for brand register and stamp
+`density: balanced (default)`.
+
+Skip this question entirely when:
+- The user's phrase already moved `density` (any of "make it
+  denser", "more breathing room", "compact", "tight", "spacious"
+  count as movement).
+- The register is `product` (default `packed` per § 4).
+- The register is `ambiguous` and resolving it earlier in the
+  reasoning is the higher-value question — defer density to the
+  next turn rather than burning a question slot.
+
+The tier propagates to `DESIGN.md`'s `spacing.sectionPadding`
+deterministically per `intent-dimensions.md` § 4: airy = 96px,
+balanced = 64px, packed = 48px. Phase 4 picks the value from this
+stamp without re-asking.
+
 Wait for the user's confirmation (`"go"`, or a correction to the
 plan) before moving on.
 
 ### Phase 2 — Resolve the divergence inputs
 
 Once the plan is confirmed, resolve the divergence-toolkit inputs
-from `skills/stardust/reference/divergence-toolkit.md`:
+from `skills/stardust/reference/divergence-toolkit.md`. Before
+rolling the seed, check for two **mode-shifting conditions** that
+narrow what the toolkit needs to do:
+
+#### Mode A — Brand-faithful mode
+
+Triggered when the user pinned **both** type and palette (via
+explicit phrase: "keep typography and palette", "preserve the
+existing brand", "brand-faithful redesign"; or via constraints
+listing both as anchors).
+
+In this mode, direct does **not** roll the type or palette
+dimensions of the seed — they are already locked. Going through
+the motions of font-deck and palette picks would be ceremony,
+producing `picked_by = "user-constraint"` records that don't
+reflect any real choice.
+
+The mode procedure:
+
+1. Record `font_deck.name = "brand-inherited"` and
+   `font_deck.picked_by = "user-constraint"`. Do not invoke
+   `reference/palette-picker.md`.
+2. Record `palette.source = "inherited from _brand-extraction.json"`
+   and `palette.picked_by = "user-constraint"`. Apply role-renaming
+   per toolkit § 4 if the inherited names violate the brand-native
+   rule (this is still useful — role renaming is presentational,
+   not a divergence choice).
+3. **Still roll** the seed for the **non-locked** dimensions
+   (decade, register, ground-family-as-applicable per Mode C
+   below). These dimensions still drive divergence — the visual
+   register and the era can shift even when type and palette are
+   pinned.
+4. Auto-emit the `brand_faithful_inversions[]` block in
+   `extensions.divergence` per
+   `reference/direction-format.md` § Brand-faithful inversions.
+   The list is mostly mechanical (see § Brand-faithful inversions
+   in direction-format.md for the canonical patterns).
+5. Surface in the user report which dimensions had teeth and
+   which were inert:
+
+   ```
+   Divergence (brand-faithful mode):
+     decade           ✓ rolled    → 2025-now
+     craft            ✓ rolled    → Riso print
+     register         ✓ rolled    → Memoir-adjacent
+     ground-family    inherited   → stark-white (brand-native)
+     font deck        inherited   → existing site stack
+     palette          inherited   → existing 5-color set
+   ```
+
+Mode A activates automatically when the resolved direction's
+constraints list contains `brand-faithful` AND explicit type AND
+palette anchors, OR when the user's phrase contains "keep
+typography" / "preserve the palette" / equivalent. The agent
+surfaces "switching to brand-faithful mode" in the plan it shows
+the user before executing — the user can correct (e.g. "actually
+let me move the palette") before it locks.
+
+#### Mode B — Anchor-reference precedence
+
+When the user provides anchor references (Q1/Q2 answers like
+"Pentagram nonprofits, This American Life, NYT Opinion longform"),
+those references **already imply** seed dimensions. Pentagram
+implies decade `2025-now` editorial. This American Life implies
+register `Memoir`-adjacent. Rolling those dimensions
+deterministically and getting an accidental alignment is fragile —
+the agent then has to retro-justify the alignment in
+`direction.md`.
+
+Precedence rule:
+
+1. If anchor references are present, extract their implied
+   dimensions:
+   - **Decade** from era of the references (Pentagram → 2025-now;
+     vintage Penguin → 1960s).
+   - **Craft** from medium of the references (TAL → audio editorial
+     ≠ a craft per se, but Bandcamp → web-print hybrid; Riso-print
+     anthology → Riso).
+   - **Register** from cultural reference set (Memoir, Tabloid,
+     Catalogue, etc.).
+   - **Ground-family** from typical ground of those references
+     (NYT Opinion → cream/parchment; Pentagram nonprofit →
+     stark-white or monochrome-tint).
+2. Mark each implied dimension as
+   `picked_by = "anchor-reference: <ref-name>"`.
+3. Roll the seed only for **un-implied** dimensions.
+4. Record the anchor → dimension mapping in
+   `extensions.divergence.seed.anchors[]`.
+
+Mode B can compose with Mode A: anchor-references narrow the seed,
+brand-faithful constraints lock type/palette, the remaining roll
+is whatever the anchors didn't already imply.
+
+#### Mode C — Brand-faithful ground-family override
+
+When Mode A is active **and** the seed's `ground_family` roll
+disagrees with the brand's existing ground (e.g. seed rolled
+`monochrome-tint` but the brand's captured background is
+`#ffffff` stark-white), the brand's ground wins. The seed roll is
+not discarded — it informs the **alt-section surface** instead
+(per `divergence-toolkit.md` § 4 Color roles). Record the override
+in `extensions.divergence.seed.ground_family.override` with one
+of three reasons:
+
+- `brand-faithful` — Mode A active and brand has a fixed ground.
+- `print-paper` — manual override for print/paper categories
+  (existing toolkit rule).
+- `direction-driven` — seed wins (default; no override).
+
+The three reasons are mutually exclusive; surface the chosen one
+in the user report.
+
+#### Default mode (no constraints)
+
+When neither Mode A nor Mode B applies, follow the standard
+procedure:
 
 - **Seed.** Roll the 4-dimension seed (decade × craft × register ×
   ground-family) using the deterministic MD5 picker per § 2 of the
-  toolkit, **unless** the user supplied anchor references strong
-  enough to skip the seed. Record `picked_by` accordingly.
-- **Font deck.** Pick from the 10 named decks per § 3. When the seed
-  strongly implies a deck (e.g. `1977 + letterpress + tabloid` →
-  `retro-italian`) use the implied deck; otherwise pick
+  toolkit. Record `picked_by`.
+- **Font deck.** Pick from the 10 named decks per § 3. When the
+  seed strongly implies a deck (e.g. `1977 + letterpress + tabloid`
+  → `retro-italian`) use the implied deck; otherwise pick
   deterministically from the hash.
-- **Palette.** If the resolved direction moves the color-energy axis
-  or names the existing palette as part of the problem, run the
-  palette picker
+- **Palette.** If the resolved direction moves the color-energy
+  axis or names the existing palette as part of the problem, run
+  the palette picker
   (`skills/direct/reference/palette-picker.md`). Otherwise inherit
   the existing palette from
   `stardust/current/_brand-extraction.json`, applying role-renaming
   per toolkit § 4 if the inherited names violate the brand-native
   rule.
-- **Anti-toolbox audit.** Run the self-audit (toolkit § 1
-  Enforcement + Self-audit) on the resolved direction. Each
-  anti-toolbox hit needs a brand-specific justification or it is
-  removed.
+
+#### Always run
+
+- **Anti-toolbox audit.** Regardless of mode, run the self-audit
+  (toolkit § 1 Enforcement + Self-audit) on the resolved direction.
+  Each anti-toolbox hit needs a brand-specific justification or it
+  is removed.
 
 Record every resolution in `DESIGN.json.extensions.divergence` per
 the v2 storage shape at the bottom of `divergence-toolkit.md`.
@@ -174,9 +323,17 @@ Token sources:
   `borderRadius.primary` mode, unless the direction moves
   distinctiveness toward `singular` (in which case re-derive from the
   font deck's tonal cousins).
-- **`spacing`** — 4pt base scale unless density is pinned: `packed`
-  → tighter scale (mode at 4-12px), `airy` → 8pt base scale (mode at
-  16-32px).
+- **`spacing`** — 4pt base scale; `sectionPadding` propagated from
+  the density tier stamped in Phase 1 (`reference/intent-dimensions.md`
+  § 4):
+  - `airy` → `sectionPadding.desktop: 96px`, `tablet: 72px`, `mobile: 48px`
+  - `balanced` → `sectionPadding.desktop: 64px`, `tablet: 48px`, `mobile: 32px`  ← brand-register default
+  - `packed` → `sectionPadding.desktop: 48px`, `tablet: 36px`, `mobile: 24px`  ← product-register default
+
+  The agent does **not** re-ask the density question here — the tier
+  was resolved in Phase 1 (asked once when the phrase didn't move
+  the axis, defaulted to balanced for brand register if unanswered).
+  Pick the value deterministically from the stamp.
 - **`components`** — 4-6 canonical components (`button-primary`,
   `button-secondary`, `card`, `input`, `badge`, `link`) populated
   from extracted brand-surface `componentStyle`, with values
