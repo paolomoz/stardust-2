@@ -41,10 +41,14 @@ stardust/
 │   ├── PRODUCT.md                    # impeccable-format strategy of the EXISTING site
 │   ├── DESIGN.md                     # impeccable-format visual system of the EXISTING site
 │   ├── DESIGN.json                   # sidecar
+│   ├── brand-review.html             # self-contained visual review of the extraction (first eyeball-able artifact)
+│   ├── _brand-extraction.json        # consolidated brand surface (palette, type, motifs, voice, system components)
+│   ├── _crawl-log.json               # discovery + crawl audit trail
 │   ├── pages/
 │   │   └── <slug>.json               # per-page parsed structure + content
 │   └── assets/
 │       ├── logo.<ext>                # extracted logo
+│       ├── screenshots/<slug>.png    # per-page viewport screenshots (used by brand-review)
 │       └── media/                    # extracted images, with original URLs
 ├── prototypes/
 │   ├── <slug>.html                   # before/after viewer (user-facing review surface)
@@ -75,6 +79,31 @@ section every time direction changes.
 Owner: `$stardust extract`. Authored by `$impeccable teach` /
 `$impeccable document` against the extracted site, but seeded by
 stardust. These files describe what *is*, not what *should be*.
+
+### `stardust/current/brand-review.html`
+Owner: `$stardust extract` (Phase 5). Self-contained visual review of
+the extraction — the **first eyeball-able artifact** the pipeline
+emits. Renders the canonical brand-board section contract plus a
+Tensions section that surfaces forced decisions for `direct`. Format
+spec in `skills/extract/reference/brand-review-template.md`. Embedded
+CSS only, no external JavaScript, rendered in the brand's own
+captured colors and fonts.
+
+The reviewer is expected to open this file and confirm the extraction
+captured the site faithfully **before** running `$stardust direct`.
+Misreads caught here are cheap to fix (re-run extract); misreads
+caught after `direct` are not.
+
+### `stardust/current/_brand-extraction.json`
+Owner: `$stardust extract` (Phase 3). Consolidated brand surface —
+palette, type, motifs, system components, voice, register. Schema in
+`skills/extract/reference/brand-surface.md`.
+
+### `stardust/current/_crawl-log.json`
+Owner: `$stardust extract` (Phases 1, 2, 6). Append-only audit trail
+of discovery and crawl. Re-running extract appends to `runs[]` rather
+than overwriting. Schema in
+`skills/extract/reference/ia-extraction.md` § `_crawl-log.json` shape.
 
 ### `stardust/current/pages/<slug>.json`
 Owner: `$stardust extract`. Per-page parsed model. Schema lives in
