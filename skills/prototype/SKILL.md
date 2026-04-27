@@ -27,6 +27,11 @@ is delegated to `$impeccable craft` and `$impeccable live`.
 - `--no-iterate` — write the initial proposed render and the viewer,
   open the viewer in the browser, but **do not** invoke
   `$impeccable live`. The user iterates manually later.
+- `--no-critique` — skip the automatic post-render critique pass
+  (Phase 2.5). Default behaviour runs critique and gates
+  `prototyped` status on P0/P1 findings; this flag opts out of the
+  gate for fast iteration cycles where the user is running
+  critique manually between iterations.
 
 ## Setup
 
@@ -220,6 +225,74 @@ After craft returns, validate the output:
 If validation fails, do not write the file. Surface the failure to
 the user with the specific rule violated and a suggested fix.
 
+### Phase 2.5 — Validate via critique
+
+Before composing the viewer, run an automatic critique pass against
+the rendered proposed file. Critique catches AI-slop reflexes and
+brand-misalignment that craft's hard-rules audit doesn't cover —
+visual hierarchy regressions, cognitive-load issues, color/contrast
+gaps, anti-pattern reflexes, register/voice drift. The pass is a
+**contract**, not a courtesy: previously the agent ran critique
+only when the user asked, and the user has to remember to ask.
+
+Procedure:
+
+1. **Run the deterministic detector first.** Invoke
+   `impeccable:impeccable` via the Skill tool with sub-command
+   `critique`:
+
+   ```
+   Skill {
+     skill: "impeccable:impeccable",
+     args: "critique stardust/prototypes/<slug>-proposed.html --json"
+   }
+   ```
+
+   Critique returns a JSON findings list — each finding has
+   `priority` (P0 / P1 / P2 / P3), `category` (hierarchy /
+   contrast / motion / etc.), and a one-line description.
+   Capture verbatim into `_provenance.critique[]` on the proposed
+   file (append; never overwrite previous runs' entries).
+
+2. **Surface findings in the user-facing report** alongside the
+   prototype-rendered confirmation. Group by priority. List the
+   first 5 P0/P1 verbatim; collapse P2/P3 to a count with a
+   "expand to see all" pointer.
+
+3. **Gate `prototyped` status on P0/P1 findings.** If the detector
+   returned ≥1 P0 or ≥1 P1 finding, do **not** mark the page
+   `prototyped` in `state.json` yet. The proposed file is on disk;
+   the viewer can render it; but the page stays in `directed`
+   until either:
+   - The agent fixes the issue (run a chat-driven impeccable
+     command per Phase 4 iteration paths, then re-run Phase 2.5).
+   - The user explicitly acknowledges (e.g. "ship as-is" /
+     "accept the P1 findings"). Acknowledgement is recorded in
+     `_provenance.critique[]` with the verbatim user phrase.
+
+   P2/P3 findings do not block `prototyped`. They surface as
+   advisory.
+
+4. **Optionally spawn an LLM design-review subagent** for an
+   independent take when the user wants more than the
+   deterministic detector. Trigger only when the user explicitly
+   asks ("give me a deeper critique", "second opinion") or when
+   the deterministic pass returns ≥3 findings (signal that the
+   render has multiple issues worth a closer look). Default off
+   to keep the loop fast.
+
+5. **`--no-critique` opt-out.** When the user passes
+   `--no-critique` to `$stardust prototype`, skip the entire
+   pass. Useful for fast iteration cycles where the user is
+   already running critique manually between iterations. Without
+   the flag, the pass is mandatory.
+
+Failure handling: when impeccable is unavailable (per Delegation
+mechanic § When impeccable is not available), record
+`_provenance.critique[]` with one entry of class `unavailable`
+and continue. Prototype proceeds to mark the page `prototyped` —
+the user will need to run critique manually before approving.
+
 ### Phase 3 — Compose the viewer
 
 Render `stardust/prototypes/<slug>.html` per
@@ -237,9 +310,16 @@ relative path to `<slug>-proposed.html`.
 1. Open the viewer in the default browser
    (`open` macOS, `xdg-open` Linux, `start ""` Windows). Skip in
    pipeline-automation mode.
-2. Mark the page `prototyped` in `state.json` (this transition does
-   not require approval — the prototype exists, it just is not
-   approved yet).
+2. Mark the page `prototyped` in `state.json` — **gated on the
+   Phase 2.5 critique result**. If critique returned ≥1 P0 or P1
+   finding and the user has not acknowledged, the page stays
+   `directed` (not `prototyped`); surface the critique findings in
+   the report and recommend either fixing the issue or
+   acknowledging explicitly. The transition itself does not require
+   *approval* (a separate later step) — but it does require the
+   critique gate to clear, since shipping a `prototyped` flag on
+   work that fails P0/P1 critique misleads downstream consumers
+   (migrate, the dashboard) about the prototype's quality.
 3. If `--no-iterate` was passed, stop here and report the prototype
    path.
 4. Otherwise, invoke `$impeccable live` against
