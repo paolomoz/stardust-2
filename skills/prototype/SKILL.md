@@ -32,6 +32,14 @@ is delegated to `$impeccable craft` and `$impeccable live`.
   `prototyped` status on P0/P1 findings; this flag opts out of the
   gate for fast iteration cycles where the user is running
   critique manually between iterations.
+- `--publish-sample <slug>` — submit the named slug to the
+  stardust showcase. Triggers the publish-sample sub-flow
+  documented in `reference/publish-sample.md`: eligibility checks,
+  file staging, PR creation against the upstream stardust repo.
+  Requires `gh` installed and authenticated. Refuses on
+  outstanding placeholders, P0/P1 critique findings, or
+  unjustified anti-toolbox hits. The showcase publishes via
+  GitHub Pages on merge.
 
 ## Setup
 
@@ -467,6 +475,10 @@ are last-write-wins; warn the user if they explicitly try.
   DESIGN.md.
 - `reference/before-after-shell.md` — viewer + proposed file
   schemas and required structure.
+- `reference/publish-sample.md` — `--publish-sample` sub-flow:
+  eligibility checks, file staging, PR creation against the
+  upstream stardust showcase. Lands the prototype as a public
+  sample at `https://{owner}.github.io/stardust-2/`.
 - `skills/stardust/reference/token-contract.md` — `:root` token
   block (cross-cutting, used by prototype + migrate).
 - `skills/stardust/reference/data-attributes.md` — structural data
