@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stardust — showcase</title>
+<meta name="description" content="A curated set of stardust redesign runs. Brief + seed = star.">
+
+<style>
+  :root {
+    --ink: #0a1024;
+    --ink-deep: #060a14;
+    --ink-soft: #141b3a;
+    --dust: #f5f0e6;
+    --dust-72: rgba(245,240,230,0.72);
+    --dust-50: rgba(245,240,230,0.5);
+    --dust-30: rgba(245,240,230,0.3);
+    --dust-15: rgba(245,240,230,0.15);
+    --dust-08: rgba(245,240,230,0.08);
+    --amber: #e8b95e;
+    --amber-light: #ffd98a;
+    --amber-deep: #c9822d;
+
+    --display: "SF Pro Display", Inter, system-ui, sans-serif;
+    --text: "SF Pro Text", Inter, system-ui, sans-serif;
+    --mono: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+
+    --pad: clamp(24px, 4vw, 56px);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--ink-deep);
+    color: var(--dust);
+    font: 15px/1.55 var(--text);
+    font-feature-settings: "ss01", "ss02";
+    min-height: 100vh;
+  }
+  ::selection { background: var(--amber); color: var(--ink); }
+  a { color: inherit; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--pad); }
+
+  /* --- HERO ---------------------------------------------------- */
+  .hero {
+    padding: 120px 0 80px;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 72% 38%, #1a2450 0%, #070c1e 65%, #060a14 100%);
+  }
+  .dust-layer {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(1.5px 1.5px at 12% 24%, rgba(245,240,230,0.4), transparent 60%),
+      radial-gradient(1px   1px   at 88% 12%, rgba(245,240,230,0.35), transparent 60%),
+      radial-gradient(1.3px 1.3px at 22% 82%, rgba(245,240,230,0.3),  transparent 60%),
+      radial-gradient(1px   1px   at 72% 78%, rgba(245,240,230,0.38), transparent 60%),
+      radial-gradient(0.8px 0.8px at 50% 10%, rgba(245,240,230,0.26), transparent 60%),
+      radial-gradient(0.9px 0.9px at  6% 58%, rgba(245,240,230,0.28), transparent 60%),
+      radial-gradient(1.2px 1.2px at 94% 54%, rgba(245,240,230,0.33), transparent 60%),
+      radial-gradient(0.7px 0.7px at 34% 48%, rgba(245,240,230,0.22), transparent 60%),
+      radial-gradient(0.8px 0.8px at 64% 36%, rgba(245,240,230,0.24), transparent 60%);
+  }
+  .hero .container { position: relative; z-index: 1; }
+
+  .mark {
+    font: 500 11px/1 var(--mono);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 28px;
+  }
+  .wordmark {
+    font-family: var(--display);
+    font-size: clamp(48px, 9vw, 96px);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+    margin: 0;
+  }
+  .tagline {
+    font: 14px/1 var(--mono);
+    letter-spacing: 0.08em;
+    color: var(--dust-50);
+    margin-top: 22px;
+  }
+  .tagline .op { color: var(--amber); padding: 0 6px; }
+  .sub {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(16px, 2vw, 19px);
+    line-height: 1.5;
+    color: var(--dust-72);
+    max-width: 56ch;
+    margin: 24px 0 0;
+  }
+
+  .hero-meta {
+    margin-top: 56px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    font: 11px/1 var(--mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dust-50);
+  }
+  .hero-meta strong { color: var(--amber); font-weight: 500; }
+
+  /* --- TOOLBAR ------------------------------------------------- */
+  .toolbar {
+    position: sticky; top: 0; z-index: 5;
+    background: rgba(6,10,20,0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--dust-08);
+  }
+  .toolbar .container {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .toolbar .label {
+    font: 500 11px/1 var(--mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+  .toolbar select,
+  .toolbar input {
+    background: var(--ink-soft);
+    border: 1px solid var(--dust-15);
+    border-radius: 6px;
+    color: var(--dust);
+    font: 13px var(--mono);
+    padding: 8px 12px;
+  }
+  .toolbar input:focus,
+  .toolbar select:focus {
+    outline: 2px solid var(--amber);
+    outline-offset: 2px;
+  }
+  .toolbar .count {
+    font: 11px/1 var(--mono);
+    letter-spacing: 0.14em;
+    color: var(--dust-50);
+    margin-left: auto;
+  }
+
+  /* --- SAMPLES GRID -------------------------------------------- */
+  .samples {
+    padding: 72px 0 120px;
+  }
+  .samples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 28px;
+    margin-top: 36px;
+  }
+  .empty-state {
+    margin-top: 56px;
+    padding: 56px 32px;
+    background: var(--ink-soft);
+    border: 1px solid var(--dust-08);
+    border-radius: 18px;
+    text-align: center;
+  }
+  .empty-state h2 { font-size: 28px; margin: 0 0 12px; font-family: var(--display); font-weight: 600; letter-spacing: -0.015em; }
+  .empty-state p { color: var(--dust-50); max-width: 56ch; margin: 0 auto; font-size: 14px; }
+  .empty-state code { font-family: var(--mono); color: var(--amber); font-size: 13px; }
+
+  /* --- CARD ---------------------------------------------------- */
+  .card {
+    background: var(--ink-soft);
+    border: 1px solid var(--dust-08);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform 200ms cubic-bezier(0.25,1,0.5,1), border-color 200ms;
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: var(--dust-15);
+  }
+  .card-cover {
+    aspect-ratio: 16/9;
+    background: var(--ink);
+    overflow: hidden;
+    position: relative;
+    display: block;
+  }
+  .card-cover img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform 240ms cubic-bezier(0.25,1,0.5,1);
+  }
+  .card-cover:hover img { transform: scale(1.02); }
+  .card-cover.placeholder {
+    background:
+      radial-gradient(ellipse at 60% 40%, #1a2450 0%, #070c1e 70%),
+      var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dust-30);
+    font: 11px/1 var(--mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .card-body { padding: 22px 22px 24px; flex: 1; display: flex; flex-direction: column; }
+  .card-eyebrow {
+    font: 500 10px/1 var(--mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 12px;
+  }
+  .card h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    margin: 0 0 8px;
+  }
+  .card .source {
+    font: 12px/1.4 var(--mono);
+    color: var(--dust-50);
+    word-break: break-all;
+    margin: 0 0 14px;
+  }
+  .card .source a {
+    color: var(--dust-50);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--dust-15);
+  }
+  .card .source a:hover { color: var(--amber); border-bottom-color: var(--amber); }
+  .card .tagline {
+    font-family: var(--text);
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--dust-72);
+    margin: 0 0 16px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .card-meta {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--dust-08);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 18px;
+    font: 11px/1 var(--mono);
+    letter-spacing: 0.06em;
+    color: var(--dust-50);
+  }
+  .card-meta .pair { display: flex; gap: 6px; }
+  .card-meta .pair .k { color: var(--dust-30); }
+  .card-meta .pair .v { color: var(--dust-72); }
+
+  /* --- VARIANT STRIP ------------------------------------------- */
+  .variants {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .variants .label {
+    font: 500 10px/1 var(--mono);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--dust-30);
+  }
+  .variant-chip {
+    padding: 6px 10px;
+    background: var(--ink);
+    border: 1px solid var(--dust-15);
+    border-radius: 9999px;
+    color: var(--dust-72);
+    font: 500 11px/1 var(--mono);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: all 150ms;
+  }
+  .variant-chip:hover {
+    background: var(--amber);
+    color: var(--ink);
+    border-color: var(--amber);
+    transform: translateY(-1px);
+  }
+  .variant-chip.primary {
+    background: var(--amber);
+    color: var(--ink);
+    border-color: var(--amber);
+  }
+  .variant-chip.primary:hover {
+    background: var(--amber-light);
+    border-color: var(--amber-light);
+  }
+  .variant-chip .dim {
+    font-weight: 400;
+    opacity: 0.7;
+    margin-left: 6px;
+    font-size: 10px;
+  }
+
+  /* --- ERROR --------------------------------------------------- */
+  .error {
+    margin-top: 56px;
+    padding: 32px;
+    background: var(--ink-soft);
+    border: 1px solid #ff6b6b;
+    border-left-width: 3px;
+    border-radius: 14px;
+  }
+  .error h3 { color: #ff6b6b; font-family: var(--display); font-size: 16px; margin: 0 0 8px; font-weight: 600; }
+  .error p { color: var(--dust-72); margin: 0; font-size: 14px; }
+  .error code { font-family: var(--mono); font-size: 12px; color: var(--amber); }
+
+  /* --- FOOTER -------------------------------------------------- */
+  footer {
+    padding: 56px 0 80px;
+    border-top: 1px solid var(--dust-08);
+    color: var(--dust-50);
+    font: 500 12px/1.5 var(--mono);
+    letter-spacing: 0.06em;
+  }
+  footer .container { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+  footer .tag { color: var(--amber); }
+  footer a { color: inherit; text-decoration: none; border-bottom: 1px dashed var(--dust-15); }
+  footer a:hover { color: var(--amber); border-bottom-color: var(--amber); }
+
+  @media (max-width: 640px) {
+    .hero { padding: 80px 0 56px; }
+    .hero-meta { gap: 16px; }
+    .samples { padding: 48px 0 80px; }
+    .toolbar .container { gap: 12px; }
+    .toolbar .count { margin-left: 0; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="dust-layer" aria-hidden="true"></div>
+  <div class="container">
+    <div class="mark">ADOBE · STARDUST · SHOWCASE</div>
+    <h1 class="wordmark">stardust</h1>
+    <div class="tagline">brief<span class="op">+</span>seed<span class="op">=</span>star</div>
+    <p class="sub">A curated set of stardust redesign runs. Each sample is a complete record — the resolved direction, the divergence inputs, the brand-faithful inversions, and one or more proposed variants.</p>
+
+    <div class="hero-meta">
+      <span><strong id="meta-count">—</strong> samples</span>
+      <span>updated <strong id="meta-updated">—</strong></span>
+      <span>seed today <strong id="meta-seed">—</strong></span>
+    </div>
+  </div>
+</section>
+
+<div class="toolbar">
+  <div class="container">
+    <span class="label">Filter</span>
+    <select id="filter-register">
+      <option value="">all registers</option>
+      <option value="brand">brand</option>
+      <option value="product">product</option>
+      <option value="ambiguous">ambiguous</option>
+    </select>
+    <input id="filter-search" type="search" placeholder="search title, source, palette…" autocomplete="off">
+    <span class="count" id="meta-shown"></span>
+  </div>
+</div>
+
+<section class="samples">
+  <div class="container">
+    <div id="grid" class="samples-grid"></div>
+    <div id="empty" class="empty-state" hidden>
+      <h2>No samples yet.</h2>
+      <p>The showcase is empty. Add the first sample with <code>$stardust prototype --publish-sample &lt;slug&gt;</code> from a project where you've approved a prototype, or follow the manual procedure in <code>samples/README.md</code>.</p>
+    </div>
+    <div id="error" class="error" hidden>
+      <h3>Could not load samples.</h3>
+      <p id="error-detail"></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>
+      <span class="tag">STARDUST</span> · showcase v0.1<br>
+      math, not mysticism. yours alone, today only.
+    </div>
+    <div style="text-align:right;">
+      <a href="https://github.com/paolomoz/stardust-2">github.com/paolomoz/stardust-2</a><br>
+      Apache-2.0 · /plugin install stardust@adobe-skills
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+  const error = document.getElementById('error');
+  const errorDetail = document.getElementById('error-detail');
+  const metaCount = document.getElementById('meta-count');
+  const metaUpdated = document.getElementById('meta-updated');
+  const metaSeed = document.getElementById('meta-seed');
+  const metaShown = document.getElementById('meta-shown');
+  const filterRegister = document.getElementById('filter-register');
+  const filterSearch = document.getElementById('filter-search');
+
+  // Today's deterministic-but-cosmetic "seed" hint, mirroring the brand voice.
+  // Not stardust's actual seed; this is just a brand stamp on the showcase header.
+  const today = new Date().toISOString().slice(0, 10);
+  let seedHash = 0;
+  for (let i = 0; i < today.length; i++) seedHash = ((seedHash << 5) - seedHash + today.charCodeAt(i)) | 0;
+  metaSeed.textContent = (seedHash >>> 0).toString(16).padStart(8, '0').slice(0, 8);
+
+  let samples = [];
+
+  function setError(msg) {
+    error.hidden = false;
+    errorDetail.innerHTML = msg;
+    grid.innerHTML = '';
+    empty.hidden = true;
+  }
+
+  function escape(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function shortenUrl(u) {
+    try {
+      const url = new URL(u);
+      return url.host + (url.pathname === '/' ? '' : url.pathname);
+    } catch { return u; }
+  }
+
+  function renderCard(meta) {
+    const slug = meta.slug;
+    const variants = Array.isArray(meta.variants) && meta.variants.length ? meta.variants : [];
+    const primary = variants.find(v => v.isPrimary) || variants[0];
+    if (!primary) return '';
+
+    const cover = meta.thumbnail || (primary && primary.thumbnail) || null;
+    const coverHtml = cover
+      ? `<img src="${escape(slug + '/' + cover)}" alt="${escape(meta.title)}" loading="lazy">`
+      : 'No cover';
+    const coverClass = cover ? 'card-cover' : 'card-cover placeholder';
+    const primaryHref = `${escape(slug)}/${escape(primary.proposedFile)}`;
+
+    const variantStripHtml = variants.length > 1 ? `
+      <div class="variants">
+        <span class="label">Variants</span>
+        ${variants.map(v => `
+          <a class="variant-chip ${v.isPrimary ? 'primary' : ''}"
+             href="${escape(slug)}/${escape(v.proposedFile)}"
+             target="_blank"
+             rel="noopener"
+             title="${escape(v.name + (v.dominantDimension ? ' · ' + v.dominantDimension : ''))}">
+            ${escape(v.id)}${v.dominantDimension ? `<span class="dim">${escape(v.dominantDimension)}</span>` : ''}
+          </a>
+        `).join('')}
+      </div>
+    ` : '';
+
+    const meta1 = [];
+    if (meta.source && meta.source.register) meta1.push({ k: 'register', v: meta.source.register });
+    if (meta.direction && meta.direction.fontDeck && meta.direction.fontDeck.name) meta1.push({ k: 'deck', v: meta.direction.fontDeck.name });
+    if (meta.direction && meta.direction.palette && meta.direction.palette.name) meta1.push({ k: 'palette', v: meta.direction.palette.name });
+    if (meta.direction && meta.direction.seed && meta.direction.seed.decade) meta1.push({ k: 'decade', v: meta.direction.seed.decade });
+
+    return `
+      <article class="card">
+        <a class="${coverClass}" href="${primaryHref}" target="_blank" rel="noopener">${coverHtml}</a>
+        <div class="card-body">
+          ${meta.source && meta.source.category ? `<div class="card-eyebrow">${escape(meta.source.category)}</div>` : ''}
+          <h3>${escape(meta.title)}</h3>
+          ${meta.source && meta.source.url ? `
+            <p class="source"><a href="${escape(meta.source.url)}" target="_blank" rel="noopener">${escape(shortenUrl(meta.source.url))}</a></p>
+          ` : ''}
+          ${meta.tagline ? `<p class="tagline">${escape(meta.tagline)}</p>` : ''}
+          ${variantStripHtml}
+          ${meta1.length ? `
+            <div class="card-meta">
+              ${meta1.map(p => `<span class="pair"><span class="k">${escape(p.k)}</span><span class="v">${escape(p.v)}</span></span>`).join('')}
+            </div>
+          ` : ''}
+        </div>
+      </article>
+    `;
+  }
+
+  function applyFilters() {
+    const reg = filterRegister.value;
+    const q = filterSearch.value.trim().toLowerCase();
+    const filtered = samples.filter(m => {
+      if (reg && (!m.source || m.source.register !== reg)) return false;
+      if (q) {
+        const hay = [
+          m.title,
+          m.tagline,
+          m.source && m.source.url,
+          m.source && m.source.category,
+          m.direction && m.direction.palette && m.direction.palette.name,
+          m.direction && m.direction.fontDeck && m.direction.fontDeck.name
+        ].filter(Boolean).join(' ').toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+    grid.innerHTML = filtered.map(renderCard).join('');
+    metaShown.textContent = filtered.length === samples.length
+      ? ''
+      : `${filtered.length} of ${samples.length} shown`;
+    empty.hidden = samples.length === 0 ? false : filtered.length > 0;
+    if (samples.length === 0) {
+      empty.hidden = false;
+      grid.innerHTML = '';
+    }
+  }
+
+  filterRegister.addEventListener('change', applyFilters);
+  filterSearch.addEventListener('input', applyFilters);
+
+  fetch('./index.json', { cache: 'no-store' })
+    .then(r => {
+      if (!r.ok) throw new Error('index.json HTTP ' + r.status);
+      return r.json();
+    })
+    .then(idx => {
+      const slugs = Array.isArray(idx.samples) ? idx.samples : [];
+      metaCount.textContent = String(slugs.length);
+      if (slugs.length === 0) {
+        empty.hidden = false;
+        return;
+      }
+      return Promise.all(slugs.map(slug =>
+        fetch(`./${slug}/meta.json`, { cache: 'no-store' })
+          .then(r => r.ok ? r.json() : null)
+          .then(meta => meta ? Object.assign({ slug }, meta) : null)
+          .catch(() => null)
+      )).then(metas => {
+        samples = metas.filter(Boolean);
+        if (samples.length === 0) {
+          setError(`Found ${slugs.length} sample slug(s) in <code>index.json</code> but could not load any <code>meta.json</code>. Check that each <code>&lt;slug&gt;/meta.json</code> exists and is valid JSON.`);
+          return;
+        }
+        // Sort by createdAt desc when present, else by slug
+        samples.sort((a, b) => {
+          const ta = a.createdAt || '';
+          const tb = b.createdAt || '';
+          if (ta && tb) return tb.localeCompare(ta);
+          return (a.slug || '').localeCompare(b.slug || '');
+        });
+        const newest = samples.find(s => s.createdAt);
+        metaUpdated.textContent = newest ? newest.createdAt : '—';
+        applyFilters();
+      });
+    })
+    .catch(err => {
+      setError(`Could not fetch <code>index.json</code> — ${escape(err.message)}. The showcase is published from <code>samples/</code> via GitHub Pages; if you're viewing this file locally with <code>file://</code>, fetch will be blocked. Open via <code>https://&lt;owner&gt;.github.io/&lt;repo&gt;/</code> instead, or run <code>npx http-server samples</code> from the repo root.`);
+    });
+})();
+</script>
+
+</body>
+</html>

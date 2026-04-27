@@ -1,0 +1,97 @@
+name: Deploy stardust showcase to GitHub Pages
+
+# Publishes everything under `samples/` to the repo's GitHub Pages
+# site whenever the contents change. The bare URL (https://<owner>.github.io/<repo>/)
+# lands on samples/index.html — the showcase navigator.
+#
+# One-time repo setup (manual, only needed once per repo):
+#   Settings → Pages → Source: GitHub Actions
+# After that, every push to `main` that touches samples/ redeploys.
+#
+# This workflow can also be triggered manually from the Actions tab
+# (workflow_dispatch).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "samples/**"
+      - ".github/workflows/showcase-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, but don't cancel in-progress runs —
+# letting them finish keeps the published site consistent.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate samples manifest
+        run: |
+          set -euo pipefail
+          # index.json must be valid JSON with a samples array.
+          node -e "
+            const fs = require('fs');
+            const idx = JSON.parse(fs.readFileSync('samples/index.json', 'utf8'));
+            if (!Array.isArray(idx.samples)) {
+              console.error('samples/index.json: samples must be an array');
+              process.exit(1);
+            }
+            for (const slug of idx.samples) {
+              if (typeof slug !== 'string' || !/^[a-z0-9-]+\$/.test(slug)) {
+                console.error('samples/index.json: invalid slug ' + JSON.stringify(slug));
+                process.exit(1);
+              }
+              const metaPath = 'samples/' + slug + '/meta.json';
+              if (!fs.existsSync(metaPath)) {
+                console.error('Missing ' + metaPath);
+                process.exit(1);
+              }
+              const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
+              if (!Array.isArray(meta.variants) || meta.variants.length === 0) {
+                console.error(metaPath + ': variants must be a non-empty array');
+                process.exit(1);
+              }
+              const primaries = meta.variants.filter(v => v.isPrimary);
+              if (primaries.length !== 1) {
+                console.error(metaPath + ': exactly one variant must have isPrimary: true (got ' + primaries.length + ')');
+                process.exit(1);
+              }
+              for (const v of meta.variants) {
+                const proposed = 'samples/' + slug + '/' + v.proposedFile;
+                if (!fs.existsSync(proposed)) {
+                  console.error('Missing ' + proposed + ' (referenced by ' + slug + ' variant ' + v.id + ')');
+                  process.exit(1);
+                }
+              }
+            }
+            console.log('Validated ' + idx.samples.length + ' sample(s).');
+          "
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: samples
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
