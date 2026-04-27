@@ -167,9 +167,10 @@ Keep but flag separately:
 
 WordPress and other CMS-driven sites often leave drafts, holiday
 campaigns, and one-off A/B test pages in the public sitemap. Without
-filtering, the cap-25 default fills with these and squeezes out real
-pages. Apply the following filter **after** the basic filtering above
-and **before** the priority sort. Disable with `--no-junk-filter`.
+filtering, the small default cap (5 pages) fills with these and
+squeezes out real pages. Apply the following filter **after** the
+basic filtering above and **before** the priority sort. Disable with
+`--no-junk-filter`.
 
 Match the URL path (not the full URL) case-insensitively:
 
@@ -200,7 +201,7 @@ Discovered 94 pages. Filtered as likely junk (16): /test/, /test1/,
   Override: include any of these explicitly with --pages, or pass
   --no-junk-filter to disable filtering entirely.
 
-Proceeding with the 25 highest-priority of the remaining 78 pages.
+Proceeding with the 5 highest-priority of the remaining 78 pages.
 ```
 
 Capture the full filtered list in `_crawl-log.json` under
@@ -305,10 +306,20 @@ keyword expansion is tracked as a v0.3 issue.
 Present the kept list and the cut list as two columns in the
 confirmation message. The user can:
 
-- Reply `go` to accept.
-- Reply `all` to lift the cap (still warn if discovered > 100).
+- Reply `go` to accept the current cap.
+- Reply `more <N>` to bump the cap to N (e.g. `more 25` to revert
+  to the previous default behaviour).
+- Reply `all` to lift the cap entirely (still warn if discovered
+  > 100).
 - Reply with explicit slugs (`include: about, pricing` or
   `exclude: blog`) to override.
+
+The default cap is intentionally small (5 pages). Cross-page brand
+aggregation, system-component detection, and the brand-review
+artifact all work usefully at that size as long as the 5 pages
+cover distinct templates (per § Page selection). The user dialog
+exists to make it trivial to lift the cap when the site warrants
+it; the small default ensures the common case is fast.
 
 Capture the user's choice and the per-URL scores in
 `_crawl-log.json` under `discovery.userChoice` and
@@ -332,7 +343,7 @@ was — useful when the heuristic produces a surprising selection.
     ],
     "waitMode": "medium",
     "waitModeAutoDetect": null,         // when --wait auto: { signal: "ssr", basis: "found <main> in initial HTML" }
-    "cappedAt": 25,
+    "cappedAt": 5,
     "userChoice": "go",
     "kept": [
       { "url": "https://example.com/", "slug": "home", "priority": 1.0, "lastmod": "2026-04-12", "score": 18 }

@@ -19,7 +19,12 @@ critique, and it does not modify the live site. It writes only under
 - `<url>` — required. The origin to crawl. Examples: `https://example.com`,
   `https://example.com/shop`. A path narrows the same-origin crawl to
   that subtree.
-- `--cap <N>` — optional. Override the default 25-page cap.
+- `--cap <N>` — optional. Override the default 5-page cap. The cap
+  is intentionally small — a 5-page sample (home + four IA
+  pillars/templates) is enough for cross-page brand aggregation,
+  system-component detection, and the brand-review HTML to do
+  useful work. Lift the cap with `--cap 25` (the previous default)
+  or higher when a deeper crawl is genuinely needed.
 - `--pages <slug,slug,...>` — optional. Restrict the crawl to specific
   paths (slugs derived per `reference/ia-extraction.md`).
 - `--refresh <slug>` — optional. Re-extract one page that already exists
@@ -65,7 +70,7 @@ Discover the page inventory before crawling. Procedure in
 5. Apply the junk-page filter (`reference/ia-extraction.md` §
    Junk-page filter) unless `--no-junk-filter` is set. Surface the
    filtered list to the user as overridable.
-6. Apply the cap (default 25, or `--cap`). If discovered count
+6. Apply the cap (default 5, or `--cap`). If discovered count
    exceeds the cap, **show the full list and the cut**, and ask the
    user before proceeding:
 
@@ -73,16 +78,17 @@ Discover the page inventory before crawling. Procedure in
    Discovered 38 pages on https://example.com (sitemap.xml).
    Filtered as likely junk (5): /test/, /sample-page/, /holiday1/, ...
      (override with --pages or --no-junk-filter)
-   Cap is 25. Proceeding with the 25 highest-priority pages:
+   Cap is 5. Proceeding with the 5 highest-priority pages:
      - / (home)
      - /about
      - /pricing
-     ... 22 more
+     - /products
+     - /contact
 
-   Cut (8 pages): /blog/post-1, /blog/post-2, ...
+   Cut (28 pages): /blog/post-1, /blog/post-2, ...
 
-   Reply "go" to proceed, "all" to lift the cap, or list slugs to
-   include manually.
+   Reply "go" to proceed, "all" to lift the cap, "more" to bump the
+   cap (e.g. "more 25"), or list slugs to include manually.
    ```
 
    Selection heuristic: page-type checklist first, then score-based
@@ -246,22 +252,28 @@ After all Phase 2-5 writes succeed:
      filled `currentStatePath`, empty `prototypePath` and `migratedPath`
 2. Print a one-screen summary:
    ```
-   Extracted https://example.com (25/38 pages, sitemap.xml)
+   Extracted https://example.com (5/38 pages, sitemap.xml)
 
    stardust/current/
      PRODUCT.md            (register: brand, inferred from landing)
      DESIGN.md             (5 colors, 2 type families, 3 motifs)
      brand-review.html     (4 tensions surfaced)
-     pages/                (25 files)
+     pages/                (5 files)
      assets/logo.svg       (extracted from inline SVG)
      _brand-extraction.json
      _crawl-log.json
 
-   Wait summary: 23 resolved at medium (avg 2.4s), 2 fallback (timed out at 8s)
-     → /donate/, /events/ may be under-captured; consider --refresh
+   Wait summary: 4 resolved at medium (avg 2.4s), 1 fallback (timed out at 8s)
+     → /donate/ may be under-captured; consider --refresh
 
    Open stardust/current/brand-review.html to verify the extraction
    before running $stardust direct.
+
+   Coverage note: extracted 5 of 38 discovered pages. The brand
+   surface and brand-review use cross-page aggregation, so 5 pages
+   covering distinct templates is usually sufficient. To extract
+   more, re-run with --cap <N> (e.g. --cap 25) or list specific
+   slugs with --pages.
 
    Next: $stardust direct  (resolve a redesign direction)
    ```
