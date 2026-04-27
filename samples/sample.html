@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stardust — sample</title>
+<meta name="description" content="Compare current and proposed renderings for a stardust sample.">
+
+<style>
+  :root {
+    --ink: #0a1024;
+    --ink-deep: #060a14;
+    --ink-soft: #141b3a;
+    --dust: #f5f0e6;
+    --dust-72: rgba(245,240,230,0.72);
+    --dust-50: rgba(245,240,230,0.5);
+    --dust-30: rgba(245,240,230,0.3);
+    --dust-15: rgba(245,240,230,0.15);
+    --dust-08: rgba(245,240,230,0.08);
+    --amber: #e8b95e;
+    --amber-light: #ffd98a;
+    --amber-deep: #c9822d;
+
+    --display: "SF Pro Display", Inter, system-ui, sans-serif;
+    --text: "SF Pro Text", Inter, system-ui, sans-serif;
+    --mono: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+
+    --pad: clamp(20px, 3.5vw, 48px);
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--ink-deep);
+    color: var(--dust);
+    font: 14.5px/1.55 var(--text);
+    font-feature-settings: "ss01", "ss02";
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  ::selection { background: var(--amber); color: var(--ink); }
+  a { color: inherit; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--pad); width: 100%; }
+
+  /* --- TOP BAR (sticky) ---------------------------------------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(6,10,20,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--dust-08);
+  }
+  .topbar .container {
+    display: flex; align-items: center; gap: 18px;
+    padding-top: 12px; padding-bottom: 12px;
+  }
+  .topbar a.back {
+    color: var(--amber);
+    text-decoration: none;
+    font: 500 11px/1 var(--mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .topbar a.back:hover { color: var(--amber-light); }
+  .topbar .lockup { display: inline-flex; align-items: center; gap: 12px; }
+  .topbar .lockup .logo { width: 28px; height: 28px; border-radius: 6px; overflow: hidden; flex-shrink: 0; }
+  .topbar .lockup .logo svg, .topbar .lockup .logo object { display: block; width: 100%; height: 100%; pointer-events: none; }
+  .topbar .lockup .word {
+    font-family: var(--display);
+    font-weight: 600; font-size: 17px; letter-spacing: -0.025em;
+    color: var(--dust);
+  }
+  .topbar .crumb {
+    color: var(--dust-50);
+    font: 12px/1 var(--mono);
+    letter-spacing: 0.06em;
+  }
+  .topbar .crumb .sep { color: var(--dust-30); padding: 0 6px; }
+  .topbar .actions { margin-left: auto; display: flex; gap: 14px; }
+  .topbar .actions a {
+    color: var(--dust-50);
+    text-decoration: none;
+    font: 11px/1 var(--mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .topbar .actions a:hover { color: var(--amber); }
+
+  /* --- HEADER STRIP -------------------------------------------- */
+  .strip {
+    padding: 36px 0 28px;
+    background:
+      radial-gradient(ellipse at 80% 20%, rgba(26,36,80,0.5) 0%, transparent 60%),
+      var(--ink-deep);
+    border-bottom: 1px solid var(--dust-08);
+  }
+  .strip h1 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(24px, 3.4vw, 36px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin: 0 0 14px;
+  }
+  .strip .source-line {
+    font: 11px/1 var(--mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dust-50);
+    margin-bottom: 18px;
+    display: flex; flex-wrap: wrap; gap: 8px 18px;
+  }
+  .strip .source-line a {
+    color: var(--dust-72);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--dust-15);
+  }
+  .strip .source-line a:hover { color: var(--amber); border-bottom-color: var(--amber); }
+  .strip .source-line .sep { color: var(--dust-30); }
+  .strip blockquote {
+    margin: 0 0 18px;
+    padding: 4px 0 4px 18px;
+    border-left: 3px solid var(--amber);
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(15px, 1.8vw, 18px);
+    line-height: 1.45;
+    letter-spacing: -0.005em;
+    color: var(--dust);
+    max-width: 70ch;
+  }
+  .strip .seed-line {
+    font: 12px/1.5 var(--mono);
+    letter-spacing: 0.04em;
+    color: var(--dust-72);
+    display: flex; flex-wrap: wrap; gap: 6px 28px;
+  }
+  .strip .seed-line .pair { display: flex; gap: 6px; }
+  .strip .seed-line .k { color: var(--dust-30); }
+  .strip .seed-line .v { color: var(--amber); }
+
+  /* --- TOOLBAR ------------------------------------------------- */
+  .toolbar {
+    background: var(--ink);
+    border-bottom: 1px solid var(--dust-08);
+    padding: 14px 0;
+  }
+  .toolbar .container { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .toolbar .label {
+    font: 500 10px/1 var(--mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+  .toolbar select {
+    background: var(--ink-soft);
+    color: var(--dust);
+    border: 1px solid var(--dust-15);
+    border-radius: 6px;
+    padding: 7px 10px;
+    font: 13px var(--mono);
+    cursor: pointer;
+  }
+  .toolbar select:focus { outline: 2px solid var(--amber); outline-offset: 2px; }
+  .toolbar button {
+    background: var(--ink-soft);
+    color: var(--dust);
+    border: 1px solid var(--dust-15);
+    border-radius: 6px;
+    padding: 7px 11px;
+    font: 11px/1 var(--mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px;
+    transition: all 150ms;
+  }
+  .toolbar button:hover { background: var(--amber); color: var(--ink); border-color: var(--amber); }
+  .toolbar .arrow { font-family: var(--text); font-size: 14px; }
+
+  /* Variant chip strip */
+  .chips {
+    background: var(--ink-deep);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--dust-08);
+  }
+  .chips .container { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .chip-label {
+    font: 500 10px/1 var(--mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dust-30);
+    margin-right: 4px;
+  }
+  .chip {
+    background: var(--ink-soft);
+    color: var(--dust-72);
+    border: 1px solid var(--dust-15);
+    border-radius: 9999px;
+    padding: 7px 12px;
+    font: 500 11px/1 var(--mono);
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all 150ms;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .chip .dim {
+    font-weight: 400;
+    opacity: 0.7;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+  .chip:hover {
+    background: var(--ink);
+    color: var(--dust);
+    border-color: var(--dust-30);
+  }
+  .chip.in-left {
+    background: var(--amber);
+    color: var(--ink);
+    border-color: var(--amber);
+  }
+  .chip.in-right {
+    background: var(--amber-light);
+    color: var(--ink);
+    border-color: var(--amber-light);
+  }
+  .chip.in-left .dim, .chip.in-right .dim { opacity: 0.55; color: var(--ink); }
+  .chip.disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .chips .hint {
+    margin-left: auto;
+    font: 11px/1 var(--mono);
+    letter-spacing: 0.04em;
+    color: var(--dust-30);
+  }
+  @media (max-width: 720px) { .chips .hint { display: none; } }
+
+  /* --- VIEWER -------------------------------------------------- */
+  .viewer {
+    flex: 1;
+    background: var(--ink-deep);
+    padding: 16px;
+    display: flex;
+    min-height: 600px;
+  }
+  .panes {
+    flex: 1;
+    display: flex;
+    gap: 0;
+    background: var(--ink-deep);
+    border-radius: 14px;
+    overflow: hidden;
+    min-height: 600px;
+  }
+  .pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--ink-soft);
+    border: 1px solid var(--dust-08);
+    border-radius: 14px;
+    overflow: hidden;
+    min-width: 0;
+  }
+  .pane.full { flex: 1 1 100%; }
+  .pane-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--ink);
+    border-bottom: 1px solid var(--dust-08);
+    flex-shrink: 0;
+  }
+  .pane-header .label {
+    font: 500 10px/1 var(--mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+  .pane-header .name {
+    color: var(--dust-72);
+    font-size: 12px;
+    font-family: var(--text);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .pane-header .open-tab {
+    margin-left: auto;
+    color: var(--dust-50);
+    text-decoration: none;
+    font: 10px/1 var(--mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: color 150ms, background 150ms;
+  }
+  .pane-header .open-tab:hover { color: var(--ink); background: var(--amber); }
+  .pane iframe {
+    flex: 1;
+    width: 100%;
+    border: 0;
+    background: var(--dust);
+  }
+  .pane.empty {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 32px;
+  }
+  .pane.empty .empty-eyebrow {
+    font: 500 10px/1 var(--mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dust-30);
+    margin-bottom: 12px;
+  }
+  .pane.empty p {
+    color: var(--dust-50);
+    font-size: 13.5px;
+    line-height: 1.55;
+    max-width: 36ch;
+    margin: 0;
+  }
+
+  /* Divider */
+  .divider {
+    width: 8px;
+    background:
+      var(--ink-deep)
+      radial-gradient(circle at center, var(--dust-15) 1px, transparent 1.5px) 0 0/100% 12px;
+    cursor: col-resize;
+    flex-shrink: 0;
+    border-radius: 4px;
+    transition: background-color 150ms;
+  }
+  .divider:hover, .divider.dragging { background-color: var(--ink-soft); }
+  .panes.dragging * { user-select: none; pointer-events: none; }
+  .panes.dragging .divider { pointer-events: auto; }
+
+  /* --- ERROR --------------------------------------------------- */
+  .error {
+    padding: 32px;
+    background: var(--ink-soft);
+    border: 1px solid #ff6b6b;
+    border-left-width: 3px;
+    border-radius: 14px;
+    margin: 32px var(--pad);
+  }
+  .error h3 { color: #ff6b6b; font-family: var(--display); font-size: 16px; margin: 0 0 8px; font-weight: 600; }
+  .error p { color: var(--dust-72); margin: 0 0 8px; font-size: 13.5px; }
+  .error code { font-family: var(--mono); font-size: 12px; color: var(--amber); }
+
+  /* --- RESPONSIVE ---------------------------------------------- */
+  @media (max-width: 720px) {
+    .panes { flex-direction: column; }
+    .divider { display: none; }
+    .pane { width: 100% !important; min-height: 400px; }
+  }
+
+  /* --- TOAST --------------------------------------------------- */
+  #toast {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--amber);
+    color: var(--ink);
+    padding: 10px 18px;
+    border-radius: 8px;
+    font: 500 12px/1 var(--mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms, transform 200ms;
+    z-index: 100;
+  }
+  #toast.shown { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <a class="back" href="./">◂ showcase</a>
+    <span class="lockup">
+      <span class="logo"><object data="_assets/logo-mark.svg" type="image/svg+xml" aria-hidden="true" tabindex="-1"></object></span>
+      <span class="word">stardust</span>
+    </span>
+    <span class="crumb"><span class="sep">·</span><span id="crumb-slug">—</span></span>
+    <span class="actions">
+      <a id="link-source" href="#" target="_blank" rel="noopener" hidden>OPEN SOURCE ↗</a>
+      <a id="link-direction" href="#" target="_blank" rel="noopener" hidden>OPEN DIRECTION ↗</a>
+    </span>
+  </div>
+</div>
+
+<section class="strip">
+  <div class="container">
+    <h1 id="title">Loading…</h1>
+    <div class="source-line" id="source-line"></div>
+    <blockquote id="phrase" hidden></blockquote>
+    <div class="seed-line" id="seed-line"></div>
+  </div>
+</section>
+
+<div class="toolbar">
+  <div class="container">
+    <span class="label">Compare</span>
+    <span class="label" style="color: var(--dust-30);">left</span>
+    <select id="select-left" aria-label="Left pane source"></select>
+    <button id="btn-swap" aria-label="Swap left and right"><span class="arrow">↔</span> SWAP</button>
+    <span class="label" style="color: var(--dust-30);">right</span>
+    <select id="select-right" aria-label="Right pane source"></select>
+    <button id="btn-share" aria-label="Copy share URL">SHARE ⎘</button>
+    <button id="btn-reset" aria-label="Reset to default panes">RESET</button>
+  </div>
+</div>
+
+<div class="chips">
+  <div class="container" id="chip-strip">
+    <span class="chip-label">Variants</span>
+  </div>
+</div>
+
+<div class="viewer">
+  <div class="panes" id="panes">
+    <div class="pane" id="pane-left">
+      <div class="pane-header">
+        <span class="label" id="left-label">—</span>
+        <span class="name" id="left-name"></span>
+        <a class="open-tab" id="left-open-tab" target="_blank" rel="noopener" hidden>OPEN ↗</a>
+      </div>
+      <iframe id="left-iframe" sandbox="allow-scripts allow-same-origin allow-forms" referrerpolicy="no-referrer"></iframe>
+    </div>
+    <div class="divider" id="divider" role="separator" aria-orientation="vertical" tabindex="0"></div>
+    <div class="pane" id="pane-right">
+      <div class="pane-header">
+        <span class="label" id="right-label">—</span>
+        <span class="name" id="right-name"></span>
+        <a class="open-tab" id="right-open-tab" target="_blank" rel="noopener" hidden>OPEN ↗</a>
+      </div>
+      <iframe id="right-iframe" sandbox="allow-scripts allow-same-origin allow-forms" referrerpolicy="no-referrer"></iframe>
+    </div>
+  </div>
+</div>
+
+<div id="error-shell" hidden></div>
+
+<div id="toast">link copied</div>
+
+<script>
+(function () {
+  const params = new URLSearchParams(location.search);
+  const slug = params.get('slug');
+  const errShell = document.getElementById('error-shell');
+
+  if (!slug || !/^[a-z0-9-]+$/.test(slug)) {
+    showError('Missing or invalid sample slug.', `Open a sample from the showcase index, or visit <code>sample.html?slug=&lt;slug&gt;</code> with a real slug.`);
+    return;
+  }
+
+  const elTitle = document.getElementById('title');
+  const elCrumb = document.getElementById('crumb-slug');
+  const elSourceLine = document.getElementById('source-line');
+  const elPhrase = document.getElementById('phrase');
+  const elSeedLine = document.getElementById('seed-line');
+  const elLinkSource = document.getElementById('link-source');
+  const elLinkDirection = document.getElementById('link-direction');
+  const elSelectLeft = document.getElementById('select-left');
+  const elSelectRight = document.getElementById('select-right');
+  const elBtnSwap = document.getElementById('btn-swap');
+  const elBtnShare = document.getElementById('btn-share');
+  const elBtnReset = document.getElementById('btn-reset');
+  const elChipStrip = document.getElementById('chip-strip');
+  const elPanes = document.getElementById('panes');
+  const elPaneLeft = document.getElementById('pane-left');
+  const elPaneRight = document.getElementById('pane-right');
+  const elDivider = document.getElementById('divider');
+  const elLeftIframe = document.getElementById('left-iframe');
+  const elRightIframe = document.getElementById('right-iframe');
+  const elLeftLabel = document.getElementById('left-label');
+  const elRightLabel = document.getElementById('right-label');
+  const elLeftName = document.getElementById('left-name');
+  const elRightName = document.getElementById('right-name');
+  const elLeftOpenTab = document.getElementById('left-open-tab');
+  const elRightOpenTab = document.getElementById('right-open-tab');
+  const elToast = document.getElementById('toast');
+
+  let meta = null;
+  let sources = []; // [{ key, label, name, file }]
+  let defaultLeft = null;
+  let defaultRight = null;
+
+  function escape(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+  function shortenUrl(u) {
+    try { const url = new URL(u); return url.host + (url.pathname === '/' ? '' : url.pathname); }
+    catch { return u; }
+  }
+  function showError(title, body) {
+    errShell.hidden = false;
+    errShell.innerHTML = `<div class="error"><h3>${escape(title)}</h3><p>${body}</p></div>`;
+  }
+  function toast(msg) {
+    elToast.textContent = msg;
+    elToast.classList.add('shown');
+    clearTimeout(elToast._t);
+    elToast._t = setTimeout(() => elToast.classList.remove('shown'), 1600);
+  }
+
+  function readHash() {
+    const h = (location.hash || '').replace(/^#/, '');
+    const p = new URLSearchParams(h);
+    return { left: p.get('left'), right: p.get('right') };
+  }
+  function writeHash(left, right) {
+    const h = new URLSearchParams();
+    if (left) h.set('left', left);
+    if (right) h.set('right', right);
+    const s = h.toString();
+    history.replaceState(null, '', s ? '#' + s : location.pathname + location.search);
+  }
+
+  fetch(`./${encodeURIComponent(slug)}/meta.json`, { cache: 'no-store' })
+    .then(r => {
+      if (!r.ok) throw new Error('meta.json HTTP ' + r.status);
+      return r.json();
+    })
+    .then(m => {
+      meta = m;
+      init();
+    })
+    .catch(err => {
+      showError(
+        'Could not load this sample.',
+        `Failed to fetch <code>${escape(slug)}/meta.json</code> — ${escape(err.message)}.<br>The sample folder may be missing or the manifest invalid.`
+      );
+    });
+
+  function init() {
+    elTitle.textContent = meta.title || slug;
+    elCrumb.textContent = slug;
+    document.title = `Stardust — ${meta.title || slug}`;
+
+    // Source line
+    const parts = [];
+    if (meta.source && meta.source.url) {
+      parts.push(`<a href="${escape(meta.source.url)}" target="_blank" rel="noopener">source ${escape(shortenUrl(meta.source.url))}</a>`);
+      elLinkSource.href = meta.source.url;
+      elLinkSource.hidden = false;
+    }
+    if (meta.source && meta.source.register) parts.push(`<span><span class="sep">·</span> register ${escape(meta.source.register)}</span>`);
+    if (meta.source && meta.source.extractedAt) parts.push(`<span><span class="sep">·</span> extracted ${escape(meta.source.extractedAt)}</span>`);
+    elSourceLine.innerHTML = parts.join(' ');
+
+    // Direction phrase
+    if (meta.direction && meta.direction.phrase) {
+      elPhrase.textContent = meta.direction.phrase;
+      elPhrase.hidden = false;
+    }
+
+    // Seed line
+    const seedBits = [];
+    if (meta.direction && meta.direction.seed) {
+      const s = meta.direction.seed;
+      const seedStr = [s.decade, s.craft, s.register, s.groundFamily].filter(Boolean).join(' × ');
+      if (seedStr) seedBits.push({ k: 'seed', v: seedStr });
+      if (s.pickedBy) seedBits.push({ k: 'picked', v: s.pickedBy });
+    }
+    if (meta.direction && meta.direction.fontDeck && meta.direction.fontDeck.name) seedBits.push({ k: 'deck', v: meta.direction.fontDeck.name });
+    if (meta.direction && meta.direction.palette && meta.direction.palette.name) seedBits.push({ k: 'palette', v: meta.direction.palette.name });
+    if (meta.direction && meta.direction.antiToolbox) {
+      const at = meta.direction.antiToolbox;
+      if (typeof at.hits === 'number') seedBits.push({ k: 'anti-toolbox', v: `${at.justified || 0}/${at.hits} justified` });
+    }
+    elSeedLine.innerHTML = seedBits.map(b => `<span class="pair"><span class="k">${escape(b.k)}</span><span class="v">${escape(b.v)}</span></span>`).join('');
+
+    // direction.md link
+    elLinkDirection.href = `${encodeURIComponent(slug)}/direction.md`;
+    elLinkDirection.hidden = false;
+
+    // Build sources list (current + variants)
+    const variants = Array.isArray(meta.variants) ? meta.variants : [];
+    const primary = variants.find(v => v.isPrimary) || variants[0];
+    const hasCurrent = !!(meta.current && meta.current.renderingFile);
+
+    if (hasCurrent) {
+      sources.push({
+        key: 'current',
+        label: 'CURRENT',
+        name: 'live-site rendering',
+        file: meta.current.renderingFile
+      });
+    }
+    for (const v of variants) {
+      sources.push({
+        key: v.id,
+        label: `PROPOSED · ${v.id}${v.isPrimary ? ' · primary' : ''}`,
+        name: v.name || (v.dominantDimension ? `${v.dominantDimension}-dominant` : ''),
+        file: v.proposedFile,
+        dominantDimension: v.dominantDimension,
+        isPrimary: !!v.isPrimary
+      });
+    }
+
+    if (sources.length === 0) {
+      showError(
+        'Sample has no renderable files.',
+        `The sample's <code>meta.json</code> declares no variants and no <code>current.renderingFile</code>. Check the manifest.`
+      );
+      return;
+    }
+
+    // Defaults
+    if (hasCurrent && primary) {
+      defaultLeft = 'current';
+      defaultRight = primary.id;
+    } else if (variants.length >= 2) {
+      defaultLeft = (primary && primary.id) || variants[0].id;
+      defaultRight = variants.find(v => v.id !== defaultLeft).id;
+    } else if (variants.length === 1) {
+      defaultLeft = null;
+      defaultRight = variants[0].id;
+    } else if (hasCurrent) {
+      defaultLeft = null;
+      defaultRight = 'current';
+    }
+
+    // Populate dropdowns
+    function fill(sel, includeNone) {
+      sel.innerHTML = '';
+      if (includeNone) sel.append(new Option('— (single pane)', ''));
+      for (const s of sources) sel.append(new Option(s.label.toLowerCase(), s.key));
+    }
+    fill(elSelectLeft, true);
+    fill(elSelectRight, false);
+
+    // Apply state from hash, falling back to defaults
+    const hash = readHash();
+    let left = hash.left && sources.some(s => s.key === hash.left) ? hash.left : defaultLeft;
+    let right = hash.right && sources.some(s => s.key === hash.right) ? hash.right : defaultRight;
+    if (!right && left) { right = left; left = null; }
+    apply(left, right);
+
+    // Build chip strip
+    renderChips();
+
+    // Wire events
+    elSelectLeft.addEventListener('change', () => apply(elSelectLeft.value || null, elSelectRight.value));
+    elSelectRight.addEventListener('change', () => apply(elSelectLeft.value || null, elSelectRight.value));
+    elBtnSwap.addEventListener('click', () => apply(elSelectRight.value || null, elSelectLeft.value || null));
+    elBtnReset.addEventListener('click', () => apply(defaultLeft, defaultRight));
+    elBtnShare.addEventListener('click', shareCopy);
+
+    // Divider drag
+    setupDivider();
+  }
+
+  function apply(left, right) {
+    // If only one is set, render single-pane
+    if (!left && !right) {
+      // refuse — at least one must be set
+      if (defaultRight) right = defaultRight; else if (defaultLeft) left = defaultLeft;
+    }
+    const single = !left || !right;
+
+    elSelectLeft.value = left || '';
+    elSelectRight.value = right || '';
+
+    if (single) {
+      const only = right || left;
+      const src = sources.find(s => s.key === only);
+      elPaneLeft.classList.add(only === left ? 'full' : 'hidden');
+      elPaneRight.classList.add(only === right ? 'full' : 'hidden');
+      if (only === right) {
+        elPaneLeft.style.display = 'none';
+        elDivider.style.display = 'none';
+        elPaneRight.style.display = '';
+        elPaneRight.classList.add('full');
+        loadPane('right', src);
+      } else {
+        elPaneRight.style.display = 'none';
+        elDivider.style.display = 'none';
+        elPaneLeft.style.display = '';
+        elPaneLeft.classList.add('full');
+        loadPane('left', src);
+      }
+    } else {
+      elPaneLeft.style.display = '';
+      elPaneRight.style.display = '';
+      elDivider.style.display = '';
+      elPaneLeft.classList.remove('full', 'hidden');
+      elPaneRight.classList.remove('full', 'hidden');
+      // Reset flex (the user may have dragged the divider previously)
+      // … kept widths via inline style; only reset on reset()
+      loadPane('left', sources.find(s => s.key === left));
+      loadPane('right', sources.find(s => s.key === right));
+    }
+
+    writeHash(left, right);
+    renderChips();
+  }
+
+  function loadPane(side, src) {
+    if (!src) return;
+    const file = `${slug}/${src.file}`;
+    const iframe = side === 'left' ? elLeftIframe : elRightIframe;
+    const labelEl = side === 'left' ? elLeftLabel : elRightLabel;
+    const nameEl  = side === 'left' ? elLeftName  : elRightName;
+    const openEl  = side === 'left' ? elLeftOpenTab : elRightOpenTab;
+    if (iframe.getAttribute('src') !== file) iframe.setAttribute('src', file);
+    labelEl.textContent = src.label;
+    nameEl.textContent = src.name || '';
+    openEl.href = file;
+    openEl.hidden = false;
+  }
+
+  function renderChips() {
+    const leftKey = elSelectLeft.value;
+    const rightKey = elSelectRight.value;
+    elChipStrip.innerHTML = '';
+    const labelEl = document.createElement('span');
+    labelEl.className = 'chip-label';
+    labelEl.textContent = 'Variants';
+    elChipStrip.append(labelEl);
+
+    // Current chip (or disabled if not captured)
+    if (sources.find(s => s.key === 'current')) {
+      elChipStrip.append(makeChip({ key: 'current', label: 'current', dim: '' }, leftKey, rightKey));
+    } else {
+      const c = document.createElement('span');
+      c.className = 'chip disabled';
+      c.title = 'Current rendering not captured for this sample';
+      c.innerHTML = `current <span class="dim">⊘</span>`;
+      elChipStrip.append(c);
+    }
+    // Variant chips
+    for (const s of sources.filter(x => x.key !== 'current')) {
+      elChipStrip.append(makeChip({
+        key: s.key,
+        label: s.key,
+        dim: s.dominantDimension || ''
+      }, leftKey, rightKey));
+    }
+
+    // Hint
+    const hint = document.createElement('span');
+    hint.className = 'hint';
+    hint.textContent = 'click → right pane · shift+click → left pane';
+    elChipStrip.append(hint);
+  }
+
+  function makeChip(data, leftKey, rightKey) {
+    const a = document.createElement('a');
+    a.href = '#';
+    a.className = 'chip' + (data.key === leftKey ? ' in-left' : '') + (data.key === rightKey ? ' in-right' : '');
+    a.innerHTML = `${escape(data.label)}${data.dim ? ` <span class="dim">${escape(data.dim)}</span>` : ''}`;
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      if (e.shiftKey) {
+        apply(data.key, rightKey === data.key ? leftKey : rightKey);
+      } else {
+        apply(leftKey === data.key ? rightKey : leftKey, data.key);
+      }
+    });
+    return a;
+  }
+
+  function shareCopy() {
+    const url = location.origin + location.pathname + location.search + location.hash;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(() => toast('link copied')).catch(() => toast(url));
+    } else {
+      toast(url);
+    }
+  }
+
+  function setupDivider() {
+    let dragging = false;
+    let startX = 0;
+    let startLeftWidth = 0;
+    let totalWidth = 0;
+
+    function onDown(e) {
+      const ev = e.touches ? e.touches[0] : e;
+      dragging = true;
+      startX = ev.clientX;
+      startLeftWidth = elPaneLeft.getBoundingClientRect().width;
+      totalWidth = elPanes.getBoundingClientRect().width - elDivider.getBoundingClientRect().width;
+      elPanes.classList.add('dragging');
+      elDivider.classList.add('dragging');
+      e.preventDefault();
+    }
+    function onMove(e) {
+      if (!dragging) return;
+      const ev = e.touches ? e.touches[0] : e;
+      let dx = ev.clientX - startX;
+      let newLeft = startLeftWidth + dx;
+      const minLeft = 200;
+      const maxLeft = totalWidth - 200;
+      if (newLeft < minLeft) newLeft = minLeft;
+      if (newLeft > maxLeft) newLeft = maxLeft;
+      const pct = (newLeft / totalWidth) * 100;
+      elPaneLeft.style.flex = `0 0 ${pct}%`;
+      elPaneRight.style.flex = `1 1 auto`;
+    }
+    function onUp() {
+      if (!dragging) return;
+      dragging = false;
+      elPanes.classList.remove('dragging');
+      elDivider.classList.remove('dragging');
+    }
+
+    elDivider.addEventListener('mousedown', onDown);
+    elDivider.addEventListener('touchstart', onDown, { passive: false });
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('touchmove', onMove, { passive: false });
+    window.addEventListener('mouseup', onUp);
+    window.addEventListener('touchend', onUp);
+
+    // Keyboard: ← / → adjust by 5% steps when divider focused
+    elDivider.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      const cur = elPaneLeft.getBoundingClientRect().width;
+      const total = elPanes.getBoundingClientRect().width - elDivider.getBoundingClientRect().width;
+      const step = total * 0.05;
+      let next = cur + (e.key === 'ArrowLeft' ? -step : step);
+      const minLeft = 200, maxLeft = total - 200;
+      if (next < minLeft) next = minLeft;
+      if (next > maxLeft) next = maxLeft;
+      elPaneLeft.style.flex = `0 0 ${(next / total) * 100}%`;
+      elPaneRight.style.flex = `1 1 auto`;
+      e.preventDefault();
+    });
+  }
+
+  // Re-apply on hash change (e.g. user pasted a shared URL into the address bar mid-session)
+  window.addEventListener('hashchange', () => {
+    const h = readHash();
+    apply(
+      h.left && sources.some(s => s.key === h.left) ? h.left : defaultLeft,
+      h.right && sources.some(s => s.key === h.right) ? h.right : defaultRight
+    );
+  });
+})();
+</script>
+
+</body>
+</html>

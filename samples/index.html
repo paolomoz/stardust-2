@@ -49,6 +49,25 @@
     overflow: hidden;
     background: radial-gradient(ellipse at 72% 38%, #1a2450 0%, #070c1e 65%, #060a14 100%);
   }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 56px;
+  }
+  .hero-mark {
+    width: 200px;
+    height: 200px;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    flex-shrink: 0;
+  }
+  .hero-mark svg { display: block; width: 100%; height: 100%; }
+  @media (max-width: 720px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .hero-mark { width: 120px; height: 120px; }
+  }
   .dust-layer {
     position: absolute; inset: 0; z-index: 0;
     pointer-events: none;
@@ -228,6 +247,8 @@
     letter-spacing: -0.005em;
     margin: 0 0 8px;
   }
+  .card h3 a.title-link { text-decoration: none; color: var(--dust); }
+  .card h3 a.title-link:hover { color: var(--amber); }
   .card .source {
     font: 12px/1.4 var(--mono);
     color: var(--dust-50);
@@ -352,15 +373,22 @@
 <section class="hero">
   <div class="dust-layer" aria-hidden="true"></div>
   <div class="container">
-    <div class="mark">ADOBE · STARDUST · SHOWCASE</div>
-    <h1 class="wordmark">stardust</h1>
-    <div class="tagline">brief<span class="op">+</span>seed<span class="op">=</span>star</div>
-    <p class="sub">A curated set of stardust redesign runs. Each sample is a complete record — the resolved direction, the divergence inputs, the brand-faithful inversions, and one or more proposed variants.</p>
+    <div class="hero-grid">
+      <div>
+        <div class="mark">ADOBE · STARDUST · SHOWCASE</div>
+        <h1 class="wordmark">stardust</h1>
+        <div class="tagline">brief<span class="op">+</span>seed<span class="op">=</span>star</div>
+        <p class="sub">A curated set of stardust redesign runs. Each sample is a complete record — the resolved direction, the divergence inputs, the brand-faithful inversions, and one or more proposed variants.</p>
 
-    <div class="hero-meta">
-      <span><strong id="meta-count">—</strong> samples</span>
-      <span>updated <strong id="meta-updated">—</strong></span>
-      <span>seed today <strong id="meta-seed">—</strong></span>
+        <div class="hero-meta">
+          <span><strong id="meta-count">—</strong> samples</span>
+          <span>updated <strong id="meta-updated">—</strong></span>
+          <span>seed today <strong id="meta-seed">—</strong></span>
+        </div>
+      </div>
+      <a class="hero-mark" href="https://github.com/paolomoz/stardust-2" aria-label="stardust on GitHub">
+        <object data="_assets/logo-mark.svg" type="image/svg+xml" aria-hidden="true" tabindex="-1" style="pointer-events:none;width:100%;height:100%;display:block;"></object>
+      </a>
     </div>
   </div>
 </section>
@@ -459,7 +487,9 @@
       ? `<img src="${escape(slug + '/' + cover)}" alt="${escape(meta.title)}" loading="lazy">`
       : 'No cover';
     const coverClass = cover ? 'card-cover' : 'card-cover placeholder';
-    const primaryHref = `${escape(slug)}/${escape(primary.proposedFile)}`;
+    // Card body click → comparison view (current vs proposed, multi-variant chooser).
+    // Variant chips below open a single proposed file full-page in a new tab.
+    const detailHref = `sample.html?slug=${encodeURIComponent(slug)}`;
 
     const variantStripHtml = variants.length > 1 ? `
       <div class="variants">
@@ -484,10 +514,10 @@
 
     return `
       <article class="card">
-        <a class="${coverClass}" href="${primaryHref}" target="_blank" rel="noopener">${coverHtml}</a>
+        <a class="${coverClass}" href="${detailHref}">${coverHtml}</a>
         <div class="card-body">
           ${meta.source && meta.source.category ? `<div class="card-eyebrow">${escape(meta.source.category)}</div>` : ''}
-          <h3>${escape(meta.title)}</h3>
+          <h3><a href="${detailHref}" class="title-link">${escape(meta.title)}</a></h3>
           ${meta.source && meta.source.url ? `
             <p class="source"><a href="${escape(meta.source.url)}" target="_blank" rel="noopener">${escape(shortenUrl(meta.source.url))}</a></p>
           ` : ''}
