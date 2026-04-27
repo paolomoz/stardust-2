@@ -88,6 +88,30 @@ specific.`)
   `https://coolors.co/...`); recommended_index = 2, picked_index = 2
 - **anti-toolbox audit** — 1 hit (Sticky top navigation),
   justified by inherited site convention
+- **brand-faithful inversions** — when the resolved direction
+  preserves the existing palette (color-energy / color axis not
+  moved), record any agent-default reflexes that are explicitly
+  inverted for brand fidelity. Common cases
+  (`STARDUST-FEEDBACK.md F-009`):
+  - **Pure `#ffffff` / `#000000` retained** as page ground / text —
+    the "no pure black/white" rule (impeccable hard rule, normally
+    enforced to prevent agent-default reflexes) is inverted because
+    the existing brand uses pure white/black as a deliberate
+    choice. Record one line: *"#ffffff retained as page ground
+    (existing brand decision; #fff is canonical for {brand
+    name}). The 'no pure black/white' impeccable rule is inverted
+    here per brand-faithful direction."*
+  - **Hex color format retained** in DESIGN.md `colors:` frontmatter
+    instead of OKLCH — when the brand-faithful direction preserves
+    color values verbatim from `_brand-extraction.json`, keep them
+    in their captured format (typically hex). The OKLCH-only
+    impeccable rule applies to *new* token authoring; brand-faithful
+    inheritance is not new authoring.
+
+  The inversion log is consumed by `prototype` (its `:root` block
+  uses the same format as DESIGN.md) and by `migrate` (the
+  deployable site preserves the inversion notes in DESIGN.json
+  provenance).
 
 ## Command sequence (proposed)
 

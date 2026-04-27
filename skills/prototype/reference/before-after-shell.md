@@ -178,10 +178,37 @@ The proposed file must satisfy:
    `skills/stardust/reference/divergence-toolkit.md` § 1) appears in
    `DESIGN.json.extensions.divergence.anti_toolbox_hits` with a
    brand-specific justification.
-6. **Impeccable hard rules respected.** OKLCH colors, no pure
-   `#000`/`#fff`, no glassmorphism reflex, no gradient text, no side
-   stripes > 1px, no skipped headings, type ratio ≥ 1.25 for brand
-   register.
+6. **Impeccable hard rules respected, with format and brand-faithful
+   reconciliation.** OKLCH colors, no glassmorphism reflex, no
+   gradient text, no side stripes > 1px, no skipped headings, type
+   ratio ≥ 1.25 for brand register. Two refinements
+   (`STARDUST-FEEDBACK.md F-009`):
+
+   - **Color format follows DESIGN.md frontmatter.** The proposed
+     file's `:root` token block uses the **same color format as
+     `DESIGN.md`'s `colors:` frontmatter**. If DESIGN.md ships hex
+     (Stitch validates hex sRGB; OKLCH triggers a Stitch lint
+     warning), `:root` is hex. If DESIGN.md ships OKLCH, `:root` is
+     OKLCH. The "OKLCH only" rule from impeccable applies at
+     **DESIGN.md authoring time** (during `direct`), not at
+     prototype render time — at render time the prototype must
+     match the format the source-of-truth file declares, or the
+     prototype's tokens diverge from DESIGN.md and migrate has to
+     re-translate.
+
+   - **Brand-faithful pure-white / pure-black inheritance.** The
+     "no pure `#000`/`#fff`" rule applies to **agent-default token
+     authoring** (preventing the assistant from reaching for
+     `#000` text on `#fff` background as a reflex). When the
+     existing brand uses pure white as the page ground (or pure
+     black as text) and `direction.md` resolves a brand-faithful
+     stance — the existing palette is preserved because the
+     redesign does not move color-energy or color away from the
+     brand — pure white / pure black are **allowed** and the rule
+     is inverted: the redesign target preserves them as a brand
+     decision, not an agent reflex. Document the inversion in
+     `DESIGN.json.extensions.divergence.notes` so downstream
+     consumers know the pure-color was chosen, not defaulted into.
 7. **Content preserved from the current page.** Hero copy, CTAs,
    navigation labels, body copy come from `current/pages/<slug>.json`.
    The redesign changes how content is presented, not what content is
