@@ -119,11 +119,46 @@ Where a section cannot be populated with confidence from inputs,
 mark it `<!-- _provenance: inferred -->` with a one-line basis
 sentence. Never invent strategy.
 
-### Phase 4 — Author target DESIGN.md and DESIGN.json
+### Phase 4 — Author target DESIGN.md and DESIGN.json (site-level only)
 
 Write `DESIGN.md` at the project root using impeccable's
 `reference/document.md` as the format spec — Stitch YAML frontmatter
 plus the 6 canonical sections in fixed order.
+
+**Site-level only.** Per `STARDUST-FEEDBACK.md F-015`, `direct`
+authors the design **system**, not page-level deployments. Page-
+specific composition decisions live in
+`stardust/prototypes/<slug>-shape.md` written by `prototype`
+Phase 1 — see `skills/prototype/reference/page-shape-brief.md`.
+
+The boundary is **abstract role vs literal deployment**:
+
+| In DESIGN.md / DESIGN.json (site system) | In `<slug>-shape.md` (page deployment) |
+|---|---|
+| Token vocabulary (colors, typography, spacing, radii) | Per-page section list and order |
+| Voice rules ("Mixed-Case-Headlines"), anti-refs | Literal copy per section (sourced from current/pages/<slug>.json) |
+| Anti-toolbox audit, divergence trace | Page-specific layout decisions ("hero is 5/3 split on home") |
+| Abstract component vocabulary: `button-primary`, `button-secondary`, `card`, `input`, `badge`, `link` (default treatment, density, sizing — NO page-specific dimensions or content) | Section-level component dimensions (`the211Panel` at 320×260 with dock points per viewport) |
+| Named system-component **roles** (a `header` exists, a `footer` exists, a `cta-band` pattern exists) | System-component **deployment** (literal tile labels in fixed order, link targets, copy variants) |
+| Default visual treatment for each abstract component | Per-page composition (statRow with literal "100 YEARS · 18,400 PEOPLE HOUSED · …") |
+| Voice samples (do/don't, tone exemplars) | Per-page interaction model and key states |
+
+Concrete examples of items that **must not** appear in DESIGN.md /
+DESIGN.json:
+
+- Literal tile labels for any system-component pattern.
+- Section-level pixel dimensions, dock points, breakpoint-specific
+  widths.
+- Stat numbers, addresses, quotes, named-person references.
+- "On home, the hero is X" — that's a home-page deployment.
+- Per-page copy variants ("on the donate page the CTA reads Y").
+
+If a redesign demands a section-level dimension or a literal label
+that feels site-wide ("every page has a 211 panel docked at the
+bottom-right"), encode it as an **abstract role** in DESIGN.json
+(e.g. `extensions.systemComponentRoles.persistent-help` with
+purpose / position-class but no literal copy or dimensions) and let
+each page's shape brief specify the deployment.
 
 Token sources:
 
@@ -152,10 +187,18 @@ Write `DESIGN.json` (schemaVersion 2) with:
 - `extensions.colorMeta`, `typographyMeta`, `shadows`, `motion`,
   `breakpoints` — filled from the same sources as DESIGN.md.
 - `extensions.divergence` — full audit trail per the v2 storage shape
-  in `divergence-toolkit.md`.
-- `extensions.componentStyle` — the v1 fields preserved (`buttons`,
-  `cards`, `inputs`, `dualCTAPattern`) so downstream tools have the
-  per-component style table.
+  in `divergence-toolkit.md`. Includes the brand-faithful inversion
+  log (per `reference/direction-format.md` § Divergence inputs)
+  capturing pure-color or hex-format retentions.
+- `extensions.componentStyle` — the **abstract** v1 fields
+  (`buttons`, `cards`, `inputs`, `dualCTAPattern`). **Default**
+  treatment per component, no per-page dimensions or literal copy.
+- `extensions.systemComponentRoles` — the **abstract roles** for
+  named cross-page patterns (e.g. `persistent-help`, `cta-band`,
+  `header`, `footer`). Each role carries purpose, position class,
+  and any site-wide constraint — **not** literal copy, dimensions,
+  or per-viewport dock points (those are page-deployment, in
+  `<slug>-shape.md`).
 - `extensions.voice` — sampled DOs and DON'Ts derived from
   `_brand-extraction.json` voice samples + the resolved tone.
 - `narrative.northStar`, `overview`, `keyCharacteristics`, `rules`,
