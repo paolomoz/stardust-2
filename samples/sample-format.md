@@ -208,23 +208,43 @@ alphabetical order; manual submitters should keep the array sorted.
 
 ## Provenance discipline
 
-Every sample carries a complete provenance trail. The submitter
-is committing to:
+Every sample carries a complete provenance trail. The showcase is
+a **visual demonstration**, not a deployable site, so the gates
+focus on *design* honesty rather than *content* completeness.
 
-- The proposed HTML's `_provenance.unsourcedContent[]` is empty
-  (no placeholders).
+The submitter is committing to:
+
+- The proposed HTML's `_provenance.unsourcedContent[]` accurately
+  lists every placeholder with its selector, type, and reason.
+  **Placeholders are allowed** — they ship visible per the F-002
+  PLACEHOLDER signature contract, and the publish flow records
+  them in the PR body so reviewers see what's sourced vs
+  illustrative.
 - The proposed HTML's `_provenance.critique[]` shows zero
   outstanding P0/P1 findings (or the user explicitly acknowledged
-  them at approval time).
+  them at approval time, or critique was not run — which is
+  surfaced in the PR body so the reviewer can run it before
+  merging).
 - `meta.json#direction.seed.pickedBy` accurately records why each
   dimension landed where it did (`deterministic` / `anchor-reference: <ref>` / `user-constraint` / `designer-override`).
 - `meta.json#direction.palette.source` is a real URL that resolves
   to the picked palette (coolors.co, library hash, etc.).
+- The `:root` token contract, data-attributes contract, and
+  impeccable hard rules pass on every variant. These are
+  *design* gates and they stay strict — showcase exists to
+  demonstrate good design.
 
-These constraints exist because the showcase doubles as proof
-that stardust output is reproducible and traceable. A sample that
-launders away the audit trail undermines the brand promise.
+The traceability promise is "every visual decision can be traced
+back to a captured input or a labelled placeholder." The
+placeholder labels are the audit trail for the not-yet-sourced
+parts; the rest of the design system traces to seed, palette
+source, font deck, and the captured brand surface.
 
 The submission PR template asks the user to confirm these
 explicitly (one checkbox each); the publish-sample flow
 prefills them with the actual values from the user's project.
+
+`migrate`'s gates are **stricter** than the showcase's because
+the audience is different — production end-users vs. designers
+reviewing a sample. A sample that's good for the showcase may
+not be ready to deploy; that's expected.

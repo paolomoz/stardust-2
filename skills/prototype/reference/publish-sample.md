@@ -95,13 +95,31 @@ combine into a single "not eligible" message.
    `<slug>-proposed-<id>.html` form, but the flow accepts any
    convention as long as the provenance and variant-id discovery
    resolve unambiguously.
-4. **No outstanding placeholders.** Read each proposed file's
-   `<!-- stardust:provenance -->` block and parse
-   `unsourcedContent[]`. If any is non-empty across variants,
-   refuse with the unsourced list. Source content first, then
-   re-prototype, then re-publish. (`--allow-placeholder` is **not**
-   accepted here — placeholder content has no business in the
-   public showcase.)
+4. **Placeholder content is allowed.** The showcase is a **visual
+   demonstration** of the redesign — composition, palette,
+   typography, layout, motion — not a deployable site. Placeholders
+   are deliberately visible per the F-002 PLACEHOLDER signature
+   contract (dashed outline + monospace eyebrow + surface-alt
+   tint). A showcase reader can tell at a glance what's sourced
+   and what's illustrative; that's the protection.
+
+   Procedure:
+   - Read each proposed file's `<!-- stardust:provenance -->`
+     block and parse `unsourcedContent[]`.
+   - If any is non-empty: surface the unsourced list to the user
+     ("3 placeholders across 2 variants — publish anyway? [y/n]")
+     and **default yes**. Record the list verbatim in the PR body
+     under § Unsourced content so reviewers see what's sourced
+     vs illustrative without opening the files.
+   - The publish flow does **not** refuse on placeholders.
+
+   `migrate`'s placeholder guard is **unchanged**: deploying a
+   public site with placeholder content is still refused there
+   (`migrate/SKILL.md § Failure modes`). The showcase publish is
+   a different flow — different audience (designers reviewing a
+   visual sample vs. end-users browsing a deployed site),
+   different stakes (design demonstration vs. production claim),
+   different gate. Don't conflate them.
 5. **No outstanding P0/P1 critique findings.** Read each proposed
    file's `_provenance.critique[]`.
 
@@ -278,11 +296,27 @@ Source: {source.url}  ·  register: {source.register}  ·  extracted {source.ext
 {For each variant:}
 - **{id} · {name}** — dominant dimension: `{dominantDimension}`. {thesis}
 
+### Unsourced content {Render this section only when at least one variant has non-empty unsourcedContent[]; omit otherwise.}
+
+The showcase is a visual demonstration; placeholders are
+deliberately visible per the F-002 PLACEHOLDER signature
+contract. Listed here so reviewers know what's illustrative.
+
+{For each variant with placeholders:}
+- **{id}** ({n} placeholder{s}):
+{For each entry in variant._provenance.unsourcedContent[]:}
+  - `{selector}` — type: `{type}` — {reason}
+
 ### Submitter checklist
 
 The publish flow already verified these — reviewer can spot-check.
 
-- [x] No `[data-placeholder]` elements in any proposed file.
+- [{x|⚠}] Placeholder content. {Render `[x] no placeholders` when
+      every variant's unsourcedContent[] is empty; render `[⚠ N
+      placeholders across M variants — see § Unsourced content
+      above]` otherwise. Placeholders are allowed in the showcase
+      per the visual-demonstration policy; the listing makes them
+      visible to reviewers without opening files.}
 - [{x|⚠}] No outstanding P0/P1 critique findings. {Render `[x]`
       when critique[] is present with no P0/P1; render `[⚠]
       critique: not run` when critique[] is absent on any variant

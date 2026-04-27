@@ -80,7 +80,10 @@ The full procedure spec lives in
 
 ## What makes a good sample
 
-The showcase is curated, not exhaustive. A good sample is one of:
+The showcase is a **visual demonstration** of stardust's output —
+composition, palette, typography, layout, motion. Curated for
+design legibility, not for content perfection. A good sample is
+one of:
 
 - **A category benchmark** — a redesign in a register or vertical
   the showcase doesn't already cover (homeless services, indie
@@ -96,16 +99,27 @@ The showcase is curated, not exhaustive. A good sample is one of:
   variant should let one seed dimension dominate per
   `divergence-toolkit.md § 2.5`).
 
+Placeholder content is **allowed**. Showcase samples are visual,
+not deployable: the F-002 PLACEHOLDER visual signature (dashed
+outline + monospace eyebrow + surface-alt tint) is on by default
+on all proposed files, so a showcase reader can tell at a glance
+what's sourced and what's illustrative. The publish flow records
+the unsourced list verbatim in the PR body under
+§ Unsourced content; reviewers see it without opening files.
+
 Things that are not good samples:
 
 - The author's own brand (without an external check).
-- Runs where the proposed file contains `[data-placeholder]`
-  elements (unsourced content). The submission flow refuses these
-  by default.
 - Runs where the divergence audit has unjustified anti-toolbox
-  hits.
+  hits — these are *design* problems, not content problems, and
+  the showcase exists to demonstrate good design.
 - Runs where the proposed file fails the `:root` token contract,
   data-attributes contract, or impeccable hard rules.
+
+Note: `migrate`'s placeholder guard is **unchanged** — deploying
+a public site with placeholder content is still refused there.
+The showcase and the deployable site are different audiences with
+different gates.
 
 ---
 
