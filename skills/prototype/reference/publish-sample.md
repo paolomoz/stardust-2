@@ -64,11 +64,37 @@ combine into a single "not eligible" message.
      acknowledgement via the prompt: "publish a non-approved
      prototype? (y/n)" — record the answer in the PR body so the
      reviewer sees it).
-3. **The proposed file(s) exist** at the expected path(s).
-   Single-variant: `stardust/prototypes/<slug>-proposed.html`.
-   Multi-variant: `stardust/prototypes/<slug>-proposed-<id>.html`
-   for each variant id resolved by `--variants` or by directory
-   scan.
+3. **The proposed file(s) exist** for the slug. The expected
+   filename pattern is `<slug>-proposed.html` (single-variant) or
+   `<slug>-proposed-<id>.html` (multi-variant), but the publish
+   flow does **not** rely on the filename pattern. Discovery is by
+   provenance:
+
+   - Scan `stardust/prototypes/*.html`.
+   - For each file, parse the `<!-- stardust:provenance -->`
+     comment block in `<head>`.
+   - A file is a candidate variant for the named slug if its
+     `page:` field equals `<slug>` and it is **not** the viewer
+     (the viewer's `writtenBy:` says `stardust:prototype`'s
+     viewer pass, while a proposed file's `writtenBy:` is plain
+     `stardust:prototype` or `stardust:prototype/iterate`; the
+     viewer also lacks a top-level `<!DOCTYPE html><html>` body
+     section because it's iframe-shelled. The cheaper detection
+     is the absence of `<iframe` tags in the body).
+   - Variant id resolution: read the file's `<head>` `<meta
+     name="variant" content="A">` if present; else read the
+     filename for a single uppercase letter token (matches
+     `home-proposed-A.html`, `home-variant-A-proposed.html`,
+     `home-A-proposed.html`); else fall back to the file's
+     position in the sorted candidate list (A, B, C, ...).
+   - If `--variants <list>` was passed, restrict to the named
+     ids and refuse if any named id has no candidate file.
+
+   This tolerance lets older or differently-named projects
+   publish without renaming. The spec example uses the canonical
+   `<slug>-proposed-<id>.html` form, but the flow accepts any
+   convention as long as the provenance and variant-id discovery
+   resolve unambiguously.
 4. **No outstanding placeholders.** Read each proposed file's
    `<!-- stardust:provenance -->` block and parse
    `unsourcedContent[]`. If any is non-empty across variants,
@@ -77,10 +103,20 @@ combine into a single "not eligible" message.
    accepted here — placeholder content has no business in the
    public showcase.)
 5. **No outstanding P0/P1 critique findings.** Read each proposed
-   file's `_provenance.critique[]`. If any P0 or P1 finding is
-   present without a recorded user acknowledgement, refuse. The
-   user runs Phase 2.5 (Validate via critique) and either fixes
-   or acknowledges before publishing.
+   file's `_provenance.critique[]`.
+
+   - If the field exists and contains any P0 or P1 finding without
+     a recorded user acknowledgement: refuse. The user runs Phase
+     2.5 (Validate via critique) and either fixes or acknowledges
+     before publishing.
+   - If the field is **absent entirely**: that means critique was
+     not run on this file (typical for prototypes from before P-3
+     landed in the spec). This is **not** a publish blocker — the
+     spec treats absence as "no findings." But the PR body
+     records `critique: not run` so the reviewer knows to run it
+     before merging, and the publish flow surfaces a one-line
+     warning to the user: "critique not run on N variant(s);
+     reviewer will see this in the PR."
 6. **Anti-toolbox audit clean.** Read
    `DESIGN.json#extensions.divergence.anti_toolbox_hits[]`. Every
    hit must have a brand-specific justification (per
@@ -247,7 +283,11 @@ Source: {source.url}  ·  register: {source.register}  ·  extracted {source.ext
 The publish flow already verified these — reviewer can spot-check.
 
 - [x] No `[data-placeholder]` elements in any proposed file.
-- [x] No outstanding P0/P1 critique findings.
+- [{x|⚠}] No outstanding P0/P1 critique findings. {Render `[x]`
+      when critique[] is present with no P0/P1; render `[⚠]
+      critique: not run` when critique[] is absent on any variant
+      — the reviewer should run `$impeccable critique` before
+      merging.}
 - [x] All anti-toolbox hits carry brand-specific justifications.
 - [x] Every `meta.json#direction.seed.pickedBy` accurately records
       why each dimension landed where it did.
