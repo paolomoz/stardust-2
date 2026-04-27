@@ -36,13 +36,26 @@ is delegated to `$impeccable craft` and `$impeccable live`.
   stardust showcase. Triggers the publish-sample sub-flow
   documented in `reference/publish-sample.md`: eligibility checks,
   file staging, PR creation against the upstream stardust repo.
-  Requires `gh` installed and authenticated. Refuses on
-  outstanding placeholders, P0/P1 critique findings, or
-  unjustified anti-toolbox hits. The showcase publishes via
-  GitHub Pages on merge.
+  Requires `gh` installed and authenticated. The showcase is a
+  visual demonstration, not a deployable site — placeholder
+  content is allowed and recorded in the PR body's § Unsourced
+  content section (the F-002 PLACEHOLDER signature is the honesty
+  mechanism). Design-quality gates stay strict: refuses on
+  unjustified anti-toolbox hits, `:root` token contract failure,
+  data-attributes contract failure, or impeccable hard-rule
+  violations. P0/P1 critique findings warn but don't refuse.
+  The showcase publishes via GitHub Pages on merge.
 
 ## Setup
 
+0. **Precondition check.** Run doctor scoped to upstream stages:
+   `node <harness>/skills/stardust/scripts/doctor.mjs --json --scope pipeline`
+   then again with `--scope divergence`. If either exits with code 2,
+   refuse to proceed and surface the failing checks. Common failures:
+   `D-101..D-103` (extract or direct skipped), `D-201` (divergence
+   audit not populated), `D-205` (anti-toolbox justifications
+   incomplete). Suppressions in `stardust/doctor-suppress.md` apply
+   per `skills/stardust/reference/doctor.md`.
 1. Run the master skill's setup
    (`skills/stardust/SKILL.md` § Setup).
 2. Verify `stardust/state.json` exists and contains at least one
