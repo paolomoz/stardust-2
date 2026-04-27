@@ -48,14 +48,6 @@ is delegated to `$impeccable craft` and `$impeccable live`.
 
 ## Setup
 
-0. **Precondition check.** Run doctor scoped to upstream stages:
-   `node <harness>/skills/stardust/scripts/doctor.mjs --json --scope pipeline`
-   then again with `--scope divergence`. If either exits with code 2,
-   refuse to proceed and surface the failing checks. Common failures:
-   `D-101..D-103` (extract or direct skipped), `D-201` (divergence
-   audit not populated), `D-205` (anti-toolbox justifications
-   incomplete). Suppressions in `stardust/doctor-suppress.md` apply
-   per `skills/stardust/reference/doctor.md`.
 1. Run the master skill's setup
    (`skills/stardust/SKILL.md` § Setup).
 2. Verify `stardust/state.json` exists and contains at least one
