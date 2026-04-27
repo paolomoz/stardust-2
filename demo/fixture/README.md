@@ -22,6 +22,7 @@ demo/fixture/
     │   ├── pages/home.json                      # per-page parsed structure + content
     │   └── current-rendering.html               # the BEFORE iframe source (re-render of existing home page)
     ├── prototypes/
+    │   ├── home-shape.md                        # per-page compositional brief (F-015 retrofit; brief-first for new pages)
     │   ├── home.html                            # the VIEWER (before/after side-by-side)
     │   └── home-proposed.html                   # the proposed redesign on its own
     └── migrated/
@@ -120,6 +121,25 @@ demo/fixture/stardust/migrated/index.html
 - Asset migration — `stardust/migrated/assets/` is empty in the
   fixture (no real media to migrate). A real run would copy
   `stardust/current/assets/logo.<ext>` and any referenced media here.
+
+## F-015 retrofit note
+
+`home-shape.md` was added to this fixture as part of the F-015
+site/page split (commit `<F-015 step 3>`). The page-level
+composition decisions previously implicit in `home-proposed.html`
+(section order, layout strategy, alternate split orientations,
+twice-per-page marginalia rule) are now documented in prose in the
+shape brief. New fixtures and new pages added to this fixture
+should be brief-first (author the shape brief, then craft the
+proposed file from it).
+
+The fixture's `DESIGN.md` and `DESIGN.json` did not require
+content migration — they were authored at the right level of
+abstraction (tokens + abstract component vocabulary + voice rules
++ named system-component roles) without page-specific deployment
+items leaking into them. F-015 was preventive for fixtures of this
+shape; the breaking-change signal it documents (DESIGN.md grows
+per-page) was observed elsewhere (theroadhome.org test run).
 
 ## Open it remotely
 
