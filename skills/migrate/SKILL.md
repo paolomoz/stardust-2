@@ -31,6 +31,14 @@ project-root `DESIGN.md`.
   Default behaviour migrates `directed` pages too (using the
   no-prototype render path); this flag flips that off for users who
   want to lock in approval-gating.
+- `--allow-placeholder` — allow migration of pages whose proposed
+  files contain `[data-placeholder]` elements (per
+  `skills/prototype/reference/before-after-shell.md` § Content
+  sourcing hierarchy). Default behaviour **refuses** to migrate
+  pages with placeholder elements — the deployable site would
+  contain visible PLACEHOLDER markers. Use this flag only when you
+  intend to ship those markers (e.g. internal staging review where
+  the placeholders are deliberately visible to copywriters).
 
 ## Setup
 
@@ -84,6 +92,22 @@ For each page in scope, follow `reference/migration-procedure.md`:
   `sourceProposed` shas all match the current files, mark the page
   `unchanged` and continue. Skipped pages are reported but no
   state.json change.
+- **Placeholder gate** (Path A only — pages with a proposed file).
+  Before render, scan `<slug>-proposed.html` for `[data-placeholder]`
+  elements and read its `_provenance.unsourcedContent[]` array. If
+  either is non-empty:
+  - Without `--allow-placeholder`: skip the page, mark it
+    `blocked-by-placeholder` in `state.json.lastRun.failures[]`,
+    print the unsourced list to the user. Do not write the migrated
+    file.
+  - With `--allow-placeholder`: continue. The migrated HTML will
+    carry the placeholder markup verbatim and the user has
+    explicitly acknowledged the deployable site contains placeholder
+    markers.
+
+  Path B (no proposed file) cannot have placeholders by construction —
+  it renders directly from `current/pages/<slug>.json` content. Skip
+  the gate.
 - **Render path** branches on whether
   `stardust/prototypes/<slug>-proposed.html` exists:
   - **Path A (approved with proposed file).** Take the proposed
@@ -219,6 +243,14 @@ they just mark it as out-of-step with the latest direction.
   path (rare; happens when a slug includes a name that's also a
   segment in another slug). Refuse to write the second one and surface
   to the user — manual slug rename needed.
+- **Placeholder content in proposed file.** Without
+  `--allow-placeholder`, migrate refuses to ship a page whose
+  proposed file contains `[data-placeholder]` elements or has a
+  non-empty `_provenance.unsourcedContent[]`. The deployable site
+  would contain visible PLACEHOLDER markers. Surface the unsourced
+  list to the user and recommend either: (a) sourcing real content
+  and re-prototyping; or (b) re-running migrate with
+  `--allow-placeholder` to ship as-is for staging review.
 
 ## What migrate does NOT do
 

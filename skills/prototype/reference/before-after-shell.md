@@ -164,7 +164,122 @@ The proposed file must satisfy:
    navigation labels, body copy come from `current/pages/<slug>.json`.
    The redesign changes how content is presented, not what content is
    present, unless `direction.md` explicitly authorises content
-   changes.
+   changes. See § Content sourcing hierarchy below for the exact
+   contract — including how to handle content the new design
+   *demands* but the page *does not provide* (stat rows, addresses,
+   testimonial quotes, etc.).
+
+### Content sourcing hierarchy
+
+Every literal value rendered into `<slug>-proposed.html` — every
+heading, paragraph, CTA label, statistic, address, quote, name,
+phone number, hours, tax ID, link target — must come from one of
+the **allowed sources** below, or be rendered with the **mandatory
+PLACEHOLDER signature**.
+
+This section exists because the v0.2 prototype produced fabricated
+content (`STARDUST-FEEDBACK.md F-002`): an invented stat row, an
+invented street address, an invented tax ID, and a memoir quote
+attributed to a real person who never said it. For a real nonprofit
+or any production site this is a serious harm — invented content
+looks authoritative once rendered.
+
+#### Allowed sources, in priority order
+
+1. **`stardust/current/pages/<slug>.json`** — the captured page.
+   Use values verbatim. Headings, body copy, CTA labels, navigation
+   labels, link targets, alt text, form fields all live here.
+2. **`stardust/current/_brand-extraction.json`'s voice samples** —
+   `voice.heroHeadline`, `voice.firstParagraph`, `voice.ctaSamples`,
+   `voice.navItems`, `voice.footerHeadings`. Used when a page's own
+   JSON lacks a value the design demands and the brand-surface
+   sample is the closest authentic source.
+3. **`stardust/direction.md` § Pages in scope content**, if direction
+   explicitly authorises new content (e.g. a renamed CTA, a
+   shortened tagline). Direction must spell out the change verbatim
+   — not just "rewrite the hero in playful tone."
+4. **None of the above.** Render with the PLACEHOLDER signature
+   (next subsection). Do not invent.
+
+The agent **must not invent** any of the following without
+explicit user-confirmed direction-document authorisation:
+
+- Numerical statistics (people served, dollars raised, years in
+  operation, percentages, counts).
+- Postal addresses, suite numbers, floor numbers.
+- Phone numbers, email addresses.
+- Tax IDs, registration numbers, license numbers, EINs.
+- Quotes, testimonials, named persons' words.
+- Hours of operation, holiday schedules, event dates.
+- Awards, certifications, partnership names.
+- Pricing, plan names, feature lists not in the captured page.
+
+These categories are the most consequential to invent and the most
+likely to be demanded by a redesign template (stat rows,
+testimonial cards, contact panels, pricing tables) without the
+captured page providing them.
+
+#### PLACEHOLDER visual signature (mandatory)
+
+When the new design demands content the captured page does not
+provide, render it as a placeholder element with **all** of:
+
+- A `2px dashed var(--accent)` outline.
+- A monospace eyebrow text reading
+  `PLACEHOLDER · <type>` where `<type>` is one of:
+  `stat | address | quote | tax-id | phone | email | hours | award | price | other`.
+- A distinct background tint (e.g. `var(--surface-alt)` with
+  `opacity: 0.7`).
+- A short example or shape hint inside (e.g. `e.g. 18,400 people
+  housed`) to communicate the slot's intent — but clearly marked
+  as illustrative, not factual.
+- HTML annotation:
+
+  ```html
+  <span data-placeholder="true"
+        data-placeholder-type="stat"
+        data-placeholder-source="design demanded by T-stat-row-pattern; not in current/pages/home.json">
+    <span class="placeholder-eyebrow">PLACEHOLDER · stat</span>
+    <span class="placeholder-shape">e.g. 18,400 people housed</span>
+  </span>
+  ```
+
+The visual signature is not optional and must remain visible in
+screenshots. The reviewer must be unable to mistake a placeholder
+for real content.
+
+#### Provenance log of unsourced content
+
+Add an `unsourcedContent[]` array to the proposed file's provenance
+listing every placeholder element rendered, with the reason:
+
+```yaml
+unsourcedContent:
+  - selector: "section[data-section=\"stats\"] .stat:nth-child(1)"
+    type: stat
+    reason: "design demanded stat row; current/pages/home.json provides no statistics"
+  - selector: "footer address"
+    type: address
+    reason: "design demanded contact address; current/pages/home.json has only nav links"
+  - selector: ".testimonial blockquote"
+    type: quote
+    reason: "design demanded testimonial card; voice samples include names but no quoted text"
+```
+
+This list is the canonical record of what needs to be sourced
+before the prototype becomes a production deliverable.
+
+#### Migrate guard
+
+`migrate` reads the proposed file's `unsourcedContent[]` and the
+DOM's `[data-placeholder]` elements. If any are present, migrate
+**refuses to ship** unless `--allow-placeholder` is passed
+explicitly. Without the flag, migrate prints the unsourced list
+and exits with a non-zero status. With the flag, migrate ships the
+placeholders verbatim into the final HTML — the user has explicitly
+acknowledged that the deployable site will contain placeholder
+markers visible to end users. Spec for the migrate guard lives in
+`skills/migrate/SKILL.md` § Failure modes.
 
 ### Provenance
 
@@ -183,12 +298,14 @@ The proposed file must satisfy:
   divergenceVersion: v1.0 (stardust v2)
   fontDeck:          zine-maximalist
   paletteSource:     library:Brutalist Dawn (recommended_index=2, picked_index=2)
+  unsourcedContent: []   # populated when design demands content the page doesn't provide; see § Content sourcing hierarchy
   stardustVersion:   0.2.0
 -->
 ```
 
 `iteratedVia` is added after the first `$impeccable live` accept;
-absent on the initial render.
+absent on the initial render. `unsourcedContent[]` lists placeholder
+elements per § Content sourcing hierarchy.
 
 ---
 

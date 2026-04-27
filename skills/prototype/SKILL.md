@@ -42,6 +42,85 @@ is delegated to `$impeccable craft` and `$impeccable live`.
 5. Read `stardust/current/DESIGN.md` (the descriptive snapshot of the
    existing site, used by the viewer's CURRENT side fallback path).
 
+## Delegation mechanic
+
+`prototype` does **not** author `<slug>-proposed.html` directly. The
+heavy creative lift is delegated to `$impeccable craft`, the
+in-browser iteration to `$impeccable live`, and (when needed) the
+structural plan to `$impeccable shape`. Spelling out the mechanic
+matters because the carve-out documented in
+`skills/stardust/reference/artifact-map.md` (where stardust authors
+`PRODUCT.md`, `DESIGN.md`, `DESIGN.json`, `current/PRODUCT.md`,
+`current/DESIGN.md` directly, treating impeccable's references as
+*format specs*, not runtime commands) is **load-bearing for those
+five files only**. It does NOT extend to:
+
+- `stardust/prototypes/<slug>-proposed.html` — must be authored by
+  `$impeccable craft`, not by stardust direct authoring.
+- Iteration on the proposed file — must be driven through
+  `$impeccable live` (or a chat-driven invocation of an explicit
+  impeccable command per the iteration paths section).
+- Structural planning when a page is complex enough to need it —
+  `$impeccable shape`.
+
+The proximate cause of content fabrication
+(`STARDUST-FEEDBACK.md F-002`) was the agent over-generalizing the
+direct-authoring carve-out to the proposed HTML. Don't.
+
+### Invoking impeccable
+
+When stardust runs in a Claude Code skill context (impeccable
+exposed as the `impeccable:impeccable` Skill, not as a CLI), invoke
+impeccable via the Skill tool with the sub-command and its args
+mirroring the slash-command form:
+
+```
+Skill {
+  skill: "impeccable:impeccable",
+  args: "craft <feature-description>"
+}
+```
+
+Sub-commands referenced from this skill are all routed through the
+same Skill: `craft`, `shape`, `live`, plus the iteration commands
+(`bolder`, `quieter`, `distill`, `polish`, `colorize`, `typeset`,
+`layout`, `adapt`, `animate`, `delight`, `overdrive`, `impeccable`).
+
+When impeccable is **not** available (CLI-only environments,
+plugin uninstalled, sandbox without skill access):
+
+1. Stop and tell the user impeccable is required for prototype
+   rendering. Recommend installing the impeccable plugin.
+2. Do NOT fall back to direct authoring of `<slug>-proposed.html`.
+   The validation contract craft enforces (anti-toolbox audit,
+   divergence rules, type ratios, content sourcing hierarchy) is
+   not reproducible by direct authoring; falling back silently
+   ships unverified output.
+3. The only allowed exception is `--no-impeccable` passed
+   explicitly. In that mode, stardust authors a placeholder
+   proposed file with `renderedVia: stardust-direct (impeccable
+   unavailable, --no-impeccable)` in provenance and **every
+   non-trivial section** wrapped in the placeholder visual signature
+   per `reference/before-after-shell.md` § Content sourcing
+   hierarchy. The output is a sketch, not a deliverable; migrate
+   refuses to ship it without `--allow-placeholder`.
+
+Stardust's job inside Phase 2 is therefore:
+
+- Compose the inputs craft needs (page content from
+  `current/pages/<slug>.json`, target spec from `DESIGN.md` /
+  `DESIGN.json`, hard constraints from `direction.md`, content
+  sourcing rules from `reference/before-after-shell.md` § Content
+  sourcing hierarchy).
+- Invoke craft via the Skill tool.
+- Validate the result against the contract (`:root` block, data
+  attributes, divergence audit, impeccable hard rules, content
+  sourcing). If validation fails, refuse to write — never paper over
+  craft output the agent thinks is "close enough."
+
+The proposed file is whatever craft writes plus the validation
+report; it is not stardust's authored artifact.
+
 ## Procedure
 
 ### Phase 1 — Plan the prototype
@@ -75,6 +154,14 @@ requirements there:
 - Self-contained: no external CSS, no external JS.
 - Content preserved from the current page (hero copy, CTAs, nav,
   body) unless `direction.md` authorises content changes.
+- **Content sourcing hierarchy** (`reference/before-after-shell.md`
+  § Content sourcing hierarchy): every literal value rendered must
+  come from `current/pages/<slug>.json`, then voice samples, then
+  direction-authorised changes — or be rendered with the mandatory
+  PLACEHOLDER visual signature. Stats, addresses, quotes, tax IDs,
+  hours, prices, named-person words must never be invented. The
+  proposed file's `_provenance.unsourcedContent[]` lists every
+  placeholder so migrate can refuse to ship unverified content.
 
 Delegate the heavy creative lift to `$impeccable craft`:
 
@@ -97,6 +184,13 @@ After craft returns, validate the output:
   with the audit's amendments noted).
 - Impeccable hard rules respected (OKLCH, type ratio ≥ 1.25, no
   reflex slop).
+- **Content sourcing scan** — every literal value in the rendered
+  output traces to one of the allowed sources
+  (`reference/before-after-shell.md` § Content sourcing hierarchy).
+  Any value that doesn't is either wrapped in a `[data-placeholder]`
+  element with the mandatory visual signature, or the validation
+  fails. Build the `_provenance.unsourcedContent[]` list during
+  this scan.
 
 If validation fails, do not write the file. Surface the failure to
 the user with the specific rule violated and a suggested fix.
