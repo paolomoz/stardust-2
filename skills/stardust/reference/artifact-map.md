@@ -51,6 +51,7 @@ stardust/
 │       ├── screenshots/<slug>.png    # per-page viewport screenshots (used by brand-review)
 │       └── media/                    # extracted images, with original URLs
 ├── prototypes/
+│   ├── <slug>-shape.md               # per-page compositional brief (page-level deployment record)
 │   ├── <slug>.html                   # before/after viewer (user-facing review surface)
 │   └── <slug>-proposed.html          # proposed redesign on its own (live-mode iteration target, migration source)
 └── migrated/                       # deployable static HTML site
@@ -112,6 +113,20 @@ Owner: `$stardust extract`. Per-page parsed model. Schema lives in
 ### `stardust/current/assets/`
 Owner: `$stardust extract`. Logo + media extracted from the live site.
 Filenames preserve the source basename plus a hash to avoid collisions.
+
+### `stardust/prototypes/<slug>-shape.md`
+Owner: `$stardust prototype` (Phase 1). Per-page compositional
+brief. Carries page-level deployment decisions: section order,
+layout strategy, key states, interaction model, structural data
+attributes, unsourced-content list. Format spec in
+`skills/prototype/reference/page-shape-brief.md`.
+
+The brief exists because of the F-015 site/page split (see
+`STARDUST-FEEDBACK.md` and the site-level vs page-level table
+below). `direct` authors the design **system**; the brief records
+the **deployment** of that system to a specific page. A direction
+change invalidates the system; the brief is content-aware-stale
+only when the system change makes its composition impossible.
 
 ### `stardust/prototypes/<slug>.html` and `<slug>-proposed.html`
 Owner: `$stardust prototype`. Two files per page (see
@@ -205,6 +220,53 @@ First top-level key (`_provenance`):
 ```
 
 ---
+
+## Site-level vs page-level (the F-015 split)
+
+Stardust separates **system** (site-wide design decisions) from
+**deployment** (how the system applies to a specific page). The
+boundary lives between `direct`'s outputs and `prototype`'s
+outputs, not within either:
+
+| concern | lives in (site-level) | lives in (page-level) |
+|---|---|---|
+| Token vocabulary (colors, typography, spacing, radii) | `DESIGN.md` frontmatter | — |
+| Voice rules, hard rules, anti-references, tone exemplars | `DESIGN.md` § 6 + `DESIGN.json` `narrative.rules/dos/donts` | — |
+| Anti-toolbox audit, divergence trace | `DESIGN.json` `extensions.divergence` | — |
+| Abstract component vocabulary (button-primary, card, input — default treatment, no per-page values) | `DESIGN.json` `extensions.componentStyle` + top-level `components[]` | — |
+| Named system-component **roles** (header / footer / cta-band / etc. — purpose + position class) | `DESIGN.json` `extensions.systemComponentRoles` | — |
+| Per-page section list and order | — | `<slug>-shape.md` § Sections |
+| Per-page layout strategy (column ratios, alternation, breakpoint inversions) | — | `<slug>-shape.md` § Layout strategy |
+| Literal copy per section | — | sourced from `current/pages/<slug>.json` into `<slug>-shape.md` |
+| Section-level pixel dimensions, dock points, viewport-specific widths | — | `<slug>-shape.md` § Layout strategy |
+| Stat numbers, addresses, phones, quotes, named persons | — | `<slug>-shape.md` § Sections OR `<slug>-shape.md` § Unsourced content (placeholder) |
+| System-component **deployment** (literal tile labels, link targets, copy variants) | — | `<slug>-shape.md` § Sections |
+| Per-page interaction model (CSS-only details/target panels, etc.) | — | `<slug>-shape.md` § Interaction model |
+| Per-page key states (default/empty/loading/error) | — | `<slug>-shape.md` § Key states |
+
+**Rule of thumb:** if removing a value from the file would make
+the file nonsensical for *every other page on the site*, it's
+site-level (DESIGN.md). If removing it would only affect *this
+page*, it's page-level (`<slug>-shape.md`).
+
+The split solves three problems with v0.1's mash-up
+(`STARDUST-FEEDBACK.md F-015`):
+
+1. **DESIGN.md grew per-page** — each prototyped page leaked its
+   specifics into the site spec. After F-015, DESIGN.md size is
+   bounded by the system, not the page count.
+2. **Direct over-specified the visual layer at site-time** —
+   leaving prototype no room to diverge per-page. After F-015,
+   prototype owns deployment; direct owns vocabulary.
+3. **Re-direct ambiguity** — was the user changing the system
+   (tokens, voice) or the deployment (composition on this page)?
+   After F-015, direct's edits target the system; prototype's
+   edits target a single brief; stale-flagging is content-aware
+   per `state-machine.md` § Stale flagging.
+
+When in doubt about where a new piece of information should land,
+ask: does this affect *every* page in the inventory, or just one?
+The answer locates the file.
 
 ## Read-vs-write discipline
 

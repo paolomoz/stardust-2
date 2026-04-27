@@ -75,28 +75,68 @@ new history entry, and the user must re-approve to advance.
 
 ---
 
-## "Stale on direction change" rule
+## Stale flagging (content-aware)
 
-When `$stardust direct` resolves a new direction that differs from the
-prior one, every page in `prototyped`, `approved`, or `migrated` state
-**must** be flagged with `stale: true` and `staleReason: "direction
-changed at <timestamp>"`. The state itself does not change — the
-artifact on disk is still valid, just out of step with the latest
-direction.
+When `$stardust direct` resolves a new direction that differs from
+the prior one, stale-flagging is **content-aware**, not blanket:
+each page in `prototyped`, `approved`, or `migrated` state is
+flagged stale only if the new direction's changes actually affect
+that page's deployment. Per `STARDUST-FEEDBACK.md F-015` corollary,
+the v0.1 blanket rule (every prior-state page goes stale on every
+re-direct) over-invalidated work and forced the user to re-render
+pages whose composition was unchanged by the direction edit.
 
-Stardust **never** auto-re-runs prototype or migrate on stale pages.
-The user opts in:
+The rule:
+
+1. Compute the **delta** between old and new direction:
+   - Token vocabulary changes (colors, typography, spacing,
+     radii) — affects every page that consumed the changed
+     tokens.
+   - Voice rule additions/removals — affects every page whose
+     content the new rule would re-judge.
+   - Anti-toolbox audit changes — affects every page whose
+     proposed file declared an audited move.
+   - Abstract component vocabulary changes (button-primary
+     redefined, etc.) — affects every page deploying that
+     component.
+   - Named system-component role changes — affects every page
+     deploying that role.
+2. For each page in `prototyped`, `approved`, or `migrated`:
+   - Read its `<slug>-shape.md` (per
+     `skills/prototype/reference/page-shape-brief.md`) to see
+     which tokens, components, voice rules, and roles the
+     deployment consumes.
+   - If any consumed item appears in the delta, flag the page
+     `stale: true` with `staleReason: "direction changed at
+     <timestamp>; affected: <comma-separated list of changed
+     items consumed by this page>"`.
+   - If no consumed item appears, **do not** flag the page.
+     The deployment is unaffected by the direction edit.
+3. Pages that lack a `<slug>-shape.md` (legacy prototypes from
+   pre-F-015 runs) fall back to the v0.1 blanket rule for safety —
+   without a brief, the agent cannot determine which tokens/
+   components/rules the deployment consumes.
+
+The state itself does not change — the artifact on disk is still
+valid; stale just means "may be out of step with the latest
+direction." The user opts in to refresh:
 
 - `$stardust prototype` with no args operates only on **non-stale**
   pages, plus shows a count of stale ones with a hint to use
-  `$stardust prototype --refresh-stale`.
-- `$stardust prototype --refresh-stale` re-prototypes every stale page.
+  `$stardust prototype --refresh-stale`. The hint includes the
+  per-page `staleReason` so the user can decide which pages
+  actually need work.
+- `$stardust prototype --refresh-stale` re-prototypes every stale
+  page.
 - `$stardust prototype <slug>` always operates on the named page,
   stale or not.
 - Same flags for `migrate`.
 
-When a stale page is successfully re-prototyped or re-migrated, clear
-its `stale` flag and append the new history entry.
+When a stale page is successfully re-prototyped or re-migrated,
+clear its `stale` flag and append the new history entry. The brief
+is updated only when the user's iteration phrase moves the
+composition (per `prototype` Phase 1) — token-only changes
+re-render the proposed file from the existing brief.
 
 ---
 
