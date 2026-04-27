@@ -123,22 +123,47 @@ report; it is not stardust's authored artifact.
 
 ## Procedure
 
-### Phase 1 — Plan the prototype
+### Phase 1 — Plan the prototype (page-shape brief)
 
 For each page in scope:
 
 1. Read `stardust/current/pages/<slug>.json` for the page's structure
    and content.
-2. Read `stardust/direction.md` Active section for the resolved
+2. Read `stardust/current/_brand-extraction.json` for system
+   components and cross-promo data (the page's site-wide repeated
+   surfaces).
+3. Read `stardust/direction.md` Active section for the resolved
    direction, divergence inputs, and command sequence.
-3. Read project-root `DESIGN.md` + `DESIGN.json` for target tokens
-   and components.
-4. Decide whether a structural plan is needed. The default is **no** —
-   `direction.md` has the brief-equivalent info already. Invoke
-   `$impeccable shape stardust/current/pages/<slug>.json` only when
-   the user asks for an explicit shape pass or when the page is
-   structurally complex (>= 8 sections, multiple forms, deep
-   nesting).
+4. Read project-root `DESIGN.md` + `DESIGN.json` for the target
+   site system — tokens, abstract component vocabulary, named
+   system-component roles. The site system tells the agent *what
+   the design language is*; this Phase decides *how it deploys to
+   this specific page*.
+5. **Author `stardust/prototypes/<slug>-shape.md`** — the per-page
+   compositional brief. Format spec:
+   `reference/page-shape-brief.md`. The brief carries the section
+   list, layout strategy, key states, interaction model, structural
+   data attributes, and the unsourced-content list (bridge to the
+   F-002 placeholder contract). Author directly — no interview, no
+   impeccable invocation; this is stardust's reasoning about how
+   the system deploys to this page given this content.
+6. Show the brief to the user and wait for confirmation before
+   moving to Phase 2. The user can edit the brief in place
+   (rearrange sections, kill open questions, change composition
+   decisions); re-rendering Phase 2 will rebuild the proposed file
+   from the edited brief.
+
+`$impeccable shape` is **not** invoked in v0.2 (see
+`reference/page-shape-brief.md` § Authoring procedure for the
+rationale; revisit if per-page hand-authoring proves insufficient
+across sites — `STARDUST-FEEDBACK.md F-016`).
+
+The brief decouples site-level concerns (in DESIGN.md) from
+page-level deployment (per-page brief). A direction change
+invalidates the system; existing briefs are content-aware-stale
+only when the system change makes their composition impossible.
+This recalibration of stale-flagging is documented in
+`skills/stardust/reference/state-machine.md` § Stale flagging.
 
 ### Phase 2 — Render the proposed page
 
@@ -323,6 +348,7 @@ flag and update `againstDirection` to the new active direction.
 
 | Path                                          | Purpose                                       |
 |-----------------------------------------------|-----------------------------------------------|
+| `stardust/prototypes/<slug>-shape.md`         | Per-page compositional brief (Phase 1 output, craft input). |
 | `stardust/prototypes/<slug>.html`             | Before/after viewer (user-facing review surface). |
 | `stardust/prototypes/<slug>-proposed.html`    | Proposed redesign (live-mode iteration target, migration source). |
 | `stardust/prototypes/<slug>-proposed-stash-<ts>.html` | (Optional) Prior proposed version, when user clicks "Stash". |
@@ -355,6 +381,10 @@ are last-write-wins; warn the user if they explicitly try.
 
 ## References
 
+- `reference/page-shape-brief.md` — per-page compositional brief
+  format (Phase 1 output, craft input). Page-level deployment
+  decisions live here; site-level system decisions live in
+  DESIGN.md.
 - `reference/before-after-shell.md` — viewer + proposed file
   schemas and required structure.
 - `skills/stardust/reference/token-contract.md` — `:root` token
