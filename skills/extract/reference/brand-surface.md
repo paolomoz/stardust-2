@@ -337,7 +337,7 @@ the redesign target.
 [
   {
     "name": "site-header",
-    "kind": "header",                // header | footer | cross-promo | nav-secondary | sidebar | cta-band | breadcrumb | other
+    "kind": "header",                // header | footer | cross-promo | nav-secondary | sidebar | cta-band | breadcrumb | background-motif | other
     "occurrences": 12,                // pages where it appears (out of pages crawled)
     "headingSequence": ["About", "Stories", "Donate"],
     "ctaLabels": ["Donate now"],
@@ -372,6 +372,36 @@ captures ~80% of the value):
 4. Capture one verbatim example block (HTML serialised from
    `exampleSlug` at `exampleSelector`) so `direct` and `prototype` can
    reason about the actual content, not just the structure.
+
+### Cross-page CSS-background reuse
+
+Beyond DOM-fingerprint repeats, also detect **shared CSS background
+images** across pages. A background image used on home AND on
+about-us is almost always a system motif (a recurring banner, a
+brand-photo treatment, a section ground) — not page-specific
+content.
+
+Algorithm:
+
+1. Read every `pages/<slug>.json#media.cssBackgrounds[].url` across
+   the crawl (after `playwright-recipe.md` capture step 11).
+2. Group by URL (case-sensitive, full URL match).
+3. For each URL appearing on **≥ 2 pages**, emit a system-component
+   entry with `kind: "background-motif"`, `occurrences` = page
+   count, `examplePages` = the page slugs.
+4. The `exampleBlock` for a background-motif entry is the
+   `domPath` + `boundingClientRect` + `backgroundSize` /
+   `backgroundPosition` of one representative occurrence — enough
+   for `direct` and `prototype` to reason about how the brand
+   deploys the image.
+
+This catches the case where a hero photo applied via
+`background-image` is shared across multiple pages but invisible
+to `<img>`-based capture. Without this aggregation, prototype
+routinely places brand photos at the wrong section position
+because it never saw them in the first place.
+
+### Detection thresholds
 
 When `pages crawled < 3`, skip detection and emit
 `systemComponents: []` with a `_provenance.notes` line ("system

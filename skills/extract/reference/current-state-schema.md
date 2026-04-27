@@ -170,6 +170,17 @@ De-duplicate by `(href, text)`. Keep the first occurrence's `domPath`.
   "inlineSvgs": [
     { "viewBox": "0 0 24 24", "domPath": "...", "markupHash": "sha256:..." }
   ],
+  "cssBackgrounds": [
+    {
+      "url": "https://example.com/img/slide-1.png",
+      "domPath": "main > section.hero",
+      "boundingClientRect": { "x": 0, "y": 0, "width": 1440, "height": 720 },
+      "backgroundSize": "cover",
+      "backgroundPosition": "center center",
+      "backgroundRepeat": "no-repeat",
+      "localPath": "stardust/current/assets/media/slide-1-b7c4.png"
+    }
+  ],
   "videos": [],
   "iframes": [
     { "src": "https://www.youtube.com/embed/...", "title": "Demo" }
@@ -179,6 +190,22 @@ De-duplicate by `(href, text)`. Keep the first occurrence's `domPath`.
 
 `localPath` is set only for media stardust successfully downloaded.
 Failed downloads have `localPath: null` and a `downloadError` field.
+
+`cssBackgrounds[]` captures every element whose computed
+`backgroundImage` resolves to one or more `url(...)` references
+**and** whose rendered `boundingClientRect` is ≥100×80 px at the
+captured viewport. Smaller elements are filtered as icon backgrounds
+(chevrons, sprite glyphs, list bullets) — see
+`playwright-recipe.md` § Capture list (11). When an element declares
+multiple background-image layers (`url(a.png), linear-gradient(...)`),
+emit one entry per `url(...)` layer; gradients are not captured here
+(they live in `_brand-extraction.json#motifs.gradients`).
+
+This is the field that lets hero images applied via CSS — full-bleed
+hero sections, parallax banners, section backgrounds — surface in
+extract output. Without it, `<img>`-only capture silently misses
+the visual hero on most page-builder / WordPress / Squarespace
+sites.
 
 ## § Forms
 

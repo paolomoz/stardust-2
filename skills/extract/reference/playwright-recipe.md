@@ -112,6 +112,27 @@ For each page, capture:
     rendered height, or `<body>` if no `<main>`). These feed the
     per-page `embedDominance` field — see
     `current-state-schema.md` § Embed dominance.
+
+    **CSS background-images.** For every element where
+    `getComputedStyle(el).backgroundImage` resolves to a non-`none`
+    value containing one or more `url(...)` references, capture:
+    the resolved URL(s), the element's `domPath`, its
+    `boundingClientRect` after the wait+scroll pass settles,
+    `backgroundSize`, `backgroundPosition`, and `backgroundRepeat`.
+    Filter by visible size: only include elements whose rect is
+    **≥100 × 80 px** at the captured viewport — smaller elements are
+    almost always icon backgrounds (chevrons, sprite glyphs, list
+    bullets) that don't carry brand or content meaning. Save into
+    the per-page `media.cssBackgrounds[]` field — see
+    `current-state-schema.md` § Media. The brand-surface pass
+    aggregates cross-page repeats into `_brand-extraction.json`'s
+    `systemComponents` so backgrounds reused across pages (a
+    section-background image used on home AND about, a banner
+    image used on multiple inner pages) surface as system motifs
+    rather than per-page noise. Without this capture, hero photos
+    applied via `background-image` (parallax sections, full-bleed
+    sections) are silently invisible to extract — `STARDUST-FEEDBACK.md
+    F-018 / X-1`.
 12. **Form inventory** — for every `<form>`: action, method, list of
     fields with type and name; whether it's wired to an obvious
     third-party (Stripe, Calendly, Typeform, Mailchimp).
