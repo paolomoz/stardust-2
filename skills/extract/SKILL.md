@@ -25,8 +25,12 @@ critique, and it does not modify the live site. It writes only under
   system-component detection, and the brand-review HTML to do
   useful work. Lift the cap with `--cap 25` (the previous default)
   or higher when a deeper crawl is genuinely needed.
+- `--all` — optional. Lift the cap entirely; extract every
+  discovered page after junk filtering. Equivalent to `--cap 0`.
+  Use when the user spontaneously asks for a full crawl.
 - `--pages <slug,slug,...>` — optional. Restrict the crawl to specific
-  paths (slugs derived per `reference/ia-extraction.md`).
+  paths (slugs derived per `reference/ia-extraction.md`). Bypasses
+  the cap.
 - `--refresh <slug>` — optional. Re-extract one page that already exists
   in `state.json`.
 - `--single` — optional. Equivalent to `--cap 1`. Useful for testing.
@@ -70,25 +74,42 @@ Discover the page inventory before crawling. Procedure in
 5. Apply the junk-page filter (`reference/ia-extraction.md` §
    Junk-page filter) unless `--no-junk-filter` is set. Surface the
    filtered list to the user as overridable.
-6. Apply the cap (default 5, or `--cap`). If discovered count
-   exceeds the cap, **show the full list and the cut**, and ask the
-   user before proceeding:
+6. Apply the cap (default 5, or `--cap`, or `--all` for no cap)
+   and **proceed silently**. Print an informational summary of
+   what was kept and what was cut — but do **not** gate on user
+   confirmation. The default cap is small enough that the common
+   case is "extract 5 pages and move on"; pausing for a yes/no
+   reply on every run is friction without value. Users who want
+   different scope set it spontaneously at command time:
+
+   ```
+   $stardust extract https://example.com              # default 5 pages
+   $stardust extract https://example.com --cap 25     # bump to 25
+   $stardust extract https://example.com --all        # lift the cap
+   $stardust extract https://example.com --pages home,about,pricing
+   $stardust extract https://example.com --single     # just the entry URL
+   ```
+
+   The agent reads spontaneous scope intent from the user's prompt
+   (e.g. "extract all pages", "look at just the home and pricing",
+   "do a full crawl") and applies the equivalent flag. No
+   re-confirmation needed once intent is clear.
+
+   Informational output (not a prompt — proceed immediately):
 
    ```
    Discovered 38 pages on https://example.com (sitemap.xml).
    Filtered as likely junk (5): /test/, /sample-page/, /holiday1/, ...
-     (override with --pages or --no-junk-filter)
-   Cap is 5. Proceeding with the 5 highest-priority pages:
+   Selecting 5 highest-priority pages:
      - / (home)
      - /about
      - /pricing
      - /products
      - /contact
 
-   Cut (28 pages): /blog/post-1, /blog/post-2, ...
+   Cut (28 pages, --all to lift): /blog/post-1, /blog/post-2, ...
 
-   Reply "go" to proceed, "all" to lift the cap, "more" to bump the
-   cap (e.g. "more 25"), or list slugs to include manually.
+   Extracting...
    ```
 
    Selection heuristic: page-type checklist first, then score-based

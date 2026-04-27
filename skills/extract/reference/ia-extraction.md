@@ -121,23 +121,33 @@ Recursion safeguards:
 - **Cycle detection.** Maintain a visited-sitemap-URLs set; refuse to
   re-fetch one already in flight.
 - **Sanity limit: 10,000 page URLs concatenated.** When the limit
-  triggers, do **not** silently truncate. Show the user:
+  triggers, truncate to the first 10,000 and emit an informational
+  notice:
 
   ```
-  Discovered 24,318 page URLs across 7 leaf sitemaps. That's a lot.
-  Cap stardust at 10,000 and proceed?  ("yes" / "all" / list slugs)
+  Discovered 24,318 page URLs across 7 leaf sitemaps. Truncated
+  discovery to the first 10,000 for scoring; the page-type
+  checklist + IA-keyword scoring picks 5 from those. Pass --all
+  to fetch every leaf sitemap if you need the full set.
   ```
 
-  If the user picks `all` and the count is >100,000, emit one more
-  warning. Beyond that, trust the user.
+  No confirmation gate — the post-discovery cap of 5 means the
+  user is going to extract a small subset anyway, and the IA-keyword
+  scoring is reliable at picking the right pages from a partial
+  10,000 (the home page and IA pillars are virtually always in
+  the first leaf sitemap by name; it's the deep blog archive that
+  trails). If the user has passed `--all` AND the discovered count
+  exceeds 100,000, **do** pause once with a "this will fetch X
+  sitemap files and ~Y minutes — proceed? (y/n)" — the runtime
+  cost crosses a threshold worth confirming.
 
-- **Selective fallback.** If `all` would exceed 10,000 and the user
-  declines, prioritise the sitemap whose URL most resembles a
-  content sitemap — score by substring match against
+- **Selective fallback.** When the truncation triggers, prioritise
+  the sitemap whose URL most resembles a content sitemap — score
+  by substring match against
   `{ pages, content, posts, articles, page }` and de-rank against
-  `{ partition, image, video, products, news }` — but this is only a
-  fallback when the user has not chosen `all`. The default behaviour
-  is **concatenate all leaves**.
+  `{ partition, image, video, products, news }`. This biases the
+  10,000 retained URLs toward content pages rather than e.g.
+  product-image partitions.
 
 ## Filtering
 
@@ -301,31 +311,72 @@ rule and rank lower than they should. The user can override with
 `--pages` or by extending the keyword list at runtime; localized
 keyword expansion is tracked as a v0.3 issue.
 
-### User dialog
+### Informational output (no confirmation gate)
 
-Present the kept list and the cut list as two columns in the
-confirmation message. The user can:
+The discover step does **not** pause for user confirmation when the
+cap binds. The default of 5 pages is small enough that the common
+case is "extract 5 pages and move on"; gating every run on a
+yes/no reply is friction without value. Print the kept and cut
+lists as informational output and proceed:
 
-- Reply `go` to accept the current cap.
-- Reply `more <N>` to bump the cap to N (e.g. `more 25` to revert
-  to the previous default behaviour).
-- Reply `all` to lift the cap entirely (still warn if discovered
-  > 100).
-- Reply with explicit slugs (`include: about, pricing` or
-  `exclude: blog`) to override.
+```
+Discovered 38 pages on https://example.com (sitemap.xml).
+Filtered as likely junk (5): /test/, /sample-page/, /holiday1/, ...
+Selecting 5 highest-priority pages:
+  - / (home)
+  - /about
+  - /pricing
+  - /products
+  - /contact
+
+Cut (28 pages, --all to lift): /blog/post-1, /blog/post-2, ...
+
+Extracting...
+```
+
+Users who want a different scope set it at command time
+(`--cap N`, `--all`, `--pages <slug,slug>`, `--single`) or signal
+intent in their prompt to the agent ("extract all pages", "look
+at just home and pricing"). When the user's intent is spontaneous
+in the prompt, the agent maps it to the equivalent flag and
+applies it without re-confirming.
 
 The default cap is intentionally small (5 pages). Cross-page brand
 aggregation, system-component detection, and the brand-review
 artifact all work usefully at that size as long as the 5 pages
-cover distinct templates (per § Page selection). The user dialog
-exists to make it trivial to lift the cap when the site warrants
-it; the small default ensures the common case is fast.
+cover distinct templates (per § Page selection). When the site
+warrants more, the user lifts via `--cap N` or `--all` — but the
+common case proceeds silently.
 
-Capture the user's choice and the per-URL scores in
-`_crawl-log.json` under `discovery.userChoice` and
-`discovery.scores[]` for the audit trail. Surfacing the scores lets
-the user see *why* a given page was kept or cut, not just *that* it
-was — useful when the heuristic produces a surprising selection.
+Capture the cap-resolution and per-URL scores in
+`_crawl-log.json` under `discovery.cap`, `discovery.capSource`
+(one of `default | --cap | --all | --single | --pages | prompt-intent`),
+and `discovery.scores[]` for the audit trail. Surfacing the scores
+lets the user see *why* a given page was kept or cut, not just
+*that* it was — useful when the heuristic produces a surprising
+selection.
+
+#### When to ask anyway
+
+Three narrow exceptions where the agent **does** pause for
+confirmation, because silent proceed would surprise the user:
+
+1. **The user's prompt is ambiguous about scope** ("extract this
+   site" with no scope hint, but the site has 200+ pages and the
+   user has previously expressed interest in non-default scope —
+   inferred from session context). Ask once, briefly, with the
+   default as the "go" reply.
+2. **`--all` would extract more than 100 pages.** The runtime cost
+   is high enough to warrant a one-line "this will extract 247
+   pages, ~8 minutes — proceed? (y/n)". The 100-page threshold is
+   a calibration; revisit if it produces friction.
+3. **The page-type checklist cannot be satisfied** (per § Page
+   selection — fewer than 3 distinct templates discoverable).
+   Surface this as a warning and ask whether to continue with
+   degraded coverage.
+
+Outside these cases, proceed silently with the kept list as
+informational output.
 
 ## `_crawl-log.json` shape
 
@@ -344,7 +395,9 @@ was — useful when the heuristic produces a surprising selection.
     "waitMode": "medium",
     "waitModeAutoDetect": null,         // when --wait auto: { signal: "ssr", basis: "found <main> in initial HTML" }
     "cappedAt": 5,
-    "userChoice": "go",
+    "cap": 5,
+    "capSource": "default",          // default | --cap | --all | --single | --pages | prompt-intent
+    "userChoice": null,              // null when no confirmation was needed (the common case); only populated when one of the three narrow exceptions triggered (see § Informational output)
     "kept": [
       { "url": "https://example.com/", "slug": "home", "priority": 1.0, "lastmod": "2026-04-12", "score": 18 }
     ],
