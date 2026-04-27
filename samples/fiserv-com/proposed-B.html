@@ -14,7 +14,16 @@ stardust:provenance
   divergenceVersion: brand-faithful (Mode A)
   fontDeck: brand-inherited (Univers Fiserv → Inter web fallback)
   paletteSource: inherited from brand surface
-  unsourcedContent: []
+  unsourcedContent:
+    - selector: section[data-section="jtbd-chooser"] .doorway
+      type: other
+      reason: "design demanded a five-doorway JTBD router; chooser labels and copy authored against direction.md"
+    - selector: section[data-section="proof-strip"] .stat
+      type: stat
+      reason: "design demanded quantified proof; direction.md authorised public IR data"
+    - selector: section[data-section="customer-logos"] .logo-row
+      type: other
+      reason: "illustrative customer wordmarks per direction.md"
   
   stardustVersion: 0.2.0
 -->
@@ -369,6 +378,93 @@ footer .legal .links{display:flex; gap:24px}
   <!-- =========== PROOF STRIP =========== -->
   <!-- =========== LOGOS =========== -->
   <!-- =========== AUDIENCES (DEMOTED) =========== -->
+  
+    <section class="proof-strip" data-section="proof-strip" data-intent="value-prop" data-layout="full-bleed-navy">
+      <style scoped>
+        .proof-strip {
+          padding: clamp(40px, 6vw, 80px) 0;
+          background: var(--color-fg, #002754);
+          color: #ffffff;
+        }
+        .proof-strip .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); }
+        .proof-strip .grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 0;
+          border-top: 1px solid rgb(255 255 255 / 0.16);
+          border-bottom: 1px solid rgb(255 255 255 / 0.16);
+        }
+        .proof-strip .proof-stat {
+          padding: clamp(24px, 3vw, 36px) clamp(16px, 2vw, 28px);
+          border-right: 1px solid rgb(255 255 255 / 0.16);
+        }
+        .proof-strip .proof-stat:last-child { border-right: 0; }
+        .proof-strip .proof-stat .num {
+          display: block; font-family: var(--font-display, "SF Pro Display", Inter, system-ui, sans-serif);
+          font-weight: 600; font-size: clamp(40px, 4vw, 56px); letter-spacing: -0.025em; line-height: 1; color: #ffffff;
+        }
+        .proof-strip .proof-stat .num em { font-style: italic; color: var(--color-accent, #fb6400); font-weight: 500; }
+        .proof-strip .proof-stat .label { display: block; margin-top: 12px; color: rgb(255 255 255 / 0.7); font-size: 14px; line-height: 1.4; }
+        .proof-strip .proof-stat[data-placeholder="true"] {
+          outline: 1.5px dashed var(--color-accent, #fb6400); outline-offset: 4px;
+        }
+        .proof-strip .ph-flag {
+          display: inline-block; margin-top: 6px;
+          font-family: "SF Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em;
+          text-transform: uppercase; color: var(--color-accent, #fb6400);
+        }
+        @media (max-width: 720px) {
+          .proof-strip .grid { grid-template-columns: repeat(2, 1fr); }
+          .proof-strip .proof-stat { border-bottom: 1px solid rgb(255 255 255 / 0.16); }
+          .proof-strip .proof-stat:nth-child(2n) { border-right: 0; }
+        }
+      </style>
+      <div class="container">
+        <div class="grid">
+        <div class="proof-stat" data-placeholder="true" data-placeholder-type="stat">
+          <span class="num"><em>10K</em>+</span>
+          <span class="label">Financial institutions running on Fiserv platforms<br><span class="ph-flag">PLACEHOLDER · public IR data</span></span>
+        </div>
+        <div class="proof-stat" data-placeholder="true" data-placeholder-type="stat">
+          <span class="num"><em>6M</em>+</span>
+          <span class="label">Merchant locations powered by Clover and Carat<br><span class="ph-flag">PLACEHOLDER · public IR data</span></span>
+        </div>
+        <div class="proof-stat" data-placeholder="true" data-placeholder-type="stat">
+          <span class="num"><em>$2.6T</em></span>
+          <span class="label">Annual payment volume processed across our network<br><span class="ph-flag">PLACEHOLDER · public IR data</span></span>
+        </div>
+        <div class="proof-stat" data-placeholder="true" data-placeholder-type="stat">
+          <span class="num"><em>100</em></span>
+          <span class="label">Countries served, 24×7, in 30+ currencies<br><span class="ph-flag">PLACEHOLDER · public IR data</span></span>
+        </div>
+        </div>
+      </div>
+    </section>
+  
+    <section class="logos-band" data-section="customer-logos" data-intent="proof" data-layout="logo-strip" data-placeholder="true" data-placeholder-type="other">
+      <style scoped>
+        .logos-band { padding: clamp(48px, 6vw, 80px) 0; background: #ffffff; color: var(--color-fg, #002754); border-top: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6; position: relative; }
+        .logos-band[data-placeholder="true"] { outline: 1.5px dashed var(--color-accent, #fb6400); outline-offset: -8px; }
+        .logos-band .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); }
+        .logos-band .lede { font-family: var(--font-text, "SF Pro Text", Inter, system-ui, sans-serif); font-size: 14px; line-height: 1.5; color: #3c3c3c; max-width: 56ch; margin: 0 0 28px; }
+        .logos-band .ph-flag { display: inline-block; margin-bottom: 4px; font-family: "SF Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent, #fb6400); }
+        .logos-band .logo-row { display: flex; flex-wrap: wrap; gap: clamp(28px, 4vw, 56px); align-items: center; }
+        .logos-band .lg { font-family: var(--font-display, "SF Pro Display", Inter, system-ui, sans-serif); font-weight: 600; font-size: clamp(20px, 2vw, 28px); letter-spacing: -0.015em; color: #0e0e0e; opacity: 0.7; }
+      </style>
+      <div class="container">
+        <p class="lede"><span class="ph-flag">PLACEHOLDER · illustrative customer wordmarks</span><br>Trusted by the world's largest banks, retailers, fintechs and software providers.</p>
+        <div class="logo-row">
+          <div class="lg">Truist</div>
+          <div class="lg">Wells Fargo</div>
+          <div class="lg">target</div>
+          <div class="lg">PNC</div>
+          <div class="lg">Brex</div>
+          <div class="lg">Block</div>
+          <div class="lg">delta</div>
+        </div>
+      </div>
+    </section>
+
   <section class="section section--alt" data-section="audience-grid" data-intent="buyer-routing-secondary">
     <div class="container">
       <div class="section-head">

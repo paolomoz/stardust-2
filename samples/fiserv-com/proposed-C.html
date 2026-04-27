@@ -14,7 +14,19 @@ stardust:provenance
   divergenceVersion: brand-faithful (Mode A) — most-committed of the three variants
   fontDeck: brand-inherited
   paletteSource: inherited from brand surface, with single accent-cta variant
-  unsourcedContent: []
+  unsourcedContent:
+    - selector: section[data-section="products"] .product-card
+      type: other
+      reason: "named products (Clover/Carat/Finxact/Forum/AppMarket) are public Fiserv brands but not on captured home page — direction.md authorised"
+    - selector: section[data-section="products"] .product-card .ui-mock
+      type: other
+      reason: "illustrative product UI mocks; no real product screenshots in captured artifacts — visually mocked from public product knowledge"
+    - selector: section[data-section="proof-strip"] .stat
+      type: stat
+      reason: "design demanded quantified scale; direction.md authorised public IR data"
+    - selector: section[data-section="customer-logos"] .logo-row
+      type: other
+      reason: "illustrative customer wordmarks per direction.md"
   
   stardustVersion: 0.2.0
 -->
@@ -415,6 +427,250 @@ footer .legal .links{display:flex; gap:24px}
   <!-- =========== PRODUCTS =========== -->
   <!-- =========== LOGOS =========== -->
   <!-- =========== AUDIENCE STRIP (third tier) =========== -->
+  
+    <section class="proof-strip" data-section="proof-strip" data-intent="value-prop" data-layout="full-bleed-navy">
+      <style scoped>
+        .proof-strip {
+          padding: clamp(40px, 6vw, 80px) 0;
+          background: var(--color-fg, #002754);
+          color: #ffffff;
+        }
+        .proof-strip .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); }
+        .proof-strip .grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 0;
+          border-top: 1px solid rgb(255 255 255 / 0.16);
+          border-bottom: 1px solid rgb(255 255 255 / 0.16);
+        }
+        .proof-strip .proof-stat {
+          padding: clamp(24px, 3vw, 36px) clamp(16px, 2vw, 28px);
+          border-right: 1px solid rgb(255 255 255 / 0.16);
+        }
+        .proof-strip .proof-stat:last-child { border-right: 0; }
+        .proof-strip .proof-stat .num {
+          display: block; font-family: var(--font-display, "SF Pro Display", Inter, system-ui, sans-serif);
+          font-weight: 600; font-size: clamp(40px, 4vw, 56px); letter-spacing: -0.025em; line-height: 1; color: #ffffff;
+        }
+        .proof-strip .proof-stat .num em { font-style: italic; color: var(--color-accent, #fb6400); font-weight: 500; }
+        .proof-strip .proof-stat .label { display: block; margin-top: 12px; color: rgb(255 255 255 / 0.7); font-size: 14px; line-height: 1.4; }
+        .proof-strip .proof-stat[data-placeholder="true"] {
+          outline: 1.5px dashed var(--color-accent, #fb6400); outline-offset: 4px;
+        }
+        .proof-strip .ph-flag {
+          display: inline-block; margin-top: 6px;
+          font-family: "SF Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em;
+          text-transform: uppercase; color: var(--color-accent, #fb6400);
+        }
+        @media (max-width: 720px) {
+          .proof-strip .grid { grid-template-columns: repeat(2, 1fr); }
+          .proof-strip .proof-stat { border-bottom: 1px solid rgb(255 255 255 / 0.16); }
+          .proof-strip .proof-stat:nth-child(2n) { border-right: 0; }
+        }
+      </style>
+      <div class="container">
+        <div class="grid">
+        <div class="proof-stat" data-placeholder="true" data-placeholder-type="stat">
+          <span class="num"><em>10K</em>+</span>
+          <span class="label">Financial institutions running on Fiserv platforms<br><span class="ph-flag">PLACEHOLDER · public IR data</span></span>
+        </div>
+        <div class="proof-stat" data-placeholder="true" data-placeholder-type="stat">
+          <span class="num"><em>6M</em>+</span>
+          <span class="label">Merchant locations powered by Clover and Carat<br><span class="ph-flag">PLACEHOLDER · public IR data</span></span>
+        </div>
+        <div class="proof-stat" data-placeholder="true" data-placeholder-type="stat">
+          <span class="num"><em>$2.6T</em></span>
+          <span class="label">Annual payment volume processed across our network<br><span class="ph-flag">PLACEHOLDER · public IR data</span></span>
+        </div>
+        <div class="proof-stat" data-placeholder="true" data-placeholder-type="stat">
+          <span class="num"><em>100</em></span>
+          <span class="label">Countries served, 24×7, in 30+ currencies<br><span class="ph-flag">PLACEHOLDER · public IR data</span></span>
+        </div>
+        </div>
+      </div>
+    </section>
+  
+    <section class="products-rich" data-section="products" data-intent="portfolio" data-layout="cards-rich">
+      <style scoped>
+        .products-rich { padding: clamp(56px, 8vw, 120px) 0; background: #ffffff; color: var(--color-fg, #002754); }
+        .products-rich .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); }
+        .products-rich .section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 48px; }
+        .products-rich .eyebrow { display: block; font-family: "SF Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent, #fb6400); margin-bottom: 12px; }
+        .products-rich h2 { font-family: var(--font-display, "SF Pro Display", Inter, sans-serif); font-weight: 600; font-size: clamp(28px, 3.6vw, 44px); letter-spacing: -0.02em; line-height: 1.1; margin: 0; }
+        .products-rich h2 em { font-style: italic; color: var(--color-accent, #fb6400); }
+        .products-rich .lede { font-family: var(--font-text, "SF Pro Text", Inter, sans-serif); font-size: 16px; line-height: 1.5; color: #3c3c3c; margin: 0; max-width: 50ch; }
+        .products-rich .products { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .products-rich .product-card { display: grid; grid-template-columns: 280px 1fr; gap: 32px; padding: 24px; background: #f8f9fa; border: 1px solid #e6e6e6; border-radius: 4px; }
+        .products-rich .product-card[data-placeholder="true"] { outline: 1.5px dashed var(--color-accent, #fb6400); outline-offset: 4px; }
+        .products-rich .pc-visual { display: flex; align-items: center; justify-content: center; }
+        .products-rich .ui-mock { width: 240px; height: 160px; background: #ffffff; border: 1px solid #e6e6e6; border-radius: 4px; padding: 12px; display: grid; grid-template-rows: 12px 1fr 24px; gap: 10px; }
+        .products-rich .ui-mock .bar { border-radius: 2px; }
+        .products-rich .ui-mock .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .products-rich .ui-mock .grid span { background: rgba(0,0,0,0.05); border-radius: 2px; }
+        .products-rich .ui-mock .pad { border-radius: 2px; }
+        .products-rich .pc-body { display: flex; flex-direction: column; gap: 8px; }
+        .products-rich .pc-row { display: flex; gap: 16px; align-items: baseline; }
+        .products-rich .pc-eyebrow { font-family: "SF Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent, #fb6400); }
+        .products-rich .meta { font-size: 12px; color: #3c3c3c; font-family: "SF Mono", ui-monospace, monospace; letter-spacing: 0.04em; }
+        .products-rich .pc-name { font-family: var(--font-display, "SF Pro Display", Inter, sans-serif); font-weight: 600; font-size: 28px; letter-spacing: -0.015em; margin: 4px 0 0; }
+        .products-rich .pc-name em { font-style: italic; color: var(--color-accent, #fb6400); font-weight: 500; }
+        .products-rich .pc-tagline { font-size: 16px; color: #0e0e0e; margin: 4px 0; font-weight: 500; }
+        .products-rich .pc-desc { font-size: 14px; line-height: 1.55; color: #3c3c3c; margin: 0 0 12px; }
+        .products-rich .pc-actions { display: flex; gap: 16px; align-items: center; margin-top: auto; padding-top: 8px; }
+        .products-rich .ds-link-cta { font-family: var(--font-text, "SF Pro Text", Inter, sans-serif); font-size: 13px; color: var(--color-accent, #fb6400); text-decoration: none; border-bottom: 1px solid var(--color-accent, #fb6400); padding-bottom: 1px; }
+        .products-rich .ph-flag { display: inline-block; margin-top: 8px; font-family: "SF Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent, #fb6400); }
+        @media (max-width: 720px) {
+          .products-rich .product-card { grid-template-columns: 1fr; }
+          .products-rich .ui-mock { width: 100%; }
+        }
+      </style>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">The portfolio</span>
+            <h2>Five products, <em>by name</em>.</h2>
+          </div>
+          <p class="lede">Each runs at scale today — none of them are roadmap. Pick the one closest to your job and dive in.</p>
+        </div>
+        <div class="products" data-placeholder="true">
+        <article class="product-card" data-placeholder="true" data-placeholder-type="other">
+          <div class="pc-visual">
+            <div class="ui-mock mock-clover" data-placeholder="true" data-placeholder-type="other" aria-hidden="true">
+              <div class="bar" style="background:#fb6400;"></div>
+              <div class="grid"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="pad" style="background:#002754;"></div>
+            </div></div>
+          <div class="pc-body">
+            <div class="pc-row">
+              <span class="pc-eyebrow">Merchant · POS</span>
+              <span class="meta">For SMB & mid-market</span>
+            </div>
+            <h3 class="pc-name"><em>Clover</em></h3>
+            <p class="pc-tagline">All-in-one point-of-sale for 6M+ merchant locations.</p>
+            <p class="pc-desc">A device, an app store and a back-office. From single-store cafés to hundred-location retailers — one Clover stack for taking payments, running the floor and managing cash.</p>
+            <div class="pc-actions">
+              <a class="ds-link-cta" href="#">Explore Clover →</a>
+              <span class="meta">Available in 30+ countries</span>
+            </div>
+            <span class="ph-flag">PLACEHOLDER · UI mock + named product</span>
+          </div>
+        </article>
+        <article class="product-card" data-placeholder="true" data-placeholder-type="other">
+          <div class="pc-visual">
+            <div class="ui-mock mock-carat" data-placeholder="true" data-placeholder-type="other" aria-hidden="true">
+              <div class="bar" style="background:#002754;"></div>
+              <div class="grid"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="pad" style="background:#fb6400;"></div>
+            </div></div>
+          <div class="pc-body">
+            <div class="pc-row">
+              <span class="pc-eyebrow">Enterprise · Commerce</span>
+              <span class="meta">For global retailers</span>
+            </div>
+            <h3 class="pc-name"><em>Carat</em></h3>
+            <p class="pc-tagline">Omnichannel commerce, one API.</p>
+            <p class="pc-desc">In-person, online, embedded, recurring. Carat is the orchestration layer behind global enterprises that need every rail without rebuilding their stack.</p>
+            <div class="pc-actions">
+              <a class="ds-link-cta" href="#">Explore Carat →</a>
+              <span class="meta">Across 130+ currencies</span>
+            </div>
+            <span class="ph-flag">PLACEHOLDER · UI mock + named product</span>
+          </div>
+        </article>
+        <article class="product-card" data-placeholder="true" data-placeholder-type="other">
+          <div class="pc-visual">
+            <div class="ui-mock mock-finxact" data-placeholder="true" data-placeholder-type="other" aria-hidden="true">
+              <div class="bar" style="background:#0e0e0e;"></div>
+              <div class="grid"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="pad" style="background:#fb6400;"></div>
+            </div></div>
+          <div class="pc-body">
+            <div class="pc-row">
+              <span class="pc-eyebrow">Banking · Core</span>
+              <span class="meta">For fintechs & FIs</span>
+            </div>
+            <h3 class="pc-name"><em>Finxact</em></h3>
+            <p class="pc-tagline">Cloud-native core banking, ready in weeks.</p>
+            <p class="pc-desc">API-first, real-time, modern. The core that lets fintechs and FIs stand up new programs without a five-year migration program.</p>
+            <div class="pc-actions">
+              <a class="ds-link-cta" href="#">Explore Finxact →</a>
+              <span class="meta">Real-time ledger</span>
+            </div>
+            <span class="ph-flag">PLACEHOLDER · UI mock + named product</span>
+          </div>
+        </article>
+        <article class="product-card" data-placeholder="true" data-placeholder-type="other">
+          <div class="pc-visual">
+            <div class="ui-mock mock-forum" data-placeholder="true" data-placeholder-type="other" aria-hidden="true">
+              <div class="bar" style="background:#fb6400;"></div>
+              <div class="grid"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="pad" style="background:#0e0e0e;"></div>
+            </div></div>
+          <div class="pc-body">
+            <div class="pc-row">
+              <span class="pc-eyebrow">Industry · Conference</span>
+              <span class="meta">For platform builders</span>
+            </div>
+            <h3 class="pc-name"><em>Forum</em></h3>
+            <p class="pc-tagline">The annual gathering for the people building the future of money.</p>
+            <p class="pc-desc">By invitation, every June. The room where Fiserv's product, partner and customer leaders set the year's direction.</p>
+            <div class="pc-actions">
+              <a class="ds-link-cta" href="#">Explore Forum →</a>
+              <span class="meta">Invitation only</span>
+            </div>
+            <span class="ph-flag">PLACEHOLDER · UI mock + named product</span>
+          </div>
+        </article>
+        <article class="product-card" data-placeholder="true" data-placeholder-type="other">
+          <div class="pc-visual">
+            <div class="ui-mock mock-appmarket" data-placeholder="true" data-placeholder-type="other" aria-hidden="true">
+              <div class="bar" style="background:#3c3c3c;"></div>
+              <div class="grid"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="pad" style="background:#fb6400;"></div>
+            </div></div>
+          <div class="pc-body">
+            <div class="pc-row">
+              <span class="pc-eyebrow">Merchant · Apps</span>
+              <span class="meta">For Clover developers</span>
+            </div>
+            <h3 class="pc-name"><em>AppMarket</em></h3>
+            <p class="pc-tagline">Extend Clover. Reach 6M+ merchants.</p>
+            <p class="pc-desc">The marketplace for software that runs on Clover. From accounting to inventory to payroll, partners ship to merchants without a separate distribution stack.</p>
+            <div class="pc-actions">
+              <a class="ds-link-cta" href="#">Explore AppMarket →</a>
+              <span class="meta">Open to ISVs</span>
+            </div>
+            <span class="ph-flag">PLACEHOLDER · UI mock + named product</span>
+          </div>
+        </article>
+        </div>
+      </div>
+    </section>
+  
+    <section class="logos-band" data-section="customer-logos" data-intent="proof" data-layout="logo-strip" data-placeholder="true" data-placeholder-type="other">
+      <style scoped>
+        .logos-band { padding: clamp(48px, 6vw, 80px) 0; background: #ffffff; color: var(--color-fg, #002754); border-top: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6; position: relative; }
+        .logos-band[data-placeholder="true"] { outline: 1.5px dashed var(--color-accent, #fb6400); outline-offset: -8px; }
+        .logos-band .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); }
+        .logos-band .lede { font-family: var(--font-text, "SF Pro Text", Inter, system-ui, sans-serif); font-size: 14px; line-height: 1.5; color: #3c3c3c; max-width: 56ch; margin: 0 0 28px; }
+        .logos-band .ph-flag { display: inline-block; margin-bottom: 4px; font-family: "SF Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent, #fb6400); }
+        .logos-band .logo-row { display: flex; flex-wrap: wrap; gap: clamp(28px, 4vw, 56px); align-items: center; }
+        .logos-band .lg { font-family: var(--font-display, "SF Pro Display", Inter, system-ui, sans-serif); font-weight: 600; font-size: clamp(20px, 2vw, 28px); letter-spacing: -0.015em; color: #0e0e0e; opacity: 0.7; }
+      </style>
+      <div class="container">
+        <p class="lede"><span class="ph-flag">PLACEHOLDER · illustrative customer wordmarks</span><br>Trusted by the world's largest banks, retailers, fintechs and software providers.</p>
+        <div class="logo-row">
+          <div class="lg">Truist</div>
+          <div class="lg">Wells Fargo</div>
+          <div class="lg">target</div>
+          <div class="lg">PNC</div>
+          <div class="lg">Brex</div>
+          <div class="lg">Block</div>
+          <div class="lg">delta</div>
+        </div>
+      </div>
+    </section>
+
   <section class="section section--alt" data-section="audience-grid" data-intent="buyer-routing-tertiary">
     <div class="container">
       <div class="section-head">

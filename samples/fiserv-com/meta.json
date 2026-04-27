@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "slug": "fiserv-com",
   "title": "Fiserv — moves more than money",
-  "tagline": "From a content-grid corporate home to a brand-faithful redesign with three multi-variant theses (proof-at-the-top, JTBD doorways, product-forward).",
+  "tagline": "Three multi-variant theses for fiserv.com — proof-at-the-top (A), JTBD doorways (B), product-forward (C). Brand-faithful direction, all variants ship with placeholder content visible per the F-002 signature contract.",
 
   "source": {
     "url": "https://www.fiserv.com",
@@ -53,7 +53,7 @@
       "id": "A",
       "name": "Proof at the top",
       "dominantDimension": "decade",
-      "thesis": "Hero leads with high-contrast headline + designed surface; the editorial-news register (decade-dominant) reads first. Audience-grid + about/life follow. Content sourced from captured pages/home.json; the proof-tiles, customer-logos, and named-products sections from the original render were trimmed before publish to keep claims to verified scope (10K+ FIs, 6M+ merchants from fiserv.com/about).",
+      "thesis": "Hero leads with a high-contrast headline + designed surface. Immediately under the hero, four proof-tiles surface scale (10K+ FIs, 6M+ merchants, $2.6T volume, 100 countries) — the editorial-news register reads first. Customer logos and the four named products (Clover/Carat/Finxact/Forum) follow before audience routing.",
       "proposedFile": "proposed-A.html",
       "isPrimary": true
     },
@@ -61,14 +61,14 @@
       "id": "B",
       "name": "Doorways (job-to-be-done first)",
       "dominantDimension": "register",
-      "thesis": "Hero question + 5-doorway JTBD chooser as the primary IA — Accept payments / Issue a card / Run a bank / Embed finance / Modernise a core. The brand register (verb-led routing) reads first; audience-grid recedes to a secondary nav. proof-strip and customer-logos sections trimmed before publish.",
+      "thesis": "Hero question + 5-doorway JTBD chooser as the primary IA — Accept payments / Issue a card / Run a bank / Embed finance / Modernise a core. The brand register (verb-led routing) reads first. Proof-strip and customer logos sit below the chooser; audience-grid is secondary navigation.",
       "proposedFile": "proposed-B.html"
     },
     {
       "id": "C",
       "name": "Product-forward",
       "dominantDimension": "craft",
-      "thesis": "Hero leads with the product list (Clover, Carat, Finxact). The editorial-news craft (named platforms first) reads first. The original render included 5 cards (with Forum and AppMarket); both were trimmed since Forum is the conference and AppMarket is a Clover sub-product, not peer platforms. proof-strip and customer-logos sections also trimmed.",
+      "thesis": "Hero leads with the product list (Clover, Carat, Finxact, Forum, AppMarket); the editorial-news craft (named platforms first) reads first. Each card is a rich block — UI mock + audience eyebrow + tagline + description. Proof-strip and customer logos surround the portfolio.",
       "proposedFile": "proposed-C.html"
     }
   ],
@@ -91,6 +91,6 @@
       "/Users/paolo/excat/tmp/st2-6-fiserv/stardust/current/_brand-extraction.json",
       "/Users/paolo/excat/tmp/st2-6-fiserv/stardust/current/pages/home.json"
     ],
-    "trimNote": "All three variants had data-placeholder elements (proof-tiles, customer-logos, products) flagged in their _provenance.unsourcedContent[]. The publish flow refuses on non-empty unsourcedContent[]; rather than fabricate content, the unsourced sections were removed before publish. Each variant's primary thesis is preserved (A: editorial-led hero; B: JTBD chooser; C: product list trimmed to Clover/Carat/Finxact)."
+    "reconstructionNote": "The proof-tiles, customer-logos, and products sections in all three variants were trimmed during a first publish attempt (under the old policy that refused on non-empty unsourcedContent[]). The relaxed policy (showcase = visual demonstration; placeholders allowed with the F-002 signature visible) made the trim unnecessary, and these sections were reconstructed from this Claude Code session's conversation logs. Section bodies are not byte-identical to the original render — they use inline scoped <style> blocks to avoid depending on what CSS survived the trim, and variant C's UI mocks are CSS shapes (honest abstractions) rather than reconstructed product screenshots. The PLACEHOLDER visual signature is restored on every reconstructed element."
   }
 }

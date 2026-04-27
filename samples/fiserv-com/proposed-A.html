@@ -14,7 +14,16 @@ stardust:provenance
   divergenceVersion: brand-faithful (Mode A)
   fontDeck: brand-inherited (Univers Fiserv → Inter web fallback for prototype)
   paletteSource: inherited from brand surface
-  unsourcedContent: []
+  unsourcedContent:
+    - selector: section[data-section="proof-tiles"] .proof-stat
+      type: stat
+      reason: "design demanded quantified scale; current/pages/home.json provides no statistics — direction.md authorised public IR data"
+    - selector: section[data-section="customer-logos"] .logo-row
+      type: other
+      reason: "design demanded named-customer wordmarks; current/pages/home.json provides no customer roster — direction.md authorised illustrative monoglyph wordmarks"
+    - selector: section[data-section="products"] .product-card
+      type: other
+      reason: "named products (Clover/Carat/Finxact/Forum) are public Fiserv brands but not present on the captured home page — direction.md authorised inclusion"
   
   stardustVersion: 0.2.0
 -->
@@ -357,6 +366,155 @@ footer .legal .links{display:flex; gap:24px}
   <!-- =========== CUSTOMER LOGO STRIP =========== -->
   <!-- =========== PRODUCTS =========== -->
   <!-- =========== AUDIENCES =========== -->
+  
+    <div class="proof-tiles" data-section="proof-tiles" data-intent="value-prop" data-layout="full-bleed-navy">
+      <style scoped>
+        .proof-tiles {
+          padding: clamp(40px, 6vw, 80px) 0;
+          background: var(--color-fg, #002754);
+          color: #ffffff;
+        }
+        .proof-tiles .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); }
+        .proof-tiles .grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 0;
+          border-top: 1px solid rgb(255 255 255 / 0.16);
+          border-bottom: 1px solid rgb(255 255 255 / 0.16);
+        }
+        .proof-tiles .proof-stat {
+          padding: clamp(24px, 3vw, 36px) clamp(16px, 2vw, 28px);
+          border-right: 1px solid rgb(255 255 255 / 0.16);
+        }
+        .proof-tiles .proof-stat:last-child { border-right: 0; }
+        .proof-tiles .proof-stat .num {
+          display: block; font-family: var(--font-display, "SF Pro Display", Inter, system-ui, sans-serif);
+          font-weight: 600; font-size: clamp(40px, 4vw, 56px); letter-spacing: -0.025em; line-height: 1; color: #ffffff;
+        }
+        .proof-tiles .proof-stat .num em { font-style: italic; color: var(--color-accent, #fb6400); font-weight: 500; }
+        .proof-tiles .proof-stat .label { display: block; margin-top: 12px; color: rgb(255 255 255 / 0.7); font-size: 14px; line-height: 1.4; }
+        .proof-tiles .proof-stat[data-placeholder="true"] {
+          outline: 1.5px dashed var(--color-accent, #fb6400); outline-offset: 4px;
+        }
+        .proof-tiles .ph-flag {
+          display: inline-block; margin-top: 6px;
+          font-family: "SF Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em;
+          text-transform: uppercase; color: var(--color-accent, #fb6400);
+        }
+        @media (max-width: 720px) {
+          .proof-tiles .grid { grid-template-columns: repeat(2, 1fr); }
+          .proof-tiles .proof-stat { border-bottom: 1px solid rgb(255 255 255 / 0.16); }
+          .proof-tiles .proof-stat:nth-child(2n) { border-right: 0; }
+        }
+      </style>
+      <div class="container">
+        <div class="grid">
+        <div class="proof-stat" data-placeholder="true" data-placeholder-type="stat">
+          <span class="num"><em>10K</em>+</span>
+          <span class="label">Financial institutions running on Fiserv platforms<br><span class="ph-flag">PLACEHOLDER · public IR data</span></span>
+        </div>
+        <div class="proof-stat" data-placeholder="true" data-placeholder-type="stat">
+          <span class="num"><em>6M</em>+</span>
+          <span class="label">Merchant locations powered by Clover and Carat<br><span class="ph-flag">PLACEHOLDER · public IR data</span></span>
+        </div>
+        <div class="proof-stat" data-placeholder="true" data-placeholder-type="stat">
+          <span class="num"><em>$2.6T</em></span>
+          <span class="label">Annual payment volume processed across our network<br><span class="ph-flag">PLACEHOLDER · public IR data</span></span>
+        </div>
+        <div class="proof-stat" data-placeholder="true" data-placeholder-type="stat">
+          <span class="num"><em>100</em></span>
+          <span class="label">Countries served, 24×7, in 30+ currencies<br><span class="ph-flag">PLACEHOLDER · public IR data</span></span>
+        </div>
+        </div>
+      </div>
+    </div>
+  
+    <section class="logos-band" data-section="customer-logos" data-intent="proof" data-layout="logo-strip" data-placeholder="true" data-placeholder-type="other">
+      <style scoped>
+        .logos-band { padding: clamp(48px, 6vw, 80px) 0; background: #ffffff; color: var(--color-fg, #002754); border-top: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6; position: relative; }
+        .logos-band[data-placeholder="true"] { outline: 1.5px dashed var(--color-accent, #fb6400); outline-offset: -8px; }
+        .logos-band .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); }
+        .logos-band .lede { font-family: var(--font-text, "SF Pro Text", Inter, system-ui, sans-serif); font-size: 14px; line-height: 1.5; color: #3c3c3c; max-width: 56ch; margin: 0 0 28px; }
+        .logos-band .ph-flag { display: inline-block; margin-bottom: 4px; font-family: "SF Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent, #fb6400); }
+        .logos-band .logo-row { display: flex; flex-wrap: wrap; gap: clamp(28px, 4vw, 56px); align-items: center; }
+        .logos-band .lg { font-family: var(--font-display, "SF Pro Display", Inter, system-ui, sans-serif); font-weight: 600; font-size: clamp(20px, 2vw, 28px); letter-spacing: -0.015em; color: #0e0e0e; opacity: 0.7; }
+      </style>
+      <div class="container">
+        <p class="lede"><span class="ph-flag">PLACEHOLDER · illustrative customer wordmarks</span><br>Trusted by the world's largest banks, retailers, fintechs and software providers.</p>
+        <div class="logo-row">
+          <div class="lg">Truist</div>
+          <div class="lg">Wells Fargo</div>
+          <div class="lg">target</div>
+          <div class="lg">PNC</div>
+          <div class="lg">Brex</div>
+          <div class="lg">Block</div>
+          <div class="lg">delta</div>
+        </div>
+      </div>
+    </section>
+  
+    <section class="products-band" data-section="products" data-intent="portfolio" data-layout="grid-4">
+      <style scoped>
+        .products-band { padding: clamp(56px, 8vw, 120px) 0; background: #ffffff; color: var(--color-fg, #002754); }
+        .products-band .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); }
+        .products-band .section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 48px; }
+        .products-band .eyebrow { display: block; font-family: "SF Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent, #fb6400); margin-bottom: 12px; }
+        .products-band h2 { font-family: var(--font-display, "SF Pro Display", Inter, sans-serif); font-weight: 600; font-size: clamp(28px, 3.6vw, 44px); letter-spacing: -0.02em; line-height: 1.1; margin: 0; }
+        .products-band h2 em { font-style: italic; color: var(--color-accent, #fb6400); }
+        .products-band .lede { font-family: var(--font-text, "SF Pro Text", Inter, sans-serif); font-size: 16px; line-height: 1.5; color: #3c3c3c; margin: 0; max-width: 50ch; }
+        .products-band .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .products-band .product-card { display: flex; flex-direction: column; gap: 12px; padding: 24px; background: #f8f9fa; border: 1px solid #e6e6e6; border-radius: 4px; transition: border-color 200ms; }
+        .products-band .product-card[data-placeholder="true"] { outline: 1.5px dashed var(--color-accent, #fb6400); outline-offset: 4px; }
+        .products-band .product-card:hover { border-color: #0e0e0e; transform: translateY(-2px); }
+        .products-band .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: #3c3c3c; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; font-family: "SF Mono", ui-monospace, monospace; }
+        .products-band .badge::before { content: ""; width: 6px; height: 6px; background: var(--color-accent, #fb6400); border-radius: 50%; }
+        .products-band .product-name { font-family: var(--font-display, "SF Pro Display", Inter, sans-serif); font-weight: 600; font-size: 22px; letter-spacing: -0.01em; margin: 0; }
+        .products-band .product-name em { font-style: italic; color: var(--color-accent, #fb6400); font-weight: 500; }
+        .products-band .desc { font-size: 14px; line-height: 1.55; color: #3c3c3c; flex: 1; }
+        .products-band .ds-link-cta { font-family: var(--font-text, "SF Pro Text", Inter, sans-serif); font-size: 13px; color: var(--color-accent, #fb6400); text-decoration: none; align-self: flex-start; border-bottom: 1px solid var(--color-accent, #fb6400); padding-bottom: 1px; }
+        @media (max-width: 960px) {
+          .products-band .section-head { grid-template-columns: 1fr; gap: 16px; }
+          .products-band .products { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 540px) { .products-band .products { grid-template-columns: 1fr; } }
+      </style>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Our products</span>
+            <h2>Every part of the money <em>system</em>, by name.</h2>
+          </div>
+          <p class="lede">Five platforms, one stack. Each runs at scale today — none of them are roadmap.</p>
+        </div>
+        <div class="products" data-placeholder="true">
+        <article class="product-card" data-placeholder="true" data-placeholder-type="other">
+          <span class="badge">Merchant</span>
+          <h3 class="product-name"><em>Clover</em></h3>
+          <p class="desc">All-in-one point-of-sale and business management for 6M+ small and mid-size merchants.</p>
+          <a class="ds-link-cta" href="#">Explore Clover →</a>
+        </article>
+        <article class="product-card" data-placeholder="true" data-placeholder-type="other">
+          <span class="badge">Enterprise</span>
+          <h3 class="product-name"><em>Carat</em></h3>
+          <p class="desc">Omnichannel commerce for global enterprises — one API across in-person, online and emerging rails.</p>
+          <a class="ds-link-cta" href="#">Explore Carat →</a>
+        </article>
+        <article class="product-card" data-placeholder="true" data-placeholder-type="other">
+          <span class="badge">Banking</span>
+          <h3 class="product-name"><em>Finxact</em></h3>
+          <p class="desc">Cloud-native core banking for fintechs and banks launching new programs in weeks, not years.</p>
+          <a class="ds-link-cta" href="#">Explore Finxact →</a>
+        </article>
+        <article class="product-card" data-placeholder="true" data-placeholder-type="other">
+          <span class="badge">Industry</span>
+          <h3 class="product-name"><em>Forum</em></h3>
+          <p class="desc">The annual gathering for the people building the future of money. By invitation, every June.</p>
+          <a class="ds-link-cta" href="#">Explore Forum →</a>
+        </article>
+        </div>
+      </div>
+    </section>
+
   <section class="section section--alt" data-section="audience-grid" data-intent="buyer-routing">
     <div class="container">
       <div class="section-head">
