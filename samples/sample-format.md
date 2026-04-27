@@ -13,7 +13,7 @@ should use this as the contract.
 ```
 samples/<slug>/
 ├── meta.json             # required — the sample's metadata
-├── thumbnail.png         # required — 1280×720 cover for the showcase card (uses the primary variant)
+├── thumbnail.png         # required — 1280×720 cover for the showcase card (uses the primary variant). PNG preferred; SVG accepted for design-system samples where vector chrome is more honest than a photo.
 ├── direction.md          # required — full reasoning trace from $stardust direct
 ├── proposed-A.html       # required — the proposed redesign, variant A. Always present even for single-variant samples.
 ├── proposed-B.html       # optional — variant B (when the run produced ≥2 variants)

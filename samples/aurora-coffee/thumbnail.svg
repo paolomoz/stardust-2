@@ -1,0 +1,47 @@
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <!-- ground: Vintage Cottage Charm — Ground (#F1F7ED) -->
+  <rect width="1280" height="720" fill="#F1F7ED"/>
+
+  <!-- Sage whole-section surface, asymmetric 3/5 split (right slab) -->
+  <rect x="528" y="0" width="752" height="720" fill="#91C7B1"/>
+
+  <!-- Riso misregistration: hero headline in Ink, with Sage shadow offset 4px -->
+  <g font-family="'Abril Fatface', 'Playfair Display', Georgia, serif" font-weight="400" letter-spacing="-0.04em">
+    <text x="76" y="372" font-size="180" fill="#91C7B1" opacity="0.7">aurora.</text>
+    <text x="80" y="368" font-size="180" fill="#54494B">aurora.</text>
+  </g>
+
+  <!-- Subtitle: DM Serif Display body register -->
+  <text x="80" y="436" font-family="'DM Serif Display', Georgia, serif" font-size="32" fill="#54494B" letter-spacing="-0.005em">indie publishing meets specialty coffee</text>
+
+  <!-- meta line: Special Elite typewriter -->
+  <text x="80" y="478" font-family="'Special Elite', ui-monospace, monospace" font-size="14" fill="#54494B" letter-spacing="0.18em">SINGLE ORIGIN  ·  ETHIOPIA  ·  YIRGACHEFFE  ·  ROASTED TUE</text>
+
+  <!-- pill-meta chips along the bottom-left -->
+  <g font-family="'Special Elite', ui-monospace, monospace" font-size="13" letter-spacing="0.14em" fill="#54494B">
+    <rect x="80" y="568" width="138" height="32" fill="#91C7B1" rx="16"/>
+    <text x="92" y="589">SAGE SURFACE</text>
+    <rect x="232" y="568" width="138" height="32" fill="#E3D081" rx="16"/>
+    <text x="244" y="589">RISO PRINT</text>
+    <rect x="384" y="568" width="138" height="32" fill="#F1F7ED" rx="16" stroke="#54494B" stroke-width="1.5"/>
+    <text x="396" y="589">ZINE-MAX</text>
+  </g>
+
+  <!-- Right pane: Rose anchor block + handwritten marginalia -->
+  <g>
+    <!-- Rose CTA-band block, hard square corner -->
+    <rect x="592" y="248" width="624" height="224" fill="#B33951"/>
+    <text x="624" y="328" font-family="'Abril Fatface', Georgia, serif" font-size="64" fill="#F1F7ED" font-weight="400" letter-spacing="-0.025em">we bought 14 sacks.</text>
+    <text x="624" y="384" font-family="'DM Serif Display', Georgia, serif" font-size="24" fill="#F1F7ED" opacity="0.85">send-it nine ways from sunday.</text>
+    <text x="624" y="438" font-family="'Special Elite', ui-monospace, monospace" font-size="13" fill="#F1F7ED" opacity="0.7" letter-spacing="0.16em">SUBSCRIBE  ·  $42 / MONTH</text>
+  </g>
+
+  <!-- Marginalia in Homemade Apple, twice per page rule respected -->
+  <text x="592" y="544" font-family="'Homemade Apple', cursive, serif" font-size="22" fill="#54494B" font-style="italic">first sack: a 6 kg sample from cumbal.</text>
+
+  <!-- bottom strip: stardust signature eyebrow -->
+  <g font-family="'SF Mono', ui-monospace, monospace" font-size="11" letter-spacing="0.18em" fill="#54494B" opacity="0.55">
+    <text x="80" y="676">SAMPLE  ·  AURORA COFFEE  ·  ZINE-MAXIMALIST  ·  VINTAGE COTTAGE CHARM</text>
+    <text x="1200" y="676" text-anchor="end">A · primary</text>
+  </g>
+</svg>

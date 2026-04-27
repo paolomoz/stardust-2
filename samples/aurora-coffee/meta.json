@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 2,
+  "slug": "aurora-coffee",
+  "title": "Aurora Coffee — indie publishing meets specialty coffee",
+  "tagline": "From a generic SaaS-cafe template to a zine-maximalist register, Vintage Cottage Charm palette, and asymmetric editorial layouts.",
+
+  "source": {
+    "url": "https://aurora-coffee.example.com/",
+    "register": "brand",
+    "category": "small-batch coffee · indie register",
+    "extractedAt": "2026-04-26",
+    "note": "Fictional brand for the stardust v2 fixture. The 'existing site' is a hand-authored generic SaaS-cafe template (Inter, blue accent #3B82F6, three-up feature card grid, 'lovingly roasted' marketing voice) — the redesign target the showcase samples diverge from."
+  },
+
+  "direction": {
+    "phrase": "make it more expressive for a young audience",
+    "movements": [
+      "expressive: restrained → committed",
+      "distinctiveness: familiar → distinctive",
+      "tone: serious → playful (warm-playful)",
+      "audience: resolved Q1 → Gen Z college / first-job"
+    ],
+    "seed": {
+      "input": "Aurora Coffee|2026-04-26",
+      "decade": "1970s",
+      "craft": "Riso print",
+      "register": "zine",
+      "groundFamily": "monochrome-tint",
+      "pickedBy": "deterministic"
+    },
+    "fontDeck": {
+      "name": "zine-maximalist",
+      "pickedBy": "seed-implied"
+    },
+    "palette": {
+      "name": "Vintage Cottage Charm",
+      "source": "https://coolors.co/54494b-f1f7ed-91c7b1-b33951-e3d081",
+      "anchor": "#B33951",
+      "pickedBy": "library:v0.6.0 (recommended_index=1, picked_index=1)"
+    },
+    "antiToolbox": {
+      "hits": 1,
+      "justified": 1,
+      "note": "Hard non-blur drop shadow on display headlines: implemented as a 4px x-axis offset between two flat fills (Ink + Sage), encoding riso-print misregistration. Removing the offset removes the entire print metaphor."
+    }
+  },
+
+  "variants": [
+    {
+      "id": "A",
+      "name": "Editorial-split mast",
+      "dominantDimension": "register",
+      "thesis": "The home page leads with the riso-misregistered 'Aurora.' wordmark on Ground; right-hand pane is a Sage section with a Rose CTA band. The zine register reads first — the eye lands on the typewriter-tagged origin meta and the asymmetric 3/5 split before any product card.",
+      "proposedFile": "proposed-A.html",
+      "isPrimary": true
+    }
+  ],
+
+  "current": {
+    "renderingFile": "current.html",
+    "note": "Re-rendering of the existing fixture from current/pages/home.json against current/DESIGN.md. Generic SaaS-cafe template — Inter throughout, blue #3B82F6 CTAs, three-up feature card grid, 'lovingly roasted' marketing voice. The visual language stardust diverges from."
+  },
+
+  "createdAt": "2026-04-27",
+  "stardustVersion": "0.2.0",
+  "submittedBy": "paolomoz",
+  "license": "Apache-2.0",
+  "thumbnail": "thumbnail.svg",
+
+  "_provenance": {
+    "writtenBy": "stardust:samples (manual port from demo/fixture/)",
+    "writtenAt": "2026-04-27",
+    "readArtifacts": [
+      "demo/fixture/PRODUCT.md",
+      "demo/fixture/DESIGN.md",
+      "demo/fixture/DESIGN.json",
+      "demo/fixture/stardust/direction.md",
+      "demo/fixture/stardust/prototypes/home-proposed.html",
+      "demo/fixture/stardust/current/current-rendering.html"
+    ]
+  }
+}

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy: stardust:extract (current-rendering)
+  writtenAt: 2026-04-26T12:14:00Z
+  page: home
+  pageUrl: https://aurora-coffee.example.com/
+  readArtifacts:
+    - stardust/current/pages/home.json
+    - stardust/current/DESIGN.md
+  synthesizedInputs: []
+  note: |
+    Re-rendering of the EXISTING site from stardust/current/pages/home.json
+    against stardust/current/DESIGN.md, used as the BEFORE iframe in
+    stardust/prototypes/home.html when the live URL is unreachable.
+  stardustVersion: 0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aurora Coffee — Lovingly roasted single-origin coffee</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  :root {
+    --bg: #FAF7F2;
+    --fg: #1F1B17;
+    --mute: #6E6660;
+    --line: #E8E2D7;
+    --surface: #FFFFFF;
+    --blue: #3B82F6;
+    --blue-hover: #2563EB;
+    --brown: #7B5E3F;
+    --radius: 8px;
+  }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+    letter-spacing: -0.005em;
+  }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* Header */
+  header.site {
+    border-bottom: 1px solid var(--line);
+    padding: 16px 0;
+  }
+  header.site .row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px;
+  }
+  .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+  .brand-mark {
+    width: 28px; height: 28px; border-radius: 6px;
+    background: var(--brown); color: white;
+    display: grid; place-items: center;
+    font-weight: 700; font-size: 13px; letter-spacing: 0;
+  }
+  nav.main ul { list-style: none; padding: 0; margin: 0; display: flex; gap: 24px; }
+  nav.main a { color: var(--fg); text-decoration: none; font-size: 14px; font-weight: 500; }
+  nav.main a:hover { color: var(--blue); }
+  .header-cta { display: flex; gap: 12px; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 600;
+    padding: 10px 20px;
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    text-decoration: none; cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .btn-primary { background: var(--blue); color: white; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+  .btn-primary:hover { background: var(--blue-hover); }
+  .btn-secondary { background: transparent; color: var(--blue); border-color: var(--blue); }
+  .btn-secondary:hover { background: rgba(59,130,246,0.06); }
+  .btn-lg { padding: 12px 24px; font-size: 16px; }
+
+  /* Hero */
+  section.hero { padding: 96px 0; }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 64px; align-items: center;
+  }
+  .hero-grid h1 {
+    margin: 0 0 24px;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+  }
+  .hero-grid p.lede {
+    margin: 0 0 32px; font-size: 18px; color: var(--mute);
+    max-width: 52ch;
+  }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero-image {
+    aspect-ratio: 4 / 3;
+    background:
+      radial-gradient(at 30% 30%, #c8b59c 0%, transparent 55%),
+      radial-gradient(at 70% 70%, #8b7355 0%, transparent 55%),
+      linear-gradient(135deg, #d4c4a8 0%, #a8916f 100%);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+
+  /* Features */
+  section.features { padding: 96px 0; background: white; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  section.features h2 {
+    margin: 0 0 48px; font-size: 32px; line-height: 1.2; letter-spacing: -0.02em;
+    text-align: center; font-weight: 600;
+  }
+  .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+  .card .icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: rgba(123, 94, 63, 0.1); color: var(--brown);
+    display: grid; place-items: center;
+    margin-bottom: 16px;
+    font-size: 20px;
+  }
+  .card h3 { margin: 0 0 8px; font-size: 20px; font-weight: 600; letter-spacing: -0.01em; }
+  .card p { margin: 0; color: var(--mute); font-size: 15px; line-height: 1.5; }
+
+  /* Social proof */
+  section.proof { padding: 64px 0; }
+  .proof h2 {
+    margin: 0 0 32px;
+    font-size: 14px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--mute);
+    text-align: center;
+  }
+  .logos {
+    display: flex; justify-content: center; flex-wrap: wrap;
+    gap: 48px; opacity: 0.6;
+  }
+  .logos span { font-weight: 700; font-size: 18px; color: var(--mute); letter-spacing: -0.01em; }
+
+  /* CTA band */
+  section.cta-band {
+    background: var(--fg); color: var(--bg);
+    padding: 96px 0; text-align: center;
+  }
+  section.cta-band h2 {
+    margin: 0 0 24px;
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    line-height: 1.2; letter-spacing: -0.02em; font-weight: 600;
+  }
+  section.cta-band p { margin: 0 0 32px; color: rgba(250,247,242,0.7); font-size: 17px; }
+  section.cta-band .btn-primary { background: var(--blue); }
+
+  /* Footer */
+  footer.site {
+    background: white; border-top: 1px solid var(--line);
+    padding: 64px 0 32px;
+  }
+  .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-grid h4 { margin: 0 0 16px; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--mute); }
+  .footer-grid ul { list-style: none; padding: 0; margin: 0; }
+  .footer-grid li { margin-bottom: 8px; }
+  .footer-grid a { color: var(--fg); text-decoration: none; font-size: 14px; }
+  .footer-grid a:hover { color: var(--blue); }
+  .footer-grid p { color: var(--mute); font-size: 14px; line-height: 1.5; margin: 0; }
+  .footer-bottom { padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; color: var(--mute); font-size: 13px; }
+
+  /* Responsive */
+  @media (max-width: 880px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    nav.main ul { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap row">
+    <a class="brand" href="/"><span class="brand-mark">A</span>Aurora Coffee</a>
+    <nav class="main">
+      <ul>
+        <li><a href="/coffee">Coffee</a></li>
+        <li><a href="/subscribe">Subscriptions</a></li>
+        <li><a href="/cafe">Cafe</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <a class="btn btn-secondary" href="/account">Account</a>
+      <a class="btn btn-primary" href="/subscribe">Start subscription</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Lovingly roasted single-origin coffee, delivered.</h1>
+        <p class="lede">We work directly with farmers and roast in small batches. Crafted with care, brewed for you.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="/subscribe">Start a subscription</a>
+          <a class="btn btn-secondary btn-lg" href="/shop">Shop beans</a>
+        </div>
+      </div>
+      <div class="hero-image" aria-label="A burlap sack of green coffee beans"></div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="wrap">
+      <h2>Why Aurora</h2>
+      <div class="feature-grid">
+        <div class="card">
+          <div class="icon">●</div>
+          <h3>Single origin</h3>
+          <p>Sourced from farms we've visited. Traceable from cherry to cup. We share the producer's name and the elevation on every bag.</p>
+        </div>
+        <div class="card">
+          <div class="icon">●</div>
+          <h3>Small batch</h3>
+          <p>Roasted in 10kg batches twice a week. Every bag ships within 48 hours of roast for peak freshness.</p>
+        </div>
+        <div class="card">
+          <div class="icon">●</div>
+          <h3>Subscription, your way</h3>
+          <p>Choose your roast level, your delivery cadence, and your bag size. Pause or skip any time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof">
+    <div class="wrap">
+      <h2>Trusted by local cafes</h2>
+      <div class="logos">
+        <span>Mission Bay Coffee</span>
+        <span>Stoker Espresso</span>
+        <span>Field Notes</span>
+        <span>Two Pines</span>
+        <span>Lighthouse</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>Start your subscription today.</h2>
+      <p>From $18 / bag. Free shipping over $40. Cancel any time.</p>
+      <a class="btn btn-primary btn-lg" href="/subscribe">Start a subscription</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="/"><span class="brand-mark">A</span>Aurora Coffee</a>
+        <p style="margin-top: 16px;">Single-origin specialty coffee, roasted in small batches and delivered within 48 hours.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul><li><a href="/coffee">Coffee</a></li><li><a href="/subscribe">Subscriptions</a></li><li><a href="/gear">Gear</a></li></ul>
+      </div>
+      <div>
+        <h4>Cafe</h4>
+        <ul><li><a href="/cafe">Visit</a></li><li><a href="/cafe/hours">Hours</a></li><li><a href="/cafe/events">Events</a></li></ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul><li><a href="/about">About</a></li><li><a href="/farmers">Our farmers</a></li><li><a href="/careers">Careers</a></li></ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Aurora Coffee. All rights reserved.</span>
+      <span><a href="https://instagram.com/auroracoffee" style="color: var(--mute); text-decoration: none;">Instagram</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
