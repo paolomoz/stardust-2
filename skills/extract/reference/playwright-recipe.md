@@ -23,25 +23,54 @@ javaScriptEnabled: true
 ignoreHTTPSErrors: true     (some staging hosts ship invalid certs)
 ```
 
+## Wait modes
+
+The wait strategy is configurable per `extract` invocation via
+`--wait fast|medium|spec`. Default: `medium`.
+
+| mode | `goto` waitUntil | grace | hard cap | when to use |
+|---|---|---|---|---|
+| `fast` | `domcontentloaded` | 500 ms | 4 s | known SSR sites where speed matters and DOM is in the initial response |
+| `medium` (default) | `domcontentloaded` | 2000 ms | 8 s | server-rendered marketing sites — the common case |
+| `spec` | `networkidle` | 1500 ms | 30 s | JS-driven SPAs, dashboards, anything where content paints after `domcontentloaded` |
+
+If the configured `waitUntil` does not resolve within the hard cap,
+fall back to `domcontentloaded` and capture whatever is rendered.
+Record the actual `waitMs` and resolved `waitMode` (e.g.
+`"networkidle"` or `"domcontentloaded(fallback)"`) in the per-page
+`_provenance` and in `_crawl-log.json` under `crawl.failures` only if
+the fallback indicates a likely under-capture.
+
+### Auto-detect (optional optimisation)
+
+Before the first Playwright navigation, the agent may issue a plain
+`fetch()` of the entry URL and inspect the raw HTML. If the response
+already contains `<main>`, `<h1>`, or recognisable nav landmarks, the
+site is server-rendered and `medium` is appropriate. If the body is a
+near-empty shell (`<div id="root">`, `<div id="app">`, no headings),
+the site is JS-driven and `spec` is appropriate. Record the chosen
+mode and the auto-detect basis in `_crawl-log.json` under
+`discovery.waitMode`.
+
+The default remains `medium` regardless of auto-detect until the
+heuristic is validated across more sites; auto-detect is opt-in via
+`--wait auto`.
+
 ## Navigation
 
 ```
-goto(url, { waitUntil: "networkidle", timeout: 30000 })
-wait 1500 ms                 // grace period for late JS paints
-scroll the page to bottom in three steps with 500 ms pauses between
+goto(url, { waitUntil: <mode>, timeout: <hardCap> })
+wait <grace> ms              // grace period for late JS paints
+scroll the page to bottom in 4 viewport-height steps with 300 ms pauses
 scroll back to top
 ```
 
 The grace period catches lazy-loaded hero media, fonts that swap after
-networkidle, and analytics-blocked late paints. The scroll-to-bottom
-pass triggers IntersectionObserver-driven content (carousels, fold-in
-sections, lazy images) so it lands in the captured DOM.
-
-## Hard timeout
-
-If `networkidle` never fires (infinite analytics polling, websocket
-keepalive), fall back to a 10 s hard timeout and capture whatever is
-rendered. Note the fallback in `_crawl-log.json`.
+the wait resolves, and analytics-blocked late paints. The
+scroll-to-bottom pass triggers IntersectionObserver-driven content
+(carousels, fold-in sections, lazy images) so it lands in the captured
+DOM. **Skipping the scroll pass is a recipe violation** — even
+server-rendered sites use lazy images.
 
 ## Capture list
 
@@ -76,6 +105,13 @@ For each page, capture:
     naturalWidth, naturalHeight. For every inline SVG: serialized
     markup hash + viewBox. For every `<video>` and `<iframe>`: src and
     poster.
+    For each cross-origin `<iframe>` (host different from page host),
+    additionally capture: `boundingClientRect` after layout settles,
+    `viewportCoveragePct` (its rect area divided by 1440×900), and
+    `mainHeightCoveragePct` (its rect height divided by `<main>`'s
+    rendered height, or `<body>` if no `<main>`). These feed the
+    per-page `embedDominance` field — see
+    `current-state-schema.md` § Embed dominance.
 12. **Form inventory** — for every `<form>`: action, method, list of
     fields with type and name; whether it's wired to an obvious
     third-party (Stripe, Calendly, Typeform, Mailchimp).
@@ -84,6 +120,12 @@ For each page, capture:
 14. **Page screenshot** — full-page PNG saved as
     `stardust/current/assets/screenshots/<slug>.png`. Used by `direct`
     later when the user wants to point at a specific section.
+15. **CSS custom properties** — read `getComputedStyle(document.documentElement)`
+    and enumerate all property names starting with `--`. Capture as
+    `{ name, value }` pairs. Used by the Tensions detector
+    (`brand-review-template.md` § Detectors) to flag sites that ship
+    no design tokens. An empty list across all extracted pages is the
+    signal "no tokens defined."
 
 ## Logo locator chain
 
@@ -126,9 +168,53 @@ v2 — they are derived later by `direct` if the redesign needs them.
 - Cookies, localStorage, sessionStorage. Out of scope.
 - Anything that would require authentication.
 
+## Response validation
+
+`page.goto()` resolves on **any** HTTP response, not just 2xx. A naive
+implementation captures HTTP 4xx/5xx pages as empty
+`pages/<slug>.json` files (no title, no headings, no body) and
+classifies them as success — propagating wrong data to `direct` and
+`prototype`. The agent **must** validate the response before treating
+the page as captured.
+
+Capture the navigation response and apply these checks in order:
+
+1. **Status code.** If `response.status() >= 400`, treat as a Phase 2
+   failure: do not write `pages/<slug>.json`; record under
+   `_crawl-log.json#crawl.failures[]` with
+   `errorClass: "HTTPError"` and `message: "HTTP <status>"`.
+2. **Content type.** Read `response.headers()['content-type']`. If
+   it does not start with `text/html` or `application/xhtml+xml`,
+   treat as a Phase 2 failure with
+   `errorClass: "ContentTypeError"` and
+   `message: "unexpected content-type: <type>"`. Catches sites that
+   serve JSON, plain text, or PDFs at HTML-looking URLs (common with
+   misconfigured WAFs and API endpoints that slipped past the
+   filter).
+3. **Final URL after redirects.** If `page.url()` differs from the
+   requested URL, record it as `finalUrl` in the per-page
+   `_provenance`. The slug stays bound to the requested URL, but
+   downstream consumers reason about content origin from `finalUrl`.
+   3xx chains are followed normally — only the *final* response is
+   validated.
+4. **Soft-404 / empty page.** After capture, if the rendered page
+   has **all** of: zero visible text in `<body>`, zero headings,
+   zero images, zero form fields, **and** zero iframes, treat as a
+   Phase 2 failure with `errorClass: "EmptyPageError"` and
+   `message: "empty page — possibly soft-404"`. The conjunction is
+   deliberately tight: legitimate minimal pages (a Calendly embed
+   landing, a single-iframe contact widget) have at least one of
+   those signals.
+
+Failed pages do **not** appear in `state.json` as `extracted`. They
+appear only in `_crawl-log.json#crawl.failures[]`. The user can
+re-run with `--refresh <slug>` once the underlying issue is fixed.
+
 ## Failure isolation
 
 A failure on one page must not abort the crawl. Record the error
 (URL, error class, error message, timestamp) in `_crawl-log.json`
 under `failures[]` and continue with the next page. The skill's final
-state report counts successes vs failures.
+state report counts successes vs failures, and surfaces the failure
+classes (`HTTPError`, `ContentTypeError`, `EmptyPageError`,
+`TimeoutError`) so the user can diagnose at a glance.

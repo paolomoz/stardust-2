@@ -18,7 +18,11 @@ The file is JSON because every consumer is non-human. It carries a
     "writtenAt": "2026-04-25T13:42:00Z",
     "readArtifacts": ["https://example.com/about"],
     "synthesizedInputs": [],
-    "stardustVersion": "0.2.0"
+    "stardustVersion": "0.2.0",
+    "waitMode": "networkidle",       // configured mode: fast | medium | spec | networkidle | domcontentloaded(fallback)
+    "waitMs": 3820,                  // actual wait time, including grace and scroll pass
+    "httpStatus": 200,               // final response status after redirects
+    "contentType": "text/html"       // final response content-type (without charset)
   },
   "slug": "about",
   "url": "https://example.com/about",
@@ -42,7 +46,10 @@ The file is JSON because every consumer is non-human. It carries a
   "media": { /* see § Media */ },
   "forms": [ /* see § Forms */ ],
   "widgets": { /* see § Widgets */ },
+  "components": { /* see § Components */ },
   "perSectionStyle": [ /* see § Per-section style */ ],
+  "embedDominance": { /* see § Embed dominance */ },
+  "cssCustomProperties": [ /* see § CSS custom properties */ ],
 
   "screenshot": "stardust/current/assets/screenshots/about.png",
 
@@ -198,6 +205,113 @@ Failed downloads have `localPath: null` and a `downloadError` field.
 ```
 
 Empty arrays are valid; missing keys are not.
+
+## § Components
+
+A closed-list inventory of recognisable component types per page.
+This is **separate from** § Widgets (which captures interactive ARIA
+roles) and § Landmarks (structural). Components fills the gap: visual
+patterns the site repeats that aren't necessarily ARIA-tagged.
+
+The vocabulary is fixed — do not invent new keys. If a page uses
+something the vocabulary doesn't cover, log it under `components.other`
+with a free-form `kind` label.
+
+```json
+{
+  "cards":           { "count": 12, "examples": [".team-member", ".story-card"] },
+  "grids":           { "count": 4,  "examples": ["main > section.team .row", ".stories .grid"] },
+  "accordions":      { "count": 1,  "examples": ["details.faq"] },
+  "tabs":            { "count": 0,  "examples": [] },
+  "tables":          { "count": 2,  "examples": ["table.data"] },
+  "modals":          { "count": 1,  "examples": ["[role=\"dialog\"].newsletter"] },
+  "carousels":       { "count": 0,  "examples": [] },
+  "videos":          { "count": 1,  "examples": ["video.hero-bg"] },
+  "iframes":         { "count": 1,  "examples": ["iframe[src*=\"datawrapper\"]"] },
+  "dataVizEmbeds":   { "count": 1,  "examples": ["iframe[src*=\"datawrapper\"]", "[class*=\"chart\"]"] },
+  "teamTiles":       { "count": 8,  "examples": [".team-member"] },
+  "pricingTiles":    { "count": 0,  "examples": [] },
+  "testimonialCards":{ "count": 3,  "examples": [".testimonial"] },
+  "logoStrip":       { "count": 1,  "examples": [".partner-logos"] },
+  "timeline":        { "count": 0,  "examples": [] },
+  "breadcrumbs":     { "count": 1,  "examples": ["nav.breadcrumb"] },
+  "statRow":         { "count": 1,  "examples": [".impact-stats"] },
+  "ctaBand":         { "count": 1,  "examples": ["section.cta-band"] },
+  "formFields":      { "count": 6,  "examples": ["form input", "form textarea"] },
+  "other":           []
+}
+```
+
+Detection selectors (apply in order; first match wins per element):
+
+| key | selector heuristic |
+|---|---|
+| `cards` | `.card`, `[class*="card"]:not([class*="card-grid"])`, `article` inside a grid |
+| `grids` | parent of ≥3 visually-equal-width siblings (CSS grid or flex with wrap) |
+| `accordions` | `details`, `[role="region"][aria-labelledby]` paired with `[aria-expanded]` |
+| `tabs` | `[role="tablist"]`, `.tabs` containing `[role="tab"]` |
+| `tables` | `table` (skip layout tables: `[role="presentation"]`) |
+| `modals` | `dialog`, `[role="dialog"]` |
+| `carousels` | `[class*="carousel"]`, `[class*="swiper"]`, `[class*="slick"]` |
+| `videos` | `video` element |
+| `iframes` | every `iframe` |
+| `dataVizEmbeds` | `iframe[src*="datawrapper"]`, `iframe[src*="flourish"]`, `iframe[src*="tableau"]`, `[class*="chart"]`, `canvas[class*="chart"]` |
+| `teamTiles` | `[class*="team"] [class*="member"]`, `[class*="staff"]`, repeated card with `<img>` + name + role |
+| `pricingTiles` | `[class*="pricing"] [class*="tier"]`, repeated card containing currency symbol + CTA |
+| `testimonialCards` | `[class*="testimonial"]`, `blockquote` with `cite` |
+| `logoStrip` | container with ≥4 sibling `img`/`svg` of similar height, no text |
+| `timeline` | `[class*="timeline"]`, `ol[class*="step"]` |
+| `breadcrumbs` | `nav[aria-label*="breadcrumb" i]`, `[class*="breadcrumb"]` |
+| `statRow` | container with ≥3 siblings each containing a number ≥10 + label |
+| `ctaBand` | full-width section whose content is dominated by a heading + 1–2 CTAs |
+| `formFields` | every form field across all forms on the page |
+
+`count` is the number of matching elements; `examples` is the first 2
+distinct CSS selectors (sufficient to find them again, not always
+unique). Empty arrays are valid.
+
+## § Embed dominance
+
+Cross-origin iframes that carry a page's primary content. When the
+site CSS doesn't reach inside, the brand-surface extraction silently
+misses what is in fact the entire visual identity of these pages.
+
+```json
+{
+  "dominated": true,
+  "iframeSrc": "https://app.datawrapper.de/...",
+  "viewportCoveragePct": 78,         // % of viewport occupied by the iframe at 1440x900
+  "mainHeightCoveragePct": 88,       // % of <main> height occupied
+  "screenshot": "stardust/current/assets/screenshots/data-dashboard.png"
+}
+```
+
+Set `dominated: true` when **either** `viewportCoveragePct > 50`
+**or** `mainHeightCoveragePct > 80`. When `dominated: false`, the
+other fields can be `null`.
+
+The screenshot is already captured by every page (per
+`playwright-recipe.md` § Capture list (14)); for embed-dominated
+pages, surface it explicitly here so `direct` and `prototype` know to
+reason from the screenshot rather than the (empty) computed-style
+data.
+
+## § CSS custom properties
+
+Every CSS custom property defined at `:root` (read via
+`getComputedStyle(document.documentElement)` and filtered to names
+starting with `--`).
+
+```json
+[
+  { "name": "--color-primary", "value": "#147aff" },
+  { "name": "--space-md", "value": "16px" }
+]
+```
+
+An **empty array** is itself a meaningful signal — it means the site
+ships no design tokens, which the Tensions detector flags. Do not
+omit the key; emit `[]` explicitly.
 
 ## § Per-section style
 

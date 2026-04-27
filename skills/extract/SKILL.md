@@ -25,6 +25,10 @@ critique, and it does not modify the live site. It writes only under
 - `--refresh <slug>` — optional. Re-extract one page that already exists
   in `state.json`.
 - `--single` — optional. Equivalent to `--cap 1`. Useful for testing.
+- `--wait <fast|medium|spec|auto>` — optional. Wait strategy per page.
+  Default `medium`. See `reference/playwright-recipe.md` § Wait modes.
+- `--no-junk-filter` — optional. Disable the default junk-page filter
+  in discovery (see `reference/ia-extraction.md` § Filtering).
 
 ## Setup
 
@@ -58,39 +62,54 @@ Discover the page inventory before crawling. Procedure in
    `mailto:`, `tel:`, anchor-only links, query-only variations,
    common asset paths (`.css`, `.js`, `.pdf`, image extensions).
 4. De-duplicate trailing-slash variations.
-5. Apply the cap (default 25, or `--cap`). If discovered count
+5. Apply the junk-page filter (`reference/ia-extraction.md` §
+   Junk-page filter) unless `--no-junk-filter` is set. Surface the
+   filtered list to the user as overridable.
+6. Apply the cap (default 25, or `--cap`). If discovered count
    exceeds the cap, **show the full list and the cut**, and ask the
    user before proceeding:
 
    ```
    Discovered 38 pages on https://example.com (sitemap.xml).
+   Filtered as likely junk (5): /test/, /sample-page/, /holiday1/, ...
+     (override with --pages or --no-junk-filter)
    Cap is 25. Proceeding with the 25 highest-priority pages:
      - / (home)
      - /about
      - /pricing
      ... 22 more
 
-   Cut (13 pages): /blog/post-1, /blog/post-2, ...
+   Cut (8 pages): /blog/post-1, /blog/post-2, ...
 
    Reply "go" to proceed, "all" to lift the cap, or list slugs to
    include manually.
    ```
 
-   Priority heuristic: index page first; then sitemap-declared
-   priority; then shorter URL paths; then alphabetical.
+   Selection heuristic: page-type checklist first, then score-based
+   ranking (home + IA-pillar keywords + sitemap priority − archive /
+   version markers). See `reference/ia-extraction.md` § Page
+   selection and § Priority for the cap. The English-only keyword
+   list is a known limitation for localized sites.
 
-6. Write the discovered list to `stardust/current/_crawl-log.json`
+7. Write the discovered list to `stardust/current/_crawl-log.json`
    (created if absent) with `_provenance` and the full discovery
-   reasoning. This is an audit trail, not a state file.
+   reasoning, including `filteredAsJunk[]` and `userChoice`. This is
+   an audit trail, not a state file.
 
 ### Phase 2 — Per-page extraction
 
 For each page in the cap-respecting list, render with Playwright
-following `reference/playwright-recipe.md`:
+following `reference/playwright-recipe.md`. The recipe is mandatory —
+in particular, do not skip the wait, scroll, or capture-list steps:
 
 - Viewport 1440 × 900 @ 2× DPR
-- Wait for `networkidle`, then 1.5 s grace period
+- Wait per the configured wait mode (default `medium`; see § Wait
+  modes in `reference/playwright-recipe.md`)
 - Disable animations via `prefers-reduced-motion: reduce`
+- After the wait resolves, scroll to bottom in 4 viewport-height
+  steps with 300 ms pauses, then return to top — this is required
+  to trigger lazy-load and IntersectionObserver-driven content
+- Record `waitMs` and `waitMode` in the per-page `_provenance`
 
 Capture per page (full schema in `reference/current-state-schema.md`):
 
@@ -115,26 +134,39 @@ successful page write. If a page fails, record the error in
 
 ### Phase 3 — Brand-surface extraction
 
-Run once, against the user-designated landing page (default: the home
-page or whichever page the user pointed `<url>` at). Produces
-`stardust/current/_brand-extraction.json` per
-`reference/brand-surface.md`. Captures:
+Run once, **after Phase 2 has finished**, so cross-page aggregation
+has data to work with. Produces `stardust/current/_brand-extraction.json`
+per `reference/brand-surface.md`. Some fields are home-only (logo,
+voice samples, register heuristic); the visual tokens that drive
+DESIGN.md (palette, radius, shadow, type) are aggregated across **all
+extracted pages** to avoid the home-page bias documented in
+`brand-surface.md` § Aggregation scope. Captures:
 
 - **Logo** by the v1 priority chain: inline SVG → `<img>` with
   logo-ish class/id → `apple-touch-icon` → `og:image` → favicon →
   synthesized placeholder. Save to `stardust/current/assets/logo.<ext>`.
-- **Palette** — aggregate computed colors across the home page
-  (background, text, accents, borders, hovers). Frequency-sort,
+- **Palette** — aggregate computed colors across **all extracted
+  pages** (background, text, accents, borders, hovers). Frequency-sort,
   cluster near-duplicates, emit a role-named list (background, surface,
   text, primary, secondary, accent).
 - **Type** — font families in use with their weights, sizes, and
   computed line-heights. Identify the heading family vs body family.
-- **Motifs** — signature border-radius (mode across non-zero values),
-  shadow stack (top 3 distinct), gradient inventory, common patterns
-  (chip, badge, card, hero-with-image).
+  Run the modular-scale audit (`brand-surface.md` § Modular-scale
+  audit) and emit `scaleAudit.kind = "modular" | "ad-hoc"`.
+- **Motifs** — signature border-radius (cross-page mode of non-zero
+  values, weighted by element count), shadow stack (top 3 distinct,
+  cross-page), gradient inventory, common patterns (chip, badge,
+  card, hero-with-image). When the home-only mode disagrees with the
+  cross-page mode, surface the divergence in `_provenance.notes`.
 - **Voice samples** — first paragraph of body copy, the hero headline,
   3 representative CTA labels, a representative link list. Used by
   `direct` later but extracted now so the network round-trip is over.
+- **System components** — cross-page repeated DOM blocks (site
+  header, site footer, cross-promo strips, persistent CTAs,
+  breadcrumbs). Detected by heading-sequence + CTA-label fingerprint
+  per `reference/brand-surface.md` § System components. Required —
+  these are usually the most load-bearing surfaces and must not
+  silently disappear from the redesign target.
 
 Do not invent values. Every captured value cites a source selector or
 URL in `_brand-extraction.json` for traceability.
@@ -170,9 +202,41 @@ contract; the runtime command is not.
 The target-state PRODUCT.md and DESIGN.md at the project root are
 written by `$stardust direct` in Phase 2 of the pipeline, not here.
 
-### Phase 5 — Update state and report
+### Phase 5 — Render `stardust/current/brand-review.html`
 
-After all Phase 2-4 writes succeed:
+After Phase 4 writes the descriptive PRODUCT.md and DESIGN.md, emit
+the current-state brand review per
+`reference/brand-review-template.md`.
+
+The brand-review HTML is the **first surface a human can eyeball** to
+verify the extraction before committing to a redesign direction.
+Misreads in the JSON (a wrong dominant radius, a missing system
+component, a single-page palette bias) are obvious to the eye in five
+seconds and invisible in JSON until someone notices. Putting the
+review at the end of `extract` catches misreads while they are still
+cheap to fix — re-extract is fast; re-direct + re-prototype is not.
+
+The template is mandatory. In particular:
+
+1. Run the **Tensions detectors** listed in
+   `reference/brand-review-template.md` § Detectors. Each rule is
+   mechanical; emit a tension card whenever the trigger condition
+   matches. The review may ship with zero tensions if the data is
+   too thin to evaluate, but the detectors must always be run.
+2. Render in the brand's **own captured colors and fonts**, not a
+   stardust shell.
+3. Embed all CSS; do not load external JavaScript or fonts unless
+   the live site already does.
+4. Cite the source artifact for every section (e.g.
+   `_brand-extraction.json § type` under Typography).
+
+If the data for a section is missing, **omit the section** — do not
+fabricate placeholders. The coverage callout at the top reflects what
+is missing.
+
+### Phase 6 — Update state and report
+
+After all Phase 2-5 writes succeed:
 
 1. Update `stardust/state.json` (schema in
    `skills/stardust/reference/state-machine.md`):
@@ -187,13 +251,24 @@ After all Phase 2-4 writes succeed:
    stardust/current/
      PRODUCT.md            (register: brand, inferred from landing)
      DESIGN.md             (5 colors, 2 type families, 3 motifs)
+     brand-review.html     (4 tensions surfaced)
      pages/                (25 files)
      assets/logo.svg       (extracted from inline SVG)
      _brand-extraction.json
      _crawl-log.json
 
+   Wait summary: 23 resolved at medium (avg 2.4s), 2 fallback (timed out at 8s)
+     → /donate/, /events/ may be under-captured; consider --refresh
+
+   Open stardust/current/brand-review.html to verify the extraction
+   before running $stardust direct.
+
    Next: $stardust direct  (resolve a redesign direction)
    ```
+
+   Compute the wait summary by grouping each page's `_provenance.waitMode`
+   and averaging `waitMs`. List slugs whose `waitMode` ends in
+   `(fallback)` as candidates for `--refresh`.
 
 ## Outputs
 
@@ -202,10 +277,12 @@ After all Phase 2-4 writes succeed:
 | `stardust/current/PRODUCT.md`               | Descriptive strategy of the existing site (impeccable format) |
 | `stardust/current/DESIGN.md`                | Descriptive visual system (Stitch format)           |
 | `stardust/current/DESIGN.json`              | Sidecar with extensions for motifs, voice, components |
+| `stardust/current/brand-review.html`        | Self-contained visual review of the extraction (first eyeball-able artifact) |
 | `stardust/current/pages/<slug>.json`        | Per-page parsed structure + content                 |
 | `stardust/current/assets/logo.<ext>`        | Extracted logo                                      |
 | `stardust/current/assets/media/`            | Extracted media referenced by pages                 |
-| `stardust/current/_brand-extraction.json`   | Consolidated brand surface (palette, type, motifs, voice) |
+| `stardust/current/assets/screenshots/`      | Per-page viewport screenshots (used by brand-review) |
+| `stardust/current/_brand-extraction.json`   | Consolidated brand surface (palette, type, motifs, voice, system components) |
 | `stardust/current/_crawl-log.json`          | Discovery + crawl audit trail                       |
 | `stardust/state.json`                       | Updated with site + per-page status                 |
 
@@ -221,13 +298,24 @@ report; do not engineer around it.
   end with a partial state. State.json reflects only successfully
   extracted pages. User can re-run; already-extracted pages are
   skipped unless `--refresh <slug>`.
+- **HTTP 4xx/5xx, non-HTML content, soft-404s.** Validated explicitly
+  per `reference/playwright-recipe.md` § Response validation. Each
+  produces a distinct error class (`HTTPError`, `ContentTypeError`,
+  `EmptyPageError`) recorded in `_crawl-log.json#crawl.failures[]`.
+  Failed pages do **not** appear in `state.json` as `extracted` —
+  they appear only in the failure log. Without this validation a 5xx
+  page silently lands as an empty success and propagates wrong data
+  to `direct` and `prototype`.
 - **Login wall.** Do not attempt to authenticate. If the home page
   redirects to a login screen, capture that one page, mark the rest as
   unreachable, and ask the user how to proceed (provide cookies via
   Playwright config, change the entry URL, or scope to public pages).
 - **JavaScript-only content.** Playwright already handles this. If
-  `networkidle` never fires (infinite analytics polling), fall back
-  to a 10 s hard timeout and capture what is rendered.
+  the configured wait condition never fires within the mode's hard
+  cap (`reference/playwright-recipe.md` § Wait modes), fall back to
+  `domcontentloaded` and capture what is rendered. Record the
+  fallback in the per-page `_provenance.waitMode` and surface in the
+  wait-summary line of the final report.
 
 ## References
 
@@ -235,5 +323,6 @@ report; do not engineer around it.
 - `reference/ia-extraction.md` — sitemap + BFS crawl + cap procedure.
 - `reference/current-state-schema.md` — per-page JSON schema.
 - `reference/brand-surface.md` — consolidated brand-surface schema.
+- `reference/brand-review-template.md` — current-state brand-review HTML contract + Tensions detectors.
 - `skills/stardust/reference/state-machine.md` — state.json contract.
 - `skills/stardust/reference/artifact-map.md` — provenance shape.
