@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy:         stardust:prototype (no-impeccable mode)
+  writtenAt:         2026-04-28T12:21:00Z
+  page:              home — Variant C · Bold direction
+  pageUrl:           https://www.polestar.com/us/
+  againstDirection:  stardust/direction.md (Active 2026-04-28T12:05:00Z)
+  renderedVia:       stardust-direct (no-impeccable; explicit per --no-impeccable)
+  variant:           C
+  thesis:            "Restraint with three earned exclamation marks."
+  oneElementPushed:  typography (96px display tier — three earned uses; everything else preserved)
+  readArtifacts:
+    - stardust/current/pages/home.json
+    - stardust/current/_brand-extraction.json
+    - DESIGN.md
+    - DESIGN.json
+    - stardust/direction.md
+    - stardust/prototypes/home-C-shape.md
+  brandFaithfulInversions:
+    - pure-black-near-black-allowed
+    - hex-format-retained
+    - flat-hierarchy-allowed (preserved on non-display sections)
+    - single-typeface-allowed (display moments use the same family at the same weight)
+    - radius-zero-allowed
+    - no-shadow-allowed
+  unsourcedContent:
+    - selector: 'section[data-section="closing"] .closing__title'
+      type: other
+      reason: "Variant C's third earned display moment requires a closing-statement headline. The captured page does not provide one. Rendered with F-002 placeholder visual signature."
+  stardustVersion:   0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polestar – Electric cars | Polestar US</title>
+<style>
+  /* :root token contract — brand-faithful Mode A.
+     Variant C introduces a 96px display tier used three times only
+     (hero, sustainability, closing). Body, secondary headings, CTAs,
+     and nav preserve the existing scale. Weight stays 400 — the
+     display move is size, not weight. */
+  :root{
+    --heading-font-family: "Polestar Unica", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --body-font-family:    "Polestar Unica", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    --heading-xxl: 96px;   /* DISPLAY tier — three earned uses on this page only */
+    --heading-xl:  56px;
+    --heading-lg:  30px;
+    --heading-md:  24px;
+    --body:        16px;
+    --body-sm:     14px;
+
+    --line-height-display: 1.0;
+    --line-height-heading: 1.18;
+    --line-height-body:    1.45;
+
+    --signalWhite:      #ECECE7;
+    --graphiteBlack:    #101820;
+    --graphiteBlack60:  rgba(16,24,32,0.6);
+    --graphiteBlack15:  rgba(16,24,32,0.15);
+    --ironGrey:         #53565A;
+    --stormGrey:        #75787B;
+    --agatheGrey:       #B1B3B3;
+    --greyNurse:        #C8C9C7;
+    --greyWhite:        #D9D9D6;
+    --offlineRed:       #E03C31;
+    --onlineGreen:      #00E676;
+
+    --color-bg:     var(--signalWhite);
+    --color-fg:     var(--graphiteBlack);
+    --color-accent: var(--graphiteBlack);
+
+    --spacing-xs:  4px;
+    --spacing-sm:  8px;
+    --spacing-md:  16px;
+    --spacing-lg:  24px;
+    --spacing-xl:  48px;
+    --spacing-2xl: 64px;
+    --spacing-3xl: 80px;   /* cap — used around display moments */
+
+    --section-padding: 64px;
+    --max-width:       1440px;
+    --radius:          0;
+    --radius-input:    2px;
+
+    --border-hairline: 1px solid var(--graphiteBlack15);
+    --border-strong:   1px solid var(--graphiteBlack);
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--color-bg);
+    color:var(--color-fg);
+    font:var(--body)/var(--line-height-body) var(--body-font-family);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  a{color:inherit}
+  img{max-width:100%;display:block}
+
+  /* DISPLAY TIER — variant C's signature move */
+  .display{
+    font-family:var(--heading-font-family);
+    font-size:var(--heading-xxl);
+    font-weight:400;
+    line-height:var(--line-height-display);
+    letter-spacing:-0.022em;
+    margin:0;
+  }
+  .display sup{font-size:0.32em;font-weight:400;vertical-align:super;letter-spacing:0;margin-left:4px}
+
+  /* HEADER */
+  header[data-section="header"]{
+    position:sticky;top:0;z-index:50;
+    background:var(--color-bg);
+    border-bottom:var(--border-hairline);
+  }
+  .nav{
+    max-width:var(--max-width);margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 32px;
+  }
+  .nav__brand{font-size:18px;letter-spacing:0.16em;font-weight:400;text-transform:uppercase;text-decoration:none}
+  .nav__primary{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+  .nav__primary a{text-decoration:none;font-size:14px;letter-spacing:0.01em;padding:6px 0;border-bottom:1px solid transparent;transition:border-color 120ms}
+  .nav__primary a:hover{border-bottom-color:var(--graphiteBlack)}
+  .nav__utility{display:flex;gap:20px;align-items:center;font-size:14px;color:var(--graphiteBlack60)}
+
+  /* BUTTONS */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    font:400 var(--body)/1 var(--body-font-family);
+    padding:14px 28px;border-radius:0;cursor:pointer;
+    border:var(--border-strong);
+    transition:background-color 160ms, color 160ms;
+    text-decoration:none;letter-spacing:0.005em;
+  }
+  .btn--primary{background:var(--graphiteBlack);color:#fff}
+  .btn--primary:hover{background:transparent;color:var(--graphiteBlack)}
+  .btn--secondary{background:transparent;color:var(--graphiteBlack)}
+  .btn--secondary:hover{background:var(--graphiteBlack);color:#fff}
+  .btn--tertiary{
+    background:transparent;color:var(--graphiteBlack);
+    border:0;padding:14px 0;border-bottom:1px solid var(--graphiteBlack);
+    border-radius:0;
+  }
+  .btn--tertiary:hover{border-bottom-width:2px;padding-bottom:13px}
+
+  /* HERO — DISPLAY MOMENT 1 of 3 */
+  section[data-section="hero"]{
+    padding:0 0 var(--spacing-3xl);
+  }
+  .hero__media{
+    width:100%;aspect-ratio:16/9;max-height:680px;
+    background:#000 center/cover no-repeat;
+  }
+  .hero__plate{
+    max-width:var(--max-width);margin:0 auto;
+    padding:64px 32px 0;
+    background:var(--signalWhite);
+    margin-top:-1px;
+  }
+  .hero__title{
+    /* 96px display — line 1 then line 2, both at 96px / 400 */
+  }
+  .hero__title .l1{display:block}
+  .hero__title .l2{display:block}
+  .hero__ctas{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:48px}
+
+  /* INCENTIVE — standard scale (no display escalation) */
+  section[data-section="incentive"]{
+    padding:var(--spacing-2xl) 0;
+    border-top:var(--border-hairline);
+  }
+  .incentive{
+    max-width:var(--max-width);margin:0 auto;padding:0 32px;
+    display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:start;
+  }
+  .incentive__head{font-size:var(--heading-lg);font-weight:400;line-height:var(--line-height-heading);margin:0;letter-spacing:-0.005em}
+  .incentive__head sup{font-size:0.5em;font-weight:400;vertical-align:super;margin-left:2px}
+  .incentive__body{font-size:var(--body);max-width:46ch;line-height:1.55}
+  .incentive__foot{font-size:var(--body-sm);color:var(--graphiteBlack60);max-width:46ch;margin-top:16px;line-height:1.5}
+
+  /* MODEL GRID — standard scale */
+  section[data-section="model-grid"]{
+    padding:var(--spacing-3xl) 0;
+    background:var(--color-bg);
+  }
+  .modelGrid{
+    max-width:var(--max-width);margin:0 auto;padding:0 32px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  }
+  .card{
+    background:var(--signalWhite);
+    border:var(--border-hairline);
+    padding:24px;
+    transition:border-color 160ms;
+    display:flex;flex-direction:column;gap:16px;
+  }
+  .card:hover{border-color:var(--graphiteBlack)}
+  .card__media{
+    aspect-ratio:535/181;background:#fff center/contain no-repeat;
+    border-bottom:1px solid var(--graphiteBlack15);
+    padding:0 0 12px;
+  }
+  .card__title{font-size:var(--heading-lg);font-weight:400;margin:8px 0 0;letter-spacing:-0.005em}
+  .card__cta{margin-top:auto}
+
+  /* SUSTAINABILITY — DISPLAY MOMENT 2 of 3 */
+  section[data-section="sustainability"]{
+    padding:0 0 var(--spacing-3xl);
+    border-top:var(--border-hairline);
+  }
+  .sus__media{
+    width:100%;aspect-ratio:1440/700;max-height:560px;
+    background:#000 center/cover no-repeat;
+    margin-bottom:48px;
+  }
+  .sus__body{
+    max-width:var(--max-width);margin:0 auto;padding:0 32px;
+    display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;
+  }
+  .sus__title{
+    /* uses .display class — 96px */
+  }
+  .sus__sub{font-size:var(--heading-md);font-weight:400;margin:0 0 16px;color:var(--graphiteBlack60);max-width:34ch;line-height:1.3}
+
+  /* CHARGING + NEWSLETTER — standard scale */
+  section[data-section="charging"]{
+    padding:var(--spacing-2xl) 0;
+    border-top:var(--border-hairline);
+  }
+  .charging{
+    max-width:var(--max-width);margin:0 auto;padding:0 32px;
+    display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:center;
+  }
+  .eyebrow{font-size:var(--body-sm);text-transform:uppercase;letter-spacing:0.08em;color:var(--graphiteBlack60);font-weight:600}
+
+  section[data-section="newsletter"]{
+    padding:var(--spacing-2xl) 0;
+    border-top:var(--border-hairline);
+  }
+  .nl{
+    max-width:var(--max-width);margin:0 auto;padding:0 32px;
+    display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;
+  }
+  .nl__title{font-size:var(--heading-md);font-weight:400;margin:0;line-height:1.3;max-width:34ch}
+  .nl__form{display:flex;gap:8px}
+  .nl__input{
+    flex:1 1 auto;padding:14px 16px;
+    background:transparent;border:var(--border-strong);
+    border-radius:var(--radius-input);
+    font:400 var(--body) var(--body-font-family);color:var(--graphiteBlack);
+    min-width:0;
+  }
+  .nl__input::placeholder{color:var(--graphiteBlack60)}
+
+  /* CLOSING — DISPLAY MOMENT 3 of 3 */
+  section[data-section="closing"]{
+    padding:var(--spacing-3xl) 0 var(--spacing-3xl);
+    border-top:var(--border-hairline);
+    background:var(--color-bg);
+  }
+  .closing{
+    max-width:var(--max-width);margin:0 auto;padding:0 32px;
+  }
+
+  /* PLACEHOLDER signature (F-002 contract) */
+  .placeholder-tag{
+    display:inline-block;position:relative;
+    padding:8px 14px 12px;
+    outline:2px dashed var(--graphiteBlack);
+    outline-offset:4px;
+    background:var(--greyWhite);
+  }
+  .placeholder-tag::before{
+    content:"PLACEHOLDER · " attr(data-placeholder-type);
+    display:block;
+    font:600 11px/1 "SF Mono", Menlo, monospace;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--graphiteBlack);
+    margin-bottom:10px;
+    background:#fff;
+    padding:3px 6px;
+    width:max-content;
+  }
+
+  /* FOOTER */
+  footer[data-section="footer"]{
+    padding:var(--spacing-3xl) 0 var(--spacing-2xl);
+    border-top:var(--border-hairline);background:var(--color-bg);
+  }
+  .footer{
+    max-width:var(--max-width);margin:0 auto;padding:0 32px;
+    display:grid;grid-template-columns:repeat(5,1fr);gap:48px;
+  }
+  .footer h4{font-size:var(--body);font-weight:600;letter-spacing:0.04em;text-transform:uppercase;margin:0 0 16px}
+  .footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+  .footer a{font-size:var(--body-sm);color:var(--graphiteBlack);text-decoration:none}
+  .footer a:hover{text-decoration:underline;text-underline-offset:4px}
+  .footer__legal{
+    max-width:var(--max-width);margin:48px auto 0;padding:24px 32px 0;
+    border-top:var(--border-hairline);
+    display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;
+    font-size:12px;color:var(--graphiteBlack60);
+  }
+
+  /* RESPONSIVE — display tier collapses on mobile so it never overflows */
+  @media (max-width: 1024px){
+    :root{--heading-xxl:72px}
+    .modelGrid{grid-template-columns:1fr 1fr}
+    .footer{grid-template-columns:repeat(3,1fr)}
+  }
+  @media (max-width: 768px){
+    :root{--heading-xxl:56px;--section-padding:32px}
+    .nav__primary{display:none}
+    .hero__plate{padding:40px 20px 0}
+    .incentive,.sus__body,.nl{grid-template-columns:1fr;gap:24px}
+    .modelGrid{grid-template-columns:1fr;gap:16px}
+    .footer{grid-template-columns:1fr 1fr}
+    section[data-section="hero"]{padding-bottom:48px}
+    section[data-section="model-grid"]{padding:48px 0}
+    section[data-section="incentive"],
+    section[data-section="charging"],
+    section[data-section="newsletter"]{padding:48px 0}
+    section[data-section="sustainability"]{padding-bottom:48px}
+    section[data-section="closing"]{padding:64px 0}
+  }
+  @media (max-width: 480px){
+    :root{--heading-xxl:44px}
+    .nav{padding:14px 20px}
+    .footer{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<header data-section="header" data-intent="navigation" data-layout="contained">
+  <nav class="nav" aria-label="Primary">
+    <a class="nav__brand" href="/">POLESTAR</a>
+    <ul class="nav__primary">
+      <li><a href="/us/polestar-2/">Polestar 2</a></li>
+      <li><a href="/us/polestar-3/">Polestar 3</a></li>
+      <li><a href="/us/polestar-4/">Polestar 4</a></li>
+      <li><a href="/us/pre-owned/">Pre-owned</a></li>
+      <li><a href="/us/shopping-tools/">Shopping tools</a></li>
+      <li><a href="/us/ownership/">Ownership</a></li>
+      <li><a href="/us/more/">More</a></li>
+    </ul>
+    <div class="nav__utility">
+      <span>United States</span>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO — Display moment 1/3 -->
+  <section data-section="hero"
+           data-intent="emotional hook"
+           data-layout="full-bleed"
+           data-media="image">
+    <div class="hero__media"
+         role="img"
+         aria-label="Polestar 4 in motion, daylight"
+         style="background-image:url('https://www.polestar.com/dato-assets/94392/1766420519-polestar-release-day-video-key-photo-desktop.png?fm=avif&only-imgix=true&fit=min&q=35&dpr=2&w=1984')">
+    </div>
+    <div class="hero__plate">
+      <h1 class="display hero__title">
+        <span class="l1">Polestar 4.</span>
+        <span class="l2">Choose better.</span>
+      </h1>
+      <div class="hero__ctas">
+        <a class="btn btn--primary" href="/us/polestar-4/">Order now</a>
+        <a class="btn btn--tertiary" href="/us/polestar-4/learn/">Learn more →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INCENTIVE — standard scale -->
+  <section data-section="incentive"
+           data-intent="drive action"
+           data-layout="contained">
+    <div class="incentive">
+      <h2 class="incentive__head">Not the status quo. Tesla owners receive $14,000.<sup>¹</sup></h2>
+      <div>
+        <p class="incentive__body">A conquest credit toward a new Polestar 3 or Polestar 4 for current Tesla owners. Eligibility, terms and conditions apply.</p>
+        <p class="incentive__foot">¹ Limited time offer. Restrictions apply. See full terms.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODEL GRID — standard scale -->
+  <section data-section="model-grid"
+           data-intent="value proposition"
+           data-layout="grid"
+           data-items="3"
+           data-media="image">
+    <div class="modelGrid">
+
+      <article class="card">
+        <div class="card__media"
+             role="img"
+             aria-label="Polestar 4 side view"
+             style="background-image:url('https://www.polestar.com/dato-assets/11286/1715697738-ps4-light.png?w=535&dpr=2')">
+        </div>
+        <h3 class="card__title">Polestar 4</h3>
+        <a class="btn btn--tertiary card__cta" href="/us/polestar-4/">Order Polestar 4 →</a>
+      </article>
+
+      <article class="card">
+        <div class="card__media"
+             role="img"
+             aria-label="Polestar 3 side view"
+             style="background-image:url('https://www.polestar.com/dato-assets/11286/1715697672-ps3-light.png?w=535&dpr=2')">
+        </div>
+        <h3 class="card__title">Polestar 3</h3>
+        <a class="btn btn--tertiary card__cta" href="/us/polestar-3/">Order Polestar 3 →</a>
+      </article>
+
+      <article class="card">
+        <div class="card__media"
+             role="img"
+             aria-label="Side view of Polestar 2 electric car in white color with black roof"
+             style="background-image:url('https://www.polestar.com/dato-assets/11286/1715759218-ps2-light.png?w=535&dpr=2')">
+        </div>
+        <h3 class="card__title">Polestar 2</h3>
+        <a class="btn btn--tertiary card__cta" href="/us/polestar-2/">Order Polestar 2 →</a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- SUSTAINABILITY — Display moment 2/3 -->
+  <section data-section="sustainability"
+           data-intent="build trust"
+           data-layout="full-bleed"
+           data-media="image">
+    <div class="sus__media"
+         role="img"
+         aria-label="City buildings with wind turbines and LCA report visual signature"
+         style="background-image:url('https://www.polestar.com/dato-assets/94392/1771837116-home-brand-lcareport-2026-d.png?fm=avif&only-imgix=true&fit=min&q=35&dpr=2&w=1984')">
+    </div>
+    <div class="sus__body">
+      <div>
+        <h2 class="display sus__title">Sustainability.</h2>
+      </div>
+      <div>
+        <p class="sus__sub">Being transparent with the facts.</p>
+        <a class="btn btn--tertiary" href="/us/sustainability/">Read the LCA report →</a>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="charging"
+           data-intent="explain mechanic"
+           data-layout="contained">
+    <div class="charging">
+      <span class="eyebrow">Charging</span>
+      <p style="margin:0;font-size:var(--body)">Public networks, home charging, and ownership tools.</p>
+      <a class="btn btn--tertiary" href="/us/charging/">Find a charger →</a>
+    </div>
+  </section>
+
+  <section data-section="newsletter"
+           data-intent="capture lead"
+           data-layout="contained"
+           data-interactive="form">
+    <div class="nl">
+      <h2 class="nl__title">Stay up to date on all the latest Polestar news</h2>
+      <form class="nl__form" action="#" method="post" novalidate>
+        <input class="nl__input" type="email" id="email" name="email" placeholder="Email address" required aria-label="Email address">
+        <button class="btn btn--primary" type="submit">Sign up</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- CLOSING — Display moment 3/3 (variant C signature) -->
+  <section data-section="closing"
+           data-intent="emotional hook"
+           data-layout="contained">
+    <div class="closing">
+      <!-- Variant C compositional move: third earned display moment.
+           The closing line is demanded but not in current/pages/home.json.
+           Rendered with F-002 placeholder visual signature. -->
+      <h2 class="display closing__title">
+        <span class="placeholder-tag"
+              data-placeholder="true"
+              data-placeholder-type="other"
+              data-placeholder-source="design demanded by Variant C 96px display budget (3 of 3); not in current/pages/home.json">Drive better.</span>
+      </h2>
+    </div>
+  </section>
+
+</main>
+
+<footer data-section="footer" data-intent="navigation" data-layout="grid" data-items="5">
+  <div class="footer">
+    <div>
+      <h4>Explore &amp; buy</h4>
+      <ul>
+        <li><a href="/us/polestar-2/">Polestar 2</a></li>
+        <li><a href="/us/polestar-3/">Polestar 3</a></li>
+        <li><a href="/us/polestar-4/">Polestar 4</a></li>
+        <li><a href="/us/pre-owned/">Pre-owned</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="/us/shop/available-cars/">Shop available cars</a></li>
+        <li><a href="/us/shop/pre-owned/">Shop pre-owned cars</a></li>
+        <li><a href="/us/shop/test-drive/">Book a test drive</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <ul>
+        <li><a href="/us/support/">Help center</a></li>
+        <li><a href="/us/support/contact/">Contact us</a></li>
+        <li><a href="/us/charging/">Charging</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>About</h4>
+      <ul>
+        <li><a href="/us/about/">About Polestar</a></li>
+        <li><a href="/us/sustainability/">Sustainability</a></li>
+        <li><a href="/us/news/">News</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Social</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/polestarcars/">Instagram</a></li>
+        <li><a href="https://www.youtube.com/polestarcars">YouTube</a></li>
+        <li><a href="https://www.linkedin.com/company/polestarcars/">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__legal">
+    <span>United States</span>
+    <span>© Polestar 2026 — Cookie Settings · Do Not Sell My Personal Information · Privacy</span>
+  </div>
+</footer>
+
+</body>
+</html>

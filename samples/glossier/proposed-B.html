@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy:        stardust:prototype (variant B · compositional shift)
+  writtenAt:        2026-04-28
+  page:             home
+  pageUrl:          https://www.glossier.com/
+  againstDirection: stardust/direction.md (Active)
+  shapeBrief:       stardust/prototypes/home-B-shape.md
+  thesis:           "What if the homepage worked differently?"
+  contentSourceMap:
+    hero:           current/pages/home.json (heading "you smell good.")
+    products:       current/pages/home.json (verbatim names + CHF prices)
+    nav-categories: current/pages/home.json (verbatim from primary nav)
+    testimonials:   current/pages/home.json (verbatim)
+    images:         current/pages/home.json (public imgix CDN URLs)
+  unsourcedContent:
+    - "WHAT ARE YOU LOOKING FOR?" section label (refresh-authored)
+    - "LOVED THIS WEEK" section label (refresh-authored)
+    - 5-product curation in "Loved this week" rail (editorial choice)
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Glossier — Variant B · Compositional shift</title>
+<style>
+  :root {
+    --heading-font-family: 'Apercu', 'Gill Sans', sans-serif;
+    --body-font-family: 'Apercu', 'Gill Sans', sans-serif;
+    --mono-font-family: 'Apercu Mono', monospace;
+
+    --heading-xxl: 72px; --heading-xl: 44px; --heading-lg: 28px; --heading-md: 20px;
+    --body: 16px; --body-sm: 14px; --label: 12px; --micro: 11px;
+    --line-height-heading: 1.05; --line-height-body: 1.55;
+
+    --color-bg: #FFFFFF; --color-fg: #000000; --color-fg-muted: #666666;
+    --color-surface-soft: #F7F7F7; --color-border-soft: #E8E8E8;
+    --color-glossier-pink: #FAF2F4; --color-glossier-pink-deep: #F6E3E6;
+    --color-sale-orange: #F94200;
+
+    --spacing-xs: 4px; --spacing-sm: 8px; --spacing-md: 16px; --spacing-lg: 24px;
+    --spacing-xl: 48px; --spacing-2xl: 96px;
+    --section-padding-tight: 40px; --section-padding-balanced: 64px; --section-padding-loose: 96px;
+    --section-padding: var(--section-padding-balanced);
+    --max-width: 1440px; --content-max-width: 1280px; --radius: 0px;
+    --hairline: 1px solid var(--color-border-soft);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: var(--body-font-family); font-size: var(--body); line-height: var(--line-height-body); color: var(--color-fg); background: var(--color-bg); -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  button { font-family: inherit; }
+  @font-face { font-family: 'Apercu'; src: local('Helvetica Neue'), local('Arial'); font-display: swap; }
+
+  .ds-uppercase { text-transform: uppercase; letter-spacing: 0.12em; }
+  .ds-button-primary {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--color-fg); color: var(--color-bg); border: 0; padding: 14px 24px;
+    font: 500 var(--body-sm)/1 var(--body-font-family); letter-spacing: 0.04em;
+    border-radius: 0; cursor: pointer; text-decoration: none;
+  }
+  .ds-button-primary--inverse { background: var(--color-bg); color: var(--color-fg); }
+  .ds-button-secondary {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--color-bg); color: var(--color-fg); border: 1px solid var(--color-fg);
+    padding: 13px 23px; font: 500 var(--body-sm)/1 var(--body-font-family);
+    letter-spacing: 0.04em; text-decoration: none;
+  }
+  .ds-button-link {
+    display: inline-flex; align-items: center; gap: 6px; background: transparent; border: 0;
+    padding: 0; color: var(--color-fg); font: 500 var(--body-sm)/1.4 var(--body-font-family);
+    border-bottom: 1px solid var(--color-fg); text-decoration: none;
+  }
+  .ds-section-label { font-size: var(--label); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 400; margin: 0 0 12px; }
+  .ds-tag { display: inline-block; font-size: var(--label); letter-spacing: 0.02em; font-weight: 500; padding: 0; background: none; }
+  .ds-tag--bestseller, .ds-tag--new { color: var(--color-fg); }
+  .ds-tag--sale { color: var(--color-sale-orange); }
+
+  [data-placeholder] { border-bottom: 1px dashed var(--color-fg-muted); background: linear-gradient(to top, rgba(255,200,200,0.18), transparent 18%); }
+
+  /* Header */
+  .site-header { position: sticky; top: 0; z-index: 10; background: var(--color-bg); border-bottom: var(--hairline); }
+  .site-header__inner {
+    max-width: var(--max-width); margin: 0 auto; padding: 16px 32px;
+    display: grid; grid-template-columns: 80px 1fr auto auto auto; align-items: center; gap: 32px;
+  }
+  .site-header__wordmark { font-size: 28px; font-weight: 400; letter-spacing: -0.01em; font-style: italic; font-family: 'Garamond', 'Times New Roman', serif; }
+  .site-nav { display: flex; gap: 28px; }
+  .site-nav a { font-size: var(--body-sm); text-decoration: none; padding-bottom: 2px; border-bottom: 1px solid transparent; }
+  .site-nav a:hover { border-color: var(--color-fg); }
+  .site-header__util { display: flex; align-items: center; gap: 18px; font-size: var(--body-sm); }
+  .site-header__util a { text-decoration: none; }
+
+  .promo-strip { background: var(--color-fg); color: var(--color-bg); padding: 10px 32px; text-align: center; font-size: var(--label); letter-spacing: 0.08em; text-transform: uppercase; }
+  .promo-strip__sale { color: var(--color-sale-orange); font-weight: 500; }
+  .promo-strip a { color: inherit; border-bottom: 1px solid currentColor; padding-bottom: 1px; text-decoration: none; }
+
+  /* Section base */
+  .section { padding: var(--section-padding) 32px; }
+  .section--tight { padding: var(--section-padding-tight) 32px; }
+  .section--loose { padding: var(--section-padding-loose) 32px; }
+  .section__inner { max-width: var(--content-max-width); margin: 0 auto; }
+  .section__head { display: flex; align-items: end; justify-content: space-between; margin-bottom: var(--spacing-xl); border-top: 1px solid var(--color-fg); padding-top: 24px; flex-wrap: wrap; gap: 16px; }
+  .section__head h2 { margin: 0; font-size: var(--heading-xl); font-weight: 400; letter-spacing: -0.01em; }
+  .section__head .ds-section-label { margin-bottom: 8px; }
+
+  /* SHOP-BY-NEED — leads the page (the compositional shift) */
+  .need-row {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+  }
+  .need-tile {
+    position: relative; aspect-ratio: 1/1.1; overflow: hidden;
+    background: var(--color-glossier-pink-deep);
+    text-decoration: none; color: var(--color-fg);
+    display: flex; flex-direction: column;
+  }
+  .need-tile img {
+    flex: 1; width: 100%; height: 100%; object-fit: cover;
+    transition: transform 320ms ease;
+  }
+  .need-tile:hover img { transform: scale(1.04); }
+  .need-tile__label {
+    background: var(--color-bg); padding: 16px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: var(--body); font-weight: 500;
+  }
+  .need-tile__label::after { content: '→'; opacity: 0.6; }
+
+  /* Hero — split layout with pink plate (Glossier Pink earns its second moment HERE) */
+  .hero-split {
+    display: grid; grid-template-columns: 7fr 5fr; min-height: 620px;
+  }
+  .hero-split__photo {
+    position: relative; overflow: hidden;
+    background: var(--color-glossier-pink);
+  }
+  .hero-split__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero-split__plate {
+    background: var(--color-glossier-pink);
+    padding: 80px 64px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero-split__product { font-size: var(--label); letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; margin-bottom: 24px; }
+  .hero-split__display { font-size: var(--heading-xxl); line-height: 0.95; font-weight: 500; letter-spacing: -0.02em; margin: 0 0 20px; }
+  .hero-split__sub { font-size: var(--heading-md); line-height: 1.4; margin: 0 0 40px; max-width: 360px; }
+  .hero-split__cta { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  /* Loved this week — single curated rail */
+  .loved-rail { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
+  .product-card { display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: inherit; }
+  .product-card__media { aspect-ratio: 4/5; background: var(--color-surface-soft); overflow: hidden; }
+  .product-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 240ms ease; }
+  .product-card:hover .product-card__media img { transform: scale(1.02); }
+  .product-card__cat { font-size: var(--label); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-fg-muted); margin: 4px 0 0; }
+  .product-card__title { font-size: var(--body-sm); font-weight: 500; margin: 2px 0 0; }
+  .product-card__price { font-size: var(--body-sm); margin: 0; }
+  .product-card__price del { color: var(--color-fg-muted); margin-right: 6px; }
+  .product-card__price-now { color: var(--color-sale-orange); }
+  .loved-rail__cta { margin-top: 48px; text-align: center; }
+
+  /* Community — two pull-quotes side by side */
+  .community-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .community-card { display: grid; grid-template-rows: auto auto auto auto auto; gap: 16px; }
+  .community-card__media { aspect-ratio: 4/3; overflow: hidden; background: var(--color-glossier-pink-deep); }
+  .community-card__media img { width: 100%; height: 100%; object-fit: cover; }
+  .community-card__stars { font-size: var(--label); letter-spacing: 0.12em; }
+  .community-card__quote { font-size: var(--heading-lg); line-height: 1.25; font-weight: 400; letter-spacing: -0.005em; margin: 0; }
+  .community-card__attr { font-size: var(--body-sm); color: var(--color-fg-muted); }
+  .community-band__cta { margin-top: 48px; text-align: center; }
+
+  /* UGC */
+  .ugc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .ugc-grid__tile { aspect-ratio: 1/1; overflow: hidden; background: var(--color-glossier-pink-deep); }
+  .ugc-grid__tile--portrait { aspect-ratio: 3/4; }
+  .ugc-grid__tile img { width: 100%; height: 100%; object-fit: cover; }
+  .ugc-caption { margin-top: 32px; max-width: 720px; font-size: var(--heading-md); line-height: 1.4; }
+  .ugc-caption a { border-bottom: 1px solid currentColor; text-decoration: none; }
+
+  /* Footer */
+  .site-footer { background: var(--color-glossier-pink); padding: 64px 32px 24px; }
+  .site-footer__inner { max-width: var(--max-width); margin: 0 auto; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(0,0,0,0.12); }
+  .footer-newsletter h3 { font-size: var(--heading-md); font-weight: 400; margin: 0 0 12px; }
+  .footer-newsletter p { font-size: var(--body-sm); margin: 0 0 16px; max-width: 320px; }
+  .footer-newsletter form { display: flex; }
+  .footer-newsletter input { flex: 1; border: 1px solid var(--color-fg); border-right: 0; background: transparent; padding: 12px; font: 400 var(--body-sm)/1 var(--body-font-family); border-radius: 0; }
+  .footer-newsletter button { border: 1px solid var(--color-fg); background: var(--color-fg); color: var(--color-bg); padding: 12px 18px; font: 500 var(--body-sm)/1 var(--body-font-family); letter-spacing: 0.04em; }
+  .footer-col h4 { font-size: var(--label); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 400; margin: 0 0 16px; }
+  .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col a { font-size: var(--body-sm); text-decoration: none; }
+  .footer-bottom { background: var(--color-glossier-pink-deep); margin: 0 -32px -24px; padding: 24px 32px; display: flex; justify-content: space-between; align-items: center; font-size: var(--micro); letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-fg-muted); }
+  .footer-bottom__wordmark { font-size: 96px; line-height: 0.85; letter-spacing: -0.02em; font-style: italic; font-family: 'Garamond', 'Times New Roman', serif; color: var(--color-fg); text-transform: none; }
+
+  @media (max-width: 1024px) {
+    :root { --section-padding-loose: 72px; --section-padding-balanced: 48px; }
+    .need-row { grid-template-columns: repeat(3, 1fr); }
+    .loved-rail { grid-template-columns: repeat(3, 1fr); }
+    .hero-split { grid-template-columns: 1fr; }
+    .hero-split__photo { min-height: 320px; }
+    .community-grid { grid-template-columns: 1fr; gap: 48px; }
+    .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-nav { display: none; }
+    .site-header__inner { grid-template-columns: 80px 1fr auto auto; }
+  }
+  @media (max-width: 640px) {
+    :root { --section-padding-loose: 48px; --section-padding-balanced: 32px; --section-padding-tight: 24px; }
+    .section, .section--tight, .section--loose, .site-footer { padding-left: 16px; padding-right: 16px; }
+    .need-row { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .loved-rail { grid-template-columns: repeat(2, 1fr); }
+    .ugc-grid { grid-template-columns: 1fr; }
+    .hero-split__plate { padding: 48px 16px; }
+    .hero-split__display { font-size: 48px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .footer-bottom__wordmark { font-size: 56px; }
+  }
+</style>
+</head>
+<body>
+
+<aside class="promo-strip" data-section="promo-strip" data-intent="drive-action" data-layout="full-bleed" data-items="1">
+  <strong class="promo-strip__sale">30% OFF</strong> &nbsp; SPRING FEVER SALE &nbsp;·&nbsp;
+  <a href="#sale">Shop the edit</a>
+</aside>
+
+<header class="site-header" data-section="header" data-intent="navigate" data-layout="contained">
+  <div class="site-header__inner">
+    <span class="site-header__wordmark">Glossier</span>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#need">Skincare</a>
+      <a href="#need">Makeup</a>
+      <a href="#need">Body</a>
+      <a href="#need">Fragrance</a>
+      <a href="#need">Sets</a>
+      <a href="#loved">Bestsellers</a>
+      <a href="#sale" style="color: var(--color-sale-orange);">Spring Fever Sale</a>
+    </nav>
+    <a href="#" aria-label="Search">Search</a>
+    <a href="#" aria-label="Account">Account</a>
+    <a href="#" aria-label="Bag">Bag (0)</a>
+  </div>
+</header>
+
+<!-- Compositional shift: shop-by-need leads the page (instead of campaign hero) -->
+<section class="section section--tight" id="need" data-section="shop-by-need" data-intent="navigate" data-layout="grid" data-items="5">
+  <div class="section__inner">
+    <div class="section__head">
+      <div>
+        <p class="ds-section-label" data-placeholder>WHAT ARE YOU LOOKING FOR?</p>
+        <h2>Start with what you need.</h2>
+      </div>
+      <a class="ds-button-link" href="#">All categories →</a>
+    </div>
+    <div class="need-row">
+      <a class="need-tile" href="#">
+        <img src="https://glossier-prod.imgix.net/files/glossier-skylight-prism-carousel-1.png?auto=compress,format&cs=srgb&w=720" alt="">
+        <span class="need-tile__label">Skincare</span>
+      </a>
+      <a class="need-tile" href="#">
+        <img src="https://glossier-prod.imgix.net/files/glossier-makeup-pro-tip-carousel-01.png?auto=compress,format&cs=srgb&w=720" alt="">
+        <span class="need-tile__label">Makeup</span>
+      </a>
+      <a class="need-tile" href="#">
+        <img src="https://glossier-prod.imgix.net/files/glossier-body-spritz-obn-carousel-01.png?auto=compress,format&cs=srgb&w=720" alt="">
+        <span class="need-tile__label">Body</span>
+      </a>
+      <a class="need-tile" href="#">
+        <img src="https://glossier-prod.imgix.net/files/glossier-fragrance-you-01.png?auto=compress,format&cs=srgb&w=720" alt="">
+        <span class="need-tile__label">Fragrance</span>
+      </a>
+      <a class="need-tile" href="#">
+        <img src="https://glossier-prod.imgix.net/files/glossier-8ml-soie-futuredew-set-carousel-01.png?auto=compress,format&cs=srgb&w=720" alt="">
+        <span class="need-tile__label">Sets</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Hero (now a side-cut split — Glossier Pink earns its second moment in the plate) -->
+<section class="hero-split" data-section="hero" data-intent="emotional-hook" data-layout="split-media" data-media="image">
+  <figure class="hero-split__photo">
+    <img src="https://glossier-prod.imgix.net/files/glossier-you-smell-good-homepage-desktop.png?auto=compress,format&cs=srgb&w=1920" alt="">
+  </figure>
+  <div class="hero-split__plate">
+    <div class="hero-split__product">Glossier You</div>
+    <h1 class="hero-split__display">you smell good.</h1>
+    <p class="hero-split__sub">Make your presence known before you arrive, and long after you leave.</p>
+    <div class="hero-split__cta">
+      <a class="ds-button-primary" href="#loved"><span data-placeholder>Discover the family</span></a>
+      <a class="ds-button-secondary" href="#need">Shop categories</a>
+    </div>
+  </div>
+</section>
+
+<!-- The compositional shift: ONE curated rail instead of two carousels -->
+<section class="section" id="loved" data-section="loved-this-week" data-intent="discovery" data-layout="grid" data-items="5" data-interactive="carousel">
+  <div class="section__inner">
+    <div class="section__head">
+      <div>
+        <p class="ds-section-label" data-placeholder>LOVED THIS WEEK</p>
+        <h2>The edit, hand-picked.</h2>
+      </div>
+      <a class="ds-button-link" href="#">Shop all bestsellers →</a>
+    </div>
+    <div class="loved-rail">
+      <a class="product-card" href="#">
+        <div class="product-card__media"><img src="https://glossier-prod.imgix.net/files/glossier-fragrance-you-01.png?auto=compress,format&cs=srgb&w=720" alt=""></div>
+        <p class="product-card__cat">Fragrance</p>
+        <h3 class="product-card__title">Glossier You</h3>
+        <p class="product-card__price">CHF 81.90</p>
+        <span class="ds-tag ds-tag--bestseller">Best seller</span>
+      </a>
+      <a class="product-card" href="#">
+        <div class="product-card__media"><img src="https://glossier-prod.imgix.net/files/glossier-skylight-prism-carousel-1.png?auto=compress,format&cs=srgb&w=720" alt=""></div>
+        <p class="product-card__cat">Makeup</p>
+        <h3 class="product-card__title">Skylight</h3>
+        <p class="product-card__price"><del>CHF 23.90</del> <span class="product-card__price-now">CHF 16.73</span></p>
+        <span class="ds-tag ds-tag--sale">30% off</span>
+      </a>
+      <a class="product-card" href="#">
+        <div class="product-card__media"><img src="https://glossier-prod.imgix.net/files/glossier-makeup-geng-cake-carousel-01.png?auto=compress,format&cs=srgb&w=720" alt=""></div>
+        <p class="product-card__cat">Lip</p>
+        <h3 class="product-card__title">Generation G</h3>
+        <p class="product-card__price"><del>CHF 19.90</del> <span class="product-card__price-now">CHF 13.93</span></p>
+        <span class="ds-tag ds-tag--sale">30% off</span>
+      </a>
+      <a class="product-card" href="#">
+        <div class="product-card__media"><img src="https://glossier-prod.imgix.net/files/glossier-body-spritz-obn-carousel-01.png?auto=compress,format&cs=srgb&w=720" alt=""></div>
+        <p class="product-card__cat">Body</p>
+        <h3 class="product-card__title">Body Spritz</h3>
+        <p class="product-card__price"><del>CHF 34.90</del> <span class="product-card__price-now">CHF 24.43</span></p>
+        <span class="ds-tag ds-tag--sale">30% off</span>
+      </a>
+      <a class="product-card" href="#">
+        <div class="product-card__media"><img src="https://glossier-prod.imgix.net/files/new-glossier-fragrance-you-soie-carousel-01.jpg?auto=compress,format&cs=srgb&w=720" alt=""></div>
+        <p class="product-card__cat">Fragrance</p>
+        <h3 class="product-card__title">Glossier You Soie</h3>
+        <p class="product-card__price">CHF 81.90</p>
+        <span class="ds-tag ds-tag--new">New</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Consolidated community/stories -->
+<section class="section" data-section="community" data-intent="build-trust" data-layout="grid" data-items="2">
+  <div class="section__inner">
+    <div class="section__head">
+      <div>
+        <p class="ds-section-label">WHAT PEOPLE ARE SAYING</p>
+        <h2>From ground level to top floor.</h2>
+      </div>
+    </div>
+    <div class="community-grid">
+      <article class="community-card">
+        <figure class="community-card__media"><img src="https://d3k81ch9hvuctc.cloudfront.net/company/Sn6eFZ/images/f0f65da5-9502-42d6-9b85-99546df049a3.jpeg" alt=""></figure>
+        <div class="community-card__stars">★★★★★</div>
+        <blockquote class="community-card__quote">"Was running late to a meeting and stumbled into the elevator with the Senior Editor. They were incredibly chic and not known for being super talkative. I reached my floor, stepped out, and right before the doors closed she commented nonchalantly, 'You smell good.'"</blockquote>
+        <div class="community-card__attr">— On <strong>Glossier You</strong></div>
+      </article>
+      <article class="community-card">
+        <figure class="community-card__media"><img src="https://glossier-prod.imgix.net/files/glossier-glossier-you-soie-teaser-ugc-2.png?auto=compress,format&cs=srgb&w=720" alt=""></figure>
+        <div class="community-card__stars">★★★★★</div>
+        <blockquote class="community-card__quote">"The very first time my now boyfriend approached me on the street, the wind blew my Glossier You into his face. He stopped mid-sentence and said 'you smell really good.'"</blockquote>
+        <div class="community-card__attr">— On <strong>Glossier You</strong></div>
+      </article>
+    </div>
+    <div class="community-band__cta">
+      <a class="ds-button-secondary" href="#">Read more stories</a>
+    </div>
+  </div>
+</section>
+
+<!-- UGC -->
+<section class="section" data-section="ugc-grid" data-intent="build-trust" data-layout="grid" data-items="3" data-media="image">
+  <div class="section__inner">
+    <div class="section__head">
+      <div>
+        <p class="ds-section-label">GET THE LOOK</p>
+        <h2>Behind the campaign.</h2>
+      </div>
+      <a class="ds-button-link" href="#">More from the shoot →</a>
+    </div>
+    <div class="ugc-grid">
+      <div class="ugc-grid__tile ugc-grid__tile--portrait"><img src="https://glossier-prod.imgix.net/files/glossier-you-smell-good-UGC-desktop-02_e8f8b5fc-394a-4e7f-aa70-0aa6f6272128.png?auto=compress,format&cs=srgb&w=1080" alt=""></div>
+      <div class="ugc-grid__tile"><img src="https://glossier-prod.imgix.net/files/YSG_COMMUNITY_2_FINAL.jpg?auto=compress,format&cs=srgb&w=1080" alt=""></div>
+      <div class="ugc-grid__tile"><img src="https://glossier-prod.imgix.net/files/glossier-you-smell-good-UGC-desktop-03_c7eca12a-327b-4308-86e0-60e170b1d8a9.png?auto=compress,format&cs=srgb&w=1080" alt=""></div>
+    </div>
+    <p class="ugc-caption">Meet the stars of our campaign: Gabrielle + Bre. <a href="#">Behind the scenes of our latest video.</a></p>
+  </div>
+</section>
+
+<footer class="site-footer" data-section="footer" data-intent="navigate" data-layout="grid" data-items="4">
+  <div class="site-footer__inner">
+    <div class="footer-grid">
+      <div class="footer-newsletter">
+        <h3>The Glossier You newsletter</h3>
+        <p>Be first to know about launches, restocks, and new editorial.</p>
+        <form onsubmit="event.preventDefault();">
+          <input type="email" placeholder="Email address" aria-label="Email address">
+          <button type="submit">Sign up</button>
+        </form>
+      </div>
+      <div class="footer-col">
+        <h4>How can we help?</h4>
+        <ul><li><a href="#">Contact</a></li><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li><li><a href="#">FAQ</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>About Glossier</h4>
+        <ul><li><a href="#">Our story</a></li><li><a href="#">Careers</a></li><li><a href="#">Sustainability</a></li><li><a href="#">Affiliates</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Stores</h4>
+        <ul><li><a href="#">Find a store</a></li><li><a href="#">Sephora</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Social</h4>
+        <ul><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li><li><a href="#">YouTube</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom__wordmark">Glossier</span>
+      <span>© 2026 · CH · EN</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

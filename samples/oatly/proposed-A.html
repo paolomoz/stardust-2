@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy:         stardust:prototype
+  writtenAt:         2026-04-28T10:30:00Z
+  page:              home (variant A — conservative refresh)
+  pageUrl:           https://www.oatly.com/
+  proposedFile:      ./home-A-proposed.html
+  againstDirection:  stardust/direction.md (Active 2026-04-28T10:15:00Z)
+  variant:           A · Conservative refresh
+  thesis:            "yes, that's our quirky homepage, refined"
+  readArtifacts:
+    - stardust/current/pages/home.json
+    - DESIGN.md
+    - DESIGN.json
+  divergenceVersion: v1.0 (stardust v2)
+  fontDeck:          brand-inherited
+  paletteSource:     inherited from _brand-extraction.json
+  unsourcedContent:  []
+  stardustVersion:   0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oatly | the Original Oat Drink Company | Oatly</title>
+<style>
+:root {
+  /* Type families — captured Oatly system, with system fallbacks */
+  --heading-font-family: "Tinny Serif Pro", "DM Serif Display", "Playfair Display", "Times New Roman", serif;
+  --body-font-family:    "Margo Pro Regular", "Inter", system-ui, sans-serif;
+  --body-bold-family:    "Margo Pro Bold", "Inter", system-ui, sans-serif;
+  --display-chunky:      "Bjorn Serif Pro", "Anton", "Impact", sans-serif;
+  --display-antique:     "Petra Antikva Pro", "Antic Slab", "Impact", serif;
+
+  /* Type scale (captured fluid clamp) */
+  --heading-xxl: clamp(5.5rem, calc(5.5rem + (100vw - 48rem) * (11.5 - 5.5) / 57), 11.5rem);
+  --heading-xl:  clamp(4.25rem, calc(4.25rem + (100vw - 48rem) * (9 - 4.25) / 57), 9rem);
+  --heading-lg:  clamp(3rem, calc(3rem + (100vw - 48rem) * (6 - 3) / 57), 6rem);
+  --heading-md:  clamp(2.125rem, calc(2.125rem + (100vw - 48rem) * (4.25 - 2.125) / 57), 4.25rem);
+  --body:        clamp(1rem, calc(1rem + (100vw - 48rem) * (1.125 - 1) / 57), 1.125rem);
+  --body-sm:     0.875rem;
+
+  --line-height-heading: 1.0;
+  --line-height-body:    1.2;
+
+  /* Colors — captured Oatly palette, hex retained per brand-faithful inversion */
+  --color-bg:           #FFFFFF;
+  --color-bg-cream:     #FFFEF6;
+  --color-fg:           #000000;
+  --color-fg-secondary: #222222;
+  --color-accent:       #fdcf85;  /* primary-yellow — the brand voice */
+  --color-pink:         #f8c8d8;
+  --color-blue:         #98c5d3;
+  --color-purple:       #a67eb1;
+  --color-red:          #e43e39;
+  --color-green:        #68c74e;
+  --color-muted:        #888888;
+  --color-border:       #000000;
+  --color-divider:      #eeeeee;
+  --footer-bg:          #f6f6f6;
+
+  /* Spacing — fluid per captured tokens */
+  --spacing-xs:  4px;
+  --spacing-sm:  8px;
+  --spacing-md:  16px;
+  --spacing-lg:  24px;
+  --spacing-xl:  48px;
+  --spacing-2xl: 96px;
+
+  --section-padding:    48px;       /* packed tier per direction.md */
+  --max-width:          1680px;
+  --radius:             0px;        /* sharp corners — brand-faithful */
+  --border-thin:        0.5px;
+  --border-default:     1px;
+  --header-height:      42px;
+  --tab-bar-height:     40px;
+  --start-bar-height:   48px;
+
+  --transition-duration: 0.3s;
+  --transition-timing:   ease-in-out;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body);
+  line-height: var(--line-height-body);
+  color: var(--color-fg);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* Skip link */
+.skip-link {
+  position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden;
+}
+.skip-link:focus { position: fixed; left: var(--spacing-md); top: var(--spacing-md); width: auto; height: auto; padding: 8px 12px; background: var(--color-fg); color: var(--color-bg); z-index: 999; }
+
+/* The Browser/Window container */
+.browser {
+  position: fixed; inset: 0;
+  display: flex; flex-direction: column;
+  background: var(--color-bg-cream);
+  border: var(--border-default) solid var(--color-border);
+  overflow: hidden;
+}
+
+/* Top rail */
+.window-rail {
+  height: var(--header-height);
+  border-bottom: var(--border-default) solid var(--color-border);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 0 var(--spacing-md);
+  gap: var(--spacing-md);
+  background: var(--color-bg);
+  flex: 0 0 auto;
+}
+
+.window-rail .home-icon { display: flex; align-items: center; }
+.window-rail .home-icon svg { width: 22px; height: 22px; stroke: var(--color-fg); fill: none; stroke-width: 1.5; }
+.window-rail .home-icon:hover svg { transform: translateY(-1px); }
+
+.window-title {
+  text-align: center;
+  font-family: var(--body-font-family);
+  font-size: var(--body-sm);
+  letter-spacing: 0.01em;
+  color: var(--color-fg);
+  font-weight: 400;
+  padding: 0 var(--spacing-md);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.window-controls { display: flex; align-items: center; gap: var(--spacing-md); }
+.window-controls .ctrl {
+  font-family: var(--body-bold-family);
+  font-size: var(--body-sm);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 4px 8px;
+  border: var(--border-default) solid transparent;
+  transition: border-color var(--transition-duration) var(--transition-timing);
+}
+.window-controls .ctrl:hover { border-color: var(--color-fg); }
+.window-controls .icon-btn { display: flex; align-items: center; cursor: pointer; padding: 4px; }
+.window-controls .icon-btn svg { width: 18px; height: 18px; stroke: var(--color-fg); fill: none; stroke-width: 1.5; }
+.window-controls .icon-btn:hover svg { stroke: var(--color-muted); }
+
+/* Tab bar */
+.tab-bar {
+  height: var(--tab-bar-height);
+  border-bottom: var(--border-thin) solid var(--color-border);
+  display: flex;
+  background: var(--color-bg);
+  flex: 0 0 auto;
+}
+.tab-bar .tab {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--body-bold-family);
+  font-size: var(--body-sm);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-fg);
+  cursor: pointer;
+  border-right: var(--border-thin) solid var(--color-border);
+  transition: background-color var(--transition-duration) var(--transition-timing);
+  position: relative;
+}
+.tab-bar .tab:last-child { border-right: 0; }
+.tab-bar .tab:hover { background: var(--color-bg-cream); }
+.tab-bar .tab:hover::after {
+  content: "";
+  position: absolute; left: 16px; right: 16px; bottom: 0;
+  border-bottom: var(--border-thin) solid var(--color-fg);
+}
+
+/* Desktop area */
+.desktop {
+  flex: 1 1 auto;
+  position: relative;
+  background-color: var(--color-bg-cream);
+  background-image: url("./grid-paper.svg");
+  background-repeat: repeat;
+  background-size: 96px 96px;
+  overflow: hidden;
+}
+
+/* The centered claim */
+.claim {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--heading-font-family);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--heading-lg);
+  line-height: 1;
+  color: var(--color-fg);
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Folder cluster (top right) */
+.folders {
+  position: absolute;
+  top: var(--spacing-xl);
+  right: var(--spacing-xl);
+  display: grid;
+  grid-template-columns: repeat(3, 124px);
+  grid-template-rows: repeat(2, auto);
+  gap: var(--spacing-md);
+  z-index: 2;
+}
+.icon-tile {
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+  font-family: var(--body-font-family);
+  font-size: var(--body-sm);
+  color: var(--color-fg);
+  cursor: pointer;
+  padding: 4px 4px 8px;
+  transition: transform var(--transition-duration) var(--transition-timing);
+}
+.icon-tile:hover { transform: translateY(-4px); }
+.icon-tile:hover .folder-shape rect { fill: var(--color-accent); }
+.icon-tile .label { line-height: 1.2; word-break: break-word; max-width: 100%; }
+
+.folder-shape {
+  width: 86px; height: 78px;
+  margin-bottom: 8px;
+}
+.folder-shape svg { width: 100%; height: 100%; }
+.folder-shape rect, .folder-shape path { fill: var(--color-bg-cream); stroke: var(--color-fg); stroke-width: 1.5; transition: fill var(--transition-duration); }
+.folder-shape .tab-piece { fill: var(--color-bg-cream); }
+
+/* File cluster (bottom-left) */
+.files {
+  position: absolute;
+  bottom: calc(var(--start-bar-height) + var(--spacing-xl));
+  left: var(--spacing-xl);
+  display: flex; flex-direction: column;
+  gap: var(--spacing-lg);
+  z-index: 2;
+}
+.file-shape { width: 76px; height: 96px; margin-bottom: 6px; display: flex; align-items: center; justify-content: center; }
+.file-shape svg { width: 100%; height: 100%; }
+
+/* Trash bin (bottom-right) */
+.trash {
+  position: absolute;
+  bottom: calc(var(--start-bar-height) + var(--spacing-xl));
+  right: var(--spacing-xl);
+  cursor: pointer;
+  z-index: 2;
+  transition: transform var(--transition-duration) var(--transition-timing);
+}
+.trash:hover { transform: translateY(-2px); }
+.trash svg { width: 76px; height: 96px; stroke: var(--color-fg); fill: none; stroke-width: 1.5; }
+
+/* Start taskbar */
+.start-bar {
+  height: var(--start-bar-height);
+  border-top: var(--border-default) solid var(--color-border);
+  background: var(--color-bg);
+  display: flex; align-items: center;
+  flex: 0 0 auto;
+}
+.start-button {
+  height: 100%;
+  padding: 0 var(--spacing-lg);
+  display: flex; align-items: center; gap: var(--spacing-sm);
+  font-family: var(--body-bold-family);
+  font-size: var(--body-sm);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-right: var(--border-default) solid var(--color-border);
+  cursor: pointer;
+  background: var(--color-bg);
+  transition: background-color var(--transition-duration) var(--transition-timing);
+}
+.start-button::before {
+  content: "";
+  width: 14px; height: 14px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'><path d='M3 12l9-9 9 9'/><path d='M5 10v10h14V10'/></svg>");
+  background-repeat: no-repeat;
+}
+.start-button:hover { background: var(--color-bg-cream); }
+.start-input {
+  flex: 1;
+  height: 100%;
+  border: 0;
+  padding: 0 var(--spacing-lg);
+  font-family: var(--body-font-family);
+  font-size: var(--body-sm);
+  color: var(--color-fg);
+  background: transparent;
+  outline: none;
+  border-bottom: 0;
+  border-right: 0;
+  letter-spacing: 0.01em;
+}
+.start-input::placeholder { color: var(--color-muted); font-style: normal; }
+.start-input:focus { box-shadow: inset 0 -0.5px 0 0 var(--color-fg); }
+
+/* Highlighted folder treatment — subtle accent on first folder */
+.icon-tile.highlighted .folder-shape rect { fill: var(--color-accent); }
+
+/* Refinement: focus outlines */
+:focus-visible {
+  outline: 2px solid var(--color-fg);
+  outline-offset: 2px;
+}
+
+@media (max-width: 920px) {
+  .folders { grid-template-columns: repeat(2, 110px); top: 64px; right: 24px; }
+  .files { left: 24px; bottom: calc(var(--start-bar-height) + 24px); }
+  .trash { right: 24px; bottom: calc(var(--start-bar-height) + 24px); }
+  .claim { font-size: clamp(2rem, 8vw, 4rem); }
+  .tab-bar .tab { font-size: 11px; letter-spacing: 0.04em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .icon-tile:hover { transform: none; }
+  .trash:hover { transform: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#desktop">Skip to content</a>
+
+<div class="browser" data-section="browser-window" data-intent="frame-context" data-layout="full-bleed">
+
+  <header class="window-rail" data-section="window-chrome-rail" data-intent="navigate" data-layout="full-bleed">
+    <a href="#" class="home-icon" aria-label="Home">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/><path d="M9 20v-5h6v5"/></svg>
+    </a>
+    <span class="window-title">Oatly | the Original Oat Drink Company | Oatly</span>
+    <div class="window-controls">
+      <a href="#" class="ctrl">FAQ</a>
+      <a href="#" class="ctrl">SIZ</a>
+      <a href="#" class="icon-btn" aria-label="Locale">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" fill="none">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/>
+        </svg>
+      </a>
+      <a href="#" class="icon-btn" aria-label="Close">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <nav class="tab-bar" data-section="tab-bar" data-intent="navigate" data-layout="full-bleed" data-items="5" aria-label="Primary">
+    <a href="#products" class="tab">Products</a>
+    <a href="#tastebuds" class="tab">Tastebuds</a>
+    <a href="#news" class="tab">News</a>
+    <a href="#sustainability" class="tab">Sustainability</a>
+    <a href="#health" class="tab">Health</a>
+  </nav>
+
+  <main class="desktop" id="desktop" data-section="desktop" data-intent="primary-action" data-layout="edge-to-edge" data-media="image">
+
+    <div class="claim" aria-hidden="false">The Original Oat Drink Company</div>
+
+    <div class="folders" role="list">
+      <a class="icon-tile" href="https://www.fckfckfckoatly.com/" target="_blank" rel="noopener" role="listitem">
+        <span class="folder-shape">
+          <svg viewBox="0 0 86 78" aria-hidden="true">
+            <path d="M3 18 L28 18 L33 12 L83 12 L83 73 L3 73 Z" fill="#FFFEF6" stroke="#000" stroke-width="1.5" stroke-linejoin="round" class="tab-piece"/>
+            <rect x="3" y="22" width="80" height="51" fill="#FFFEF6" stroke="#000" stroke-width="1.5"/>
+          </svg>
+        </span>
+        <span class="label">fckfckfckoatly<br>.com</span>
+      </a>
+      <a class="icon-tile" href="https://www.fckfckoatly.com/" target="_blank" rel="noopener" role="listitem">
+        <span class="folder-shape">
+          <svg viewBox="0 0 86 78"><path d="M3 18 L28 18 L33 12 L83 12 L83 73 L3 73 Z" fill="#FFFEF6" stroke="#000" stroke-width="1.5"/><rect x="3" y="22" width="80" height="51" fill="#FFFEF6" stroke="#000" stroke-width="1.5"/></svg>
+        </span>
+        <span class="label">fckfckoatly<br>.com</span>
+      </a>
+      <a class="icon-tile" href="https://fckoatly.com/" target="_blank" rel="noopener" role="listitem">
+        <span class="folder-shape">
+          <svg viewBox="0 0 86 78"><path d="M3 18 L28 18 L33 12 L83 12 L83 73 L3 73 Z" fill="#FFFEF6" stroke="#000" stroke-width="1.5"/><rect x="3" y="22" width="80" height="51" fill="#FFFEF6" stroke="#000" stroke-width="1.5"/></svg>
+        </span>
+        <span class="label">fckoatly<br>.com</span>
+      </a>
+      <a class="icon-tile" href="http://fckfckfckfckfckoatly.com/" target="_blank" rel="noopener" role="listitem">
+        <span class="folder-shape">
+          <svg viewBox="0 0 86 78"><path d="M3 18 L28 18 L33 12 L83 12 L83 73 L3 73 Z" fill="#FFFEF6" stroke="#000" stroke-width="1.5"/><rect x="3" y="22" width="80" height="51" fill="#FFFEF6" stroke="#000" stroke-width="1.5"/></svg>
+        </span>
+        <span class="label">fckfckfckfckf<br>ckoatly<br>.com</span>
+      </a>
+      <a class="icon-tile" href="https://www.fckfckfckfckoatly.com/" target="_blank" rel="noopener" role="listitem">
+        <span class="folder-shape">
+          <svg viewBox="0 0 86 78"><path d="M3 18 L28 18 L33 12 L83 12 L83 73 L3 73 Z" fill="#FFFEF6" stroke="#000" stroke-width="1.5"/><rect x="3" y="22" width="80" height="51" fill="#FFFEF6" stroke="#000" stroke-width="1.5"/></svg>
+        </span>
+        <span class="label">fckfckfcfckko<br>atly<br>.com</span>
+      </a>
+    </div>
+
+    <div class="files" role="list">
+      <a class="icon-tile" href="https://hey-barista.com/" target="_blank" rel="noopener" role="listitem">
+        <span class="file-shape">
+          <svg viewBox="0 0 76 96" aria-hidden="true">
+            <path d="M8 4 L52 4 L70 22 L70 92 L8 92 Z" fill="#FFFEF6" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M52 4 L52 22 L70 22" fill="none" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="label">heybarista<br>.png</span>
+      </a>
+      <a class="icon-tile" href="https://oatfinder.oatly.com/" target="_blank" rel="noopener" role="listitem">
+        <span class="file-shape">
+          <svg viewBox="0 0 76 96"><path d="M8 4 L52 4 L70 22 L70 92 L8 92 Z" fill="#FFFEF6" stroke="#000" stroke-width="1.5"/><path d="M52 4 L52 22 L70 22" fill="none" stroke="#000" stroke-width="1.5"/></svg>
+        </span>
+        <span class="label">oatfinder<br>.png</span>
+      </a>
+    </div>
+
+    <a href="#" class="trash" aria-label="Trash">
+      <svg viewBox="0 0 76 96" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 22 L62 22 L58 92 L18 92 Z" fill="#FFFEF6"/>
+        <path d="M10 22 L66 22"/>
+        <path d="M28 16 L48 16 L48 22 L28 22 Z" fill="#FFFEF6"/>
+        <path d="M28 32 L30 84 M38 32 L38 84 M48 32 L46 84"/>
+      </svg>
+    </a>
+
+  </main>
+
+  <footer class="start-bar" data-section="start-taskbar" data-intent="navigate-by-search" data-layout="full-bleed">
+    <button class="start-button" type="button" aria-label="Start menu">START</button>
+    <input class="start-input" type="text" placeholder="Where to next?" aria-label="Search or navigate">
+  </footer>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy:         stardust:prototype
+  writtenAt:         2026-04-28T10:35:00Z
+  page:              home (variant B — compositional shift)
+  pageUrl:           https://www.oatly.com/
+  proposedFile:      ./home-B-proposed.html
+  againstDirection:  stardust/direction.md (Active 2026-04-28T10:15:00Z)
+  variant:           B · Compositional shift
+  thesis:            "we're rethinking how the page works"
+  readArtifacts:
+    - stardust/current/pages/home.json
+    - DESIGN.md
+    - DESIGN.json
+  divergenceVersion: v1.0 (stardust v2)
+  fontDeck:          brand-inherited
+  paletteSource:     inherited from _brand-extraction.json
+  unsourcedContent:
+    - selector: "section[data-section=\"hero\"] .product-lockup"
+      type: image
+      reason: "design demanded product imagery; current/pages/home.json has no product photography"
+    - selector: "section[data-section=\"products\"] .product-card .image"
+      type: image
+      reason: "design demanded 4 product photos; not in captured page"
+    - selector: "section[data-section=\"products\"] .product-card .name"
+      type: other
+      reason: "product names not captured on homepage"
+    - selector: "section[data-section=\"products\"] .product-card .description"
+      type: other
+      reason: "product descriptions not captured"
+    - selector: "section[data-section=\"sustainability-strip\"] .stat .number"
+      type: stat
+      reason: "design demanded CO2/land/water reduction stats; not captured"
+    - selector: "section[data-section=\"news\"] .card"
+      type: other
+      reason: "news headlines, dates and imagery not captured"
+    - selector: "footer .columns .nav-list"
+      type: other
+      reason: "secondary nav not captured"
+  stardustVersion:   0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oatly | the Original Oat Drink Company | Oatly</title>
+<style>
+:root {
+  --heading-font-family: "Tinny Serif Pro", "DM Serif Display", "Playfair Display", "Times New Roman", serif;
+  --body-font-family:    "Margo Pro Regular", "Inter", system-ui, sans-serif;
+  --body-bold-family:    "Margo Pro Bold", "Inter", system-ui, sans-serif;
+  --display-chunky:      "Bjorn Serif Pro", "Anton", "Impact", sans-serif;
+  --display-antique:     "Petra Antikva Pro", "Antic Slab", "Impact", serif;
+
+  --heading-xxl: clamp(5.5rem, calc(5.5rem + (100vw - 48rem) * (11.5 - 5.5) / 57), 11.5rem);
+  --heading-xl:  clamp(4.25rem, calc(4.25rem + (100vw - 48rem) * (9 - 4.25) / 57), 9rem);
+  --heading-lg:  clamp(3rem, calc(3rem + (100vw - 48rem) * (6 - 3) / 57), 6rem);
+  --heading-md:  clamp(2.125rem, calc(2.125rem + (100vw - 48rem) * (4.25 - 2.125) / 57), 4.25rem);
+  --body-xl:     clamp(1.25rem, calc(1.25rem + (100vw - 48rem) * (1.5 - 1.25) / 57), 1.5rem);
+  --body-lg:     clamp(1.125rem, calc(1.125rem + (100vw - 48rem) * (1.25 - 1.125) / 57), 1.25rem);
+  --body:        clamp(1rem, calc(1rem + (100vw - 48rem) * (1.125 - 1) / 57), 1.125rem);
+  --body-sm:     0.875rem;
+
+  --line-height-heading: 1.0;
+  --line-height-body:    1.4;
+
+  --color-bg:           #FFFFFF;
+  --color-bg-cream:     #FFFEF6;
+  --color-fg:           #000000;
+  --color-fg-secondary: #222222;
+  --color-accent:       #fdcf85;
+  --color-pink:         #f8c8d8;
+  --color-blue:         #98c5d3;
+  --color-purple:       #a67eb1;
+  --color-red:          #e43e39;
+  --color-green:        #68c74e;
+  --color-muted:        #888888;
+  --color-border:       #000000;
+  --footer-bg:          #f6f6f6;
+
+  --spacing-xs:  4px;
+  --spacing-sm:  8px;
+  --spacing-md:  16px;
+  --spacing-lg:  24px;
+  --spacing-xl:  48px;
+  --spacing-2xl: 96px;
+
+  --section-padding:    48px;
+  --section-padding-md: 36px;
+  --section-padding-sm: 24px;
+  --max-width:          1680px;
+  --container-l:        1280px;
+  --radius:             0px;
+  --border-thin:        0.5px;
+  --border-default:     1px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body);
+  line-height: var(--line-height-body);
+  color: var(--color-fg);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.container {
+  width: 100%; max-width: var(--container-l);
+  margin: 0 auto;
+  padding: 0 var(--section-padding);
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 var(--section-padding-sm); }
+  :root { --section-padding: var(--section-padding-sm); }
+}
+
+.skip-link {
+  position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden;
+}
+.skip-link:focus { position: fixed; left: 16px; top: 16px; width: auto; height: auto; padding: 8px 12px; background: var(--color-fg); color: var(--color-bg); z-index: 999; }
+
+/* HEADER */
+.site-header {
+  height: 56px;
+  position: sticky; top: 0; z-index: 50;
+  background: var(--color-bg-cream);
+  border-bottom: var(--border-thin) solid var(--color-border);
+  display: flex; align-items: center;
+}
+.site-header .container {
+  display: flex; align-items: center; gap: var(--spacing-xl);
+}
+.site-logo { font-family: var(--display-chunky); font-weight: 900; font-size: 28px; letter-spacing: -0.02em; line-height: 1; display: flex; align-items: center; gap: 4px; }
+.site-logo .small { font-family: var(--heading-font-family); font-style: italic; font-size: 11px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1; align-self: flex-start; transform: translateY(2px); }
+.site-logo .mark { font-family: var(--display-chunky); font-size: 26px; letter-spacing: -0.04em; }
+.site-logo .bang { color: var(--color-fg); }
+.site-nav { display: flex; gap: var(--spacing-lg); margin-left: auto; }
+.site-nav a {
+  font-family: var(--body-bold-family); font-weight: 700;
+  font-size: var(--body-sm); letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color 200ms ease;
+}
+.site-nav a:hover { border-bottom-color: var(--color-fg); }
+.site-utility { display: flex; gap: var(--spacing-md); align-items: center; padding-left: var(--spacing-md); border-left: var(--border-thin) solid var(--color-border); }
+.site-utility a { font-family: var(--body-bold-family); font-size: var(--body-sm); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.site-utility .bag { background: var(--color-fg); color: var(--color-bg); padding: 8px 14px; }
+.site-utility .bag:hover { background: var(--color-accent); color: var(--color-fg); }
+
+/* HERO */
+.hero {
+  background: var(--color-bg-cream);
+  padding: var(--spacing-2xl) 0 var(--spacing-2xl);
+  border-bottom: var(--border-default) solid var(--color-border);
+}
+.hero .container { display: grid; grid-template-columns: 7fr 5fr; gap: var(--spacing-2xl); align-items: center; }
+.hero h1 {
+  font-family: var(--display-chunky); font-weight: 900;
+  font-size: var(--heading-xl); line-height: 0.9;
+  margin: 0 0 var(--spacing-lg);
+  letter-spacing: -0.02em;
+}
+.hero p { font-size: var(--body-xl); line-height: 1.4; max-width: 56ch; margin: 0 0 var(--spacing-xl); }
+.hero .ctas { display: flex; gap: var(--spacing-md); flex-wrap: wrap; }
+.hero .ctas a {
+  font-family: var(--body-bold-family); font-weight: 700;
+  font-size: var(--body-sm); letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border: var(--border-default) solid var(--color-border);
+  background: transparent;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+.hero .ctas .primary { background: var(--color-fg); color: var(--color-bg); }
+.hero .ctas .primary:hover { background: var(--color-accent); color: var(--color-fg); }
+.hero .ctas .secondary:hover { background: var(--color-fg); color: var(--color-bg); }
+
+/* PLACEHOLDER signature */
+.placeholder {
+  outline: 2px dashed var(--color-accent);
+  background: rgba(253, 207, 133, 0.18);
+  padding: var(--spacing-lg);
+  position: relative;
+  display: flex; flex-direction: column; gap: var(--spacing-sm);
+}
+.placeholder-eyebrow {
+  font-family: "SFMono-Regular", "Menlo", "Consolas", monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--color-fg);
+  background: var(--color-accent);
+  padding: 2px 8px;
+  display: inline-block; align-self: flex-start;
+  border: var(--border-thin) solid var(--color-fg);
+}
+.placeholder-shape { font-style: italic; color: var(--color-fg-secondary); font-family: var(--heading-font-family); font-size: var(--body-lg); }
+.placeholder-illustration { aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center; color: var(--color-muted); font-family: "SFMono-Regular", "Menlo", "Consolas", monospace; font-size: 11px; }
+
+/* PRODUCTS */
+.products { padding: var(--section-padding) 0; }
+.products h2 {
+  font-family: var(--heading-font-family); font-style: italic;
+  font-size: var(--heading-md); font-weight: 400;
+  margin: 0 0 var(--spacing-xl);
+  text-align: center;
+}
+.products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--spacing-lg); }
+.product-card {
+  border: var(--border-default) solid var(--color-border);
+  background: var(--color-bg-cream);
+  padding: var(--spacing-lg);
+  display: flex; flex-direction: column; gap: var(--spacing-md);
+  position: relative;
+}
+.product-card .image-slot { aspect-ratio: 3/4; }
+.product-card .arrow {
+  position: absolute; right: -8px; top: 60%; width: 56px; height: 30px; opacity: 0.7;
+  transform: rotate(-8deg);
+  pointer-events: none;
+}
+.product-card .arrow svg { width: 100%; height: 100%; stroke: var(--color-fg); fill: none; stroke-width: 1.5; }
+.product-card .arrow-note { position: absolute; right: 12px; top: 50%; font-family: var(--heading-font-family); font-style: italic; font-size: 14px; transform: translateY(-160%) rotate(-3deg); }
+.product-card .name { font-family: var(--display-chunky); font-weight: 900; font-size: 22px; line-height: 1; margin-top: var(--spacing-md); letter-spacing: -0.02em; }
+.product-card .description { font-size: var(--body-sm); line-height: 1.4; color: var(--color-fg-secondary); }
+.product-card .more { font-family: var(--body-bold-family); font-weight: 700; font-size: var(--body-sm); text-transform: uppercase; letter-spacing: 0.06em; text-decoration: underline; align-self: flex-start; margin-top: auto; }
+
+/* SUSTAINABILITY STRIP — the one yellow surface */
+.sustainability {
+  background: var(--color-accent);
+  border-top: var(--border-default) solid var(--color-border);
+  border-bottom: var(--border-default) solid var(--color-border);
+  padding: var(--spacing-2xl) 0;
+}
+.sustainability h2 {
+  font-family: var(--heading-font-family); font-style: italic;
+  font-size: var(--heading-md); font-weight: 400;
+  margin: 0 0 var(--spacing-xl);
+  text-align: center;
+}
+.sustainability-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+.stat-tile { padding: var(--spacing-xl); border-right: var(--border-default) solid var(--color-border); text-align: center; display: flex; flex-direction: column; align-items: center; gap: var(--spacing-md); }
+.stat-tile:last-child { border-right: 0; }
+.stat-tile .number {
+  font-family: var(--display-chunky); font-weight: 900;
+  font-size: var(--heading-xl); line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-fg);
+}
+.stat-tile .label { font-family: var(--body-bold-family); font-weight: 700; font-size: var(--body-sm); letter-spacing: 0.08em; text-transform: uppercase; max-width: 22ch; }
+.stat-tile .placeholder { width: 100%; }
+.stat-tile .placeholder-shape { font-size: var(--heading-xl); font-family: var(--display-chunky); font-style: normal; }
+.stat-footnote { text-align: center; font-size: var(--body-sm); margin-top: var(--spacing-lg); font-style: italic; color: var(--color-fg-secondary); font-family: var(--heading-font-family); }
+
+/* NEWS */
+.news { padding: var(--section-padding) 0; background: var(--color-bg); }
+.news h2 { font-family: var(--heading-font-family); font-style: italic; font-size: var(--heading-md); font-weight: 400; margin: 0 0 var(--spacing-xl); }
+.news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-xl); }
+.news-card { display: flex; flex-direction: column; gap: var(--spacing-md); }
+.news-card .image-slot { aspect-ratio: 4/3; }
+.news-card .date { font-family: "SFMono-Regular", "Menlo", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-muted); }
+.news-card .headline { font-family: var(--display-chunky); font-weight: 900; font-size: 24px; line-height: 1.05; letter-spacing: -0.01em; margin: 0; }
+.news-card .more { font-family: var(--body-bold-family); font-weight: 700; font-size: var(--body-sm); text-transform: uppercase; letter-spacing: 0.06em; text-decoration: underline; align-self: flex-start; }
+
+/* OATFINDER */
+.oatfinder { padding: var(--section-padding) 0; background: var(--color-bg-cream); border-top: var(--border-default) solid var(--color-border); border-bottom: var(--border-default) solid var(--color-border); }
+.oatfinder .panel {
+  max-width: 760px; margin: 0 auto;
+  border: var(--border-default) solid var(--color-border);
+  background: var(--color-bg);
+  padding: var(--spacing-xl);
+  display: flex; flex-direction: column; gap: var(--spacing-md);
+}
+.oatfinder h2 { font-family: var(--display-chunky); font-weight: 900; font-size: var(--heading-lg); line-height: 1; margin: 0; letter-spacing: -0.02em; }
+.oatfinder p { font-size: var(--body-lg); margin: 0; }
+.oatfinder form { display: flex; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+.oatfinder input { flex: 1; border: var(--border-default) solid var(--color-border); padding: 12px 16px; font-family: var(--body-font-family); font-size: var(--body); background: var(--color-bg); }
+.oatfinder input:focus { outline: 2px solid var(--color-fg); outline-offset: -2px; }
+.oatfinder button {
+  font-family: var(--body-bold-family); font-weight: 700; font-size: var(--body-sm);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 12px 24px; border: var(--border-default) solid var(--color-border);
+  background: var(--color-accent); color: var(--color-fg);
+  cursor: pointer;
+}
+.oatfinder button:hover { background: var(--color-fg); color: var(--color-bg); }
+
+/* FOOTER */
+.site-footer { background: var(--footer-bg); padding: var(--section-padding) 0 var(--spacing-lg); border-top: var(--border-default) solid var(--color-border); }
+.footer-columns { display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: var(--spacing-xl); padding-bottom: var(--spacing-xl); }
+.footer-columns .col h3 { font-family: var(--body-bold-family); font-weight: 700; font-size: var(--body-sm); letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 var(--spacing-md); }
+.footer-columns .col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.footer-columns .col ul a { font-size: var(--body-sm); }
+.footer-columns .col ul a:hover { text-decoration: underline; }
+.footer-mark { font-family: var(--display-chunky); font-weight: 900; font-size: 36px; line-height: 1; letter-spacing: -0.04em; }
+.footer-mark .small { font-family: var(--heading-font-family); font-style: italic; font-size: 12px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+.footer-stamp {
+  display: inline-block;
+  border: 2px solid var(--color-fg);
+  padding: 6px 14px;
+  font-family: var(--display-antique);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  font-size: 11px;
+  transform: rotate(-3deg);
+  margin-top: var(--spacing-md);
+  background: transparent;
+}
+.footer-bottom {
+  border-top: var(--border-thin) solid var(--color-border);
+  padding-top: var(--spacing-lg);
+  display: flex; justify-content: space-between; align-items: center; gap: var(--spacing-lg);
+  font-size: var(--body-sm); color: var(--color-fg-secondary);
+  flex-wrap: wrap;
+}
+.footer-bottom .legal { display: flex; gap: var(--spacing-md); flex-wrap: wrap; }
+.footer-bottom a:hover { text-decoration: underline; }
+
+@media (max-width: 1024px) {
+  .hero .container { grid-template-columns: 1fr; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .news-grid { grid-template-columns: repeat(2, 1fr); }
+  .sustainability-grid { grid-template-columns: 1fr; }
+  .stat-tile { border-right: 0; border-bottom: var(--border-default) solid var(--color-border); }
+  .stat-tile:last-child { border-bottom: 0; }
+  .footer-columns { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .products-grid { grid-template-columns: 1fr; }
+  .news-grid { grid-template-columns: 1fr; }
+  .site-nav { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" data-section="header" data-intent="navigate" data-layout="full-bleed">
+  <div class="container">
+    <a href="#" class="site-logo" aria-label="Oatly home">
+      <span class="small">THE ORIGINAL</span>
+      <span class="mark">OAT-LY<span class="bang">!</span></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#products">Products</a>
+      <a href="#tastebuds">Tastebuds</a>
+      <a href="#news">News</a>
+      <a href="#sustainability">Sustainability</a>
+      <a href="#health">Health</a>
+    </nav>
+    <div class="site-utility">
+      <a href="#">FAQ</a>
+      <a href="#" aria-label="Locale">EN/SE</a>
+      <a href="#oatfinder" class="bag">FIND OATLY</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" data-section="hero" data-intent="emotional-hook" data-layout="split-7-5" data-items="2" data-media="image">
+    <div class="container">
+      <div class="hero-text">
+        <h1>Hey! You found us.<br>We're the original<br>oat drink company.</h1>
+        <p>A site filled with everything you could possible think of, and also probably not think of, related to an oat drink company called Oatly.</p>
+        <div class="ctas">
+          <a class="primary" href="#products">Browse Oats</a>
+          <a class="secondary" href="https://hey-barista.com/" target="_blank" rel="noopener">Hey, Barista</a>
+        </div>
+      </div>
+      <div class="product-lockup">
+        <div class="placeholder">
+          <span class="placeholder-eyebrow">PLACEHOLDER · image</span>
+          <span class="placeholder-shape">e.g. cartons of 4 Oatly product variants on cream ground, photographed honestly without gloss</span>
+          <div class="placeholder-illustration" style="aspect-ratio: 4/5; border: 1px dashed var(--color-muted);">[ product lockup ]</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="products" id="products" data-section="products" data-intent="value-proposition" data-layout="grid" data-items="4" data-media="image">
+    <div class="container">
+      <h2>Oat drinks that taste like stuff you actually want.</h2>
+      <div class="products-grid">
+
+        <article class="product-card">
+          <div class="image-slot placeholder">
+            <span class="placeholder-eyebrow">PLACEHOLDER · image</span>
+            <span class="placeholder-shape">e.g. carton — Original</span>
+          </div>
+          <div class="arrow"><svg viewBox="0 0 56 30"><path d="M3 22 C12 8 30 4 50 12 M44 8 L52 12 L46 18" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <p class="arrow-note">this one tastes like oat.</p>
+          <h3 class="name placeholder" style="background:transparent;outline:none;padding:0;">
+            <span class="placeholder-eyebrow" style="margin-bottom:6px;">PLACEHOLDER · product-name</span>
+            <span style="display:block;">Oat Drink Original</span>
+          </h3>
+          <p class="description placeholder" style="background:transparent;outline:none;padding:0;">
+            <span class="placeholder-eyebrow" style="margin-bottom:4px;">PLACEHOLDER · copy</span>
+            <span style="display:block;">e.g. The everyday one. Goes with cereal, coffee, life.</span>
+          </p>
+          <a class="more" href="#">Learn more</a>
+        </article>
+
+        <article class="product-card">
+          <div class="image-slot placeholder">
+            <span class="placeholder-eyebrow">PLACEHOLDER · image</span>
+            <span class="placeholder-shape">e.g. carton — Barista</span>
+          </div>
+          <h3 class="name placeholder" style="background:transparent;outline:none;padding:0;">
+            <span class="placeholder-eyebrow" style="margin-bottom:6px;">PLACEHOLDER · product-name</span>
+            <span style="display:block;">Barista Edition</span>
+          </h3>
+          <p class="description placeholder" style="background:transparent;outline:none;padding:0;">
+            <span class="placeholder-eyebrow" style="margin-bottom:4px;">PLACEHOLDER · copy</span>
+            <span style="display:block;">e.g. The one your coffee will respect.</span>
+          </p>
+          <a class="more" href="#">Learn more</a>
+        </article>
+
+        <article class="product-card">
+          <div class="image-slot placeholder">
+            <span class="placeholder-eyebrow">PLACEHOLDER · image</span>
+            <span class="placeholder-shape">e.g. carton — Chocolate</span>
+          </div>
+          <h3 class="name placeholder" style="background:transparent;outline:none;padding:0;">
+            <span class="placeholder-eyebrow" style="margin-bottom:6px;">PLACEHOLDER · product-name</span>
+            <span style="display:block;">Chocolate</span>
+          </h3>
+          <p class="description placeholder" style="background:transparent;outline:none;padding:0;">
+            <span class="placeholder-eyebrow" style="margin-bottom:4px;">PLACEHOLDER · copy</span>
+            <span style="display:block;">e.g. The one for when you said no to cookies.</span>
+          </p>
+          <a class="more" href="#">Learn more</a>
+        </article>
+
+        <article class="product-card">
+          <div class="image-slot placeholder">
+            <span class="placeholder-eyebrow">PLACEHOLDER · image</span>
+            <span class="placeholder-shape">e.g. carton — Low-Fat</span>
+          </div>
+          <h3 class="name placeholder" style="background:transparent;outline:none;padding:0;">
+            <span class="placeholder-eyebrow" style="margin-bottom:6px;">PLACEHOLDER · product-name</span>
+            <span style="display:block;">Low-Fat</span>
+          </h3>
+          <p class="description placeholder" style="background:transparent;outline:none;padding:0;">
+            <span class="placeholder-eyebrow" style="margin-bottom:4px;">PLACEHOLDER · copy</span>
+            <span style="display:block;">e.g. Light. Or, light-er. Don't @ us.</span>
+          </p>
+          <a class="more" href="#">Learn more</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sustainability" id="sustainability" data-section="sustainability-strip" data-intent="build-trust" data-layout="grid" data-items="3">
+    <div class="container">
+      <h2>Less of basically everything that matters.</h2>
+      <div class="sustainability-grid">
+        <div class="stat-tile">
+          <div class="placeholder" style="background: rgba(0,0,0,0.05); outline-color: var(--color-fg);">
+            <span class="placeholder-eyebrow" style="background:var(--color-fg); color:var(--color-bg); border-color:var(--color-fg);">PLACEHOLDER · stat</span>
+            <span class="placeholder-shape">e.g. 73%</span>
+          </div>
+          <p class="label">Less CO2 than cow milk*</p>
+        </div>
+        <div class="stat-tile">
+          <div class="placeholder" style="background: rgba(0,0,0,0.05); outline-color: var(--color-fg);">
+            <span class="placeholder-eyebrow" style="background:var(--color-fg); color:var(--color-bg); border-color:var(--color-fg);">PLACEHOLDER · stat</span>
+            <span class="placeholder-shape">e.g. 79%</span>
+          </div>
+          <p class="label">Less land use*</p>
+        </div>
+        <div class="stat-tile">
+          <div class="placeholder" style="background: rgba(0,0,0,0.05); outline-color: var(--color-fg);">
+            <span class="placeholder-eyebrow" style="background:var(--color-fg); color:var(--color-bg); border-color:var(--color-fg);">PLACEHOLDER · stat</span>
+            <span class="placeholder-shape">e.g. 60%</span>
+          </div>
+          <p class="label">Less water*</p>
+        </div>
+      </div>
+      <p class="stat-footnote">*compared to cow milk; receipts in our sustainability report.</p>
+    </div>
+  </section>
+
+  <section class="news" id="news" data-section="news" data-intent="freshness" data-layout="grid" data-items="3" data-media="image">
+    <div class="container">
+      <h2>What we're up to.</h2>
+      <div class="news-grid">
+
+        <article class="news-card">
+          <div class="image-slot placeholder">
+            <span class="placeholder-eyebrow">PLACEHOLDER · image</span>
+            <span class="placeholder-shape">e.g. news cover image</span>
+          </div>
+          <span class="date placeholder" style="background:transparent;outline:none;padding:0;display:flex;flex-direction:column;gap:4px;">
+            <span class="placeholder-eyebrow">PLACEHOLDER · date</span>
+            <span>e.g. APR 2026</span>
+          </span>
+          <h3 class="headline placeholder" style="background:transparent;outline:none;padding:0;">
+            <span class="placeholder-eyebrow" style="margin-bottom:6px;">PLACEHOLDER · headline</span>
+            <span style="display:block;">e.g. We bought another fckoatly.com domain because, honestly, why not.</span>
+          </h3>
+          <a class="more" href="#">Read more</a>
+        </article>
+
+        <article class="news-card">
+          <div class="image-slot placeholder">
+            <span class="placeholder-eyebrow">PLACEHOLDER · image</span>
+            <span class="placeholder-shape">e.g. news cover image</span>
+          </div>
+          <span class="date placeholder" style="background:transparent;outline:none;padding:0;display:flex;flex-direction:column;gap:4px;">
+            <span class="placeholder-eyebrow">PLACEHOLDER · date</span>
+            <span>e.g. MAR 2026</span>
+          </span>
+          <h3 class="headline placeholder" style="background:transparent;outline:none;padding:0;">
+            <span class="placeholder-eyebrow" style="margin-bottom:6px;">PLACEHOLDER · headline</span>
+            <span style="display:block;">e.g. The 2025 Sustainability Report. (It's a long one. Sorry.)</span>
+          </h3>
+          <a class="more" href="#">Read more</a>
+        </article>
+
+        <article class="news-card">
+          <div class="image-slot placeholder">
+            <span class="placeholder-eyebrow">PLACEHOLDER · image</span>
+            <span class="placeholder-shape">e.g. news cover image</span>
+          </div>
+          <span class="date placeholder" style="background:transparent;outline:none;padding:0;display:flex;flex-direction:column;gap:4px;">
+            <span class="placeholder-eyebrow">PLACEHOLDER · date</span>
+            <span>e.g. FEB 2026</span>
+          </span>
+          <h3 class="headline placeholder" style="background:transparent;outline:none;padding:0;">
+            <span class="placeholder-eyebrow" style="margin-bottom:6px;">PLACEHOLDER · headline</span>
+            <span style="display:block;">e.g. Hey baristas: heybarista.com got a face-lift.</span>
+          </h3>
+          <a class="more" href="#">Read more</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="oatfinder" id="oatfinder" data-section="oatfinder" data-intent="drive-action" data-layout="contained" data-interactive="form">
+    <div class="panel">
+      <h2>Find Oatly near you.</h2>
+      <p>Or accept that we're not there yet. Either way, no judgement.</p>
+      <form action="#" method="get" onsubmit="event.preventDefault();">
+        <input type="text" name="q" placeholder="Postcode, address, or city" aria-label="Where are you?">
+        <button type="submit">Find</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" data-section="footer" data-intent="navigate" data-layout="grid" data-items="4">
+  <div class="container">
+    <div class="footer-columns">
+      <div class="col">
+        <span class="footer-mark"><span class="small">THE ORIGINAL</span>OAT-LY!</span>
+        <span class="footer-stamp">fckoatly.com — yes, we own this one</span>
+      </div>
+      <div class="col">
+        <h3>About</h3>
+        <ul class="placeholder" style="background:transparent;outline:none;padding:0;list-style:none;">
+          <li><span class="placeholder-eyebrow" style="font-size:9px;">PLACEHOLDER · nav</span></li>
+          <li><a href="#">Our story</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Products</h3>
+        <ul class="placeholder" style="background:transparent;outline:none;padding:0;list-style:none;">
+          <li><span class="placeholder-eyebrow" style="font-size:9px;">PLACEHOLDER · nav</span></li>
+          <li><a href="#">Original</a></li>
+          <li><a href="#">Barista</a></li>
+          <li><a href="#">Chocolate</a></li>
+          <li><a href="#">Yogurt</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Resources</h3>
+        <ul class="placeholder" style="background:transparent;outline:none;padding:0;list-style:none;">
+          <li><span class="placeholder-eyebrow" style="font-size:9px;">PLACEHOLDER · nav</span></li>
+          <li><a href="#">Tastebuds blog</a></li>
+          <li><a href="https://hey-barista.com/">Hey Barista</a></li>
+          <li><a href="https://oatfinder.oatly.com/">OatFinder</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Social</h3>
+        <ul class="placeholder" style="background:transparent;outline:none;padding:0;list-style:none;">
+          <li><span class="placeholder-eyebrow" style="font-size:9px;">PLACEHOLDER · nav</span></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">YouTube</a></li>
+          <li><a href="#">TikTok</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Oatly AB. The original oat drink company.</span>
+      <div class="legal">
+        <a href="https://www.oatly.com/privacy-policy">Privacy</a>
+        <a href="/accessibility-statement">Accessibility Statement</a>
+        <a href="#">Cookie policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

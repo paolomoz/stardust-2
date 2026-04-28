@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+_provenance:
+  writtenBy: stardust:prototype
+  writtenAt: 2026-04-28T00:00:00Z
+  variant: C · Typographic Confidence
+  thesis: Display-class Lyon, fewer sections, more space per section
+  renderedVia: stardust-direct (Mode A brand-faithful)
+  againstDirection: stardust/direction.md (active)
+  readArtifacts:
+    - DESIGN.md
+    - DESIGN.json
+    - stardust/current/pages/home.json
+    - stardust/current/_brand-extraction.json
+    - stardust/prototypes/home-C-shape.md
+  synthesizedInputs:
+    - tonal-scaffolding-copy
+  stardustVersion: 0.2.0
+  unsourcedContent:
+    - text: "The world, slowed."
+      kind: hero-headline
+      placement: hero (on captured-surface scrim)
+      basis: derived from captured tonal traits (soulful + elemental + understated); short tonal scaffolding; not a fact
+    - text: "Where in the world"
+      kind: section-headline
+      placement: audience-grid section
+      basis: derived from captured eyebrow language (Coastal/Nature/City Escapes/Exclusive Hideaways); not a fact
+    - text: "Currently"
+      kind: eyebrow
+      placement: combined seasonal + Djokovic feature
+      basis: timely-narrative scaffolding; not a fact
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aman · home (variant C · Typographic Confidence)</title>
+<style>
+:root {
+  --heading-font-family: 'Lyon Display Web', 'Times New Roman', serif;
+  --body-font-family: 'Whitney SSm A', 'Whitney SSm B', system-ui, sans-serif;
+
+  --display-xl:  80px;
+  --display:     72px;
+  --heading-xxl: 48px;
+  --heading-xl:  32px;
+  --heading-lg:  24px;
+  --heading-md:  20px;
+  --body-lg:     18px;
+  --body:        16px;
+  --body-sm:     14px;
+  --micro:       12px;
+  --eyebrow:     10px;
+
+  --line-height-heading: 1.15;
+  --line-height-body:    1.55;
+
+  --color-cream:       #F3EEE7;
+  --color-cream-light: #FDF9F5;
+  --color-surface:     #FFFFFF;
+  --color-ink:         #313131;
+  --color-ink-alt:     #404040;
+  --color-ink-2:       #585858;
+  --color-ink-3:       #696969;
+  --color-hairline:    rgba(49,49,49,0.12);
+  --color-scrim:       rgba(20,18,14,0.36);
+
+  --color-bg:     var(--color-cream);
+  --color-fg:     var(--color-ink);
+  --color-accent: var(--color-ink);
+
+  --spacing-xs:  4px;
+  --spacing-sm:  8px;
+  --spacing-md:  16px;
+  --spacing-lg:  24px;
+  --spacing-xl:  40px;
+  --spacing-2xl: 64px;
+
+  --section-padding: 56px;
+  --max-width:       1320px;
+  --radius:          0px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--body-font-family);
+  font-size: var(--body);
+  line-height: var(--line-height-body);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 48px; }
+@media (max-width: 700px) { .container { padding: 0 20px; } }
+
+/* ─── Header ───────────────────────────────────────────────── */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  padding: 18px 32px; background: transparent; color: var(--color-cream);
+  transition: background 240ms ease, color 240ms ease;
+}
+.site-header[data-scrolled="true"] { background: var(--color-cream); color: var(--color-ink); border-bottom: 1px solid var(--color-hairline); }
+.site-header__left, .site-header__right { display: flex; align-items: center; gap: var(--spacing-xl); font-size: var(--micro); letter-spacing: 0.04em; }
+.site-header__right { justify-content: flex-end; gap: var(--spacing-lg); }
+.site-header__brand svg { width: 88px; height: auto; fill: currentColor; }
+.btn-icon { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; background: transparent; border: 0; color: inherit; font: inherit; padding: 0; }
+.btn-icon svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.lang { border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+
+.btn-primary {
+  display: inline-block; background: var(--color-ink); color: var(--color-cream);
+  font-family: var(--body-font-family); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 12px 26px; border: 0; border-radius: 0; cursor: pointer;
+}
+.btn-primary:hover { background: var(--color-ink-alt); }
+
+.btn-secondary {
+  display: inline-block; color: var(--color-ink);
+  font-family: var(--body-font-family); font-size: 12px; letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--color-ink); padding-bottom: 2px;
+}
+.btn-secondary:hover { color: var(--color-ink-2); border-bottom-color: var(--color-ink-2); }
+
+.eyebrow { font-family: var(--body-font-family); font-size: var(--eyebrow); letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-ink-2); margin: 0; }
+.lyon { font-family: var(--heading-font-family); font-weight: 400; }
+.lyon-h-md  { font-size: var(--heading-md); line-height: 1.3; letter-spacing: 0.03em; }
+.lyon-h-lg  { font-size: var(--heading-lg); line-height: 1.25; letter-spacing: 0.02em; }
+.lyon-h-xl  { font-size: var(--heading-xl); line-height: 1.15; letter-spacing: 0.01em; }
+.lyon-h-xxl { font-size: var(--heading-xxl); line-height: 1.08; letter-spacing: 0; }
+.lyon-display { font-size: clamp(48px, 7vw, 72px); line-height: 1.04; letter-spacing: -0.005em; }
+.lyon-display-xl { font-size: clamp(56px, 8.5vw, 80px); line-height: 1.0; letter-spacing: -0.01em; }
+
+/* ─── Hero with anchored display headline ──────────────────── */
+section[data-section="hero"] {
+  position: relative;
+  height: 96vh;
+  min-height: 720px;
+  background: #2a2a26 url('https://www.aman.com/sites/default/files/styles/listing_teaser_extra_large_2x/public/2024-09/amanyara_turks_caicos_-accommodation-villa-33-pool.jpg?itok=L8jw1KKd') center/cover no-repeat;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  color: var(--color-cream);
+}
+section[data-section="hero"]::before {
+  /* captured-surface scrim — gradient that visually belongs to the photo */
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(20,18,14,0.10) 60%, rgba(20,18,14,0.55) 92%, rgba(20,18,14,0.65) 100%);
+  pointer-events: none;
+}
+.hero-text {
+  position: relative; z-index: 2;
+  padding: 0 48px 96px;
+  max-width: 1320px;
+  margin: 0 auto;
+  width: 100%;
+}
+.hero-text .eyebrow { color: rgba(243,238,231,0.85); margin-bottom: 24px; }
+.hero-text h1 {
+  font-family: var(--heading-font-family); font-weight: 400;
+  font-size: clamp(56px, 9vw, 96px);
+  line-height: 0.98;
+  letter-spacing: -0.012em;
+  margin: 0 0 24px;
+  max-width: 14ch;
+}
+.hero-text p {
+  font-size: 16px; max-width: 30em; color: rgba(243,238,231,0.85);
+  margin: 0 0 32px;
+}
+.hero-text .hero-meta {
+  display: flex; align-items: center; gap: 20px;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(243,238,231,0.65);
+}
+.hero-text .hero-meta::before { content: ''; display: block; width: 32px; height: 1px; background: currentColor; }
+@media (max-width: 700px) { .hero-text { padding: 0 20px 48px; } }
+
+/* ─── Section frame ────────────────────────────────────────── */
+section.section { padding: var(--section-padding) 0; }
+section.section + section.section { border-top: 1px solid var(--color-hairline); }
+
+/* ─── Currently feature (display-class) ────────────────────── */
+.currently-display {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.currently-display .currently-text { display: flex; flex-direction: column; gap: 24px; padding: 48px 0; }
+.currently-display .currently-text .eyebrow { margin: 0; }
+.currently-display .currently-text h2 { margin: 0; max-width: 12ch; }
+.currently-display .currently-text p { color: var(--color-ink-2); margin: 0; max-width: 36em; font-size: var(--body-lg); }
+.currently-display .currently-text .meta-row { display: flex; align-items: center; gap: 24px; font-size: var(--micro); color: var(--color-ink-3); letter-spacing: 0.04em; }
+.currently-display .currently-text .meta-row::before { content: ''; display: block; width: 32px; height: 1px; background: var(--color-hairline); }
+.currently-display .currently-media { aspect-ratio: 5/7; overflow: hidden; }
+.currently-display .currently-media img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 900px) {
+  .currently-display { grid-template-columns: 1fr; gap: 32px; }
+  .currently-display .currently-text { padding: 0; }
+}
+
+/* ─── Audience grid (taller tiles) ─────────────────────────── */
+.audience-display-head { margin: 0 0 48px; }
+.audience-display-head .eyebrow { margin: 0 0 16px; }
+.audience-display-head h2 { margin: 0; max-width: 14ch; }
+
+.audience-grid-c {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.audience-card-c { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.audience-card-c .audience-media { aspect-ratio: 5/6; overflow: hidden; background: var(--color-cream-light); }
+.audience-card-c .audience-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms ease; }
+.audience-card-c:hover .audience-media img { transform: scale(1.015); }
+.audience-card-c .eyebrow { margin: var(--spacing-md) 0 0; }
+.audience-card-c h3 { margin: 6px 0 var(--spacing-sm); font-size: 22px; line-height: 1.25; letter-spacing: 0.02em; }
+.audience-card-c p { color: var(--color-ink-2); margin: 0 0 var(--spacing-sm); font-size: var(--body-sm); }
+@media (max-width: 1100px) { .audience-grid-c { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px)  { .audience-grid-c { grid-template-columns: 1fr; } }
+
+/* ─── World of Aman ────────────────────────────────────────── */
+.world-display-head { margin: 0 0 48px; }
+.world-display-head .eyebrow { margin: 0 0 16px; }
+.world-display-head h2 { margin: 0; max-width: 14ch; }
+
+.world-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.world-card { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.world-card .world-media { aspect-ratio: 4/5; overflow: hidden; }
+.world-card .world-media img { width: 100%; height: 100%; object-fit: cover; }
+.world-card .eyebrow { margin: var(--spacing-md) 0 0; }
+.world-card h3 { margin: var(--spacing-xs) 0 var(--spacing-sm); font-size: 22px; line-height: 1.25; letter-spacing: 0.02em; }
+.world-card p { color: var(--color-ink-2); margin: 0 0 var(--spacing-sm); font-size: var(--body-sm); }
+@media (max-width: 900px) { .world-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+/* ─── Footer ───────────────────────────────────────────────── */
+.site-footer { background: var(--color-cream-light); padding: 72px 0 32px; border-top: 1px solid var(--color-hairline); }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 2fr 1fr; gap: 48px; align-items: start; }
+.footer-grid h4 { font: 400 13px var(--body-font-family); letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-ink); margin: 0 0 var(--spacing-md); }
+.footer-grid ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.footer-grid a { color: var(--color-ink-2); font-size: var(--body-sm); }
+.footer-grid a:hover { color: var(--color-ink); }
+.footer-destinations { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
+.footer-bottom { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--color-hairline); display: flex; justify-content: space-between; align-items: center; font-size: var(--micro); color: var(--color-ink-3); }
+.social-row { display: flex; gap: 18px; }
+.social-row svg { width: 16px; height: 16px; fill: var(--color-ink-3); }
+.social-row a:hover svg { fill: var(--color-ink); }
+@media (max-width: 900px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+  .footer-destinations { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .footer-bottom { flex-direction: column; gap: 16px; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader" data-section="header" data-intent="navigation" data-layout="contained">
+  <div class="site-header__left">
+    <button class="btn-icon" aria-label="Open menu"><svg viewBox="0 0 16 16"><path d="M2 5h12M2 11h12"/></svg><span>Menu</span></button>
+    <button class="btn-icon" aria-label="Search"><svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="M11 11l3 3"/></svg></button>
+  </div>
+  <a class="site-header__brand" href="/" aria-label="Aman home">
+    <svg viewBox="0 0 776 207"><path d="M356 45h-2c-57 119-58 126-64 139-5-13-6-20-64-139h-1s-15 159-20 159v1h17v-1c-4 0 8-112 9-125 6 16 15 34 26 57l31 69h4l31-69c11-23 20-41 26-57h1c0 13 13 125 9 125v1h17v-1c-6 0-20-159-20-159M68 71l-32 81c-18 43-21 51-19 52v1H0v-1c4 0 67-159 67-159h2s60 159 64 159v1h-17v-1c2-1-1-9-18-52L68 71M515 71h-1l-31 81c-18 43-21 51-19 52v1h-17v-1c4 0 67-159 67-159h2s60 159 64 159v1h-18v-1c3-1 0-9-17-52l-30-81M767 47h-8v1c1 0 2 10 2 68v62L657 45h-2v91c0 59-2 68-4 68v1h18v-1c-2 0-3-9-3-68V74l104 133h2v-91c0-58 2-68 4-68v-1ZM43 0h48v11H43z"/></svg>
+  </a>
+  <div class="site-header__right">
+    <a class="lang" href="#">English</a>
+    <a class="btn-primary" href="#">Reserve</a>
+  </div>
+</header>
+
+<!-- ─── Hero with anchored display headline on captured-surface scrim ─── -->
+<section data-section="hero" data-intent="atmospheric brand impression with anchored display" data-layout="full-bleed" data-media="image" data-items="1">
+  <div class="hero-text">
+    <p class="eyebrow">Aman · Hotels &amp; Resorts</p>
+    <h1>The world,<br>slowed.</h1>
+    <p>Soul-soothing escapes by the coast, transformational journeys to the wilds — across 35 hotels and resorts in 20 countries.</p>
+    <div class="hero-meta"><span>Reservations open year-round</span></div>
+  </div>
+</section>
+
+<!-- ─── Currently at Aman (single display feature) ─────────────────── -->
+<section class="section" data-section="currently-display" data-intent="timely narrative + brand scope" data-layout="split-media" data-items="1">
+  <div class="container">
+    <div class="currently-display">
+      <div class="currently-text">
+        <p class="eyebrow">Currently · Summer With Aman</p>
+        <h2 class="lyon lyon-display">Summer&rsquo;s Warm Embrace, and a Novak Djokovic Programme.</h2>
+        <p>Discover seasonal stays curated to the rhythm of the warmer months, and a new three-day wellness programme combining elite training and restorative rituals — curated by Novak Djokovic, exclusively at four Aman sanctuaries.</p>
+        <div class="meta-row"><a class="btn-secondary" href="#">Discover the season</a><a class="btn-secondary" href="#">The Djokovic programme</a></div>
+      </div>
+      <a class="currently-media" href="#"><img src="https://www.aman.com/sites/default/files/styles/listing_teaser_slim_extra_large_2x/public/2026-04/Brand-Ambassador_-Novak-Djokovic---Aman-New-York--United-States.jpg?itok=B19i2nd2" alt="Novak Djokovic, brand ambassador for Aman New York"></a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Audience grid (display headline) ──────────────────────────── -->
+<section class="section" data-section="audience-grid" data-intent="discovery by mood/place" data-layout="grid" data-items="4">
+  <div class="container">
+    <div class="audience-display-head">
+      <p class="eyebrow">Seasonal Experiences</p>
+      <h2 class="lyon lyon-display-xl">Where in the world.</h2>
+    </div>
+    <div class="audience-grid-c">
+      <article class="audience-card-c">
+        <a class="audience-media" href="#"><img src="https://www.aman.com/sites/default/files/styles/listing_teaser_extra_large_2x/public/2024-10/amanzoe-accommodation-villa-21-4299_2.jpg?itok=ZOTJQQ3M" alt="Amanzoe, Greece"></a>
+        <p class="eyebrow">Exclusive Hideaways</p>
+        <h3 class="lyon">Aman Villas</h3>
+        <p>Private Villas unveil the true essence of the Aman experience.</p>
+        <a class="btn-secondary" href="#">Discover more</a>
+      </article>
+      <article class="audience-card-c">
+        <a class="audience-media" href="#"><img src="https://www.aman.com/sites/default/files/styles/listing_teaser_extra_large_2x/public/2022-08/Aman%20New%20York%2C%20Exterior%20Facade%2C%20Website%20-%20Square.jpg?itok=rKOwMd9x" alt="Aman New York exterior facade"></a>
+        <p class="eyebrow">City Escapes</p>
+        <h3 class="lyon">In the City</h3>
+        <p>The gilded city skyline presents opportunities for cultural discovery at every turn.</p>
+        <a class="btn-secondary" href="#">Discover more</a>
+      </article>
+      <article class="audience-card-c">
+        <a class="audience-media" href="#"><img src="https://www.aman.com/sites/default/files/styles/listing_teaser_extra_large_2x/public/2024-06/aman-i-khas_india_-_spa_exterior.jpg?itok=KztBtuUD" alt="Aman-i-Khas spa exterior at dusk"></a>
+        <p class="eyebrow">Nature</p>
+        <h3 class="lyon">To the Wilds</h3>
+        <p>Venture out of the ordinary with a stay immersed in Aman&rsquo;s most remote camp and safari settings.</p>
+        <a class="btn-secondary" href="#">Discover more</a>
+      </article>
+      <article class="audience-card-c">
+        <a class="audience-media" href="#"><img src="https://www.aman.com/sites/default/files/styles/carousel_cards_extra_large_2x/public/2024-08/amanyara_turks_caicos_-_caribbean_exterior.jpg?itok=Yvjjkd17" alt="Amanyara, Turks &amp; Caicos"></a>
+        <p class="eyebrow">Coastal</p>
+        <h3 class="lyon">At Water&rsquo;s Edge</h3>
+        <p>Across the Aman globe, oceanfront retreats offer the balm of sun, sea and sand.</p>
+        <a class="btn-secondary" href="#">Discover more</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─── World of Aman (display headline) ──────────────────────────── -->
+<section class="section" data-section="world-of-aman" data-intent="extended brand surfaces" data-layout="grid" data-items="3">
+  <div class="container">
+    <div class="world-display-head">
+      <p class="eyebrow">Beyond the resorts</p>
+      <h2 class="lyon lyon-display">The world of Aman.</h2>
+    </div>
+    <div class="world-grid">
+      <article class="world-card">
+        <a class="world-media" href="#"><img src="https://www.aman.com/sites/default/files/styles/listing_teaser_slim_extra_large_2x/public/2026-02/Aman%20at%20Sea%20Hero%20Exterior-Portrait.jpg?itok=RptdYdZf" alt="Aman at Sea cruise"></a>
+        <p class="eyebrow">Aman at Sea</p>
+        <h3 class="lyon">Amangati Opens for Reservations</h3>
+        <p>Aman at Sea&rsquo;s first vessel, Amangati, will soon embark on a curated suite of Mediterranean journeys.</p>
+        <a class="btn-secondary" href="#">Discover more</a>
+      </article>
+      <article class="world-card">
+        <a class="world-media" href="#"><img src="https://www.aman.com/sites/default/files/styles/listing_teaser_slim_extra_large_2x/public/2025-02/aman_digital_gift_card_-_hills28.jpg?itok=X1LFCsSZ" alt="Aman Gift Cards"></a>
+        <p class="eyebrow">Aman Gift Card</p>
+        <h3 class="lyon">Thoughtful Gestures</h3>
+        <p>Prompting new adventures, Aman Gift Cards are the perfect token of gratitude.</p>
+        <a class="btn-secondary" href="#">Shop now</a>
+      </article>
+      <article class="world-card">
+        <a class="world-media" href="#"><img src="https://www.aman.com/sites/default/files/styles/listing_teaser_slim_extra_large_2x/public/2026-03/AmanEssentials--Shop--Aman-Tennis-Club.jpg?itok=dL28YiW3" alt="Aman Tennis Club shop display"></a>
+        <p class="eyebrow">Aman Tennis Club &times; The Webster</p>
+        <h3 class="lyon">The Official Aman Shop</h3>
+        <p>Aman Essentials introduces a new expression of the Aman Tennis Club through a collaboration with luxury retailer The Webster.</p>
+        <a class="btn-secondary" href="#">Shop now</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" data-section="footer-nav" data-intent="utility + IA" data-layout="contained">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>More Information</h4>
+        <ul>
+          <li><a href="#">Aman Stories</a></li>
+          <li><a href="#">Aman Club</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Destinations</h4>
+        <div class="footer-destinations">
+          <ul>
+            <li><a href="#">Americas &amp; Caribbean</a></li>
+            <li><a href="#">Asia</a></li>
+            <li><a href="#">Europe, Middle East &amp; Africa</a></li>
+          </ul>
+          <ul>
+            <li><a href="#">All Destinations</a></li>
+            <li><a href="#">Residences</a></li>
+            <li><a href="#">Aman at Sea</a></li>
+          </ul>
+          <ul>
+            <li><a href="#">Aman Interiors</a></li>
+            <li><a href="#">Aman Essentials</a></li>
+            <li><a href="#">Gift Cards</a></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h4>Stay in touch</h4>
+        <p style="font-size:14px;color:var(--color-ink-2);margin:0 0 16px;max-width:24em;">Sign up for first looks at new openings and journeys.</p>
+        <a class="btn-primary" href="#">Sign Up</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; Aman 2026 &middot; All Rights Reserved</span>
+      <div class="social-row" aria-label="Social">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="0" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="8" r="2.6" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="11.6" cy="4.4" r="0.7" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M9 14V8.5h2L11.3 7H9V5.7c0-.5.2-.8.8-.8H11V3.4h-1.5C8 3.4 7.4 4.3 7.4 5.4V7H6v1.5h1.4V14H9z"/></svg></a>
+        <a href="#" aria-label="Pinterest"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 2C5 2 3 4 3 6.6c0 1.4.8 3 2 3.5.2.1.3 0 .3-.1l.2-.7c0-.1 0-.2-.1-.3-.4-.5-.7-1.2-.7-2 0-1.6 1.2-3.1 3.2-3.1 1.7 0 3 1 3 2.6 0 2-1 3.5-2.3 3.5-.7 0-1.3-.6-1.1-1.4.2-.9.7-1.9.7-2.5 0-.6-.3-1.1-.9-1.1-.7 0-1.3.7-1.3 1.7 0 .6.2 1 .2 1l-.9 3.6c-.3 1.1-.1 2.4 0 2.6 0 .1.1.1.2 0 .1-.1 1.1-1.4 1.5-2.5l.5-2c.3.5 1 .9 1.8.9 2.4 0 4-2.1 4-5C13 4.3 11 2 8 2z"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2.5 4.5a1 1 0 100-2 1 1 0 000 2zm-.7 1.7h1.3v6.4H1.8V6.2zm3 0h1.2v.9h.1c.2-.4.7-.9 1.5-.9 1.6 0 1.9 1 1.9 2.3v3.7H8.2V9.3c0-.7 0-1.5-.9-1.5s-1 .7-1 1.5v3.3H4.8V6.2zm5.7 0h1.3l1.1 4.4 1-4.4H15l-1.6 6.4h-1.3z"/></svg></a>
+      </div>
+      <a class="lang" href="#">English</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  var hdr = document.getElementById('siteHeader');
+  var threshold = window.innerHeight * 0.85;
+  function onScroll() { hdr.dataset.scrolled = (window.scrollY > threshold) ? 'true' : 'false'; }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
+</body>
+</html>

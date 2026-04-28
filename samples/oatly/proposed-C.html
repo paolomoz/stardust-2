@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy:         stardust:prototype
+  writtenAt:         2026-04-28T10:40:00Z
+  page:              home (variant C — bold direction)
+  pageUrl:           https://www.oatly.com/
+  proposedFile:      ./home-C-proposed.html
+  againstDirection:  stardust/direction.md (Active 2026-04-28T10:15:00Z)
+  variant:           C · Bold direction
+  thesis:            "are we ready to be more distinctive? — push copy register x type scale"
+  readArtifacts:
+    - stardust/current/pages/home.json
+    - DESIGN.md
+    - DESIGN.json
+  divergenceVersion: v1.0 (stardust v2)
+  fontDeck:          brand-inherited
+  paletteSource:     inherited from _brand-extraction.json
+  unsourcedContent:
+    - selector: "section[data-section=\"declaration\"] .eyebrow"
+      type: other
+      reason: "founding-year claim 1972-present is illustrative; not captured on homepage"
+    - selector: "section[data-section=\"manifesto\"] p.body-paragraph"
+      type: other
+      reason: "manifesto-register copy in Oatly voice; source unknown for verbatim, F-002 placeholder"
+    - selector: "section[data-section=\"manifesto\"] .pull-quote"
+      type: quote
+      reason: "WOW NO COW is a real Oatly campaign line, not captured on homepage; rendered as placeholder"
+    - selector: "section[data-section=\"claim-stamps\"] .stamp .body"
+      type: other
+      reason: "stamp copy partly synthesized; troll-domain reference is captured, others are placeholder"
+    - selector: "section[data-section=\"product-strip\"] .product-image"
+      type: image
+      reason: "product carton image not captured"
+  stardustVersion:   0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oatly | the Original Oat Drink Company | Oatly</title>
+<style>
+:root {
+  --heading-font-family: "Tinny Serif Pro", "DM Serif Display", "Playfair Display", "Times New Roman", serif;
+  --body-font-family:    "Margo Pro Regular", "Inter", system-ui, sans-serif;
+  --body-bold-family:    "Margo Pro Bold", "Inter", system-ui, sans-serif;
+  --display-chunky:      "Bjorn Serif Pro", "Anton", "Impact", sans-serif;
+  --display-rounded:     "Girdo Black Pro", "Anton", "Bebas Neue", "Impact", sans-serif;
+  --display-antique:     "Petra Antikva Pro", "Antic Slab", "Impact", serif;
+
+  --heading-xxl: clamp(5.5rem, calc(5.5rem + (100vw - 48rem) * (11.5 - 5.5) / 57), 11.5rem);
+  --heading-xl:  clamp(4.25rem, calc(4.25rem + (100vw - 48rem) * (9 - 4.25) / 57), 9rem);
+  --heading-lg:  clamp(3rem, calc(3rem + (100vw - 48rem) * (6 - 3) / 57), 6rem);
+  --heading-md:  clamp(2.125rem, calc(2.125rem + (100vw - 48rem) * (4.25 - 2.125) / 57), 4.25rem);
+  --body-xl:     clamp(1.25rem, calc(1.25rem + (100vw - 48rem) * (1.5 - 1.25) / 57), 1.5rem);
+  --body-lg:     clamp(1.125rem, calc(1.125rem + (100vw - 48rem) * (1.25 - 1.125) / 57), 1.25rem);
+  --body:        clamp(1rem, calc(1rem + (100vw - 48rem) * (1.125 - 1) / 57), 1.125rem);
+  --body-sm:     0.875rem;
+
+  --line-height-heading: 0.9;
+  --line-height-body:    1.45;
+
+  --color-bg:           #FFFFFF;
+  --color-bg-cream:     #FFFEF6;
+  --color-fg:           #000000;
+  --color-fg-secondary: #222222;
+  --color-accent:       #fdcf85;
+  --color-red:          #e43e39;
+  --color-muted:        #888888;
+  --color-border:       #000000;
+  --footer-bg:          #f6f6f6;
+
+  --spacing-xs:  4px;
+  --spacing-sm:  8px;
+  --spacing-md:  16px;
+  --spacing-lg:  24px;
+  --spacing-xl:  48px;
+  --spacing-2xl: 96px;
+
+  --section-padding:    48px;
+  --max-width:          1680px;
+  --container-l:        1280px;
+  --container-m:        920px;
+  --radius:             0px;
+  --border-thin:        0.5px;
+  --border-default:     1px;
+  --header-height:      36px;
+  --start-bar-height:   48px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body);
+  line-height: var(--line-height-body);
+  color: var(--color-fg);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; }
+a:hover { color: var(--color-muted); text-decoration-thickness: 2px; }
+
+.container { width: 100%; max-width: var(--container-l); margin: 0 auto; padding: 0 var(--section-padding); }
+.container-m { width: 100%; max-width: var(--container-m); margin: 0 auto; padding: 0 var(--section-padding); }
+
+.skip-link { position: absolute; left: -9999px; }
+.skip-link:focus { position: fixed; left: 16px; top: 16px; padding: 8px 12px; background: var(--color-fg); color: var(--color-bg); z-index: 999; }
+
+/* HEADER — micro-rail */
+.site-header {
+  height: var(--header-height);
+  background: var(--color-bg-cream);
+  border-bottom: var(--border-thin) solid var(--color-border);
+  display: flex; align-items: center;
+  position: sticky; top: 0; z-index: 50;
+}
+.site-header .container { display: flex; align-items: center; gap: var(--spacing-lg); padding: 0 var(--section-padding); }
+.site-logo { font-family: var(--display-chunky); font-weight: 900; font-size: 18px; letter-spacing: -0.04em; line-height: 1; display: flex; align-items: baseline; gap: 4px; }
+.site-logo .small { font-family: var(--heading-font-family); font-style: italic; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1; align-self: flex-start; }
+.site-nav { display: flex; gap: var(--spacing-md); margin-left: auto; }
+.site-nav a {
+  font-family: var(--body-bold-family); font-weight: 700;
+  font-size: var(--body-sm); letter-spacing: 0.06em;
+  text-transform: uppercase; text-decoration: none;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color 200ms ease;
+}
+.site-nav a:hover { border-bottom-color: var(--color-fg); color: var(--color-fg); }
+
+/* DECLARATION — the big bang */
+.declaration {
+  background-color: var(--color-bg-cream);
+  background-image: url("./grid-paper.svg");
+  background-repeat: repeat;
+  background-size: 96px 96px;
+  border-bottom: var(--border-default) solid var(--color-border);
+  padding: var(--spacing-2xl) 0 var(--spacing-xl);
+  text-align: center;
+  position: relative;
+}
+.declaration .eyebrow {
+  font-family: var(--display-antique);
+  font-size: var(--body-sm);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-fg);
+  margin-bottom: var(--spacing-xl);
+  padding: 4px 12px;
+  border: var(--border-default) solid var(--color-fg);
+  display: inline-block;
+  background: var(--color-bg-cream);
+}
+.declaration h1 {
+  font-family: var(--display-chunky);
+  font-weight: 900;
+  font-size: var(--heading-xxl);
+  line-height: var(--line-height-heading);
+  letter-spacing: -0.05em;
+  margin: 0;
+  color: var(--color-fg);
+}
+.declaration .subline {
+  font-family: var(--heading-font-family);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--heading-md);
+  margin-top: var(--spacing-md);
+  display: inline-block;
+  transform: rotate(-2deg) translateX(40px);
+  color: var(--color-fg);
+}
+
+/* MANIFESTO */
+.manifesto {
+  background: var(--color-bg);
+  padding: var(--spacing-2xl) 0;
+  border-bottom: var(--border-default) solid var(--color-border);
+}
+.manifesto .body {
+  max-width: 60ch;
+  margin: 0 auto;
+}
+.manifesto p.body-paragraph {
+  font-size: var(--body-xl);
+  line-height: 1.5;
+  margin: 0 0 var(--spacing-xl);
+  position: relative;
+}
+.manifesto p.body-paragraph + .pull-quote {
+  margin-top: var(--spacing-2xl);
+  margin-bottom: var(--spacing-2xl);
+}
+.manifesto .pull-quote {
+  font-family: var(--display-chunky);
+  font-weight: 900;
+  font-size: var(--heading-lg);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-align: left;
+  margin: var(--spacing-2xl) 0;
+  color: var(--color-fg);
+  position: relative;
+  padding-left: var(--spacing-lg);
+  border-left: 4px solid var(--color-fg);
+}
+
+/* Placeholder for paragraphs — visible signature without breaking flow */
+.manifesto .placeholder {
+  outline: 2px dashed var(--color-accent);
+  background: rgba(253, 207, 133, 0.10);
+  padding: var(--spacing-lg);
+  position: relative;
+}
+.placeholder-eyebrow {
+  font-family: "SFMono-Regular", "Menlo", "Consolas", monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--color-fg);
+  background: var(--color-accent);
+  padding: 2px 8px;
+  display: inline-block;
+  border: var(--border-thin) solid var(--color-fg);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Annotation arrow in manifesto margins */
+.margin-arrow {
+  position: absolute;
+  left: -160px;
+  width: 140px;
+  font-family: var(--heading-font-family);
+  font-style: italic;
+  font-size: var(--body);
+  color: var(--color-fg);
+  display: flex; flex-direction: column; gap: 4px;
+}
+.margin-arrow::after {
+  content: "";
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 30' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M3 10 C20 22 50 22 76 14'/><path d='M68 8 L78 14 L70 22'/></svg>");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 80px; height: 30px;
+  margin-top: 4px;
+}
+
+/* CLAIM STAMPS */
+.claim-stamps {
+  background: var(--color-bg);
+  padding: var(--spacing-2xl) 0;
+  border-bottom: var(--border-default) solid var(--color-border);
+  text-align: center;
+}
+.claim-stamps h2 {
+  font-family: var(--heading-font-family); font-style: italic;
+  font-size: var(--heading-md); font-weight: 400;
+  margin: 0 0 var(--spacing-2xl);
+  color: var(--color-fg);
+}
+.stamps-row {
+  display: flex; justify-content: center; gap: var(--spacing-2xl);
+  flex-wrap: wrap;
+}
+.stamp {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--display-antique);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 3px solid var(--color-fg);
+  padding: 16px 24px;
+  font-size: var(--body-lg);
+  text-align: center;
+  background: transparent;
+  transition: transform 300ms ease;
+  position: relative;
+}
+.stamp:hover { transform: rotate(0deg) !important; }
+.stamp.tilt-1 { transform: rotate(-7deg); }
+.stamp.tilt-2 { transform: rotate(3deg); }
+.stamp.tilt-3 { transform: rotate(-4deg); }
+.stamp.with-circle {
+  border-radius: 50%;
+  width: 200px; height: 200px;
+  text-align: center;
+}
+.stamp.with-fill { background: var(--color-accent); }
+.stamp .star {
+  display: inline-block; transform: rotate(15deg) translateY(-4px); font-size: 0.6em;
+}
+.stamp-footnote {
+  margin-top: var(--spacing-xl);
+  font-size: var(--body-sm);
+  font-style: italic;
+  color: var(--color-fg-secondary);
+  font-family: var(--heading-font-family);
+}
+
+/* PRODUCT STRIP */
+.product-strip {
+  background: var(--color-accent);
+  padding: var(--spacing-2xl) 0;
+  border-bottom: var(--border-default) solid var(--color-border);
+  text-align: center;
+}
+.product-strip .image-wrap {
+  display: inline-block;
+  position: relative;
+  margin: 0 auto;
+}
+.product-strip .placeholder {
+  outline: 2px dashed var(--color-fg);
+  background: rgba(255,255,255,0.5);
+  width: 220px; height: 280px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: var(--spacing-md);
+  margin: 0 auto;
+  gap: var(--spacing-sm);
+}
+.product-strip .placeholder-eyebrow { background: var(--color-fg); color: var(--color-bg); }
+.product-strip .placeholder-shape { font-style: italic; color: var(--color-fg-secondary); font-family: var(--heading-font-family); font-size: var(--body); text-align: center; }
+.product-strip .arrow-note {
+  position: absolute;
+  right: -180px; top: 40%;
+  font-family: var(--heading-font-family);
+  font-style: italic;
+  font-size: var(--body-lg);
+  width: 160px;
+  text-align: left;
+}
+.product-strip .arrow-note::before {
+  content: "";
+  display: block;
+  width: 60px; height: 36px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 50' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M76 30 C50 6 20 6 4 24'/><path d='M14 14 L4 24 L14 32'/></svg>");
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-bottom: 4px;
+}
+.product-strip .cta {
+  display: inline-block;
+  margin-top: var(--spacing-2xl);
+  font-family: var(--body-bold-family); font-weight: 700;
+  font-size: var(--body); letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--color-fg); color: var(--color-bg);
+  padding: 14px 28px;
+  text-decoration: none;
+  border: var(--border-default) solid var(--color-fg);
+  transition: background-color 200ms ease, color 200ms ease;
+}
+.product-strip .cta:hover { background: var(--color-bg); color: var(--color-fg); }
+
+/* TROLL MEMOIR */
+.troll-memoir {
+  background: var(--color-bg-cream);
+  padding: var(--spacing-2xl) 0;
+  border-bottom: var(--border-default) solid var(--color-border);
+}
+.troll-memoir .container-m { padding-left: var(--section-padding); padding-right: var(--section-padding); }
+.troll-memoir .preface {
+  font-family: var(--display-chunky);
+  font-weight: 900;
+  font-size: var(--heading-md);
+  line-height: 1;
+  margin: 0 0 var(--spacing-xl);
+  letter-spacing: -0.02em;
+}
+.troll-memoir .preface .quiet { font-family: var(--heading-font-family); font-style: italic; font-weight: 400; font-size: 0.6em; display: block; color: var(--color-fg-secondary); margin-top: 4px; }
+.troll-memoir ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--spacing-md); padding-left: var(--spacing-xl); }
+.troll-memoir ul li { font-family: var(--body-font-family); font-size: var(--body-lg); }
+.troll-memoir ul li a { text-decoration: underline; }
+
+/* FOOTER */
+.site-footer { background: var(--footer-bg); padding: 0 0 var(--spacing-lg); border-top: var(--border-default) solid var(--color-border); }
+.footer-search {
+  background: var(--color-bg);
+  border-bottom: var(--border-default) solid var(--color-border);
+  display: flex; align-items: center;
+  height: var(--start-bar-height);
+}
+.footer-search .start-button {
+  height: 100%; padding: 0 var(--spacing-lg);
+  display: flex; align-items: center; gap: var(--spacing-sm);
+  font-family: var(--body-bold-family); font-size: var(--body-sm); font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  border-right: var(--border-default) solid var(--color-border);
+  cursor: pointer; background: var(--color-bg);
+  text-decoration: none;
+}
+.footer-search .start-button::before {
+  content: "";
+  width: 14px; height: 14px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'><path d='M3 12l9-9 9 9'/><path d='M5 10v10h14V10'/></svg>");
+  background-repeat: no-repeat;
+}
+.footer-search .start-button:hover { background: var(--color-bg-cream); }
+.footer-search input {
+  flex: 1; height: 100%;
+  border: 0; padding: 0 var(--spacing-lg);
+  font-family: var(--body-font-family);
+  font-size: var(--body-sm);
+  background: transparent;
+  outline: none;
+}
+.footer-search input::placeholder { color: var(--color-muted); }
+.footer-search input:focus { box-shadow: inset 0 -0.5px 0 0 var(--color-fg); }
+
+.footer-info {
+  padding: var(--spacing-xl) var(--section-padding);
+  display: flex; justify-content: space-between; gap: var(--spacing-lg); flex-wrap: wrap; align-items: flex-end;
+  max-width: var(--container-l); margin: 0 auto;
+}
+.footer-mark { font-family: var(--display-chunky); font-weight: 900; font-size: 28px; line-height: 1; letter-spacing: -0.04em; }
+.footer-mark .small { font-family: var(--heading-font-family); font-style: italic; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; display: block; margin-bottom: 4px; font-weight: 400; }
+.footer-info .legal { display: flex; gap: var(--spacing-md); flex-wrap: wrap; font-size: var(--body-sm); color: var(--color-fg-secondary); }
+.footer-info .legal a:hover { text-decoration: underline; }
+
+@media (max-width: 1024px) {
+  .margin-arrow { display: none; }
+  .stamps-row { gap: var(--spacing-xl); }
+  .product-strip .arrow-note { position: static; margin-top: var(--spacing-md); width: auto; }
+  .product-strip .arrow-note::before { display: none; }
+}
+
+@media (max-width: 640px) {
+  .declaration h1 { font-size: clamp(3rem, 18vw, 6rem); }
+  .declaration .subline { transform: rotate(-2deg) translateX(0); display: block; }
+  .stamp { font-size: var(--body); padding: 12px 16px; }
+  .stamp.with-circle { width: 150px; height: 150px; }
+  .site-nav { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .stamp.tilt-1, .stamp.tilt-2, .stamp.tilt-3 { transform: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" data-section="header" data-intent="navigate" data-layout="full-bleed">
+  <div class="container">
+    <a href="#" class="site-logo" aria-label="Oatly home">
+      <span class="small">THE</span>
+      <span>OAT-LY!</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#products">Products</a>
+      <a href="#tastebuds">Tastebuds</a>
+      <a href="#news">News</a>
+      <a href="#sustainability">Sustainability</a>
+      <a href="#health">Health</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="declaration" data-section="declaration" data-intent="claim-authority" data-layout="full-bleed" data-media="image">
+    <div class="container">
+      <p class="eyebrow"><span style="background:var(--color-bg-cream); padding: 0 6px;">PLACEHOLDER · date</span> &nbsp; e.g. 1972 — present.</p>
+      <h1>Oat drink.</h1>
+      <span class="subline">That's it.</span>
+    </div>
+  </section>
+
+  <section class="manifesto" data-section="manifesto" data-intent="persuade" data-layout="split-asymmetric" data-items="3">
+    <div class="container-m">
+      <div class="body">
+
+        <div class="placeholder">
+          <span class="placeholder-eyebrow">PLACEHOLDER · long-form copy in Oatly voice</span>
+          <p class="body-paragraph">e.g. We make drinks out of oats. That's been the entire job since the nineties, when our founder thought the world might prefer a glass of milk that didn't come out of a cow. Some people agreed. A surprising number of people didn't. So we made some signs and a website and a few cartons with too much copy on the back, and now we're here.</p>
+        </div>
+
+        <div class="placeholder">
+          <span class="placeholder-eyebrow">PLACEHOLDER · pull-quote — known Oatly campaign line</span>
+          <p class="pull-quote">WOW, NO COW.</p>
+        </div>
+
+        <div class="placeholder">
+          <span class="placeholder-eyebrow">PLACEHOLDER · long-form copy in Oatly voice</span>
+          <p class="body-paragraph">e.g. The thing about oats is they grow in actual fields, and the thing about cows is they don't. Cows are a thing humans built on top of fields. We thought we'd skip a step, and the savings turn out to be considerable: less land, less water, less of basically everything you'd want less of, more oat. Math is on our side here.</p>
+        </div>
+
+        <div class="placeholder">
+          <span class="placeholder-eyebrow">PLACEHOLDER · long-form copy in Oatly voice</span>
+          <p class="body-paragraph">e.g. We have a website that is, generously, weird. We bought a list of domains people made up to insult us, and we put them on the homepage as folders, because if you can't laugh at yourself you'll have to pay someone else to laugh at you. The folders still work. The criticism still works. The oat drink, we hope, also works.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="claim-stamps" id="sustainability" data-section="claim-stamps" data-intent="build-trust" data-layout="grid" data-items="3">
+    <div class="container">
+      <h2>Receipts.</h2>
+      <div class="stamps-row">
+        <div class="stamp tilt-1 with-circle with-fill">
+          <span class="placeholder" style="background: transparent; outline: none; padding: 0; display:flex; flex-direction:column; align-items:center; gap:4px;">
+            <span class="placeholder-eyebrow" style="background:var(--color-fg);color:var(--color-bg);font-size:8px;border:none;">PLACEHOLDER</span>
+            <span style="display:block; font-size: 1.1em;">e.g. 73% Less CO2<span class="star">*</span></span>
+          </span>
+        </div>
+        <div class="stamp tilt-2">
+          <span>Made in Sweden.</span>
+        </div>
+        <div class="stamp tilt-3">
+          <span>We bought<br>the troll<br>domains.</span>
+        </div>
+      </div>
+      <p class="stamp-footnote">*compared to cow milk; receipts in our sustainability report. *we know what an asterisk does.</p>
+    </div>
+  </section>
+
+  <section class="product-strip" data-section="product-strip" data-intent="identify-product" data-layout="stack" data-media="image" data-items="1">
+    <div class="container">
+      <div class="image-wrap">
+        <div class="placeholder">
+          <span class="placeholder-eyebrow">PLACEHOLDER · image</span>
+          <span class="placeholder-shape">e.g. one Oatly Original carton, photographed on cream</span>
+        </div>
+        <div class="arrow-note">this is&nbsp;it.</div>
+      </div>
+      <a href="#products" class="cta">Browse the oats →</a>
+    </div>
+  </section>
+
+  <section class="troll-memoir" data-section="troll-memoir" data-intent="brand-signature" data-layout="stack" data-items="5">
+    <div class="container-m">
+      <p class="preface">we own these.<span class="quiet">A short list of domains the internet made up to insult us. We bought them. They redirect here.</span></p>
+      <ul>
+        <li><a href="https://www.fckfckfckoatly.com/" target="_blank" rel="noopener">fckfckfckoatly.com</a></li>
+        <li><a href="https://www.fckfckoatly.com/" target="_blank" rel="noopener">fckfckoatly.com</a></li>
+        <li><a href="https://fckoatly.com/" target="_blank" rel="noopener">fckoatly.com</a></li>
+        <li><a href="http://fckfckfckfckfckoatly.com/" target="_blank" rel="noopener">fckfckfckfckfckoatly.com</a></li>
+        <li><a href="https://www.fckfckfckfckoatly.com/" target="_blank" rel="noopener">fckfckfcfckkoatly.com</a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" data-section="footer" data-intent="navigate" data-layout="stack" data-items="2">
+  <div class="footer-search">
+    <a href="#" class="start-button">START</a>
+    <input type="text" placeholder="Where to next?" aria-label="Search or navigate">
+  </div>
+  <div class="footer-info">
+    <span class="footer-mark"><span class="small">THE ORIGINAL</span>OAT-LY!</span>
+    <div class="legal">
+      <a href="https://www.oatly.com/privacy-policy">Privacy</a>
+      <a href="/accessibility-statement">Accessibility Statement</a>
+      <a href="#">Cookie policy</a>
+      <span>© Oatly AB.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

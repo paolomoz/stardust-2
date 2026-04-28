@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 2,
+  "slug": "theroadhome",
+  "title": "The Road Home",
+  "tagline": "WordPress-charity-default with weak hierarchy and a centennial story it never tells. Variants make the institution visible without rebranding it.",
+
+  "source": {
+    "url": "https://theroadhome.org/",
+    "register": "brand",
+    "category": "nonprofit · housing services · centennial",
+    "extractedAt": "2026-04-28"
+  },
+
+  "direction": {
+    "phrase": "Brand-faithful Mode A — palette and typography pinned to captured surface. Presales tool. Refresh, not rebrand.",
+    "movements": [
+      "type-scale: ad-hoc → modular major-third 1.25",
+      "section-padding: 96+ rejected → 48–64px stamped",
+      "hero-contrast: text-over-photo → guaranteed scrim",
+      "banner-color semantic: ambiguous → explicit (centennial-red reserved to TRH-100)"
+    ],
+    "seed": {
+      "input": "The Road Home|2026-04-28",
+      "decade": "1930s",
+      "craft": "Plaster cast",
+      "register": "Tabloid",
+      "groundFamily": "stark-white (overridden from monochrome-tint, brand-faithful)",
+      "pickedBy": "deterministic (md5)"
+    },
+    "fontDeck": {
+      "name": "brand-inherited",
+      "value": "HarmoniaSans + DIN Next LT Pro",
+      "pickedBy": "user-constraint"
+    },
+    "palette": {
+      "name": "TRH brand-pinned",
+      "source": "inherited from stardust/current/_brand-extraction.json",
+      "anchor": "#163a48",
+      "pickedBy": "user-constraint",
+      "brandFaithfulInversions": [
+        "pure-white #ffffff retained",
+        "pure-black #000000 retained",
+        "hex format retained",
+        "0px corners retained",
+        "ALL CAPS headings retained",
+        "BW portrait treatment retained",
+        "centennial-red reserved to TRH-100 lockup"
+      ]
+    },
+    "antiToolbox": { "hits": 0, "justified": 0 }
+  },
+
+  "originalCritique": "WordPress-charity-default treatment on top of a strong civic brand. The hero text floats over a photo with no scrim; the IA collides (three-doors lockup repeats inside the body); CTAs fragment; type scale is ad-hoc; two banner colors mean two different things. <strong>The page reads like a template — the institution and the centennial it carries are nowhere visible.</strong>",
+
+  "variants": [
+    {
+      "id": "A",
+      "name": "Conservative refresh",
+      "dominantDimension": "tokens",
+      "thesis": "All seed dimensions recede; brand mannerism dominates verbatim. Hero gains a scrim, type ladders to 1.25, the three-doors IA is preserved verbatim. Lowest-risk option.",
+      "fix": "All seed dimensions recede; brand mannerism dominates verbatim. The hero earns a scrim. Type snaps to a 1.25 modular ladder. The three-doors IA is preserved verbatim — but each door gets its own pill CTA instead of the fragmented collection the live site has. <strong>The lowest-risk refresh — the customer's design team will recognise every move as theirs.</strong>",
+      "proposedFile": "proposed-A.html",
+      "isPrimary": true
+    },
+    {
+      "id": "B",
+      "name": "Compositional shift",
+      "dominantDimension": "ia",
+      "thesis": "Tabloid IA logic — front-page priority, classified-section logic, \"above the fold\" hierarchy — reorganises the page. Same palette and type; different IA.",
+      "fix": "Same palette, same type. <strong>Tabloid IA logic</strong> — front-page priority, classified-section logic, \"above the fold\" hierarchy — reorganises the home. The three-doors lockup becomes a single front-page index; the centennial story moves above the donor band; each audience gets one declarative ALL-CAPS headline instead of a four-up tile cluster.",
+      "proposedFile": "proposed-B.html"
+    },
+    {
+      "id": "C",
+      "name": "Bold direction",
+      "dominantDimension": "decade",
+      "thesis": "1930s civic-monumental + Plaster-cast solidity push display type and surface treatment further. Larger 1930s-civic-poster scale on the hero; flat-banner monumental treatment for sections.",
+      "fix": "<strong>1930s civic-monumental + Plaster-cast solidity</strong> push display type and surface treatment further. Hero scale jumps to civic-poster proportions; section markers become flat-banner monumental treatments — the brand's existing ALL-CAPS headlines and saturated road-deep colour finally have weight to carry. Same palette, same type, more commitment.",
+      "proposedFile": "proposed-C.html"
+    }
+  ],
+
+  "createdAt": "2026-04-28",
+  "stardustVersion": "0.2.0",
+  "submittedBy": "paolomoz",
+  "license": "Apache-2.0",
+  "thumbnail": "thumbnail.jpg"
+}

@@ -1,0 +1,46 @@
+<svg viewBox="0 0 1280 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <rect width="1280" height="800" fill="#ffffff"/>
+
+  <!-- top utility -->
+  <rect x="0" y="0" width="1280" height="40" fill="#f4f4f1"/>
+  <text x="80" y="26" font-family="ui-monospace, monospace" font-size="11" fill="#5a5a5a" letter-spacing="2">PERSONAL  ·  ADVISORS  ·  INSTITUTIONS</text>
+
+  <!-- header -->
+  <rect x="0" y="40" width="1280" height="80" fill="#ffffff"/>
+  <rect x="80" y="68" width="120" height="22" fill="#96151d"/>
+  <g fill="#1a1a1a" font-family="ui-sans-serif, sans-serif" font-size="13" font-weight="500">
+    <text x="980" y="86">Investing</text>
+    <text x="1060" y="86">Advice</text>
+    <text x="1130" y="86">About</text>
+    <text x="1200" y="86">Sign in</text>
+  </g>
+
+  <!-- single-message hero -->
+  <text x="80" y="240" font-family="FF Mark, ui-sans-serif, sans-serif" font-size="64" fill="#1a1a1a" font-weight="600" letter-spacing="-1.5">Plans for the goal</text>
+  <text x="80" y="318" font-family="FF Mark, ui-sans-serif, sans-serif" font-size="64" fill="#1a1a1a" font-weight="600" letter-spacing="-1.5">in front of you.</text>
+  <text x="80" y="380" font-family="ui-sans-serif, sans-serif" font-size="20" fill="#5a5a5a">Retire · Save for college · Build wealth · Day-to-day.</text>
+  <rect x="80" y="430" width="220" height="56" fill="#96151d"/>
+  <text x="105" y="466" font-family="ui-sans-serif, sans-serif" font-size="14" fill="#fff" font-weight="600">Find your plan</text>
+
+  <!-- aligned photo (24px in 32px card) -->
+  <rect x="780" y="200" width="420" height="380" fill="#f4f4f1" rx="32"/>
+  <rect x="800" y="220" width="380" height="340" fill="#5a7a8a" rx="24"/>
+  <circle cx="990" cy="390" r="50" fill="#ffd7d7"/>
+
+  <!-- goals strip -->
+  <rect x="80" y="640" width="260" height="100" fill="#f4f4f1" rx="8"/>
+  <text x="100" y="676" font-family="ui-sans-serif, sans-serif" font-size="14" fill="#1a1a1a" font-weight="600">Retire</text>
+  <text x="100" y="708" font-family="ui-sans-serif, sans-serif" font-size="11" fill="#5a5a5a">Plan for the years after work.</text>
+
+  <rect x="360" y="640" width="260" height="100" fill="#ffd7d7" rx="8"/>
+  <text x="380" y="676" font-family="ui-sans-serif, sans-serif" font-size="14" fill="#1a1a1a" font-weight="600">Save for college</text>
+  <text x="380" y="708" font-family="ui-sans-serif, sans-serif" font-size="11" fill="#1a1a1a" opacity="0.7">529s, custodial, scholarships.</text>
+
+  <rect x="640" y="640" width="260" height="100" fill="#f4f4f1" rx="8"/>
+  <text x="660" y="676" font-family="ui-sans-serif, sans-serif" font-size="14" fill="#1a1a1a" font-weight="600">Build wealth</text>
+  <text x="660" y="708" font-family="ui-sans-serif, sans-serif" font-size="11" fill="#5a5a5a">Brokerage, IRA, advice.</text>
+
+  <rect x="920" y="640" width="280" height="100" fill="#f4f4f1" rx="8"/>
+  <text x="940" y="676" font-family="ui-sans-serif, sans-serif" font-size="14" fill="#1a1a1a" font-weight="600">Day-to-day</text>
+  <text x="940" y="708" font-family="ui-sans-serif, sans-serif" font-size="11" fill="#5a5a5a">Cash, checking, debit.</text>
+</svg>

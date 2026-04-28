@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 2,
+  "slug": "virginatlantic",
+  "title": "Virgin Atlantic",
+  "tagline": "Iconic red/purple already strong; the home is dense and CTA-heavy. Variants test compositional rest and a deliberate purple in-body, vs the bold direction.",
+
+  "source": {
+    "url": "https://www.virginatlantic.com/",
+    "register": "brand",
+    "category": "travel · airline",
+    "extractedAt": "2026-04-28"
+  },
+
+  "direction": {
+    "phrase": "Redesign this home page for presales (brand-faithful Mode A; three variants A/B/C).",
+    "movements": [
+      "type-scale: ad-hoc 18–48 → modular 1.25",
+      "section-padding: variable → balanced 64px desktop",
+      "border-radius: 4px → 6px",
+      "hero-contrast: photo-anchored card → linear-gradient scrim",
+      "purple: chrome-absent → photographic-accent token (named, deliberate)"
+    ],
+    "seed": {
+      "input": "Virgin Atlantic|2026-04-28",
+      "decade": "2025-now",
+      "craft": "transactional brand site",
+      "register": "brand",
+      "groundFamily": "stark-white",
+      "pickedBy": "inherited (Mode A)"
+    },
+    "fontDeck": {
+      "name": "brand-inherited",
+      "value": "Gotham single-family",
+      "pickedBy": "user-constraint"
+    },
+    "palette": {
+      "name": "Virgin Atlantic brand-pinned",
+      "source": "inherited from stardust/current/_brand-extraction.json + photographic-purple token added",
+      "anchor": "#e10a0a",
+      "pickedBy": "user-constraint",
+      "brandFaithfulInversions": [
+        "pure-white retention",
+        "hex format retention"
+      ]
+    },
+    "antiToolbox": { "hits": 0, "justified": 0 }
+  },
+
+  "originalCritique": "The brand surface is iconic but the homepage carries it badly. Three display jumps with no consistent ratio (18/20/24/28/40/48), two unrelated H2 sizes (24 and 40), and a chrome that has migrated wholly to dark navy — leaving the brand purple living only in photography, never as a chosen surface. The home is CTA-heavy: every band repeats a search/login/loyalty trio. <strong>The page asks for clicks before it makes you feel.</strong>",
+
+  "variants": [
+    {
+      "id": "A",
+      "name": "Conservative refresh",
+      "dominantDimension": "type-scale",
+      "thesis": "Same IA, refined tokens. The 1.25 modular type ladder, 6px corners, 64px section padding, and a guaranteed hero scrim do most of the work. Brand purple appears once in body — quiet, deliberate.",
+      "fix": "Same IA, modernised tokens. The 1.25 modular type ladder replaces six unrelated sizes; <strong>two H2 sizes collapse to one.</strong> 6px corners, 64px section padding, hero scrim guaranteed. Brand purple is exposed as a named accent token — once in body, deliberate, not decorative. The cheapest legibility win the brand has earned.",
+      "proposedFile": "proposed-A.html",
+      "isPrimary": true
+    },
+    {
+      "id": "B",
+      "name": "Compositional shift",
+      "dominantDimension": "ia",
+      "thesis": "Same palette, type, photography. Rearranged IA: the home opens with a single authored moment (one route, one offer) instead of the dense band-stack. Search and loyalty recede into one anchored utility shelf.",
+      "fix": "Same palette, type, photography. <strong>Different homepage thesis.</strong> The home opens with a single authored moment — one route, one offer, one image — not the dense band-stack of search/loyalty/destinations/upsell. Search and loyalty consolidate into one anchored utility shelf below the fold. The page reads as a brand statement, then a tool.",
+      "proposedFile": "proposed-B.html"
+    },
+    {
+      "id": "C",
+      "name": "Bold direction",
+      "dominantDimension": "expressive",
+      "thesis": "Push expressive from committed → drenched on one element. The captured photographic purple becomes a full emphasis band on the hero or a primary section ground; everything else stays brand-faithful.",
+      "fix": "Expressive pushed from committed → drenched <strong>on one element only</strong>. The captured photographic purple becomes a full emphasis band — a hero scrim that earns its purple, or a primary section ground. The rest of the page stays brand-faithful, so the move reads as commitment rather than rebrand. \"Are we ready to be more distinctive?\" answered visually.",
+      "proposedFile": "proposed-C.html"
+    }
+  ],
+
+  "createdAt": "2026-04-28",
+  "stardustVersion": "0.2.0",
+  "submittedBy": "paolomoz",
+  "license": "Apache-2.0",
+  "thumbnail": "thumbnail.jpg"
+}

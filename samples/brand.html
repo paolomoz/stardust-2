@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Festool — Stardust showcase (mock v2)</title>
+<title>Stardust — sample</title>
+<meta name="description" content="A stardust redesign sample. Original critique, three variant theses, full-bleed prototype preview.">
 <style>
   :root {
     --ink: #0a1024;
@@ -43,7 +44,7 @@
   ::selection { background: var(--amber); color: var(--ink); }
   a { color: inherit; }
 
-  /* --- HEADER (consistent with home) --------------------------- */
+  /* --- HEADER ---------------------------------------------------- */
   header.chrome {
     position: fixed; top: 0; left: 0; right: 0; z-index: 30;
     background: rgba(6,10,20,0.86);
@@ -54,14 +55,8 @@
     display: flex; align-items: center;
     padding: 0 var(--pad);
   }
-  header .row {
-    display: flex; align-items: center; gap: 14px;
-    width: 100%;
-  }
-  .lockup {
-    display: inline-flex; align-items: center; gap: 10px;
-    text-decoration: none;
-  }
+  header .row { display: flex; align-items: center; gap: 14px; width: 100%; }
+  .lockup { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
   .lockup .mark {
     width: 26px; height: 26px; border-radius: 5px;
     background: linear-gradient(180deg, #151e42 0%, #08101f 100%);
@@ -86,18 +81,12 @@
   .crumb .here { color: var(--dust); }
   header .actions { margin-left: auto; display: flex; gap: 14px; align-items: center; }
   header .actions a {
-    color: var(--dust-50);
-    text-decoration: none;
-    font: 11px/1 var(--mono);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    color: var(--dust-50); text-decoration: none;
+    font: 11px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase;
   }
   header .actions a:hover { color: var(--amber); }
 
-  /* --- STAGE (full-bleed preview area) ------------------------- */
-  /* Desktop: iframe fills the entire viewport — header + sidekick
-     overlay it. Tablet/mobile: stardust ground shows through, device
-     is centered with margin to clear the header. */
+  /* --- STAGE (full-bleed preview area) --------------------------- */
   .stage {
     position: fixed;
     inset: 0;
@@ -119,9 +108,7 @@
     position: absolute;
     inset: 0;
     width: auto; height: auto;
-    border-radius: 0;
-    border: 0;
-    box-shadow: none;
+    border-radius: 0; border: 0; box-shadow: none;
   }
   .device.tablet {
     width: 768px;
@@ -142,13 +129,12 @@
     box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px var(--dust-15);
   }
   .device iframe {
-    width: 100%; height: 100%;
-    border: 0;
+    width: 100%; height: 100%; border: 0;
     background: var(--dust);
     display: block;
   }
 
-  /* --- SIDEKICK (right floating panel) ------------------------- */
+  /* --- SIDEKICK -------------------------------------------------- */
   aside.sidekick {
     position: fixed;
     top: calc(var(--header-h) + 16px);
@@ -165,11 +151,9 @@
     z-index: 20;
     display: flex; flex-direction: column;
     overflow: hidden;
-    transition: width 240ms cubic-bezier(0.25,1,0.5,1), transform 240ms;
+    transition: width 240ms cubic-bezier(0.25,1,0.5,1);
   }
-  aside.sidekick.collapsed {
-    width: 56px;
-  }
+  aside.sidekick.collapsed { width: 56px; }
   aside.sidekick.collapsed .sk-body,
   aside.sidekick.collapsed .sk-footer { display: none; }
   aside.sidekick.collapsed .sk-head .sk-title,
@@ -185,8 +169,7 @@
   }
   .sk-head .sk-title h2 {
     font-family: var(--display);
-    font-weight: 600;
-    font-size: 18px;
+    font-weight: 600; font-size: 18px;
     letter-spacing: -0.01em;
     margin: 0 0 4px;
   }
@@ -202,8 +185,7 @@
     color: var(--dust-50);
   }
   .sk-head .sk-source a {
-    color: var(--dust-72);
-    text-decoration: none;
+    color: var(--dust-72); text-decoration: none;
     border-bottom: 1px dashed var(--dust-15);
   }
   .sk-head .sk-source a:hover { color: var(--amber); border-bottom-color: var(--amber); }
@@ -241,94 +223,14 @@
   }
   .sk-section h3 .num { color: var(--dust-30); font-weight: 500; }
 
-  /* assessment card */
-  .assess {
-    background: var(--ink);
-    border: 1px solid var(--dust-08);
-    border-radius: 10px;
-    padding: 14px 14px 12px;
-  }
-  .assess .verdict {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 10px; margin-bottom: 12px;
-  }
-  .assess .verdict .score {
-    font-family: var(--display);
-    font-weight: 600; font-size: 26px; letter-spacing: -0.01em;
-    color: var(--amber);
-    line-height: 1;
-  }
-  .assess .verdict .score small {
-    font-size: 11px; color: var(--dust-30);
-    font-family: var(--mono); letter-spacing: 0.1em;
-    margin-left: 4px;
-  }
-  .assess .verdict .label {
-    font: 500 10px/1.2 var(--mono);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    text-align: right;
-  }
-  .assess .verdict .label .tag {
-    background: rgba(244,182,91,0.16);
-    color: var(--warn);
-    padding: 4px 8px;
-    border-radius: 999px;
-    border: 1px solid rgba(244,182,91,0.3);
-    display: inline-block;
-  }
-  .assess ul { list-style: none; margin: 0; padding: 0; }
-  .assess li {
-    display: grid; grid-template-columns: 80px 1fr 24px;
-    gap: 10px; align-items: center;
-    padding: 6px 0;
-    border-top: 1px dashed var(--dust-08);
-    font-size: 12.5px;
-  }
-  .assess li:first-child { border-top: 0; }
-  .assess li .k {
-    color: var(--dust-50);
-    font: 500 10px/1 var(--mono);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-  .assess li .bar {
-    position: relative;
-    height: 4px;
-    background: var(--dust-08);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .assess li .bar i {
-    position: absolute; left: 0; top: 0; bottom: 0;
-    background: var(--bad);
-    border-radius: 2px;
-  }
-  .assess li[data-score="3"] .bar i, .assess li[data-score="4"] .bar i { background: var(--warn); }
-  .assess li[data-score="5"] .bar i { background: var(--ok); }
-  .assess li .v {
-    text-align: right;
-    color: var(--dust-72);
-    font: 500 11px/1 var(--mono);
-  }
-  .assess .findings {
-    margin: 12px 0 0;
-    padding: 10px 12px;
-    background: var(--ink-soft);
-    border-left: 2px solid var(--amber);
-    border-radius: 4px;
-    color: var(--dust-72);
-    font-size: 12.5px;
-    line-height: 1.5;
-  }
-  .assess .findings strong { color: var(--dust); font-weight: 600; }
-
   /* variant switcher */
   .vsw {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 6px;
   }
+  .vsw.one  { grid-template-columns: 1fr; }
+  .vsw.two  { grid-template-columns: 1fr 1fr; }
   .vsw button {
     background: var(--ink);
     border: 1px solid var(--dust-15);
@@ -360,13 +262,9 @@
   }
 
   /* concept text */
-  .concept {
-    font-size: 13px;
-    line-height: 1.55;
-  }
+  .concept { font-size: 13px; line-height: 1.55; }
   .concept .pair {
-    margin-bottom: 14px;
-    padding-bottom: 14px;
+    margin-bottom: 14px; padding-bottom: 14px;
     border-bottom: 1px dashed var(--dust-08);
   }
   .concept .pair:last-child { border-bottom: 0; padding-bottom: 0; margin-bottom: 0; }
@@ -417,7 +315,31 @@
   .dvs button.on { background: var(--amber); color: var(--ink); }
   .dvs button svg { width: 16px; height: 16px; }
 
-  /* responsive: narrower sidekick on small screens; iframe stays full-bleed */
+  /* error pane */
+  .err {
+    position: fixed; inset: var(--header-h) 0 0 0;
+    display: flex; align-items: center; justify-content: center;
+    padding: 32px;
+    z-index: 5;
+  }
+  .err-card {
+    max-width: 540px;
+    background: var(--ink-soft);
+    border: 1px solid var(--bad);
+    border-left-width: 3px;
+    border-radius: 14px;
+    padding: 28px 32px;
+  }
+  .err-card h3 {
+    color: var(--bad);
+    font-family: var(--display);
+    font-size: 18px;
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  .err-card p { color: var(--dust-72); margin: 0 0 8px; font-size: 14px; }
+  .err-card code { font-family: var(--mono); font-size: 12px; color: var(--amber); }
+
   @media (max-width: 720px) {
     :root { --side-w: 88vw; }
     .lockup .word { display: none; }
@@ -452,29 +374,27 @@
       <span class="word">stardust</span>
     </a>
     <span class="crumb">
-      <span class="sep">/</span><a href="./index.html">showcase</a><span class="sep">/</span><span class="here" id="brand-crumb">festool</span>
+      <span class="sep">/</span><a href="./index.html">showcase</a><span class="sep">/</span><span class="here" id="brand-crumb">—</span>
     </span>
     <span class="actions">
-      <a href="#" id="open-source" target="_blank" rel="noopener">SOURCE ↗</a>
-      <a href="#" id="open-direction" target="_blank" rel="noopener">DIRECTION ↗</a>
+      <a href="#" id="open-source" target="_blank" rel="noopener" hidden>SOURCE ↗</a>
+      <a href="#" id="open-direction" target="_blank" rel="noopener" hidden>DIRECTION ↗</a>
     </span>
   </div>
 </header>
 
-<main class="stage" id="stage">
+<main class="stage" id="stage" hidden>
   <div class="device desktop" id="device">
-    <iframe id="preview" src="./festool-A.html" title="Festool — Variant A preview"></iframe>
+    <iframe id="preview" title="Prototype preview"></iframe>
   </div>
 </main>
 
-<aside class="sidekick" id="sidekick" aria-label="Sample details">
+<aside class="sidekick" id="sidekick" aria-label="Sample details" hidden>
   <div class="sk-head">
     <div class="sk-title">
-      <span class="reg" id="sk-reg">brand · industrial</span>
-      <h2 id="sk-name">Festool</h2>
-      <p class="sk-source" id="sk-source">
-        <a href="https://www.festool.com/" target="_blank" rel="noopener">festool.com ↗</a>
-      </p>
+      <span class="reg" id="sk-reg">—</span>
+      <h2 id="sk-name">Loading…</h2>
+      <p class="sk-source" id="sk-source"></p>
     </div>
     <button class="sk-toggle" id="sk-toggle" aria-label="Collapse sidekick">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6"/><path d="M14 6l-6 6 6 6"/></svg>
@@ -483,60 +403,14 @@
 
   <div class="sk-body">
 
-    <!-- ASSESSMENT -->
     <section class="sk-section">
-      <h3><span class="num">01</span> Original assessment</h3>
-      <div class="assess">
-        <div class="verdict">
-          <div>
-            <span class="score">52<small>/100</small></span>
-          </div>
-          <div class="label">
-            <span class="tag">Tired refresh</span>
-          </div>
-        </div>
-        <ul>
-          <li data-score="2"><span class="k">Hierarchy</span>     <span class="bar"><i style="width:40%"></i></span> <span class="v">2/5</span></li>
-          <li data-score="3"><span class="k">Density</span>       <span class="bar"><i style="width:60%"></i></span> <span class="v">3/5</span></li>
-          <li data-score="2"><span class="k">Type scale</span>    <span class="bar"><i style="width:40%"></i></span> <span class="v">2/5</span></li>
-          <li data-score="4"><span class="k">Contrast</span>      <span class="bar"><i style="width:80%"></i></span> <span class="v">4/5</span></li>
-          <li data-score="2"><span class="k">Distinct.</span>     <span class="bar"><i style="width:40%"></i></span> <span class="v">2/5</span></li>
-        </ul>
-        <p class="findings">
-          <strong>Hero text floats over photo without scrim.</strong> Heading scale is ad-hoc — at least four near-identical sizes between 28–44px. The 6-up "Discover Festool" grid treats every tile equally, eroding hierarchy. The voice and palette are recognisable but the composition reads as a 2018 template refresh.
-        </p>
-      </div>
+      <h3><span class="num">01</span> Variants</h3>
+      <div class="vsw" id="vsw"></div>
     </section>
 
-    <!-- VARIANTS -->
     <section class="sk-section">
-      <h3><span class="num">02</span> Variants</h3>
-      <div class="vsw" id="vsw">
-        <button class="on" data-variant="A" data-file="./festool-A.html">
-          <span class="id">A</span><span class="nm">Conservative</span>
-        </button>
-        <button data-variant="B" data-file="./festool-B.html">
-          <span class="id">B</span><span class="nm">JTBD-led</span>
-        </button>
-        <button data-variant="C" data-file="./festool-C.html">
-          <span class="id">C</span><span class="nm">Bold</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- CRITIQUE → CONCEPT -->
-    <section class="sk-section">
-      <h3><span class="num">03</span> What's broken · how it's fixed</h3>
-      <div class="concept" id="concept">
-        <div class="pair broken">
-          <span class="lbl">— Original</span>
-          <p>Hero pairs an unscrim'd headline with a photo, and the IA reads as a flat campaign deck. <strong>The page tells you nothing about what's new for the trade — it tells you what the marketing team shipped this quarter.</strong></p>
-        </div>
-        <div class="pair fixed">
-          <span class="lbl">+ Variant A · Conservative refresh</span>
-          <p>Same IA, modernised tokens. Hero text moves to a left-rail block over a contrast scrim; product name leads, value follows. Heading scale snaps to a major-third (1.25) modular ratio. The 6-up grid gets size hierarchy: one feature tile spans 2 cells, the rest are single. <strong>The risk-averse stakeholder option — almost nothing the legal team would push back on.</strong></p>
-        </div>
-      </div>
+      <h3><span class="num">02</span> What's broken · how it's fixed</h3>
+      <div class="concept" id="concept"></div>
     </section>
 
   </div>
@@ -557,68 +431,140 @@
   </div>
 </aside>
 
+<div class="err" id="err" hidden></div>
+
 <script>
-  const VARIANT_TEXT = {
-    A: {
-      lbl: '+ Variant A · Conservative refresh',
-      body: 'Same IA, modernised tokens. Hero text moves to a left-rail block over a contrast scrim; product name leads, value follows. Heading scale snaps to a major-third (1.25) modular ratio. The 6-up grid gets size hierarchy: one feature tile spans 2 cells, the rest are single. <strong>The risk-averse stakeholder option — almost nothing the legal team would push back on.</strong>'
-    },
-    B: {
-      lbl: '+ Variant B · JTBD-led ("what are you doing today?")',
-      body: 'Same palette, type, photography. <strong>Different homepage thesis.</strong> The page opens with a job-to-be-done router (Cordless · Sanding · Dust extraction · Mobility · Service), not a single hero campaign. The "Tabless" cordless campaign moves into the cordless route as a detail panel. Service-equal band rises above the brand teaser because for owners, service is the most-used surface.'
-    },
-    C: {
-      lbl: '+ Variant C · Bold direction (push one element)',
-      body: 'DIN at 96px on the hero — single declarative line, the brand mark gets to <strong>be</strong> the brand mark instead of a logo lockup. A green ground-line motif runs through every section break, an industrial-engineering signal that ties hero to footer. Same IA as A, but every section gains a single confident move.'
-    }
-  };
+(function () {
+  const params = new URLSearchParams(location.search);
+  const slug = params.get('slug');
+  const errEl = document.getElementById('err');
 
-  // Variant switching
-  const vsw = document.querySelectorAll('#vsw button');
-  const preview = document.getElementById('preview');
-  const concept = document.getElementById('concept');
-
-  function renderConcept(id) {
-    const v = VARIANT_TEXT[id];
-    concept.innerHTML = `
-      <div class="pair broken">
-        <span class="lbl">— Original</span>
-        <p>Hero pairs an unscrim'd headline with a photo, and the IA reads as a flat campaign deck. <strong>The page tells you nothing about what's new for the trade — it tells you what the marketing team shipped this quarter.</strong></p>
-      </div>
-      <div class="pair fixed">
-        <span class="lbl">${v.lbl}</span>
-        <p>${v.body}</p>
-      </div>
-    `;
+  function escape(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+  // Allow <strong>...</strong> through; escape everything else.
+  function richEscape(s) {
+    if (s == null) return '';
+    const placeholderOpen = 'STRONG_OPEN';
+    const placeholderClose = 'STRONG_CLOSE';
+    const swapped = String(s)
+      .replace(/<strong>/g, placeholderOpen)
+      .replace(/<\/strong>/g, placeholderClose);
+    return escape(swapped)
+      .replace(new RegExp(placeholderOpen, 'g'), '<strong>')
+      .replace(new RegExp(placeholderClose, 'g'), '</strong>');
+  }
+  function shortenUrl(u) {
+    try { const url = new URL(u); return url.host + (url.pathname === '/' ? '' : url.pathname); }
+    catch { return u; }
+  }
+  function showError(title, body) {
+    errEl.hidden = false;
+    errEl.innerHTML = `<div class="err-card"><h3>${escape(title)}</h3><p>${body}</p></div>`;
   }
 
-  vsw.forEach(btn => btn.addEventListener('click', () => {
-    vsw.forEach(b => b.classList.remove('on'));
-    btn.classList.add('on');
-    preview.src = btn.dataset.file;
-    preview.title = `Festool — Variant ${btn.dataset.variant} preview`;
-    renderConcept(btn.dataset.variant);
-  }));
+  if (!slug || !/^[a-z0-9-]+$/.test(slug)) {
+    showError('Missing or invalid sample slug.', 'Open a sample from the showcase, or visit <code>brand.html?slug=&lt;slug&gt;</code> with a real slug.');
+    return;
+  }
 
-  // Device switching
-  const device = document.getElementById('device');
-  const dvs = document.querySelectorAll('#dvs button');
-  dvs.forEach(btn => btn.addEventListener('click', () => {
-    dvs.forEach(b => b.classList.remove('on'));
-    btn.classList.add('on');
-    device.className = `device ${btn.dataset.device}`;
-  }));
+  fetch(`./${encodeURIComponent(slug)}/meta.json`, { cache: 'no-store' })
+    .then(r => { if (!r.ok) throw new Error('meta.json HTTP ' + r.status); return r.json(); })
+    .then(init)
+    .catch(err => {
+      showError('Could not load this sample.', `Failed to fetch <code>${escape(slug)}/meta.json</code> — ${escape(err.message)}.`);
+    });
 
-  // Sidekick collapse
-  const sidekick = document.getElementById('sidekick');
-  document.getElementById('sk-toggle').addEventListener('click', () => {
-    sidekick.classList.toggle('collapsed');
-    // adjust desktop max-width when sidekick collapses (visual feedback only — iframe will reflow on its own)
-  });
+  function init(meta) {
+    document.title = `Stardust — ${meta.title || slug}`;
+    document.getElementById('stage').hidden = false;
+    document.getElementById('sidekick').hidden = false;
 
-  // Pre-fill source link
-  document.getElementById('open-source').href = 'https://www.festool.com/';
-  document.getElementById('open-direction').href = '#';
+    // Header crumb + actions
+    document.getElementById('brand-crumb').textContent = slug;
+    if (meta.source && meta.source.url) {
+      const a = document.getElementById('open-source');
+      a.href = meta.source.url; a.hidden = false;
+    }
+    const dirLink = document.getElementById('open-direction');
+    dirLink.href = `${encodeURIComponent(slug)}/direction.md`;
+    dirLink.hidden = false;
+
+    // Sidekick head
+    const reg = (meta.source && meta.source.category) || (meta.source && meta.source.register) || '';
+    document.getElementById('sk-reg').textContent = reg;
+    document.getElementById('sk-name').textContent = meta.title || slug;
+    if (meta.source && meta.source.url) {
+      document.getElementById('sk-source').innerHTML =
+        `<a href="${escape(meta.source.url)}" target="_blank" rel="noopener">${escape(shortenUrl(meta.source.url))} ↗</a>`;
+    }
+
+    // Variants
+    const variants = Array.isArray(meta.variants) ? meta.variants : [];
+    if (variants.length === 0) {
+      showError('No variants in this sample.', 'The sample <code>meta.json</code> declares no variants.');
+      return;
+    }
+    const vsw = document.getElementById('vsw');
+    vsw.classList.add(variants.length === 1 ? 'one' : variants.length === 2 ? 'two' : '');
+    vsw.innerHTML = '';
+    variants.forEach((v, i) => {
+      const btn = document.createElement('button');
+      btn.dataset.variant = v.id;
+      btn.dataset.file = `${slug}/${v.proposedFile}`;
+      btn.dataset.idx = i;
+      if (v.isPrimary) btn.classList.add('on');
+      btn.innerHTML = `<span class="id">${escape(v.id)}</span><span class="nm">${escape(v.name || v.dominantDimension || '')}</span>`;
+      btn.addEventListener('click', () => activate(i));
+      vsw.append(btn);
+    });
+
+    // Default to primary, else first
+    const primaryIdx = Math.max(0, variants.findIndex(v => v.isPrimary));
+    activate(primaryIdx === -1 ? 0 : primaryIdx);
+
+    function activate(i) {
+      const v = variants[i];
+      // toggle on
+      [...vsw.children].forEach((b, j) => b.classList.toggle('on', j === i));
+      // load preview
+      const preview = document.getElementById('preview');
+      const file = `${slug}/${v.proposedFile}`;
+      preview.src = file;
+      preview.title = `${meta.title || slug} — Variant ${v.id} preview`;
+      // render concept text
+      const broken = (meta.originalCritique || '').trim();
+      const fix = (v.fix || v.thesis || '').trim();
+      const concept = document.getElementById('concept');
+      concept.innerHTML = '';
+      if (broken) {
+        concept.insertAdjacentHTML('beforeend',
+          `<div class="pair broken"><span class="lbl">— Original</span><p>${richEscape(broken)}</p></div>`);
+      }
+      if (fix) {
+        const lbl = `+ Variant ${escape(v.id)} · ${escape(v.name || v.dominantDimension || 'proposed')}`;
+        concept.insertAdjacentHTML('beforeend',
+          `<div class="pair fixed"><span class="lbl">${lbl}</span><p>${richEscape(fix)}</p></div>`);
+      }
+    }
+
+    // Device switch
+    const device = document.getElementById('device');
+    document.querySelectorAll('#dvs button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#dvs button').forEach(b => b.classList.remove('on'));
+        btn.classList.add('on');
+        device.className = `device ${btn.dataset.device}`;
+      });
+    });
+
+    // Sidekick collapse
+    const sidekick = document.getElementById('sidekick');
+    document.getElementById('sk-toggle').addEventListener('click', () => sidekick.classList.toggle('collapsed'));
+  }
+})();
 </script>
 
 </body>

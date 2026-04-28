@@ -1,6 +1,15 @@
 {
   "schemaVersion": 2,
   "samples": [
-    "aurora-coffee"
+    "aman",
+    "aurora-coffee",
+    "festool",
+    "glossier",
+    "oatly",
+    "patagonia",
+    "polestar",
+    "theroadhome",
+    "vanguard",
+    "virginatlantic"
   ]
 }
