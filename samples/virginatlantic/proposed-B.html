@@ -1,593 +1,726 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- stardust:provenance
-  writtenBy:        stardust:prototype  (variant B — compositional shift)
-  writtenAt:        2026-04-28T11:30:00Z
-  page:             home
-  pageUrl:          https://www.virginatlantic.com/
-  variant:          B
-  variantThesis:    Same brand, different page. Palette/typography inherited; homepage thesis flips from feature-list-parade to booking-funnel narrative (decide → choose cabin → know what's included). Cabin classes promoted up; sustainability slimmed to a strip.
-  proposedFile:     ./home-B-shift-proposed.html
-  againstDirection: stardust/direction.md (Active 2026-04-28T11:20:00Z)
-  readArtifacts:
-    - stardust/current/pages/home.json
-    - stardust/current/_brand-extraction.json
-    - DESIGN.md
-    - DESIGN.json
-    - stardust/direction.md
-  divergenceVersion: v1.0 (stardust v2)
-  fontDeck:          brand-inherited (Gotham)
-  paletteSource:     inherited from _brand-extraction.json
-  unsourcedContent:
-    - selector: '[data-section="destinations-rail"] .placeholder:nth-of-type(1)'
-      type: other
-      reason: design demanded 3-up destinations rail; current/pages/home.json provides only one destination image (Lady-in-car-LA)
-    - selector: '[data-section="destinations-rail"] .placeholder:nth-of-type(2)'
-      type: other
-      reason: as above — second destination slot
-  directionAuthorisedCopy:
-    - location: hero eyebrow
-      copy: Where shall we take you?
-      reason: small JTBD-led eyebrow; voice-aligned ("Take off to the UK and beyond" register)
-    - location: H2 above destinations rail
-      copy: Where shall we take you?
-      reason: section title for the new destinations rail
-    - location: H2 above pre-travel row
-      copy: What's included
-      reason: replaces "Pre-travel advice" — promoted to a JTBD-aware label as part of the booking-funnel narrative
-  validation:
-    tokenContract: pass
-    dataAttributes: pass (incl. data-fragment-role=source on destinations rail)
-    contentSourcing: pass (placeholders used where current page lacks the value; direction-authorised copy listed)
-    antiToolboxAudit: clean
-    impeccableHardRules: pass
-  stardustVersion:   0.2.0
--->
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Book flights with Virgin Atlantic</title>
-<meta name="description" content="Hello you. Welcome to Virgin Atlantic. Find our best fares on your next flights to the US and beyond, with a fantastic choice of food, drinks, award winning entertainment and onboard WiFi.">
+<meta name="provenance" content='{"writtenBy":"stardust:prototype","variant":"B-smart-booking","writtenAt":"2026-04-27T22:13:00Z","hardenedAt":"2026-04-28T08:35:00Z","againstDirection":"stardust/direction.md","mode":"brand-faithful","tokens":"DESIGN.json","content":"current/pages/home.json","critique":[{"at":"2026-04-28T08:25:00Z","detector":"impeccable-cli","findings":0},{"at":"2026-04-28T08:25:00Z","detector":"llm-design-review","heuristics":"33/40","p0":1,"p1":2}],"hardenLog":["ops-strip metrics wrapped [data-placeholder]","tabs demoted: dropped Manage Trip + Flight Status (already in utility bar)","recent-search rail added above tabs for returning bookers","hero sub stat removed (138 routes claim was unsourced)","Flying Club balance promoted from gray utility text to interactive pill"],"unsourcedContent":["fare prices in deals + cabin compare ([data-placeholder])","ops-strip metrics: 98.4% on-time, 148 in air, 0 disruptions ([data-placeholder])","Flying Club balance 112,480 pts (illustrative)","cabin features list (specific seat dimensions, allowances)"]}'>
+<title>Virgin Atlantic — Search flights</title>
 <style>
-
 :root {
-  --heading-font-family: "Gotham", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --body-font-family:    "Gotham", "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-  --heading-xxl: 61px;
-  --heading-xl:  49px;
-  --heading-lg:  39px;
-  --heading-md:  31px;
-  --heading-sm:  25px;
-  --heading-xs:  20px;
-  --body:        16px;
-  --body-sm:     14px;
-
-  --line-height-heading: 1.1;
-  --line-height-body:    1.55;
-
-  --color-bg:           #ffffff;
-  --color-fg:           #030c16;
-  --color-fg-muted:     #5a6573;
-  --color-surface:      #f5f5f6;
-  --color-surface-alt:  #e6e7e8;
-  --color-border:       #dfe1e3;
-  --color-accent:       #da0530;
-  --color-accent-pressed: #a80024;
-  --color-chrome:       #111921;
-  --color-chrome-soft:  #1c2733;
-  --color-purple:       #4c1d4f;
-  --color-purple-deep:  #2d0f33;
-  --color-rose:         #a05c8a;
-
-  --spacing-xs:  4px;
-  --spacing-sm:  8px;
-  --spacing-md:  16px;
-  --spacing-lg:  24px;
-  --spacing-xl:  48px;
-  --spacing-2xl: 64px;
-
-  --section-padding: 64px;
-  --max-width:       1280px;
-  --radius:          6px;
+  --bg: #ffffff;
+  --bg-soft: #f6f7f9;
+  --bg-rail: #fafbfc;
+  --ink: #030c16;
+  --ink-soft: #2a3340;
+  --primary: #da0530;
+  --primary-hover: #f92b47;
+  --primary-deep: #a70d2e;
+  --secondary: #4f145b;
+  --champagne: #bda05d;
+  --line: #d7d8da;
+  --line-strong: #a8b0b9;
+  --caption: #676d73;
+  --radius-card: 12px;
+  --radius-pill: 999px;
+  --pad-section: 48px;
+  --pad-section-md: 36px;
+  --pad-section-sm: 24px;
+  --max: 1320px;
+  --gutter: 24px;
+  --font-head: "Gotham","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-body: "Gotham","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --t-11: 11px;
+  --t-12: 12px;
+  --t-13: 13px;
+  --t-14: 14px;
+  --t-16: 16px;
+  --t-19: 19px;
+  --t-23: 23px;
+  --t-28: 28px;
+  --t-34: 34px;
+  --t-41: 41px;
 }
-
-
-*, *::before, *::after { box-sizing: border-box; }
-html, body { margin: 0; }
-body {
-  font-family: var(--body-font-family);
-  color: var(--color-fg);
-  background: var(--color-bg);
-  font-size: var(--body);
-  line-height: var(--line-height-body);
-  -webkit-font-smoothing: antialiased;
-}
-img { max-width: 100%; display: block; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-weight: 400; font-size: var(--t-14); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
 a { color: inherit; }
-h1, h2, h3, h4, h5, h6 { font-family: var(--heading-font-family); font-weight: 500; line-height: var(--line-height-heading); margin: 0; letter-spacing: -0.01em; }
-.container { max-width: var(--max-width); margin: 0 auto; padding-inline: clamp(20px, 5vw, 80px); }
 
-/* ----- chrome ----- */
-.va-utility {
-  background: var(--color-chrome);
-  color: rgba(255,255,255,0.85);
-  font-size: var(--body-sm);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.va-utility .container { display: flex; justify-content: flex-end; gap: 24px; padding-block: 8px; }
-.va-utility a { color: inherit; text-decoration: none; padding: 4px 0; opacity: 0.9; }
-.va-utility a:hover { opacity: 1; }
-.va-utility a + a { margin-left: 0; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
 
-.va-header {
-  background: var(--color-chrome);
-  color: #fff;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-}
-.va-header .container {
-  display: flex; align-items: center; justify-content: space-between;
-  padding-block: 18px;
-}
-.va-header .va-logo { width: 180px; height: auto; display: block; }
-.va-header nav { display: flex; gap: 32px; align-items: center; font-weight: 500; }
-.va-header nav a { color: #fff; text-decoration: none; padding: 6px 0; font-size: var(--body); }
-.va-header nav a:hover { color: var(--color-rose); }
-.va-header .ds-search { background: transparent; border: 0; color: #fff; cursor: pointer; padding: 8px; border-radius: 50%; }
-.va-header .ds-search:hover { background: var(--color-chrome-soft); }
+/* Top utility */
+.utility { background: var(--ink); color: #cfd5dc; font-size: var(--t-12); }
+.utility__inner { display: flex; justify-content: space-between; height: 36px; align-items: center; }
+.utility a { color: #cfd5dc; text-decoration: none; }
+.utility a:hover { color: #fff; }
+.utility ul { list-style: none; display: flex; gap: 20px; padding: 0; margin: 0; }
+.utility .pts { display: inline-flex; gap: 8px; align-items: center; }
+.utility .pts strong { color: var(--champagne); font-weight: 500; }
 
-/* ----- buttons ----- */
-.ds-btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-family: inherit; font-weight: 500; font-size: var(--body);
-  padding: 12px 20px; border-radius: var(--radius);
-  cursor: pointer; text-decoration: none; border: 0;
-  line-height: 1.2; transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
-}
-.ds-btn--primary { background: var(--color-accent); color: #fff; }
-.ds-btn--primary:hover { background: var(--color-accent-pressed); }
-.ds-btn--secondary {
-  background: transparent; color: var(--color-fg);
-  padding: 8px 0; border-radius: 0;
-  border-bottom: 2px solid var(--color-fg);
-}
-.ds-btn--secondary:hover { color: var(--color-accent); border-color: var(--color-accent); }
-.ds-btn--secondary-light {
-  background: transparent; color: #fff;
-  padding: 8px 0; border-radius: 0;
-  border-bottom: 2px solid #fff;
-}
-.ds-btn--secondary-light:hover { color: var(--color-rose); border-color: var(--color-rose); }
-.ds-chev::after { content: " ›"; }
+/* Header */
+.va-header { background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 50; }
+.va-header__inner { display: flex; align-items: center; gap: 32px; height: 64px; }
+.va-logo { font-family: var(--font-head); font-weight: 500; font-size: var(--t-19); color: var(--primary); text-decoration: none; letter-spacing: -0.02em; }
+.va-logo b { color: var(--ink); font-weight: 500; }
+.va-nav { display: flex; gap: 4px; flex: 1; }
+.va-nav a { font-size: var(--t-14); text-decoration: none; color: var(--ink); padding: 10px 14px; border-radius: 8px; font-weight: 500; }
+.va-nav a:hover { background: var(--bg-soft); }
+.va-nav a.active { background: var(--bg-soft); color: var(--primary); }
+.va-actions { display: flex; gap: 8px; }
+@media (max-width: 900px) { .va-nav { display: none; } }
 
-/* ----- card ----- */
-.ds-card { background: var(--color-bg); border-radius: var(--radius); overflow: hidden; }
-.ds-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; border-radius: var(--radius); }
-.ds-card__body { padding: 20px 0 0; }
-.ds-card__title { font-size: var(--heading-sm); margin: 0 0 8px; }
-.ds-card__text { color: var(--color-fg-muted); margin: 0 0 16px; font-size: var(--body); line-height: 1.55; }
+/* Buttons */
+.btn { font-family: var(--font-head); font-weight: 500; font-size: var(--t-14); padding: 10px 18px; border-radius: var(--radius-pill); border: 0; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+.btn--primary { background: var(--primary); color: #fff; }
+.btn--primary:hover { background: var(--primary-hover); }
+.btn--ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line-strong); }
+.btn--ghost:hover { border-color: var(--ink); }
+.btn--lg { padding: 14px 28px; font-size: var(--t-16); }
+.btn--xl { padding: 16px 32px; font-size: var(--t-19); }
 
-/* ----- input ----- */
-.ds-input {
-  width: 100%;
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 12px 16px;
-  font: inherit; color: var(--color-fg);
-  font-size: var(--body);
-}
-.ds-input:focus { outline: 2px solid var(--color-accent); outline-offset: 2px; }
-.ds-input-label { display: block; font-size: var(--body-sm); color: var(--color-fg-muted); margin-bottom: 4px; font-weight: 500; }
-
-/* ----- badge ----- */
-.ds-badge { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 500; line-height: 1.6; letter-spacing: 0.02em; }
-.ds-badge--promo { background: var(--color-accent); color: #fff; }
-.ds-badge--member { background: var(--color-purple); color: #fff; }
-
-/* ----- footer ----- */
-.va-footer {
-  background: var(--color-chrome);
-  color: rgba(255,255,255,0.78);
-  padding-block: 64px 32px;
-  margin-top: 64px;
-}
-.va-footer .container { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; gap: 32px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-.va-footer h4 { color: #fff; font-size: var(--body); font-weight: 500; margin: 0 0 16px; }
-.va-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: var(--body-sm); }
-.va-footer a { color: inherit; text-decoration: none; }
-.va-footer a:hover { color: #fff; }
-.va-footer .va-footer__brand { display: flex; flex-direction: column; gap: 16px; }
-.va-footer .va-logo { width: 160px; height: auto; }
-.va-footer .va-social { display: flex; gap: 12px; margin-top: 16px; }
-.va-footer .va-social a { width: 32px; height: 32px; border-radius: 50%; background: var(--color-chrome-soft); display: inline-flex; align-items: center; justify-content: center; color: #fff; }
-.va-footer .va-footer__legal { display: flex; justify-content: space-between; padding-top: 24px; font-size: 12px; color: rgba(255,255,255,0.5); flex-wrap: wrap; gap: 16px; }
-.va-footer .va-footer__legal nav { display: flex; gap: 16px; }
-
-/* placeholder visual signature (F-002) */
-.placeholder {
+/* HERO = booking widget. Sky behind for atmosphere; widget owns the surface. */
+.hero {
   position: relative;
-  border: 2px dashed var(--color-accent);
-  background: rgba(218, 5, 48, 0.04);
-  padding: 16px;
-  border-radius: var(--radius);
+  padding: 56px 0 80px;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--bg-soft);
+}
+.hero__media { position: absolute; inset: 0; z-index: -1; }
+.hero__media img { width: 100%; height: 100%; object-fit: cover; opacity: 0.65; }
+.hero__veil { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.95) 100%); }
+
+.hero__head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; }
+.hero__title { font-family: var(--font-head); font-weight: 500; font-size: var(--t-34); line-height: 1.1; letter-spacing: -0.02em; margin: 0; max-width: 22ch; }
+.hero__title em { color: var(--primary); font-style: normal; }
+.hero__sub { color: var(--caption); font-size: var(--t-14); }
+
+.search {
+  background: #fff;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 24px rgba(3,12,22,0.07);
+}
+.search__tabs { display: flex; border-bottom: 1px solid var(--line); padding: 0 8px; }
+.search__tab { padding: 16px 18px; font-size: var(--t-14); font-weight: 500; color: var(--caption); border-bottom: 2px solid transparent; cursor: pointer; }
+.search__tab.active { color: var(--ink); border-bottom-color: var(--primary); }
+.search__body { padding: 18px; }
+.search__row {
+  display: grid;
+  grid-template-columns: 1.4fr 1.4fr 1.1fr 1.3fr 1fr auto;
+  gap: 0;
+  align-items: stretch;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.field {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 14px 18px;
+  border-right: 1px solid var(--line);
+  position: relative;
+  cursor: pointer;
+  transition: background .15s ease;
+}
+.field:hover { background: var(--bg-rail); }
+.field:last-of-type { border-right: 0; }
+.field label { font-size: var(--t-11); letter-spacing: 0.1em; text-transform: uppercase; color: var(--caption); font-weight: 500; }
+.field .v { font-size: var(--t-16); color: var(--ink); font-weight: 500; }
+.field .vh { font-size: var(--t-13); color: var(--caption); }
+.field--btn { padding: 0; border-right: 0; }
+.field--btn .btn { width: 100%; height: 100%; border-radius: 0; padding: 14px 24px; }
+.search__row__opts { display: flex; gap: 18px; padding: 12px 4px 0 4px; flex-wrap: wrap; font-size: var(--t-13); color: var(--caption); }
+.search__row__opts label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.search__row__opts input[type=checkbox] { accent-color: var(--primary); }
+.search__row__opts a { color: var(--primary); font-weight: 500; text-decoration: none; }
+@media (max-width: 1100px) {
+  .search__row { grid-template-columns: 1fr 1fr; }
+  .field { border-right: 0; border-bottom: 1px solid var(--line); }
+  .field--btn { grid-column: 1/-1; border-bottom: 0; }
+  .field--btn .btn { padding: 16px 24px; }
+}
+
+/* Quick links — popular routes */
+.quick { padding: 32px 0; border-bottom: 1px solid var(--line); }
+.quick__title { font-size: var(--t-12); letter-spacing: 0.14em; text-transform: uppercase; color: var(--caption); margin: 0 0 14px; font-weight: 500; }
+.quick__row { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip { font-size: var(--t-13); padding: 8px 14px; border-radius: var(--radius-pill); border: 1px solid var(--line); background: #fff; color: var(--ink); text-decoration: none; transition: border-color .15s ease, color .15s ease; display: inline-flex; align-items: center; gap: 8px; }
+.chip:hover { border-color: var(--primary); color: var(--primary); }
+.chip strong { font-weight: 500; }
+.chip span { color: var(--caption); }
+
+/* Section */
+section { padding: var(--pad-section) 0; }
+.section-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+.section-title { font-family: var(--font-head); font-weight: 500; font-size: var(--t-23); line-height: 1.2; letter-spacing: -0.01em; margin: 0; }
+.section-link { font-size: var(--t-14); color: var(--primary); text-decoration: none; font-weight: 500; }
+.section-link:hover { text-decoration: underline; }
+
+/* Deals table */
+.deals { background: var(--bg); }
+.deals__list { border: 1px solid var(--line); border-radius: var(--radius-card); overflow: hidden; background: #fff; }
+.deals__row {
+  display: grid;
+  grid-template-columns: 56px 1.4fr 1fr 1fr 1fr 0.8fr 130px;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  transition: background .15s ease;
+}
+.deals__row:last-child { border-bottom: 0; }
+.deals__row:hover { background: var(--bg-rail); }
+.deals__head { background: var(--bg-soft); font-size: var(--t-11); letter-spacing: 0.1em; text-transform: uppercase; color: var(--caption); font-weight: 500; padding: 12px 18px; cursor: default; }
+.deals__head:hover { background: var(--bg-soft); }
+.deals__row .thumb { width: 40px; height: 40px; border-radius: 6px; overflow: hidden; }
+.deals__row .thumb img { width: 100%; height: 100%; object-fit: cover; }
+.deals__row .city { font-size: var(--t-15, 15px); font-weight: 500; }
+.deals__row .city small { display: block; font-weight: 400; color: var(--caption); font-size: var(--t-12); }
+.deals__row .col { font-size: var(--t-13); color: var(--ink-soft); }
+.deals__row .price { text-align: right; font-size: var(--t-19); font-weight: 500; color: var(--ink); }
+.deals__row .price small { display: block; font-size: var(--t-11); color: var(--caption); font-weight: 400; }
+.deals__row .price[data-placeholder]::before { content: "≈"; opacity: .55; margin-right: 2px; }
+.deals__row .price[data-placeholder] { color: var(--ink); position: relative; }
+.deals__row .price[data-placeholder]::after { content: "illustrative"; position: absolute; top: -10px; right: 0; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--caption); font-weight: 400; }
+.deals__row .cta { text-align: right; }
+.badge { display: inline-block; padding: 3px 8px; border-radius: var(--radius-pill); font-size: var(--t-11); font-weight: 500; letter-spacing: 0.05em; }
+.badge--reward { background: rgba(189,160,93,0.15); color: #6e5a26; }
+.badge--deal   { background: rgba(218,5,48,0.10); color: var(--primary-deep); }
+.badge--new    { background: rgba(79,20,91,0.10); color: var(--secondary); }
+@media (max-width: 1100px) {
+  .deals__row { grid-template-columns: 40px 1fr auto; gap: 10px; }
+  .deals__row .col, .deals__row .cta { display: none; }
+  .deals__head { display: none; }
+}
+
+/* Triple band: rewards / cabins / help */
+.triple {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+.tile {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  min-height: 220px;
-  justify-content: center;
+}
+.tile__media { aspect-ratio: 16/9; background: var(--bg-soft); }
+.tile__media img { width: 100%; height: 100%; object-fit: cover; }
+.tile__body { padding: 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.tile__eyebrow { font-size: var(--t-11); letter-spacing: 0.12em; text-transform: uppercase; color: var(--primary); font-weight: 500; }
+.tile__h { margin: 0; font-size: var(--t-19); font-weight: 500; line-height: 1.25; }
+.tile__b { color: var(--ink-soft); font-size: var(--t-14); margin: 0; flex: 1; }
+.tile__cta { font-size: var(--t-14); color: var(--ink); font-weight: 500; text-decoration: none; border-bottom: 1.5px solid var(--primary); align-self: flex-start; padding-bottom: 1px; }
+@media (max-width: 900px) { .triple { grid-template-columns: 1fr; } }
+
+/* Cabin compare strip */
+.cabins-compare {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: #fff;
+}
+.cabin-col {
+  padding: 0;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+}
+.cabin-col:last-child { border-right: 0; }
+.cabin-col__media { aspect-ratio: 4/3; }
+.cabin-col__media img { width: 100%; height: 100%; object-fit: cover; }
+.cabin-col__body { padding: 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.cabin-col__name { font-size: var(--t-12); letter-spacing: 0.16em; text-transform: uppercase; font-weight: 500; }
+.cabin-col__name--upper { color: var(--champagne); }
+.cabin-col__name--prem  { color: var(--secondary); }
+.cabin-col__name--econ  { color: var(--ink); }
+.cabin-col__h { font-size: var(--t-19); font-weight: 500; margin: 0; }
+.cabin-col__feat { list-style: none; padding: 0; margin: 6px 0 12px 0; display: flex; flex-direction: column; gap: 6px; font-size: var(--t-13); color: var(--ink-soft); }
+.cabin-col__feat li { display: flex; gap: 8px; align-items: flex-start; }
+.cabin-col__feat li::before { content: "→"; color: var(--primary); flex-shrink: 0; }
+.cabin-col__from { font-size: var(--t-13); color: var(--caption); margin-top: auto; }
+.cabin-col__from strong { color: var(--ink); font-weight: 500; }
+.cabin-col__cta { font-size: var(--t-13); color: var(--primary); font-weight: 500; text-decoration: none; }
+@media (max-width: 900px) { .cabins-compare { grid-template-columns: 1fr; } .cabin-col { border-right: 0; border-bottom: 1px solid var(--line); } }
+
+/* Status strip */
+.status-strip {
+  background: var(--ink);
+  color: #cfd5dc;
+  border-radius: var(--radius-card);
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  gap: 24px;
   align-items: center;
-  text-align: center;
-  color: var(--color-fg-muted);
 }
-.placeholder__eyebrow {
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--color-accent); font-weight: 600;
+.status-strip__title { font-size: var(--t-19); font-weight: 500; color: #fff; margin: 0 0 4px; }
+.status-strip__sub { font-size: var(--t-13); color: #8993a0; }
+.status-strip__metric strong { display: block; font-size: var(--t-23); font-weight: 500; color: #fff; }
+.status-strip__metric span { font-size: var(--t-12); color: #8993a0; letter-spacing: 0.08em; text-transform: uppercase; }
+.status-strip__metric .ok { color: #6dd99a; }
+@media (max-width: 900px) { .status-strip { grid-template-columns: 1fr 1fr; } }
+
+/* Status-strip placeholder signature — applied to ops metrics */
+.status-strip__metric[data-placeholder] { position: relative; }
+.status-strip__metric[data-placeholder]::after {
+  content: "illustrative";
+  position: absolute;
+  top: -6px;
+  right: 0;
+  font-size: 9px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: #6b7480;
+  font-weight: 500;
 }
-.placeholder__shape { font-size: var(--body-sm); font-style: italic; }
 
-
-.ds-booking { display: grid; gap: 16px; }
-.ds-booking__tabs { display: flex; gap: 4px; }
-.ds-booking__tab {
-  background: transparent; border: 0; padding: 10px 16px; cursor: pointer;
-  font: inherit; font-weight: 500; color: var(--color-fg-muted);
-  border-bottom: 2px solid transparent; border-radius: 0;
+/* Recent-search rail: above the booking widget for returning bookers */
+.recent { margin-bottom: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.recent__label { font-size: var(--t-11); letter-spacing: 0.10em; text-transform: uppercase; color: var(--caption); font-weight: 500; }
+.recent__pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #fff;
+  border: 1.5px solid var(--ink);
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  font-size: var(--t-13);
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  transition: background .15s ease;
 }
-.ds-booking__tab.is-active { color: var(--color-fg); border-color: var(--color-accent); }
-.ds-booking__row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.ds-booking__row--actions { grid-template-columns: 1fr auto; align-items: center; gap: 16px; }
-@media (min-width: 920px) {
-  .ds-booking__row:nth-of-type(3) { grid-template-columns: 1fr 1fr 1fr; }
+.recent__pill:hover { background: var(--ink); color: #fff; }
+.recent__pill .dot { width: 6px; height: 6px; background: var(--primary); border-radius: 50%; }
+.recent__pill[data-placeholder]::after { display: none; } /* don't decorate the pill itself */
+.recent__points {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: var(--t-13);
+  color: var(--caption);
+  text-decoration: none;
 }
-.ds-booking__field { display: block; }
-.ds-booking__discount { color: var(--color-fg); text-decoration: underline; text-underline-offset: 3px; font-size: var(--body-sm); }
+.recent__points strong { color: var(--secondary); font-weight: 500; }
+.recent__points:hover { color: var(--ink); }
 
-
-/* ----- variant B specific ----- */
-.va-hero {
-  padding-block: 80px 56px;
-  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-surface) 100%);
-}
-.va-hero .container { display: grid; grid-template-columns: 5fr 7fr; gap: 48px; align-items: center; }
-.va-hero__eyebrow { font-size: var(--body-sm); letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-accent); font-weight: 500; margin: 0 0 12px; }
-.va-hero__copy h1 { font-size: var(--heading-xl); margin: 0 0 16px; }
-.va-hero__copy p { font-size: var(--body); color: var(--color-fg-muted); margin: 0 0 24px; max-width: 36ch; }
-.va-hero__widget { background: var(--color-bg); border-radius: var(--radius); padding: 24px; box-shadow: 0 2px 8px rgba(3, 12, 22, 0.06); border: 1px solid var(--color-border); }
-.va-hero__photo { position: relative; border-radius: var(--radius); overflow: hidden; }
-.va-hero__photo img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 16 / 10; }
-
-.va-section { padding-block: 64px; }
-.va-section__head { margin-bottom: 32px; }
-.va-section__head h2 { font-size: var(--heading-md); margin: 0 0 8px; }
-.va-section__head p { color: var(--color-fg-muted); margin: 0; max-width: 60ch; }
-
-.va-grid-2, .va-grid-3, .va-grid-4 { display: grid; gap: 24px; }
-.va-grid-2 { grid-template-columns: 1fr 1fr; }
-.va-grid-3 { grid-template-columns: repeat(3, 1fr); }
-.va-grid-4 { grid-template-columns: repeat(4, 1fr); }
-
-/* destinations rail */
-.va-destinations { background: var(--color-surface); }
-.va-destinations .va-grid-3 { gap: 16px; }
-.va-dest-card { border-radius: var(--radius); overflow: hidden; position: relative; aspect-ratio: 4 / 5; min-height: 360px; }
-.va-dest-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.va-dest-card__caption {
-  position: absolute; left: 16px; right: 16px; bottom: 16px;
-  background: linear-gradient(180deg, transparent 0%, rgba(3,12,22,0.0) 30%, rgba(3,12,22,0.9) 100%);
-  color: #fff; padding: 32px 0 0; min-height: 80px;
-}
-.va-dest-card__caption-bg {
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, transparent 50%, rgba(3,12,22,0.85) 100%);
-  pointer-events: none;
-}
-.va-dest-card__label { position: absolute; left: 20px; right: 20px; bottom: 20px; color: #fff; z-index: 2; }
-.va-dest-card__label small { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.8; display: block; margin-bottom: 4px; }
-.va-dest-card__label strong { font-size: var(--heading-sm); font-weight: 500; display: block; }
-
-/* condensed experience band */
-.va-experience-band {
-  background: var(--color-surface);
-  padding-block: 56px;
-}
-.va-experience-band__row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
-.va-experience-tile { background: var(--color-bg); border-radius: var(--radius); padding: 24px; display: grid; grid-template-columns: 96px 1fr; gap: 16px; align-items: center; }
-.va-experience-tile img { width: 96px; height: 96px; object-fit: cover; border-radius: var(--radius); aspect-ratio: 1; }
-.va-experience-tile h3 { font-size: var(--heading-xs); margin: 0 0 6px; }
-.va-experience-tile p { font-size: var(--body-sm); color: var(--color-fg-muted); margin: 0 0 8px; }
-.va-experience-tile a { font-size: var(--body-sm); }
-
-/* what's included row */
-.va-pretravel .va-tile { display: grid; gap: 12px; padding: 24px; background: var(--color-bg); border-radius: var(--radius); border: 1px solid var(--color-border); align-content: start; }
-.va-tile__icon { width: 36px; height: 36px; color: var(--color-accent); }
-.va-tile h3 { font-size: var(--heading-xs); margin: 0; }
-.va-tile p { font-size: var(--body-sm); color: var(--color-fg-muted); margin: 0; }
-
-/* sustainability strip */
-.va-sustain-strip { background: var(--color-surface); padding-block: 40px; }
-.va-sustain-strip .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.va-sustain-tile { display: grid; grid-template-columns: 160px 1fr; gap: 20px; align-items: center; background: var(--color-bg); border-radius: var(--radius); padding: 16px; border: 1px solid var(--color-border); }
-.va-sustain-tile img { width: 160px; height: 100px; object-fit: cover; border-radius: var(--radius); aspect-ratio: 16 / 10; }
-.va-sustain-tile h3 { font-size: var(--heading-xs); margin: 0 0 4px; }
-.va-sustain-tile p { font-size: var(--body-sm); color: var(--color-fg-muted); margin: 0; }
-.va-sustain-tile a { display: inline-block; margin-top: 8px; font-size: var(--body-sm); }
-
-@media (max-width: 920px) {
-  .va-hero .container { grid-template-columns: 1fr; }
-  .va-grid-2, .va-grid-3, .va-grid-4, .va-experience-band__row, .va-sustain-strip .row { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 600px) {
-  .va-grid-2, .va-grid-3, .va-grid-4, .va-experience-band__row, .va-sustain-strip .row { grid-template-columns: 1fr; }
-  .va-section { padding-block: 32px; }
-  .va-header nav { gap: 16px; }
-  .va-header nav a:nth-child(n+4) { display: none; }
-}
+/* Footer */
+.footer { background: #fff; border-top: 1px solid var(--line); padding: var(--pad-section) 0 24px; margin-top: var(--pad-section); }
+.footer__top { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.footer__col h6 { font-size: var(--t-12); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); margin: 0 0 12px; font-weight: 500; }
+.footer__col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.footer__col a { font-size: var(--t-13); color: var(--ink-soft); text-decoration: none; }
+.footer__col a:hover { color: var(--primary); }
+.footer__legal { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-top: 18px; font-size: var(--t-12); color: var(--caption); }
+.footer__legal ul { list-style: none; display: flex; gap: 16px; padding: 0; margin: 0; flex-wrap: wrap; }
+.footer__legal a { color: var(--caption); text-decoration: none; }
+@media (max-width: 900px) { .footer__top { grid-template-columns: 1fr 1fr; } }
 </style>
 </head>
-<body>
+<body data-variant="B-smart-booking" data-stardust-prototype="home">
 
-
-<aside class="va-utility" data-section="utility-nav" data-intent="secondary navigation" data-layout="full-bleed">
-  <div class="container">
-    <a href="#">Help</a><a href="#">Special offers</a><a href="#">Register</a><a href="#">Log in</a><a href="#">My booking</a>
+<div class="utility">
+  <div class="wrap utility__inner">
+    <ul>
+      <li><a href="#">United Kingdom · GBP</a></li>
+      <li><a href="#">Help centre</a></li>
+      <li><a href="#">Flight status</a></li>
+    </ul>
+    <ul>
+      <li><a href="#">Manage trip</a></li>
+      <li><a href="#">Sign in</a></li>
+    </ul>
   </div>
-</aside>
+</div>
 
-<header class="va-header" data-section="header" data-intent="primary navigation" data-layout="full-bleed">
-  <div class="container">
-    <a href="/" aria-label="Virgin Atlantic" class="va-brand"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 233 48" role="presentation" preserveAspectRatio="xMinYMin" class="va-logo" style="width:180px;height:auto"><title>Virgin Atlantic Logo</title><path class="brand-logo-component-module__purple___UoYP" d="M9.809 43.082h-1.74L.015 25.67h2.323l6.637 14.824 6.553-14.824h2.205l-7.93 17.412h.007Zm11.798-19.346h-1.99v-2.31h1.99v2.31Zm0 19.346h-1.99V25.67h1.99v17.412ZM54.372 23.7H52.39v-2.31h1.982v2.31Zm0 19.346H52.39V25.635h1.982v17.412Zm49.969 0h-1.99V21.391h1.99v21.656Zm46.087-19.346h-1.983v-2.31h1.983v2.31Zm0 19.346h-1.983V25.635h1.983v17.412Zm-53.475 0h-1.976V21.391h1.976v4.25h3.409v1.851h-3.409v15.562-.007Zm46.087 0h-1.976V21.391h1.976v4.25h3.402V27.5h-3.402v15.555-.007Zm-58.463.369c-3.227 0-6.497-1.885-6.497-5.489v-.063c0-3.777 2.623-5.69 7.77-5.69h4.863v-.049c0-3.165-1.795-4.779-5.336-4.779-1.718 0-3.353.41-5.175 1.301l-.167.084-.73-1.65.152-.069c1.934-1.002 4.119-1.537 6.143-1.537 2.344 0 4.132.598 5.322 1.78 1.148 1.155 1.718 2.742 1.718 4.842v10.957h-1.927v-2.31c-.786.967-2.81 2.679-6.136 2.679v-.007Zm-4.466-5.58c0 2.178 1.941 3.771 4.62 3.771 2.99 0 6.017-1.704 6.017-5.523V33.99h-4.689c-4.222 0-5.94 1.113-5.94 3.853l-.008-.006Zm33.148 5.58c-3.221 0-6.49-1.885-6.49-5.489v-.063c0-3.777 2.615-5.69 7.77-5.69h4.87v-.049c0-3.165-1.802-4.779-5.343-4.779-1.711 0-3.353.41-5.176 1.301l-.167.084-.723-1.65.146-.069c1.941-1.002 4.132-1.537 6.15-1.537 2.337 0 4.132.598 5.314 1.78 1.155 1.155 1.712 2.742 1.712 4.842v10.957h-1.913v-2.31c-.786.967-2.804 2.679-6.15 2.679v-.007Zm-4.466-5.58c0 2.178 1.941 3.771 4.619 3.771 2.998 0 6.018-1.704 6.018-5.523V33.99h-4.689c-4.216 0-5.948 1.113-5.948 3.853v-.006Zm-37.078 5.211h-1.983V33.85c0-1.99 0-6.65-5.106-6.65-3.638 0-5.809 2.762-5.809 7.374v8.48h-1.975V25.642h1.975v2.9c.703-1.078 2.519-3.192 6.039-3.192 4.424 0 6.859 2.685 6.859 7.547v10.15Zm66.984 0h-1.989V33.85c0-1.99 0-6.65-5.113-6.65-3.632 0-5.795 2.762-5.795 7.374v8.48h-1.983V25.642h1.983v2.9c.702-1.078 2.511-3.192 6.031-3.192 4.424 0 6.866 2.685 6.866 7.547v10.15Zm-97.002 4.94c-4.507 0-7.38-2.36-7.694-2.63l-.125-.105 1.127-1.593.14.105c1.725 1.217 3.707 2.344 6.58 2.344 4.049 0 6.275-2.421 6.275-6.825V38.4c-1.148 1.788-3.652 3.416-6.692 3.416a8.267 8.267 0 0 1-5.58-2.213c-1.634-1.523-2.532-3.645-2.532-5.94v-.07c0-2.316.898-4.445 2.533-5.969a8.171 8.171 0 0 1 5.579-2.247c3.075 0 5.572 1.559 6.692 3.263v-2.97h1.94v13.579c0 2.928-.646 4.918-2.128 6.434-1.454 1.496-3.624 2.31-6.122 2.31l.007-.007Zm-.23-20.69c-3.582 0-6.197 2.623-6.197 6.24v.063c0 3.54 2.726 6.317 6.212 6.317 3.13 0 6.504-2.4 6.504-6.275v-.063c0-3.923-3.311-6.268-6.518-6.268v-.014ZM161.413 43.25c-4.89 0-8.723-3.924-8.723-8.925v-.063c0-5.05 3.833-8.995 8.723-8.995 4 0 6.282 2.33 6.887 3.054l.104.125-1.252 1.357-.125-.14c-1.732-1.697-3.576-2.525-5.642-2.525-3.694 0-6.587 3.096-6.587 7.061v.063c0 3.993 2.949 7.116 6.72 7.116 2.796 0 4.653-1.614 5.523-2.574l.118-.139 1.301 1.19-.09.125c-.772 1.134-3.228 3.27-6.964 3.27h.007Zm-135.339-.167h-1.99V25.67h1.99v4.146c1.544-2.818 4.25-4.432 7.34-4.3h.173v2.074h-.348c-3.568 0-7.172 2.56-7.172 8.299v7.193h.007Z"></path><path class="brand-logo-component-module__red__HTQG9" d="M200.96.021h-17.023c-5.266 0-6.56.863-8.66 3.172L160.056 19.89c12.16-.584 15.902 11.659 28.257 8.306L200.953.028l.007-.007Z"></path><path class="brand-logo-component-module__white__xfVQa" d="M178.671 6.567s.759-1.398 1.357-1.857c0 0 .654-.397.668-1.05 0 0 .048-.432-.299-.703 0 0-.919-.745-1.67.528 0 0-3.527 6.672-4.744 13.406 0 0-.091.215-.119-.397 0 0-.521-5.649-.542-5.857-.021-.202 0-.717-.48-.752 0 0-.557-.097-.884.738l-1.565 3.86s-.257.48.16.662c0 0 .466.264.772-.39l.724-1.551c.139-.32.25-.272.25-.272.084.021.118.334.118.334s.633 7.576.64 7.638c.007.056.063.668.571.668.369 0 .487-.417.563-.758.077-.348.759-3.951 1.913-7.847.752-2.546 1.719-5.092 2.574-6.414l-.007.014Zm-1.043 6.609c-.724.16-.821.995-.821.995l-.445 3.304c-.07.654.779.18.779.18.348-.208.41-.64.41-.64l.133-.827.41-2.233c.132-.932-.473-.772-.473-.772l.007-.007Zm1.454.292s-.237 1.725-.279 2.1c0 0-.319 1.455.46 1.19 0 0 .633-.174.73-1.057l.125-1.238s.042-.918.772-1.322c0 0 .787-.355.543-.835 0 0-.146-.39-.612-.18-.355.152-.543.18-.543.18s-.466.056-.542.07c0 0-.578.028-.661 1.092h.007Zm-.605-1.969c.48-.382.333-.702.333-.702-.18-.515-.827.034-.827.034-.55.39-.362.773-.362.773.243.417.849-.105.849-.105h.007Zm7.979 2.4s.619-.132.73-.841c0 0 .369-2.637.39-2.727.014-.09.174-.78-.313-.675 0 0-.599.111-.703.702l-.466 2.595-.084.522s-.118.563.453.41l-.007.014Zm1.488-5.516s.522-.432.286-.752c0 0-.223-.327-.835.112 0 0-.557.452-.216.772 0 0 .32.299.772-.132h-.007Zm6.519 3.214c-.126-.216-.439-.362-1.002-.112-.598.258-.849.376-.87.383-.014 0-.737.376-.661-.591l.223-2.296s.091-.835-.563-.835c0 0-.348-.035-.905.445 0 0-.271.258-.48.313a.79.79 0 0 1-.466-.027c-.202-.07-.382-.035-.529 0 0 0-.626.167-.667 1.015l-.251 2.039s-.132.793-.062.946c0 0 .069.32.64.125 0 0 .487-.146.542-.981 0 0 .139-1.628.369-1.948 0 0 .278-.522.668-.737 0 0 .563-.272.556.188l-.202 1.864s-.201.918.216 1.064c0 0 .049.021-.055.077 0 0-2.686 1.14-6.143 3.068.236-1.962.64-4.69.64-4.69.063-.444-.487-.444-.487-.444-.529-.014-.605.605-.647.876-.042.272-.445 2.484-.445 2.484-.181 1.002-.779.953-.779.953-.592.07-.237-1.524-.237-1.524.16-.57.209-1.05.661-1.433.438-.368.48-.855.153-.87-.55-.027-1.12.564-1.12.564-.981.967-.981 3.318-.981 3.318-.021.745.487.967.487.967.626.286 1.482-.215 1.482-.215.202-.14.174.055.174.055l-.042.599c-2.539 1.468-5.357 3.297-7.791 5.356 0 0-1.113.821-.703 1.364.445.57 1.057.048 1.308-.181 0 0 2.49-2.553 7.096-5.42l-.146 1.92c-.063.87-.341 3.549-.341 3.549-.133 1.057.041 1.259.097 1.335.097.118.508.466.967.167.57-.362.285-1.245.195-1.656-.098-.417-.084-1.092-.084-1.092.042-.556.362-4.285.362-4.285a6.2 6.2 0 0 1 .049-.605 51.493 51.493 0 0 1 6.052-3.054s.981-.39 1.816-.647c0 0 .278-.111.626-.216.473-.132 1.078-.348 1.259-.605a.533.533 0 0 0 .014-.591l.007.02Z"></path><path class="brand-logo-component-module__blue__xwEi1" d="m228.452 24.188-.014.014a12.587 12.587 0 0 1 3.645 8.02c.487 6.964-4.758 12.995-11.714 13.482-3.27.23-6.338-.814-8.717-2.699l-.014.014a12.597 12.597 0 0 0 9.496 3.36c6.956-.487 12.209-6.525 11.715-13.482a12.57 12.57 0 0 0-4.397-8.716M206.066 38.546c-.403.223-.494.563-.285 1.078.188.473.487.682.807.55.257-.097.299-.32.188-.89l-.042-.223c-.104-.564-.125-.8-.056-1.044a.734.734 0 0 1 .459-.542c.571-.23 1.113.125 1.433.925.348.87.16 1.523-.514 1.802l-.167-.425c.473-.201.591-.647.341-1.273-.209-.514-.536-.744-.877-.605-.278.104-.341.369-.243.953l.034.244.042.215c.077.432.084.585.042.772a.694.694 0 0 1-.438.494c-.536.216-1.051-.097-1.343-.82-.313-.787-.146-1.371.459-1.642l.167.424-.007.007ZM205.711 33.983l1.92-1.607.007.59-1.621 1.343.522.585 1.141-.028.014.473-3.256.07-.014-.466 1.28-.028h.181l.167-.007-.111-.111-.111-.119-1.44-1.558-.021-.62 1.342 1.483ZM207.151 28.946l1.252.438-.153.439-1.252-.439-2.247.675.188-.536 1.398-.39.174-.048c.07-.02.112-.028.237-.056-.111-.132-.139-.16-.251-.32l-.862-1.168.181-.515 1.342 1.913-.007.007ZM209.357 22.963l-.689.842 2.052 1.684-.487.605-2.059-1.684-.682.842-.466-.39 1.864-2.274.467.375ZM213.753 19.875l-1.642.967.348.598 1.51-.884.285.48-1.51.884.404.696 1.676-.981.299.514-2.344 1.378-1.649-2.818 2.317-1.349.306.515ZM220.056 21.14l-.856.063-.424-.71-1.315.21-.188.8-.807.208.856-3.561.8-.126 1.927 3.117h.007Zm-1.865-1.676c-.181-.299-.25-.431-.348-.66-.027.229-.055.403-.139.737l-.132.619.946-.153-.32-.55-.007.007ZM225.287 22.184l-.682-.257.265-.974c.027-.111.069-.264.125-.466.055-.202.104-.362.139-.48.042-.132.083-.265.125-.41l.077-.23c-.195.334-.272.445-.446.71-.076.118-.146.215-.201.299l-.926 1.293-.591-.16-.188-1.558a2.97 2.97 0 0 1-.027-.348c-.014-.201-.021-.361-.028-.466v-.396l-.084.396a30.77 30.77 0 0 1-.271 1.127l-.271 1.05-.724-.11.814-3.187 1.099.209.153 1.51c.042.354.049.647.035 1.07.118-.243.167-.32.306-.542.097-.146.174-.271.251-.39l.855-1.23 1.037.354-.849 3.172.007.014Z"></path><path class="brand-logo-component-module__blue__xwEi1" d="M219.068 28.46c-.397.347-1.176 1.098-1.934 1.822l-.856.82a11.791 11.791 0 0 0-2.101-.187c-1.586 0-3.04.438-3.707 1.113-.251.257-.376.542-.369.835.014.772.897 1.154 1.162 1.259 1.412.521 2.587.368 3.833-.501.688-.48 1.509-1.245 2.156-1.865.501.112 1.071.265 1.684.446l.563.16c-.73.716-1.482 1.474-2.177 2.087l-.056.048c-.967.85-1.663 1.468-2.678 1.698-.71.16-1.218 0-1.385-.09-.013 0-.034.027-.034.027.584.48 1.141.758 2.094.675.904-.077 1.954-.654 3.026-1.656l1.447-1.419 1.015-1.009 2.052.599c.014 0 .042.007.042.007-.021 0-1.273 1.231-1.273 1.231l-1.085 1.085c-1.113 1.085-1.725 1.642-2.379 2.108-1.071.765-1.997 1.162-2.811 1.217-.417.028-1.029 0-1.537-.299-.021 0-.056.021-.056.021.55.473 1.225 1.037 2.386 1.002 1.315-.042 2.477-.668 4.293-2.338.827-.758 1.648-1.607 2.372-2.358l1.349-1.363c.891.195 1.677.278 2.553.257 1.273-.028 2.366-.633 2.38-1.336.013-.514-.411-.793-.668-.953a2.904 2.904 0 0 0-1.566-.452c-.96 0-1.954.425-2.97 1.252l-.675.592-.243-.07-1.878-.528c.549-.515 1.022-.96 1.446-1.336 1.023-.912 2.157-1.287 2.825-1.329.48-.035 1.322.007 1.669.258.014 0 .042-.035.042-.035-.925-.786-1.718-.898-2.379-.898s-1.69.202-2.963 1.19c-.515.403-1.197 1.078-1.9 1.788l-.946-.292-.229-.07-.995-.3.57-.535c.675-.66 1.308-1.28 1.802-1.697 1.802-1.51 2.929-1.711 3.715-1.718.863 0 1.551.174 2.038.528.014 0 .035-.035.035-.035-1.009-.91-1.739-1.203-2.991-1.217-1.099 0-2.414.605-3.701 1.732m-7.068 5.392c-.584-.042-.87-.272-.87-.724 0-.063.042-1.482 3.305-1.649.375-.02.786-.034 1.419.042-.028 0-.369.32-.369.32l-.202.188c-.786.717-2.107 1.913-3.283 1.83m13.217-1.155c.939-.633 1.726-.974 2.206-.953.285.007.633.097.633.452s-.348.668-1.03.918c-.598.216-1.516.264-2.511.16.278-.25.508-.438.702-.563M226.63 19.582a.533.533 0 0 1 .702-.278c.278.119.397.431.278.703a.53.53 0 0 1-.702.278.53.53 0 0 1-.285-.703m.89.432a.454.454 0 0 0-.181-.612.463.463 0 0 0-.619.174.454.454 0 0 0 .793.438m-.313.16-.083-.049-.021-.32-.084-.049-.132.237-.07-.042.286-.515.222.126c.091.048.167.125.105.236-.056.098-.146.098-.237.049l.021.32-.007.007Zm-.07-.439c.063.035.167.112.216.028.028-.055-.035-.104-.09-.132l-.139-.076-.077.132.09.048Z"></path></svg></a>
-    <nav aria-label="Main">
-      <a href="#">Plan</a><a href="#">Manage</a><a href="#">Experience</a><a href="#">Flying Club</a><a href="#">Help</a>
-      <button class="ds-search" aria-label="Search">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
-      </button>
+<header class="va-header" data-section="header" data-section-kind="navigation">
+  <div class="wrap va-header__inner">
+    <a class="va-logo" href="#"><b>virgin</b> atlantic</a>
+    <nav class="va-nav" aria-label="Primary">
+      <a href="#search" class="active">Book</a>
+      <a href="#deals">Deals</a>
+      <a href="#destinations">Destinations</a>
+      <a href="#cabins">Flying with us</a>
+      <a href="#upgrades">Upgrades &amp; extras</a>
+      <a href="#flying-club">Flying Club</a>
     </nav>
+    <div class="va-actions">
+      <a class="btn btn--ghost" href="#">Check in</a>
+      <a class="btn btn--primary" href="#search">Search</a>
+    </div>
   </div>
 </header>
 
 <main>
+  <!-- HERO = the booking widget -->
+  <section class="hero" data-section="hero" data-section-kind="search-hero" aria-label="Book a flight">
+    <div class="hero__media"><img src="https://vaabrowse.virginatlantic.com/content/dam/vaa-home/vaa-plane-sky.jpg" alt=""></div>
+    <div class="hero__veil"></div>
+    <div class="wrap">
+      <div class="hero__head">
+        <h1 class="hero__title">Where to, today? <em>Find your fare in seconds.</em></h1>
+      </div>
 
-  <section class="va-hero" data-section="hero" data-intent="emotional hook + drive action" data-layout="split-media" data-media="image">
-    <div class="container">
-      <div class="va-hero__copy">
-        <p class="va-hero__eyebrow">Where shall we take you?</p>
-        <h1>Take off to the UK and beyond</h1>
-        <div class="va-hero__widget">
-          
-<form class="ds-booking" aria-label="Find flights" onsubmit="return false">
-  <div class="ds-booking__tabs" role="tablist">
-    <button type="button" class="ds-booking__tab is-active" role="tab" aria-selected="true">Return</button>
-    <button type="button" class="ds-booking__tab" role="tab" aria-selected="false">One way</button>
-    <button type="button" class="ds-booking__tab" role="tab" aria-selected="false">Multi-city</button>
-  </div>
-  <div class="ds-booking__row">
-    <label class="ds-booking__field">
-      <span class="ds-input-label">From</span>
-      <input class="ds-input" type="text" placeholder="Add origin">
-    </label>
-    <label class="ds-booking__field">
-      <span class="ds-input-label">To</span>
-      <input class="ds-input" type="text" placeholder="Add destination">
-    </label>
-  </div>
-  <div class="ds-booking__row">
-    <label class="ds-booking__field">
-      <span class="ds-input-label">Depart</span>
-      <input class="ds-input" type="text" placeholder="Add date">
-    </label>
-    <label class="ds-booking__field">
-      <span class="ds-input-label">Return</span>
-      <input class="ds-input" type="text" placeholder="Add date">
-    </label>
-    <label class="ds-booking__field">
-      <span class="ds-input-label">Passengers</span>
-      <input class="ds-input" type="text" placeholder="1 adult">
-    </label>
-  </div>
-  <div class="ds-booking__row ds-booking__row--actions">
-    <a class="ds-booking__discount" href="#">Got a discount code?</a>
-    <button class="ds-btn ds-btn--primary" type="submit">Search flights</button>
-  </div>
-</form>
+      <div class="recent" aria-label="Resume from your last visit">
+        <span class="recent__label">Pick up where you left off:</span>
+        <a class="recent__pill" href="#" data-placeholder><span class="dot"></span>LHR → JFK · Mon 12 May → Mon 19 May · 2 adults</a>
+        <a class="recent__points" href="#"><strong data-placeholder>112,480 pts</strong> — use Virgin Points</a>
+      </div>
+
+      <form class="search" id="search" data-section="booking" data-section-kind="form" aria-label="Search flights">
+        <div class="search__tabs" role="tablist">
+          <button type="button" class="search__tab active">Book a flight</button>
+          <button type="button" class="search__tab">Multi-city</button>
+          <button type="button" class="search__tab">Reward seats</button>
+        </div>
+        <div class="search__body">
+          <div class="search__row">
+            <div class="field">
+              <label>Flying from</label>
+              <span class="v">London — LHR</span>
+              <span class="vh">Heathrow · Multiple options</span>
+            </div>
+            <div class="field">
+              <label>Flying to</label>
+              <span class="v">New York — JFK</span>
+              <span class="vh">Add a destination</span>
+            </div>
+            <div class="field">
+              <label>Journey</label>
+              <span class="v">Round trip</span>
+              <span class="vh">2 adults, 0 children</span>
+            </div>
+            <div class="field">
+              <label>When</label>
+              <span class="v">Mon 12 May → Mon 19 May</span>
+              <span class="vh">7 nights · ± 3 days</span>
+            </div>
+            <div class="field">
+              <label>Cabin</label>
+              <span class="v">Economy</span>
+              <span class="vh">Compare cabins</span>
+            </div>
+            <div class="field field--btn">
+              <button class="btn btn--primary btn--xl" type="button">Search flights</button>
+            </div>
+          </div>
+          <div class="search__row__opts">
+            <label><input type="checkbox"> Use Virgin Points</label>
+            <label><input type="checkbox"> Direct only</label>
+            <label><input type="checkbox" checked> Include nearby airports (LGW, STN)</label>
+            <a href="#">Add discount code</a>
+          </div>
+        </div>
+      </form>
+
+      <div class="quick">
+        <p class="quick__title">Popular this month</p>
+        <div class="quick__row">
+          <a class="chip" href="#"><strong>LHR → JFK</strong> <span>· from £429 RT</span></a>
+          <a class="chip" href="#"><strong>LHR → LAX</strong> <span>· from £539 RT</span></a>
+          <a class="chip" href="#"><strong>MAN → MCO</strong> <span>· from £459 RT</span></a>
+          <a class="chip" href="#"><strong>LHR → BGI</strong> <span>· from £519 RT</span></a>
+          <a class="chip" href="#"><strong>LHR → DEL</strong> <span>· from £569 RT</span></a>
+          <a class="chip" href="#"><strong>LHR → DXB</strong> <span>· from £499 RT</span></a>
         </div>
       </div>
-      <figure class="va-hero__photo">
-        <img src="https://vaabrowse.virginatlantic.com/content/dam/vaa-home/hp/hero-banner/web-exclusive-deals.jpg" alt="Virgin Atlantic aircraft in flight at sunset" width="1600" height="624">
-      </figure>
     </div>
   </section>
 
-  <section class="va-section va-destinations" data-section="destinations-rail" data-intent="discovery" data-layout="grid" data-items="3" data-fragment="destination-card" data-fragment-role="source">
-    <div class="container">
-      <div class="va-section__head">
-        <h2>Where shall we take you?</h2>
+  <!-- Deals as a scannable list, not a poster carousel -->
+  <section class="deals" id="deals" data-section="deals" data-section-kind="data-list" aria-label="Web-exclusive deals">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title">Web-exclusive deals · this week</h2>
+        <a class="section-link" href="#">All 42 deals →</a>
       </div>
-      <div class="va-grid-3">
-        <article class="va-dest-card">
-          <img src="https://vaabrowse.virginatlantic.com/content/dam/vhols/hp/content-card-images/Lady-in-car-LA.jpg" alt="Lady in car in LA" loading="lazy">
-          <div class="va-dest-card__caption-bg"></div>
-          <div class="va-dest-card__label">
-            <strong>Los Angeles</strong>
-          </div>
-        </article>
-        <article class="placeholder"
-                 data-placeholder="true"
-                 data-placeholder-type="other"
-                 data-placeholder-source="design demanded 3-up destinations rail; current/pages/home.json provides only one destination image">
-          <div class="placeholder__eyebrow">PLACEHOLDER · destination card</div>
-          <div class="placeholder__shape">e.g. New York / Tokyo / Cape Town (image + label not in captured page)</div>
-        </article>
-        <article class="placeholder"
-                 data-placeholder="true"
-                 data-placeholder-type="other"
-                 data-placeholder-source="design demanded 3-up destinations rail; current/pages/home.json provides only one destination image">
-          <div class="placeholder__eyebrow">PLACEHOLDER · destination card</div>
-          <div class="placeholder__shape">e.g. Barbados / Antigua / St Lucia (image + label not in captured page)</div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="va-section" data-section="cabin-showcase" data-intent="value proposition" data-layout="grid" data-items="3">
-    <div class="container">
-      <div class="va-section__head">
-        <h2>Fly in style, in any seat</h2>
-      </div>
-      <div class="va-grid-3">
-        
-<article class="ds-card">
-  <img src="https://vaabrowse.virginatlantic.com/content/dam/experience/cabins/flying-kids-economy-cabin-vaa.jpg" alt="Economy" loading="lazy" width="1024" height="768">
-  <div class="ds-card__body">
-    <h3 class="ds-card__title">Economy</h3>
-    <p class="ds-card__text">A relaxed start to your journey, with thoughtful service and a great seat at a great price.</p>
-    <a class="ds-btn ds-btn--secondary ds-chev" href="#">Discover Economy</a>
-  </div>
-</article>
-        
-<article class="ds-card">
-  <img src="https://vaabrowse.virginatlantic.com/content/dam/experience/cabins/TOL297_WH_VA_250218_VA_Experience_10308_RGB.jpg" alt="Premium" loading="lazy" width="1024" height="768">
-  <div class="ds-card__body">
-    <h3 class="ds-card__title">Premium</h3>
-    <p class="ds-card__text">More space, faster boarding, and a fuller experience — without the Upper Class price tag.</p>
-    <a class="ds-btn ds-btn--secondary ds-chev" href="#">Discover Premium</a>
-  </div>
-</article>
-        
-<article class="ds-card">
-  <img src="https://vaabrowse.virginatlantic.com/content/dam/experience/cabins/upper-class-yellow-jumper-1024x768.jpg" alt="Upper Class" loading="lazy" width="1024" height="768">
-  <div class="ds-card__body">
-    <h3 class="ds-card__title">Upper Class</h3>
-    <p class="ds-card__text">Lie-flat suites, drive-through check-in, and our Clubhouse lounges. The way to fly the Atlantic.</p>
-    <a class="ds-btn ds-btn--secondary ds-chev" href="#">Discover Upper Class</a>
-  </div>
-</article>
-      </div>
-    </div>
-  </section>
-
-  <section class="va-section va-pretravel" data-section="whats-included" data-intent="explain mechanic" data-layout="grid" data-items="4">
-    <div class="container">
-      <div class="va-section__head">
-        <h2>What&rsquo;s included</h2>
-      </div>
-      <div class="va-grid-4">
-        <article class="va-tile">
-          <svg class="va-tile__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 10h14"/><path d="M5 14h14"/><circle cx="12" cy="6" r="2"/><circle cx="12" cy="18" r="2"/></svg>
-          <h3>Pre-travel advice</h3>
-          <a class="ds-btn ds-btn--secondary ds-chev" href="#">Plan your trip</a>
-        </article>
-        <article class="va-tile">
-          <svg class="va-tile__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m3 12 18-7-3 18-5-7-10-4Z"/></svg>
-          <h3>Flight information</h3>
-          <a class="ds-btn ds-btn--secondary ds-chev" href="#">Check flights</a>
-        </article>
-        <article class="va-tile">
-          <svg class="va-tile__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="7" width="12" height="13" rx="2"/><path d="M9 7V4h6v3"/></svg>
-          <h3>Flying with baggage</h3>
-          <a class="ds-btn ds-btn--secondary ds-chev" href="#">Baggage rules</a>
-        </article>
-        <article class="va-tile">
-          <svg class="va-tile__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg>
-          <h3>Air on App</h3>
-          <a class="ds-btn ds-btn--secondary ds-chev" href="#">Get the app</a>
-        </article>
+      <div class="deals__list" role="table">
+        <div class="deals__row deals__head" role="row">
+          <span></span><span>Route</span><span>Travel window</span><span>Cabin</span><span>From</span><span></span><span></span>
+        </div>
+        <a class="deals__row" href="#" role="row">
+          <span class="thumb"><img src="https://flywith.virginatlantic.com/content/dam/vaa-home/headers/vaa/featured-london.jpg" alt=""></span>
+          <span class="city">JFK → LHR <small>New York → London Heathrow</small></span>
+          <span class="col">May–Jul 2026</span>
+          <span class="col">Economy Light</span>
+          <span class="col"><span class="badge badge--deal">−18%</span></span>
+          <span class="price" data-placeholder>£329</span>
+          <span class="cta"><span class="btn btn--ghost">Pick a date</span></span>
+        </a>
+        <a class="deals__row" href="#" role="row">
+          <span class="thumb"><img src="https://flywith.virginatlantic.com/content/dam/vaa-home/headers/vaa/featured-edinburgh.jpg" alt=""></span>
+          <span class="city">JFK → EDI <small>via London</small></span>
+          <span class="col">Jun–Aug 2026</span>
+          <span class="col">Premium</span>
+          <span class="col"><span class="badge badge--new">New route</span></span>
+          <span class="price" data-placeholder>£899</span>
+          <span class="cta"><span class="btn btn--ghost">Pick a date</span></span>
+        </a>
+        <a class="deals__row" href="#" role="row">
+          <span class="thumb"><img src="https://flywith.virginatlantic.com/content/dam/vaa-home/headers/vaa/featured-dubai.jpg" alt=""></span>
+          <span class="city">LHR → DXB <small>London → Dubai</small></span>
+          <span class="col">Sep–Oct 2026</span>
+          <span class="col">Economy Classic</span>
+          <span class="col"><span class="badge badge--reward">Reward seats</span></span>
+          <span class="price" data-placeholder>£499</span>
+          <span class="cta"><span class="btn btn--ghost">Pick a date</span></span>
+        </a>
+        <a class="deals__row" href="#" role="row">
+          <span class="thumb"><img src="https://flywith.virginatlantic.com/content/dam/vaa-home/headers/vaa/featured-delhi.jpg" alt=""></span>
+          <span class="city">LHR → DEL <small>London → Delhi</small></span>
+          <span class="col">Nov 2026 – Feb 2027</span>
+          <span class="col">Premium</span>
+          <span class="col"><span class="badge badge--deal">−12%</span></span>
+          <span class="price" data-placeholder>£749</span>
+          <span class="cta"><span class="btn btn--ghost">Pick a date</span></span>
+        </a>
+        <a class="deals__row" href="#" role="row">
+          <span class="thumb"><img src="https://flywith.virginatlantic.com/content/dam/vaa-home/headers/vaa/featured-lagos.jpg" alt=""></span>
+          <span class="city">LHR → LOS <small>London → Lagos</small></span>
+          <span class="col">May–Aug 2026</span>
+          <span class="col">Economy Classic</span>
+          <span class="col"><span class="badge badge--deal">−15%</span></span>
+          <span class="price" data-placeholder>£689</span>
+          <span class="cta"><span class="btn btn--ghost">Pick a date</span></span>
+        </a>
+        <a class="deals__row" href="#" role="row">
+          <span class="thumb"><img src="https://vaabrowse.virginatlantic.com/content/dam/vaa-home/hp/content-cards/Barbados.jpg" alt=""></span>
+          <span class="city">LHR → BGI <small>London → Barbados</small></span>
+          <span class="col">Jun–Sep 2026</span>
+          <span class="col">Upper Class</span>
+          <span class="col"><span class="badge badge--reward">Reward seats</span></span>
+          <span class="price" data-placeholder>£2,449</span>
+          <span class="cta"><span class="btn btn--ghost">Pick a date</span></span>
+        </a>
       </div>
     </div>
   </section>
 
-  <section class="va-experience-band" data-section="flying-with-us" data-intent="build trust" data-layout="grid" data-items="3">
-    <div class="container">
-      <div class="va-section__head">
-        <h2>Flying with us</h2>
+  <!-- Cabin compare -->
+  <section id="cabins" data-section="cabins" data-section-kind="compare" aria-label="Compare cabins">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title">Pick a cabin, compare what's included</h2>
+        <a class="section-link" href="#">Full cabin guide →</a>
       </div>
-      <div class="va-experience-band__row">
-        <article class="va-experience-tile">
-          <img src="https://vaabrowse.virginatlantic.com/content/dam/vaa-home/hp/content-cards/va_shot_9_international-biz_traveller_1024x768.jpg" alt="Onboard experience" loading="lazy">
-          <div>
-            <h3>Our unique experience</h3>
-            <a class="ds-btn ds-btn--secondary ds-chev" href="#">See onboard</a>
+      <div class="cabins-compare">
+        <div class="cabin-col">
+          <div class="cabin-col__media"><img src="https://vaabrowse.virginatlantic.com/content/dam/experience/cabins/flying-kids-economy-cabin-vaa.jpg" alt="Economy"></div>
+          <div class="cabin-col__body">
+            <span class="cabin-col__name cabin-col__name--econ">Economy</span>
+            <h3 class="cabin-col__h">Comfortable for the long-haul.</h3>
+            <ul class="cabin-col__feat">
+              <li>Light, Classic &amp; Delight fares</li>
+              <li>23kg checked bag (Classic+)</li>
+              <li>Vera in-flight entertainment</li>
+              <li>Crew-served meals</li>
+            </ul>
+            <span class="cabin-col__from">From <strong>£329</strong> round trip · LHR → JFK</span>
+            <a class="cabin-col__cta" href="#">Explore Economy →</a>
+          </div>
+        </div>
+        <div class="cabin-col">
+          <div class="cabin-col__media"><img src="https://vaabrowse.virginatlantic.com/content/dam/experience/cabins/TOL297_WH_VA_250218_VA_Experience_10308_RGB.jpg" alt="Premium"></div>
+          <div class="cabin-col__body">
+            <span class="cabin-col__name cabin-col__name--prem">Premium</span>
+            <h3 class="cabin-col__h">Wider seat, quieter cabin, better meal.</h3>
+            <ul class="cabin-col__feat">
+              <li>38&quot; pitch, 21&quot; width</li>
+              <li>Priority boarding, dedicated check-in</li>
+              <li>Wider leg-rest, individual reading light</li>
+              <li>Two checked bags included</li>
+            </ul>
+            <span class="cabin-col__from">From <strong>£899</strong> round trip · LHR → JFK</span>
+            <a class="cabin-col__cta" href="#">Explore Premium →</a>
+          </div>
+        </div>
+        <div class="cabin-col">
+          <div class="cabin-col__media"><img src="https://vaabrowse.virginatlantic.com/content/dam/experience/cabins/upper-class-yellow-jumper-1024x768.jpg" alt="Upper Class"></div>
+          <div class="cabin-col__body">
+            <span class="cabin-col__name cabin-col__name--upper">Upper Class</span>
+            <h3 class="cabin-col__h">Suite, private door, the Clubhouse.</h3>
+            <ul class="cabin-col__feat">
+              <li>Lie-flat suite with sliding door (A330neo, A350)</li>
+              <li>Clubhouse access at LHR &amp; JFK</li>
+              <li>Chauffeur on selected fares</li>
+              <li>Three checked bags + 16kg cabin</li>
+            </ul>
+            <span class="cabin-col__from">From <strong>£2,449</strong> round trip · LHR → BGI</span>
+            <a class="cabin-col__cta" href="#">Explore Upper Class →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Triple band: Reward seats / Holidays cross-sell / Manage -->
+  <section data-section="cross-sell" data-section-kind="triple" aria-label="More from Virgin Atlantic">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title">Three more ways to use today's window</h2>
+      </div>
+      <div class="triple">
+        <article class="tile">
+          <div class="tile__media"><img src="https://vaabrowse.virginatlantic.com/content/dam/vaa-home/hp/content-cards/aircraft-model-795x448-V2.jpg" alt=""></div>
+          <div class="tile__body">
+            <span class="tile__eyebrow">Search for Reward Seats</span>
+            <h3 class="tile__h">Use Virgin Points to fly further, for less.</h3>
+            <p class="tile__b">Search 12 months ahead. We surface every Reward seat available on the date you pick — no guesswork.</p>
+            <a class="tile__cta" href="#">Open the reward map →</a>
           </div>
         </article>
-        <article class="va-experience-tile">
-          <img src="https://vaabrowse.virginatlantic.com/content/dam/vaa-home/hp/content-cards/Check%20in.png" alt="Check in" loading="lazy">
-          <div>
-            <h3>Baggage unpacked</h3>
-            <a class="ds-btn ds-btn--secondary ds-chev" href="#">Read more</a>
+        <article class="tile">
+          <div class="tile__media"><img src="https://vaabrowse.virginatlantic.com/content/dam/vhols/hp/content-card-images/Lady-in-car-LA.jpg" alt=""></div>
+          <div class="tile__body">
+            <span class="tile__eyebrow">Virgin Atlantic Holidays</span>
+            <h3 class="tile__h">Bundle flight + hotel + car. Save 9% on average.</h3>
+            <p class="tile__b">ATOL-protected, one booking, one bill. Most popular bundle: 7-night Florida + Universal park tickets.</p>
+            <a class="tile__cta" href="#">Build a bundle →</a>
           </div>
         </article>
-        <article class="va-experience-tile">
-          <img src="https://vaabrowse.virginatlantic.com/content/dam/vaa-home/hp/content-cards/clubhouse-spa-image.jpg" alt="Sunglasses" loading="lazy">
-          <div>
-            <h3>Flying Club</h3>
-            <a class="ds-btn ds-btn--secondary ds-chev" href="#">Join</a>
+        <article class="tile">
+          <div class="tile__media"><img src="https://vaabrowse.virginatlantic.com/content/dam/vaa-home/hp/content-cards/clubhouse-spa-image.jpg" alt=""></div>
+          <div class="tile__body">
+            <span class="tile__eyebrow">Already booked</span>
+            <h3 class="tile__h">Add seats, bags, lounge, or change your trip.</h3>
+            <p class="tile__b">Manage every booking from one place — including bookings made via SkyTeam partners.</p>
+            <a class="tile__cta" href="#">Manage trip →</a>
           </div>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="va-sustain-strip" data-section="sustainability" data-intent="build trust" data-layout="grid" data-items="2">
-    <div class="container">
-      <div class="row">
-        <article class="va-sustain-tile">
-          <img src="https://vaabrowse.virginatlantic.com/content/dam/vaa-home/hp/content-cards/aircraft-model-795x448-V2.jpg" alt="Virgin Atlantic aircraft" loading="lazy">
-          <div>
-            <h3>Our mission to net zero</h3>
-            <a class="ds-btn ds-btn--secondary ds-chev" href="#">Read our roadmap</a>
+  <!-- Operational status strip — for returning bookers -->
+  <section data-section="ops-status" data-section-kind="status" aria-label="Today's operations">
+    <div class="wrap">
+      <div class="status-strip">
+        <div>
+          <h3 class="status-strip__title">Operations · today</h3>
+          <p class="status-strip__sub">Updated every 15 minutes from VS Operations Control.</p>
+        </div>
+        <div class="status-strip__metric" data-placeholder>
+          <strong class="ok">98.4%</strong>
+          <span>On-time arrivals (last 24h)</span>
+        </div>
+        <div class="status-strip__metric" data-placeholder>
+          <strong>148</strong>
+          <span>Flights in the air</span>
+        </div>
+        <div class="status-strip__metric" data-placeholder>
+          <strong>0</strong>
+          <span>Active disruptions</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Help — concise links, not cards -->
+  <section data-section="help" data-section-kind="links" aria-label="Flying with us">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title">Flying with us</h2>
+        <a class="section-link" href="#">Help centre →</a>
+      </div>
+      <div class="triple">
+        <article class="tile">
+          <div class="tile__body">
+            <span class="tile__eyebrow">Pre-travel advice</span>
+            <h3 class="tile__h">Everything you need to know before you go.</h3>
+            <p class="tile__b">Visas, vaccinations, check-in windows, boarding times — short answers, the right way around.</p>
+            <a class="tile__cta" href="#">Pre-travel advice →</a>
           </div>
         </article>
-        <article class="va-sustain-tile">
-          <img src="https://vaabrowse.virginatlantic.com/content/dam/vaa-home/hp/content-cards/SAF%20flight_mobile_700x670%20(1).jpg" alt="Virgin Atlantic aircraft in hanger" loading="lazy">
-          <div>
-            <h3>Sustainable fuel Flight 100</h3>
-            <a class="ds-btn ds-btn--secondary ds-chev" href="#">About Flight 100</a>
+        <article class="tile">
+          <div class="tile__body">
+            <span class="tile__eyebrow">Flight information</span>
+            <h3 class="tile__h">What to do if your flight is cancelled, delayed or disrupted.</h3>
+            <p class="tile__b">Real-time status, rebooking options, and EU 261 / DOT compensation eligibility — calculated for your specific flight.</p>
+            <a class="tile__cta" href="#">Flight information →</a>
+          </div>
+        </article>
+        <article class="tile">
+          <div class="tile__body">
+            <span class="tile__eyebrow">Flying with baggage</span>
+            <h3 class="tile__h">Find out what you can and can't take with you.</h3>
+            <p class="tile__b">Cabin allowance per cabin class, restricted items, sports kit, musical instruments, and the lithium-battery rules.</p>
+            <a class="tile__cta" href="#">Baggage rules →</a>
           </div>
         </article>
       </div>
     </div>
   </section>
-
 </main>
 
-
-<footer class="va-footer" data-section="footer" data-intent="secondary navigation" data-layout="full-bleed">
-  <div class="container">
-    <div class="va-footer__brand">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 233 48" role="presentation" preserveAspectRatio="xMinYMin" class="va-logo" style="width:160px;height:auto"><title>Virgin Atlantic Logo</title><path class="brand-logo-component-module__purple___UoYP" d="M9.809 43.082h-1.74L.015 25.67h2.323l6.637 14.824 6.553-14.824h2.205l-7.93 17.412h.007Zm11.798-19.346h-1.99v-2.31h1.99v2.31Zm0 19.346h-1.99V25.67h1.99v17.412ZM54.372 23.7H52.39v-2.31h1.982v2.31Zm0 19.346H52.39V25.635h1.982v17.412Zm49.969 0h-1.99V21.391h1.99v21.656Zm46.087-19.346h-1.983v-2.31h1.983v2.31Zm0 19.346h-1.983V25.635h1.983v17.412Zm-53.475 0h-1.976V21.391h1.976v4.25h3.409v1.851h-3.409v15.562-.007Zm46.087 0h-1.976V21.391h1.976v4.25h3.402V27.5h-3.402v15.555-.007Zm-58.463.369c-3.227 0-6.497-1.885-6.497-5.489v-.063c0-3.777 2.623-5.69 7.77-5.69h4.863v-.049c0-3.165-1.795-4.779-5.336-4.779-1.718 0-3.353.41-5.175 1.301l-.167.084-.73-1.65.152-.069c1.934-1.002 4.119-1.537 6.143-1.537 2.344 0 4.132.598 5.322 1.78 1.148 1.155 1.718 2.742 1.718 4.842v10.957h-1.927v-2.31c-.786.967-2.81 2.679-6.136 2.679v-.007Zm-4.466-5.58c0 2.178 1.941 3.771 4.62 3.771 2.99 0 6.017-1.704 6.017-5.523V33.99h-4.689c-4.222 0-5.94 1.113-5.94 3.853l-.008-.006Zm33.148 5.58c-3.221 0-6.49-1.885-6.49-5.489v-.063c0-3.777 2.615-5.69 7.77-5.69h4.87v-.049c0-3.165-1.802-4.779-5.343-4.779-1.711 0-3.353.41-5.176 1.301l-.167.084-.723-1.65.146-.069c1.941-1.002 4.132-1.537 6.15-1.537 2.337 0 4.132.598 5.314 1.78 1.155 1.155 1.712 2.742 1.712 4.842v10.957h-1.913v-2.31c-.786.967-2.804 2.679-6.15 2.679v-.007Zm-4.466-5.58c0 2.178 1.941 3.771 4.619 3.771 2.998 0 6.018-1.704 6.018-5.523V33.99h-4.689c-4.216 0-5.948 1.113-5.948 3.853v-.006Zm-37.078 5.211h-1.983V33.85c0-1.99 0-6.65-5.106-6.65-3.638 0-5.809 2.762-5.809 7.374v8.48h-1.975V25.642h1.975v2.9c.703-1.078 2.519-3.192 6.039-3.192 4.424 0 6.859 2.685 6.859 7.547v10.15Zm66.984 0h-1.989V33.85c0-1.99 0-6.65-5.113-6.65-3.632 0-5.795 2.762-5.795 7.374v8.48h-1.983V25.642h1.983v2.9c.702-1.078 2.511-3.192 6.031-3.192 4.424 0 6.866 2.685 6.866 7.547v10.15Zm-97.002 4.94c-4.507 0-7.38-2.36-7.694-2.63l-.125-.105 1.127-1.593.14.105c1.725 1.217 3.707 2.344 6.58 2.344 4.049 0 6.275-2.421 6.275-6.825V38.4c-1.148 1.788-3.652 3.416-6.692 3.416a8.267 8.267 0 0 1-5.58-2.213c-1.634-1.523-2.532-3.645-2.532-5.94v-.07c0-2.316.898-4.445 2.533-5.969a8.171 8.171 0 0 1 5.579-2.247c3.075 0 5.572 1.559 6.692 3.263v-2.97h1.94v13.579c0 2.928-.646 4.918-2.128 6.434-1.454 1.496-3.624 2.31-6.122 2.31l.007-.007Zm-.23-20.69c-3.582 0-6.197 2.623-6.197 6.24v.063c0 3.54 2.726 6.317 6.212 6.317 3.13 0 6.504-2.4 6.504-6.275v-.063c0-3.923-3.311-6.268-6.518-6.268v-.014ZM161.413 43.25c-4.89 0-8.723-3.924-8.723-8.925v-.063c0-5.05 3.833-8.995 8.723-8.995 4 0 6.282 2.33 6.887 3.054l.104.125-1.252 1.357-.125-.14c-1.732-1.697-3.576-2.525-5.642-2.525-3.694 0-6.587 3.096-6.587 7.061v.063c0 3.993 2.949 7.116 6.72 7.116 2.796 0 4.653-1.614 5.523-2.574l.118-.139 1.301 1.19-.09.125c-.772 1.134-3.228 3.27-6.964 3.27h.007Zm-135.339-.167h-1.99V25.67h1.99v4.146c1.544-2.818 4.25-4.432 7.34-4.3h.173v2.074h-.348c-3.568 0-7.172 2.56-7.172 8.299v7.193h.007Z"></path><path class="brand-logo-component-module__red__HTQG9" d="M200.96.021h-17.023c-5.266 0-6.56.863-8.66 3.172L160.056 19.89c12.16-.584 15.902 11.659 28.257 8.306L200.953.028l.007-.007Z"></path><path class="brand-logo-component-module__white__xfVQa" d="M178.671 6.567s.759-1.398 1.357-1.857c0 0 .654-.397.668-1.05 0 0 .048-.432-.299-.703 0 0-.919-.745-1.67.528 0 0-3.527 6.672-4.744 13.406 0 0-.091.215-.119-.397 0 0-.521-5.649-.542-5.857-.021-.202 0-.717-.48-.752 0 0-.557-.097-.884.738l-1.565 3.86s-.257.48.16.662c0 0 .466.264.772-.39l.724-1.551c.139-.32.25-.272.25-.272.084.021.118.334.118.334s.633 7.576.64 7.638c.007.056.063.668.571.668.369 0 .487-.417.563-.758.077-.348.759-3.951 1.913-7.847.752-2.546 1.719-5.092 2.574-6.414l-.007.014Zm-1.043 6.609c-.724.16-.821.995-.821.995l-.445 3.304c-.07.654.779.18.779.18.348-.208.41-.64.41-.64l.133-.827.41-2.233c.132-.932-.473-.772-.473-.772l.007-.007Zm1.454.292s-.237 1.725-.279 2.1c0 0-.319 1.455.46 1.19 0 0 .633-.174.73-1.057l.125-1.238s.042-.918.772-1.322c0 0 .787-.355.543-.835 0 0-.146-.39-.612-.18-.355.152-.543.18-.543.18s-.466.056-.542.07c0 0-.578.028-.661 1.092h.007Zm-.605-1.969c.48-.382.333-.702.333-.702-.18-.515-.827.034-.827.034-.55.39-.362.773-.362.773.243.417.849-.105.849-.105h.007Zm7.979 2.4s.619-.132.73-.841c0 0 .369-2.637.39-2.727.014-.09.174-.78-.313-.675 0 0-.599.111-.703.702l-.466 2.595-.084.522s-.118.563.453.41l-.007.014Zm1.488-5.516s.522-.432.286-.752c0 0-.223-.327-.835.112 0 0-.557.452-.216.772 0 0 .32.299.772-.132h-.007Zm6.519 3.214c-.126-.216-.439-.362-1.002-.112-.598.258-.849.376-.87.383-.014 0-.737.376-.661-.591l.223-2.296s.091-.835-.563-.835c0 0-.348-.035-.905.445 0 0-.271.258-.48.313a.79.79 0 0 1-.466-.027c-.202-.07-.382-.035-.529 0 0 0-.626.167-.667 1.015l-.251 2.039s-.132.793-.062.946c0 0 .069.32.64.125 0 0 .487-.146.542-.981 0 0 .139-1.628.369-1.948 0 0 .278-.522.668-.737 0 0 .563-.272.556.188l-.202 1.864s-.201.918.216 1.064c0 0 .049.021-.055.077 0 0-2.686 1.14-6.143 3.068.236-1.962.64-4.69.64-4.69.063-.444-.487-.444-.487-.444-.529-.014-.605.605-.647.876-.042.272-.445 2.484-.445 2.484-.181 1.002-.779.953-.779.953-.592.07-.237-1.524-.237-1.524.16-.57.209-1.05.661-1.433.438-.368.48-.855.153-.87-.55-.027-1.12.564-1.12.564-.981.967-.981 3.318-.981 3.318-.021.745.487.967.487.967.626.286 1.482-.215 1.482-.215.202-.14.174.055.174.055l-.042.599c-2.539 1.468-5.357 3.297-7.791 5.356 0 0-1.113.821-.703 1.364.445.57 1.057.048 1.308-.181 0 0 2.49-2.553 7.096-5.42l-.146 1.92c-.063.87-.341 3.549-.341 3.549-.133 1.057.041 1.259.097 1.335.097.118.508.466.967.167.57-.362.285-1.245.195-1.656-.098-.417-.084-1.092-.084-1.092.042-.556.362-4.285.362-4.285a6.2 6.2 0 0 1 .049-.605 51.493 51.493 0 0 1 6.052-3.054s.981-.39 1.816-.647c0 0 .278-.111.626-.216.473-.132 1.078-.348 1.259-.605a.533.533 0 0 0 .014-.591l.007.02Z"></path><path class="brand-logo-component-module__blue__xwEi1" d="m228.452 24.188-.014.014a12.587 12.587 0 0 1 3.645 8.02c.487 6.964-4.758 12.995-11.714 13.482-3.27.23-6.338-.814-8.717-2.699l-.014.014a12.597 12.597 0 0 0 9.496 3.36c6.956-.487 12.209-6.525 11.715-13.482a12.57 12.57 0 0 0-4.397-8.716M206.066 38.546c-.403.223-.494.563-.285 1.078.188.473.487.682.807.55.257-.097.299-.32.188-.89l-.042-.223c-.104-.564-.125-.8-.056-1.044a.734.734 0 0 1 .459-.542c.571-.23 1.113.125 1.433.925.348.87.16 1.523-.514 1.802l-.167-.425c.473-.201.591-.647.341-1.273-.209-.514-.536-.744-.877-.605-.278.104-.341.369-.243.953l.034.244.042.215c.077.432.084.585.042.772a.694.694 0 0 1-.438.494c-.536.216-1.051-.097-1.343-.82-.313-.787-.146-1.371.459-1.642l.167.424-.007.007ZM205.711 33.983l1.92-1.607.007.59-1.621 1.343.522.585 1.141-.028.014.473-3.256.07-.014-.466 1.28-.028h.181l.167-.007-.111-.111-.111-.119-1.44-1.558-.021-.62 1.342 1.483ZM207.151 28.946l1.252.438-.153.439-1.252-.439-2.247.675.188-.536 1.398-.39.174-.048c.07-.02.112-.028.237-.056-.111-.132-.139-.16-.251-.32l-.862-1.168.181-.515 1.342 1.913-.007.007ZM209.357 22.963l-.689.842 2.052 1.684-.487.605-2.059-1.684-.682.842-.466-.39 1.864-2.274.467.375ZM213.753 19.875l-1.642.967.348.598 1.51-.884.285.48-1.51.884.404.696 1.676-.981.299.514-2.344 1.378-1.649-2.818 2.317-1.349.306.515ZM220.056 21.14l-.856.063-.424-.71-1.315.21-.188.8-.807.208.856-3.561.8-.126 1.927 3.117h.007Zm-1.865-1.676c-.181-.299-.25-.431-.348-.66-.027.229-.055.403-.139.737l-.132.619.946-.153-.32-.55-.007.007ZM225.287 22.184l-.682-.257.265-.974c.027-.111.069-.264.125-.466.055-.202.104-.362.139-.48.042-.132.083-.265.125-.41l.077-.23c-.195.334-.272.445-.446.71-.076.118-.146.215-.201.299l-.926 1.293-.591-.16-.188-1.558a2.97 2.97 0 0 1-.027-.348c-.014-.201-.021-.361-.028-.466v-.396l-.084.396a30.77 30.77 0 0 1-.271 1.127l-.271 1.05-.724-.11.814-3.187 1.099.209.153 1.51c.042.354.049.647.035 1.07.118-.243.167-.32.306-.542.097-.146.174-.271.251-.39l.855-1.23 1.037.354-.849 3.172.007.014Z"></path><path class="brand-logo-component-module__blue__xwEi1" d="M219.068 28.46c-.397.347-1.176 1.098-1.934 1.822l-.856.82a11.791 11.791 0 0 0-2.101-.187c-1.586 0-3.04.438-3.707 1.113-.251.257-.376.542-.369.835.014.772.897 1.154 1.162 1.259 1.412.521 2.587.368 3.833-.501.688-.48 1.509-1.245 2.156-1.865.501.112 1.071.265 1.684.446l.563.16c-.73.716-1.482 1.474-2.177 2.087l-.056.048c-.967.85-1.663 1.468-2.678 1.698-.71.16-1.218 0-1.385-.09-.013 0-.034.027-.034.027.584.48 1.141.758 2.094.675.904-.077 1.954-.654 3.026-1.656l1.447-1.419 1.015-1.009 2.052.599c.014 0 .042.007.042.007-.021 0-1.273 1.231-1.273 1.231l-1.085 1.085c-1.113 1.085-1.725 1.642-2.379 2.108-1.071.765-1.997 1.162-2.811 1.217-.417.028-1.029 0-1.537-.299-.021 0-.056.021-.056.021.55.473 1.225 1.037 2.386 1.002 1.315-.042 2.477-.668 4.293-2.338.827-.758 1.648-1.607 2.372-2.358l1.349-1.363c.891.195 1.677.278 2.553.257 1.273-.028 2.366-.633 2.38-1.336.013-.514-.411-.793-.668-.953a2.904 2.904 0 0 0-1.566-.452c-.96 0-1.954.425-2.97 1.252l-.675.592-.243-.07-1.878-.528c.549-.515 1.022-.96 1.446-1.336 1.023-.912 2.157-1.287 2.825-1.329.48-.035 1.322.007 1.669.258.014 0 .042-.035.042-.035-.925-.786-1.718-.898-2.379-.898s-1.69.202-2.963 1.19c-.515.403-1.197 1.078-1.9 1.788l-.946-.292-.229-.07-.995-.3.57-.535c.675-.66 1.308-1.28 1.802-1.697 1.802-1.51 2.929-1.711 3.715-1.718.863 0 1.551.174 2.038.528.014 0 .035-.035.035-.035-1.009-.91-1.739-1.203-2.991-1.217-1.099 0-2.414.605-3.701 1.732m-7.068 5.392c-.584-.042-.87-.272-.87-.724 0-.063.042-1.482 3.305-1.649.375-.02.786-.034 1.419.042-.028 0-.369.32-.369.32l-.202.188c-.786.717-2.107 1.913-3.283 1.83m13.217-1.155c.939-.633 1.726-.974 2.206-.953.285.007.633.097.633.452s-.348.668-1.03.918c-.598.216-1.516.264-2.511.16.278-.25.508-.438.702-.563M226.63 19.582a.533.533 0 0 1 .702-.278c.278.119.397.431.278.703a.53.53 0 0 1-.702.278.53.53 0 0 1-.285-.703m.89.432a.454.454 0 0 0-.181-.612.463.463 0 0 0-.619.174.454.454 0 0 0 .793.438m-.313.16-.083-.049-.021-.32-.084-.049-.132.237-.07-.042.286-.515.222.126c.091.048.167.125.105.236-.056.098-.146.098-.237.049l.021.32-.007.007Zm-.07-.439c.063.035.167.112.216.028.028-.055-.035-.104-.09-.132l-.139-.076-.077.132.09.048Z"></path></svg>
-      <div class="va-social" aria-label="Social">
-        <a href="#" aria-label="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg></a>
-        <a href="#" aria-label="Facebook"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9h3V6h-3a3 3 0 0 0-3 3v3H8v3h3v6h3v-6h3l1-3h-4V9Z"/></svg></a>
-        <a href="#" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l16 16M20 4 4 20"/></svg></a>
-        <a href="#" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 11v6M8 7v.01M12 17v-3a3 3 0 0 1 6 0v3M12 17v-6"/></svg></a>
+<footer class="footer" data-section="footer" data-section-kind="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__col">
+        <h6>Where we fly</h6>
+        <ul>
+          <li><a href="#">Destinations</a></li>
+          <li><a href="#">Experience</a></li>
+          <li><a href="#">Deals</a></li>
+          <li><a href="#">Flying Club</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h6>About</h6>
+        <ul>
+          <li><a href="#">Our story</a></li>
+          <li><a href="#">Force for good</a></li>
+          <li><a href="#">Media centre</a></li>
+          <li><a href="#">Annual reports</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h6>Support</h6>
+        <ul>
+          <li><a href="#">Help centre</a></li>
+          <li><a href="#">Baggage</a></li>
+          <li><a href="#">Accessible travel</a></li>
+          <li><a href="#">Flight disruption</a></li>
+          <li><a href="#">Flying Club help</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h6>More</h6>
+        <ul>
+          <li><a href="#">Business travel</a></li>
+          <li><a href="#">Cargo</a></li>
+          <li><a href="#">Travel trade</a></li>
+          <li><a href="#">Affiliates</a></li>
+          <li><a href="#">SkyTeam</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h6>Region</h6>
+        <ul>
+          <li><a href="#"><img src="https://vaabrowse.virginatlantic.com/content/dam/vaa-home/region-selector/flags/united-kingdom.svg" alt="" style="display:inline;width:18px;vertical-align:middle;margin-right:6px"> United Kingdom</a></li>
+          <li><a href="#"><img src="https://vaabrowse.virginatlantic.com/content/dam/vaa-home/region-selector/flags/usa.svg" alt="" style="display:inline;width:18px;vertical-align:middle;margin-right:6px"> United States</a></li>
+          <li><a href="#"><img src="https://vaabrowse.virginatlantic.com/content/dam/vaa-home/region-selector/flags/eu.svg" alt="" style="display:inline;width:18px;vertical-align:middle;margin-right:6px"> Europe</a></li>
+          <li><a href="#">All regions →</a></li>
+        </ul>
       </div>
     </div>
-    <div>
-      <h4>Who we are</h4>
-      <ul><li><a href="#">About us</a></li><li><a href="#">Newsroom</a></li><li><a href="#">Sustainability</a></li><li><a href="#">Careers</a></li></ul>
+    <div class="footer__legal">
+      <span>© 2026 Virgin Atlantic Airways</span>
+      <ul>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Conditions of Carriage</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Accessibility</a></li>
+        <li><a href="#">Cookies</a></li>
+      </ul>
     </div>
-    <div>
-      <h4>Experience</h4>
-      <ul><li><a href="#">Our cabins</a></li><li><a href="#">Onboard experience</a></li><li><a href="#">Clubhouse lounges</a></li><li><a href="#">Air on App</a></li></ul>
-    </div>
-    <div>
-      <h4>Discover</h4>
-      <ul><li><a href="#">Holidays</a></li><li><a href="#">Cargo</a></li><li><a href="#">Atlantic Joint Venture</a></li><li><a href="#">Codeshare partners</a></li></ul>
-    </div>
-    <div>
-      <h4>Flying Club</h4>
-      <ul><li><a href="#">Join Flying Club</a></li><li><a href="#">Earn miles</a></li><li><a href="#">Spend miles</a></li><li><a href="#">Tier benefits</a></li></ul>
-    </div>
-  </div>
-  <div class="container va-footer__legal">
-    <div>© Virgin Atlantic Airways</div>
-    <nav>
-      <a href="#">Cookie policy</a>
-      <a href="#">Privacy</a>
-      <a href="#">Modern slavery statement</a>
-      <a href="#">Accessibility</a>
-    </nav>
   </div>
 </footer>
 
