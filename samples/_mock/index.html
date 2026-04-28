@@ -356,18 +356,6 @@
   </div>
 </section>
 
-<div class="toolbar">
-  <div class="container">
-    <div class="seg" role="tablist" aria-label="Filter by register">
-      <button class="on" data-filter="all">all</button>
-      <button data-filter="brand">brand</button>
-      <button data-filter="product">product</button>
-    </div>
-    <input type="search" placeholder="search brand, source, palette…" aria-label="Search">
-    <span class="count">9 brands</span>
-  </div>
-</div>
-
 <section class="grid-wrap">
   <div class="container">
     <div class="grid">
@@ -651,19 +639,6 @@
     </div>
   </div>
 </footer>
-
-<script>
-  // Filter wiring (mock — visual only)
-  const seg = document.querySelectorAll('.seg button');
-  seg.forEach(btn => btn.addEventListener('click', () => {
-    seg.forEach(b => b.classList.remove('on'));
-    btn.classList.add('on');
-    const f = btn.dataset.filter;
-    document.querySelectorAll('.card').forEach(c => {
-      c.style.display = (f === 'all' || c.dataset.register === f) ? '' : 'none';
-    });
-  }));
-</script>
 
 </body>
 </html>
