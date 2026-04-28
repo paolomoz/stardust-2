@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy:         stardust:prototype
+  writtenAt:         2026-04-28T11:16:00Z
+  page:              home (variant B — compositional shift)
+  pageUrl:           https://www.festool.com/
+  variant:           B
+  thesis:            JTBD-led router replaces single-message hero. Service moves above brand heritage.
+  againstDirection:  stardust/direction.md (Active 2026-04-28T11:14:00Z)
+  readArtifacts:
+    - stardust/current/pages/home.json
+    - stardust/current/_brand-extraction.json
+    - DESIGN.md
+    - DESIGN.json
+    - stardust/prototypes/home-B-shape.md
+  unsourcedContent:  []
+  stardustVersion:   0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Festool Worldwide — Tools for the toughest demands</title>
+<style>
+:root {
+  --heading-font-family: "DINWebPro", "DIN Next", Verdana, system-ui, sans-serif;
+  --body-font-family:    "DINWebPro", "DIN Next", Verdana, system-ui, sans-serif;
+
+  --heading-xxl: 64px;
+  --heading-xl:  44px;
+  --heading-lg:  32px;
+  --heading-md:  22px;
+  --body:        16px;
+  --body-sm:     14px;
+  --eyebrow:     13px;
+
+  --line-height-heading: 1.1;
+  --line-height-body:    1.55;
+
+  --color-bg:          #ffffff;
+  --color-fg:          #191e2b;
+  --color-fg-muted:    #536877;
+  --color-fg-subtle:   #7b909d;
+  --color-accent:      #23aa08;
+  --color-accent-hover:#266419;
+  --color-accent-tint: #dff0d4;
+  --color-surface:     #f4f6f8;
+  --color-surface-cool:#e9edf1;
+  --color-rule:        #d1dae0;
+  --color-nav-dark:    #191e2b;
+  --color-alert:       #cd272d;
+
+  --spacing-xs:  4px;
+  --spacing-sm:  8px;
+  --spacing-md:  16px;
+  --spacing-lg:  24px;
+  --spacing-xl:  48px;
+  --spacing-2xl: 64px;
+
+  --section-padding: 64px;
+  --max-width:       1280px;
+  --radius:          8px;
+  --radius-button:   4px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--body-font-family);
+  font-size: var(--body);
+  line-height: var(--line-height-body);
+  color: var(--color-fg);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4 { font-family: var(--heading-font-family); margin: 0; line-height: var(--line-height-heading); font-weight: 700; letter-spacing: -0.005em; }
+h1 { font-size: var(--heading-xxl); }
+h2 { font-size: var(--heading-lg); }
+h3 { font-size: var(--heading-md); }
+p  { margin: 0 0 var(--spacing-md); }
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
+}
+.eyebrow {
+  font-size: var(--eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+  margin: 0 0 var(--spacing-sm);
+}
+.eyebrow--accent { color: var(--color-accent); }
+.eyebrow--alert  { color: var(--color-alert); }
+
+.btn {
+  display: inline-flex; align-items: center; gap: var(--spacing-sm);
+  font-family: var(--body-font-family);
+  font-size: var(--body);
+  font-weight: 500;
+  padding: 12px 28px;
+  border-radius: var(--radius-button);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 200ms cubic-bezier(.2,0,.2,1), color 200ms;
+}
+.btn--primary { background: var(--color-accent); color: #fff; }
+.btn--primary:hover { background: var(--color-accent-hover); }
+.btn--secondary { background: transparent; color: var(--color-fg); border-color: var(--color-fg); }
+.btn--secondary:hover { background: var(--color-fg); color: #fff; }
+.btn--on-green { background: transparent; color: #fff; border-color: #fff; }
+.btn--on-green:hover { background: #fff; color: var(--color-accent-hover); }
+.btn--arrow::after { content: "→"; }
+.link {
+  display: inline-flex; align-items: center; gap: var(--spacing-sm);
+  font-weight: 700; color: var(--color-fg);
+  border-bottom: 1px solid transparent; padding-bottom: 2px;
+}
+.link:hover { border-bottom-color: var(--color-fg); }
+.link::after { content: "→"; }
+
+/* ============ HEADER (compact, JTBD-led) ============ */
+header[data-section="header"] {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-rule);
+}
+.header-row .container {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: var(--spacing-xl);
+  padding-top: 14px; padding-bottom: 14px;
+}
+.brand-mark { display: inline-flex; align-items: center; gap: var(--spacing-sm); font-weight: 700; }
+.brand-mark img { height: 22px; }
+.compact-search {
+  display: flex; align-items: center; gap: var(--spacing-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-rule); border-radius: 999px;
+  padding: 8px 16px; font-size: var(--body-sm); color: var(--color-fg-muted);
+  max-width: 420px; justify-self: stretch;
+}
+.compact-search:focus-within { border-color: var(--color-fg); }
+.compact-search input { flex:1; border: 0; outline: 0; background: transparent; font: inherit; color: var(--color-fg); }
+.header-actions { display: flex; gap: var(--spacing-md); align-items: center; }
+.header-actions .country-pill {
+  display: inline-flex; align-items: center; gap: var(--spacing-sm);
+  background: var(--color-fg); color: #fff;
+  border-radius: 999px;
+  padding: 8px 14px; font-size: var(--body-sm); font-weight: 500;
+}
+.header-actions .icon-link {
+  display: inline-flex; align-items: center; gap: var(--spacing-sm);
+  font-size: var(--body-sm); color: var(--color-fg);
+}
+.header-jobnav { background: var(--color-surface); border-top: 1px solid var(--color-rule); }
+.header-jobnav .container { display: flex; align-items: center; gap: var(--spacing-xl); padding-top: 12px; padding-bottom: 12px; overflow: auto; }
+.header-jobnav a { font-size: var(--body-sm); font-weight: 500; color: var(--color-fg-muted); white-space: nowrap; }
+.header-jobnav a:hover { color: var(--color-fg); }
+.header-jobnav a.active { color: var(--color-fg); font-weight: 700; }
+
+/* ============ JOB ROUTER ============ */
+section[data-section="job-router"] {
+  padding: var(--spacing-xl) 0 var(--section-padding);
+  background: var(--color-bg);
+}
+.jr-head {
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--spacing-2xl);
+  align-items: end; margin-bottom: var(--spacing-2xl);
+}
+.jr-head h1 {
+  font-size: clamp(36px, 5vw, var(--heading-xxl));
+  letter-spacing: -0.015em;
+}
+.jr-head .jr-sub { font-size: 19px; color: var(--color-fg-muted); max-width: 460px; }
+.jr-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-lg);
+}
+.jr-card {
+  position: relative;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: var(--spacing-xl);
+  display: flex; flex-direction: column; gap: var(--spacing-md);
+  min-height: 260px;
+  border: 1px solid transparent;
+  transition: border-color 200ms;
+}
+.jr-card:hover { border-color: var(--color-fg); }
+.jr-card .jr-icon {
+  width: 48px; height: 48px; border-radius: var(--radius-button);
+  background: var(--color-bg); display: grid; place-items: center;
+  font-weight: 700; font-size: 22px; color: var(--color-fg);
+  border: 1px solid var(--color-rule);
+}
+.jr-card h3 { font-size: 22px; line-height: 1.2; }
+.jr-card p { color: var(--color-fg-muted); margin: 0; max-width: 32ch; }
+.jr-card .jr-link { margin-top: auto; font-weight: 700; color: var(--color-fg); }
+.jr-card .jr-link::after { content: " →"; color: var(--color-accent); }
+.jr-card.featured { background: #fff; border: 1px solid var(--color-fg); grid-column: span 1; }
+.jr-card.featured .jr-icon { background: var(--color-accent); color: #fff; border-color: var(--color-accent); }
+.jr-card.featured .badge {
+  position: absolute; top: 16px; right: 16px;
+  background: var(--color-accent); color: #fff; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 4px 8px; border-radius: 3px;
+}
+.jr-card.featured .jr-detail {
+  margin-top: var(--spacing-sm);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-rule);
+  font-size: var(--body-sm);
+  color: var(--color-fg-muted);
+}
+
+/* ============ NEW PRODUCTS (compressed strip) ============ */
+section[data-section="new-products"] {
+  padding: var(--section-padding) 0;
+  background: var(--color-surface);
+}
+.np-head {
+  display: flex; align-items: end; justify-content: space-between; margin-bottom: var(--spacing-xl);
+  gap: var(--spacing-lg);
+}
+.np-row {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--spacing-md);
+}
+.np-tile {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: var(--spacing-md);
+  display: flex; gap: var(--spacing-md); align-items: center;
+  transition: transform 200ms;
+}
+.np-tile:hover { transform: translateY(-3px); }
+.np-tile .np-img { flex: 0 0 80px; aspect-ratio: 1; background: var(--color-surface-cool); border-radius: var(--radius-button); display: grid; place-items: center; overflow: hidden; }
+.np-tile .np-img img { width: 80%; height: auto; }
+.np-tile .np-body { flex: 1; }
+.np-tile .np-meta { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-fg-muted); margin: 0 0 4px; font-weight: 700; }
+.np-tile h3 { font-size: 14px; line-height: 1.25; font-weight: 700; }
+.np-foot { display: flex; justify-content: space-between; margin-top: var(--spacing-xl); align-items: center; color: var(--color-fg-muted); font-size: var(--body-sm); }
+.np-rail { display: inline-flex; gap: 6px; }
+.np-rail .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-rule); }
+.np-rail .dot.active { background: var(--color-fg); }
+
+/* ============ SERVICE BAND ============ */
+section[data-section="cta-band-service"] {
+  background: var(--color-accent);
+  color: #fff;
+  padding: var(--section-padding) 0;
+}
+.svc-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-2xl);
+  align-items: start;
+}
+.svc-grid h2 { color: #fff; max-width: 540px; }
+.svc-grid p { color: #f1faec; max-width: 540px; font-size: 18px; }
+.svc-tiles {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--spacing-md);
+}
+.svc-tile {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: var(--radius);
+  padding: var(--spacing-lg);
+  display: flex; flex-direction: column; gap: 6px;
+  color: #fff;
+}
+.svc-tile strong { font-weight: 700; font-size: 16px; }
+.svc-tile span { font-size: var(--body-sm); color: #e2efd6; }
+
+/* ============ BRAND BAND (heritage) ============ */
+section[data-section="brand-band"] {
+  position: relative;
+  min-height: 460px;
+  background: var(--color-fg);
+  color: #fff;
+  overflow: hidden;
+}
+section[data-section="brand-band"] .bb-img {
+  position: absolute; inset: 0;
+  background-image: url("https://www.festool.com/-/media/tts/fcp/festool/homepage/brand-teaser/100y_800x450px.webp");
+  background-size: cover; background-position: center right;
+}
+section[data-section="brand-band"] .scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(25,30,43,0.92) 0%, rgba(25,30,43,0.55) 60%, rgba(25,30,43,0.0) 100%);
+}
+section[data-section="brand-band"] .container {
+  position: relative; z-index: 2;
+  padding-top: var(--section-padding); padding-bottom: var(--section-padding);
+  display: grid; grid-template-columns: minmax(0, 600px); gap: var(--spacing-md);
+}
+section[data-section="brand-band"] h2 { color: #fff; font-size: 44px; line-height: 1.1; }
+section[data-section="brand-band"] .lead { font-size: 18px; color: #c5c7c4; max-width: 480px; }
+
+/* ============ DISCOVER ROUTES ============ */
+section[data-section="discover"] {
+  padding: var(--section-padding) 0;
+}
+.dr-head { display: flex; justify-content: space-between; align-items: end; margin-bottom: var(--spacing-xl); gap: var(--spacing-lg); }
+.dr-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--spacing-lg);
+}
+.dr-card { display: flex; flex-direction: column; gap: var(--spacing-md); }
+.dr-card .dr-caption {
+  display: flex; flex-direction: column; gap: 6px;
+}
+.dr-card .dr-img {
+  aspect-ratio: 4 / 5;
+  background-size: cover; background-position: center;
+  border-radius: var(--radius);
+  position: relative;
+}
+.dr-card .dr-num {
+  font-size: var(--eyebrow); font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--color-fg-muted);
+}
+.dr-card h3 { font-size: 22px; line-height: 1.2; }
+.dr-card p { color: var(--color-fg-muted); font-size: var(--body-sm); }
+.dr-card .dr-link { margin-top: 4px; font-weight: 700; }
+.dr-card .dr-link::after { content: " →"; color: var(--color-accent); }
+
+/* ============ #FESTOOLME (single row, scrollable) ============ */
+section[data-section="festoolme"] {
+  padding: var(--section-padding) 0;
+  background: var(--color-surface);
+}
+.fm-row {
+  display: grid; grid-auto-flow: column; grid-auto-columns: 200px; gap: var(--spacing-md);
+  overflow-x: auto; padding-bottom: var(--spacing-md);
+  scroll-snap-type: x mandatory;
+}
+.fm-row .fm-tile {
+  aspect-ratio: 1; border-radius: var(--radius); overflow: hidden;
+  background: var(--color-surface-cool); background-size: cover; background-position: center;
+  scroll-snap-align: start;
+}
+.fm-foot { display: flex; justify-content: space-between; margin-top: var(--spacing-lg); color: var(--color-fg-muted); font-size: var(--body-sm); align-items: center; }
+
+/* ============ TRADE UTILITY STRIP ============ */
+section[data-section="service-tile-strip"] {
+  background: var(--color-nav-dark);
+  color: #fff;
+  padding: var(--section-padding) 0;
+}
+.sts-head { margin-bottom: var(--spacing-xl); }
+.sts-head h2 { color: #fff; font-size: 32px; }
+.sts-head p { color: #c5c7c4; max-width: 540px; }
+.sts-grid {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+.sts-tile {
+  padding: var(--spacing-lg) var(--spacing-md);
+  border-right: 1px solid rgba(255,255,255,0.12);
+  display: flex; flex-direction: column; gap: var(--spacing-sm);
+  text-align: left;
+}
+.sts-tile:last-child { border-right: 0; }
+.sts-tile .sts-icon {
+  width: 28px; height: 28px; border: 1px solid rgba(255,255,255,0.4); border-radius: 4px;
+  display: grid; place-items: center; font-weight: 700; color: #fff; font-size: 14px;
+}
+.sts-tile h4 { font-size: 14px; font-weight: 700; }
+.sts-tile p { font-size: 12px; color: #c5c7c4; margin: 0; }
+.sts-tile:hover { background: rgba(255,255,255,0.04); }
+.sts-tile:hover .sts-icon { background: var(--color-accent); border-color: var(--color-accent); }
+
+/* ============ FOOTER ============ */
+footer[data-section="footer"] {
+  background: var(--color-nav-dark);
+  color: #fff;
+  padding: var(--spacing-2xl) 0 var(--spacing-lg);
+}
+.footer-grid {
+  display: grid; grid-template-columns: 1.2fr repeat(4, 1fr); gap: var(--spacing-xl);
+}
+.footer-grid h4 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: #c5c7c4; margin-bottom: var(--spacing-md); }
+.footer-grid ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.footer-grid li { font-size: var(--body-sm); }
+.footer-grid a:hover { color: var(--color-accent); }
+.footer-bottom {
+  margin-top: var(--spacing-2xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid rgba(255,255,255,0.18);
+  display: flex; justify-content: space-between; gap: var(--spacing-lg);
+  font-size: var(--body-sm); color: #c5c7c4;
+}
+.footer-legal-links { display: flex; gap: var(--spacing-lg); }
+
+@media (max-width: 1024px) {
+  :root { --section-padding: 48px; }
+  .jr-head { grid-template-columns: 1fr; }
+  .jr-grid { grid-template-columns: repeat(2, 1fr); }
+  .np-row { grid-template-columns: repeat(2, 1fr); }
+  .svc-grid { grid-template-columns: 1fr; }
+  .dr-grid { grid-template-columns: repeat(2, 1fr); }
+  .sts-grid { grid-template-columns: repeat(4, 1fr); }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .header-row .container { grid-template-columns: auto 1fr auto; }
+  .compact-search { display: none; }
+}
+@media (max-width: 640px) {
+  :root { --section-padding: 32px; }
+  .jr-grid { grid-template-columns: 1fr; }
+  .jr-head h1 { font-size: 32px; }
+  .np-row { grid-template-columns: 1fr; }
+  .dr-grid { grid-template-columns: 1fr; }
+  .sts-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header data-section="header" data-intent="navigation + identity" data-layout="full-bleed">
+  <div class="header-row">
+    <div class="container">
+      <a href="/" class="brand-mark"><img src="https://assets.cdn.festool.io/festool-logo.min.svg" alt="Festool"></a>
+      <label class="compact-search">
+        <span aria-hidden="true">⌕</span>
+        <input type="search" placeholder="Search products, manuals, parts…" aria-label="Search">
+      </label>
+      <div class="header-actions">
+        <a class="icon-link" href="#"><span aria-hidden="true">◐</span> MyFestool</a>
+        <a class="icon-link" href="#"><span aria-hidden="true">♡</span> Watch list</a>
+        <a class="country-pill" href="#"><span aria-hidden="true">◯</span> United Kingdom · EN</a>
+      </div>
+    </div>
+  </div>
+  <nav class="header-jobnav" aria-label="What are you doing today">
+    <div class="container">
+      <a href="#cordless" class="active">Cordless work</a>
+      <a href="#sanding">Sanding &amp; finishing</a>
+      <a href="#cutting">Cutting &amp; joining</a>
+      <a href="#dust">Dust extraction</a>
+      <a href="#mobility">Mobility &amp; site</a>
+      <a href="#service">Service &amp; registration</a>
+      <a href="#trade" style="margin-left:auto;">For dealers &amp; press</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<!-- ===================== JOB ROUTER ===================== -->
+<section data-section="job-router"
+         data-intent="route by job to be done"
+         data-layout="grid"
+         data-items="6">
+  <div class="container">
+    <div class="jr-head">
+      <h1>What are you doing today?</h1>
+      <p class="jr-sub">Six routes through the Festool catalogue, organised by the work in front of you. Pick the one that fits the job.</p>
+    </div>
+    <div class="jr-grid">
+
+      <article class="jr-card featured" id="cordless">
+        <span class="badge">Tabless</span>
+        <span class="jr-icon">◯</span>
+        <h3>Cordless work</h3>
+        <p>The 18 V system: cordless saws, drills, sanders, dust extractors, lights — one battery across the kit.</p>
+        <p class="jr-detail">New: Tabless cell architecture — extra power for your toughest applications, longer runtime under load, faster charging.</p>
+        <a class="jr-link" href="#">Everything to do with technology</a>
+      </article>
+
+      <article class="jr-card">
+        <span class="jr-icon">◇</span>
+        <h3>Sanding &amp; finishing</h3>
+        <p>Random orbital, eccentric, linear. Granat abrasives. The dust-extraction port is standard, not an upgrade.</p>
+        <a class="jr-link" href="#">Sanders &amp; abrasives</a>
+      </article>
+
+      <article class="jr-card">
+        <span class="jr-icon">▭</span>
+        <h3>Cutting &amp; joining</h3>
+        <p>Plunge-cut saws, jigsaws, routers, the Domino joining system. Track-saw guide rails as the through-line.</p>
+        <a class="jr-link" href="#">Saws &amp; joining</a>
+      </article>
+
+      <article class="jr-card">
+        <span class="jr-icon">⌗</span>
+        <h3>Dust extraction</h3>
+        <p>Dust class L, M, H. Auto-clean filters. Quiet on site, code-compliant in the workshop, paired to your tool.</p>
+        <a class="jr-link" href="#">Extractors &amp; accessories</a>
+      </article>
+
+      <article class="jr-card">
+        <span class="jr-icon">▤</span>
+        <h3>Mobility &amp; site</h3>
+        <p>Systainer cases, SYS-Cart, SYS-Lights. Pack the kit once, work from the same stack on every job.</p>
+        <a class="jr-link" href="#">The mobility system</a>
+      </article>
+
+      <article class="jr-card">
+        <span class="jr-icon">⌘</span>
+        <h3>Service &amp; registration</h3>
+        <p>Register a tool. Find a manual. Order a spare part. Book a repair. Already an owner? Start here.</p>
+        <a class="jr-link" href="#">Festool SERVICE</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NEW PRODUCTS (compressed) ===================== -->
+<section data-section="new-products"
+         data-intent="surface newest products"
+         data-layout="grid"
+         data-items="4">
+  <div class="container">
+    <div class="np-head">
+      <div>
+        <p class="eyebrow eyebrow--alert">Released this season</p>
+        <h2>Just added to the catalogue.</h2>
+      </div>
+      <a class="link" href="#">Show all new products</a>
+    </div>
+    <div class="np-row">
+      <a class="np-tile" href="#">
+        <div class="np-img"><img src="https://media.cdn.festool.io/productmedia/Images/jpg_large/68cbdffa-528c-11f0-8a63-005056b3ad01_330_220.jpg" alt="Energy set 18V 2xTBX4/TCL6"></div>
+        <div class="np-body"><p class="np-meta">Cordless · Energy</p><h3>Energy set 18V 2xTBX4/TCL6</h3></div>
+      </a>
+      <a class="np-tile" href="#">
+        <div class="np-img"><img src="https://media.cdn.festool.io/productmedia/Images/jpg_large/b1754bc0-817f-11f0-8a65-005056b3ad01_330_220.jpg" alt="Cordless pendulum jigsaw PSC-E 18 EB-Basic"></div>
+        <div class="np-body"><p class="np-meta">Cordless · Cutting</p><h3>Cordless pendulum jigsaw PSC-E 18 EB-Basic</h3></div>
+      </a>
+      <a class="np-tile" href="#">
+        <div class="np-img"><img src="https://media.cdn.festool.io/productmedia/Images/jpg_large/4cb1da38-6626-11f0-8a64-005056b3ad01_330_220.jpg" alt="Abrasives D150 S GR PRO/10 Granat PROfile"></div>
+        <div class="np-body"><p class="np-meta">Abrasives · Sanding</p><h3>Abrasives D150 S GR PRO/10 Granat PROfile</h3></div>
+      </a>
+      <a class="np-tile" href="#">
+        <div class="np-img"><img src="https://media.cdn.festool.io/productmedia/Images/jpg_large/3d6fa53c-aa85-11f0-8a67-005056b3ad01_330_220.jpg" alt="Y-valve SV-AS D50 SWT"></div>
+        <div class="np-body"><p class="np-meta">Dust · Accessories</p><h3>Y-valve SV-AS D50 SWT</h3></div>
+      </a>
+    </div>
+    <div class="np-foot">
+      <span>Updated weekly · last revised this week</span>
+      <span class="np-rail" aria-hidden="true"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICE BAND (moved up) ===================== -->
+<section data-section="cta-band-service"
+         data-intent="service activation"
+         data-layout="full-bleed">
+  <div class="container">
+    <div class="svc-grid">
+      <div>
+        <p class="eyebrow" style="color:#dff0d4;">Festool SERVICE</p>
+        <h2>Already own a Festool? Register for warranty all-inclusive.</h2>
+        <p>Register your tool for free and take advantage of our Warranty all-inclusive package: 3-year warranty and 10-year spare-part availability.</p>
+        <p style="margin-top: var(--spacing-xl);">
+          <a class="btn btn--on-green btn--arrow" href="#">More about Festool SERVICE</a>
+        </p>
+      </div>
+      <div class="svc-tiles">
+        <a class="svc-tile" href="#"><strong>Register a tool</strong><span>3 minutes, by serial number</span></a>
+        <a class="svc-tile" href="#"><strong>Spare parts</strong><span>10-year availability</span></a>
+        <a class="svc-tile" href="#"><strong>Manuals &amp; downloads</strong><span>Find your model</span></a>
+        <a class="svc-tile" href="#"><strong>Authorised repair</strong><span>Find a centre</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BRAND BAND (compressed heritage) ===================== -->
+<section data-section="brand-band"
+         data-intent="heritage in one band"
+         data-layout="full-bleed"
+         data-media="image">
+  <div class="bb-img" role="presentation"></div>
+  <div class="scrim" aria-hidden="true"></div>
+  <div class="container">
+    <p class="eyebrow" style="color:#c5c7c4;">1925 — 2025 · 100 years</p>
+    <h2>Inspired by craftspeople for 100 years. We say thank you.</h2>
+    <p class="lead">A century of building tools for the trade. From the first portable chain mortiser through the EC-TEC brushless motor — every Festool is engineered to be repairable, accurate, and quiet on dust.</p>
+    <p>
+      <a class="btn btn--primary btn--arrow" href="#">Read the story</a>
+      &nbsp;
+      <a class="link" href="#" style="color:#fff; border-bottom-color: rgba(255,255,255,0.4);">Watch the "We" Movie</a>
+    </p>
+  </div>
+</section>
+
+<!-- ===================== DISCOVER ROUTES (caption-led, 4-up) ===================== -->
+<section data-section="discover"
+         data-intent="route to category content"
+         data-layout="grid"
+         data-items="4"
+         data-media="image">
+  <div class="container">
+    <div class="dr-head">
+      <div>
+        <p class="eyebrow">Discover Festool</p>
+        <h2>Four routes worth taking.</h2>
+      </div>
+      <a class="link" href="#">All categories</a>
+    </div>
+    <div class="dr-grid">
+      <article class="dr-card">
+        <div class="dr-caption">
+          <span class="dr-num">01 — System</span>
+          <h3>The 18 V portfolio</h3>
+          <p>One battery, every tool. The platform across saws, sanders, drills, dust extractors.</p>
+          <a class="dr-link" href="#">Explore the system</a>
+        </div>
+        <div class="dr-img" style="background-image:url('https://www.festool.com/-/media/tts/fcp/festool/homepage/vip-themen-teaser/ready_2024_18v_vip-teaser_800x533px.webp');"></div>
+      </article>
+      <article class="dr-card">
+        <div class="dr-caption">
+          <span class="dr-num">02 — Health</span>
+          <h3>Dust-free working</h3>
+          <p>Solutions for the best possible dust management — from the workshop to the site.</p>
+          <a class="dr-link" href="#">Read more</a>
+        </div>
+        <div class="dr-img" style="background-image:url('https://www.festool.com/-/media/tts/fcp/festool/homepage/vip-themen-teaser/vip_teaser_dustfree_homepage_2025_800x533px.webp');"></div>
+      </article>
+      <article class="dr-card">
+        <div class="dr-caption">
+          <span class="dr-num">03 — Mobility</span>
+          <h3>Systainer mobility</h3>
+          <p>Pack once, carry once. The Systainer system stays consistent across every Festool product.</p>
+          <a class="dr-link" href="#">Read more</a>
+        </div>
+        <div class="dr-img" style="background-image:url('https://www.festool.com/-/media/tts/fcp/festool/homepage/vip-themen-teaser/vip_teaser_mobility_startseite_800x533px.jpg');"></div>
+      </article>
+      <article class="dr-card">
+        <div class="dr-caption">
+          <span class="dr-num">04 — Trade</span>
+          <h3>Floor laying</h3>
+          <p>Specialist tools and abrasives for the floor-laying trade. Built for repeat use under load.</p>
+          <a class="dr-link" href="#">Read more</a>
+        </div>
+        <div class="dr-img" style="background-image:url('https://www.festool.com/-/media/tts/fcp/festool/homepage/vip-themen-teaser/floorlaying_800x533px.webp');"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== #FESTOOLME (single row) ===================== -->
+<section data-section="festoolme"
+         data-intent="social proof"
+         data-layout="grid"
+         data-items="8"
+         data-media="image">
+  <div class="container">
+    <div class="dr-head" style="margin-bottom: var(--spacing-lg);">
+      <div>
+        <p class="eyebrow">#festoolme</p>
+        <h2>What people are saying about our products.</h2>
+      </div>
+      <a class="link" href="#">See the wall</a>
+    </div>
+    <div class="fm-row">
+      <div class="fm-tile" style="background-image:url('https://media.cdn.festool.io/productmedia/Images/jpg_large/68cbdffa-528c-11f0-8a63-005056b3ad01_330_220.jpg');"></div>
+      <div class="fm-tile" style="background-image:url('https://media.cdn.festool.io/productmedia/Images/jpg_large/b1754bc0-817f-11f0-8a65-005056b3ad01_330_220.jpg');"></div>
+      <div class="fm-tile" style="background-image:url('https://media.cdn.festool.io/productmedia/Images/jpg_large/4cb1da38-6626-11f0-8a64-005056b3ad01_330_220.jpg');"></div>
+      <div class="fm-tile" style="background-image:url('https://media.cdn.festool.io/productmedia/Images/jpg_large/3d6fa53c-aa85-11f0-8a67-005056b3ad01_330_220.jpg');"></div>
+      <div class="fm-tile" style="background-image:url('https://www.festool.com/-/media/tts/fcp/festool/homepage/vip-themen-teaser/floorlaying_800x533px.webp');"></div>
+      <div class="fm-tile" style="background-image:url('https://www.festool.com/-/media/tts/fcp/festool/homepage/vip-themen-teaser/vip_teaser_mobility_startseite_800x533px.jpg');"></div>
+      <div class="fm-tile" style="background-image:url('https://www.festool.com/-/media/tts/fcp/festool/homepage/vip-themen-teaser/guard_new_800x533px.webp');"></div>
+      <div class="fm-tile" style="background-image:url('https://www.festool.com/-/media/tts/fcp/festool/homepage/vip-themen-teaser/warranty-all-inclusive-800x533.webp');"></div>
+    </div>
+    <p class="fm-foot"><span>Post on Instagram with #festoolme.</span><a class="link" href="#">Submit a contribution</a></p>
+  </div>
+</section>
+
+<!-- ===================== TRADE UTILITY ===================== -->
+<section data-section="service-tile-strip"
+         data-intent="trade utility"
+         data-layout="grid"
+         data-items="7">
+  <div class="container">
+    <div class="sts-head">
+      <p class="eyebrow" style="color:#7b909d;">For owners, dealers, press</p>
+      <h2>Trade utility</h2>
+      <p>The pages owners and partners visit most. They live above the footer because they should.</p>
+    </div>
+    <div class="sts-grid">
+      <a class="sts-tile" href="#"><span class="sts-icon">◎</span><h4>Social</h4><p>Join the conversation</p></a>
+      <a class="sts-tile" href="#"><span class="sts-icon">◇</span><h4>Knowledge</h4><p>Tips and how-to</p></a>
+      <a class="sts-tile" href="#"><span class="sts-icon">↓</span><h4>Downloads</h4><p>Manuals &amp; CAD</p></a>
+      <a class="sts-tile" href="#"><span class="sts-icon">▤</span><h4>Systainer labels</h4><p>Print &amp; customise</p></a>
+      <a class="sts-tile" href="#"><span class="sts-icon">⌗</span><h4>Supplier Portal</h4><p>For dealers</p></a>
+      <a class="sts-tile" href="#"><span class="sts-icon">▭</span><h4>Press Area</h4><p>Imagery &amp; releases</p></a>
+      <a class="sts-tile" href="#"><span class="sts-icon">✉</span><h4>Contact</h4><p>customerservice-int@festool.com</p></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer data-section="footer" data-intent="site map + legal" data-layout="grid">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="/" class="brand-mark" style="color:#fff;">
+          <img src="https://assets.cdn.festool.io/festool-logo.min.svg" alt="Festool" style="filter: brightness(0) invert(1);">
+        </a>
+        <p style="margin-top: var(--spacing-md); color:#c5c7c4; font-size:var(--body-sm); max-width: 280px;">Tools for the toughest demands. Engineered in Wendlingen, Germany.</p>
+      </div>
+      <div>
+        <h4>Catalogue</h4>
+        <ul>
+          <li><a href="#">Tools</a></li>
+          <li><a href="#">Accessories</a></li>
+          <li><a href="#">Applications</a></li>
+          <li><a href="#">Fan merchandise</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Service</h4>
+        <ul>
+          <li><a href="#">Warranty all-inclusive</a></li>
+          <li><a href="#">Downloads</a></li>
+          <li><a href="#">Spare parts</a></li>
+          <li><a href="#">Repair</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Trade</h4>
+        <ul>
+          <li><a href="#">Supplier Portal</a></li>
+          <li><a href="#">Press Area</a></li>
+          <li><a href="#">Systainer labels</a></li>
+          <li><a href="#">Knowledge</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>customerservice-int@festool.com</li>
+          <li>+49 (0) 7024 804 0</li>
+          <li><a href="#">To contact page</a></li>
+          <li><a href="#">Festool worldwide</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Festool 1925 — 2026 · TTS Tooltechnic Systems AG &amp; Co. KG</span>
+      <div class="footer-legal-links">
+        <a href="#">Cookies</a>
+        <a href="#">Privacy</a>
+        <a href="#">Legal notice</a>
+        <a href="#">Service terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

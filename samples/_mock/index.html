@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stardust — showcase (mock v2)</title>
+<style>
+  :root {
+    --ink: #0a1024;
+    --ink-deep: #060a14;
+    --ink-soft: #141b3a;
+    --dust: #f5f0e6;
+    --dust-72: rgba(245,240,230,0.72);
+    --dust-50: rgba(245,240,230,0.5);
+    --dust-30: rgba(245,240,230,0.3);
+    --dust-15: rgba(245,240,230,0.15);
+    --dust-08: rgba(245,240,230,0.08);
+    --amber: #e8b95e;
+    --amber-light: #ffd98a;
+    --amber-deep: #c9822d;
+    --bad: #ef6b6b;
+    --ok: #87d29a;
+
+    --display: "SF Pro Display", Inter, system-ui, sans-serif;
+    --text:    "SF Pro Text", Inter, system-ui, sans-serif;
+    --mono:    "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+
+    --pad: clamp(20px, 3.5vw, 40px);
+  }
+  * { box-sizing: border-box; }
+  html, body { background: var(--ink-deep); }
+  body {
+    margin: 0;
+    color: var(--dust);
+    font: 14.5px/1.55 var(--text);
+    font-feature-settings: "ss01", "ss02";
+    min-height: 100vh;
+  }
+  ::selection { background: var(--amber); color: var(--ink); }
+  a { color: inherit; }
+
+  .container { max-width: 1320px; margin: 0 auto; padding: 0 var(--pad); width: 100%; }
+
+  /* --- HEADER (consistent across views) ------------------------ */
+  header.chrome {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(6,10,20,0.86);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--dust-08);
+    height: 52px;
+    display: flex;
+    align-items: center;
+  }
+  header .container {
+    display: flex; align-items: center; gap: 14px;
+    height: 100%;
+  }
+  .lockup {
+    display: inline-flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .lockup .mark {
+    width: 26px; height: 26px; border-radius: 5px;
+    background: linear-gradient(180deg, #151e42 0%, #08101f 100%);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .lockup .mark svg { width: 26px; height: 26px; display: block; }
+  .lockup .word {
+    font-family: var(--display);
+    font-weight: 600; font-size: 16px; letter-spacing: -0.025em;
+    color: var(--dust);
+  }
+  .crumb {
+    color: var(--dust-50);
+    font: 11px/1 var(--mono);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .crumb .sep { color: var(--dust-30); padding: 0 8px; }
+  .crumb .here { color: var(--dust); }
+  header .actions { margin-left: auto; display: flex; gap: 18px; align-items: center; }
+  header .actions a {
+    color: var(--dust-50);
+    text-decoration: none;
+    font: 11px/1 var(--mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  header .actions a:hover { color: var(--amber); }
+
+  /* --- HERO STRIP (small, single line) ------------------------- */
+  .strip {
+    padding: 56px 0 32px;
+    border-bottom: 1px solid var(--dust-08);
+    background:
+      radial-gradient(ellipse at 86% 0%, rgba(26,36,80,0.55) 0%, transparent 55%),
+      var(--ink-deep);
+  }
+  .strip-wordmark {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(36px, 5.6vw, 64px);
+    letter-spacing: -0.035em;
+    line-height: 0.95;
+    margin: 0 0 14px;
+  }
+  .strip-tag {
+    font: 13px/1 var(--mono);
+    letter-spacing: 0.08em;
+    color: var(--dust-50);
+  }
+  .strip-tag .op { color: var(--amber); padding: 0 5px; }
+  .strip-sub {
+    margin-top: 18px;
+    color: var(--dust-72);
+    font-size: 16px;
+    line-height: 1.55;
+    max-width: 60ch;
+  }
+  .strip-meta {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    font: 11px/1 var(--mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dust-50);
+  }
+  .strip-meta strong { color: var(--amber); font-weight: 500; }
+
+  /* --- TOOLBAR ------------------------------------------------- */
+  .toolbar {
+    border-bottom: 1px solid var(--dust-08);
+    background: var(--ink-deep);
+  }
+  .toolbar .container {
+    display: flex; align-items: center; gap: 16px;
+    padding-top: 14px; padding-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .seg {
+    display: inline-flex;
+    background: var(--ink-soft);
+    border: 1px solid var(--dust-15);
+    border-radius: 999px;
+    padding: 3px;
+  }
+  .seg button {
+    background: transparent; border: 0;
+    color: var(--dust-72);
+    font: 500 11px/1 var(--mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .seg button.on { background: var(--amber); color: var(--ink); }
+  .toolbar input[type=search] {
+    background: var(--ink-soft);
+    border: 1px solid var(--dust-15);
+    color: var(--dust);
+    font: 13px var(--mono);
+    padding: 8px 12px;
+    border-radius: 6px;
+    min-width: 260px;
+  }
+  .toolbar input[type=search]:focus { outline: 2px solid var(--amber); outline-offset: 2px; }
+  .toolbar .count {
+    margin-left: auto;
+    font: 11px/1 var(--mono);
+    letter-spacing: 0.14em;
+    color: var(--dust-50);
+  }
+
+  /* --- CARD GRID ----------------------------------------------- */
+  .grid-wrap { padding: 36px 0 96px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 24px;
+  }
+  .card {
+    background: var(--ink-soft);
+    border: 1px solid var(--dust-08);
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: transform 200ms cubic-bezier(0.25,1,0.5,1), border-color 200ms;
+    position: relative;
+  }
+  .card:hover { transform: translateY(-2px); border-color: var(--dust-15); }
+  .card-cover {
+    aspect-ratio: 16/10;
+    position: relative;
+    overflow: hidden;
+    background: var(--ink);
+  }
+  .card-cover .ph {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 10px;
+    color: var(--dust-30);
+    font: 500 10px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .card-cover svg.thumb { width: 100%; height: 100%; display: block; }
+  .card-cover .scrim {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(6,10,20,0.6) 100%);
+  }
+  .card-cover .badge {
+    position: absolute; top: 12px; left: 12px;
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(6,10,20,0.78);
+    color: var(--amber);
+    font: 500 10px/1 var(--mono);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 5px 9px;
+    border-radius: 999px;
+    border: 1px solid var(--dust-15);
+  }
+  .card-cover .score {
+    position: absolute; bottom: 12px; right: 12px;
+    background: rgba(6,10,20,0.78);
+    color: var(--dust);
+    font: 500 11px/1 var(--mono);
+    letter-spacing: 0.04em;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--dust-15);
+    display: inline-flex; gap: 8px; align-items: center;
+  }
+  .card-cover .score .num { color: var(--amber); }
+  .card-cover .score .lbl { color: var(--dust-50); text-transform: uppercase; letter-spacing: 0.1em; font-size: 10px; }
+  .card-body { padding: 18px 18px 18px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .card-body h3 {
+    font-family: var(--display); font-weight: 600;
+    font-size: 18px; letter-spacing: -0.005em;
+    margin: 0;
+  }
+  .card-body .src {
+    font: 12px/1.4 var(--mono);
+    color: var(--dust-50);
+    word-break: break-all;
+  }
+  .card-body .src a { color: inherit; text-decoration: none; border-bottom: 1px dashed var(--dust-15); }
+  .card-body .src a:hover { color: var(--amber); border-bottom-color: var(--amber); }
+  .card-body .tag {
+    color: var(--dust-72);
+    font-size: 13.5px;
+    line-height: 1.5;
+    margin: 4px 0 0;
+  }
+  .card-foot {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid var(--dust-08);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font: 10px/1 var(--mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dust-50);
+  }
+  .card-foot .variants {
+    display: inline-flex; gap: 4px;
+  }
+  .card-foot .variants span {
+    background: var(--ink);
+    border: 1px solid var(--dust-15);
+    color: var(--dust-72);
+    padding: 4px 7px;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+  .card-foot .variants span.primary { background: var(--amber); color: var(--ink); border-color: var(--amber); }
+  .card-foot .open {
+    margin-left: auto;
+    color: var(--amber);
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+
+  /* --- FOOTER -------------------------------------------------- */
+  footer {
+    padding: 40px 0 64px;
+    border-top: 1px solid var(--dust-08);
+    color: var(--dust-50);
+    font: 500 11px/1.5 var(--mono);
+    letter-spacing: 0.06em;
+  }
+  footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 18px; }
+  footer .tag { color: var(--amber); }
+  footer a { color: inherit; text-decoration: none; border-bottom: 1px dashed var(--dust-15); }
+  footer a:hover { color: var(--amber); border-bottom-color: var(--amber); }
+
+  @media (max-width: 720px) {
+    .strip { padding: 40px 0 24px; }
+    .grid-wrap { padding: 24px 0 64px; }
+    .toolbar .container { flex-direction: column; align-items: stretch; }
+    .toolbar .count { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="chrome">
+  <div class="container">
+    <a href="./index.html" class="lockup" aria-label="stardust showcase home">
+      <span class="mark">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <g fill="#e8b95e">
+            <rect x="92" y="26" width="16" height="16"/>
+            <rect x="92" y="46" width="16" height="16" opacity="0.7"/>
+            <rect x="92" y="66" width="16" height="16" opacity="0.5"/>
+            <rect x="92" y="118" width="16" height="16" opacity="0.5"/>
+            <rect x="92" y="138" width="16" height="16" opacity="0.7"/>
+            <rect x="92" y="158" width="16" height="16"/>
+            <rect x="26" y="92" width="16" height="16"/>
+            <rect x="46" y="92" width="16" height="16" opacity="0.7"/>
+            <rect x="66" y="92" width="16" height="16" opacity="0.5"/>
+            <rect x="118" y="92" width="16" height="16" opacity="0.5"/>
+            <rect x="138" y="92" width="16" height="16" opacity="0.7"/>
+            <rect x="158" y="92" width="16" height="16"/>
+          </g>
+          <rect x="85" y="85" width="30" height="30" fill="#ffd98a"/>
+        </svg>
+      </span>
+      <span class="word">stardust</span>
+    </a>
+    <span class="crumb"><span class="sep">/</span><span class="here">showcase</span></span>
+    <span class="actions">
+      <a href="https://github.com/paolomoz/stardust-2" target="_blank" rel="noopener">GITHUB ↗</a>
+    </span>
+  </div>
+</header>
+
+<section class="strip">
+  <div class="container">
+    <h1 class="strip-wordmark">showcase</h1>
+    <div class="strip-tag">brief<span class="op">+</span>seed<span class="op">=</span>star</div>
+    <p class="strip-sub">Real brands, redesigned through stardust's deterministic seed. Each card opens a brand view — assessment of the live site, three variant theses, and the prototypes in full-page preview at desktop, tablet, and mobile.</p>
+    <div class="strip-meta">
+      <span><strong>9</strong> brands</span>
+      <span>updated <strong>2026-04-28</strong></span>
+      <span>seed today <strong>a3f7c92e</strong></span>
+    </div>
+  </div>
+</section>
+
+<div class="toolbar">
+  <div class="container">
+    <div class="seg" role="tablist" aria-label="Filter by register">
+      <button class="on" data-filter="all">all</button>
+      <button data-filter="brand">brand</button>
+      <button data-filter="product">product</button>
+    </div>
+    <input type="search" placeholder="search brand, source, palette…" aria-label="Search">
+    <span class="count">9 brands</span>
+  </div>
+</div>
+
+<section class="grid-wrap">
+  <div class="container">
+    <div class="grid">
+
+      <!-- FESTOOL -->
+      <a class="card" href="./brand.html?slug=festool" data-register="brand">
+        <div class="card-cover">
+          <svg class="thumb" viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="festoolBg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e6efe9"/>
+              </linearGradient>
+            </defs>
+            <rect width="640" height="400" fill="url(#festoolBg)"/>
+            <rect x="0" y="0" width="640" height="56" fill="#0c2c1f"/>
+            <rect x="40" y="22" width="68" height="14" fill="#3aa66e"/>
+            <rect x="40" y="120" width="290" height="40" fill="#1a2c22"/>
+            <rect x="40" y="170" width="180" height="22" fill="#3aa66e"/>
+            <rect x="40" y="220" width="120" height="36" fill="#0c2c1f"/>
+            <rect x="380" y="100" width="220" height="220" fill="#0c2c1f"/>
+            <circle cx="490" cy="210" r="60" fill="#3aa66e"/>
+          </svg>
+          <span class="scrim" aria-hidden="true"></span>
+          <span class="badge">brand · industrial</span>
+          <span class="score" title="Design assessment of the original page">
+            <span class="lbl">orig</span><span class="num">52</span>
+          </span>
+        </div>
+        <div class="card-body">
+          <h3>Festool</h3>
+          <p class="src">festool.com</p>
+          <p class="tag">DIN-driven product-commerce. Brand-faithful refresh: same palette and type, three theses on hierarchy and IA.</p>
+          <div class="card-foot">
+            <span class="variants">
+              <span class="primary">A</span><span>B</span><span>C</span>
+            </span>
+            <span style="margin-left:auto; color: var(--dust-50);">3 variants</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- VIRGIN ATLANTIC -->
+      <a class="card" href="./brand.html?slug=virginatlantic" data-register="brand">
+        <div class="card-cover">
+          <svg class="thumb" viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="vaBg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#1a0d2e"/><stop offset="1" stop-color="#3a0a3e"/>
+              </linearGradient>
+            </defs>
+            <rect width="640" height="400" fill="url(#vaBg)"/>
+            <rect x="40" y="120" width="320" height="44" fill="#ff2d5e"/>
+            <rect x="40" y="180" width="200" height="20" fill="#ffd966" opacity="0.75"/>
+            <rect x="40" y="240" width="120" height="36" fill="#ffd966"/>
+            <circle cx="500" cy="200" r="100" fill="#ff2d5e" opacity="0.85"/>
+            <rect x="0" y="0" width="640" height="48" fill="rgba(255,255,255,0.04)"/>
+          </svg>
+          <span class="scrim"></span>
+          <span class="badge">brand · travel</span>
+          <span class="score"><span class="lbl">orig</span><span class="num">61</span></span>
+        </div>
+        <div class="card-body">
+          <h3>Virgin Atlantic</h3>
+          <p class="src">virginatlantic.com</p>
+          <p class="tag">Iconic red/purple already strong; the homepage is dense and CTA-heavy. Variants test compositional rest vs a single bold focal.</p>
+          <div class="card-foot">
+            <span class="variants"><span class="primary">A</span><span>B</span><span>C</span></span>
+            <span style="margin-left:auto; color: var(--dust-50);">3 variants</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- THE ROAD HOME -->
+      <a class="card" href="./brand.html?slug=theroadhome" data-register="brand">
+        <div class="card-cover">
+          <svg class="thumb" viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice">
+            <rect width="640" height="400" fill="#fbf9f4"/>
+            <rect x="0" y="0" width="640" height="48" fill="#163a48"/>
+            <rect x="40" y="100" width="380" height="56" fill="#163a48"/>
+            <rect x="40" y="170" width="320" height="20" fill="#5b7a86" opacity="0.75"/>
+            <rect x="40" y="220" width="160" height="40" fill="#d77e3b"/>
+            <rect x="450" y="100" width="150" height="220" fill="#163a48" opacity="0.85"/>
+          </svg>
+          <span class="scrim"></span>
+          <span class="badge">brand · nonprofit</span>
+          <span class="score"><span class="lbl">orig</span><span class="num">48</span></span>
+        </div>
+        <div class="card-body">
+          <h3>The Road Home</h3>
+          <p class="src">theroadhome.org</p>
+          <p class="tag">WordPress-charity-default with weak hierarchy. Brand-faithful refresh on the captured palette and type — institution, not template.</p>
+          <div class="card-foot">
+            <span class="variants"><span class="primary">A</span><span>B</span><span>C</span></span>
+            <span style="margin-left:auto; color: var(--dust-50);">3 variants</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- AMAN -->
+      <a class="card" href="./brand.html?slug=aman" data-register="brand">
+        <div class="card-cover">
+          <svg class="thumb" viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="amanBg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#3a2e25"/><stop offset="1" stop-color="#0a0807"/>
+              </linearGradient>
+            </defs>
+            <rect width="640" height="400" fill="url(#amanBg)"/>
+            <rect x="40" y="60" width="200" height="2" fill="#cdb98c"/>
+            <rect x="40" y="200" width="380" height="36" fill="#f5efe3" opacity="0.92"/>
+            <rect x="40" y="250" width="280" height="14" fill="#cdb98c" opacity="0.7"/>
+            <rect x="450" y="60" width="150" height="280" fill="#cdb98c" opacity="0.18"/>
+            <circle cx="525" cy="200" r="44" fill="#cdb98c" opacity="0.5"/>
+          </svg>
+          <span class="scrim"></span>
+          <span class="badge">brand · luxury</span>
+          <span class="score"><span class="lbl">orig</span><span class="num">72</span></span>
+        </div>
+        <div class="card-body">
+          <h3>Aman</h3>
+          <p class="src">aman.com</p>
+          <p class="tag">Atmospheric photography, composed restraint. Refresh tightens scale and section padding without breaking the soulful tone.</p>
+          <div class="card-foot">
+            <span class="variants"><span class="primary">A</span><span>B</span><span>C</span></span>
+            <span style="margin-left:auto; color: var(--dust-50);">3 variants</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- POLESTAR -->
+      <a class="card" href="./brand.html?slug=polestar" data-register="brand">
+        <div class="card-cover">
+          <svg class="thumb" viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice">
+            <rect width="640" height="400" fill="#0c0c0c"/>
+            <rect x="40" y="280" width="560" height="40" fill="#1a1a1a"/>
+            <rect x="40" y="100" width="280" height="36" fill="#f6f6f6"/>
+            <rect x="40" y="148" width="200" height="14" fill="#9aa1a8"/>
+            <rect x="40" y="190" width="100" height="28" fill="#f6f6f6"/>
+            <rect x="380" y="60" width="220" height="200" fill="#3a3f44" opacity="0.85"/>
+          </svg>
+          <span class="scrim"></span>
+          <span class="badge">brand · automotive</span>
+          <span class="score"><span class="lbl">orig</span><span class="num">68</span></span>
+        </div>
+        <div class="card-body">
+          <h3>Polestar</h3>
+          <p class="src">polestar.com</p>
+          <p class="tag">Cinematic minimalism, but the homepage is one-note. Variants test typographic hierarchy and named-vehicle navigation.</p>
+          <div class="card-foot">
+            <span class="variants"><span class="primary">A</span><span>B</span><span>C</span></span>
+            <span style="margin-left:auto; color: var(--dust-50);">3 variants</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- GLOSSIER -->
+      <a class="card" href="./brand.html?slug=glossier" data-register="brand">
+        <div class="card-cover">
+          <svg class="thumb" viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice">
+            <rect width="640" height="400" fill="#fbeae3"/>
+            <rect x="0" y="0" width="640" height="48" fill="#fbeae3"/>
+            <rect x="40" y="100" width="320" height="44" fill="#1a1a1a"/>
+            <rect x="40" y="160" width="240" height="14" fill="#7a7a7a"/>
+            <rect x="40" y="210" width="120" height="34" fill="#1a1a1a"/>
+            <rect x="430" y="80" width="170" height="240" fill="#f7c4b3"/>
+            <circle cx="515" cy="200" r="50" fill="#ffe9da"/>
+          </svg>
+          <span class="scrim"></span>
+          <span class="badge">product · beauty</span>
+          <span class="score"><span class="lbl">orig</span><span class="num">66</span></span>
+        </div>
+        <div class="card-body">
+          <h3>Glossier</h3>
+          <p class="src">glossier.com</p>
+          <p class="tag">Strong brand surface, weak homepage thesis — feels like a rolling promo. Variants try a JTBD chooser and a routine-led IA.</p>
+          <div class="card-foot">
+            <span class="variants"><span class="primary">A</span><span>B</span><span>C</span></span>
+            <span style="margin-left:auto; color: var(--dust-50);">3 variants</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- AURORA COFFEE -->
+      <a class="card" href="./brand.html?slug=aurora-coffee" data-register="brand">
+        <div class="card-cover">
+          <svg class="thumb" viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice">
+            <rect width="640" height="400" fill="#f1f7ed"/>
+            <rect x="0" y="0" width="640" height="46" fill="#54494b"/>
+            <text x="40" y="160" font-family="Georgia, serif" font-size="80" fill="#54494b" font-weight="700" letter-spacing="-3">Aurora.</text>
+            <rect x="40" y="200" width="240" height="3" fill="#b33951"/>
+            <rect x="40" y="230" width="280" height="14" fill="#54494b" opacity="0.55"/>
+            <rect x="40" y="280" width="120" height="36" fill="#b33951"/>
+            <rect x="430" y="60" width="170" height="280" fill="#91c7b1"/>
+            <rect x="460" y="100" width="110" height="20" fill="#e3d081"/>
+          </svg>
+          <span class="scrim"></span>
+          <span class="badge">brand · indie coffee</span>
+          <span class="score"><span class="lbl">orig</span><span class="num">44</span></span>
+        </div>
+        <div class="card-body">
+          <h3>Aurora Coffee</h3>
+          <p class="src">aurora-coffee.example.com <span style="color:var(--dust-30)">· fixture</span></p>
+          <p class="tag">From a generic SaaS-cafe template to a zine-maximalist, Vintage Cottage Charm-palette riso-print register.</p>
+          <div class="card-foot">
+            <span class="variants"><span class="primary">A</span></span>
+            <span style="margin-left:auto; color: var(--dust-50);">1 variant</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- FISERV -->
+      <a class="card" href="./brand.html?slug=fiserv" data-register="brand">
+        <div class="card-cover">
+          <svg class="thumb" viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice">
+            <rect width="640" height="400" fill="#ffffff"/>
+            <rect x="0" y="0" width="640" height="280" fill="#002754"/>
+            <text x="40" y="120" font-family="ui-monospace, Menlo, monospace" font-size="13" fill="#fb6400" letter-spacing="3">2026 · ANNUAL REPORT</text>
+            <text x="40" y="190" font-family="Georgia, serif" font-size="44" fill="#ffffff" font-weight="700">moves more than</text>
+            <text x="40" y="240" font-family="Georgia, serif" font-size="44" fill="#fb6400" font-weight="700">money.</text>
+            <rect x="40" y="320" width="120" height="16" fill="#002754"/>
+            <rect x="180" y="320" width="120" height="16" fill="#002754" opacity="0.5"/>
+            <rect x="320" y="320" width="120" height="16" fill="#002754" opacity="0.5"/>
+            <rect x="460" y="320" width="120" height="16" fill="#002754" opacity="0.5"/>
+          </svg>
+          <span class="scrim"></span>
+          <span class="badge">brand · B2B fintech</span>
+          <span class="score"><span class="lbl">orig</span><span class="num">58</span></span>
+        </div>
+        <div class="card-body">
+          <h3>Fiserv</h3>
+          <p class="src">fiserv.com</p>
+          <p class="tag">Three multi-variant theses: proof-at-the-top, JTBD doorways, product-forward. Brand-faithful direction, palette pinned.</p>
+          <div class="card-foot">
+            <span class="variants"><span class="primary">A</span><span>B</span><span>C</span></span>
+            <span style="margin-left:auto; color: var(--dust-50);">3 variants</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- PATAGONIA (placeholder, partial sample) -->
+      <a class="card" href="./brand.html?slug=patagonia" data-register="brand" style="opacity:0.55">
+        <div class="card-cover">
+          <svg class="thumb" viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="patBg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#3a2c1a"/><stop offset="1" stop-color="#0c0a08"/>
+              </linearGradient>
+            </defs>
+            <rect width="640" height="400" fill="url(#patBg)"/>
+            <rect x="40" y="240" width="240" height="36" fill="#f5d36b"/>
+            <rect x="40" y="290" width="180" height="14" fill="#f5f0e6" opacity="0.7"/>
+          </svg>
+          <span class="scrim"></span>
+          <span class="badge" style="color: var(--dust-50)">draft · 1 of 3</span>
+          <span class="score"><span class="lbl">orig</span><span class="num">71</span></span>
+        </div>
+        <div class="card-body">
+          <h3>Patagonia <span style="font-size:11px; color:var(--dust-30); font-family: var(--mono); letter-spacing:0.1em; margin-left: 6px;">DRAFT</span></h3>
+          <p class="src">patagonia.com</p>
+          <p class="tag">Wireframe-stage. Variant A only — B/C are shape-md drafts. Will publish after the next prototype pass.</p>
+          <div class="card-foot">
+            <span class="variants"><span class="primary">A</span><span style="opacity:0.4">B</span><span style="opacity:0.4">C</span></span>
+            <span style="margin-left:auto; color: var(--dust-50);">work in progress</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>
+      <span class="tag">STARDUST</span> · showcase mock v2<br>
+      math, not mysticism. yours alone, today only.
+    </div>
+    <div style="text-align:right;">
+      <a href="https://github.com/paolomoz/stardust-2">github.com/paolomoz/stardust-2</a><br>
+      Apache-2.0 · /plugin install stardust@adobe-skills
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Filter wiring (mock — visual only)
+  const seg = document.querySelectorAll('.seg button');
+  seg.forEach(btn => btn.addEventListener('click', () => {
+    seg.forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.card').forEach(c => {
+      c.style.display = (f === 'all' || c.dataset.register === f) ? '' : 'none';
+    });
+  }));
+</script>
+
+</body>
+</html>

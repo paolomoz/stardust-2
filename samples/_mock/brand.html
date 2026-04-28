@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Festool — Stardust showcase (mock v2)</title>
+<style>
+  :root {
+    --ink: #0a1024;
+    --ink-deep: #060a14;
+    --ink-soft: #141b3a;
+    --dust: #f5f0e6;
+    --dust-72: rgba(245,240,230,0.72);
+    --dust-50: rgba(245,240,230,0.5);
+    --dust-30: rgba(245,240,230,0.3);
+    --dust-15: rgba(245,240,230,0.15);
+    --dust-08: rgba(245,240,230,0.08);
+    --amber: #e8b95e;
+    --amber-light: #ffd98a;
+    --amber-deep: #c9822d;
+    --bad: #ef6b6b;
+    --warn: #f4b65b;
+    --ok: #87d29a;
+
+    --display: "SF Pro Display", Inter, system-ui, sans-serif;
+    --text:    "SF Pro Text", Inter, system-ui, sans-serif;
+    --mono:    "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+
+    --pad: clamp(16px, 2vw, 28px);
+    --header-h: 52px;
+    --side-w: 360px;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--ink-deep);
+    color: var(--dust);
+    font: 14px/1.5 var(--text);
+    font-feature-settings: "ss01", "ss02";
+    overflow: hidden;
+  }
+  ::selection { background: var(--amber); color: var(--ink); }
+  a { color: inherit; }
+
+  /* --- HEADER (consistent with home) --------------------------- */
+  header.chrome {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 30;
+    background: rgba(6,10,20,0.86);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--dust-08);
+    height: var(--header-h);
+    display: flex; align-items: center;
+    padding: 0 var(--pad);
+  }
+  header .row {
+    display: flex; align-items: center; gap: 14px;
+    width: 100%;
+  }
+  .lockup {
+    display: inline-flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .lockup .mark {
+    width: 26px; height: 26px; border-radius: 5px;
+    background: linear-gradient(180deg, #151e42 0%, #08101f 100%);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .lockup .mark svg { width: 26px; height: 26px; display: block; }
+  .lockup .word {
+    font-family: var(--display);
+    font-weight: 600; font-size: 16px; letter-spacing: -0.025em;
+    color: var(--dust);
+  }
+  .crumb {
+    color: var(--dust-50);
+    font: 11px/1 var(--mono);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .crumb a { color: var(--dust-50); text-decoration: none; }
+  .crumb a:hover { color: var(--amber); }
+  .crumb .sep { color: var(--dust-30); padding: 0 8px; }
+  .crumb .here { color: var(--dust); }
+  header .actions { margin-left: auto; display: flex; gap: 14px; align-items: center; }
+  header .actions a {
+    color: var(--dust-50);
+    text-decoration: none;
+    font: 11px/1 var(--mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  header .actions a:hover { color: var(--amber); }
+
+  /* --- STAGE (full-bleed preview area) ------------------------- */
+  .stage {
+    position: fixed;
+    inset: var(--header-h) 0 0 0;
+    display: flex; align-items: center; justify-content: center;
+    overflow: auto;
+    background:
+      radial-gradient(ellipse at 30% 0%, rgba(26,36,80,0.4) 0%, transparent 50%),
+      var(--ink-deep);
+    padding: 40px 40px 40px 40px;
+  }
+  .device {
+    background: var(--dust);
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px var(--dust-15);
+    transition: width 280ms cubic-bezier(0.25,1,0.5,1), height 280ms cubic-bezier(0.25,1,0.5,1), border-radius 280ms;
+  }
+  .device.desktop {
+    width: 100%;
+    max-width: calc(100vw - var(--side-w) - 80px);
+    height: calc(100vh - var(--header-h) - 80px);
+    border-radius: 12px;
+  }
+  .device.tablet {
+    width: 768px;
+    height: calc(100vh - var(--header-h) - 80px);
+    max-height: 1024px;
+    border-radius: 22px;
+    border: 8px solid #0e1426;
+  }
+  .device.mobile {
+    width: 390px;
+    height: calc(100vh - var(--header-h) - 80px);
+    max-height: 844px;
+    border-radius: 36px;
+    border: 10px solid #0e1426;
+  }
+  .device iframe {
+    width: 100%; height: 100%;
+    border: 0;
+    background: var(--dust);
+    display: block;
+  }
+
+  /* --- SIDEKICK (right floating panel) ------------------------- */
+  aside.sidekick {
+    position: fixed;
+    top: calc(var(--header-h) + 16px);
+    right: 16px;
+    bottom: 16px;
+    width: var(--side-w);
+    max-width: calc(100vw - 32px);
+    background: rgba(20,27,58,0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--dust-15);
+    border-radius: 14px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    z-index: 20;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    transition: width 240ms cubic-bezier(0.25,1,0.5,1), transform 240ms;
+  }
+  aside.sidekick.collapsed {
+    width: 56px;
+  }
+  aside.sidekick.collapsed .sk-body,
+  aside.sidekick.collapsed .sk-footer { display: none; }
+  aside.sidekick.collapsed .sk-head .sk-title,
+  aside.sidekick.collapsed .sk-head .sk-source { display: none; }
+  aside.sidekick.collapsed .sk-head { padding: 12px 8px; }
+  aside.sidekick.collapsed .sk-toggle { transform: rotate(180deg); }
+
+  .sk-head {
+    padding: 16px 18px 14px;
+    border-bottom: 1px solid var(--dust-08);
+    display: flex; gap: 10px; align-items: flex-start;
+    flex-shrink: 0;
+  }
+  .sk-head .sk-title h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    margin: 0 0 4px;
+  }
+  .sk-head .sk-title .reg {
+    font: 500 10px/1 var(--mono);
+    letter-spacing: 0.16em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .sk-head .sk-source {
+    margin-top: 6px;
+    font: 12px/1.4 var(--mono);
+    color: var(--dust-50);
+  }
+  .sk-head .sk-source a {
+    color: var(--dust-72);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--dust-15);
+  }
+  .sk-head .sk-source a:hover { color: var(--amber); border-bottom-color: var(--amber); }
+
+  .sk-toggle {
+    margin-left: auto; flex-shrink: 0;
+    background: transparent; border: 1px solid var(--dust-15);
+    color: var(--dust-50);
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 240ms, color 150ms;
+  }
+  .sk-toggle:hover { color: var(--amber); border-color: var(--amber); }
+
+  .sk-body {
+    flex: 1; min-height: 0;
+    overflow: auto;
+    padding: 16px 18px 8px;
+    display: flex; flex-direction: column;
+    gap: 22px;
+  }
+  .sk-body::-webkit-scrollbar { width: 8px; }
+  .sk-body::-webkit-scrollbar-thumb { background: var(--dust-08); border-radius: 4px; }
+  .sk-body::-webkit-scrollbar-thumb:hover { background: var(--dust-15); }
+
+  .sk-section h3 {
+    font: 500 10px/1 var(--mono);
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    margin: 0 0 10px;
+    text-transform: uppercase;
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  .sk-section h3 .num { color: var(--dust-30); font-weight: 500; }
+
+  /* assessment card */
+  .assess {
+    background: var(--ink);
+    border: 1px solid var(--dust-08);
+    border-radius: 10px;
+    padding: 14px 14px 12px;
+  }
+  .assess .verdict {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; margin-bottom: 12px;
+  }
+  .assess .verdict .score {
+    font-family: var(--display);
+    font-weight: 600; font-size: 26px; letter-spacing: -0.01em;
+    color: var(--amber);
+    line-height: 1;
+  }
+  .assess .verdict .score small {
+    font-size: 11px; color: var(--dust-30);
+    font-family: var(--mono); letter-spacing: 0.1em;
+    margin-left: 4px;
+  }
+  .assess .verdict .label {
+    font: 500 10px/1.2 var(--mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: right;
+  }
+  .assess .verdict .label .tag {
+    background: rgba(244,182,91,0.16);
+    color: var(--warn);
+    padding: 4px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(244,182,91,0.3);
+    display: inline-block;
+  }
+  .assess ul { list-style: none; margin: 0; padding: 0; }
+  .assess li {
+    display: grid; grid-template-columns: 80px 1fr 24px;
+    gap: 10px; align-items: center;
+    padding: 6px 0;
+    border-top: 1px dashed var(--dust-08);
+    font-size: 12.5px;
+  }
+  .assess li:first-child { border-top: 0; }
+  .assess li .k {
+    color: var(--dust-50);
+    font: 500 10px/1 var(--mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .assess li .bar {
+    position: relative;
+    height: 4px;
+    background: var(--dust-08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .assess li .bar i {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    background: var(--bad);
+    border-radius: 2px;
+  }
+  .assess li[data-score="3"] .bar i, .assess li[data-score="4"] .bar i { background: var(--warn); }
+  .assess li[data-score="5"] .bar i { background: var(--ok); }
+  .assess li .v {
+    text-align: right;
+    color: var(--dust-72);
+    font: 500 11px/1 var(--mono);
+  }
+  .assess .findings {
+    margin: 12px 0 0;
+    padding: 10px 12px;
+    background: var(--ink-soft);
+    border-left: 2px solid var(--amber);
+    border-radius: 4px;
+    color: var(--dust-72);
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+  .assess .findings strong { color: var(--dust); font-weight: 600; }
+
+  /* variant switcher */
+  .vsw {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .vsw button {
+    background: var(--ink);
+    border: 1px solid var(--dust-15);
+    color: var(--dust-72);
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 150ms;
+  }
+  .vsw button:hover { border-color: var(--dust-30); color: var(--dust); }
+  .vsw button.on {
+    background: var(--amber);
+    color: var(--ink);
+    border-color: var(--amber);
+  }
+  .vsw button .id {
+    font: 600 13px/1 var(--mono);
+    letter-spacing: 0.06em;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .vsw button .nm {
+    font: 500 10px/1.2 var(--mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    display: block;
+  }
+
+  /* concept text */
+  .concept {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  .concept .pair {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed var(--dust-08);
+  }
+  .concept .pair:last-child { border-bottom: 0; padding-bottom: 0; margin-bottom: 0; }
+  .concept .pair .lbl {
+    font: 500 10px/1 var(--mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .concept .pair.broken .lbl { color: var(--bad); }
+  .concept .pair.fixed  .lbl { color: var(--ok); }
+  .concept .pair p { margin: 0; color: var(--dust-72); }
+  .concept .pair p strong { color: var(--dust); font-weight: 600; }
+
+  /* footer (device switch) */
+  .sk-footer {
+    border-top: 1px solid var(--dust-08);
+    padding: 12px 18px;
+    display: flex; align-items: center; gap: 10px;
+    flex-shrink: 0;
+    background: rgba(10,16,36,0.5);
+  }
+  .sk-footer .lbl {
+    font: 500 10px/1 var(--mono);
+    letter-spacing: 0.16em;
+    color: var(--dust-30);
+    text-transform: uppercase;
+  }
+  .dvs {
+    margin-left: auto;
+    display: inline-flex;
+    background: var(--ink);
+    border: 1px solid var(--dust-15);
+    border-radius: 999px;
+    padding: 3px;
+  }
+  .dvs button {
+    background: transparent; border: 0;
+    color: var(--dust-72);
+    width: 36px; height: 28px;
+    border-radius: 999px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background 120ms;
+  }
+  .dvs button:hover { color: var(--dust); }
+  .dvs button.on { background: var(--amber); color: var(--ink); }
+  .dvs button svg { width: 16px; height: 16px; }
+
+  /* responsive: stack sidekick on top on narrow screens */
+  @media (max-width: 920px) {
+    aside.sidekick {
+      top: var(--header-h);
+      right: 0; left: 0; bottom: auto;
+      width: auto; max-height: 50vh;
+      border-radius: 0;
+      border-left: 0; border-right: 0;
+    }
+    aside.sidekick.collapsed { max-height: 56px; }
+    .stage { padding: 50vh 16px 16px; }
+    .device.desktop { max-width: 100%; }
+  }
+
+  @media (max-width: 720px) {
+    .lockup .word { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="chrome">
+  <div class="row">
+    <a href="./index.html" class="lockup" aria-label="stardust showcase home">
+      <span class="mark">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <g fill="#e8b95e">
+            <rect x="92" y="26" width="16" height="16"/>
+            <rect x="92" y="46" width="16" height="16" opacity="0.7"/>
+            <rect x="92" y="66" width="16" height="16" opacity="0.5"/>
+            <rect x="92" y="118" width="16" height="16" opacity="0.5"/>
+            <rect x="92" y="138" width="16" height="16" opacity="0.7"/>
+            <rect x="92" y="158" width="16" height="16"/>
+            <rect x="26" y="92" width="16" height="16"/>
+            <rect x="46" y="92" width="16" height="16" opacity="0.7"/>
+            <rect x="66" y="92" width="16" height="16" opacity="0.5"/>
+            <rect x="118" y="92" width="16" height="16" opacity="0.5"/>
+            <rect x="138" y="92" width="16" height="16" opacity="0.7"/>
+            <rect x="158" y="92" width="16" height="16"/>
+          </g>
+          <rect x="85" y="85" width="30" height="30" fill="#ffd98a"/>
+        </svg>
+      </span>
+      <span class="word">stardust</span>
+    </a>
+    <span class="crumb">
+      <span class="sep">/</span><a href="./index.html">showcase</a><span class="sep">/</span><span class="here" id="brand-crumb">festool</span>
+    </span>
+    <span class="actions">
+      <a href="#" id="open-source" target="_blank" rel="noopener">SOURCE ↗</a>
+      <a href="#" id="open-direction" target="_blank" rel="noopener">DIRECTION ↗</a>
+    </span>
+  </div>
+</header>
+
+<main class="stage" id="stage">
+  <div class="device desktop" id="device">
+    <iframe id="preview" src="./festool-A.html" title="Festool — Variant A preview"></iframe>
+  </div>
+</main>
+
+<aside class="sidekick" id="sidekick" aria-label="Sample details">
+  <div class="sk-head">
+    <div class="sk-title">
+      <span class="reg" id="sk-reg">brand · industrial</span>
+      <h2 id="sk-name">Festool</h2>
+      <p class="sk-source" id="sk-source">
+        <a href="https://www.festool.com/" target="_blank" rel="noopener">festool.com ↗</a>
+      </p>
+    </div>
+    <button class="sk-toggle" id="sk-toggle" aria-label="Collapse sidekick">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6"/><path d="M14 6l-6 6 6 6"/></svg>
+    </button>
+  </div>
+
+  <div class="sk-body">
+
+    <!-- ASSESSMENT -->
+    <section class="sk-section">
+      <h3><span class="num">01</span> Original assessment</h3>
+      <div class="assess">
+        <div class="verdict">
+          <div>
+            <span class="score">52<small>/100</small></span>
+          </div>
+          <div class="label">
+            <span class="tag">Tired refresh</span>
+          </div>
+        </div>
+        <ul>
+          <li data-score="2"><span class="k">Hierarchy</span>     <span class="bar"><i style="width:40%"></i></span> <span class="v">2/5</span></li>
+          <li data-score="3"><span class="k">Density</span>       <span class="bar"><i style="width:60%"></i></span> <span class="v">3/5</span></li>
+          <li data-score="2"><span class="k">Type scale</span>    <span class="bar"><i style="width:40%"></i></span> <span class="v">2/5</span></li>
+          <li data-score="4"><span class="k">Contrast</span>      <span class="bar"><i style="width:80%"></i></span> <span class="v">4/5</span></li>
+          <li data-score="2"><span class="k">Distinct.</span>     <span class="bar"><i style="width:40%"></i></span> <span class="v">2/5</span></li>
+        </ul>
+        <p class="findings">
+          <strong>Hero text floats over photo without scrim.</strong> Heading scale is ad-hoc — at least four near-identical sizes between 28–44px. The 6-up "Discover Festool" grid treats every tile equally, eroding hierarchy. The voice and palette are recognisable but the composition reads as a 2018 template refresh.
+        </p>
+      </div>
+    </section>
+
+    <!-- VARIANTS -->
+    <section class="sk-section">
+      <h3><span class="num">02</span> Variants</h3>
+      <div class="vsw" id="vsw">
+        <button class="on" data-variant="A" data-file="./festool-A.html">
+          <span class="id">A</span><span class="nm">Conservative</span>
+        </button>
+        <button data-variant="B" data-file="./festool-B.html">
+          <span class="id">B</span><span class="nm">JTBD-led</span>
+        </button>
+        <button data-variant="C" data-file="./festool-C.html">
+          <span class="id">C</span><span class="nm">Bold</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- CRITIQUE → CONCEPT -->
+    <section class="sk-section">
+      <h3><span class="num">03</span> What's broken · how it's fixed</h3>
+      <div class="concept" id="concept">
+        <div class="pair broken">
+          <span class="lbl">— Original</span>
+          <p>Hero pairs an unscrim'd headline with a photo, and the IA reads as a flat campaign deck. <strong>The page tells you nothing about what's new for the trade — it tells you what the marketing team shipped this quarter.</strong></p>
+        </div>
+        <div class="pair fixed">
+          <span class="lbl">+ Variant A · Conservative refresh</span>
+          <p>Same IA, modernised tokens. Hero text moves to a left-rail block over a contrast scrim; product name leads, value follows. Heading scale snaps to a major-third (1.25) modular ratio. The 6-up grid gets size hierarchy: one feature tile spans 2 cells, the rest are single. <strong>The risk-averse stakeholder option — almost nothing the legal team would push back on.</strong></p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="sk-footer">
+    <span class="lbl">Device</span>
+    <span class="dvs" id="dvs">
+      <button class="on" data-device="desktop" aria-label="Desktop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 22h8"/><path d="M12 18v4"/></svg>
+      </button>
+      <button data-device="tablet" aria-label="Tablet">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M11 18h2"/></svg>
+      </button>
+      <button data-device="mobile" aria-label="Mobile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg>
+      </button>
+    </span>
+  </div>
+</aside>
+
+<script>
+  const VARIANT_TEXT = {
+    A: {
+      lbl: '+ Variant A · Conservative refresh',
+      body: 'Same IA, modernised tokens. Hero text moves to a left-rail block over a contrast scrim; product name leads, value follows. Heading scale snaps to a major-third (1.25) modular ratio. The 6-up grid gets size hierarchy: one feature tile spans 2 cells, the rest are single. <strong>The risk-averse stakeholder option — almost nothing the legal team would push back on.</strong>'
+    },
+    B: {
+      lbl: '+ Variant B · JTBD-led ("what are you doing today?")',
+      body: 'Same palette, type, photography. <strong>Different homepage thesis.</strong> The page opens with a job-to-be-done router (Cordless · Sanding · Dust extraction · Mobility · Service), not a single hero campaign. The "Tabless" cordless campaign moves into the cordless route as a detail panel. Service-equal band rises above the brand teaser because for owners, service is the most-used surface.'
+    },
+    C: {
+      lbl: '+ Variant C · Bold direction (push one element)',
+      body: 'DIN at 96px on the hero — single declarative line, the brand mark gets to <strong>be</strong> the brand mark instead of a logo lockup. A green ground-line motif runs through every section break, an industrial-engineering signal that ties hero to footer. Same IA as A, but every section gains a single confident move.'
+    }
+  };
+
+  // Variant switching
+  const vsw = document.querySelectorAll('#vsw button');
+  const preview = document.getElementById('preview');
+  const concept = document.getElementById('concept');
+
+  function renderConcept(id) {
+    const v = VARIANT_TEXT[id];
+    concept.innerHTML = `
+      <div class="pair broken">
+        <span class="lbl">— Original</span>
+        <p>Hero pairs an unscrim'd headline with a photo, and the IA reads as a flat campaign deck. <strong>The page tells you nothing about what's new for the trade — it tells you what the marketing team shipped this quarter.</strong></p>
+      </div>
+      <div class="pair fixed">
+        <span class="lbl">${v.lbl}</span>
+        <p>${v.body}</p>
+      </div>
+    `;
+  }
+
+  vsw.forEach(btn => btn.addEventListener('click', () => {
+    vsw.forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    preview.src = btn.dataset.file;
+    preview.title = `Festool — Variant ${btn.dataset.variant} preview`;
+    renderConcept(btn.dataset.variant);
+  }));
+
+  // Device switching
+  const device = document.getElementById('device');
+  const dvs = document.querySelectorAll('#dvs button');
+  dvs.forEach(btn => btn.addEventListener('click', () => {
+    dvs.forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    device.className = `device ${btn.dataset.device}`;
+  }));
+
+  // Sidekick collapse
+  const sidekick = document.getElementById('sidekick');
+  document.getElementById('sk-toggle').addEventListener('click', () => {
+    sidekick.classList.toggle('collapsed');
+    // adjust desktop max-width when sidekick collapses (visual feedback only — iframe will reflow on its own)
+  });
+
+  // Pre-fill source link
+  document.getElementById('open-source').href = 'https://www.festool.com/';
+  document.getElementById('open-direction').href = '#';
+</script>
+
+</body>
+</html>
