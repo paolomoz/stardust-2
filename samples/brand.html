@@ -43,6 +43,8 @@
   }
   ::selection { background: var(--amber); color: var(--ink); }
   a { color: inherit; }
+  /* HTML [hidden] must beat author display:flex/etc — otherwise hidden overlays still capture pointer/wheel events. */
+  [hidden] { display: none !important; }
 
   /* --- HEADER ---------------------------------------------------- */
   header.chrome {
