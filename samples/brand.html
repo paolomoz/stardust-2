@@ -472,7 +472,13 @@
 
   fetch(`./${encodeURIComponent(slug)}/meta.json`, { cache: 'no-store' })
     .then(r => { if (!r.ok) throw new Error('meta.json HTTP ' + r.status); return r.json(); })
-    .then(init)
+    .then(meta => {
+      try { init(meta); }
+      catch (initErr) {
+        console.error(initErr);
+        showError('Could not render this sample.', `Loaded <code>${escape(slug)}/meta.json</code> but rendering failed — ${escape(initErr.message)}.`);
+      }
+    })
     .catch(err => {
       showError('Could not load this sample.', `Failed to fetch <code>${escape(slug)}/meta.json</code> — ${escape(err.message)}.`);
     });
@@ -508,7 +514,8 @@
       return;
     }
     const vsw = document.getElementById('vsw');
-    vsw.classList.add(variants.length === 1 ? 'one' : variants.length === 2 ? 'two' : '');
+    if (variants.length === 1) vsw.classList.add('one');
+    else if (variants.length === 2) vsw.classList.add('two');
     vsw.innerHTML = '';
     variants.forEach((v, i) => {
       const btn = document.createElement('button');
