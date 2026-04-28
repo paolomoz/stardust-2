@@ -1,6 +1,7 @@
 {
   "schemaVersion": 2,
   "samples": [
-    "aurora-coffee"
+    "aurora-coffee",
+    "fiserv-com"
   ]
 }

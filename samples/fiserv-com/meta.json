@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 2,
+  "slug": "fiserv-com",
+  "title": "Fiserv — moves more than money",
+  "tagline": "Three multi-variant theses for fiserv.com — proof-at-the-top (A), JTBD doorways (B), product-forward (C). Brand-faithful direction, all variants ship with placeholder content visible per the F-002 signature contract.",
+
+  "source": {
+    "url": "https://www.fiserv.com",
+    "register": "brand",
+    "category": "B2B fintech · payments + banking infrastructure",
+    "extractedAt": "2026-04-27"
+  },
+
+  "direction": {
+    "phrase": "redesign this home page to make it better",
+    "movements": [
+      "register: brand (inherited)",
+      "ground-family: stark-white (user-constraint, brand-faithful override)",
+      "type-scale: ad-hoc → modular major-third 1.25",
+      "ia: audience-only → audience + JTBD doorways"
+    ],
+    "seed": {
+      "input": "fiserv.com|2026-04-27",
+      "decade": "2025-now",
+      "craft": "editorial-news-business",
+      "register": "brand",
+      "groundFamily": "stark-white",
+      "pickedBy": "anchor-implied: incumbent-modern · user-constraint on ground"
+    },
+    "fontDeck": {
+      "name": "brand-inherited",
+      "pickedBy": "user-constraint"
+    },
+    "palette": {
+      "name": "Fiserv brand-pinned",
+      "source": "inherited from stardust/current/_brand-extraction.json",
+      "anchor": "#002754",
+      "pickedBy": "user-constraint",
+      "brandFaithfulInversions": [
+        "pure-white retention",
+        "hex format retention"
+      ]
+    },
+    "antiToolbox": {
+      "hits": 0,
+      "justified": 0,
+      "note": "No anti-toolbox moves invoked — the resolved direction is brand-faithful (palette + type pinned), so divergence-toolkit § 1 has nothing to flag."
+    }
+  },
+
+  "variants": [
+    {
+      "id": "A",
+      "name": "Proof at the top",
+      "dominantDimension": "decade",
+      "thesis": "Hero leads with a high-contrast headline + designed surface. Immediately under the hero, four proof-tiles surface scale (10K+ FIs, 6M+ merchants, $2.6T volume, 100 countries) — the editorial-news register reads first. Customer logos and the four named products (Clover/Carat/Finxact/Forum) follow before audience routing.",
+      "proposedFile": "proposed-A.html",
+      "isPrimary": true
+    },
+    {
+      "id": "B",
+      "name": "Doorways (job-to-be-done first)",
+      "dominantDimension": "register",
+      "thesis": "Hero question + 5-doorway JTBD chooser as the primary IA — Accept payments / Issue a card / Run a bank / Embed finance / Modernise a core. The brand register (verb-led routing) reads first. Proof-strip and customer logos sit below the chooser; audience-grid is secondary navigation.",
+      "proposedFile": "proposed-B.html"
+    },
+    {
+      "id": "C",
+      "name": "Product-forward",
+      "dominantDimension": "craft",
+      "thesis": "Hero leads with the product list (Clover, Carat, Finxact, Forum, AppMarket); the editorial-news craft (named platforms first) reads first. Each card is a rich block — UI mock + audience eyebrow + tagline + description. Proof-strip and customer logos surround the portfolio.",
+      "proposedFile": "proposed-C.html"
+    }
+  ],
+
+  "createdAt": "2026-04-27",
+  "stardustVersion": "0.2.0",
+  "submittedBy": "paolomoz",
+  "license": "Apache-2.0",
+  "thumbnail": "thumbnail.svg",
+
+  "_provenance": {
+    "writtenBy": "stardust:prototype --publish-sample (this session)",
+    "writtenAt": "2026-04-27",
+    "readArtifacts": [
+      "/Users/paolo/excat/tmp/st2-6-fiserv/stardust/state.json",
+      "/Users/paolo/excat/tmp/st2-6-fiserv/stardust/direction.md",
+      "/Users/paolo/excat/tmp/st2-6-fiserv/DESIGN.md",
+      "/Users/paolo/excat/tmp/st2-6-fiserv/DESIGN.json",
+      "/Users/paolo/excat/tmp/st2-6-fiserv/stardust/current/PRODUCT.md",
+      "/Users/paolo/excat/tmp/st2-6-fiserv/stardust/current/_brand-extraction.json",
+      "/Users/paolo/excat/tmp/st2-6-fiserv/stardust/current/pages/home.json"
+    ],
+    "reconstructionNote": "The proof-tiles, customer-logos, and products sections in all three variants were trimmed during a first publish attempt (under the old policy that refused on non-empty unsourcedContent[]). The relaxed policy (showcase = visual demonstration; placeholders allowed with the F-002 signature visible) made the trim unnecessary, and these sections were reconstructed from this Claude Code session's conversation logs. Section bodies are not byte-identical to the original render — they use inline scoped <style> blocks to avoid depending on what CSS survived the trim, and variant C's UI mocks are CSS shapes (honest abstractions) rather than reconstructed product screenshots. The PLACEHOLDER visual signature is restored on every reconstructed element."
+  }
+}

@@ -1,0 +1,654 @@
+<!--
+stardust:provenance
+  writtenBy: stardust:prototype
+  writtenAt: 2026-04-27T00:00:00Z
+  page: home
+  variant: A — Proof at the top
+  pageUrl: https://www.fiserv.com/en.html
+  againstDirection: stardust/direction.md
+  readArtifacts:
+    - stardust/current/pages/home.json
+    - stardust/current/_brand-extraction.json
+    - DESIGN.md
+    - DESIGN.json
+  divergenceVersion: brand-faithful (Mode A)
+  fontDeck: brand-inherited (Univers Fiserv → Inter web fallback for prototype)
+  paletteSource: inherited from brand surface
+  unsourcedContent:
+    - selector: section[data-section="proof-tiles"] .proof-stat
+      type: stat
+      reason: "design demanded quantified scale; current/pages/home.json provides no statistics — direction.md authorised public IR data"
+    - selector: section[data-section="customer-logos"] .logo-row
+      type: other
+      reason: "design demanded named-customer wordmarks; current/pages/home.json provides no customer roster — direction.md authorised illustrative monoglyph wordmarks"
+    - selector: section[data-section="products"] .product-card
+      type: other
+      reason: "named products (Clover/Carat/Finxact/Forum) are public Fiserv brands but not present on the captured home page — direction.md authorised inclusion"
+  
+  stardustVersion: 0.2.0
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Financial Services Technology, Mobile Banking, Payments | Fiserv</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,500;0,700;1,500;1,700&display=swap');
+:root {
+  --color-bg: #ffffff;
+  --color-surface: #f6f7f9;
+  --color-text: #0e0e0e;
+  --color-text-muted: #3c3c3c;
+  --color-text-subtle: #666666;
+  --color-primary: #002754;
+  --color-primary-deep: #001434;
+  --color-secondary: #237cb8;
+  --color-accent: #fb6400;
+  --color-rule: #e3e6ec;
+  --radius-1: 4px;
+  --radius-0: 0px;
+  --shadow-1: 0 4px 12px rgb(0 39 84 / 0.08);
+  --shadow-2: 0 8px 28px rgb(0 39 84 / 0.12);
+  --font-display: 'Fraunces', 'PPFormulaSemiBold', 'Univers Fiserv Light', Georgia, serif;
+  --font-heading: 'Inter', 'Univers Fiserv Light', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', 'Univers Fiserv Regular', system-ui, -apple-system, sans-serif;
+  --container: 1200px;
+  --section-pad: 64px;
+  --gap: 24px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.55;
+  font-size: 16px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+.container{max-width:var(--container); margin:0 auto; padding:0 32px}
+h1,h2,h3,h4,h5{font-family:var(--font-heading); font-weight:300; color:var(--color-text); margin:0; line-height:1.15; letter-spacing:-0.01em}
+h2{font-size:32px}
+h3{font-size:24px}
+p{margin:0}
+a{color:inherit; text-decoration:none}
+.eyebrow{font-family:var(--font-body); font-size:12px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-subtle)}
+.eyebrow--accent{color:var(--color-accent)}
+
+/* ---------- header ---------- */
+header{position:sticky; top:0; z-index:50; background:var(--color-bg); border-bottom:1px solid var(--color-rule)}
+header .bar{display:flex; align-items:center; gap:32px; height:72px}
+.wordmark{font-family:var(--font-heading); font-weight:700; font-size:22px; color:var(--color-accent); letter-spacing:-0.02em; line-height:1}
+.wordmark .dot{display:inline-block; margin-left:1px}
+nav.primary{display:flex; gap:28px; flex:1}
+nav.primary a{font-size:15px; color:var(--color-text); font-weight:500}
+nav.primary a:hover{color:var(--color-accent)}
+.utilities{display:flex; gap:16px; align-items:center}
+.icon-btn{width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; color:var(--color-text-muted); border:0; background:transparent; cursor:pointer; border-radius:var(--radius-1)}
+.icon-btn:hover{background:var(--color-surface)}
+
+/* ---------- regional banner ---------- */
+.regional{background:var(--color-surface); border-bottom:1px solid var(--color-rule); padding:10px 0; font-size:14px; color:var(--color-text-muted)}
+.regional .bar{display:flex; align-items:center; gap:16px; justify-content:center}
+.regional .actions{display:flex; gap:8px}
+.btn-outline{background:transparent; color:var(--color-text); border:1px solid var(--color-rule); padding:6px 14px; border-radius:var(--radius-1); font-size:13px; cursor:pointer}
+.btn-outline:hover{border-color:var(--color-text)}
+.btn-solid{background:var(--color-text); color:#fff; border:1px solid var(--color-text); padding:6px 14px; border-radius:var(--radius-1); font-size:13px; cursor:pointer}
+.dismiss{margin-left:auto; background:transparent; border:0; color:var(--color-text-subtle); cursor:pointer; padding:0 4px}
+
+/* ---------- buttons / links ---------- */
+.ds-btn-primary{
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--color-primary); color:#fff;
+  font-family:var(--font-body); font-weight:600; font-size:16px;
+  padding:14px 24px; border-radius:var(--radius-1); border:0;
+  text-decoration:none; cursor:pointer;
+  transition:background 120ms ease;
+}
+.ds-btn-primary:hover{background:var(--color-primary-deep)}
+.ds-btn-primary:focus-visible{outline:3px solid var(--color-accent); outline-offset:2px}
+.ds-btn-primary--accent{background:var(--color-accent)}
+.ds-btn-primary--accent:hover{background:#d65500}
+.ds-btn-primary--inverted{background:#fff; color:var(--color-primary)}
+.ds-btn-primary--inverted:hover{background:#f0f3f8}
+
+.ds-link-cta{
+  display:inline-flex; align-items:center; gap:8px;
+  color:var(--color-text); font-weight:600;
+  border-bottom:1px solid var(--color-text);
+  padding:0 0 2px 0; transition:all 120ms ease;
+}
+.ds-link-cta:hover{color:var(--color-accent); border-color:var(--color-accent)}
+.ds-link-cta--inverted{color:#fff; border-color:#fff}
+.ds-link-cta--inverted:hover{color:var(--color-accent); border-color:var(--color-accent)}
+
+/* ---------- HERO (Variant A: proof at the top) ---------- */
+.hero{
+  background: var(--color-primary);
+  color:#fff;
+  position:relative;
+  padding:96px 0 0;
+  overflow:hidden;
+}
+.hero .container{position:relative; z-index:2}
+.hero h1{
+  color:#fff;
+  font-size:clamp(48px, 7vw, 84px);
+  line-height:1.02;
+  font-weight:300;
+  letter-spacing:-0.02em;
+  max-width:14ch;
+  margin:0 0 24px;
+}
+.hero h1 em{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-weight:500;
+  color:var(--color-accent);
+}
+.hero .lede{
+  color:rgb(255 255 255 / 0.78);
+  font-size:20px; line-height:1.55; max-width:60ch; margin:0 0 32px;
+}
+.hero .cta-row{display:flex; gap:16px; flex-wrap:wrap; align-items:center; margin-bottom:80px}
+.proof-tiles{
+  display:grid; grid-template-columns: repeat(4, 1fr); gap:0;
+  border-top:1px solid rgb(255 255 255 / 0.16);
+  margin-top:48px;
+}
+.proof-stat{
+  padding:40px 32px;
+  border-right:1px solid rgb(255 255 255 / 0.16);
+  position:relative;
+}
+.proof-stat:last-child{border-right:0}
+.proof-stat .num{
+  font-family:var(--font-display);
+  font-size:64px; line-height:1; font-weight:500; color:#fff;
+  letter-spacing:-0.02em;
+}
+.proof-stat .num em{font-style:italic; color:var(--color-accent); font-weight:500}
+.proof-stat .label{display:block; margin-top:12px; color:rgb(255 255 255 / 0.7); font-size:14px; line-height:1.4}
+.proof-stat[]{outline:0}
+.proof-stat .ph-flag{display:none}
+
+/* ---------- customer logos ---------- */
+.logos-band{padding:48px 0; background:var(--color-surface)}
+.logos-band .lede{color:var(--color-text-muted); font-size:14px; letter-spacing:.04em; text-align:center; margin-bottom:24px}
+.logo-row{
+  display:grid; grid-template-columns:repeat(7, 1fr); gap:32px; align-items:center;
+}
+.logo-row .lg{
+  font-family:var(--font-display); font-weight:700; font-style:italic; letter-spacing:-0.04em;
+  color:var(--color-text-subtle); font-size:22px; text-align:center;
+  filter:saturate(0); opacity:.75;
+}
+.logo-row .lg.s2{font-family:var(--font-heading); font-weight:700; font-style:normal; font-size:18px; letter-spacing:-0.02em}
+.logo-row .lg.s3{font-family:var(--font-body); font-weight:300; font-style:normal; font-size:18px; letter-spacing:.4em; text-transform:uppercase}
+.logo-row .lg.s4{font-family:var(--font-display); font-weight:500; font-size:20px; letter-spacing:0}
+.logo-row .lg.s5{font-family:var(--font-heading); font-weight:600; font-size:17px}
+.logos-band[] .ph-flag{
+  display:inline-block; font-family:ui-monospace, SFMono-Regular, monospace; font-size:11px;
+  color:var(--color-accent); letter-spacing:.08em;
+  border:1px dashed var(--color-accent); padding:2px 8px; margin-bottom:16px;
+}
+
+/* ---------- section base ---------- */
+.section{padding:var(--section-pad) 0}
+.section h2{font-size:clamp(32px, 4vw, 48px); font-weight:300; letter-spacing:-0.01em; max-width:24ch}
+.section h2 em{font-family:var(--font-display); font-style:italic; color:var(--color-accent); font-weight:500}
+.section .lede{font-size:18px; color:var(--color-text-muted); max-width:60ch; margin-top:16px; line-height:1.55}
+.section-head{margin-bottom:48px; display:flex; justify-content:space-between; align-items:flex-end; gap:32px; flex-wrap:wrap}
+.section--alt{background:var(--color-surface)}
+
+/* ---------- products grid ---------- */
+.products{display:grid; grid-template-columns:repeat(4, 1fr); gap:24px}
+.product-card{
+  background:var(--color-bg); padding:32px; border:1px solid var(--color-rule);
+  display:flex; flex-direction:column; gap:16px; min-height:280px;
+  transition:border-color 120ms ease, transform 120ms ease;
+}
+.product-card:hover{border-color:var(--color-text); transform:translateY(-2px)}
+.product-card .product-name{font-family:var(--font-heading); font-weight:600; font-size:24px; letter-spacing:-0.01em}
+.product-card .product-name em{font-family:var(--font-display); font-weight:500; font-style:italic; color:var(--color-accent)}
+.product-card .desc{color:var(--color-text-muted); font-size:15px; line-height:1.55; flex:1}
+.product-card .badge{display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--color-text-subtle); font-weight:500; letter-spacing:.04em; text-transform:uppercase}
+.product-card .badge::before{content:""; width:6px; height:6px; background:var(--color-accent); border-radius:50%}
+.product-card .ds-link-cta{align-self:flex-start; font-size:14px}
+
+/* ---------- audience grid ---------- */
+.audience{display:grid; grid-template-columns:repeat(4, 1fr); gap:24px}
+.audience-tile{
+  position:relative; min-height:280px; padding:32px;
+  background:var(--color-primary); color:#fff; overflow:hidden;
+  display:flex; flex-direction:column; justify-content:flex-end; gap:8px;
+}
+.audience-tile .bg{
+  position:absolute; inset:0; z-index:0;
+  background-size:cover; background-position:center;
+  filter:saturate(0.7) brightness(0.7);
+  opacity:0.4;
+}
+.audience-tile::before{
+  content:""; position:absolute; inset:0; z-index:1;
+  background: linear-gradient(180deg, rgba(0,39,84,0.4) 0%, rgba(0,39,84,0.95) 80%);
+}
+.audience-tile > *{position:relative; z-index:2}
+.audience-tile h3{color:#fff; font-size:24px; font-weight:300}
+.audience-tile p{color:rgb(255 255 255 / 0.78); font-size:14px; line-height:1.5; min-height:42px}
+.audience-tile .ds-link-cta--inverted{align-self:flex-start; margin-top:8px; font-size:14px}
+
+/* ---------- split institutional ---------- */
+.split{display:grid; grid-template-columns:1fr 1fr; gap:0; align-items:center; min-height:480px}
+.split--reverse > .split-img{order:2}
+.split-img{background-size:cover; background-position:center; min-height:480px}
+.split-copy{padding:64px}
+.split-copy .eyebrow{margin-bottom:16px; display:block}
+.split-copy h2{margin-bottom:16px}
+.split-copy p{font-size:18px; color:var(--color-text-muted); line-height:1.6; margin-bottom:24px; max-width:46ch}
+
+/* ---------- cta band ---------- */
+.cta-band{background:var(--color-primary); color:#fff; padding:80px 0; text-align:center}
+.cta-band h2{color:#fff; font-size:clamp(36px, 5vw, 56px); font-weight:300; max-width:24ch; margin:0 auto}
+.cta-band h2 em{font-family:var(--font-display); font-style:italic; color:var(--color-accent); font-weight:500}
+.cta-band .row{display:flex; gap:16px; justify-content:center; margin-top:32px; flex-wrap:wrap}
+
+/* ---------- footer ---------- */
+footer{background:var(--color-primary-deep); color:rgb(255 255 255 / 0.85); padding:64px 0 32px; font-size:14px; line-height:1.6}
+footer .top{display:grid; grid-template-columns: 280px repeat(4, 1fr); gap:32px; margin-bottom:48px}
+footer .top h4{color:#fff; font-size:14px; font-weight:600; margin:0 0 16px; letter-spacing:.04em; text-transform:uppercase}
+footer ul{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px}
+footer ul a{color:rgb(255 255 255 / 0.75)}
+footer ul a:hover{color:var(--color-accent)}
+footer .brand{color:rgb(255 255 255 / 0.72); font-size:14px}
+footer .brand .wordmark{color:var(--color-accent); font-size:32px; margin-bottom:16px; display:block}
+footer .social{display:flex; gap:12px; margin-top:24px}
+footer .social a{width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; border:1px solid rgb(255 255 255 / 0.25); border-radius:var(--radius-1); color:rgb(255 255 255 / 0.85)}
+footer .social a:hover{border-color:var(--color-accent); color:var(--color-accent)}
+footer .legal{border-top:1px solid rgb(255 255 255 / 0.15); padding-top:24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; color:rgb(255 255 255 / 0.55); font-size:12px}
+footer .legal .links{display:flex; gap:24px}
+
+/* ---------- responsive ---------- */
+@media (max-width: 960px){
+  .proof-tiles{grid-template-columns:repeat(2, 1fr)}
+  .proof-stat{border-bottom:1px solid rgb(255 255 255 / 0.16)}
+  .proof-stat:nth-child(2n){border-right:0}
+  .products{grid-template-columns:repeat(2, 1fr)}
+  .audience{grid-template-columns:repeat(2, 1fr)}
+  .logo-row{grid-template-columns:repeat(3, 1fr); row-gap:16px}
+  .split{grid-template-columns:1fr}
+  .split--reverse > .split-img{order:0}
+  .split-copy{padding:48px 32px}
+  footer .top{grid-template-columns:1fr 1fr}
+  nav.primary{display:none}
+}
+@media (max-width: 560px){
+  :root{--section-pad:48px}
+  .hero{padding:64px 0 0}
+  .hero h1{font-size:44px}
+  .hero .lede{font-size:17px}
+  .proof-tiles{grid-template-columns:1fr}
+  .proof-stat .num{font-size:48px}
+  .audience{grid-template-columns:1fr}
+  .products{grid-template-columns:1fr}
+  .logo-row{grid-template-columns:repeat(2, 1fr)}
+  .container{padding:0 20px}
+  footer .top{grid-template-columns:1fr}
+  .regional .bar{flex-wrap:wrap; justify-content:flex-start}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important; animation:none !important}
+}
+</style>
+</head>
+<body data-variant="A">
+  <!-- =========== HEADER =========== -->
+  <header data-section="header" data-intent="navigation" data-layout="sticky-bar">
+    <div class="container bar">
+      <a href="/" aria-label="Fiserv home" class="wordmark">fiserv<span class="dot">.</span></a>
+      <nav class="primary" aria-label="Primary">
+        <a href="#">Who We Serve</a>
+        <a href="#">Insights</a>
+        <a href="#">About</a>
+        <a href="#">Developers</a>
+        <a href="#">Careers</a>
+      </nav>
+      <div class="utilities">
+        <button class="icon-btn" aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <button class="icon-btn" aria-label="Region"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></button>
+        <a class="ds-btn-primary" href="#" style="padding:10px 18px; font-size:14px">Talk to sales</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========== REGIONAL BANNER =========== -->
+  <div class="regional" data-section="regional-banner" data-intent="geo-switch">
+    <div class="container bar">
+      <span>You may be interested in visiting our local site for relevant content specific to your location.</span>
+      <div class="actions">
+        <button class="btn-outline">Switzerland</button>
+        <button class="btn-solid">Continue</button>
+      </div>
+      <button class="dismiss" aria-label="Dismiss">×</button>
+    </div>
+  </div>
+
+  <!-- =========== HERO =========== -->
+  <section class="hero" data-section="hero" data-intent="value-prop-with-proof" data-layout="full-bleed-navy">
+    <div class="container">
+      <span class="eyebrow eyebrow--accent">2026 · Annual Report</span>
+      <h1>Fiserv moves <em>more</em> than money.</h1>
+      <p class="lede">We power the world's payments and banking infrastructure for 10,000+ financial institutions and 6 million+ merchant locations across 100 countries.</p>
+      <div class="cta-row">
+        <a class="ds-btn-primary ds-btn-primary--accent" href="#">Talk to sales <span aria-hidden="true">→</span></a>
+        <a class="ds-link-cta ds-link-cta--inverted" href="#">See solutions</a>
+      </div>
+
+      <div class="proof-stat">
+          <span class="num"><em>6M</em>+</span>
+          <span class="label">Merchant locations powered by Clover and Carat</span>
+        </div>
+        <div class="proof-stat">
+          <span class="num"><em>$2.6T</em></span>
+          <span class="label">Annual payment volume processed across our network</span>
+        </div>
+        <div class="proof-stat">
+          <span class="num"><em>100</em></span>
+          <span class="label">Countries served, 24×7, in 30+ currencies</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== CUSTOMER LOGO STRIP =========== -->
+  <!-- =========== PRODUCTS =========== -->
+  <!-- =========== AUDIENCES =========== -->
+  
+    <div class="proof-tiles" data-section="proof-tiles" data-intent="value-prop" data-layout="full-bleed-navy">
+      <style scoped>
+        .proof-tiles {
+          padding: clamp(40px, 6vw, 80px) 0;
+          background: var(--color-fg, #002754);
+          color: #ffffff;
+        }
+        .proof-tiles .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); }
+        .proof-tiles .grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 0;
+          border-top: 1px solid rgb(255 255 255 / 0.16);
+          border-bottom: 1px solid rgb(255 255 255 / 0.16);
+        }
+        .proof-tiles .proof-stat {
+          padding: clamp(24px, 3vw, 36px) clamp(16px, 2vw, 28px);
+          border-right: 1px solid rgb(255 255 255 / 0.16);
+        }
+        .proof-tiles .proof-stat:last-child { border-right: 0; }
+        .proof-tiles .proof-stat .num {
+          display: block; font-family: var(--font-display, "SF Pro Display", Inter, system-ui, sans-serif);
+          font-weight: 600; font-size: clamp(40px, 4vw, 56px); letter-spacing: -0.025em; line-height: 1; color: #ffffff;
+        }
+        .proof-tiles .proof-stat .num em { font-style: italic; color: var(--color-accent, #fb6400); font-weight: 500; }
+        .proof-tiles .proof-stat .label { display: block; margin-top: 12px; color: rgb(255 255 255 / 0.7); font-size: 14px; line-height: 1.4; }
+        .proof-tiles .proof-stat[data-placeholder="true"] {
+          outline: 1.5px dashed var(--color-accent, #fb6400); outline-offset: 4px;
+        }
+        .proof-tiles .ph-flag {
+          display: inline-block; margin-top: 6px;
+          font-family: "SF Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em;
+          text-transform: uppercase; color: var(--color-accent, #fb6400);
+        }
+        @media (max-width: 720px) {
+          .proof-tiles .grid { grid-template-columns: repeat(2, 1fr); }
+          .proof-tiles .proof-stat { border-bottom: 1px solid rgb(255 255 255 / 0.16); }
+          .proof-tiles .proof-stat:nth-child(2n) { border-right: 0; }
+        }
+      </style>
+      <div class="container">
+        <div class="grid">
+        <div class="proof-stat" data-placeholder="true" data-placeholder-type="stat">
+          <span class="num"><em>10K</em>+</span>
+          <span class="label">Financial institutions running on Fiserv platforms<br><span class="ph-flag">PLACEHOLDER · public IR data</span></span>
+        </div>
+        <div class="proof-stat" data-placeholder="true" data-placeholder-type="stat">
+          <span class="num"><em>6M</em>+</span>
+          <span class="label">Merchant locations powered by Clover and Carat<br><span class="ph-flag">PLACEHOLDER · public IR data</span></span>
+        </div>
+        <div class="proof-stat" data-placeholder="true" data-placeholder-type="stat">
+          <span class="num"><em>$2.6T</em></span>
+          <span class="label">Annual payment volume processed across our network<br><span class="ph-flag">PLACEHOLDER · public IR data</span></span>
+        </div>
+        <div class="proof-stat" data-placeholder="true" data-placeholder-type="stat">
+          <span class="num"><em>100</em></span>
+          <span class="label">Countries served, 24×7, in 30+ currencies<br><span class="ph-flag">PLACEHOLDER · public IR data</span></span>
+        </div>
+        </div>
+      </div>
+    </div>
+  
+    <section class="logos-band" data-section="customer-logos" data-intent="proof" data-layout="logo-strip" data-placeholder="true" data-placeholder-type="other">
+      <style scoped>
+        .logos-band { padding: clamp(48px, 6vw, 80px) 0; background: #ffffff; color: var(--color-fg, #002754); border-top: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6; position: relative; }
+        .logos-band[data-placeholder="true"] { outline: 1.5px dashed var(--color-accent, #fb6400); outline-offset: -8px; }
+        .logos-band .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); }
+        .logos-band .lede { font-family: var(--font-text, "SF Pro Text", Inter, system-ui, sans-serif); font-size: 14px; line-height: 1.5; color: #3c3c3c; max-width: 56ch; margin: 0 0 28px; }
+        .logos-band .ph-flag { display: inline-block; margin-bottom: 4px; font-family: "SF Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent, #fb6400); }
+        .logos-band .logo-row { display: flex; flex-wrap: wrap; gap: clamp(28px, 4vw, 56px); align-items: center; }
+        .logos-band .lg { font-family: var(--font-display, "SF Pro Display", Inter, system-ui, sans-serif); font-weight: 600; font-size: clamp(20px, 2vw, 28px); letter-spacing: -0.015em; color: #0e0e0e; opacity: 0.7; }
+      </style>
+      <div class="container">
+        <p class="lede"><span class="ph-flag">PLACEHOLDER · illustrative customer wordmarks</span><br>Trusted by the world's largest banks, retailers, fintechs and software providers.</p>
+        <div class="logo-row">
+          <div class="lg">Truist</div>
+          <div class="lg">Wells Fargo</div>
+          <div class="lg">target</div>
+          <div class="lg">PNC</div>
+          <div class="lg">Brex</div>
+          <div class="lg">Block</div>
+          <div class="lg">delta</div>
+        </div>
+      </div>
+    </section>
+  
+    <section class="products-band" data-section="products" data-intent="portfolio" data-layout="grid-4">
+      <style scoped>
+        .products-band { padding: clamp(56px, 8vw, 120px) 0; background: #ffffff; color: var(--color-fg, #002754); }
+        .products-band .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); }
+        .products-band .section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 48px; }
+        .products-band .eyebrow { display: block; font-family: "SF Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent, #fb6400); margin-bottom: 12px; }
+        .products-band h2 { font-family: var(--font-display, "SF Pro Display", Inter, sans-serif); font-weight: 600; font-size: clamp(28px, 3.6vw, 44px); letter-spacing: -0.02em; line-height: 1.1; margin: 0; }
+        .products-band h2 em { font-style: italic; color: var(--color-accent, #fb6400); }
+        .products-band .lede { font-family: var(--font-text, "SF Pro Text", Inter, sans-serif); font-size: 16px; line-height: 1.5; color: #3c3c3c; margin: 0; max-width: 50ch; }
+        .products-band .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .products-band .product-card { display: flex; flex-direction: column; gap: 12px; padding: 24px; background: #f8f9fa; border: 1px solid #e6e6e6; border-radius: 4px; transition: border-color 200ms; }
+        .products-band .product-card[data-placeholder="true"] { outline: 1.5px dashed var(--color-accent, #fb6400); outline-offset: 4px; }
+        .products-band .product-card:hover { border-color: #0e0e0e; transform: translateY(-2px); }
+        .products-band .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: #3c3c3c; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; font-family: "SF Mono", ui-monospace, monospace; }
+        .products-band .badge::before { content: ""; width: 6px; height: 6px; background: var(--color-accent, #fb6400); border-radius: 50%; }
+        .products-band .product-name { font-family: var(--font-display, "SF Pro Display", Inter, sans-serif); font-weight: 600; font-size: 22px; letter-spacing: -0.01em; margin: 0; }
+        .products-band .product-name em { font-style: italic; color: var(--color-accent, #fb6400); font-weight: 500; }
+        .products-band .desc { font-size: 14px; line-height: 1.55; color: #3c3c3c; flex: 1; }
+        .products-band .ds-link-cta { font-family: var(--font-text, "SF Pro Text", Inter, sans-serif); font-size: 13px; color: var(--color-accent, #fb6400); text-decoration: none; align-self: flex-start; border-bottom: 1px solid var(--color-accent, #fb6400); padding-bottom: 1px; }
+        @media (max-width: 960px) {
+          .products-band .section-head { grid-template-columns: 1fr; gap: 16px; }
+          .products-band .products { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 540px) { .products-band .products { grid-template-columns: 1fr; } }
+      </style>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Our products</span>
+            <h2>Every part of the money <em>system</em>, by name.</h2>
+          </div>
+          <p class="lede">Five platforms, one stack. Each runs at scale today — none of them are roadmap.</p>
+        </div>
+        <div class="products" data-placeholder="true">
+        <article class="product-card" data-placeholder="true" data-placeholder-type="other">
+          <span class="badge">Merchant</span>
+          <h3 class="product-name"><em>Clover</em></h3>
+          <p class="desc">All-in-one point-of-sale and business management for 6M+ small and mid-size merchants.</p>
+          <a class="ds-link-cta" href="#">Explore Clover →</a>
+        </article>
+        <article class="product-card" data-placeholder="true" data-placeholder-type="other">
+          <span class="badge">Enterprise</span>
+          <h3 class="product-name"><em>Carat</em></h3>
+          <p class="desc">Omnichannel commerce for global enterprises — one API across in-person, online and emerging rails.</p>
+          <a class="ds-link-cta" href="#">Explore Carat →</a>
+        </article>
+        <article class="product-card" data-placeholder="true" data-placeholder-type="other">
+          <span class="badge">Banking</span>
+          <h3 class="product-name"><em>Finxact</em></h3>
+          <p class="desc">Cloud-native core banking for fintechs and banks launching new programs in weeks, not years.</p>
+          <a class="ds-link-cta" href="#">Explore Finxact →</a>
+        </article>
+        <article class="product-card" data-placeholder="true" data-placeholder-type="other">
+          <span class="badge">Industry</span>
+          <h3 class="product-name"><em>Forum</em></h3>
+          <p class="desc">The annual gathering for the people building the future of money. By invitation, every June.</p>
+          <a class="ds-link-cta" href="#">Explore Forum →</a>
+        </article>
+        </div>
+      </div>
+    </section>
+
+  <section class="section section--alt" data-section="audience-grid" data-intent="buyer-routing">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Who we serve</span>
+          <h2>Pick your <em>seat</em>.</h2>
+        </div>
+        <p class="lede">Four ways into Fiserv. Each is its own world — products, integrations, regulatory posture, support.</p>
+      </div>
+      <div class="audience">
+        <a class="audience-tile" href="#">
+          <div class="bg" style="background-image:url('../current/assets/media/img-34a45c.webp')"></div>
+          <h3>Financial Institutions</h3>
+          <p>Platforms and digital banking solutions for community banks, credit unions and large FIs.</p>
+          <span class="ds-link-cta ds-link-cta--inverted">See solutions →</span>
+        </a>
+        <a class="audience-tile" href="#">
+          <div class="bg" style="background-image:url('../current/assets/media/bg-a89e93.jpg')"></div>
+          <h3>Enterprises</h3>
+          <p>Omnichannel commerce, billing and payments for large merchants, telcos and utilities.</p>
+          <span class="ds-link-cta ds-link-cta--inverted">See solutions →</span>
+        </a>
+        <a class="audience-tile" href="#">
+          <div class="bg" style="background-image:url('../current/assets/media/img-34a45c.webp')"></div>
+          <h3>Fintechs</h3>
+          <p>APIs, sponsorship and connectivity for the technology companies building modern finance.</p>
+          <span class="ds-link-cta ds-link-cta--inverted">See solutions →</span>
+        </a>
+        <a class="audience-tile" href="#">
+          <div class="bg" style="background-image:url('../current/assets/media/bg-a55a8f.jpg')"></div>
+          <h3>Small Businesses</h3>
+          <p>One Clover device, every payment surface — and the back-office to run it all.</p>
+          <span class="ds-link-cta ds-link-cta--inverted">See solutions →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== INSTITUTIONAL: ABOUT =========== -->
+  <section class="split" data-section="about" data-intent="institutional-story" data-layout="50-50-image-text">
+    <div class="split-img" style="background-image:url('../current/assets/media/bg-08d7d2.jpg')" role="img" aria-label="Fiserv signage on the Milwaukee headquarters"></div>
+    <div class="split-copy">
+      <span class="eyebrow">About Fiserv</span>
+      <h2>Moving money. <em>Advancing</em> commerce.</h2>
+      <p>For more than three decades, Fiserv has been the infrastructure beneath the world's payments and banking. We're a Fortune 250 fintech with a single, plain-spoken job: keep the money moving — securely, reliably, at scale.</p>
+      <a class="ds-link-cta" href="#">Read more about Fiserv →</a>
+    </div>
+  </section>
+
+  <!-- =========== INSTITUTIONAL: LIFE AT FISERV =========== -->
+  <section class="split split--reverse" data-section="life" data-intent="employer-brand" data-layout="50-50-image-text-reverse">
+    <div class="split-img" style="background-image:url('../current/assets/media/bg-a89e93.jpg')" role="img" aria-label="Two Fiserv associates in an office"></div>
+    <div class="split-copy">
+      <span class="eyebrow">Life at Fiserv</span>
+      <h2>40,000+ associates. <em>One</em> mission.</h2>
+      <p>We hire engineers, bankers, designers, risk specialists and operators in every region we serve. Every role moves money for someone, somewhere.</p>
+      <a class="ds-link-cta" href="#">Explore careers →</a>
+    </div>
+  </section>
+
+  <!-- =========== CTA BAND =========== -->
+  <section class="cta-band" data-section="cta-band" data-intent="primary-cta-repeat">
+    <div class="container">
+      <h2>Ready to move <em>more</em> than money?</h2>
+      <div class="row">
+        <a class="ds-btn-primary ds-btn-primary--accent" href="#">Talk to sales</a>
+        <a class="ds-link-cta ds-link-cta--inverted" href="#">Read the 2026 annual report</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== FOOTER =========== -->
+  <footer data-section="footer" data-intent="global-footer" data-layout="multi-column">
+    <div class="container">
+      <div class="top">
+        <div class="brand">
+          <span class="wordmark">fiserv<span style="color:var(--color-accent)">.</span></span>
+          Helping clients achieve best-in-class results across every part of the money system.
+          <div class="social" aria-label="Social">
+            <a href="#" aria-label="LinkedIn"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0H5a5 5 0 0 0-5 5v14a5 5 0 0 0 5 5h14a5 5 0 0 0 5-5V5a5 5 0 0 0-5-5ZM8 19H5V8h3v11ZM6.5 6.5a1.75 1.75 0 1 1 0-3.5 1.75 1.75 0 0 1 0 3.5ZM20 19h-3v-5.5c0-3-3-2.75-3 0V19h-3V8h3v1.6c1.4-2.59 6-2.78 6 2.48V19Z"/></svg></a>
+            <a href="#" aria-label="X / Twitter"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.654l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25h6.819l4.713 6.231 5.458-6.231Z"/></svg></a>
+            <a href="#" aria-label="Facebook"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24h11.494v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 0-1.794.715-1.794 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.732 0 1.325-.593 1.325-1.325V1.325C24 .593 23.407 0 22.675 0z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.897 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.897-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4>Solutions</h4>
+          <ul>
+            <li><a href="#">Financial Institutions</a></li>
+            <li><a href="#">Enterprises</a></li>
+            <li><a href="#">Fintechs</a></li>
+            <li><a href="#">Small Businesses</a></li>
+            <li><a href="#">Public Sector</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>About</h4>
+          <ul>
+            <li><a href="#">Who We Are</a></li>
+            <li><a href="#">Executive Leadership</a></li>
+            <li><a href="#">Corporate Social Responsibility</a></li>
+            <li><a href="#">Equal Opportunity</a></li>
+            <li><a href="#">Newsroom</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Investors</h4>
+          <ul>
+            <li><a href="#">Investor Relations</a></li>
+            <li><a href="#">Financial Reports</a></li>
+            <li><a href="#">SEC Filings</a></li>
+            <li><a href="#">Press Releases</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Developers</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Partner support</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="legal">
+        <span>© 2026 Fiserv, Inc. All rights reserved.</span>
+        <span class="links">
+          <a href="#">Privacy Notice</a>
+          <a href="#">Cookie Notice</a>
+          <a href="#">Acceptable Use</a>
+          <a href="#">Terms</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
