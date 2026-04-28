@@ -1,14 +1,14 @@
 {
   "schemaVersion": 2,
   "samples": [
-    "aman",
+    "virginatlantic",
+    "vanguard",
+    "theroadhome",
+    "patagonia",
     "festool",
     "glossier",
-    "oatly",
-    "patagonia",
+    "aman",
     "polestar",
-    "theroadhome",
-    "vanguard",
-    "virginatlantic"
+    "oatly"
   ]
 }
