@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Replatforming, Reimagined — Vision Brief · Variant B</title>
+<style>
+  :root {
+    --ink: #0a1024;
+    --ink-deep: #060a14;
+    --ink-soft: #141b3a;
+    --dust: #f5f0e6;
+    --cream: #f6efe2;
+    --cream-ink: #1a1f38;
+    --dust-72: rgba(245,240,230,0.72);
+    --dust-50: rgba(245,240,230,0.5);
+    --dust-30: rgba(245,240,230,0.3);
+    --dust-15: rgba(245,240,230,0.15);
+    --dust-08: rgba(245,240,230,0.08);
+    --amber: #e8b95e;
+    --amber-light: #ffd98a;
+    --amber-deep: #c9822d;
+
+    --display: "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --text:    "SF Pro Text", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --mono:    "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+
+    --pad: clamp(20px, 4vw, 56px);
+    --maxw: 1180px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--ink-deep);
+    color: var(--dust);
+    font: 15px/1.6 var(--text);
+    font-feature-settings: "ss01", "ss02";
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--amber); color: var(--ink); }
+  a { color: var(--amber); text-decoration: none; }
+
+  .container { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); position: relative; }
+
+  h1, h2, h3, h4 { font-family: var(--display); font-weight: 600; letter-spacing: -0.018em; margin: 0; }
+  h1 { font-size: clamp(60px, 9vw, 108px); line-height: 0.94; letter-spacing: -0.04em; }
+  h2 { font-size: clamp(36px, 4.6vw, 60px); line-height: 1.02; letter-spacing: -0.022em; margin-bottom: 18px; }
+  h3 { font-size: 22px; line-height: 1.3; margin-bottom: 8px; }
+  p { margin: 0 0 18px; line-height: 1.65; max-width: 64ch; }
+  p:last-child { margin-bottom: 0; }
+  em { font-style: italic; }
+  strong { font-weight: 600; }
+  .ital { font-style: italic; color: var(--amber-light); }
+
+  .eyebrow {
+    font: 500 11px/1 var(--mono);
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber);
+    display: inline-block; margin-bottom: 22px;
+  }
+  .eyebrow .num { color: currentColor; opacity: 0.5; margin-right: 8px; }
+
+  /* CORNER HEX CODES (decorative) */
+  .codes {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.32;
+    font: 500 10px/1 var(--mono); letter-spacing: 0.18em; color: currentColor;
+  }
+  .codes span {
+    position: absolute;
+  }
+  .codes .tl { top: 16px; left: var(--pad); }
+  .codes .tr { top: 16px; right: var(--pad); }
+  .codes .bl { bottom: 16px; left: var(--pad); }
+  .codes .br { bottom: 16px; right: var(--pad); }
+
+  /* GROUND ROTATIONS */
+  .ground-ink { background: var(--ink-deep); color: var(--dust); }
+  .ground-ink-soft { background: var(--ink-soft); color: var(--dust); }
+  .ground-dust { background: var(--dust); color: var(--cream-ink); }
+  .ground-dust .eyebrow { color: var(--amber-deep); }
+  .ground-dust h1, .ground-dust h2, .ground-dust h3, .ground-dust h4 { color: var(--cream-ink); }
+  .ground-dust p { color: rgba(26,31,56,0.72); }
+  .ground-dust strong { color: var(--cream-ink); }
+  .ground-dust em.ital, .ground-dust .ital { color: var(--amber-deep); }
+  .ground-dust .codes { color: var(--cream-ink); opacity: 0.18; }
+  .ground-amber { background: var(--amber); color: var(--ink); }
+  .ground-amber .eyebrow { color: var(--ink); opacity: 0.7; }
+  .ground-amber h1, .ground-amber h2 { color: var(--ink); }
+  .ground-amber p { color: rgba(10,16,36,0.78); }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(6,10,20,0.78);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--dust-08);
+  }
+  .nav-row { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  .nav .mark { display: flex; align-items: center; gap: 10px; font: 600 14px/1 var(--display); color: var(--dust); }
+  .nav .meta { font: 500 11px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase; color: var(--dust-50); }
+  .nav .meta .op { color: var(--amber); padding: 0 4px; }
+
+  /* HERO */
+  .hero {
+    position: relative; overflow: hidden;
+    padding: 120px 0 80px;
+    background: radial-gradient(ellipse 90% 60% at 70% 30%, #1a2450 0%, #070c1e 60%, #060a14 100%);
+  }
+  .dust-layer {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      radial-gradient(1.5px 1.5px at 12% 24%, rgba(245,240,230,0.4), transparent 60%),
+      radial-gradient(1px 1px at 88% 12%, rgba(245,240,230,0.35), transparent 60%),
+      radial-gradient(1.3px 1.3px at 22% 82%, rgba(245,240,230,0.3), transparent 60%),
+      radial-gradient(1px 1px at 72% 78%, rgba(245,240,230,0.38), transparent 60%),
+      radial-gradient(0.8px 0.8px at 50% 10%, rgba(245,240,230,0.26), transparent 60%),
+      radial-gradient(0.9px 0.9px at 6% 58%, rgba(245,240,230,0.28), transparent 60%),
+      radial-gradient(1.2px 1.2px at 94% 54%, rgba(245,240,230,0.33), transparent 60%),
+      radial-gradient(0.7px 0.7px at 34% 48%, rgba(245,240,230,0.22), transparent 60%),
+      radial-gradient(0.8px 0.8px at 64% 36%, rgba(245,240,230,0.24), transparent 60%);
+  }
+  /* Cursor-following star particle */
+  .cursor-star {
+    position: fixed; pointer-events: none; z-index: 100;
+    width: 10px; height: 10px; opacity: 0.9;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.4s ease;
+    mix-blend-mode: screen;
+  }
+
+  .hero h1 .word { display: inline-block; }
+  .hero h1 .word.r { color: var(--amber); font-style: italic; }
+
+  .hero .lede {
+    margin-top: 28px;
+    font-family: var(--display); font-size: clamp(20px, 2.2vw, 28px); line-height: 1.4; color: var(--dust);
+    max-width: 40ch; font-weight: 400; letter-spacing: -0.01em;
+  }
+  .hero .lede .hl { background: linear-gradient(180deg, transparent 60%, rgba(232,185,94,0.32) 60%); padding: 0 4px; color: var(--dust); }
+
+  .chiprow { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; align-items: center; }
+  .chip {
+    font: 500 11px/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase;
+    padding: 9px 14px; border: 1px solid var(--dust-15); border-radius: 999px; color: var(--dust-50);
+  }
+  .chip .op { color: var(--amber); padding: 0 6px; }
+  .chip.solid { background: var(--amber); color: var(--ink); border-color: var(--amber); }
+  .chip.dust { background: var(--dust); color: var(--ink); border-color: var(--dust); }
+
+  /* BEFORE / AFTER */
+  .ba { margin: 56px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; position: relative; z-index: 2; }
+  .ba figure { margin: 0; transform: rotate(-0.5deg); transition: transform 0.4s ease; }
+  .ba figure + figure { transform: rotate(0.5deg); }
+  .ba figure:hover { transform: rotate(0) scale(1.012); }
+  .ba .frame {
+    aspect-ratio: 16 / 9; overflow: hidden; border-radius: 14px;
+    border: 1px solid var(--dust-15);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+  }
+  .ba .frame img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .ba .frame.before img { filter: saturate(0.8) brightness(0.95); }
+  .ba figcaption {
+    margin-top: 14px;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font: 500 11px/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--dust-50);
+  }
+  .ba figcaption b { color: var(--dust); font-weight: 500; }
+  .ba figcaption .after b { color: var(--amber); }
+
+  /* SECTION BASE */
+  section.b { padding: 120px 0; position: relative; overflow: hidden; }
+  section.b > .container > .codes { z-index: 1; }
+  section.b .head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 36px; }
+  section.b .head .right { font: 500 11px/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: currentColor; opacity: 0.4; }
+
+  /* THREE CARDS */
+  .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+  .three .card {
+    padding: 28px;
+    background: rgba(245,240,230,0.04);
+    border-radius: 18px;
+    border: 1px solid var(--dust-08);
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+  .three .card:hover { transform: translateY(-3px); background: rgba(232,185,94,0.05); border-color: rgba(232,185,94,0.22); }
+  .ground-dust .three .card { background: rgba(26,31,56,0.04); border-color: rgba(26,31,56,0.1); }
+  .ground-dust .three .card:hover { background: rgba(232,185,94,0.1); border-color: rgba(201,130,45,0.4); }
+  .three .card .lbl { font: 500 11px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; }
+  .ground-dust .three .card .lbl { color: var(--amber-deep); }
+  .three .card h4 { font-size: 18px; line-height: 1.3; margin-bottom: 8px; }
+  .three .card p { font-size: 14px; line-height: 1.55; opacity: 0.78; margin: 0; }
+
+  /* PIPELINE */
+  .pipeline {
+    margin-top: 32px; padding: 28px;
+    background: rgba(245,240,230,0.04);
+    border-radius: 20px; border: 1px solid var(--dust-08);
+  }
+  .ground-dust .pipeline { background: rgba(26,31,56,0.05); border-color: rgba(26,31,56,0.1); }
+  .pipeline .lane { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .pipeline .lane:last-child { margin-bottom: 0; }
+  .pipeline .lane-name { font-family: var(--display); font-style: italic; font-size: 14px; width: 92px; flex-shrink: 0; font-weight: 500; }
+  .pipeline .pills { display: flex; gap: 6px; flex: 1; align-items: center; flex-wrap: wrap; }
+  .pipeline .pill {
+    padding: 9px 16px; border: 1px solid var(--dust-15); border-radius: 8px;
+    font: 500 12px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
+    flex: 1 0 auto; text-align: center;
+    transition: background 0.2s, color 0.2s;
+  }
+  .ground-dust .pipeline .pill { border-color: rgba(26,31,56,0.18); }
+  .pipeline .pill:hover { background: var(--amber); color: var(--ink); border-color: var(--amber); cursor: default; }
+  .pipeline .pill.amber { background: var(--amber); color: var(--ink); border-color: var(--amber); flex: 1 1 100%; }
+  .pipeline .arrow { font-family: var(--mono); opacity: 0.5; }
+
+  /* ARCHITECTURE — hover lights up */
+  .arch { margin-top: 36px; padding: 28px; border-radius: 22px; background: var(--ink-deep); border: 1px solid var(--dust-08); }
+  .arch .band {
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(90deg, rgba(232,185,94,0.18), rgba(232,185,94,0.0));
+    border: 1px solid var(--amber); border-radius: 14px;
+    padding: 18px 22px; margin-bottom: 22px;
+  }
+  .arch .band .who { font-family: var(--display); font-size: 24px; font-weight: 600; color: var(--amber-light); letter-spacing: -0.012em; }
+  .arch .band .what { font: 500 11px/1.4 var(--mono); letter-spacing: 0.18em; text-transform: uppercase; color: var(--dust-50); text-align: right; max-width: 56%; }
+  .arch-flow { display: grid; grid-template-columns: 1fr 32px 1fr 32px 1fr; align-items: stretch; }
+  .arch-node {
+    padding: 24px 20px; background: var(--ink); border: 1px solid var(--dust-15); border-radius: 14px; text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s, background 0.3s;
+  }
+  .arch-node:hover {
+    transform: translateY(-4px);
+    border-color: var(--amber);
+    background: linear-gradient(180deg, rgba(232,185,94,0.08), var(--ink));
+    box-shadow: 0 18px 40px rgba(232,185,94,0.12);
+  }
+  .arch-node .role { font: 500 10px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 12px; }
+  .arch-node .name { font-family: var(--display); font-weight: 600; font-size: 22px; color: var(--dust); letter-spacing: -0.015em; margin-bottom: 8px; }
+  .arch-node .desc { font: 13px/1.5 var(--text); color: var(--dust-72); }
+  .arch-node.signal { border-color: var(--amber); background: linear-gradient(180deg, rgba(232,185,94,0.08), rgba(232,185,94,0)); }
+  .arch-arrow { display: flex; align-items: center; justify-content: center; color: var(--amber); font-family: var(--mono); font-size: 18px; }
+  .arch-foot { margin-top: 18px; font: 500 11px/1.5 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--dust-50); text-align: center; }
+  .arch-foot b { color: var(--amber); font-weight: 500; }
+
+  /* STEPS */
+  .steps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px 36px; margin-top: 28px; counter-reset: step; list-style: none; padding: 0; }
+  .steps li { counter-increment: step; padding-left: 48px; position: relative; line-height: 1.55; font-size: 15px; }
+  .steps li::before {
+    content: counter(step); position: absolute; left: 0; top: -3px;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--ink); border: 1.5px solid var(--amber); color: var(--amber);
+    font: 600 13px/30px var(--mono); text-align: center;
+    transition: transform 0.3s, background 0.3s;
+  }
+  .ground-dust .steps li::before { background: var(--cream); border-color: var(--amber-deep); color: var(--amber-deep); }
+  .steps li:hover::before { transform: rotate(180deg) scale(1.05); background: var(--amber); color: var(--ink); }
+  .steps li b { font-weight: 500; }
+
+  /* PLG */
+  .plg .ask {
+    margin: 28px 0;
+    padding: 32px 36px;
+    border-left: 3px solid var(--amber);
+    background: linear-gradient(90deg, rgba(232,185,94,0.1), transparent 70%);
+    font-family: var(--display); font-size: clamp(28px, 3.8vw, 44px); line-height: 1.18; font-style: italic; font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .plg .ask::before { content: '"'; color: var(--amber); margin-right: 6px; font-size: 1.1em; }
+  .plg .ask::after { content: '"'; color: var(--amber); margin-left: 6px; font-size: 1.1em; }
+
+  /* AEM */
+  .aem { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+  .aem .card { padding: 28px; background: rgba(0,0,0,0.18); border: 1px solid rgba(0,0,0,0.18); border-radius: 18px; }
+  .aem .card .pre { font: italic 600 16px/1 var(--display); color: var(--ink); margin-bottom: 6px; }
+  .aem .card .lbl { font: 500 11px/1 var(--mono); letter-spacing: 0.2em; text-transform: uppercase; color: rgba(10,16,36,0.5); margin-bottom: 16px; }
+  .aem .card h3 { font-size: 19px; line-height: 1.3; margin-bottom: 10px; }
+  .aem .card p { font-size: 14px; line-height: 1.55; opacity: 0.78; margin: 0; }
+
+  /* LOGO STRIP */
+  .logos { padding: 80px 0; background: var(--dust); color: var(--cream-ink); }
+  .logos .caption { font: 500 11px/1 var(--mono); letter-spacing: 0.22em; text-transform: uppercase; color: rgba(26,31,56,0.5); margin-bottom: 28px; }
+  .logos .caption .op { color: var(--amber-deep); padding: 0 8px; }
+  .logos .row { display: grid; grid-template-columns: repeat(8, 1fr); gap: 28px; align-items: center; }
+  .logos .row img {
+    max-width: 100%; max-height: 36px; width: auto; height: auto; object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.6;
+    margin: 0 auto; display: block;
+    transition: opacity 0.3s, filter 0.3s, transform 0.3s;
+  }
+  .logos .row img:hover { opacity: 1; filter: grayscale(0); transform: scale(1.06); }
+
+  /* FOOTER */
+  footer { padding: 60px 0 80px; background: var(--ink-deep); color: var(--dust-50); font: 500 12px/1.5 var(--mono); letter-spacing: 0.06em; }
+  footer .row { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
+  footer .item .k { font-size: 10px; color: var(--dust-30); letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 6px; display: block; }
+  footer .item .v { font: 500 14px/1 var(--display); color: var(--dust); }
+  footer .item.right { text-align: right; }
+
+  /* MOTION */
+  .reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 880px) {
+    .three, .aem, .ba { grid-template-columns: 1fr; }
+    .arch-flow { grid-template-columns: 1fr; gap: 12px; }
+    .arch-arrow { transform: rotate(90deg); }
+    .steps { grid-template-columns: 1fr; }
+    .logos .row { grid-template-columns: repeat(4, 1fr); gap: 24px 18px; }
+    .nav .meta { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-row">
+    <div class="mark">
+      <svg viewBox="0 0 24 24" width="22" height="22"><g fill="#e8b95e"><rect x="11" y="3" width="2" height="3"/><rect x="11" y="18" width="2" height="3"/><rect x="3" y="11" width="3" height="2"/><rect x="18" y="11" width="3" height="2"/><rect x="10" y="10" width="4" height="4"/></g></svg>
+      Stardust × Snowflake × Slicc
+    </div>
+    <div class="meta">brief<span class="op">+</span>seed<span class="op">=</span>star</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero ground-ink">
+  <div class="dust-layer"></div>
+  <div class="container" style="position:relative; z-index:2;">
+    <div class="codes">
+      <span class="tl">a3f7</span><span class="tr">c92e</span>
+      <span class="bl">b1d4</span><span class="br">8a0c</span>
+    </div>
+    <span class="eyebrow"><span class="num">00 ·</span>Vision Brief</span>
+    <h1>Replatforming, <span class="word r">reimagined.</span></h1>
+    <p class="lede">A platform migration sold on Core Web Vitals never reaches the exec table. A <span class="hl">brand-presence refresh</span> does. Bundle them — and design fatigue becomes the wedge that turns a tech project into a <em class="ital">board-level rebuild</em>.</p>
+
+    <div class="chiprow">
+      <span class="chip">brief<span class="op">+</span>seed<span class="op">=</span>star</span>
+      <span class="chip">3 pilots <span class="op">·</span> 2 weeks <span class="op">·</span> 0 effort</span>
+      <span class="chip solid">Slicc · PLG end state</span>
+    </div>
+
+    <div class="ba">
+      <figure>
+        <div class="frame before"><img src="images/before-virgin.png" alt="Virgin Atlantic today"/></div>
+        <figcaption><b>Before</b><span>virginatlantic.com today</span></figcaption>
+      </figure>
+      <figure>
+        <div class="frame after"><img src="images/after-virgin.png" alt="Stardust proposal"/></div>
+        <figcaption class="after"><b>After · Stardust</b><span>redesign in hours</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<!-- 01 — ground-ink-soft -->
+<section class="b ground-ink-soft">
+  <div class="container">
+    <div class="codes"><span class="tl">a3f7</span><span class="tr">c92e</span><span class="bl">b1d4</span><span class="br">8a0c</span></div>
+    <div class="head">
+      <span class="eyebrow"><span class="num">01 ·</span>The shift</span>
+      <span class="right">From parts <span style="color:var(--amber);padding:0 6px;">›</span> pages</span>
+    </div>
+    <h2>Web publishing changed <em class="ital">under us</em>.</h2>
+    <p style="font-family:var(--display); font-size:21px; line-height:1.45; color:var(--dust); max-width:50ch; font-weight:400; letter-spacing:-0.01em;">From <em class="ital">assembling pages out of shared parts</em> → to <em class="ital">generating unique pages that share the same rules</em>.</p>
+
+    <div class="three">
+      <div class="card">
+        <div class="lbl">The old deal</div>
+        <h4>Reuse everything. <em class="ital">Build nothing new.</em></h4>
+        <p>Implementation partners shipped a library — Hero, Card Grid, Accordion, Tabs — and marketers composed pages from the shelf. Sites got fast by getting boring. It worked.</p>
+      </div>
+      <div class="card">
+        <div class="lbl">What broke it</div>
+        <h4>The cost of <em class="ital">uniqueness</em> collapsed.</h4>
+        <p>AI agents now generate bespoke, production-quality HTML — scroll-driven motion, cinematic transitions, three-week designs in an hour — from a prompt and a brand guide. And designers know how to drive them.</p>
+      </div>
+      <div class="card">
+        <div class="lbl">Now</div>
+        <h4>The library was a <em class="ital">workaround</em>.</h4>
+        <p>Every page can be its own page again — provided the brand keeps the rules. The library's job moves up a level: from <em class="ital">shape</em> to <em class="ital">guardrails</em>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 — ground-dust -->
+<section class="b ground-dust">
+  <div class="container">
+    <div class="codes"><span class="tl">a3f7</span><span class="tr">c92e</span><span class="bl">b1d4</span><span class="br">8a0c</span></div>
+    <div class="head">
+      <span class="eyebrow"><span class="num">02 ·</span>What brands gain</span>
+      <span class="right">Expressiveness <span style="color:var(--amber-deep);padding:0 6px;">·</span> without losing the brand</span>
+    </div>
+    <h2>Apple-grade craft, <em class="ital">on every page</em>.</h2>
+    <p>The Apple iPad page. The Spotify campaign that moves like a film. The Nike launch that feels nothing like a template. Six-figure projects with months of lead time — that ceiling is gone.</p>
+
+    <div class="three">
+      <div class="card">
+        <div class="lbl">Expressiveness at scale</div>
+        <h4>Every campaign <em class="ital">carries the craft</em>.</h4>
+        <p>Not just hero activations that survive the annual budget. Every market launch, every product moment, every micro-site — distinct, on-brand, deserving of attention.</p>
+      </div>
+      <div class="card">
+        <div class="lbl">No handover</div>
+        <h4>The seam is <em class="ital">gone</em>.</h4>
+        <p>Designers work on the live page. Marketing edits in-context. Translations run in parallel. SEO tunes the real thing. Nothing waits on anything.</p>
+      </div>
+      <div class="card">
+        <div class="lbl">Control moves up a level</div>
+        <h4><em class="ital">Tokens</em>, not templates.</h4>
+        <p>Type, color, spacing, assets — enforced at the platform. AI review at publish: brand, a11y, perf, legal. Markets get latitude; the brand keeps the non-negotiables.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 — ground-ink -->
+<section class="b ground-ink">
+  <div class="container">
+    <div class="codes"><span class="tl">a3f7</span><span class="tr">c92e</span><span class="bl">b1d4</span><span class="br">8a0c</span></div>
+    <div class="head">
+      <span class="eyebrow"><span class="num">03 ·</span>Strategy</span>
+      <span class="right">Sell modernization <span style="color:var(--amber);padding:0 6px;">·</span> not migration</span>
+    </div>
+    <h2>The refresh <em class="ital">is</em> the pitch.</h2>
+    <p style="color:var(--dust-72); font-size: 17px; max-width:64ch;">Brands tire of their visual identity every 12–24 months. The impulse is real — but expensive enough that most settle for staying static between major rebrands. Bundling the refresh with a platform migration changes the math: <strong style="color:var(--dust);">one project, two outcomes</strong> — a modern stack <em class="ital">and</em> a modern identity. Performance, SEO, and LLM visibility ride along by default.</p>
+  </div>
+</section>
+
+<!-- 04 — ground-ink-soft -->
+<section class="b ground-ink-soft">
+  <div class="container">
+    <div class="codes"><span class="tl">a3f7</span><span class="tr">c92e</span><span class="bl">b1d4</span><span class="br">8a0c</span></div>
+    <div class="head">
+      <span class="eyebrow"><span class="num">04 ·</span>Technical solution</span>
+      <span class="right">Stardust <em>generates</em> <span style="color:var(--amber);padding:0 6px;">·</span> Snowflake <em>publishes</em></span>
+    </div>
+    <h2>Two tools. <em class="ital">No development</em> in between.</h2>
+
+    <div class="pipeline">
+      <div class="lane">
+        <span class="lane-name">Stardust</span>
+        <div class="pills">
+          <span class="pill">Extract</span><span class="arrow">›</span>
+          <span class="pill">Direct</span><span class="arrow">›</span>
+          <span class="pill">Prototype</span><span class="arrow">›</span>
+          <span class="pill">Migrate</span>
+        </div>
+      </div>
+      <div class="lane">
+        <span class="lane-name">Snowflake</span>
+        <div class="pills">
+          <span class="pill amber">Pixel-perfect onboarding to AEM Edge Delivery — no development</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="three" style="margin-top:32px;">
+      <div class="card">
+        <div class="lbl">Stardust</div>
+        <h4>Generation, with the brand <em class="ital">pinned</em>.</h4>
+        <p>Crawls the live site, diagnoses pitfalls, proposes fresh directions, regenerates every page under a new design system. Palette, typography, voice — pinned, so identity survives.</p>
+      </div>
+      <div class="card">
+        <div class="lbl">Snowflake</div>
+        <h4>Any AI page → editable EDS site.</h4>
+        <p>Drop AI prototypes into a known folder; out comes a publishable EDS site with the authoring stack already wired: in-page editing, scheduling, drafts, edge routing.</p>
+      </div>
+      <div class="card">
+        <div class="lbl">Together</div>
+        <h4>Pixel-perfect, <em class="ital">by construction</em>.</h4>
+        <p>Stardust outputs clean, semantic markup. Snowflake maps it onto Edge Delivery's blocks without a hand-off step. The migration to EDS isn't a step — it's the same artifact, reframed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE — ground-ink -->
+<section class="b ground-ink">
+  <div class="container">
+    <div class="codes"><span class="tl">a3f7</span><span class="tr">c92e</span><span class="bl">b1d4</span><span class="br">8a0c</span></div>
+    <div class="head">
+      <span class="eyebrow"><span class="num">·</span>System at a glance</span>
+      <span class="right">PLG end state</span>
+    </div>
+    <div class="arch">
+      <div class="band">
+        <span class="who">Slicc</span>
+        <span class="what">Browser-native AI agent <span style="color:var(--amber);padding:0 6px;">·</span> orchestration <span style="color:var(--amber);padding:0 6px;">·</span> PLG surface</span>
+      </div>
+      <div class="arch-flow">
+        <div class="arch-node">
+          <div class="role">Generate</div>
+          <div class="name">Stardust</div>
+          <div class="desc">AI design tools regenerate the site against pinned brand</div>
+        </div>
+        <div class="arch-arrow">›</div>
+        <div class="arch-node signal">
+          <div class="role">Wire &amp; author</div>
+          <div class="name">Snowflake</div>
+          <div class="desc">No-dev EDS onboarding + in-page editing, scheduling, drafts</div>
+        </div>
+        <div class="arch-arrow">›</div>
+        <div class="arch-node">
+          <div class="role">Publish</div>
+          <div class="name">AEM Edge Delivery</div>
+          <div class="desc">Performance, SEO, LLM visibility, global delivery</div>
+        </div>
+      </div>
+      <div class="arch-foot">User <b>·</b> "uplift this website" <b>›</b> Slicc loads Stardust + Snowflake skills <b>›</b> deployable EDS site</div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 First steps — ground-dust -->
+<section class="b ground-dust">
+  <div class="container">
+    <div class="codes"><span class="tl">a3f7</span><span class="tr">c92e</span><span class="bl">b1d4</span><span class="br">8a0c</span></div>
+    <div class="head">
+      <span class="eyebrow"><span class="num">05 ·</span>First steps</span>
+      <span class="right">3 brands <span style="color:var(--amber-deep);padding:0 6px;">·</span> 2 weeks <span style="color:var(--amber-deep);padding:0 6px;">·</span> 0 effort</span>
+    </div>
+    <h2>Ship the demo <em class="ital">before</em> the deck.</h2>
+    <ol class="steps">
+      <li><b>Hand-pick three brands</b> across distinct segments — CPG, mobility, hospitality.</li>
+      <li><b>Run Stardust</b> to produce side-by-side before/after previews — without involving the customer.</li>
+      <li><b>Present to brand &amp; marketing leadership.</b> Capture exec response and intent to proceed.</li>
+      <li><b>Convert interested brands</b> into a Snowflake-led migration to AEM Edge Delivery.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 06 PLG — ground-ink-soft -->
+<section class="b ground-ink-soft">
+  <div class="container">
+    <div class="codes"><span class="tl">a3f7</span><span class="tr">c92e</span><span class="bl">b1d4</span><span class="br">8a0c</span></div>
+    <div class="head">
+      <span class="eyebrow"><span class="num">06 ·</span>The PLG end state</span>
+      <span class="right">One prompt <span style="color:var(--amber);padding:0 6px;">·</span> one website</span>
+    </div>
+    <h2>Collapse the pipeline into <em class="ital">a sentence</em>.</h2>
+    <div class="plg">
+      <p style="color:var(--dust-72); font-size: 17px; max-width:64ch;"><strong>Slicc</strong> — a browser-native AI agent — loads Stardust and Snowflake as skills. The user opens Slicc, points it at a URL, and asks:</p>
+      <div class="ask">uplift this website.</div>
+      <p style="color:var(--dust-72); font-size: 17px; max-width:64ch;">What comes back is a working EDS site that looks better than the original. <strong>No discovery call. No design brief. No developer in the loop.</strong></p>
+      <p style="color:var(--dust-50); font-size: 14px; font-family: var(--mono); letter-spacing:0.06em; max-width:64ch; margin-top:16px;">→ The pilot is the wedge. This is the motion that scales it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 07 AEM — ground-amber -->
+<section class="b ground-amber">
+  <div class="container">
+    <div class="codes"><span class="tl">a3f7</span><span class="tr">c92e</span><span class="bl">b1d4</span><span class="br">8a0c</span></div>
+    <div class="head">
+      <span class="eyebrow"><span class="num">07 ·</span>Why this matters for AEM</span>
+      <span class="right">Two layers of value <span style="padding:0 6px;">·</span> one urgency</span>
+    </div>
+    <h2>Pipeline today. <em class="ital">Product</em> tomorrow.</h2>
+
+    <div class="aem">
+      <div class="card">
+        <div class="pre">Perceived value</div>
+        <div class="lbl">In presales</div>
+        <h3>A demo, not a deck.</h3>
+        <p>A Stardust before/after lets AEM walk into brand exec rooms with something tangible — <em>your site, redesigned</em>. Conversations move up the org; deals close on the strength of one screen.</p>
+      </div>
+      <div class="card">
+        <div class="pre">Real value</div>
+        <div class="lbl">In production</div>
+        <h3>Time-to-launch collapses.</h3>
+        <p>When a customer commits, the same pipeline produces a deployable EDS site. The cost-to-migrate story becomes credible. Shorter sales cycles <em>and</em> faster onboarding both compound into AEM growth.</p>
+      </div>
+      <div class="card">
+        <div class="pre">Why fast</div>
+        <div class="lbl">MVP first</div>
+        <h3>The thesis is unproven until customers respond.</h3>
+        <p>Get to MVP quickly, run it with a handful of selected brands, and learn how the idea is received before scaling into the full PLG product.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<section class="logos">
+  <div class="container">
+    <div class="caption">Already redesigned with Stardust <span class="op">·</span> across segments</div>
+    <div class="row">
+      <img src="logos/glossier.png" alt="Glossier"/>
+      <img src="logos/patagonia.png" alt="Patagonia"/>
+      <img src="logos/polestar.png" alt="Polestar"/>
+      <img src="logos/oatly.png" alt="Oatly"/>
+      <img src="logos/virginatlantic.png" alt="Virgin Atlantic"/>
+      <img src="logos/aman.png" alt="Aman"/>
+      <img src="logos/vanguard.png" alt="Vanguard"/>
+      <img src="logos/festool.png" alt="Festool"/>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container row">
+    <div class="item">
+      <span class="k">Stardust · live examples</span>
+      <span class="v">paolomoz.github.io/stardust-2</span>
+    </div>
+    <div class="item">
+      <span class="k">Snowflake · repo</span>
+      <span class="v">github.com/ai-ecoverse/snowflake</span>
+    </div>
+    <div class="item right">
+      <span class="k">Slicc · repo</span>
+      <span class="v">github.com/ai-ecoverse/slicc</span>
+    </div>
+  </div>
+</footer>
+
+<svg class="cursor-star" viewBox="0 0 12 12" id="cstar"><g fill="#e8b95e"><rect x="5" y="0" width="2" height="3"/><rect x="5" y="9" width="2" height="3"/><rect x="0" y="5" width="3" height="2"/><rect x="9" y="5" width="3" height="2"/><rect x="4" y="4" width="4" height="4"/></g></svg>
+
+<script>
+  const io = new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }})}, { threshold: 0.18 });
+  document.querySelectorAll('section.b > .container > *, .ba, .pipeline, .arch, .logos .row').forEach(el=>{ el.classList.add('reveal'); io.observe(el); });
+
+  // Cursor-following star — only on hero/pointer-fine devices
+  const star = document.getElementById('cstar');
+  if (window.matchMedia('(pointer: fine)').matches) {
+    let x=0,y=0,tx=0,ty=0;
+    document.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
+    function frame() { x += (tx-x)*0.12; y += (ty-y)*0.12; star.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`; requestAnimationFrame(frame); }
+    frame();
+  } else {
+    star.style.display = 'none';
+  }
+</script>
+
+</body>
+</html>

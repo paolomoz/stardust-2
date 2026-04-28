@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Replatforming, Reimagined — Vision Brief · Variant C</title>
+<style>
+  :root {
+    --ink: #0a1024;
+    --ink-deep: #060a14;
+    --ink-soft: #141b3a;
+    --dust: #f5f0e6;
+    --cream: #f6efe2;
+    --cream-ink: #1a1f38;
+    --dust-72: rgba(245,240,230,0.72);
+    --dust-50: rgba(245,240,230,0.5);
+    --dust-30: rgba(245,240,230,0.3);
+    --dust-15: rgba(245,240,230,0.15);
+    --dust-08: rgba(245,240,230,0.08);
+    --amber: #e8b95e;
+    --amber-light: #ffd98a;
+    --amber-deep: #c9822d;
+
+    --display: "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --text:    "SF Pro Text", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --mono:    "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+
+    --pad: clamp(20px, 4vw, 64px);
+    --maxw: 1320px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--ink-deep); color: var(--dust);
+    font: 16px/1.6 var(--text);
+    font-feature-settings: "ss01", "ss02";
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--amber); color: var(--ink); }
+  a { color: var(--amber); text-decoration: none; }
+
+  .container { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); }
+
+  h1, h2, h3 { font-family: var(--display); font-weight: 600; letter-spacing: -0.022em; margin: 0; }
+  h1 { font-size: clamp(72px, 12vw, 168px); line-height: 0.9; letter-spacing: -0.045em; }
+  h2 { font-size: clamp(46px, 7vw, 96px); line-height: 0.96; letter-spacing: -0.032em; }
+  h3 { font-size: clamp(22px, 2vw, 28px); line-height: 1.18; }
+  p { margin: 0 0 20px; line-height: 1.6; max-width: 60ch; }
+  p:last-child { margin-bottom: 0; }
+  em { color: var(--amber); font-style: italic; }
+  strong { color: var(--dust); font-weight: 600; }
+
+  .eyebrow {
+    font: 500 12px/1 var(--mono); letter-spacing: 0.24em; text-transform: uppercase; color: var(--amber);
+    display: inline-block; margin-bottom: 30px;
+  }
+  .eyebrow .num { color: var(--dust-50); margin-right: 12px; }
+
+  /* NAV */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(6,10,20,0.86); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--dust-08);
+  }
+  .nav-row { display: flex; align-items: center; justify-content: space-between; height: 60px; padding: 0 var(--pad); }
+  .nav .mark { display: flex; align-items: center; gap: 10px; font: 600 14px/1 var(--display); color: var(--dust); }
+  .nav .meta { font: 500 11px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase; color: var(--dust-50); }
+  .nav .meta b { color: var(--amber); font-weight: 500; }
+
+  /* HERO — drama */
+  .hero {
+    position: relative; overflow: hidden; padding: 180px 0 80px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    background: radial-gradient(ellipse 90% 70% at 80% 35%, #1a2450 0%, #070c1e 55%, #060a14 100%);
+  }
+  .dust-layer {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      radial-gradient(2px 2px at 8% 14%, rgba(245,240,230,0.5), transparent 60%),
+      radial-gradient(1.5px 1.5px at 90% 8%, rgba(245,240,230,0.4), transparent 60%),
+      radial-gradient(2px 2px at 16% 88%, rgba(245,240,230,0.34), transparent 60%),
+      radial-gradient(1px 1px at 76% 78%, rgba(245,240,230,0.45), transparent 60%),
+      radial-gradient(0.8px 0.8px at 50% 10%, rgba(245,240,230,0.28), transparent 60%),
+      radial-gradient(1.4px 1.4px at 4% 58%, rgba(245,240,230,0.32), transparent 60%),
+      radial-gradient(1.2px 1.2px at 98% 60%, rgba(245,240,230,0.4), transparent 60%),
+      radial-gradient(0.7px 0.7px at 38% 50%, rgba(245,240,230,0.22), transparent 60%),
+      radial-gradient(0.9px 0.9px at 64% 28%, rgba(245,240,230,0.32), transparent 60%);
+  }
+  .hero .codes {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.34;
+    font: 500 12px/1 var(--mono); letter-spacing: 0.2em; color: var(--dust);
+  }
+  .hero .codes span { position: absolute; }
+  .hero .codes .tl { top: 96px; left: var(--pad); }
+  .hero .codes .tr { top: 96px; right: var(--pad); }
+  .hero .codes .bl { bottom: 24px; left: var(--pad); }
+  .hero .codes .br { bottom: 24px; right: var(--pad); }
+
+  .hero .container { position: relative; z-index: 2; }
+  .hero h1 { max-width: 14ch; }
+  .hero h1 .word { display: inline-block; }
+  .hero h1 .ital { color: var(--amber); font-style: italic; }
+  .hero .lede {
+    margin-top: 36px; max-width: 50ch;
+    font-family: var(--display); font-size: clamp(20px, 2.4vw, 30px); line-height: 1.36; color: var(--dust); font-weight: 400; letter-spacing: -0.012em;
+  }
+  .hero .lede .hl { background: linear-gradient(180deg, transparent 60%, rgba(232,185,94,0.34) 60%); padding: 0 4px; }
+
+  .chiprow { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 40px; align-items: center; }
+  .chip {
+    font: 500 11px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 11px 16px; border: 1px solid var(--dust-15); border-radius: 999px; color: var(--dust-50);
+  }
+  .chip .op { color: var(--amber); padding: 0 6px; }
+  .chip.solid { background: var(--amber); color: var(--ink); border-color: var(--amber); font-weight: 600; }
+
+  /* FULL-BLEED BEFORE/AFTER */
+  .ba-bleed {
+    margin-top: 80px;
+    width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border-top: 1px solid var(--dust-08); border-bottom: 1px solid var(--dust-08);
+  }
+  .ba-bleed figure { margin: 0; position: relative; aspect-ratio: 16/9; overflow: hidden; }
+  .ba-bleed figure img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .ba-bleed figure.before img { filter: saturate(0.7) brightness(0.9); }
+  .ba-bleed figure + figure { border-left: 1px solid var(--dust-08); }
+  .ba-bleed figcaption {
+    position: absolute; left: 28px; bottom: 24px; right: 28px;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap;
+    font: 600 12px/1 var(--mono); letter-spacing: 0.22em; text-transform: uppercase; color: var(--dust);
+    text-shadow: 0 2px 16px rgba(0,0,0,0.65);
+  }
+  .ba-bleed figcaption .meta { font-weight: 500; opacity: 0.85; }
+  .ba-bleed figure.after figcaption { color: var(--amber-light); }
+  .ba-bleed .label-tag {
+    position: absolute; top: 24px; left: 28px;
+    font: 600 11px/1 var(--mono); letter-spacing: 0.24em; text-transform: uppercase;
+    background: var(--ink-deep); color: var(--dust); padding: 8px 12px; border-radius: 4px;
+  }
+  .ba-bleed figure.after .label-tag { background: var(--amber); color: var(--ink); }
+
+  /* SECTION BASE — bold, full-bleed grounds, sliding heads */
+  section.b { padding: 160px 0; position: relative; }
+  section.b.dark { background: var(--ink-deep); }
+  section.b.alt { background: var(--ink-soft); }
+  section.b.dust { background: var(--dust); color: var(--cream-ink); }
+  section.b.dust .eyebrow { color: var(--amber-deep); }
+  section.b.dust h2, section.b.dust h3 { color: var(--cream-ink); }
+  section.b.dust p { color: rgba(26,31,56,0.72); }
+  section.b.dust em { color: var(--amber-deep); }
+  section.b.dust strong { color: var(--cream-ink); }
+
+  .head { display: flex; align-items: baseline; justify-content: space-between; gap: 32px; flex-wrap: wrap; margin-bottom: 56px; }
+  .head .right { font: 500 11px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase; color: currentColor; opacity: 0.4; }
+
+  /* THREE-CARD */
+  .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 48px; }
+  .three .card { padding: 36px 32px; border-radius: 22px; background: rgba(245,240,230,0.04); border: 1px solid var(--dust-08); }
+  section.b.dust .three .card { background: rgba(26,31,56,0.04); border-color: rgba(26,31,56,0.12); }
+  .three .card .lbl { font: 500 11px/1 var(--mono); letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 18px; }
+  section.b.dust .three .card .lbl { color: var(--amber-deep); }
+  .three .card h3 { font-size: 22px; line-height: 1.2; margin-bottom: 12px; }
+  .three .card p { font-size: 15px; line-height: 1.6; margin: 0; opacity: 0.8; }
+
+  /* SHIFT — oversized arrow row */
+  .shift-row {
+    margin-top: 64px; padding: 64px 0 32px;
+    border-top: 1px solid var(--dust-08); border-bottom: 1px solid var(--dust-08);
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 40px; align-items: center;
+  }
+  .shift-row .term {
+    font-family: var(--display); font-size: clamp(28px, 4vw, 56px); font-weight: 500; line-height: 1.05; letter-spacing: -0.018em; color: var(--dust);
+  }
+  .shift-row .term.r { text-align: right; }
+  .shift-row .term em { color: var(--amber); font-style: italic; }
+  .shift-row .arrow { font-family: var(--mono); font-size: 64px; color: var(--amber); }
+
+  /* PIPELINE — generously framed */
+  .pipeline { margin-top: 48px; padding: 36px; background: var(--ink); border-radius: 24px; border: 1px solid var(--dust-08); }
+  .pipeline .lane { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+  .pipeline .lane:last-child { margin-bottom: 0; }
+  .pipeline .lane-name { font-family: var(--display); font-style: italic; font-size: 18px; width: 110px; flex-shrink: 0; font-weight: 500; }
+  .pipeline .pills { display: flex; gap: 8px; flex: 1; align-items: center; flex-wrap: wrap; }
+  .pipeline .pill {
+    padding: 12px 20px; border: 1px solid var(--dust-15); border-radius: 10px;
+    font: 600 13px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
+    flex: 1 0 auto; text-align: center;
+  }
+  .pipeline .pill.amber { background: var(--amber); color: var(--ink); border-color: var(--amber); flex: 1 1 100%; padding: 14px 20px; }
+  .pipeline .arrow { font-family: var(--mono); color: var(--amber); }
+
+  /* ARCHITECTURE — hero scene */
+  .arch-scene {
+    margin: 0 calc(50% - 50vw);
+    padding: 120px var(--pad);
+    background: linear-gradient(180deg, var(--ink-deep) 0%, var(--ink) 100%);
+    border-top: 1px solid var(--amber);
+    border-bottom: 1px solid var(--amber);
+    position: relative; overflow: hidden;
+  }
+  .arch-scene::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1.4px 1.4px at 12% 24%, rgba(232,185,94,0.5), transparent 60%),
+      radial-gradient(1px 1px at 88% 18%, rgba(232,185,94,0.4), transparent 60%),
+      radial-gradient(1.6px 1.6px at 22% 78%, rgba(232,185,94,0.34), transparent 60%),
+      radial-gradient(1.2px 1.2px at 78% 84%, rgba(232,185,94,0.4), transparent 60%);
+    pointer-events: none; opacity: 0.6;
+  }
+  .arch-inner { max-width: var(--maxw); margin: 0 auto; position: relative; }
+  .arch-band {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 26px 32px; margin-bottom: 36px;
+    background: var(--ink); border: 1.5px solid var(--amber); border-radius: 18px;
+  }
+  .arch-band .who { font-family: var(--display); font-size: 36px; font-weight: 600; color: var(--amber-light); letter-spacing: -0.018em; }
+  .arch-band .what { font: 500 11px/1.4 var(--mono); letter-spacing: 0.22em; text-transform: uppercase; color: var(--dust-50); text-align: right; max-width: 50%; }
+  .arch-flow { display: grid; grid-template-columns: 1fr 60px 1fr 60px 1fr; align-items: stretch; gap: 0; }
+  .arch-node {
+    padding: 36px 28px; background: var(--ink-soft); border: 1px solid var(--dust-15); border-radius: 18px; text-align: center;
+  }
+  .arch-node .role { font: 500 11px/1 var(--mono); letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber); margin-bottom: 18px; }
+  .arch-node .name { font-family: var(--display); font-weight: 600; font-size: 30px; color: var(--dust); letter-spacing: -0.02em; margin-bottom: 12px; }
+  .arch-node .desc { font: 14px/1.55 var(--text); color: var(--dust-72); }
+  .arch-node.signal { border-color: var(--amber); background: linear-gradient(180deg, rgba(232,185,94,0.12), rgba(232,185,94,0)); }
+  .arch-arrow { display: flex; align-items: center; justify-content: center; color: var(--amber); font-family: var(--mono); font-size: 36px; }
+  .arch-foot { margin-top: 32px; font: 500 12px/1.6 var(--mono); letter-spacing: 0.18em; text-transform: uppercase; color: var(--dust-50); text-align: center; }
+  .arch-foot b { color: var(--amber); font-weight: 500; }
+
+  /* STEPS — bold numerals */
+  .steps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px 48px; margin-top: 48px; counter-reset: step; list-style: none; padding: 0; }
+  .steps li { counter-increment: step; position: relative; padding-left: 76px; line-height: 1.5; font-size: 17px; min-height: 56px; display: flex; flex-direction: column; justify-content: center; }
+  .steps li::before {
+    content: counter(step); position: absolute; left: 0; top: 0;
+    width: 56px; height: 56px;
+    font: 600 28px/56px var(--display); text-align: center; color: var(--ink);
+    background: var(--amber); border-radius: 14px;
+  }
+  .steps li b { font-weight: 500; }
+
+  /* PLG — hero ask */
+  .ask-hero {
+    margin-top: 48px;
+    padding: 80px 56px;
+    background: var(--ink); border-radius: 28px; border: 1px solid var(--amber);
+    position: relative;
+  }
+  .ask-hero .quote {
+    font-family: var(--display); font-size: clamp(48px, 8vw, 96px); line-height: 0.96; font-style: italic; font-weight: 400;
+    color: var(--dust); letter-spacing: -0.025em; margin: 0;
+  }
+  .ask-hero .quote span { color: var(--amber); }
+  .ask-hero .footnote { margin-top: 32px; font: 500 13px/1.5 var(--mono); letter-spacing: 0.18em; text-transform: uppercase; color: var(--dust-50); }
+  .ask-hero .footnote b { color: var(--amber); font-weight: 500; }
+
+  /* AEM — 3 oversized stacked claims */
+  .aem-stack { display: flex; flex-direction: column; gap: 0; margin-top: 56px; border-top: 1px solid var(--dust-08); }
+  .aem-row { display: grid; grid-template-columns: 200px 1fr 1fr; gap: 48px; padding: 56px 0; border-bottom: 1px solid var(--dust-08); align-items: center; }
+  .aem-row .num { font-family: var(--display); font-size: clamp(64px, 9vw, 120px); font-weight: 500; line-height: 0.85; letter-spacing: -0.04em; color: var(--amber); font-style: italic; }
+  .aem-row h3 { font-size: clamp(28px, 3.4vw, 44px); line-height: 1.05; letter-spacing: -0.022em; max-width: 14ch; }
+  .aem-row .body { font-size: 16px; line-height: 1.55; color: var(--dust-72); max-width: 50ch; }
+  .aem-row .lbl { font: 500 11px/1 var(--mono); letter-spacing: 0.22em; text-transform: uppercase; color: var(--dust-50); display: block; margin-bottom: 12px; }
+  .aem-row .lbl b { color: var(--amber); font-weight: 500; }
+
+  /* LOGO STRIP — full-width band */
+  .logos { padding: 80px 0; background: var(--dust); color: var(--cream-ink); }
+  .logos .caption { font: 500 11px/1 var(--mono); letter-spacing: 0.24em; text-transform: uppercase; color: rgba(26,31,56,0.55); margin-bottom: 32px; }
+  .logos .caption b { color: var(--amber-deep); font-weight: 500; }
+  .logos .row { display: grid; grid-template-columns: repeat(8, 1fr); gap: 36px; align-items: center; }
+  .logos .row img {
+    max-width: 100%; max-height: 44px; width: auto; height: auto; object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.55;
+    margin: 0 auto; display: block;
+    transition: opacity 0.3s, filter 0.3s, transform 0.3s;
+  }
+  .logos .row img:hover { opacity: 1; filter: grayscale(0); transform: scale(1.06); }
+
+  /* FOOTER */
+  footer { padding: 80px 0; background: var(--ink-deep); color: var(--dust-50); border-top: 4px solid var(--amber); font: 500 12px/1.5 var(--mono); letter-spacing: 0.06em; }
+  footer .row { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
+  footer .item .k { font-size: 10px; color: var(--dust-30); letter-spacing: 0.24em; text-transform: uppercase; margin-bottom: 8px; display: block; }
+  footer .item .v { font: 600 16px/1 var(--display); color: var(--dust); letter-spacing: -0.005em; }
+  footer .item.right { text-align: right; }
+
+  /* MOTION — slide in from gutter */
+  .reveal { opacity: 0; transform: translateX(-24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in { opacity: 1; transform: translateX(0); }
+  .reveal.r { transform: translateX(24px); }
+  .reveal.up { transform: translateY(20px); }
+  .reveal.in.r, .reveal.in.up { transform: translate(0,0); }
+
+  @media (max-width: 980px) {
+    .three, .arch-flow, .ba-bleed, .aem-row { grid-template-columns: 1fr; }
+    .arch-arrow { transform: rotate(90deg); }
+    .arch-flow { gap: 16px; }
+    .ba-bleed figure + figure { border-left: none; border-top: 1px solid var(--dust-08); }
+    .steps { grid-template-columns: 1fr; }
+    .shift-row { grid-template-columns: 1fr; gap: 16px; }
+    .shift-row .term.r { text-align: left; }
+    .shift-row .arrow { transform: rotate(90deg); }
+    .logos .row { grid-template-columns: repeat(4, 1fr); gap: 28px 18px; }
+    .nav .meta { display: none; }
+    .aem-row { gap: 16px; padding: 36px 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-row">
+    <div class="mark">
+      <svg viewBox="0 0 24 24" width="22" height="22"><g fill="#e8b95e"><rect x="11" y="3" width="2" height="3"/><rect x="11" y="18" width="2" height="3"/><rect x="3" y="11" width="3" height="2"/><rect x="18" y="11" width="3" height="2"/><rect x="10" y="10" width="4" height="4"/></g></svg>
+      Stardust × Snowflake × Slicc
+    </div>
+    <div class="meta">Vision Brief <b>·</b> 2026</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="dust-layer"></div>
+  <div class="codes"><span class="tl">a3f7</span><span class="tr">c92e</span><span class="bl">b1d4</span><span class="br">8a0c</span></div>
+  <div class="container">
+    <span class="eyebrow"><span class="num">00 ·</span>Vision Brief</span>
+    <h1>Replatforming, <span class="word ital">reimagined.</span></h1>
+    <p class="lede">A platform migration sold on Core Web Vitals never reaches the exec table. A <span class="hl">brand-presence refresh</span> does. Bundle them — and design fatigue becomes the wedge that turns a tech project into a <em>board-level rebuild</em>.</p>
+
+    <div class="chiprow">
+      <span class="chip">brief<span class="op">+</span>seed<span class="op">=</span>star</span>
+      <span class="chip">3 pilots <span class="op">·</span> 2 weeks <span class="op">·</span> 0 effort</span>
+      <span class="chip solid">PLG end state · Slicc</span>
+    </div>
+  </div>
+</header>
+
+<!-- FULL-BLEED BEFORE/AFTER -->
+<div class="ba-bleed">
+  <figure class="before">
+    <span class="label-tag">Before</span>
+    <img src="images/before-virgin.png" alt="Virgin Atlantic today"/>
+    <figcaption><span class="meta">virginatlantic.com today</span><span>The deck</span></figcaption>
+  </figure>
+  <figure class="after">
+    <span class="label-tag">After · Stardust</span>
+    <img src="images/after-virgin.png" alt="Stardust proposal"/>
+    <figcaption><span class="meta">redesigned in hours</span><span>The demo</span></figcaption>
+  </figure>
+</div>
+
+<!-- 01 THE SHIFT -->
+<section class="b dark">
+  <div class="container">
+    <div class="head">
+      <span class="eyebrow"><span class="num">01 ·</span>The shift</span>
+      <span class="right">Web publishing changed under us</span>
+    </div>
+    <h2>The library was<br/>a <em>workaround</em>.</h2>
+
+    <div class="shift-row">
+      <div class="term">Assemble pages from <em>shared parts</em>.</div>
+      <div class="arrow">→</div>
+      <div class="term r">Generate <em>unique pages</em> that share the same rules.</div>
+    </div>
+
+    <div class="three">
+      <div class="card">
+        <div class="lbl">The old deal</div>
+        <h3>Reuse everything. Build nothing new.</h3>
+        <p>Implementation partners shipped a library — Hero, Card Grid, Accordion, Tabs. Marketers composed pages from the shelf. Sites got fast by getting boring. It worked.</p>
+      </div>
+      <div class="card">
+        <div class="lbl">What broke it</div>
+        <h3>The cost of uniqueness collapsed.</h3>
+        <p>AI agents now generate bespoke, production-quality HTML — scroll-driven motion, cinematic transitions, three-week designs in an hour — from a prompt and a brand guide.</p>
+      </div>
+      <div class="card">
+        <div class="lbl">Now</div>
+        <h3>Every page can be its own page again.</h3>
+        <p>Provided the brand keeps the rules. The library's job moves up a level — from <em>shape</em> to <em>guardrails</em>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 WHAT BRANDS GAIN -->
+<section class="b alt">
+  <div class="container">
+    <div class="head">
+      <span class="eyebrow"><span class="num">02 ·</span>What brands gain</span>
+      <span class="right">Expressiveness · without losing the brand</span>
+    </div>
+    <h2>Apple-grade craft —<br/>on <em>every</em> page.</h2>
+    <p style="font-size: 19px; max-width: 64ch; color: var(--dust); margin-top: 24px;">The Apple iPad page. The Spotify campaign that moves like a film. The Nike launch that feels nothing like a template. <strong>Six-figure projects with months of lead time — that ceiling is gone.</strong></p>
+
+    <div class="three">
+      <div class="card">
+        <div class="lbl">Expressiveness at scale</div>
+        <h3>Every campaign carries the craft.</h3>
+        <p>Not just hero activations that survive the annual budget. Every market launch, every product moment, every micro-site — distinct, on-brand, deserving of attention.</p>
+      </div>
+      <div class="card">
+        <div class="lbl">No handover</div>
+        <h3>The seam is gone.</h3>
+        <p>Designers work on the live page. Marketing edits in-context. Translations run in parallel. SEO tunes the real thing. Nothing waits on anything.</p>
+      </div>
+      <div class="card">
+        <div class="lbl">Control moves up a level</div>
+        <h3>Tokens, not templates.</h3>
+        <p>Type, color, spacing, assets — enforced at the platform. AI review at publish: brand, a11y, perf, legal. Markets get latitude; the brand keeps the non-negotiables.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 STRATEGY -->
+<section class="b dust">
+  <div class="container">
+    <div class="head">
+      <span class="eyebrow"><span class="num">03 ·</span>Strategy</span>
+      <span class="right">Sell modernization · not migration</span>
+    </div>
+    <h2 style="max-width:14ch;">The refresh<br/><em>is</em> the pitch.</h2>
+    <p style="font-size: 19px; max-width: 60ch; margin-top: 32px; line-height: 1.55;">Brands tire of their visual identity every 12–24 months. The impulse is real — but expensive enough that most settle for staying static between major rebrands. Bundling the refresh with a platform migration changes the math: <strong>one project, two outcomes</strong> — a modern stack <em>and</em> a modern identity.</p>
+    <p style="font-size: 16px; max-width: 60ch; color: rgba(26,31,56,0.6); margin-top: 24px;">Performance, SEO, and LLM visibility ride along by default.</p>
+  </div>
+</section>
+
+<!-- 04 TECHNICAL -->
+<section class="b dark">
+  <div class="container">
+    <div class="head">
+      <span class="eyebrow"><span class="num">04 ·</span>Technical solution</span>
+      <span class="right">Stardust generates · Snowflake publishes</span>
+    </div>
+    <h2>Two tools.<br/><em>No development</em><br/>in between.</h2>
+
+    <div class="pipeline">
+      <div class="lane">
+        <span class="lane-name">Stardust</span>
+        <div class="pills">
+          <span class="pill">Extract</span><span class="arrow">›</span>
+          <span class="pill">Direct</span><span class="arrow">›</span>
+          <span class="pill">Prototype</span><span class="arrow">›</span>
+          <span class="pill">Migrate</span>
+        </div>
+      </div>
+      <div class="lane">
+        <span class="lane-name">Snowflake</span>
+        <div class="pills">
+          <span class="pill amber">Pixel-perfect onboarding to AEM Edge Delivery — no development</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="three">
+      <div class="card">
+        <div class="lbl">Stardust</div>
+        <h3>Generation, with the brand pinned.</h3>
+        <p>Crawls the live site, diagnoses pitfalls, proposes fresh directions, regenerates every page under a new design system. Palette, typography, voice — pinned, so identity survives.</p>
+      </div>
+      <div class="card">
+        <div class="lbl">Snowflake</div>
+        <h3>Any AI page → editable EDS site.</h3>
+        <p>Drop AI prototypes into a known folder; out comes a publishable EDS site with the authoring stack already wired: in-page editing, scheduling, drafts, edge routing.</p>
+      </div>
+      <div class="card">
+        <div class="lbl">Together</div>
+        <h3>Pixel-perfect, by construction.</h3>
+        <p>Stardust outputs clean, semantic markup. Snowflake maps it onto Edge Delivery's blocks without a hand-off step. The migration to EDS isn't a step — it's the same artifact, reframed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE — full-bleed scene -->
+<div class="arch-scene">
+  <div class="arch-inner">
+    <div class="head" style="margin-bottom: 48px;">
+      <span class="eyebrow"><span class="num">·</span>System at a glance</span>
+      <span class="right" style="color: var(--amber); opacity: 0.9;">PLG end state</span>
+    </div>
+    <div class="arch-band">
+      <span class="who">Slicc</span>
+      <span class="what">Browser-native AI agent <span style="color:var(--amber);padding:0 8px;">·</span> orchestration <span style="color:var(--amber);padding:0 8px;">·</span> PLG surface</span>
+    </div>
+    <div class="arch-flow">
+      <div class="arch-node">
+        <div class="role">Generate</div>
+        <div class="name">Stardust</div>
+        <div class="desc">AI design tools regenerate the site against pinned brand</div>
+      </div>
+      <div class="arch-arrow">›</div>
+      <div class="arch-node signal">
+        <div class="role">Wire &amp; author</div>
+        <div class="name">Snowflake</div>
+        <div class="desc">No-dev EDS onboarding + in-page editing, scheduling, drafts</div>
+      </div>
+      <div class="arch-arrow">›</div>
+      <div class="arch-node">
+        <div class="role">Publish</div>
+        <div class="name">AEM Edge Delivery</div>
+        <div class="desc">Performance, SEO, LLM visibility, global delivery</div>
+      </div>
+    </div>
+    <div class="arch-foot">User <b>·</b> "uplift this website" <b>›</b> Slicc loads Stardust + Snowflake skills <b>›</b> deployable EDS site</div>
+  </div>
+</div>
+
+<!-- 05 FIRST STEPS -->
+<section class="b dark">
+  <div class="container">
+    <div class="head">
+      <span class="eyebrow"><span class="num">05 ·</span>First steps</span>
+      <span class="right">3 brands · 2 weeks · 0 effort</span>
+    </div>
+    <h2>Ship the demo<br/><em>before</em> the deck.</h2>
+    <ol class="steps">
+      <li><b>Hand-pick three brands</b> across distinct segments — CPG, mobility, hospitality.</li>
+      <li><b>Run Stardust</b> to produce side-by-side before/after previews — without involving the customer.</li>
+      <li><b>Present to brand &amp; marketing leadership.</b> Capture exec response and intent to proceed.</li>
+      <li><b>Convert interested brands</b> into a Snowflake-led migration to AEM Edge Delivery.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 06 PLG -->
+<section class="b alt">
+  <div class="container">
+    <div class="head">
+      <span class="eyebrow"><span class="num">06 ·</span>The PLG end state</span>
+      <span class="right">One prompt · one website</span>
+    </div>
+    <h2>Collapse the pipeline<br/>into <em>a sentence</em>.</h2>
+    <p style="font-size: 19px; max-width: 64ch; color: var(--dust); margin-top: 32px;"><strong>Slicc</strong> — a browser-native AI agent — loads Stardust and Snowflake as skills. The user opens Slicc, points it at a URL, and asks:</p>
+
+    <div class="ask-hero">
+      <p class="quote">"<span>uplift</span> this website."</p>
+      <div class="footnote"><b>›</b> Working EDS site. No discovery call. No design brief. <b>·</b> No developer in the loop.</div>
+    </div>
+
+    <p style="font-size: 14px; color: var(--dust-50); font-family: var(--mono); letter-spacing: 0.06em; max-width: 64ch; margin-top: 36px; line-height: 1.55;">The pilot is the wedge. This is the motion that scales it.</p>
+  </div>
+</section>
+
+<!-- 07 AEM — oversized stacked claims -->
+<section class="b dark">
+  <div class="container">
+    <div class="head">
+      <span class="eyebrow"><span class="num">07 ·</span>Why this matters for AEM</span>
+      <span class="right">Two layers of value · one urgency</span>
+    </div>
+    <h2>Pipeline today.<br/><em>Product</em> tomorrow.</h2>
+
+    <div class="aem-stack">
+      <div class="aem-row">
+        <div class="num">01</div>
+        <div>
+          <span class="lbl"><b>Perceived value</b> · in presales</span>
+          <h3>A demo, not a deck.</h3>
+        </div>
+        <div class="body">A Stardust before/after lets AEM walk into brand exec rooms with something tangible — <em>your site, redesigned</em>. Conversations move up the org; deals close on the strength of one screen.</div>
+      </div>
+      <div class="aem-row">
+        <div class="num">02</div>
+        <div>
+          <span class="lbl"><b>Real value</b> · in production</span>
+          <h3>Time-to-launch collapses.</h3>
+        </div>
+        <div class="body">When a customer commits, the same pipeline produces a deployable EDS site. The cost-to-migrate story becomes credible. Shorter sales cycles <em>and</em> faster onboarding both compound into AEM growth.</div>
+      </div>
+      <div class="aem-row">
+        <div class="num">03</div>
+        <div>
+          <span class="lbl"><b>Why fast</b> · MVP first</span>
+          <h3>The thesis is unproven until customers respond.</h3>
+        </div>
+        <div class="body">Get to MVP quickly, run it with a handful of selected brands, and learn how the idea is received before scaling into the full PLG product.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<section class="logos">
+  <div class="container">
+    <div class="caption">Already redesigned with Stardust <b>·</b> across segments</div>
+    <div class="row">
+      <img src="logos/glossier.png" alt="Glossier"/>
+      <img src="logos/patagonia.png" alt="Patagonia"/>
+      <img src="logos/polestar.png" alt="Polestar"/>
+      <img src="logos/oatly.png" alt="Oatly"/>
+      <img src="logos/virginatlantic.png" alt="Virgin Atlantic"/>
+      <img src="logos/aman.png" alt="Aman"/>
+      <img src="logos/vanguard.png" alt="Vanguard"/>
+      <img src="logos/festool.png" alt="Festool"/>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container row">
+    <div class="item">
+      <span class="k">Stardust · live examples</span>
+      <span class="v">paolomoz.github.io/stardust-2</span>
+    </div>
+    <div class="item">
+      <span class="k">Snowflake · repo</span>
+      <span class="v">github.com/ai-ecoverse/snowflake</span>
+    </div>
+    <div class="item right">
+      <span class="k">Slicc · repo</span>
+      <span class="v">github.com/ai-ecoverse/slicc</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }})}, { threshold: 0.16 });
+  // Slide-in heads from left, content from right
+  document.querySelectorAll('section.b > .container > .head, .arch-inner > .head').forEach(el=>{ el.classList.add('reveal'); io.observe(el); });
+  document.querySelectorAll('section.b > .container > h2').forEach(el=>{ el.classList.add('reveal'); io.observe(el); });
+  document.querySelectorAll('.three .card, .aem-row, .arch-flow > *, .pipeline, .ask-hero').forEach(el=>{ el.classList.add('reveal','up'); io.observe(el); });
+</script>
+
+</body>
+</html>

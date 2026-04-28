@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 2,
+  "slug": "stardust-whitepaper",
+  "title": "Stardust whitepaper",
+  "tagline": "Three landing-page treatments for the stardust strategy memo itself. Same content, three takes on \"clean, playful, bold\" — each pinned to stardust's own identity (ink/dust/amber, SF Pro + SF Mono).",
+
+  "source": {
+    "register": "brand",
+    "category": "internal · strategy memo · landing"
+  },
+
+  "direction": {
+    "phrase": "Clean, playful, bold.",
+    "movements": [
+      "distinctiveness: familiar SaaS landing → distinctive (singular palette + mono-tagged structure)",
+      "density: generous (editorial, not commerce-grid)",
+      "register: brand · technical (memo, not pitch)",
+      "ground: ink-deep dominant, dust paper as breathing room"
+    ],
+    "seed": {
+      "input": "Stardust|2026-04-28",
+      "decade": "2025-now",
+      "craft": "editorial-technical memo",
+      "register": "brand",
+      "groundFamily": "ink-deep",
+      "pickedBy": "user-constraint (brand-faithful to stardust identity)"
+    },
+    "fontDeck": {
+      "name": "stardust-inherited",
+      "value": "SF Pro Display + SF Mono",
+      "pickedBy": "user-constraint"
+    },
+    "palette": {
+      "name": "stardust",
+      "anchor": "#e8b95e",
+      "pickedBy": "user-constraint",
+      "brandFaithfulInversions": [
+        "ink #0a1024 retained",
+        "amber #e8b95e retained as signal",
+        "dust #f5f0e6 retained as day-ground",
+        "hex format retained"
+      ]
+    },
+    "antiToolbox": { "hits": 0, "justified": 0 }
+  },
+
+  "originalCritique": "There is no live page to critique — this sample is the inverse case. Stardust has a strategy memo to land in front of internal stakeholders, and the question is what \"clean, playful, bold\" looks like when the brand's own identity (ink/amber/dust, SF Pro + SF Mono, mono-tagged structure) is the canvas. <strong>Three variants stratify on one axis each — quiet authority, lively craft, dramatic claim — so the reader can pick which register the memo should occupy.</strong>",
+
+  "variants": [
+    {
+      "id": "A",
+      "name": "Clean",
+      "dominantDimension": "density",
+      "thesis": "Quiet authority. Editorial memo: generous whitespace, modular type, single amber accent per scene, dust particles only in the hero. Restrained motion. The eye finds structure without the page raising its voice.",
+      "fix": "<strong>Quiet authority.</strong> The brief reads as an editorial memo — generous vertical rhythm (110–140px section padding), modular 1.25 type ladder, single amber moment per section. Ground rotates ink-deep → dust paper → ink-deep. Motion is scroll-driven fade-in only; no hover choreography. The structure does the persuading; the page does not raise its voice.",
+      "proposedFile": "proposed-A.html",
+      "isPrimary": true
+    },
+    {
+      "id": "B",
+      "name": "Playful",
+      "dominantDimension": "craft",
+      "thesis": "Lively craft. The brief breaks its grid intentionally — varying section widths, color rotation between scenes, expressive type pairings (display + italic + mono in close proximity), micro-interactions. Cursor-following dust, eyebrow numbers tick, architecture diagram lights up on hover.",
+      "fix": "<strong>Lively craft.</strong> Section ground rotates: every section a different surface color (ink → ink-soft → dust → ink). Display type alternates roman / italic mid-headline. Mono code chips at section corners. The architecture diagram becomes interactive — hover lights up each node. Cursor-following dust particle near the hero; logo strip enters with staggered y-shift. The page feels authored.",
+      "proposedFile": "proposed-B.html"
+    },
+    {
+      "id": "C",
+      "name": "Bold",
+      "dominantDimension": "expressive",
+      "thesis": "Dramatic claim. Oversized 124pt hero, full-bleed gradient ground, before/after at 100vw, scroll-driven section transitions, architecture diagram becomes a hero scene of its own. Three oversized stacked claims for \"why this matters\".",
+      "fix": "<strong>Dramatic claim.</strong> 124pt display hero with dust-particle overlay and ground gradient. Before/after at 100vw — frames touch the page edge. Section headlines slide in from the gutter on scroll; sections snap. The architecture diagram is its own full-width hero scene with Slicc as a luminous band over Stardust → Snowflake → AEM. \"Why this matters for AEM\" renders as three oversized stacked claims, each a scene.",
+      "proposedFile": "proposed-C.html"
+    }
+  ],
+
+  "createdAt": "2026-04-28",
+  "stardustVersion": "0.2.0",
+  "submittedBy": "paolomoz",
+  "license": "Apache-2.0",
+  "thumbnail": "logo.svg"
+}
