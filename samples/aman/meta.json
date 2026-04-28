@@ -72,6 +72,30 @@
       "thesis": "Photogram-craft pushed: full-bleed photographic moments, captured cream as the sole non-photo surface, type set in the photographic register (hairline display, generous tracking).",
       "fix": "<strong>Photogram-craft pushed.</strong> Full-bleed photographic moments replace card-bordered tiles. Captured cream is the sole non-photo surface; everything else is image. Display type sets in the photographic register — hairline weights, generous tracking — and Whitney SSm carries body, restrained. The page reads as photography first, copy second.",
       "proposedFile": "proposed-C.html"
+    },
+    {
+      "id": "D",
+      "name": "v2 · Faithful refresh",
+      "dominantDimension": "tokens",
+      "thesis": "Apply the five identified improvements: hierarchy of scale (hero h2 from 31px to display), uncrop the experience photography from 326px squares, eight \"Discover more\" CTAs become action-specific verbs, hero gets contrast support, repetitive card composition gets rhythm changes.",
+      "fix": "<strong>Apply five identified improvements exactly.</strong> Hero h2 lifts from 31px (only ~2.2× body) to a real display moment. Resort photography uncrops from 326×326 thumbnails. Eight repeating \"Discover more\" CTAs become action-specific verbs. Hero gets contrast support so the headline doesn't drop below WCAG AA on bright frames. The eight near-identical card compositions get rhythm — breakaways, scale changes, rest.",
+      "proposedFile": "proposed-D.html"
+    },
+    {
+      "id": "E",
+      "name": "v2 · Place-led",
+      "dominantDimension": "ia",
+      "thesis": "The brand IS the named index of places. New \"36 places, 20 countries\" typographic strip after the hero; hotels-feature becomes a single full-bleed image; experience eyebrows become places (Java, Argolid, NY) instead of categories; world-of-aman becomes a horizontal-scroll filmstrip.",
+      "fix": "<strong>The brand IS the named index of places.</strong> A new \"36 places, 20 countries\" typographic strip lands after the hero. Hotels-feature collapses to a single full-bleed image instead of an asymmetric pair. Experience eyebrows shift from categories (Coastal, Nature, City) to places (Java, Argolid, NY). The world-of-aman becomes a horizontal-scroll filmstrip. The page reads as a place-index first, a service taxonomy second.",
+      "proposedFile": "proposed-E.html"
+    },
+    {
+      "id": "F",
+      "name": "v2 · Story-led",
+      "dominantDimension": "register",
+      "thesis": "The home as chaptered editorial. Three long-form story spreads replace the categorical experiences grid; hotels-feature folds into Chapter 01; world-of-aman shrinks to a single inline strip; place-index demoted to compact roll-call near the footer. Vocabulary register: \"Chapter / Read the chapter.\"",
+      "fix": "<strong>The home as chaptered editorial.</strong> Three long-form story spreads (alternating left/right composition) replace the 5-up experiences grid. Hotels-feature folds into Chapter 01. World-of-aman shrinks to a single inline strip; the place-index becomes a compact roll-call near the footer. Vocabulary shifts to \"Chapter / Read the chapter.\" Aman publishes editorial under /stories/* — the home finally composes like that.",
+      "proposedFile": "proposed-F.html"
     }
   ],
 

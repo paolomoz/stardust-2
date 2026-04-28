@@ -231,6 +231,30 @@
   }
   .sk-section h3 .num { color: var(--dust-30); font-weight: 500; }
 
+  /* mode toggle (Prototypes / Brand review) */
+  .modesw {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--ink);
+    border: 1px solid var(--dust-15);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .modesw button {
+    background: transparent; border: 0;
+    color: var(--dust-72);
+    padding: 8px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    font: 500 11px/1 var(--mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: all 150ms;
+  }
+  .modesw button:hover { color: var(--dust); }
+  .modesw button.on { background: var(--amber); color: var(--ink); }
+
   /* variant switcher */
   .vsw {
     display: grid;
@@ -411,12 +435,19 @@
 
   <div class="sk-body">
 
-    <section class="sk-section">
+    <section class="sk-section" id="sk-mode" hidden>
+      <div class="modesw" id="modesw" role="tablist" aria-label="View mode">
+        <button class="on" data-mode="prototype">Prototypes</button>
+        <button data-mode="review">Brand review</button>
+      </div>
+    </section>
+
+    <section class="sk-section" id="sk-variants">
       <h3><span class="num">01</span> Variants</h3>
       <div class="vsw" id="vsw"></div>
     </section>
 
-    <section class="sk-section">
+    <section class="sk-section" id="sk-concept">
       <h3><span class="num">02</span> What's broken · how it's fixed</h3>
       <div class="concept" id="concept"></div>
     </section>
@@ -538,17 +569,51 @@
 
     // Default to primary, else first
     const primaryIdx = Math.max(0, variants.findIndex(v => v.isPrimary));
-    activate(primaryIdx === -1 ? 0 : primaryIdx);
+    let activeIdx = primaryIdx === -1 ? 0 : primaryIdx;
+    let mode = 'prototype';
+
+    activate(activeIdx);
+
+    // Brand-review toggle (only when meta.brandReview is set)
+    if (meta.brandReview) {
+      document.getElementById('sk-mode').hidden = false;
+      document.querySelectorAll('#modesw button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          mode = btn.dataset.mode;
+          applyMode();
+        });
+      });
+    }
+
+    function applyMode() {
+      const preview = document.getElementById('preview');
+      const sectVariants = document.getElementById('sk-variants');
+      const sectConcept = document.getElementById('sk-concept');
+      document.querySelectorAll('#modesw button').forEach(b =>
+        b.classList.toggle('on', b.dataset.mode === mode));
+      if (mode === 'review' && meta.brandReview) {
+        preview.src = `${slug}/${meta.brandReview}`;
+        preview.title = `${meta.title || slug} — Brand review`;
+        sectVariants.hidden = true;
+        sectConcept.hidden = true;
+      } else {
+        sectVariants.hidden = false;
+        sectConcept.hidden = false;
+        activate(activeIdx);
+      }
+    }
 
     function activate(i) {
+      activeIdx = i;
       const v = variants[i];
-      // toggle on
       [...vsw.children].forEach((b, j) => b.classList.toggle('on', j === i));
-      // load preview
-      const preview = document.getElementById('preview');
-      const file = `${slug}/${v.proposedFile}`;
-      preview.src = file;
-      preview.title = `${meta.title || slug} — Variant ${v.id} preview`;
+      // load preview only when in prototype mode
+      if (mode === 'prototype') {
+        const preview = document.getElementById('preview');
+        const file = `${slug}/${v.proposedFile}`;
+        preview.src = file;
+        preview.title = `${meta.title || slug} — Variant ${v.id} preview`;
+      }
       // render concept text
       const broken = (meta.originalCritique || '').trim();
       const fix = (v.fix || v.thesis || '').trim();

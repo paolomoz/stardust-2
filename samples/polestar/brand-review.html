@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Polestar (US) — current-state brand review</title>
+<style>
+  /* Render in the brand's own captured colors and fonts (per template spec) */
+  :root {
+    --bg: #ffffff;
+    --surface: #f0f0f0;
+    --signal-white: #ECECE7;
+    --text: #000000;
+    --muted: rgba(0,0,0,0.6);
+    --inv: #ffffff;
+    --graphite: #101820;
+    --iron: #53565a;
+    --stone: #75787b;
+    --warm: #b1b3b3;
+    --ash: #d9d9d6;
+    --orange: #FF7500;
+    --green: #00e676;
+    --red: #e03c31;
+    --type: "Polestar Unica", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: var(--type);
+    color: var(--text);
+    background: var(--bg);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 1180px; margin: 0 auto; padding: 64px 32px 120px; }
+  header.top {
+    border-bottom: 1px solid var(--ash);
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  header.top .brand { font-weight: 400; letter-spacing: -0.01em; }
+  header.top .meta { color: var(--muted); font-size: 13px; }
+  h1 {
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    margin: 0 0 8px;
+  }
+  h2 {
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin: 64px 0 16px;
+    border-top: 1px solid var(--text);
+    padding-top: 24px;
+  }
+  h3 { font-size: 18px; font-weight: 400; letter-spacing: -0.01em; margin: 24px 0 8px; }
+  p { margin: 8px 0; }
+  .muted { color: var(--muted); }
+  .lead { font-size: 18px; max-width: 680px; }
+  .cite {
+    font-size: 12px; color: var(--muted);
+    margin-top: 4px;
+  }
+  .palette { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; margin-top: 16px; }
+  .swatch {
+    aspect-ratio: 1;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 12px;
+    font-size: 11px;
+  }
+  .swatch.dark { color: var(--inv); }
+  .swatch .role { font-size: 11px; opacity: 0.85; }
+  .swatch .val { font-size: 11px; opacity: 0.7; margin-top: 2px; }
+
+  .type-row { display: grid; grid-template-columns: 110px 1fr; gap: 24px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--ash); }
+  .type-row .label { font-size: 12px; color: var(--muted); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  @media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .tension {
+    border: 1px solid var(--text);
+    padding: 20px;
+    margin: 16px 0;
+  }
+  .tension .tag { display: inline-block; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border: 1px solid var(--text); margin-bottom: 8px; }
+  .tension h3 { margin-top: 0; }
+
+  .button { display: inline-block; padding: 16px 24px; font-family: var(--type); font-weight: 400; font-size: 14px; border: 0; cursor: pointer; }
+  .button.primary { background: var(--text); color: var(--inv); }
+  .button.secondary { background: transparent; color: var(--text); box-shadow: 0 0 0 1px var(--text) inset; }
+  .button:hover { box-shadow: 0 2px 0 0 var(--orange), 0 0 0 1px transparent inset; }
+
+  .voice-list { font-family: var(--type); }
+  .voice-list .row { padding: 12px 0; border-bottom: 1px solid var(--ash); display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: baseline; }
+  .voice-list .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .voice-list .text { font-size: 18px; }
+
+  table.cta { border-collapse: collapse; width: 100%; margin: 16px 0; }
+  table.cta th, table.cta td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--ash); font-size: 14px; }
+  table.cta th { font-weight: 400; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  .coverage {
+    background: var(--signal-white);
+    padding: 20px 24px;
+    margin: 24px 0 48px;
+    font-size: 14px;
+  }
+
+  .shot-frame {
+    width: 100%;
+    border: 1px solid var(--ash);
+    background: var(--surface);
+    margin-top: 16px;
+  }
+  .shot-frame img { width: 100%; display: block; }
+
+  .components-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; padding: 16px 0; }
+
+  .pattern-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .pattern-list li { padding: 12px 16px; border: 1px solid var(--ash); }
+  .pattern-list li b { font-weight: 400; }
+  .pattern-list li .why { font-size: 13px; color: var(--muted); display: block; margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">Polestar — current-state review</div>
+  <div class="meta">https://www.polestar.com/us/ · extracted 2026-04-28</div>
+</header>
+
+<main>
+
+<section>
+  <h1>Polestar — current state</h1>
+  <p class="lead muted">Descriptive snapshot of the live Polestar US home page. Used as the input to a brand-faithful redesign. Renders in the brand's own captured palette and typography.</p>
+</section>
+
+<div class="coverage">
+  <strong>Coverage.</strong> Single-page extraction (presales scope: home only). Cross-page aggregation falls back to home-only mode; system-component detection is limited to header / footer / incentive strip identified on the home page itself. Reading guide: each section cites the source artifact in <code>_brand-extraction.json</code>.
+</div>
+
+<section>
+  <h2>Palette</h2>
+  <p class="muted">Aggregated from <code>_brand-extraction.json § palette</code>. The captured site is functionally monochrome — black, white, and five greys — with one accent (<code>#FF7500</code>) used as a 2 px hover underline only. The configurator green and offline red live in CSS but never surface on the home page.</p>
+  <div class="palette">
+    <div class="swatch" style="background:#ffffff; border:1px solid #d9d9d6;"><div class="role">background</div><div class="val">#FFFFFF</div></div>
+    <div class="swatch" style="background:#f0f0f0;"><div class="role">surface</div><div class="val">#F0F0F0</div></div>
+    <div class="swatch dark" style="background:#000000;"><div class="role">text</div><div class="val">#000000</div></div>
+    <div class="swatch dark" style="background:#101820;"><div class="role">graphite</div><div class="val">#101820</div></div>
+    <div class="swatch dark" style="background:#53565a;"><div class="role">iron grey</div><div class="val">#53565A</div></div>
+    <div class="swatch dark" style="background:#75787b;"><div class="role">stone grey</div><div class="val">#75787B</div></div>
+    <div class="swatch" style="background:#d9d9d6;"><div class="role">ash</div><div class="val">#D9D9D6</div></div>
+    <div class="swatch dark" style="background:#FF7500;"><div class="role">focus orange</div><div class="val">#FF7500</div></div>
+    <div class="swatch" style="background:#ECECE7;"><div class="role">signal white</div><div class="val">#ECECE7</div></div>
+    <div class="swatch" style="background:#b1b3b3;"><div class="role">warm grey</div><div class="val">#B1B3B3</div></div>
+    <div class="swatch dark" style="background:#00e676; color:#000;"><div class="role">online green</div><div class="val">#00E676</div></div>
+    <div class="swatch dark" style="background:#e03c31;"><div class="role">offline red</div><div class="val">#E03C31</div></div>
+  </div>
+  <p class="cite">Source: <code>_brand-extraction.json § palette</code>. Greyscale flagged — see Tensions.</p>
+</section>
+
+<section>
+  <h2>Typography</h2>
+  <div class="type-row">
+    <div class="label">110 px / 400</div>
+    <div style="font-size: 110px; line-height: 1; letter-spacing: -0.075rem;">Polestar.</div>
+  </div>
+  <div class="type-row">
+    <div class="label">48 px / 400</div>
+    <div style="font-size: 48px; line-height: 1.05; letter-spacing: -0.04em;">Polestar 4. Choose better.</div>
+  </div>
+  <div class="type-row">
+    <div class="label">30 px / 400</div>
+    <div style="font-size: 30px; line-height: 1.1; letter-spacing: -0.02em;">Polestar 4. Choose better.</div>
+  </div>
+  <div class="type-row">
+    <div class="label">16 px / 400</div>
+    <div style="font-size: 16px; line-height: 1.5;">We are an electric performance car brand, determined to improve the society we live in. We innovate to drive progress and create a better future.</div>
+  </div>
+  <div class="type-row">
+    <div class="label">12 px / 400</div>
+    <div style="font-size: 12px; line-height: 1.4; color: var(--muted);">Combine lease and purchase offers with incentives available until April 30th.</div>
+  </div>
+  <p class="cite">Source: <code>_brand-extraction.json § type</code>. One family (Polestar Unica), one weight (regular). Scale audit: <strong>ad-hoc</strong> — observed sizes 12 / 16 / 30 / 48 / 110, no canonical ratio. The home-page H1 actually renders at 30 px, identical to most H2 / H3 — see Tensions.</p>
+</section>
+
+<section>
+  <h2>Components</h2>
+  <div class="components-row">
+    <button class="button primary">Configure</button>
+    <button class="button secondary">Test drive</button>
+    <a href="#" style="font-family: var(--type); border-bottom: 1px solid var(--text); text-decoration: none; color: var(--text);">Discover Polestar 4</a>
+  </div>
+  <p class="cite">Buttons: primary <code>#000</code> / <code>#fff</code> / 0 px radius / 16 × 24 padding. Secondary 1 px black inset border. Hover: 2 px <code>#FF7500</code> underline via <code>box-shadow</code>.</p>
+</section>
+
+<section>
+  <h2>Motifs</h2>
+  <ul class="pattern-list">
+    <li><b>Sharp rectangles.</b><span class="why">Border-radius effectively 0 px across cards, buttons, surfaces. Pill / 50% reserved for icons and status dots.</span></li>
+    <li><b>Single-typeface single-weight.</b><span class="why">Polestar Unica regular at 12 / 16 / 30 / 48 / 110 px — no italic, no caps treatment, no bold contrast in body copy.</span></li>
+    <li><b>Photography on flat ground.</b><span class="why">Cars on white / pale grey, side-profile, no environment, no people. The vehicles are the only colour on the page.</span></li>
+    <li><b>Promo-strip → mega-nav → product row.</b><span class="why">Commerce-spine IA. Hero is a single model spotlight; row of 4 model cards sits directly below it.</span></li>
+    <li><b>Single orange accent.</b><span class="why"><code>#FF7500</code> as 2 px underline-on-hover. No fill use, no large surface use.</span></li>
+    <li><b>Footer-mega 5-column.</b><span class="why">Explore & buy / Shop / Support / About / Social.</span></li>
+  </ul>
+</section>
+
+<section>
+  <h2>Voice</h2>
+  <div class="voice-list">
+    <div class="row"><div class="label">hero H1</div><div class="text">Polestar 4. Choose better.</div></div>
+    <div class="row"><div class="label">conquest</div><div class="text">Not the status quo. Tesla owners receive $14,000.</div></div>
+    <div class="row"><div class="label">brand H2</div><div class="text">Sustainability.</div></div>
+    <div class="row"><div class="label">brand H3</div><div class="text">Being transparent with the facts.</div></div>
+    <div class="row"><div class="label">primary CTA</div><div class="text">Configure</div></div>
+    <div class="row"><div class="label">brand statement</div><div class="text">We are an electric performance car brand, determined to improve the society we live in.</div></div>
+  </div>
+  <p class="cite">Source: <code>_brand-extraction.json § voice</code>. Tone reading: <strong>bold-direct</strong> — two-word imperatives, full-stop fragments, product-name-as-headline. Volvo-Scandinavian minimalist register.</p>
+</section>
+
+<section>
+  <h2>CTA frequency (home page)</h2>
+  <table class="cta">
+    <thead><tr><th>Label</th><th>Total</th></tr></thead>
+    <tbody>
+      <tr><td>Discover</td><td>4</td></tr>
+      <tr><td>Test drive</td><td>3</td></tr>
+      <tr><td>Shop available cars</td><td>3</td></tr>
+      <tr><td>Shop pre-owned cars</td><td>3</td></tr>
+      <tr><td>Configure</td><td>2</td></tr>
+      <tr><td>Offers</td><td>2</td></tr>
+      <tr><td>View offers</td><td>1</td></tr>
+    </tbody>
+  </table>
+  <p class="cite">Source: <code>_brand-extraction.json § voiceTable.ctaFrequency</code>. The buy-path verbs (<em>Discover / Test drive / Configure / Shop</em>) anchor the IA. <em>Learn more</em> is absent — Polestar refuses the verb.</p>
+</section>
+
+<section>
+  <h2>System components</h2>
+  <ul class="pattern-list">
+    <li><b>site-header (mega-nav)</b><span class="why">Polestar 2 / 3 / 4 / Pre-owned / Shopping tools / Ownership / More — each model name opens a dropdown with Discover / Test drive / Offers / Configure / Shop.</span></li>
+    <li><b>site-footer (mega 5-column)</b><span class="why">Explore & buy / Shop / Support / About / Social with newsletter signup above the legal row.</span></li>
+    <li><b>incentive-strip</b><span class="why">"Combine lease and purchase offers with incentives available until April 30th. View offers." Thin band at the very top of the page.</span></li>
+  </ul>
+</section>
+
+<section>
+  <h2>Tensions</h2>
+  <p class="muted">Detector triggers (run mechanically per <code>brand-review-template.md § Detectors</code>). These are descriptive, not corrective — the redesign target decides whether to keep, soften, or fix.</p>
+
+  <div class="tension">
+    <span class="tag">T-flat-hierarchy</span>
+    <h3>Hero H1 is the same size as section H2 and most H3.</h3>
+    <p>Captured H1 ("Polestar 4. Choose better.") renders at 30 px. Captured H2s ("Polestar 3", "Sustainability.", "Charging") also render at 30 px. There is no display tier in the live page hierarchy — the configurator and cookie modal are the only places where the 48 / 110 px display sizes appear. On a brand whose proprietary face (Polestar Unica) reads beautifully at scale, this is restraint past the point of discipline.</p>
+    <p class="cite">Trigger: heading sizes show no monotonic decrease across H1→H6, and the H1 is within 10% of the H2 mode.</p>
+  </div>
+
+  <div class="tension">
+    <span class="tag">T-monotonous-grid</span>
+    <h3>Four model cards at the same crop, the same size, the same lockup.</h3>
+    <p>The home page presents Polestar 2 / 3 / 4 / Pre-owned as a uniform 4-up row of <strong>535 × 185</strong> wide-thumbnail cards. Each card has the same image aspect, the same title position, the same dual CTA. The page's visual rhythm is one note repeated four times — and each thumbnail is too small to do justice to the studio photography that is Polestar's strongest brand asset.</p>
+    <p class="cite">Trigger: ≥ 3 sibling cards share image dimensions within ± 5 % and identical CTA structure.</p>
+  </div>
+
+  <div class="tension">
+    <span class="tag">T-hero-undersized</span>
+    <h3>The hero treats the brand smaller than its own brand wordmark deserves.</h3>
+    <p>The hero is a full-bleed autoplay video with a 30 px H1 ("Polestar 4. Choose better.") layered over it. Modern luxury auto sites (Porsche, Mercedes EQ, Lucid) routinely deploy 80–120 px display copy in the hero. Polestar's own design system reserves 110 px for the cookie banner and the configurator. The brand is shrinking itself on its own front door.</p>
+    <p class="cite">Trigger: hero H1 size ≤ 32 px on a brand-register page with a full-bleed video / image.</p>
+  </div>
+
+  <div class="tension">
+    <span class="tag">T-greyscale-overtokenised</span>
+    <h3>Five greys in the token sheet, two-and-a-half in actual rendering.</h3>
+    <p><code>#53565a</code> / <code>#75787b</code> / <code>#b1b3b3</code> / <code>#d9d9d6</code> / <code>#ECECE7</code> are all defined as named CSS variables (<code>--ironGrey</code>, <code>--stormGrey</code>, etc.). On screen, four of them sit within ΔE &lt; 5 of each other — a typographer or designer can't distinguish them at typical monitor brightness. The system has more colour tokens than it has colour decisions.</p>
+    <p class="cite">Trigger: ≥ 4 grey tokens with mutual ΔE &lt; 5.</p>
+  </div>
+
+  <div class="tension">
+    <span class="tag">T-buried-purpose</span>
+    <h3>Sustainability is the brand's stated purpose, but the layout treats it as an afterthought.</h3>
+    <p>The brand statement says: "determined to improve the society we live in." The Sustainability section appears below four product cards and a Tesla-conquest banner, in the same thumbnail-card format as Charging — a 535 × 182 illustration with a one-line headline. The IA orders <em>commerce → conquest → product → values</em>. A brand that wants to be sold on values cannot leave them at slot seven.</p>
+    <p class="cite">Trigger: the meta description's primary noun appears below the fold and below at least three commerce blocks.</p>
+  </div>
+
+  <div class="tension">
+    <span class="tag">T-promo-banner-pattern-mismatch</span>
+    <h3>The Tesla-conquest callout uses a SaaS-banner pattern on a luxury-auto page.</h3>
+    <p>"Not the status quo. Tesla owners receive $14,000." is rendered as a small announcement strip under the hero. The MESSAGE is a strong conversion lever for Polestar — the PRESENTATION is a Shopify-store dashboard message. Confidence in the offer would be served by a presentation register that matches the rest of the brand surface.</p>
+    <p class="cite">Trigger: a competitor name in body copy in a thin promo strip with disclaimer footnote.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Image bank (captured URLs)</h2>
+  <p class="muted">Captured from the live page. The redesign reuses these via their public URLs in the same semantic positions (hero / model card / sustainability illustration).</p>
+  <ul style="font-size: 13px; padding-left: 18px; line-height: 1.7;">
+    <li><strong>hero (PS4 launch reel video)</strong> — <code>polestar-release-day-video-key-photo-desktop.png</code> + <code>ps4_launch_10s_16x9_web_2048x1066_251222.mp4</code></li>
+    <li><strong>portfolio: Polestar 3</strong> — <code>polestar-home-portfolio-polestar3-ltr.png</code></li>
+    <li><strong>portfolio: Polestar 2</strong> — <code>polestar-home-portfolio-polestar2-my26-ltr.png</code></li>
+    <li><strong>card thumbnails</strong> — <code>ps2-light.png</code>, <code>ps3-light.png</code>, <code>ps4-light.png</code>, <code>pre-owned.png</code></li>
+    <li><strong>sustainability illustration</strong> — <code>home-brand-lcareport-2026-d.png</code> (city / wind turbines / power lines)</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Captured screenshot</h2>
+  <p class="muted">Full-page screenshot at 1440 × 900, 2× DPR, light scheme.</p>
+  <div class="shot-frame"><img src="assets/screenshots/home.jpg" alt="Polestar US home page screenshot" /></div>
+</section>
+
+</main>
+
+</body>
+</html>

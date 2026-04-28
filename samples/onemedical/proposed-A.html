@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+  stardust:provenance
+  writtenBy: stardust:prototype (Variant A — faithful + improvements)
+  writtenAt: 2026-04-28T16:15:00Z
+  readArtifacts:
+    - stardust/current/pages/home.json
+    - stardust/current/_brand-extraction.json
+    - stardust/prototypes/home-improvements.md
+    - stardust/prototypes/home-a-shape.md
+    - DESIGN.md
+    - DESIGN.json
+  againstDirection: stardust/direction.md (resolvedAt 2026-04-28T16:13:00Z, mode A — brand-faithful)
+  synthesizedInputs: []
+  unsourcedContent: []
+  stardustVersion: 0.2.0
+  variant: A
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OneMedical — refreshed (Variant A · faithful)</title>
+<style>
+:root {
+  /* COLORS — pinned (Mode A) from _brand-extraction.json */
+  --page-bg: #ffffff;
+  --alt-section-bg: #f3eee5;
+  --jade: #005450;
+  --deep-jade: #004d49;
+  --emerald: #068466;
+  --melon: #ffc776;
+  --hero-blue: #0578ff;
+  --ink: #004d49;
+  --ink-muted: #3a4a48;
+  --ink-soft: #5e6e6c;
+  --rule: rgba(0,77,73,0.16);
+  --scrim: rgba(0,77,73,0.55);
+
+  /* TYPE — pinned (Mode A) family stacks */
+  --serif: "GT Super Display", "Times New Roman", "Georgia", serif;
+  --sans: "Ginto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* TYPE SCALE — 1.25 modular (improvement I-1) */
+  --t-h1: 64px;
+  --t-h2: 52px;
+  --t-h3: 32px;
+  --t-h4: 22px;
+  --t-body: 16px;
+  --t-feature: 18px;
+  --t-eyebrow: 13px;
+  --t-nav: 14px;
+
+  /* SPACING — balanced density (≤64 ≥40) */
+  --section-py: 56px;
+  --section-py-tablet: 40px;
+  --section-py-mobile: 32px;
+  --container: 1240px;
+  --gutter: 32px;
+  --gap: 24px;
+
+  /* RADII */
+  --r-pill: 36px;
+  --r-card: 4px;
+  --r-callout: 8px;
+
+  /* MOTION */
+  --ease: cubic-bezier(.2,.7,.2,1);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--sans);
+  font-size: var(--t-body);
+  line-height: 1.55;
+  color: var(--ink-muted);
+  background: var(--page-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--hero-blue); outline-offset: 3px; }
+
+.container { max-width: var(--container); margin: 0 auto; padding-inline: var(--gutter); }
+
+/* Eyebrow utility */
+.eyebrow {
+  font: 600 var(--t-eyebrow)/1.4 var(--sans);
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--emerald);
+  margin: 0;
+}
+
+/* Display headings */
+h1, h2, h3, h4 { font-family: var(--serif); color: var(--ink); margin: 0; }
+h1 { font-size: var(--t-h1); line-height: 1.05; font-weight: 500; letter-spacing: -0.01em; }
+h2 { font-size: var(--t-h2); line-height: 1.08; font-weight: 600; letter-spacing: -0.005em; }
+h3 { font-size: var(--t-h3); line-height: 1.2; font-weight: 500; }
+h4 { font-size: var(--t-h4); line-height: 1.3; font-weight: 600; }
+
+/* Buttons — pill, 36px radius (preserved) */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font: 600 15px/1 var(--sans);
+  padding: 16px 36px;
+  border-radius: var(--r-pill);
+  border: 0; cursor: pointer; text-decoration: none;
+  transition: transform .15s var(--ease), box-shadow .15s var(--ease), background-color .15s var(--ease);
+}
+.btn-primary { background: var(--jade); color: #fff; }
+.btn-primary:hover { background: var(--deep-jade); transform: translateY(-1px); }
+.btn-melon { background: var(--melon); color: var(--deep-jade); }
+.btn-melon:hover { background: #f9bc63; transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--deep-jade); padding: 8px 0; }
+.btn-ghost::after { content: "→"; transition: transform .2s var(--ease); }
+.btn-ghost:hover::after { transform: translateX(3px); }
+
+/* HEADER */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--page-bg);
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s var(--ease), background-color .2s var(--ease);
+}
+.site-header.scrolled { border-bottom-color: var(--rule); }
+.nav-row { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; gap: 24px; }
+.brand-mark { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+.brand-mark svg { display: block; }
+.nav-list { display: flex; align-items: center; gap: 28px; list-style: none; padding: 0; margin: 0; }
+.nav-list a, .nav-list button {
+  background: transparent; border: 0; padding: 8px 0;
+  font: 600 var(--t-nav)/1 var(--sans); color: var(--deep-jade);
+  cursor: pointer; text-decoration: none;
+}
+.nav-list a:hover, .nav-list button:hover { color: var(--jade); }
+.nav-cta { display: flex; align-items: center; gap: 14px; }
+.nav-cta .login { font: 600 var(--t-nav)/1 var(--sans); color: var(--deep-jade); text-decoration: none; }
+.nav-cta .pill { padding: 12px 22px; font-size: 14px; }
+
+/* HERO — improvement I-2 (gradient scrim) */
+.hero {
+  position: relative;
+  min-height: 640px;
+  background: linear-gradient(180deg, #eaf2ff 0%, #d8eaff 100%);
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: url("https://www.onemedical.com/media/images/OM-homepage-hero-transparent-bg-DESKTOP_nKkownV.original.png");
+  background-size: contain;
+  background-position: right center;
+  background-repeat: no-repeat;
+}
+.hero::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 55%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 2; padding: 96px 0 80px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: var(--gap); align-items: center; }
+.hero-copy { max-width: 580px; }
+.hero h1 {
+  color: var(--hero-blue);
+  text-shadow: 0 1px 24px rgba(255,255,255,.7);  /* subtle scrim aid */
+}
+.hero .promo-line {
+  font: 400 16px/1.5 var(--sans);
+  color: var(--deep-jade);
+  margin: 24px 0 28px;
+  max-width: 460px;
+}
+.hero .promo-line strong { font-weight: 600; }
+.hero-cta-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.hero .terms {
+  font: 400 13px/1.5 var(--sans);
+  color: var(--ink-soft);
+  margin: 16px 0 0;
+}
+.hero .terms a { color: var(--jade); }
+
+/* 3-COL PREVIEW — improvement I-4 (5/3 photo-led split) */
+.preview-section { padding: var(--section-py) 0; background: var(--page-bg); }
+.preview-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.preview-card {
+  background: transparent;
+  border-radius: var(--r-card);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  border: 1px solid var(--rule);
+  transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+}
+.preview-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,77,73,0.08); }
+.preview-card .photo {
+  aspect-ratio: 5 / 4;
+  width: 100%;
+  background-color: var(--alt-section-bg);
+  background-size: cover;
+  background-position: center;
+}
+.preview-card .body { padding: 24px 24px 28px; }
+.preview-card .body .eyebrow { color: var(--emerald); margin-bottom: 8px; }
+.preview-card .body h3 { color: var(--deep-jade); margin: 0 0 12px; }
+.preview-card .body p { font: 400 15px/1.5 var(--sans); color: var(--ink-muted); margin: 0 0 16px; }
+.preview-card .body .more { font: 600 14px/1 var(--sans); color: var(--jade); }
+.preview-card .body .more::after { content: " →"; }
+
+/* ROTATING-SERVICES — preserved signature */
+.rotating-section {
+  background: var(--alt-section-bg);
+  padding: 96px 0 88px;
+  text-align: center;
+}
+.rotating-section .lead {
+  font: 600 var(--t-eyebrow)/1.4 var(--sans);
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--emerald);
+  margin: 0 0 12px;
+}
+.rotating-section h2 {
+  color: var(--deep-jade);
+  font-size: 56px;
+  line-height: 1.08;
+  font-weight: 600;
+  max-width: 920px;
+  margin: 0 auto;
+  display: inline;
+}
+.rotator {
+  display: inline-block;
+  position: relative;
+  height: 64px;
+  vertical-align: bottom;
+  overflow: hidden;
+  min-width: 360px;
+  text-align: left;
+}
+.rotator > span {
+  display: block;
+  font-style: italic;
+  color: var(--jade);
+  animation: rotateConditions 16s steps(8) infinite;
+}
+@keyframes rotateConditions {
+  0%, 12.5%   { transform: translateY(0); }
+  15%, 25%    { transform: translateY(-64px); }
+  27.5%, 37.5%{ transform: translateY(-128px); }
+  40%, 50%    { transform: translateY(-192px); }
+  52.5%, 62.5%{ transform: translateY(-256px); }
+  65%, 75%    { transform: translateY(-320px); }
+  77.5%, 87.5%{ transform: translateY(-384px); }
+  90%, 100%   { transform: translateY(-448px); }
+}
+.rotating-section .footer-line { font: 400 15px/1.5 var(--sans); color: var(--ink-muted); margin: 28px 0 0; }
+.rotating-section .footer-line a { color: var(--jade); font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+
+/* ICON GRID — "Fall in love..." */
+.icon-grid-section { padding: var(--section-py) 0; }
+.icon-grid-section .header-row { text-align: center; max-width: 720px; margin: 0 auto 48px; }
+.icon-grid-section h2 { color: var(--deep-jade); margin: 12px 0 0; }
+.icon-grid-section .sub {
+  font: 400 17px/1.55 var(--sans);
+  color: var(--ink-muted);
+  margin: 16px 0 0;
+}
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px 40px;
+}
+.icon-grid .item { text-align: left; }
+.icon-grid .item .icon {
+  width: 56px; height: 56px;
+  background: var(--alt-section-bg);
+  border-radius: 50%;
+  margin-bottom: 16px;
+  display: flex; align-items: center; justify-content: center;
+}
+.icon-grid .item .icon img { max-width: 32px; max-height: 32px; opacity: .9; }
+.icon-grid .item h3 {
+  font: 200 18px/1.55 var(--sans);
+  color: var(--deep-jade);
+  font-family: var(--sans);
+  margin: 0;
+}
+
+/* APP SERVICES BLOCK — phone screenshot */
+.app-section { padding: var(--section-py) 0; background: var(--alt-section-bg); }
+.app-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.app-text h2 { color: var(--deep-jade); margin-bottom: 24px; }
+.app-text ul { padding: 0; margin: 0; list-style: none; }
+.app-text li {
+  font: 400 16px/1.55 var(--sans);
+  color: var(--deep-jade);
+  position: relative; padding: 12px 0 12px 28px;
+  border-top: 1px solid var(--rule);
+}
+.app-text li:last-child { border-bottom: 1px solid var(--rule); }
+.app-text li::before {
+  content: "";
+  position: absolute; left: 0; top: 19px;
+  width: 16px; height: 16px;
+  border: 2px solid var(--jade); border-right: 0; border-top: 0;
+  transform: rotate(-45deg);
+  transform-origin: left top;
+}
+.app-text li::before { width: 14px; height: 7px; left: 0; top: 18px; transform: rotate(-45deg); }
+.app-photo { display: flex; justify-content: center; }
+.app-photo img { max-width: 100%; height: auto; }
+
+/* MEMBERSHIP $99 CALLOUT — improved (single mid-page CTA) */
+.membership-callout {
+  background: linear-gradient(120deg, var(--jade) 0%, var(--deep-jade) 100%);
+  color: #fff;
+  padding: 64px 0;
+}
+.membership-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--gap);
+  align-items: center;
+}
+.membership-callout h3 {
+  font-size: 40px; line-height: 1.15;
+  color: #fff;
+  font-weight: 600;
+}
+.membership-callout p {
+  font: 400 16px/1.55 var(--sans);
+  color: rgba(255,255,255,.85);
+  margin: 12px 0 0;
+  max-width: 540px;
+}
+
+/* VIDEO BLOCK */
+.video-section { padding: var(--section-py) 0; }
+.video-section h2 { color: var(--deep-jade); text-align: center; margin: 0 0 32px; }
+.video-stage {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: #0d2c2a;
+  cursor: pointer;
+}
+.video-stage img { width: 100%; height: 100%; object-fit: cover; opacity: .92; }
+.video-stage::after {
+  content: "▶";
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--jade);
+  background: rgba(255,255,255,.92);
+  width: 88px; height: 88px;
+  border-radius: 50%;
+  margin: auto;
+  font-size: 28px;
+  padding-left: 6px;
+}
+
+/* EMPLOYER STRIP */
+.employer-strip {
+  padding: var(--section-py) 0;
+  background: var(--page-bg);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.employer-grid {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 64px;
+  align-items: center;
+}
+.employer-strip h2 { color: var(--deep-jade); font-size: 36px; line-height: 1.12; }
+.employer-strip .sub { font: 400 15px/1.55 var(--sans); color: var(--ink-muted); margin: 16px 0 20px; max-width: 360px; }
+.logo-row {
+  display: flex; align-items: center; justify-content: space-around;
+  flex-wrap: wrap; gap: 32px;
+}
+.logo-row img { height: 36px; opacity: .9; filter: grayscale(20%); }
+
+/* SIGNUP FOOTER CALLOUT */
+.signup-footer {
+  background: var(--jade);
+  color: #fff;
+  padding: 80px 0;
+  text-align: center;
+}
+.signup-footer h2 { color: #fff; font-size: 56px; }
+.signup-footer .btn-melon { margin-top: 32px; }
+
+/* FOOTER */
+.site-footer {
+  background: #00302d;
+  color: rgba(255,255,255,.78);
+  padding: 56px 0 32px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.site-footer .footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 2fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+.site-footer h4 {
+  font-family: var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  font-size: 12px;
+  color: rgba(255,255,255,.55);
+  font-weight: 600;
+  margin: 0 0 16px;
+}
+.site-footer ul { list-style: none; padding: 0; margin: 0; }
+.site-footer ul li { padding: 4px 0; }
+.site-footer a { color: rgba(255,255,255,.78); text-decoration: none; }
+.site-footer a:hover { color: #fff; }
+.location-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 36px;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+.social-row { display: flex; gap: 16px; margin: 16px 0 0; }
+.social-row a {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background .15s var(--ease);
+}
+.social-row a:hover { background: rgba(255,255,255,.08); }
+.subfooter {
+  border-top: 1px solid rgba(255,255,255,.12);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 12px;
+  color: rgba(255,255,255,.5);
+}
+.subfooter ul { display: flex; flex-wrap: wrap; gap: 16px; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  :root { --section-py: var(--section-py-tablet); }
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero { min-height: 540px; }
+  .hero::before { background-position: right -120px center; opacity: .5; }
+  .preview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .icon-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .app-grid { grid-template-columns: 1fr; }
+  .employer-grid { grid-template-columns: 1fr; }
+  .site-footer .footer-grid { grid-template-columns: 1fr 1fr; }
+  h1 { font-size: 48px; }
+  h2 { font-size: 36px; }
+  .rotating-section h2 { font-size: 40px; }
+  .signup-footer h2 { font-size: 40px; }
+}
+@media (max-width: 640px) {
+  :root { --section-py: var(--section-py-mobile); --gutter: 20px; }
+  .preview-grid { grid-template-columns: 1fr; }
+  .icon-grid { grid-template-columns: 1fr; }
+  .nav-list { display: none; }
+  h1 { font-size: 38px; }
+  h2 { font-size: 30px; }
+  .membership-grid { grid-template-columns: 1fr; }
+  .rotating-section h2 { font-size: 32px; }
+  .rotator { min-width: 0; }
+  .signup-footer h2 { font-size: 32px; }
+}
+</style>
+</head>
+<body data-stardust-page="home" data-stardust-variant="A">
+
+<header class="site-header" data-section="header" data-purpose="navigation">
+  <div class="container nav-row">
+    <a class="brand-mark" href="/" aria-label="One Medical">
+      <svg width="120" height="24" viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <text x="0" y="18" font-family="GT Super Display, Times New Roman, serif" font-size="20" font-weight="600" fill="#005450">One Medical</text>
+      </svg>
+    </a>
+    <ul class="nav-list" role="menubar">
+      <li><button>Locations</button></li>
+      <li><button>For You</button></li>
+      <li><button>For Business</button></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="login" href="https://app.onemedical.com">Log in</a>
+      <a class="btn btn-primary pill" href="https://app.onemedical.com/registration/signup">Sign up</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" data-section="hero" data-purpose="hero">
+  <div class="container hero-inner">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <h1>Comprehensive healthcare just got less painful</h1>
+        <p class="promo-line">Now Amazon Prime members can purchase One Medical membership for <strong>$99/year</strong>.</p>
+        <div class="hero-cta-row">
+          <a class="btn btn-primary" href="https://app.onemedical.com/registration/signup">Get Started</a>
+        </div>
+        <p class="terms">*Purchase terms apply. Already a One Medical member? <a href="#">Apply the Amazon Prime savings.</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="preview-section" data-section="preview-cards" data-purpose="feature-list">
+  <div class="container">
+    <div class="preview-grid">
+
+      <a class="preview-card" href="#" data-component="preview-card">
+        <div class="photo" style="background-image:url('https://www.onemedical.com/media/images/OM_Meditation_0697.original.jpg')"></div>
+        <div class="body">
+          <p class="eyebrow">Mental Health</p>
+          <h3>Care for your mental health</h3>
+          <p>Same-day virtual or in-person visits with providers who listen.</p>
+          <span class="more">Learn more</span>
+        </div>
+      </a>
+
+      <a class="preview-card" href="#" data-component="preview-card">
+        <div class="photo" style="background-image:url('https://www.onemedical.com/media/images/OM_ExamRoom4_2843.original.jpg')"></div>
+        <div class="body">
+          <p class="eyebrow">Annual Wellness</p>
+          <h3>The annual physical, reimagined</h3>
+          <p>Longer appointments, conversations that don't feel rushed.</p>
+          <span class="more">Learn more</span>
+        </div>
+      </a>
+
+      <a class="preview-card" href="#" data-component="preview-card">
+        <div class="photo" style="background-image:url('https://www.onemedical.com/media/images/OM-homepage-AMZ-Pharmacy-thumbnail_4eS3ecY.original.png')"></div>
+        <div class="body">
+          <p class="eyebrow">Amazon Pharmacy</p>
+          <h3>Finally, a pharmacy that really delivers</h3>
+          <p>Refill, ship, and track from inside the One Medical app.</p>
+          <span class="more">Learn more</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="rotating-section" data-section="rotating-services" data-purpose="signature">
+  <div class="container">
+    <p class="lead">Same-day care</p>
+    <h2>Get care today for&nbsp;<span class="rotator" aria-live="polite"><span>
+      sleep issues<br>
+      anxiety<br>
+      back pain<br>
+      menopause<br>
+      heartburn<br>
+      that weird rash<br>
+      knee pain<br>
+      depression
+    </span></span></h2>
+    <p class="footer-line">…and 40+ more conditions, in person or over video. <a href="#">See the full list</a>.</p>
+  </div>
+</section>
+
+<section class="icon-grid-section" data-section="benefits" data-purpose="feature-list">
+  <div class="container">
+    <div class="header-row">
+      <p class="eyebrow">Membership benefits</p>
+      <h2>Fall in love with your doctor's office</h2>
+      <p class="sub">We accept most major health insurance plans for scheduled in-office and remote visits, but we make it faster, easier, and more enjoyable to get care.</p>
+    </div>
+    <div class="icon-grid">
+      <div class="item">
+        <div class="icon"><img src="https://www.onemedical.com/media/images/bookonline_1_aGc4xkt.width-734.png" alt=""></div>
+        <h3>Same/next-day appointments, in person or over video, that start on time</h3>
+      </div>
+      <div class="item">
+        <div class="icon"><img src="https://www.onemedical.com/media/images/sofa-conversation_1.width-734.png" alt=""></div>
+        <h3>Longer appointments so you don't feel rushed</h3>
+      </div>
+      <div class="item">
+        <div class="icon"><img src="https://www.onemedical.com/media/images/Group_163.width-734.png" alt=""></div>
+        <h3>Drop-in lab services at our offices to save you extra trips</h3>
+      </div>
+      <div class="item">
+        <div class="icon"><img src="https://www.onemedical.com/media/images/HomepageServicesRTB_Image_221018_1.width-734.png" alt=""></div>
+        <h3>Covering everything from physicals and chronic care to mental health</h3>
+      </div>
+      <div class="item">
+        <div class="icon"><img src="https://www.onemedical.com/media/images/usa_illo_gQAtRvn.width-734.png" alt=""></div>
+        <h3>Primary care offices in many US cities</h3>
+      </div>
+      <div class="item">
+        <div class="icon"><img src="https://www.onemedical.com/media/images/exceptionalproviders2.width-734.png" alt=""></div>
+        <h3>Compassionate providers who are experts at medicine and caring</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="app-section" data-section="app-services" data-purpose="feature-list">
+  <div class="container">
+    <div class="app-grid">
+      <div class="app-text">
+        <p class="eyebrow">The One Medical app</p>
+        <h2>With the One Medical app you can:</h2>
+        <ul>
+          <li>Get 24/7 on-demand care nationwide via Video Chat at no extra cost</li>
+          <li>Send and receive secure messages with a provider</li>
+          <li>Easily access your health records and care plans</li>
+          <li>Book appointments and get prescriptions renewed</li>
+        </ul>
+      </div>
+      <div class="app-photo">
+        <img src="https://www.onemedical.com/media/images/OM-homepage-block-media-right_1.width-1440.png" alt="One Medical app on a phone">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="membership-callout" data-section="cta-band" data-purpose="cta-band">
+  <div class="container membership-grid">
+    <div>
+      <h3>Membership costs only $99/year.</h3>
+      <p>Same-day visits, longer appointments, and 24/7 virtual care — all included.</p>
+    </div>
+    <a class="btn btn-melon" href="https://app.onemedical.com/registration/signup">Join now</a>
+  </div>
+</section>
+
+<section class="video-section" data-section="video" data-purpose="rich-text">
+  <div class="container">
+    <h2>See what makes One Medical different</h2>
+    <div class="video-stage">
+      <img src="https://embed-ssl.wistia.com/deliveries/61c9e8cb173b73762f255f630040c7a4.webp?image_crop_resized=2470x1388" alt="See what makes One Medical different — video poster">
+    </div>
+  </div>
+</section>
+
+<section class="employer-strip" data-section="employer-benefit" data-purpose="social-proof">
+  <div class="container">
+    <div class="employer-grid">
+      <div>
+        <p class="eyebrow">For business</p>
+        <h2>We're an employee benefit at 11,600+ companies</h2>
+        <p class="sub">Bring better primary care to your team — same-day visits, virtual care, and chronic-condition management.</p>
+        <a class="btn-ghost" href="#">See plans for employers</a>
+      </div>
+      <div class="logo-row">
+        <img src="https://www.onemedical.com/media/images/logo-airbnb.original.jpg" alt="Airbnb">
+        <img src="https://www.onemedical.com/media/images/logo-allbirds.original.png" alt="Allbirds">
+        <img src="https://www.onemedical.com/media/images/logo-nasdaq.original.png" alt="Nasdaq">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="signup-footer" data-section="cta-band-final" data-purpose="cta-band">
+  <div class="container">
+    <p class="eyebrow" style="color: rgba(255,255,255,.6)">Ready to start?</p>
+    <h2>Sign up for membership</h2>
+    <a class="btn btn-melon" href="https://app.onemedical.com/registration/signup">Join now</a>
+  </div>
+</section>
+
+<footer class="site-footer" data-section="footer" data-purpose="footer-nav">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Locations</h4>
+        <button class="location-pill">Your Location (ALL) ▾</button>
+      </div>
+      <div>
+        <h4>One Medical</h4>
+        <ul>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Media center</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Sponsored membership</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Give a membership</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <div class="social-row">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Twitter">x</a>
+          <a href="#" aria-label="YouTube">▶</a>
+          <a href="#" aria-label="Instagram">○</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+    </div>
+    <div class="subfooter">
+      <ul>
+        <li><a href="#">Terms of Use</a></li>
+        <li><a href="#">Privacy Notice</a></li>
+        <li><a href="#">Notice of Privacy Practices</a></li>
+        <li><a href="#">Notice of Non-Discrimination</a></li>
+      </ul>
+      <span>©2026 1Life Healthcare, Inc. — All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sticky header subtle shadow on scroll
+  const hdr = document.querySelector('.site-header');
+  window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 8));
+</script>
+
+</body>
+</html>

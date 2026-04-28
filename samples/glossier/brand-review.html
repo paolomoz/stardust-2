@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--
+_provenance:
+  writtenBy: stardust:extract phase 5
+  writtenAt: 2026-04-28
+  source: stardust/current/_brand-extraction.json
+-->
+<title>Glossier — current-state brand review</title>
+<style>
+  :root {
+    --ground: #FFFFFF; --ink: #000000; --muted: #666666;
+    --soft: #F7F7F7; --border: #E8E8E8;
+    --pink: #FAF2F4; --pink-deep: #F6E3E6; --orange: #F94200;
+    --primary: 'Apercu','Gill Sans',sans-serif;
+  }
+  html,body { background: var(--ground); color: var(--ink); margin:0; font-family: var(--primary); -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 48px 32px 96px; }
+  .lede { border-top: 1px solid var(--ink); padding-top: 24px; }
+  .label { text-transform: uppercase; letter-spacing: 0.12em; font-size: 11px; }
+  h1 { font-size: 22px; font-weight: 400; margin: 8px 0 0; }
+  h2 { font-size: 14px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; border-top: 1px solid var(--ink); padding-top: 16px; margin: 56px 0 16px; }
+  h3 { font-size: 14px; font-weight: 400; margin: 24px 0 8px; }
+  p, li { font-size: 14px; line-height: 1.55; }
+  ul { padding-left: 18px; margin: 8px 0 16px; }
+  small { color: var(--muted); font-size: 12px; }
+  .grid { display:grid; gap:12px; }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .swatch { aspect-ratio: 4/3; border: 1px solid var(--border); display:flex; align-items: end; padding: 8px; font-size: 11px; }
+  .swatch.dark { color: white; }
+  .tile { border: 1px solid var(--border); padding: 16px; }
+  .tile .k { text-transform: uppercase; letter-spacing: 0.12em; font-size: 10px; color: var(--muted); }
+  .tile .v { font-size: 16px; margin-top: 6px; }
+  .citation { font-size: 11px; color: var(--muted); }
+  .footer-strip { background: var(--pink); margin-top: 64px; padding: 48px 32px; }
+  .footer-strip h2 { border-top: none; padding-top: 0; margin-top: 0; }
+  .tension { border: 1px solid var(--ink); padding: 16px; }
+  .tension .badge { display:inline-block; background: var(--ink); color: white; font-size: 10px; padding: 2px 6px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .quote { font-size: 28px; line-height: 1.2; font-weight: 400; }
+  .uppercase { text-transform: uppercase; letter-spacing: 0.12em; font-size: 12px; }
+  .hero-photo { background: linear-gradient(135deg, #f9d7c2 0%, #f0a48a 60%, #d57e6a 100%); aspect-ratio: 16/7; display:flex; align-items: end; padding: 24px; color: white; }
+  .hero-photo .h { font-size: 32px; line-height: 1; margin-bottom: 8px; }
+  .hero-photo small { color: white; opacity: 0.92; }
+  .ratio-bar { height: 8px; background: var(--soft); position: relative; overflow: hidden; }
+  .ratio-bar > span { display: block; height: 100%; background: var(--ink); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="lede">
+    <span class="label">Stardust · current-state brand review</span>
+    <h1>Glossier — homepage, captured 2026-04-28</h1>
+    <small>Source: pages/home.json · _brand-extraction.json · screenshot at assets/screenshots/home.png · single-page extract</small>
+  </div>
+
+  <h2>1 — Palette</h2>
+  <p><small>Source: <code>_brand-extraction.json § palette</code> · cross-element computed-style frequency.</small></p>
+  <div class="grid grid-4">
+    <div class="swatch" style="background:#FFFFFF; border-color: var(--ink);">#FFFFFF · ground (1144)</div>
+    <div class="swatch dark" style="background:#000000;">#000000 · ink (1163)</div>
+    <div class="swatch" style="background:#FAF2F4;">#FAF2F4 · Glossier Pink (footer-only)</div>
+    <div class="swatch" style="background:#F6E3E6;">#F6E3E6 · pink-deep</div>
+    <div class="swatch" style="background:#F94200; color:white;">#F94200 · sale-orange</div>
+    <div class="swatch" style="background:#F7F7F7;">#F7F7F7 · soft-1</div>
+    <div class="swatch" style="background:#E8E8E8;">#E8E8E8 · border</div>
+    <div class="swatch" style="background:#666666; color:white;">#666666 · muted</div>
+  </div>
+
+  <h2>2 — Typography</h2>
+  <p><small>Source: <code>_brand-extraction.json § type</code>. Single family, single weight, ad-hoc scale.</small></p>
+  <div class="grid grid-2">
+    <div class="tile">
+      <div class="k">Hero (20px)</div>
+      <div class="v">you smell good.</div>
+      <div class="citation">Apercu 400 / lowercase / used overlaid on hero photo</div>
+    </div>
+    <div class="tile">
+      <div class="k">Section label (12px caps)</div>
+      <div class="v uppercase">FRAGRANCE</div>
+      <div class="citation">Apercu 400 / letter-spacing 0.12em</div>
+    </div>
+    <div class="tile">
+      <div class="k">Product name (14px)</div>
+      <div class="v">Glossier You Soie</div>
+      <div class="citation">Apercu 400 / title case</div>
+    </div>
+    <div class="tile">
+      <div class="k">Body (14–16px)</div>
+      <div class="v">Make your presence known before you arrive…</div>
+      <div class="citation">Apercu 400 / line-height 1.55</div>
+    </div>
+  </div>
+
+  <h2>3 — Hero (image-led, copy overlaid)</h2>
+  <div class="hero-photo">
+    <div>
+      <div class="h" style="font-family: var(--primary); font-weight: 400;">you smell good.</div>
+      <small>Make your presence known before you arrive, and long after you leave. — Glossier You</small>
+    </div>
+  </div>
+  <p class="citation">Photo placeholder approximates captured warm peach/pink hero; real source: glossier-you-smell-good-homepage-desktop.png</p>
+
+  <h2>4 — Components observed</h2>
+  <div class="grid grid-3">
+    <div class="tile"><div class="k">Add-to-bag CTA</div><div class="v" style="border:1px solid var(--ink); padding:8px 0; text-align:center;">Add to bag</div><div class="citation">white bg, black text, 0px radius, no shadow</div></div>
+    <div class="tile"><div class="k">Sale tag</div><div class="v"><span style="color:var(--orange); font-size:11px; letter-spacing:0.1em;">30% OFF IN CART</span></div><div class="citation">orange caps, no chip background</div></div>
+    <div class="tile"><div class="k">Footer ground</div><div class="v" style="background:var(--pink); padding:16px;">FAF2F4</div><div class="citation">Glossier Pink — only chromatic warmth in chrome</div></div>
+  </div>
+
+  <h2>5 — Voice samples</h2>
+  <div class="quote">"you smell good."</div>
+  <p>Real-person testimonial: <em>"Was running late to a meeting and stumbled into the elevator with the Senior Editor. They were incredibly chic and not known for being super talkative. I reached my floor, stepped out, and right before the doors closed she commented nonchalantly, 'You smell good.'"</em></p>
+  <p>Section labels (caps): <span class="uppercase">SPRING FEVER SALE · FRAGRANCE · GET THE LOOK · BEST SELLER · NEW · TOP-RATED · LEAVING SOON</span></p>
+
+  <h2>6 — Homepage section sequence</h2>
+  <ol style="font-size:14px; line-height:1.7;">
+    <li>promo strip — 30% OFF Spring Fever Sale</li>
+    <li>hero — "you smell good." over campaign photo</li>
+    <li>promo band — Spring Fever Sale CTA</li>
+    <li>product carousel — Spring Fever (7 items)</li>
+    <li>story band — testimonial pull-quote</li>
+    <li>product carousel — Fragrance (8 items)</li>
+    <li>story band — testimonial pull-quote</li>
+    <li>UGC grid — Get the look (3 tiles)</li>
+    <li>footer — Glossier Pink ground</li>
+  </ol>
+
+  <h2>7 — Tensions</h2>
+  <div class="grid grid-2">
+    <div class="tension">
+      <span class="badge">Type scale</span>
+      <p><strong>No display moment.</strong> Hero copy maxes at 20px — only 1.42× over body. The brand voice is doing all the heavy lifting; a refresh could give the hero a typographic moment without changing the family.</p>
+    </div>
+    <div class="tension">
+      <span class="badge">Repetition</span>
+      <p><strong>Two identical product carousels back-to-back.</strong> Spring Fever and Fragrance use the same 5-up grid in the same row format, separated only by a thin testimonial band. Visual rhythm is flat.</p>
+    </div>
+    <div class="tension">
+      <span class="badge">Colour distribution</span>
+      <p><strong>Glossier Pink lands once, at the end.</strong> The ground colour the brand owns has only one moment on the page. Either commit harder or place a second deliberate punctuation.</p>
+    </div>
+    <div class="tension">
+      <span class="badge">Section padding</span>
+      <p><strong>Flat 32–48px between very different content types.</strong> The promo strip, the hero, and the carousels share the same vertical rhythm. The page reads as a single density when it could breathe at the right moments.</p>
+    </div>
+    <div class="tension">
+      <span class="badge">Tag overload</span>
+      <p><strong>Sale-orange stamps across every product card.</strong> 30% OFF IN CART, BEST SELLER, NEW, LEAVING SOON, TOP-RATED — five tag types competing for attention in the same grid.</p>
+    </div>
+    <div class="tension">
+      <span class="badge">Hero contrast</span>
+      <p><strong>Overlay text relies on a quiet bottom band of the photo.</strong> Borderline AA on darker frames. A deliberate contrast device (scrim, plate, side-cut) would harden the foundation.</p>
+    </div>
+  </div>
+
+  <h2>8 — Signature moves to preserve</h2>
+  <ul>
+    <li>Lowercase poetic hero phrasing as a brand voice tell</li>
+    <li>Single-family Apercu typesetting (restraint as identity)</li>
+    <li>Glossier Pink in the footer (don't kill it — earn a second moment)</li>
+    <li>Sharp 0px corners on cards and CTAs</li>
+    <li>Real-person testimonials with overheard moments</li>
+    <li>"Add to bag" verb (not "Buy" / "Shop now")</li>
+  </ul>
+
+  <div class="footer-strip">
+    <span class="label">Next</span>
+    <h2 style="margin-top: 6px;">Run <code>$stardust direct</code> in Mode A — palette and typography pinned.</h2>
+    <p>Three variants will follow, each with a distinct refresh thesis:
+      A · Conservative · same IA, refined tokens —
+      B · Compositional · same palette/type, different IA —
+      C · Bold · pushes one element further (typography or photography).
+    </p>
+  </div>
+</div>
+</body>
+</html>

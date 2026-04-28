@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Brand review · The Road Home (current state)</title>
+<!-- _provenance:
+writtenBy: stardust:extract (Phase 5)
+writtenAt: 2026-04-28T09:13:30Z
+readArtifacts:
+  - stardust/current/PRODUCT.md
+  - stardust/current/DESIGN.md
+  - stardust/current/DESIGN.json
+  - stardust/current/_brand-extraction.json
+  - stardust/current/pages/home.json
+  - stardust/current/assets/screenshots/home.png
+mode: descriptive (current state)
+stardustVersion: 0.2.0
+-->
+<style>
+:root {
+  --bg: #FFFFFF;
+  --text: #000000;
+  --text-on-dark: #FFFFFF;
+  --primary: #005560;
+  --secondary: #008192;
+  --surface: #E9EEEF;
+  --accent-purple: #5B4B8A;
+  --accent-red: #C8443A;
+  --hairline: rgba(0,0,0,.12);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: HarmoniaSans, "DIN Next LT Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--primary); }
+.shell { max-width: 1200px; margin: 0 auto; padding: 48px 32px 96px; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--primary); }
+h1, h2, h3 { font-weight: 900; letter-spacing: -.005em; margin: 0; }
+h1 { font-size: 56px; line-height: 1.05; text-transform: uppercase; }
+h2 { font-size: 32px; line-height: 1.1; text-transform: uppercase; margin-top: 0; }
+h3 { font-size: 18px; line-height: 1.2; text-transform: uppercase; letter-spacing: .04em; }
+
+.masthead { padding-bottom: 32px; border-bottom: 1px solid var(--hairline); margin-bottom: 48px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; }
+.masthead .lockup img { display: block; height: 64px; width: auto; }
+.masthead .hero-line { font-size: 28px; font-weight: 900; text-transform: uppercase; color: var(--primary); margin: 16px 0 0; }
+.masthead .meta { color: rgba(0,0,0,.6); font-size: 14px; text-align: right; }
+.masthead .meta a { color: inherit; text-decoration: underline; text-decoration-color: var(--hairline); }
+
+nav.toc { position: sticky; top: 0; background: var(--bg); border-bottom: 1px solid var(--hairline); margin: -48px -32px 48px; padding: 14px 32px; z-index: 5; display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
+nav.toc a { color: var(--text); text-decoration: none; padding: 6px 0; border-bottom: 2px solid transparent; }
+nav.toc a:hover { border-bottom-color: var(--primary); }
+
+section { padding: 64px 0; border-top: 1px solid var(--hairline); scroll-margin-top: 96px; }
+section:first-of-type { border-top: 0; padding-top: 0; }
+section .lede { color: rgba(0,0,0,.7); margin-top: 8px; max-width: 720px; }
+
+.callout { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+.callout .stat { background: var(--surface); padding: 20px 24px; }
+.callout .stat .n { font-size: 36px; font-weight: 900; color: var(--primary); display: block; line-height: 1; }
+.callout .stat .l { display: block; margin-top: 8px; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: rgba(0,0,0,.6); }
+
+.page-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 32px; }
+.page-card { background: var(--surface); }
+.page-card img { display: block; width: 100%; max-height: 540px; object-fit: cover; object-position: top; }
+.page-card .label { padding: 12px 16px; display: flex; justify-content: space-between; font-size: 13px; }
+.page-card .label code { font-family: "SF Mono", ui-monospace, Menlo, monospace; color: rgba(0,0,0,.6); }
+
+.swatch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 32px; }
+.swatch { background: var(--surface); }
+.swatch .chip { height: 100px; }
+.swatch .meta { padding: 14px 16px; }
+.swatch .role { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: rgba(0,0,0,.6); margin-bottom: 4px; }
+.swatch .val { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 13px; font-weight: 700; }
+.swatch .used { font-size: 12px; color: rgba(0,0,0,.55); margin-top: 6px; }
+
+.type-row { padding: 24px 0; border-bottom: 1px dashed var(--hairline); display: grid; grid-template-columns: 96px 1fr; gap: 24px; align-items: center; }
+.type-row:last-child { border-bottom: 0; }
+.type-row .tag { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: rgba(0,0,0,.6); }
+.type-row .specimen.h-display { font-size: 60px; font-weight: 900; line-height: 1.05; text-transform: uppercase; }
+.type-row .specimen.h-section { font-size: 45px; font-weight: 900; line-height: 1.1; text-transform: uppercase; }
+.type-row .specimen.h-sub { font-size: 20px; font-weight: 700; line-height: 1.25; text-transform: uppercase; letter-spacing: .04em; }
+.type-row .specimen.h-body { font-size: 16px; font-weight: 500; line-height: 1.5; }
+.type-row .specimen.h-small { font-size: 14px; font-weight: 500; line-height: 1.5; }
+.scale-badge { display: inline-block; padding: 4px 10px; background: var(--accent-purple); color: var(--text-on-dark); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; }
+
+.voice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+.voice-card { background: var(--surface); padding: 24px; min-height: 180px; }
+.voice-card .role { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: rgba(0,0,0,.6); margin-bottom: 12px; }
+.voice-card .quote { font-size: 18px; font-weight: 700; }
+.voice-card.tagline .quote { font-size: 28px; font-weight: 900; text-transform: uppercase; color: var(--primary); }
+
+.cta-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.cta-pill { padding: 8px 18px; background: var(--primary); color: var(--text-on-dark); border-radius: 9999px; font-weight: 700; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; }
+.cta-pill .count { margin-left: 8px; opacity: .7; font-weight: 500; }
+
+.tone-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+.tone-metrics .stat { padding: 20px; background: var(--surface); }
+.tone-metrics .stat .n { font-size: 28px; font-weight: 900; color: var(--primary); display: block; }
+.tone-metrics .stat .l { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: rgba(0,0,0,.6); margin-top: 6px; display: block; }
+
+.tensions { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+.tension { padding: 20px 24px; background: var(--bg); border: 1px solid var(--hairline); border-left: 4px solid var(--accent-red); }
+.tension h3 { font-size: 14px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; color: var(--accent-red); }
+.tension p { margin: 0; font-size: 14px; color: rgba(0,0,0,.75); }
+
+.motif-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px; }
+.motif { background: var(--surface); padding: 24px; text-align: center; }
+.motif .demo { height: 80px; display: flex; align-items: center; justify-content: center; }
+.motif .demo .pill { display: inline-block; padding: 12px 28px; background: var(--primary); color: var(--text-on-dark); border-radius: 9999px; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+.motif .demo .square { width: 80px; height: 60px; background: var(--accent-purple); }
+.motif .demo .road { width: 120px; height: 40px; background-image: radial-gradient(circle, var(--primary) 2px, transparent 2.5px); background-size: 12px 12px; }
+.motif .label { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: rgba(0,0,0,.6); margin-top: 12px; }
+
+.component-list { margin-top: 32px; }
+.component { padding: 16px 24px; border-left: 4px solid var(--secondary); margin-bottom: 8px; background: var(--surface); display: flex; justify-content: space-between; align-items: baseline; }
+.component .name { font-weight: 700; text-transform: uppercase; font-size: 14px; letter-spacing: .04em; }
+.component .desc { color: rgba(0,0,0,.6); font-size: 13px; max-width: 60%; text-align: right; }
+
+footer.review-footer { padding-top: 64px; border-top: 1px solid var(--hairline); margin-top: 48px; color: rgba(0,0,0,.5); font-size: 12px; display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <header class="masthead">
+    <div>
+      <div class="lockup">
+        <img src="https://theroadhome.org/wp-content/uploads/2023/02/TRH-100-Logo_Color-for-website-header.png" alt="The Road Home" />
+      </div>
+      <p class="hero-line">REFUGE. RESOURCES. RELIEF.</p>
+      <p class="lede">Brand review — current state. The Road Home, a 100-year-old housing &amp; shelter nonprofit. This page describes what the existing home page is; it is not a redesign target.</p>
+    </div>
+    <div class="meta">
+      <div><a href="https://theroadhome.org/">theroadhome.org</a></div>
+      <div>extracted 2026-04-28</div>
+      <div>1 page · medium wait · 4.3s</div>
+    </div>
+  </header>
+
+  <nav class="toc">
+    <a href="#coverage">Coverage</a>
+    <a href="#pages">Pages</a>
+    <a href="#palette">Palette</a>
+    <a href="#typography">Typography</a>
+    <a href="#voice">Voice</a>
+    <a href="#tensions">Tensions</a>
+    <a href="#motifs">Motifs</a>
+    <a href="#components">Components</a>
+  </nav>
+
+  <section id="coverage">
+    <span class="eyebrow">01 — Coverage</span>
+    <h2>What was captured</h2>
+    <p class="lede">Single-page extraction (home only) at the user's request. Cross-page aggregation is out of scope for this run — the brand-surface tokens are read from the home page alone.</p>
+    <div class="callout">
+      <div class="stat"><span class="n">1 / 1</span><span class="l">Pages extracted</span></div>
+      <div class="stat"><span class="n">42</span><span class="l">Headings on home</span></div>
+      <div class="stat"><span class="n">81%</span><span class="l">Headings uppercase</span></div>
+    </div>
+  </section>
+
+  <section id="pages">
+    <span class="eyebrow">02 — Pages</span>
+    <h2>The home, as captured</h2>
+    <div class="page-grid">
+      <div class="page-card">
+        <img src="assets/screenshots/home.jpg" alt="Home page screenshot" />
+        <div class="label"><span>Home</span><code>/</code></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="palette">
+    <span class="eyebrow">03 — Palette</span>
+    <h2>Eight roles</h2>
+    <p class="lede">A teal-anchored palette with white as background, black as text, and a muted purple carrying section-banner duty. Red is reserved for the road-flag motif inside the 100 logo and is not used elsewhere.</p>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="chip" style="background:#FFFFFF; border:1px solid var(--hairline);"></div><div class="meta"><div class="role">Background</div><div class="val">#FFFFFF</div><div class="used">body, charity band, stories</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#000000;"></div><div class="meta"><div class="role">Text</div><div class="val">#000000</div><div class="used">body, dark-section H2</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#005560;"></div><div class="meta"><div class="role">Primary — deep teal</div><div class="val">#005560</div><div class="used">footer, get-involved, primary CTA</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#008192;"></div><div class="meta"><div class="role">Secondary — mid teal</div><div class="val">#008192</div><div class="used">impact band, more-stories CTA</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#E9EEEF;"></div><div class="meta"><div class="role">Surface — cool grey</div><div class="val">#E9EEEF</div><div class="used">stories, newsletter</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#5B4B8A;"></div><div class="meta"><div class="role">Accent — purple</div><div class="val">#5B4B8A</div><div class="used">JOIN OUR TEAM, PROGRAMS, story-card</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#C8443A;"></div><div class="meta"><div class="role">Accent — red</div><div class="val">#C8443A</div><div class="used">TRH-100 logo road-flag only</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#FFFFFF; border:1px solid var(--hairline);"></div><div class="meta"><div class="role">Text on dark</div><div class="val">#FFFFFF</div><div class="used">hero, footer, impact band</div></div></div>
+    </div>
+  </section>
+
+  <section id="typography">
+    <span class="eyebrow">04 — Typography</span>
+    <h2>HarmoniaSans, ALL CAPS</h2>
+    <p class="lede">A single typeface family carries the entire surface. Display headings are uppercase and heavy (900). The size scale is <span class="scale-badge">No modular scale</span> — sizes 60 / 45 / 20 / 18 / 16 px don't sit on a single ratio.</p>
+    <div class="type-row">
+      <div class="tag">Display 60 / 900</div>
+      <div class="specimen h-display">Refuge. Resources. Relief.</div>
+    </div>
+    <div class="type-row">
+      <div class="tag">Section 45 / 900</div>
+      <div class="specimen h-section">Housing Stories</div>
+    </div>
+    <div class="type-row">
+      <div class="tag">Sub 20 / 700</div>
+      <div class="specimen h-sub">Emergency shelter</div>
+    </div>
+    <div class="type-row">
+      <div class="tag">Body 16 / 500</div>
+      <div class="specimen h-body">The Road Home provides emergency shelter, supportive services, and housing assistance that help individuals and families step out of homelessness.</div>
+    </div>
+    <div class="type-row">
+      <div class="tag">Small 14 / 500</div>
+      <div class="specimen h-small">The Road Home has been seeking to help those in need of housing and shelter services for 100 years.</div>
+    </div>
+  </section>
+
+  <section id="voice">
+    <span class="eyebrow">05 — Voice</span>
+    <h2>Direct, civic, alliterative</h2>
+    <p class="lede">The brand's signature voice move is the alliterative triplet — <em>Refuge. Resources. Relief.</em> — repeated in section headings (<em>Emergency Shelter / Supportive Services / Housing Assistance</em>). Section labels are short imperatives in caps.</p>
+    <div class="voice-grid">
+      <div class="voice-card tagline">
+        <div class="role">Hero tagline</div>
+        <div class="quote">Refuge. Resources. Relief.</div>
+      </div>
+      <div class="voice-card">
+        <div class="role">First paragraph</div>
+        <div class="quote">The Road Home has been seeking to help those in need of housing and shelter services for 100 years.</div>
+      </div>
+      <div class="voice-card">
+        <div class="role">Empathetic ask</div>
+        <div class="quote">Looking for immediate shelter? &nbsp;·&nbsp; Experiencing a housing crisis? &nbsp;·&nbsp; Please call: 211</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:48px;">CTA vocabulary</h3>
+    <div class="cta-pills">
+      <span class="cta-pill">Donate <span class="count">×5</span></span>
+      <span class="cta-pill">Read more <span class="count">×6</span></span>
+      <span class="cta-pill">Get help <span class="count">×3</span></span>
+      <span class="cta-pill">Give <span class="count">×3</span></span>
+      <span class="cta-pill">Get involved <span class="count">×2</span></span>
+      <span class="cta-pill">More stories <span class="count">×1</span></span>
+      <span class="cta-pill">Subscribe <span class="count">×1</span></span>
+      <span class="cta-pill">Submit <span class="count">×1</span></span>
+    </div>
+
+    <div class="tone-metrics">
+      <div class="stat"><span class="n">81%</span><span class="l">Headings uppercase</span></div>
+      <div class="stat"><span class="n">28</span><span class="l">Distinct headings</span></div>
+      <div class="stat"><span class="n">8</span><span class="l">Distinct CTA verbs</span></div>
+    </div>
+  </section>
+
+  <section id="tensions">
+    <span class="eyebrow">06 — Tensions</span>
+    <h2>What a refresh should address</h2>
+    <p class="lede">Mechanical readings of the captured surface that point at refresh opportunities. Descriptive, not prescriptive — the redesign target gets to decide which to act on.</p>
+    <div class="tensions">
+      <div class="tension">
+        <h3>Hero contrast risk</h3>
+        <p>Tagline sits over a photographic background with no explicit dark-scrim layer. Contrast is implicit and viewport-dependent.</p>
+      </div>
+      <div class="tension">
+        <h3>Hero IA collision</h3>
+        <p>Tagline + 3 question-cards + photo + utility nav in one viewport. Hierarchy is unclear at a glance.</p>
+      </div>
+      <div class="tension">
+        <h3>CTA vocabulary fragmentation</h3>
+        <p>8 distinct CTA verbs on one page (Donate, Give, Read More, More Stories, Submit, Subscribe, Get Help, Get Involved). The verb set competes with itself.</p>
+      </div>
+      <div class="tension">
+        <h3>Ad-hoc type scale</h3>
+        <p>Heading sizes 60 / 45 / 20 / 18 / 16 px don't sit on a single modular ratio. The 45 → 20 jump is the largest discontinuity.</p>
+      </div>
+      <div class="tension">
+        <h3>Two banner colours, one role</h3>
+        <p>Purple banners (JOIN OUR TEAM, PROGRAMS) and teal banners (IMPACT, footer) both read as section-color but no clear semantic separates them.</p>
+      </div>
+      <div class="tension">
+        <h3>Zero design tokens</h3>
+        <p>The site ships <code>0</code> CSS custom properties at <code>:root</code>. Every style is local; the system forks under maintenance pressure.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="motifs">
+    <span class="eyebrow">07 — Motifs</span>
+    <h2>Pills, banners, the road</h2>
+    <p class="lede">The recurring visual moves the brand uses. The pill CTA, the flat colour banner, the dotted-road divider, and the BW story portrait are the signatures a refresh must preserve.</p>
+    <div class="motif-grid">
+      <div class="motif">
+        <div class="demo"><span class="pill">DONATE</span></div>
+        <div class="label">Pill CTA · 9999 px</div>
+      </div>
+      <div class="motif">
+        <div class="demo"><span class="square"></span></div>
+        <div class="label">Section banner · purple</div>
+      </div>
+      <div class="motif">
+        <div class="demo"><span class="road"></span></div>
+        <div class="label">Road dotted divider</div>
+      </div>
+      <div class="motif">
+        <div class="demo" style="background:#3a3a3a; height:80px; width:80px; margin:0 auto; border-radius:0;"></div>
+        <div class="label">BW story portrait</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="components">
+    <span class="eyebrow">08 — Components</span>
+    <h2>The recurring blocks</h2>
+    <div class="component-list">
+      <div class="component"><span class="name">Site header</span><span class="desc">TRH-100 logo · 4 nav links · DONATE pill</span></div>
+      <div class="component"><span class="name">Hero — full-bleed photo + tagline</span><span class="desc">single editorial photo, centred uppercase tagline, 3 question-cards above</span></div>
+      <div class="component"><span class="name">Three-question help cards</span><span class="desc">Looking for immediate shelter? / Experiencing a housing crisis? / Please call 211</span></div>
+      <div class="component"><span class="name">Section colour banner</span><span class="desc">flat purple band, single uppercase label</span></div>
+      <div class="component"><span class="name">Feature 3-up icons</span><span class="desc">3-column icon-with-caption — Get Involved, Impact</span></div>
+      <div class="component"><span class="name">Road-zigzag divider</span><span class="desc">decorative dotted-road graphic between sections</span></div>
+      <div class="component"><span class="name">Charity credibility band</span><span class="desc">Charity Navigator Four-Star badge with byline</span></div>
+      <div class="component"><span class="name">Stories carousel — BW portraits</span><span class="desc">prev/next chevrons, active card adopts brand-purple</span></div>
+      <div class="component"><span class="name">Newsletter band</span><span class="desc">light-grey, email + first/last name + SUBSCRIBE</span></div>
+      <div class="component"><span class="name">Footer mega</span><span class="desc">dark-teal, 4 columns mirroring nav, TRH-100 footer logo</span></div>
+    </div>
+  </section>
+
+  <footer class="review-footer">
+    <div>stardust:extract · v0.2.0 · descriptive</div>
+    <div>1 page · 779 words captured · 72 images · 3 css backgrounds</div>
+  </footer>
+
+</div>
+</body>
+</html>

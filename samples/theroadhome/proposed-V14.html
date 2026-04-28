@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy:        stardust:prototype (Tier 3 / V14)
+  writtenAt:        2026-04-28T17:16:00Z
+  variant:
+    tier: 3
+    id: V14
+    slug: centennial
+    dominantMove: motif (heritage-forward, time-as-trust)
+    thesis: "A century of unbroken civic service is the most asymmetric institutional asset TRH has. The variant elevates it: hero is a timeline running 1923 → 2026 with five sourced anchor years; programs and impact frame as 'what the work has held'; copy carries archival cadence. Restrained, archival, never nostalgic."
+    densityTier: balanced (sectionPadding.desktop = 56px)
+    register: archival-institutional
+    capturedTraitAmplified: "TRH's centennial branding mark — present in the source as TRH-100-Logo and TRH-100-Year-Logo files (2023). The variant brings the centennial out of the header lockup and onto the page."
+  IAPriority:
+    - 211 panel as a fixed top strip; the timeline cannot displace immediate help
+  unsourcedContent:
+    - "1923 origin year — verified against TRH about-us page"
+    - "Five timeline anchor years 1923, 1968, 1996, 2009, 2023 — only 1923 (founding) and 2023 (centennial) are verifiable from captured pages; the three intermediate dates are PLACEHOLDER (rendered with the F-002 placeholder visual signature) and identified in-text as such."
+  stardustVersion: 0.2.0
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#005560">
+<title>The Road Home — A Hundred Years. (V14 · Centennial)</title>
+<style>
+  @font-face { font-family:'DINNextLTPro'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/dinnextltpro/DINNextLTPro-Light.woff2') format('woff2'); font-weight:300; font-display:swap }
+  @font-face { font-family:'DINNextLTPro'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/dinnextltpro/DINNextLTPro-Regular.woff2') format('woff2'); font-weight:400; font-display:swap }
+  @font-face { font-family:'DINNextLTPro'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/dinnextltpro/DINNextLTPro-Bold.woff2') format('woff2'); font-weight:700; font-display:swap }
+  @font-face { font-family:'DINNextLTPro'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/dinnextltpro/DINNextLTPro-Black.woff2') format('woff2'); font-weight:900; font-display:swap }
+  @font-face { font-family:'HarmoniaSans'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/harmoniasans/HarmoniaSansProRegular.woff2') format('woff2'); font-weight:400; font-display:swap }
+  @font-face { font-family:'HarmoniaSans'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/harmoniasans/HarmoniaSansPro-Italic.woff2') format('woff2'); font-weight:400; font-style:italic; font-display:swap }
+  @font-face { font-family:'HarmoniaSans'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/harmoniasans/HarmoniaSansProSemiBd.woff2') format('woff2'); font-weight:500; font-display:swap }
+
+  :root{
+    --civic-teal:#008192; --deep-teal:#005560; --teal-mid:#006A77; --teal-shadow:#105560;
+    --lavender:#8F77AD; --pale-lavender:#C8BCD6; --aubergine:#604A7B;
+    --slate:#67696A; --pale-teal-gray:#E9EEEF; --soft-gray:#CECFD0;
+    --white:#FFFFFF; --crimson:#DC323D;
+    --bg:#F2EEE5;             /* archival paper */
+    --paper:#FAF6EC;
+    --ink:#0E1517;
+    --display:'DINNextLTPro', ui-serif, sans-serif;
+    --body:'HarmoniaSans', ui-sans-serif, sans-serif;
+    --sp-d:56px; --sp-t:40px; --sp-m:28px;
+    --container:1240px;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:var(--body);color:var(--ink);background:var(--bg);font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:var(--deep-teal);text-decoration:underline;text-underline-offset:3px}
+  a:hover{color:var(--civic-teal)}
+  img{max-width:100%;display:block}
+  h1,h2,h3{font-family:var(--display);margin:0;color:var(--ink)}
+  .container{max-width:var(--container);margin:0 auto;padding:0 28px}
+  .skip{position:absolute;left:-9999px;top:8px;background:var(--crimson);color:#fff;padding:10px 14px;border-radius:0;font-weight:700;z-index:99}
+  .skip:focus-visible{left:8px}
+
+  .help-bar{background:var(--deep-teal);color:#fff;padding:10px 0;font-size:13px;border-bottom:3px solid var(--civic-teal)}
+  .help-bar .row{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;font-family:var(--display);text-transform:uppercase;letter-spacing:0.06em}
+  .help-bar .lbl{color:var(--pale-lavender);font-weight:700}
+  .help-bar .lbl::before{content:"●  ";color:var(--crimson)}
+  .help-bar .lines{display:flex;gap:20px;flex-wrap:wrap}
+  .help-bar a.tel{color:#fff;text-decoration:none;font-weight:700}
+  .help-bar a.tel small{font-family:var(--body);font-weight:400;text-transform:none;color:rgba(255,255,255,0.7);font-size:12px;letter-spacing:0.02em;margin-left:6px}
+  .help-bar a.tel:hover{color:var(--pale-lavender)}
+
+  header.site{padding:18px 0;background:var(--bg);border-bottom:1px solid var(--soft-gray)}
+  header.site .row{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .wm{font-family:var(--display);font-weight:900;color:var(--deep-teal);font-size:20px;letter-spacing:0.04em;text-transform:uppercase;display:flex;align-items:center;gap:14px}
+  .wm .seal{display:inline-flex;width:46px;height:46px;border-radius:50%;border:2px solid var(--lavender);color:var(--lavender);align-items:center;justify-content:center;font-family:var(--display);font-weight:900;font-size:13px;letter-spacing:0;line-height:1}
+  nav.h ul{list-style:none;padding:0;margin:0;display:flex;gap:20px;font-family:var(--display);text-transform:uppercase;letter-spacing:0.08em;font-size:13px;font-weight:500;align-items:center}
+  nav.h a{color:var(--ink);text-decoration:none}
+  nav.h a.donate{background:var(--crimson);color:#fff;padding:9px 16px;font-weight:700}
+
+  /* Hero — centennial banner */
+  section.cover{padding:var(--sp-d) 0 calc(var(--sp-d) - 16px)}
+  .cover-row{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:end}
+  section.cover .eyebrow{font-family:var(--display);text-transform:uppercase;letter-spacing:0.18em;color:var(--lavender);font-size:12px;font-weight:700}
+  section.cover h1{font-family:var(--display);font-weight:900;color:var(--deep-teal);font-size:clamp(68px,9.4vw,168px);line-height:0.86;letter-spacing:-0.02em;margin:14px 0 8px}
+  section.cover h1 small{display:block;font-family:var(--body);font-style:italic;font-weight:400;font-size:0.18em;color:var(--ink);letter-spacing:0;line-height:1.4;margin-top:14px}
+  section.cover .deck{font-size:20px;color:var(--ink);line-height:1.55;max-width:42ch}
+  .cover-mark{display:flex;flex-direction:column;align-items:flex-end;gap:14px}
+  .cover-mark .lockup{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--deep-teal);color:#fff;padding:32px;width:240px;height:240px;border-radius:50%;text-align:center;border:6px double var(--pale-lavender)}
+  .cover-mark .lockup .yr{font-family:var(--display);font-weight:900;font-size:54px;line-height:1;letter-spacing:-0.005em}
+  .cover-mark .lockup .lbl{font-family:var(--display);text-transform:uppercase;letter-spacing:0.18em;font-size:11px;color:var(--pale-lavender);margin-top:6px}
+  .cover-mark .lockup .yrs{font-family:var(--body);font-style:italic;font-size:13px;color:rgba(255,255,255,0.75);margin-top:6px}
+
+  /* Timeline — five anchor years */
+  section.timeline{padding:var(--sp-d) 0;background:var(--paper);border-top:1px solid var(--soft-gray);border-bottom:1px solid var(--soft-gray)}
+  section.timeline h2{font-family:var(--display);text-transform:uppercase;letter-spacing:0.18em;color:var(--ink);font-size:13px;font-weight:700;margin-bottom:24px}
+  .tline{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:2px solid var(--ink);position:relative}
+  .tline::before{content:"";position:absolute;top:-8px;left:0;right:0;height:14px;background:transparent;background-image:repeating-linear-gradient(90deg, var(--ink) 0 3px, transparent 3px 30px);opacity:0.18}
+  .tnode{padding:18px 16px 18px;border-right:1px solid var(--soft-gray);position:relative}
+  .tnode:last-child{border-right:none}
+  .tnode::before{content:"";position:absolute;top:-8px;left:14px;width:14px;height:14px;background:var(--deep-teal);border-radius:50%}
+  .tnode .yr{font-family:var(--display);font-weight:900;color:var(--deep-teal);font-size:34px;letter-spacing:-0.005em;line-height:1}
+  .tnode .ttl{font-family:var(--display);text-transform:uppercase;letter-spacing:0.04em;font-size:14px;color:var(--ink);margin:8px 0 6px;font-weight:700}
+  .tnode .body{font-size:13px;color:var(--slate);line-height:1.5}
+  .tnode.placeholder .ttl::after{content:" · placeholder";color:var(--lavender);font-weight:400;letter-spacing:0;font-size:11px;text-transform:none;font-family:var(--body);font-style:italic}
+  .tnode.placeholder .body{font-style:italic;color:var(--lavender);background-image:repeating-linear-gradient(135deg,rgba(143,119,173,0.08) 0 6px,transparent 6px 12px);padding:6px 8px;margin-left:-8px}
+
+  /* The years held — programs framed as enduring practices */
+  section.held{padding:var(--sp-d) 0;background:var(--bg)}
+  section.held h2{font-family:var(--display);font-weight:300;color:var(--ink);font-size:clamp(34px,4vw,52px);line-height:1.04;letter-spacing:-0.005em;margin-bottom:14px}
+  section.held h2 strong{color:var(--deep-teal);font-weight:700}
+  section.held .deck{color:var(--slate);font-style:italic;font-size:18px;max-width:54ch;margin-bottom:32px}
+  .held-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .held-cell{padding:24px;background:var(--paper);border-top:3px solid var(--lavender)}
+  .held-cell img{width:42px;height:42px;margin-bottom:12px}
+  .held-cell h3{font-family:var(--display);text-transform:uppercase;letter-spacing:0.04em;font-size:18px;color:var(--ink);margin-bottom:6px}
+  .held-cell p{margin:0;color:var(--slate);font-size:14px;line-height:1.5}
+
+  /* Impact band */
+  section.figures{padding:var(--sp-d) 0;background:var(--deep-teal);color:#fff}
+  section.figures h2{font-family:var(--display);text-transform:uppercase;letter-spacing:0.18em;color:#fff;font-size:13px;margin-bottom:24px}
+  .ig{display:grid;grid-template-columns:repeat(3,1fr);gap:36px}
+  .stat{padding-top:18px;border-top:2px solid #fff}
+  .stat .num{font-family:var(--display);font-weight:900;color:#fff;font-size:60px;letter-spacing:-0.01em;line-height:1}
+  .stat .num em{font-style:normal;color:var(--pale-lavender);font-weight:300;font-size:0.5em;vertical-align:0.5em;margin-left:2px}
+  .stat .lbl{font-size:14px;color:rgba(255,255,255,0.85);margin-top:10px;line-height:1.5;max-width:30ch}
+
+  /* Stories as a quiet archive grid */
+  section.archive{padding:var(--sp-d) 0;background:var(--paper)}
+  section.archive h2{font-family:var(--display);font-weight:300;color:var(--ink);font-size:30px;margin-bottom:18px}
+  section.archive h2 small{display:block;font-family:var(--body);font-style:italic;font-size:14px;color:var(--slate);font-weight:400;margin-top:6px}
+  .agrid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+  .pp{display:flex;flex-direction:column;gap:8px}
+  .pp img{aspect-ratio:1/1.2;object-fit:cover;filter:contrast(0.96) sepia(0.06)}
+  .pp .name{font-family:var(--display);font-weight:700;color:var(--ink);font-size:16px;letter-spacing:0.02em;text-transform:uppercase}
+  .pp .cap{color:var(--slate);font-size:13px;font-style:italic;line-height:1.5}
+
+  footer.site{padding:32px 0 22px;background:var(--bg);font-size:14px;color:var(--slate);border-top:1px solid var(--soft-gray)}
+  footer.site .row{display:flex;justify-content:space-between;gap:24px;align-items:baseline;flex-wrap:wrap}
+  footer.site a{color:var(--ink);text-decoration:none}
+  footer.site .links{display:flex;gap:22px;font-family:var(--display);text-transform:uppercase;letter-spacing:0.08em;font-size:12px;font-weight:500}
+  footer.site .meta{font-size:12px;color:var(--slate);font-style:italic;margin-top:14px;padding-top:12px;border-top:1px dotted var(--soft-gray);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  @media (max-width:960px){
+    .cover-row{grid-template-columns:1fr}
+    .tline{grid-template-columns:1fr 1fr}
+    .tnode{border-right:none;border-bottom:1px solid var(--soft-gray)}
+    .held-grid,.ig{grid-template-columns:1fr}
+    .agrid{grid-template-columns:repeat(3,1fr)}
+    .cover-mark{align-items:center}
+  }
+  @media (max-width:560px){.tline{grid-template-columns:1fr}.agrid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#help">Skip to immediate help</a>
+
+<div id="help" class="help-bar" data-section-role="immediate-help" data-section-pos="0">
+  <div class="container row">
+    <span class="lbl">Need help right now</span>
+    <div class="lines">
+      <a class="tel" href="tel:8019909999">801·990·9999<small>shelter</small></a>
+      <a class="tel" href="tel:8013592444">801·359·2444<small>housing crisis</small></a>
+      <a class="tel" href="tel:211">2·1·1<small>information</small></a>
+    </div>
+  </div>
+</div>
+
+<header class="site">
+  <div class="container row">
+    <span class="wm"><span class="seal">100</span> The Road Home</span>
+    <nav class="h" aria-label="Primary"><ul>
+      <li><a href="/get-help/">Get Help</a></li>
+      <li><a href="/give-main/">Give</a></li>
+      <li><a href="/get-involved/">Volunteer</a></li>
+      <li><a href="/about-us/">About</a></li>
+      <li><a class="donate" href="/give-main/">Donate</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<section class="cover" data-section-role="hero" data-section-pos="1">
+  <div class="container cover-row">
+    <div>
+      <span class="eyebrow">A century of stepping people back into a home of their own</span>
+      <h1>One hundred years.<small>Refuge. Resources. Relief. The Road Home opened a desk for travelers in distress at the Salt Lake City Union Pacific Depot in 1923. The desk has not closed since.</small></h1>
+      <p class="deck">Emergency shelter, supportive services, and housing assistance for individuals and families stepping out of homelessness in Salt Lake County. <strong>The same work, in the same town, for a hundred years.</strong></p>
+    </div>
+    <div class="cover-mark">
+      <div class="lockup">
+        <span class="yr">100</span>
+        <span class="lbl">Years</span>
+        <span class="yrs">1923 — 2023</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="timeline" data-section-role="timeline" data-section-pos="2">
+  <div class="container">
+    <h2>Five anchor years</h2>
+    <div class="tline">
+      <div class="tnode"><div class="yr">1923</div><div class="ttl">Founding</div><div class="body">Opened as the Salt Lake City Chapter of the National Travelers' Aid Societies — a desk at the Union Pacific Depot for travelers in distress.</div></div>
+      <div class="tnode placeholder"><div class="yr">1968</div><div class="ttl">Mid-century</div><div class="body">Date placeholder — the agency expanded into family services through the post-war period; specifics await source confirmation.</div></div>
+      <div class="tnode placeholder"><div class="yr">1996</div><div class="ttl">Modern era</div><div class="body">Date placeholder — emergency shelter capacity grew through the 1990s; source confirmation pending.</div></div>
+      <div class="tnode placeholder"><div class="yr">2009</div><div class="ttl">Housing-first</div><div class="body">Date placeholder — TRH adopted the housing-first model in this period; exact year awaits archive confirmation.</div></div>
+      <div class="tnode"><div class="yr">2023</div><div class="ttl">Centennial</div><div class="body">A hundred years in continuous service; the centennial mark introduced. The work continues without pause.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="held" data-section-role="program-pillars" data-section-pos="3">
+  <div class="container">
+    <h2><strong>What the work has held —</strong> for a hundred years and counting.</h2>
+    <p class="deck">Three practices, named for the field they belong to. None are new ideas; the patience to keep doing them is the institutional asset.</p>
+    <div class="held-grid">
+      <div class="held-cell"><img alt="" src="https://theroadhome.org/wp-content/uploads/2020/11/TheRoadHome_IconsArtboard-152.svg"><h3>Emergency Shelter</h3><p>A safe place to sleep, tonight, every night, for individuals and families.</p></div>
+      <div class="held-cell"><img alt="" src="https://theroadhome.org/wp-content/uploads/2020/11/TheRoadHome_IconsArtboard-153.svg"><h3>Supportive Services</h3><p>Case management, employment, mental and physical health navigation while a person is sheltered.</p></div>
+      <div class="held-cell"><img alt="" src="https://theroadhome.org/wp-content/uploads/2020/11/TheRoadHome_IconsArtboard-154.svg"><h3>Housing Assistance</h3><p>Rapid re-housing, supportive housing, and the patient navigation that holds people in place.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="figures" data-section-role="impact" data-section-pos="4">
+  <div class="container">
+    <h2>The most recent year, in figures</h2>
+    <div class="ig">
+      <div class="stat"><div class="num">1,550<em>+</em></div><div class="lbl">people in housing in the community on any given night.</div></div>
+      <div class="stat"><div class="num">60<em>%</em></div><div class="lbl">of people who shelter with us receive case-management services.</div></div>
+      <div class="stat"><div class="num">3,491</div><div class="lbl">people assisted last year with employment and housing-related services.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="archive" data-section-role="stories" data-section-pos="5">
+  <div class="container">
+    <h2>From the housing-stories archive<small>Six of the people we work with — names by the archive's convention; portraits in the archive's own treatment.</small></h2>
+    <div class="agrid">
+      <article class="pp"><img alt="Cole" src="https://theroadhome.org/wp-content/uploads/2021/01/Cole_Canva-Stock-Photo_BW.jpg"><div class="name">Cole</div><div class="cap">Years in shelter; supportive housing.</div></article>
+      <article class="pp"><img alt="Jay" src="https://theroadhome.org/wp-content/uploads/2021/01/Jay_Canva-Stock-Photo_BW.jpg"><div class="name">Jay</div><div class="cap">Found employment via TRH.</div></article>
+      <article class="pp"><img alt="Sue" src="https://theroadhome.org/wp-content/uploads/2021/01/Sue_Canva-Stock-Photo_BW.jpg"><div class="name">Sue</div><div class="cap">Re-housed with family.</div></article>
+      <article class="pp"><img alt="Jordan" src="https://theroadhome.org/wp-content/uploads/2021/01/Jordan_Canva-Stock-Photo_BW.jpg"><div class="name">Jordan</div><div class="cap">Case management.</div></article>
+      <article class="pp"><img alt="Ray" src="https://theroadhome.org/wp-content/uploads/2021/01/Ray_Canva-Stock-Photo_BW.jpg"><div class="name">Ray</div><div class="cap">Palmer Court community.</div></article>
+      <article class="pp"><img alt="Randall" src="https://theroadhome.org/wp-content/uploads/2021/01/Randall_Canva-Stock-Photo_BW.jpg"><div class="name">Randall</div><div class="cap">Rapid re-housing.</div></article>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="container">
+    <div class="row">
+      <div class="links"><a href="/get-help/">Get Help</a><a href="/give-main/">Give</a><a href="/get-involved/">Get Involved</a><a href="/about-us/">About</a></div>
+      <div>1415 S Main Street, Salt Lake City, UT 84115 · 801.359.4142</div>
+    </div>
+    <div class="meta">
+      <span>© 2026 The Road Home · Founded 1923 · Centennial 2023 · Four-star Charity Navigator rated</span>
+      <span>Three of the timeline entries above are placeholders pending archive confirmation.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

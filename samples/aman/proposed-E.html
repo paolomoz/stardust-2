@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aman — Variant B · Place-led</title>
+<!--
+  _provenance:
+    skill: stardust:prototype
+    variant: B
+    direction-shape-brief:
+      "B leans into PLACE. Each section is anchored to a specific named
+       property and its country, amplifying the captured brand trait
+       that 'the brand is the named index of places' (PRODUCT.md /
+       Brand personality / Place-led)."
+    differs_from_A:
+      - new "36 places, 20 countries" typographic index strip after hero
+      - hotels-feature: single full-bleed image (not asymmetric pair)
+      - experiences eyebrows are places (Java, Argolid, NY) not categories (Coastal, Nature, City)
+      - world-of-aman: horizontal scroll filmstrip (not 3-up grid)
+    inherits: stardust/prototypes/aman-improvements.md (all 5)
+-->
+<style>
+  :root{
+    --color-page:#FDF9F5; --color-surface:#F3EEE7; --color-surface-deep:#E9E2D6;
+    --color-ink:#1F1B16; --color-ink-muted:#585858; --color-ink-soft:#8A8278;
+    --color-line:#D9D2C5; --color-emphatic:#000000; --color-on-emphatic:#FDF9F5;
+
+    --font-display:"Lyon Display Web","Lyon Text Web","EB Garamond",Georgia,"Times New Roman",serif;
+    --font-body:WhitneySSm,"Whitney SSm A","Whitney SSm B","Inter",system-ui,-apple-system,sans-serif;
+
+    --fs-eyebrow:11px; --fs-meta:13px; --fs-body:15px;
+    --fs-h3:22px; --fs-h2:34px; --fs-h1:64px;
+
+    --space-section:56px; --space-block:32px;
+    --radius:2px; --radius-card:3px;
+    --shadow:0 8px 28px -8px rgba(31,27,22,.18);
+    --line-thin:1px solid var(--color-line);
+    --container-w:1280px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--color-page);color:var(--color-ink);
+    font-family:var(--font-body);font-size:var(--fs-body);line-height:1.55;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+  .container{max-width:var(--container-w);margin:0 auto;padding:0 32px}
+  .eyebrow{font-family:var(--font-body);font-size:var(--fs-eyebrow);
+    text-transform:uppercase;letter-spacing:.22em;color:var(--color-ink-soft);
+    font-weight:500}
+  .place-eyebrow{display:inline-flex;gap:10px;align-items:baseline;font-size:11px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--color-ink-soft)}
+  .place-eyebrow strong{color:var(--color-ink);font-weight:500;letter-spacing:.18em}
+  .place-eyebrow::before{content:"⌖";font-size:13px;line-height:0;color:var(--color-ink-soft);
+    transform:translateY(2px);display:inline-block}
+  .cta{display:inline-flex;align-items:center;gap:10px;
+    font-size:var(--fs-meta);text-transform:uppercase;letter-spacing:.18em;
+    padding-bottom:6px;border-bottom:1px solid currentColor;
+    transition:gap .25s ease,opacity .2s ease}
+  .cta:hover{gap:14px}
+  .cta::after{content:"→";font-size:14px;line-height:1}
+  .cta--invert{color:var(--color-on-emphatic);border-color:rgba(253,249,245,.55)}
+
+  /* === Util / masthead === */
+  .util{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+    padding:18px 32px;border-bottom:var(--line-thin);background:var(--color-page);
+    position:sticky;top:0;z-index:20}
+  .util__left,.util__right{display:flex;gap:20px;align-items:center;font-size:12px;
+    letter-spacing:.18em;text-transform:uppercase}
+  .util__right{justify-content:flex-end}
+  .util__brand{justify-self:center;font-family:var(--font-display);font-size:24px;
+    letter-spacing:.55em;text-transform:uppercase;padding-left:.55em}
+  .util__menu{display:inline-flex;gap:8px;align-items:center}
+  .util__menu::before{content:"";width:18px;height:1px;background:currentColor;
+    box-shadow:0 5px 0 0 currentColor,0 -5px 0 0 currentColor}
+  .util__reserve{padding:8px 18px;border:1px solid var(--color-ink);border-radius:var(--radius);
+    transition:background .2s,color .2s}
+  .util__reserve:hover{background:var(--color-ink);color:var(--color-page)}
+
+  /* === Hero — place-led, cinematic single frame === */
+  [data-section="hero"]{position:relative;height:min(800px,90vh);background:#000;
+    color:var(--color-on-emphatic);overflow:hidden}
+  [data-section="hero"] .hero-img{position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:center 60%}
+  [data-section="hero"] .hero-scrim{position:absolute;inset:0;
+    background:linear-gradient(to top,
+      rgba(31,27,22,.78) 0%,
+      rgba(31,27,22,.55) 22%,
+      rgba(31,27,22,.22) 42%,
+      rgba(31,27,22,0) 65%),
+      radial-gradient(at 0% 100%, rgba(31,27,22,.35), transparent 50%)}
+  [data-section="hero"] .hero-place{position:absolute;top:32px;left:0;right:0;
+    text-align:center;font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+    color:rgba(253,249,245,.78)}
+  [data-section="hero"] .hero-place strong{color:rgba(253,249,245,.95);font-weight:500;letter-spacing:.32em}
+  [data-section="hero"] .hero-rule{position:absolute;top:62px;left:50%;width:32px;height:1px;
+    transform:translateX(-50%);background:rgba(253,249,245,.4)}
+  [data-section="hero"] .hero-content{position:absolute;inset:auto 0 0 0;padding:0 32px 72px;
+    max-width:var(--container-w);margin:0 auto;left:0;right:0}
+  [data-section="hero"] .eyebrow{color:rgba(253,249,245,.85);margin-bottom:20px}
+  [data-section="hero"] h1{font-family:var(--font-display);font-size:var(--fs-h1);
+    font-weight:400;line-height:1;letter-spacing:-.012em;max-width:14ch;margin-bottom:24px}
+  [data-section="hero"] .hero-body{font-size:18px;line-height:1.5;color:rgba(253,249,245,.86);
+    max-width:46ch;margin-bottom:30px}
+  [data-section="hero"] .hero-actions{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+  [data-section="hero"] .reserve-here{display:inline-flex;align-items:center;gap:12px;
+    padding:14px 22px;border:1px solid rgba(253,249,245,.7);font-size:12px;letter-spacing:.2em;
+    text-transform:uppercase;border-radius:var(--radius);
+    transition:background .2s,color .2s,border-color .2s}
+  [data-section="hero"] .reserve-here:hover{background:var(--color-on-emphatic);color:var(--color-ink);
+    border-color:var(--color-on-emphatic)}
+
+  /* === Place-index strip (NEW vs A) === */
+  [data-section="place-index"]{padding-block:60px;background:var(--color-page);
+    border-bottom:var(--line-thin)}
+  [data-section="place-index"] .pi{display:grid;grid-template-columns:1fr 2.4fr;gap:64px;
+    align-items:center}
+  [data-section="place-index"] .pi-h{display:flex;flex-direction:column;gap:12px}
+  [data-section="place-index"] .pi-count{font-family:var(--font-display);font-weight:400;
+    font-size:80px;line-height:1;letter-spacing:-.02em;color:var(--color-ink)}
+  [data-section="place-index"] .pi-count em{font-style:italic;color:var(--color-ink-soft);
+    font-size:18px;font-family:var(--font-display);letter-spacing:.04em;display:block;margin-top:6px}
+  [data-section="place-index"] .pi-text p{font-size:18px;line-height:1.55;color:var(--color-ink-muted);
+    max-width:48ch;margin-bottom:16px}
+  [data-section="place-index"] .pi-list{display:grid;grid-template-columns:repeat(4,1fr);
+    gap:6px 28px;font-family:var(--font-display);font-size:18px;line-height:1.5;
+    color:var(--color-ink);max-width:680px}
+  [data-section="place-index"] .pi-list a{transition:color .15s}
+  [data-section="place-index"] .pi-list a:hover{color:var(--color-ink-soft)}
+
+  /* === Hotels-feature: single full-bleed === */
+  [data-section="hotels-feature"]{padding-block:var(--space-section);background:var(--color-page)}
+  [data-section="hotels-feature"] .hf-frame{position:relative;border-radius:var(--radius-card);
+    overflow:hidden;height:560px}
+  [data-section="hotels-feature"] .hf-frame img{position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover}
+  [data-section="hotels-feature"] .hf-scrim{position:absolute;inset:0;
+    background:linear-gradient(75deg,rgba(31,27,22,.72) 0%,rgba(31,27,22,.42) 30%,rgba(31,27,22,0) 55%)}
+  [data-section="hotels-feature"] .hf-text{position:absolute;left:48px;bottom:48px;color:var(--color-on-emphatic);
+    max-width:46ch}
+  [data-section="hotels-feature"] .hf-text .place-eyebrow{color:rgba(253,249,245,.78);margin-bottom:18px}
+  [data-section="hotels-feature"] .hf-text .place-eyebrow strong{color:rgba(253,249,245,.96)}
+  [data-section="hotels-feature"] .hf-text .place-eyebrow::before{color:rgba(253,249,245,.78)}
+  [data-section="hotels-feature"] .hf-text h2{font-family:var(--font-display);font-size:var(--fs-h2);
+    font-weight:400;line-height:1.05;margin-bottom:14px}
+  [data-section="hotels-feature"] .hf-text p{color:rgba(253,249,245,.82);font-size:16px;
+    line-height:1.55;margin-bottom:20px;max-width:42ch}
+  [data-section="hotels-feature"] .hf-meta{position:absolute;right:48px;bottom:48px;
+    color:rgba(253,249,245,.7);font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+    text-align:right;line-height:1.7}
+  [data-section="hotels-feature"] .hf-meta strong{color:rgba(253,249,245,.96);font-weight:500;
+    display:block;margin-bottom:4px}
+
+  /* === Experiences (5-up, with PLACE eyebrows) === */
+  [data-section="experiences"]{background:var(--color-surface);padding-block:var(--space-section)}
+  [data-section="experiences"] .section-head{display:flex;align-items:flex-end;justify-content:space-between;
+    gap:48px;margin-bottom:var(--space-block)}
+  [data-section="experiences"] .section-head h2{font-family:var(--font-display);font-size:var(--fs-h2);
+    font-weight:400;line-height:1.1;max-width:24ch}
+  [data-section="experiences"] .section-head .section-meta{font-size:var(--fs-meta);color:var(--color-ink-soft);
+    text-align:right;line-height:1.5;max-width:36ch}
+  [data-section="experiences"] .xp{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+  [data-section="experiences"] .xp__card{display:flex;flex-direction:column;gap:14px}
+  [data-section="experiences"] .xp__card img{aspect-ratio:4/5;width:100%;object-fit:cover;
+    border-radius:var(--radius-card)}
+  [data-section="experiences"] .xp__card .place-eyebrow{font-size:10px}
+  [data-section="experiences"] .xp__card h3{font-family:var(--font-display);font-size:var(--fs-h3);
+    font-weight:400;line-height:1.2}
+  [data-section="experiences"] .xp__card p{font-size:14px;color:var(--color-ink-muted);line-height:1.5}
+  [data-section="experiences"] .xp__card .cta{font-size:11px;margin-top:auto}
+
+  /* === Editorial break (Djokovic) — preserved as rhythm change === */
+  [data-section="editorial-break"]{padding:0;background:var(--color-emphatic);color:var(--color-on-emphatic)}
+  [data-section="editorial-break"] .eb{position:relative;height:520px;overflow:hidden}
+  [data-section="editorial-break"] .eb img{position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:center 28%}
+  [data-section="editorial-break"] .eb-scrim{position:absolute;inset:0;
+    background:linear-gradient(115deg,rgba(31,27,22,.78) 0%,rgba(31,27,22,.45) 35%,rgba(31,27,22,0) 65%)}
+  [data-section="editorial-break"] .eb-content{position:absolute;inset:0;display:flex;align-items:center;
+    padding:0 32px;max-width:var(--container-w);margin:0 auto;left:0;right:0}
+  [data-section="editorial-break"] .eb-content > div{max-width:38ch}
+  [data-section="editorial-break"] .place-eyebrow{color:rgba(253,249,245,.78);margin-bottom:14px}
+  [data-section="editorial-break"] .place-eyebrow strong{color:rgba(253,249,245,.95)}
+  [data-section="editorial-break"] .place-eyebrow::before{color:rgba(253,249,245,.78)}
+  [data-section="editorial-break"] h2{font-family:var(--font-display);font-size:42px;font-weight:400;
+    line-height:1.05;margin-bottom:18px}
+  [data-section="editorial-break"] p{font-size:16px;line-height:1.6;color:rgba(253,249,245,.82);
+    margin-bottom:24px}
+
+  /* === World of Aman — horizontal scroll filmstrip === */
+  [data-section="world"]{background:var(--color-page);padding-block:var(--space-section)}
+  [data-section="world"] .section-head{display:flex;align-items:flex-end;justify-content:space-between;
+    gap:48px;margin-bottom:var(--space-block);max-width:var(--container-w);margin-left:auto;margin-right:auto;
+    padding:0 32px}
+  [data-section="world"] .section-head h2{font-family:var(--font-display);font-size:var(--fs-h2);font-weight:400;line-height:1.1;max-width:24ch}
+  [data-section="world"] .section-head .nav{display:flex;gap:8px}
+  [data-section="world"] .section-head .nav button{width:40px;height:40px;border-radius:50%;
+    border:1px solid var(--color-ink);font-size:14px;line-height:0;
+    transition:background .2s,color .2s}
+  [data-section="world"] .section-head .nav button:hover{background:var(--color-ink);color:var(--color-page)}
+  [data-section="world"] .strip{display:grid;grid-auto-flow:column;grid-auto-columns:380px;gap:18px;
+    overflow-x:auto;padding:0 32px 12px;scroll-snap-type:x mandatory;scroll-padding-left:32px;
+    scrollbar-width:thin}
+  [data-section="world"] .strip::-webkit-scrollbar{height:6px}
+  [data-section="world"] .strip::-webkit-scrollbar-thumb{background:var(--color-line);border-radius:8px}
+  [data-section="world"] .strip__card{scroll-snap-align:start;display:flex;flex-direction:column;gap:14px;
+    background:var(--color-page)}
+  [data-section="world"] .strip__card img{aspect-ratio:3/4;width:100%;object-fit:cover;
+    border-radius:var(--radius-card)}
+  [data-section="world"] .strip__card .eyebrow{margin-top:4px}
+  [data-section="world"] .strip__card h3{font-family:var(--font-display);font-size:24px;font-weight:400;line-height:1.2}
+  [data-section="world"] .strip__card p{font-size:14px;color:var(--color-ink-muted);line-height:1.55}
+
+  /* === Newsletter === */
+  [data-section="newsletter"]{background:var(--color-surface-deep);padding-block:64px}
+  [data-section="newsletter"] .nl{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;
+    max-width:1080px;margin:0 auto}
+  [data-section="newsletter"] h2{font-family:var(--font-display);font-size:var(--fs-h2);font-weight:400;
+    line-height:1.1;margin-bottom:8px}
+  [data-section="newsletter"] p{color:var(--color-ink-muted);font-size:15px;line-height:1.5}
+  [data-section="newsletter"] form{display:flex;border-bottom:1px solid var(--color-ink);padding-bottom:6px}
+  [data-section="newsletter"] input{flex:1;background:transparent;border:0;font:inherit;font-size:15px;
+    padding:10px 0;color:var(--color-ink);outline:0}
+  [data-section="newsletter"] input::placeholder{color:var(--color-ink-soft)}
+  [data-section="newsletter"] button[type=submit]{font-size:11px;letter-spacing:.22em;text-transform:uppercase}
+
+  /* === Footer === */
+  footer{background:var(--color-emphatic);color:var(--color-on-emphatic);padding:64px 0 32px}
+  footer .container{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px}
+  footer h4{font-family:var(--font-body);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:rgba(253,249,245,.7);margin-bottom:18px}
+  footer ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+  footer a{font-size:14px;color:rgba(253,249,245,.86);transition:color .15s}
+  footer a:hover{color:var(--color-on-emphatic)}
+  footer .destinations{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;column-gap:24px}
+  footer .footer-mark{font-family:var(--font-display);font-size:32px;letter-spacing:.5em;
+    text-transform:uppercase;padding-left:.5em;color:var(--color-on-emphatic);margin-bottom:24px}
+  footer .footer-tag{font-size:14px;color:rgba(253,249,245,.66);max-width:32ch;line-height:1.5}
+  footer .legal{margin-top:48px;border-top:1px solid rgba(253,249,245,.15);padding-top:24px;
+    display:flex;justify-content:space-between;align-items:center;font-size:12px;
+    color:rgba(253,249,245,.55);flex-wrap:wrap;gap:16px}
+  footer .social{display:flex;gap:14px;align-items:center}
+  footer .social a{width:32px;height:32px;border:1px solid rgba(253,249,245,.25);border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;font-size:12px}
+  footer .social a:hover{border-color:rgba(253,249,245,.7)}
+
+  @media (max-width:1100px){
+    [data-section="experiences"] .xp{grid-template-columns:repeat(3,1fr)}
+    [data-section="place-index"] .pi{grid-template-columns:1fr;gap:24px}
+    [data-section="place-index"] .pi-list{grid-template-columns:repeat(3,1fr)}
+    [data-section="hotels-feature"] .hf-meta{display:none}
+    footer .container{grid-template-columns:1fr 1fr}
+    footer .destinations{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:720px){
+    [data-section="hero"] h1{font-size:42px}
+    [data-section="experiences"] .xp{grid-template-columns:repeat(2,1fr)}
+    [data-section="place-index"] .pi-count{font-size:60px}
+    [data-section="place-index"] .pi-list{grid-template-columns:repeat(2,1fr)}
+    [data-section="hotels-feature"] .hf-frame{height:480px}
+    [data-section="hotels-feature"] .hf-text{left:24px;bottom:24px;right:24px;max-width:none}
+    [data-section="newsletter"] .nl{grid-template-columns:1fr;gap:24px}
+    footer .container{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body data-variant="B">
+
+<header class="util" data-section="masthead">
+  <div class="util__left">
+    <button class="util__menu">Menu</button>
+  </div>
+  <a href="#" class="util__brand" aria-label="Aman">AMAN</a>
+  <div class="util__right">
+    <span>EN</span>
+    <a href="#reserve" class="util__reserve">Reserve</a>
+  </div>
+</header>
+
+<main>
+
+  <section data-section="hero">
+    <img class="hero-img" src="https://www.aman.com/sites/default/files/2021-08/amanjiwo.jpg" alt="Amanjiwo, Central Java">
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <p class="hero-place"><strong>AMANJIWO</strong> · CENTRAL JAVA · INDONESIA</p>
+    <span class="hero-rule" aria-hidden="true"></span>
+    <div class="hero-content">
+      <p class="eyebrow">A summer in residence</p>
+      <h1>Summer's Warm Embrace</h1>
+      <p class="hero-body">Across the Aman world, discover new and noteworthy experiences that provide an authentic connection to the soul of a place.</p>
+      <div class="hero-actions">
+        <a href="#reserve" class="reserve-here">Reserve at Amanjiwo &nbsp;→</a>
+        <a href="#summer" class="cta cta--invert">Read the season</a>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="place-index">
+    <div class="container pi">
+      <div class="pi-h">
+        <div class="pi-count">36<em>resorts, hotels &amp; private residences</em></div>
+        <div class="pi-count" style="font-size:48px">20<em>countries — one register</em></div>
+      </div>
+      <div class="pi-text">
+        <p>The Aman world is named, not numbered. Every property carries its own light, its own coastline, its own quiet. Choose a place — or let the season choose you.</p>
+        <div class="pi-list" role="list">
+          <a href="#">Amanjiwo · Java</a>
+          <a href="#">Amanyara · Caribbean</a>
+          <a href="#">Amankora · Bhutan</a>
+          <a href="#">Aman Tokyo · Japan</a>
+          <a href="#">Amangiri · Utah</a>
+          <a href="#">Amanzoe · Argolid</a>
+          <a href="#">Amanpuri · Phuket</a>
+          <a href="#">Aman New York · USA</a>
+          <a href="#">Amankila · Bali</a>
+          <a href="#">Amandari · Bali</a>
+          <a href="#">Amanjena · Marrakech</a>
+          <a href="#">All 36 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="hotels-feature">
+    <div class="container">
+      <div class="hf-frame">
+        <img src="https://www.aman.com/sites/default/files/styles/carousel_cards_extra_large_2x/public/2024-08/amanyara_turks_caicos_-_caribbean_exterior.jpg?itok=Yvjjkd17" alt="Amanyara, Turks &amp; Caicos">
+        <div class="hf-scrim" aria-hidden="true"></div>
+        <div class="hf-text">
+          <p class="place-eyebrow"><strong>AMANYARA</strong> · TURKS &amp; CAICOS</p>
+          <h2>Where the Caribbean stays quiet.</h2>
+          <p>Eighteen pavilions and thirty-six villas on a private peninsula, fringed by a nature reserve and one of the longest coral reefs in the hemisphere.</p>
+          <a href="#amanyara" class="cta cta--invert">Explore Amanyara</a>
+        </div>
+        <div class="hf-meta" aria-hidden="false">
+          <strong>21° 57' N</strong>
+          <span>72° 17' W</span>
+          <span style="margin-top:10px;display:block">2007 · J. M. Gathy</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="experiences">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Seasonal Experiences</p>
+          <h2>This summer, in five places</h2>
+        </div>
+        <p class="section-meta">From the Argolid coast to the cliffs of Phuket — five named places, five different summers.</p>
+      </div>
+      <div class="xp">
+        <article class="xp__card">
+          <img src="https://www.aman.com/sites/default/files/styles/listing_teaser_extra_large_2x/public/2024-10/amanzoe-accommodation-villa-21-4299_2.jpg?itok=ZOTJQQ3M" alt="Amanzoe, Argolid">
+          <p class="place-eyebrow"><strong>AMANZOE</strong> · ARGOLID</p>
+          <h3>The villa estate</h3>
+          <p>Pavilions and private villas above the Aegean — exclusive use, full Aman service.</p>
+          <a class="cta" href="#villas">View villas</a>
+        </article>
+        <article class="xp__card">
+          <img src="https://www.aman.com/sites/default/files/styles/listing_teaser_extra_large_2x/public/2022-08/Aman%20New%20York%2C%20Exterior%20Facade%2C%20Website%20-%20Square.jpg?itok=rKOwMd9x" alt="Aman New York">
+          <p class="place-eyebrow"><strong>AMAN NEW YORK</strong> · USA</p>
+          <h3>The city, slowed</h3>
+          <p>The Crown Building on Fifth Avenue, with the only three-storey spa in the city.</p>
+          <a class="cta" href="#city">See city resorts</a>
+        </article>
+        <article class="xp__card">
+          <img src="https://www.aman.com/sites/default/files/styles/listing_teaser_extra_large_2x/public/2024-06/aman-i-khas_india_-_spa_exterior.jpg?itok=KztBtuUD" alt="Aman-i-Khas, Ranthambore">
+          <p class="place-eyebrow"><strong>AMAN-I-KHAS</strong> · RANTHAMBORE</p>
+          <h3>Tented in tiger country</h3>
+          <p>Ten luxury Mughal-style tents at the edge of Ranthambore National Park.</p>
+          <a class="cta" href="#wilds">Step into nature</a>
+        </article>
+        <article class="xp__card">
+          <img src="https://www.aman.com/sites/default/files/styles/listing_teaser_extra_large_2x/public/2024-09/amanyara_turks_caicos_-accommodation-villa-33-pool.jpg?itok=L8jw1KKd" alt="Amanyara villa pool">
+          <p class="place-eyebrow"><strong>AMANYARA</strong> · CARIBBEAN</p>
+          <h3>At the water's edge</h3>
+          <p>Villas with pools meeting Caribbean horizon — three thousand acres of nature reserve at the door.</p>
+          <a class="cta" href="#water">Find the coast</a>
+        </article>
+        <article class="xp__card">
+          <img src="https://www.aman.com/sites/default/files/styles/listing_teaser_extra_large_2x/public/2025-11/Brand%20Ambassador_%20Novak%20Djokovic%20-%20Amanpuri%2C%20Thailand%2C%20Tennis%20Courts%20%2812%29.jpg?itok=vogFhR0U" alt="Amanpuri tennis court">
+          <p class="place-eyebrow"><strong>AMANPURI</strong> · PHUKET</p>
+          <h3>The detoxification programme</h3>
+          <p>A three-day reset on the cliffs of Phuket, curated with Novak Djokovic.</p>
+          <a class="cta" href="#detox">See the programme</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="editorial-break">
+    <div class="eb">
+      <img src="https://www.aman.com/sites/default/files/styles/listing_teaser_slim_extra_large_2x/public/2026-04/Brand-Ambassador_-Novak-Djokovic---Aman-New-York--United-States.jpg?itok=B19i2nd2" alt="Novak Djokovic — Aman New York">
+      <div class="eb-scrim" aria-hidden="true"></div>
+      <div class="eb-content">
+        <div>
+          <p class="place-eyebrow"><strong>AMAN NEW YORK</strong> · A NOVAK DJOKOVIC PROGRAMME</p>
+          <h2>The Programme, in residence at Amanpuri.</h2>
+          <p>Three days of recovery, movement and quiet — curated with our global ambassador, set on the cliffs of Phuket.</p>
+          <a class="cta cta--invert" href="#novak">Read the programme</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="world">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">The World of Aman</p>
+        <h2>Beyond the resorts — and still under the same sky.</h2>
+      </div>
+      <div class="nav" aria-label="Filmstrip controls">
+        <button aria-label="Previous">←</button>
+        <button aria-label="Next">→</button>
+      </div>
+    </div>
+    <div class="strip">
+      <article class="strip__card">
+        <img src="https://www.aman.com/sites/default/files/styles/listing_teaser_slim_extra_large_2x/public/2025-02/aman_digital_gift_card_-_hills28.jpg?itok=X1LFCsSZ" alt="Aman gift card">
+        <p class="eyebrow">Aman Gift Card</p>
+        <h3>Thoughtful gestures</h3>
+        <p>Redeemable across the Aman world — 36 places, one card.</p>
+        <a class="cta" href="#gift">Browse gift cards</a>
+      </article>
+      <article class="strip__card">
+        <img src="https://www.aman.com/sites/default/files/styles/listing_teaser_slim_extra_large_2x/public/2026-02/Aman%20at%20Sea%20Hero%20Exterior-Portrait.jpg?itok=RptdYdZf" alt="Amangati — Aman at Sea">
+        <p class="eyebrow">Aman at Sea</p>
+        <h3>Amangati</h3>
+        <p>The first vessel of Aman at Sea begins her inaugural season this winter.</p>
+        <a class="cta" href="#sea">Step aboard</a>
+      </article>
+      <article class="strip__card">
+        <img src="https://www.aman.com/sites/default/files/styles/listing_teaser_slim_extra_large_2x/public/2026-04/Aman-Essentials--Amanruya--Aman-Tennis-Club--Digital-Images.jpg?itok=eRyeg4DB" alt="Aman Essentials Tennis Club">
+        <p class="eyebrow">Aman Shop</p>
+        <h3>Aman Essentials Tennis Club</h3>
+        <p>A limited-edition collection from Aman Essentials with The Webster.</p>
+        <a class="cta" href="#shop">Browse the shop</a>
+      </article>
+      <article class="strip__card">
+        <img src="https://www.aman.com/sites/default/files/styles/listing_teaser_extra_large_2x/public/2024-10/amanzoe-accommodation-villa-21-4299_2.jpg?itok=ZOTJQQ3M" alt="Aman residences">
+        <p class="eyebrow">Aman Residences</p>
+        <h3>A home in the Aman world</h3>
+        <p>Branded residences at Aman New York, Amanyara, Amanzoe and beyond.</p>
+        <a class="cta" href="#residences">Discover residences</a>
+      </article>
+    </div>
+  </section>
+
+  <section data-section="newsletter" id="signup">
+    <div class="container nl">
+      <div>
+        <p class="eyebrow" style="margin-bottom:10px">Get inspired</p>
+        <h2>Letters from the Aman world</h2>
+        <p>Quiet stories, new properties, the season as it unfolds.</p>
+      </div>
+      <form onsubmit="event.preventDefault()">
+        <input type="email" placeholder="Your email address" aria-label="Your email address">
+        <button type="submit">Sign up &nbsp;→</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer data-section="footer">
+  <div class="container">
+    <div>
+      <div class="footer-mark">AMAN</div>
+      <p class="footer-tag">36 named places, 20 countries — one register, one quiet.</p>
+    </div>
+    <div>
+      <h4>Destinations · Asia</h4>
+      <ul>
+        <li><a href="#">Amanpuri · Phuket</a></li>
+        <li><a href="#">Amankora · Bhutan</a></li>
+        <li><a href="#">Aman Tokyo · Japan</a></li>
+        <li><a href="#">Amankila · Bali</a></li>
+        <li><a href="#">Amandari · Bali</a></li>
+        <li><a href="#">Amanjiwo · Java</a></li>
+        <li><a href="#">All Asia →</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Destinations · Americas</h4>
+      <ul>
+        <li><a href="#">Aman New York · USA</a></li>
+        <li><a href="#">Amangiri · Utah</a></li>
+        <li><a href="#">Amanyara · Caribbean</a></li>
+        <li><a href="#">Amangani · Wyoming</a></li>
+        <li><a href="#">Amanera · DR</a></li>
+        <li><a href="#">All Americas →</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Destinations · EMEA</h4>
+      <ul>
+        <li><a href="#">Amanjena · Marrakech</a></li>
+        <li><a href="#">Amanzoe · Argolid</a></li>
+        <li><a href="#">Aman Venice · Italy</a></li>
+        <li><a href="#">Aman Le Mélézin · Courchevel</a></li>
+        <li><a href="#">Amanruya · Bodrum</a></li>
+        <li><a href="#">All EMEA →</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container legal">
+    <div>© 2026 Aman Group S.à r.l. All rights reserved.</div>
+    <div class="social" aria-label="Follow Aman">
+      <a href="#">IG</a><a href="#">FB</a><a href="#">YT</a><a href="#">LI</a><a href="#">WC</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

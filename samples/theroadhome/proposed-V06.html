@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy:        stardust:prototype (Tier 2 / V06)
+  writtenAt:        2026-04-28T16:52:00Z
+  variant:
+    tier: 2
+    id: V06
+    slug: bolder
+    dominantMove: $impeccable bolder
+    thesis: "Confident-institutional moved one notch toward expressive. Larger type, deeper colour confidence, full-bleed photography moments. The captured trait this amplifies: TRH's all-caps display tagline. We hold restraint in copy and never overshoot into 120pt-airy anonymity."
+    densityTier: balanced (sectionPadding.desktop = 60px)
+    register: confident-institutional
+    capturedTraitAmplified: "All-caps DINNextLTPro display tagline (REFUGE. RESOURCES. RELIEF.) — already a brand asset, raised one notch in scale and weight"
+  IAPriority:
+    - 211 panel as a sticky right rail above-fold + a bolder primary card under hero
+  unsourcedContent: []
+  stardustVersion: 0.2.0
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#005560">
+<title>The Road Home — Refuge. Resources. Relief. (V06 · Bolder)</title>
+<style>
+  @font-face { font-family:'DINNextLTPro'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/dinnextltpro/DINNextLTPro-Regular.woff2') format('woff2'); font-weight:400; font-display:swap }
+  @font-face { font-family:'DINNextLTPro'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/dinnextltpro/DINNextLTPro-Bold.woff2') format('woff2'); font-weight:700; font-display:swap }
+  @font-face { font-family:'DINNextLTPro'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/dinnextltpro/DINNextLTPro-Black.woff2') format('woff2'); font-weight:900; font-display:swap }
+  @font-face { font-family:'HarmoniaSans'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/harmoniasans/HarmoniaSansProRegular.woff2') format('woff2'); font-weight:400; font-display:swap }
+  @font-face { font-family:'HarmoniaSans'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/harmoniasans/HarmoniaSansProSemiBd.woff2') format('woff2'); font-weight:500; font-display:swap }
+  @font-face { font-family:'HarmoniaSans'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/harmoniasans/HarmoniaSansProBold.woff2') format('woff2'); font-weight:700; font-display:swap }
+
+  :root{
+    --civic-teal:#008192; --deep-teal:#005560; --teal-mid:#006A77; --teal-shadow:#105560;
+    --lavender:#8F77AD; --aubergine:#604A7B; --pale-lavender:#C8BCD6;
+    --slate:#67696A; --pale-teal-gray:#E9EEEF; --soft-gray:#CECFD0;
+    --white:#FFFFFF; --crimson:#DC323D;
+    --bg:#FFFFFF; --ink:#0E1417;
+    --display:'DINNextLTPro', ui-sans-serif, sans-serif;
+    --body:'HarmoniaSans', ui-sans-serif, sans-serif;
+    --sp-d:60px; --sp-t:44px; --sp-m:32px;
+    --container:1280px;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:var(--body);color:var(--ink);background:var(--bg);font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:var(--civic-teal);text-decoration:none}
+  a:hover{color:var(--deep-teal);text-decoration:underline;text-underline-offset:3px}
+  img{max-width:100%;display:block}
+  h1,h2,h3,h4{font-family:var(--display);margin:0;color:var(--ink)}
+  .container{max-width:var(--container);margin:0 auto;padding:0 32px}
+
+  .skip{position:absolute;left:-9999px;top:8px;background:var(--crimson);color:#fff;padding:10px 14px;border-radius:4px;font-weight:700;z-index:99}
+  .skip:focus-visible{left:8px}
+
+  /* Header — confident, deep teal full bar */
+  header.site{background:var(--deep-teal);color:#fff;padding:18px 0;position:sticky;top:0;z-index:30;box-shadow:0 1px 0 rgba(0,0,0,0.08)}
+  header.site .row{display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .wordmark{font-family:var(--display);font-weight:900;color:#fff;font-size:22px;letter-spacing:0.04em;text-transform:uppercase;display:flex;align-items:center;gap:14px}
+  .wordmark .seal{width:34px;height:34px;border-radius:50%;border:2px solid var(--pale-lavender);color:var(--pale-lavender);display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:0;font-weight:900}
+  nav.b ul{list-style:none;padding:0;margin:0;display:flex;gap:22px;font-family:var(--display);text-transform:uppercase;letter-spacing:0.08em;font-size:13px;font-weight:700;align-items:center}
+  nav.b a{color:#fff}
+  nav.b a:hover{color:var(--pale-lavender);text-decoration:none}
+  nav.b a.donate{background:var(--crimson);padding:11px 18px;border-radius:4px}
+  nav.b a.donate:hover{background:#fff;color:var(--crimson)}
+
+  /* Hero — full-bleed, big mood shape behind, confident type at scale */
+  section.hero{position:relative;background:var(--deep-teal);color:#fff;padding:var(--sp-d) 0 0;overflow:hidden}
+  section.hero::before{
+    content:""; position:absolute; top:0; right:-10%; width:60%; height:100%;
+    background:radial-gradient(closest-side at 50% 50%, var(--civic-teal) 0%, transparent 70%);
+    opacity:0.55; z-index:1;
+  }
+  section.hero::after{
+    content:""; position:absolute; bottom:-20%; left:-10%; width:55%; height:100%;
+    background:radial-gradient(closest-side at 50% 50%, var(--lavender) 0%, transparent 65%);
+    opacity:0.35; z-index:1;
+  }
+  .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:end;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,0.18)}
+  .hero h1{font-family:var(--display);font-weight:900;color:#fff;font-size:clamp(64px,8vw,120px);line-height:0.9;letter-spacing:-0.012em;text-transform:uppercase;text-wrap:balance}
+  .hero h1 .pause{color:var(--pale-lavender)}
+  .hero p.lede{font-family:var(--body);font-size:22px;color:rgba(255,255,255,0.88);max-width:42ch;margin:24px 0 28px;line-height:1.45}
+  .hero .ctas{display:flex;gap:14px;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 26px;font-family:var(--display);text-transform:uppercase;letter-spacing:0.08em;font-weight:700;border-radius:4px;font-size:15px}
+  .btn-d{background:var(--crimson);color:#fff} .btn-d:hover{background:#fff;color:var(--crimson);text-decoration:none}
+  .btn-l{background:#fff;color:var(--deep-teal)} .btn-l:hover{background:var(--pale-lavender);color:var(--deep-teal);text-decoration:none}
+
+  /* 211 panel docked into hero, bolder presence */
+  #help{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);backdrop-filter:saturate(120%);padding:26px 26px 22px;border-top:4px solid var(--crimson);position:relative;border-radius:6px}
+  #help h2{font-family:var(--display);text-transform:uppercase;letter-spacing:0.16em;color:#fff;font-size:14px;font-weight:900;margin-bottom:18px}
+  #help h2::before{content:"●  ";color:var(--crimson)}
+  #help .row{padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.18);display:flex;flex-direction:column;gap:6px}
+  #help .row:last-child{border-bottom:none;padding-bottom:0}
+  #help .ctx{font-size:13px;color:rgba(255,255,255,0.78);line-height:1.4}
+  #help a.tel{font-family:var(--display);font-weight:900;color:#fff;font-size:26px;letter-spacing:0;text-decoration:none}
+  #help a.tel:hover{color:var(--pale-lavender)}
+
+  /* Bold ribbon between hero and tiles */
+  .ribbon{background:var(--civic-teal);color:#fff;padding:16px 0;font-family:var(--display);font-weight:900;text-transform:uppercase;letter-spacing:0.18em;font-size:14px}
+  .ribbon .container{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .ribbon .lockup{display:flex;align-items:center;gap:14px}
+  .ribbon .seal{display:inline-flex;width:38px;height:38px;border:2px solid #fff;border-radius:50%;align-items:center;justify-content:center;font-size:13px;letter-spacing:0}
+
+  /* Programs in big tiles */
+  section.programs{padding:var(--sp-d) 0;background:var(--bg)}
+  .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .ptile{background:var(--white);border:2px solid var(--ink);padding:32px 28px 30px;display:flex;flex-direction:column;gap:14px;transition:transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease}
+  .ptile:hover{transform:translateY(-4px);background:var(--deep-teal);color:#fff;border-color:var(--deep-teal)}
+  .ptile:hover h3,.ptile:hover .num{color:#fff}
+  .ptile .num{font-family:var(--display);font-weight:900;color:var(--civic-teal);font-size:36px;letter-spacing:-0.005em;line-height:1}
+  .ptile h3{font-family:var(--display);text-transform:uppercase;letter-spacing:0.04em;font-size:24px;color:var(--ink)}
+  .ptile p{margin:0;color:inherit;opacity:0.82;font-size:15px}
+
+  /* Impact — big, brassy figures on civic teal */
+  section.impact{padding:var(--sp-d) 0;background:var(--civic-teal);color:#fff;border-top:4px solid var(--deep-teal)}
+  .impact-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:36px;gap:24px;flex-wrap:wrap}
+  .impact h2{font-family:var(--display);text-transform:uppercase;letter-spacing:0.18em;color:#fff;font-size:14px;font-weight:900}
+  .impact-head p{margin:0;color:rgba(255,255,255,0.85);max-width:48ch;font-size:15px}
+  .ig{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  .ig .stat{padding:20px 0;border-top:3px solid #fff}
+  .ig .num{font-family:var(--display);font-weight:900;color:#fff;font-size:clamp(72px,7vw,108px);line-height:0.92;letter-spacing:-0.012em}
+  .ig .num em{font-style:normal;color:var(--pale-lavender);font-weight:300;font-size:0.45em;vertical-align:0.45em;margin-left:4px}
+  .ig .lbl{font-size:15px;color:rgba(255,255,255,0.88);margin-top:14px;line-height:1.5;max-width:32ch}
+
+  /* Stories — bigger, bolder portraits with a hover lift */
+  section.stories{padding:var(--sp-d) 0;background:var(--ink);color:#fff}
+  section.stories .head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px;gap:24px;flex-wrap:wrap}
+  section.stories h2{font-family:var(--display);text-transform:uppercase;letter-spacing:0.18em;color:#fff;font-size:14px;font-weight:900}
+  section.stories .head a{font-family:var(--display);text-transform:uppercase;letter-spacing:0.08em;font-size:13px;color:var(--pale-lavender);font-weight:500}
+  .sgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+  .portrait{position:relative;overflow:hidden;border-radius:4px}
+  .portrait img{aspect-ratio:1/1.25;object-fit:cover;transition:transform .35s ease;width:100%}
+  .portrait:hover img{transform:scale(1.04)}
+  .portrait .pad{position:absolute;left:0;right:0;bottom:0;padding:14px;background:linear-gradient(0deg,rgba(0,0,0,0.86) 0%,rgba(0,0,0,0) 100%)}
+  .portrait .name{font-family:var(--display);font-weight:900;color:#fff;font-size:22px;letter-spacing:0.02em;text-transform:uppercase}
+  .portrait .cap{color:rgba(255,255,255,0.82);font-size:13px;margin-top:4px;line-height:1.4}
+
+  footer.site{padding:36px 0 22px;background:var(--deep-teal);color:rgba(255,255,255,0.82);font-size:14px}
+  footer.site .row{display:flex;justify-content:space-between;gap:24px;align-items:baseline;flex-wrap:wrap}
+  footer.site a{color:#fff}
+  footer.site .links{display:flex;gap:22px;font-family:var(--display);text-transform:uppercase;letter-spacing:0.1em;font-size:12px;font-weight:700}
+  footer.site .meta{font-size:12px;color:rgba(255,255,255,0.6);margin-top:14px;padding-top:12px;border-top:1px dotted rgba(255,255,255,0.2);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  @media (max-width:960px){
+    .hero-grid,.pgrid,.ig,.sgrid{grid-template-columns:1fr}
+    .hero h1{font-size:48px}
+    .sgrid{grid-template-columns:repeat(3,1fr)}
+  }
+  @media (max-width:560px){.sgrid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#help">Skip to immediate help</a>
+
+<header class="site">
+  <div class="container row">
+    <span class="wordmark">The Road Home <span class="seal">100</span></span>
+    <nav class="b" aria-label="Primary"><ul>
+      <li><a href="/get-help/">Get Help</a></li>
+      <li><a href="/give-main/">Give</a></li>
+      <li><a href="/get-involved/">Get Involved</a></li>
+      <li><a href="/about-us/">About</a></li>
+      <li><a class="donate" href="/give-main/">Donate</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<section class="hero" data-section-role="hero" data-section-pos="1">
+  <div class="container hero-grid">
+    <div>
+      <h1>Refuge<span class="pause">.</span> Resources<span class="pause">.</span> Relief<span class="pause">.</span></h1>
+      <p class="lede">Emergency shelter, supportive services, and housing assistance — built across a hundred years to help people step out of homelessness in Salt Lake County and along the Wasatch Front.</p>
+      <div class="ctas">
+        <a class="btn btn-d" href="/give-main/">Donate</a>
+        <a class="btn btn-l" href="/get-involved/">Volunteer</a>
+      </div>
+    </div>
+    <aside id="help" data-section-role="immediate-help">
+      <h2>Need help right now</h2>
+      <div class="row"><span class="ctx">Looking for shelter tonight</span><a class="tel" href="tel:8019909999">801·990·9999</a></div>
+      <div class="row"><span class="ctx">Housing crisis</span><a class="tel" href="tel:8013592444">801·359·2444</a></div>
+      <div class="row"><span class="ctx">Other needs</span><a class="tel" href="tel:211">2·1·1</a></div>
+    </aside>
+  </div>
+  <div class="ribbon">
+    <div class="container">
+      <span class="lockup"><span class="seal">100</span> A century in this work · 1923–2026</span>
+      <span>Salt Lake County · Wasatch Front · Four-star Charity Navigator rated</span>
+    </div>
+  </div>
+</section>
+
+<section class="programs" data-section-role="program-pillars" data-section-pos="2">
+  <div class="container pgrid">
+    <a href="/get-help/" class="ptile" style="text-decoration:none;color:inherit"><div class="num">01</div><h3>Emergency Shelter</h3><p>A safe place to sleep tonight, every night, for individuals and families in immediate need.</p></a>
+    <a href="/get-help/" class="ptile" style="text-decoration:none;color:inherit"><div class="num">02</div><h3>Supportive Services</h3><p>Case management, employment, mental and physical health navigation while a person is sheltered.</p></a>
+    <a href="/get-help/" class="ptile" style="text-decoration:none;color:inherit"><div class="num">03</div><h3>Housing Assistance</h3><p>Rapid re-housing, supportive housing, and the patient navigation that holds.</p></a>
+  </div>
+</section>
+
+<section class="impact" data-section-role="impact" data-section-pos="3">
+  <div class="container">
+    <div class="impact-head"><h2>Impact</h2><p>Numbers verbatim from The Road Home's 2024 reporting. Each one represents a person, not an outcome.</p></div>
+    <div class="ig">
+      <div class="stat"><div class="num">1,550<em>+</em></div><div class="lbl">people in housing in the community on any given night.</div></div>
+      <div class="stat"><div class="num">60<em>%</em></div><div class="lbl">of people who shelter with us receive case-management services.</div></div>
+      <div class="stat"><div class="num">3,491</div><div class="lbl">people assisted last year with employment and housing-related services.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="stories" data-section-role="stories" data-section-pos="4">
+  <div class="container">
+    <div class="head"><h2>Housing Stories</h2><a href="/about-us/news/">All stories →</a></div>
+    <div class="sgrid">
+      <article class="portrait"><img alt="Cole" src="https://theroadhome.org/wp-content/uploads/2021/01/Cole_Canva-Stock-Photo_BW.jpg"><div class="pad"><div class="name">Cole</div><div class="cap">Years in shelter; supportive housing.</div></div></article>
+      <article class="portrait"><img alt="Jay" src="https://theroadhome.org/wp-content/uploads/2021/01/Jay_Canva-Stock-Photo_BW.jpg"><div class="pad"><div class="name">Jay</div><div class="cap">Found employment via TRH navigation.</div></div></article>
+      <article class="portrait"><img alt="Sue" src="https://theroadhome.org/wp-content/uploads/2021/01/Sue_Canva-Stock-Photo_BW.jpg"><div class="pad"><div class="name">Sue</div><div class="cap">Re-housed with family.</div></div></article>
+      <article class="portrait"><img alt="Jordan" src="https://theroadhome.org/wp-content/uploads/2021/01/Jordan_Canva-Stock-Photo_BW.jpg"><div class="pad"><div class="name">Jordan</div><div class="cap">Case management through medical recovery.</div></div></article>
+      <article class="portrait"><img alt="Ray" src="https://theroadhome.org/wp-content/uploads/2021/01/Ray_Canva-Stock-Photo_BW.jpg"><div class="pad"><div class="name">Ray</div><div class="cap">Long-term resident, Palmer Court.</div></div></article>
+      <article class="portrait"><img alt="Randall" src="https://theroadhome.org/wp-content/uploads/2021/01/Randall_Canva-Stock-Photo_BW.jpg"><div class="pad"><div class="name">Randall</div><div class="cap">Rapid re-housing; back at work in months.</div></div></article>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="container">
+    <div class="row">
+      <div class="links">
+        <a href="/get-help/">Get Help</a>
+        <a href="/give-main/">Give</a>
+        <a href="/get-involved/">Get Involved</a>
+        <a href="/about-us/">About</a>
+      </div>
+      <div>1415 S Main Street, Salt Lake City, UT 84115 · 801.359.4142</div>
+    </div>
+    <div class="meta">
+      <span>© 2026 The Road Home · A century of stepping people back into a home of their own</span>
+      <span>Four-Star Charity Navigator rated</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
