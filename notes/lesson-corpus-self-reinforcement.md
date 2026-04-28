@@ -155,9 +155,10 @@ Pick this back up when one of:
 
 ## Source files (reference)
 
-The three feedback corpora that drove this analysis live outside
-this repo (in user's `tmp/` projects). When this revives, copy
-them into a corpus seed at `skills/stardust/reference/lesson-corpus-seed-2026-04-28/`
+The three agent-self-critique corpora that drove the original
+analysis live outside this repo (in user's `tmp/` projects). When
+this revives, copy them into a corpus seed at
+`skills/stardust/reference/lesson-corpus-seed-2026-04-28/`
 so the analysis is reproducible.
 
 ```
@@ -168,3 +169,39 @@ so the analysis is reproducible.
 
 These three are the v0 of `stardust.lesson.v1` even if the schema
 isn't yet locked.
+
+## Human-review corpus (in this repo)
+
+In addition to the agent-self-critique files above, human-taste
+reviews are now collected in this repo:
+
+- **`notes/human-review-2026-04-28-pass1.md`** — first batch, 9
+  projects reviewed in free-form prose, 5 cross-project patterns
+  extracted (L-A through L-E), 5 single-project findings tracked
+  (L-F through L-J). Reviewer: paolomoz.
+
+The first batch surfaced one finding important enough to warrant
+its own dedicated note:
+
+- **`notes/variant-convergence.md`** — captures L-B "variants
+  look like reskins" as a structural problem, not a refinement.
+  Multi-variant ideation is the load-bearing feature at risk;
+  the convergence pattern recurs across 4 unrelated brands.
+  Highest-leverage candidate for spec-tightening when this
+  pipeline revives.
+
+**Plan:** continue collecting human reviews to a target of 20–30
+total (diverse across register × industry × complexity, not just
+B2B fintech homepages). Schema stays free-form prose for the
+first ~10 reviews; lock `stardust.lesson.v1` only when natural
+patterns have surfaced. See the parent note's checkpoints
+(15 / 25–30 / stop) for cadence.
+
+**Recurrence signal already present.** BAC's earlier
+self-critique L-012 ("Generic Premium-airline tone") recurred
+on fiserv / festool / st2-5 in the human-review pass. Same
+brand's L-003 ("booking widget rendered as static spans")
+recurred on the SAME project's same prototype. Both because
+the corpus pipeline is deferred — predicted, observed, and the
+strongest argument for the pipeline being valuable when wired
+in.
