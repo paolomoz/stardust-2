@@ -1,0 +1,1751 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+_provenance:
+  writtenBy: stardust:prototype (block-demo bold variant)
+  writtenAt: 2026-04-29
+  basis: stardust/current/pages/block-demo.json (55 blocks)
+  designSystem: DESIGN.md / DESIGN.json (Mode A brand-faithful + bold palette + richer imagery)
+  variant: bold
+  inheritsFrom: block-demo-proposed.html (canonical V-A) which it replaces in user preference
+  amplifies:
+    - Broader surface palette: cream, cool, mustard-tint, pistachio-tint, blueberry-tint, ginger-tint, charcoal, navy, Vitamix Red peaks
+    - Vortex motif on Hero / Best Pick / Verdict / Countdown / AI query
+    - Real CDN imagery on Hero, Best Pick (with crown badge), Banner Split, Tips Banner (overlay), Cards, Product Cards (with badge ribbons), Category Cards, Recipe Cards, Recipe Steps, Technique Spotlight, Featured Recipe, Timeline, Hotspot, Video, Collage, Related Articles, Related Recipes, Product Recommendation
+    - Verdict Card and Countdown Timer rendered as Vitamix Red peak bands
+    - Engineering Specs amplified with red/mustard accents on the navy panel
+    - Accent rotations on Benefits, Feature Highlights, Recipe Tips, Use Case Cards, Follow Up using Mustard, Pistachio, Ginger, Blueberry secondaries
+  validations: same Mode A contract — no fonts outside Sentinel/Gotham, no hex outside captured corebook palette, no gradient text, no glassmorphism
+-->
+<title>Vitamix block library — recommender showcase (Bold)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;700&family=Montserrat:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c-bg:#FFFFFF; --c-surface:#FFFFFF; --c-surface-cream:#F6ECE4; --c-surface-cool:#DCE0E7;
+  --c-surface-muted:#F5F5F5; --c-surface-inverse:#333F48;
+  /* tinted secondaries — derived from corebook secondary palette at ~30-35% saturation */
+  --c-tint-mustard:#FBF1D9; --c-tint-ginger:#F4DECC; --c-tint-pistachio:#E6EBDC; --c-tint-blueberry:#DCE3E8; --c-tint-rose:#F8E2E2;
+  --c-divider:#E0E1E3; --c-text:#333F48; --c-text-muted:#666B70; --c-text-inverse:#FFFFFF;
+  --c-primary:#C8102E; --c-primary-hover:#A01E2A; --c-primary-active:#6C1D20;
+  --c-navy:#333F48; --c-charcoal:#262626; --c-gray:#A2AAAD;
+  --c-link:#1B68B4; --c-announce:#8C1356; --c-offer:#5E7D61;
+  --c-mustard:#DDB247; --c-ginger:#CD7E59; --c-blueberry:#A2B2BD; --c-pistachio:#7B997C;
+
+  --f-heading:'Roboto Slab','Sentinel','sentinel-fallback',Georgia,serif;
+  --f-body:'Montserrat','Gotham Narrow','gotham-narrow-fallback',Helvetica,Arial,sans-serif;
+  --f-eyebrow:'Montserrat','Gotham',sans-serif;
+  --f-mono:'JetBrains Mono','SF Mono',ui-monospace,monospace;
+
+  --t-display-1:104px; --t-display-2:80px; --t-h1:60px; --t-h2:42px; --t-h3:30px; --t-h4:22px;
+  --t-eyebrow:12px; --t-body-lg:19px; --t-body:17px; --t-body-sm:15px; --t-cta:13px; --t-detail:11px;
+
+  --r-primary:0; --r-input:4px; --r-chip:8px; --r-pill:999px;
+  --s-resting:none; --s-hover:0 2px 8px rgba(0,0,0,0.10); --s-active:0 3px 12px rgba(0,0,0,0.16); --s-deep:0 16px 56px rgba(38,38,38,0.18);
+
+  --sp-base:8px; --sp-section:88px; --sp-section-tablet:72px; --sp-section-mobile:48px; --sp-gutter:32px; --container:1280px;
+  --ease:cubic-bezier(.2,.8,.2,1); --d-fast:150ms; --d-base:240ms; --d-slow:480ms;
+}
+@media (max-width:1199px){:root{--sp-section:var(--sp-section-tablet)}}
+@media (max-width:899px){:root{--sp-section:var(--sp-section-mobile)}}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:var(--f-body);font-size:var(--t-body);line-height:1.55;color:var(--c-text);background:var(--c-bg);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{max-width:100%;display:block}
+a{color:var(--c-link);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--c-navy)}
+h1,h2,h3,h4,h5,h6{font-family:var(--f-heading);font-weight:400;color:var(--c-navy);margin:0;letter-spacing:-0.005em}
+table{border-collapse:collapse}
+button{font-family:inherit}
+
+.eyebrow{font-family:var(--f-eyebrow);font-weight:600;font-size:var(--t-eyebrow);letter-spacing:0.18em;text-transform:uppercase;color:var(--c-primary);margin:0 0 16px;display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:32px;height:2px;background:var(--c-primary)}
+.eyebrow.on-dark{color:#FFFFFF}.eyebrow.on-dark::before{background:#FFFFFF}
+.eyebrow.muted{color:var(--c-navy)}.eyebrow.muted::before{background:var(--c-navy)}
+.eyebrow.mustard{color:var(--c-ginger)}.eyebrow.mustard::before{background:var(--c-ginger)}
+.eyebrow.pistachio{color:var(--c-pistachio)}.eyebrow.pistachio::before{background:var(--c-pistachio)}
+.eyebrow.center{justify-content:center}
+
+.container{max-width:var(--container);margin:0 auto;padding:0 var(--sp-gutter)}
+section{padding:var(--sp-section) 0;position:relative}
+.section-cool{background:var(--c-surface-cool)}
+.section-cream{background:var(--c-surface-cream)}
+.section-muted{background:var(--c-surface-muted)}
+.section-mustard{background:var(--c-tint-mustard)}
+.section-ginger{background:var(--c-tint-ginger)}
+.section-pistachio{background:var(--c-tint-pistachio)}
+.section-blueberry{background:var(--c-tint-blueberry)}
+.section-rose{background:var(--c-tint-rose)}
+.section-dark{background:var(--c-surface-inverse);color:var(--c-text-inverse)}
+.section-charcoal{background:var(--c-charcoal);color:var(--c-text-inverse)}
+.section-red{background:var(--c-primary);color:var(--c-text-inverse)}
+.section-dark h1,.section-dark h2,.section-dark h3,.section-dark h4,.section-charcoal h1,.section-charcoal h2,.section-charcoal h3,.section-charcoal h4,.section-red h1,.section-red h2,.section-red h3,.section-red h4{color:#FFFFFF}
+.section-dark p,.section-charcoal p,.section-red p{color:rgba(255,255,255,0.86)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--f-body);font-weight:400;font-size:var(--t-cta);text-transform:uppercase;letter-spacing:0.04em;padding:14px 28px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:background var(--d-base) var(--ease),color var(--d-base) var(--ease),border-color var(--d-base) var(--ease);border-radius:var(--r-primary);min-width:160px;line-height:1}
+.btn-primary{background:var(--c-primary);color:#FFFFFF}.btn-primary:hover{background:var(--c-primary-hover);color:#FFFFFF}
+.btn-secondary{background:transparent;color:var(--c-navy);border-color:var(--c-navy)}.btn-secondary:hover{background:var(--c-navy);color:#FFFFFF}
+.btn-secondary.on-dark{color:#FFFFFF;border-color:#FFFFFF}.btn-secondary.on-dark:hover{background:#FFFFFF;color:var(--c-navy)}
+.btn-link{background:none;border:0;padding:0;color:var(--c-navy);text-transform:uppercase;letter-spacing:0.12em;font-size:var(--t-detail);font-weight:600;display:inline-flex;align-items:center;gap:6px;cursor:pointer;text-decoration:none}
+.btn-link::after{content:"→";font-size:14px;transition:transform var(--d-base) var(--ease)}
+.btn-link:hover::after{transform:translateX(4px)}
+.btn-block{width:100%;min-width:0}
+
+.photo{position:relative;background:linear-gradient(135deg,#cbb591 0%,#7d6446 60%,#3d3220 100%);overflow:hidden}
+.photo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.photo[data-tone="cool"]{background:linear-gradient(135deg,#a9bfc6 0%,#5a6c75 70%,#2a3138 100%)}
+.photo[data-tone="warm"]{background:linear-gradient(135deg,#f0d3b6 0%,#d39660 60%,#7e4f2a 100%)}
+.photo[data-tone="green"]{background:linear-gradient(135deg,#c8d4ad 0%,#6f8456 60%,#33402a 100%)}
+.photo[data-tone="cream"]{background:linear-gradient(135deg,#fbf3e8 0%,#e6d4ba 60%,#9c8a6c 100%)}
+.photo[data-tone="navy"]{background:linear-gradient(135deg,#5e6c78 0%,#333f48 60%,#1a2026 100%)}
+.photo[data-tone="rose"]{background:linear-gradient(135deg,#e8a394 0%,#b94c3a 50%,#5e1c14 100%)}
+
+.announce{background:var(--c-announce);color:#FFFFFF;padding:12px var(--sp-gutter);text-align:center;font-size:13px;letter-spacing:0.04em}
+.announce a{color:#FFFFFF;text-decoration:underline;text-underline-offset:2px;font-weight:400}
+.announce strong{font-weight:600;letter-spacing:0.12em;text-transform:uppercase;margin-right:8px}
+.site-header{position:sticky;top:0;background:#FFFFFF;border-bottom:1px solid var(--c-divider);z-index:50}
+.site-header .row{display:flex;align-items:center;justify-content:space-between;padding:18px var(--sp-gutter);max-width:var(--container);margin:0 auto;gap:32px}
+.brand{font-family:var(--f-heading);font-size:28px;font-weight:400;color:var(--c-navy);text-decoration:none;letter-spacing:-0.02em}
+.brand sup{color:var(--c-primary);font-size:10px;vertical-align:super}
+.site-nav{display:flex;align-items:center;gap:32px}
+.site-nav a{color:var(--c-navy);text-decoration:none;font-size:14px;font-weight:400;letter-spacing:0.04em;text-transform:uppercase;padding:8px 0;border-bottom:2px solid transparent}
+.site-nav a:hover{border-bottom-color:var(--c-primary)}
+.site-utils{display:flex;align-items:center;gap:20px;color:var(--c-navy)}
+.icon-btn{background:none;border:0;cursor:pointer;color:var(--c-navy);font-size:20px;line-height:1;padding:6px}
+.icon-btn .badge{display:inline-flex;align-items:center;justify-content:center;background:var(--c-primary);color:#FFFFFF;font-family:var(--f-body);font-size:10px;font-weight:600;min-width:16px;height:16px;border-radius:var(--r-pill);margin-left:-6px;vertical-align:top;padding:0 4px}
+
+.section-heading{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;gap:32px}
+.section-heading h2{font-size:var(--t-h2);line-height:1.08;margin:0;font-weight:400;max-width:680px;letter-spacing:-0.005em}
+.section-heading p{margin:8px 0 0;color:var(--c-text-muted);font-size:var(--t-body);max-width:560px}
+
+/* showcase hero — full-bleed product photography */
+.showcase-hero{position:relative;min-height:480px;display:flex;align-items:center;color:#FFFFFF;overflow:hidden;padding:0}
+.showcase-hero .bg{position:absolute;inset:0}
+.showcase-hero .bg>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.showcase-hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(38,38,38,0.78) 0%,rgba(38,38,38,0.45) 55%,transparent 100%)}
+.showcase-hero .container{position:relative;z-index:2;padding-top:64px;padding-bottom:64px}
+.showcase-hero h1{font-family:var(--f-heading);font-size:72px;line-height:1.0;margin:0 0 18px;font-weight:400;letter-spacing:-0.025em;color:#FFFFFF;max-width:920px}
+.showcase-hero p{font-size:var(--t-body-lg);max-width:620px;color:rgba(255,255,255,0.92);margin:0 0 28px}
+.showcase-hero .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.showcase-hero .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid rgba(255,255,255,0.32);border-radius:var(--r-pill);font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#FFFFFF;background:rgba(255,255,255,0.06);backdrop-filter:none}
+.showcase-hero .pill .dot{width:6px;height:6px;border-radius:50%;background:var(--c-primary)}
+
+/* divider */
+.divider{padding:48px 0 8px;border-top:1px solid rgba(51,63,72,0.18)}
+.section-charcoal .divider,.section-dark .divider,.section-red .divider{border-top-color:rgba(255,255,255,0.18)}
+.divider .row{display:flex;align-items:baseline;gap:20px;justify-content:space-between}
+.divider .num{font-family:var(--f-eyebrow);font-weight:600;font-size:11px;letter-spacing:0.18em;color:var(--c-primary);text-transform:uppercase}
+.section-red .divider .num{color:#FFFFFF}
+.divider .title{font-family:var(--f-heading);font-size:32px;font-weight:400;line-height:1.18;color:var(--c-navy);letter-spacing:-0.01em;margin:0;flex:1;text-align:left}
+.section-charcoal .divider .title,.section-dark .divider .title,.section-red .divider .title{color:#FFFFFF}
+.divider .kind{font-family:var(--f-eyebrow);font-weight:400;font-size:11px;letter-spacing:0.14em;color:var(--c-text-muted);text-transform:uppercase}
+.section-charcoal .divider .kind,.section-dark .divider .kind,.section-red .divider .kind{color:rgba(255,255,255,0.7)}
+@media (max-width:899px){.divider .row{flex-direction:column;align-items:flex-start;gap:6px}}
+
+/* Vortex motif — subtle conic decorative used on a few sections */
+.vortex{position:absolute;width:680px;height:680px;border-radius:50%;background:conic-gradient(from 0deg, transparent 0deg, rgba(200,16,46,0.08) 90deg, transparent 180deg, rgba(51,63,72,0.06) 270deg, transparent 360deg);pointer-events:none;opacity:0.7;right:-220px;top:-120px;filter:blur(0.5px)}
+@media (prefers-reduced-motion:reduce){.vortex{display:none}}
+
+/* ===== Quick Answer ===== */
+.qa{background:#FFFFFF;padding:48px;border-left:6px solid var(--c-primary);box-shadow:var(--s-hover)}
+.qa h3{font-size:32px;line-height:1.18;margin:0 0 18px;font-weight:400}
+.qa p{margin:0 0 14px;color:var(--c-navy);font-size:17px}
+.qa .toggle{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.14em;color:var(--c-primary);font-weight:600;text-transform:uppercase;background:none;border:0;padding:0;cursor:pointer;margin-top:12px}
+
+/* ===== Best Pick ===== */
+.bp{display:grid;grid-template-columns:5fr 7fr;gap:0;align-items:stretch;background:#FFFFFF;border:0;overflow:hidden;box-shadow:var(--s-hover)}
+.bp .img{aspect-ratio:auto;min-height:520px;background:var(--c-tint-blueberry);position:relative}
+.bp .img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bp .img .crown{position:absolute;top:24px;left:24px;background:var(--c-primary);color:#FFFFFF;padding:8px 14px;font-family:var(--f-eyebrow);font-weight:700;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;z-index:2}
+.bp .body{padding:48px 48px;display:flex;flex-direction:column;justify-content:center}
+.bp .ribbon{display:inline-flex;align-items:center;gap:10px;color:var(--c-primary);padding:0;font-family:var(--f-eyebrow);font-weight:700;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:14px}
+.bp h3{font-size:54px;line-height:1.04;margin:0 0 16px;font-weight:400;letter-spacing:-0.02em}
+.bp .p{color:var(--c-text-muted);margin:0 0 28px;max-width:520px;font-size:var(--t-body-lg)}
+.bp .price-row{display:flex;align-items:baseline;gap:20px;margin:0 0 28px;padding:24px 0;border-top:2px solid var(--c-charcoal);border-bottom:1px solid var(--c-divider)}
+.bp .price{font-family:var(--f-heading);font-size:44px;font-weight:500;color:var(--c-navy);letter-spacing:-0.02em}
+.bp .warranty{font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--c-text-muted);font-weight:600}
+@media (max-width:1199px){.bp{grid-template-columns:1fr}.bp .img{min-height:340px}.bp .body{padding:32px}}
+
+/* ===== Benefits Grid ===== */
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.benefit{padding:36px 28px;background:#FFFFFF;border-top:3px solid var(--c-primary);border-right:1px solid var(--c-divider);position:relative}
+.benefit:nth-child(2){border-top-color:var(--c-mustard)}
+.benefit:nth-child(3){border-top-color:var(--c-pistachio)}
+.benefit:nth-child(4){border-top-color:var(--c-ginger);border-right:0}
+.benefit .num{font-family:var(--f-heading);font-size:60px;font-weight:400;color:var(--c-primary);line-height:1;margin-bottom:14px;letter-spacing:-0.04em}
+.benefit:nth-child(2) .num{color:var(--c-mustard)}
+.benefit:nth-child(3) .num{color:var(--c-pistachio)}
+.benefit:nth-child(4) .num{color:var(--c-ginger)}
+.benefit h4{font-size:24px;line-height:1.18;margin:0 0 8px;font-weight:400}
+.benefit p{color:var(--c-text-muted);font-size:var(--t-body-sm);margin:0}
+@media (max-width:1199px){.benefits{grid-template-columns:repeat(2,1fr)}.benefit{border-right:1px solid var(--c-divider)!important}}
+@media (max-width:599px){.benefits{grid-template-columns:1fr}}
+
+/* ===== Feature Highlights ===== */
+.fhighlights{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.fhighlight{padding:36px;background:#FFFFFF;border-top:6px solid var(--c-primary);transition:box-shadow var(--d-base) var(--ease)}
+.fhighlight:nth-child(2){border-top-color:var(--c-pistachio)}
+.fhighlight:nth-child(3){border-top-color:var(--c-mustard)}
+.fhighlight:hover{box-shadow:var(--s-hover);transform:translateY(-3px)}
+.fhighlight .ico{width:60px;height:60px;background:var(--c-primary);color:#FFFFFF;display:inline-flex;align-items:center;justify-content:center;font-family:var(--f-heading);font-weight:500;font-size:24px;margin-bottom:24px}
+.fhighlight:nth-child(2) .ico{background:var(--c-pistachio)}
+.fhighlight:nth-child(3) .ico{background:var(--c-mustard);color:var(--c-navy)}
+.fhighlight h4{font-size:24px;line-height:1.18;margin:0 0 12px;font-weight:400}
+.fhighlight p{color:var(--c-text-muted);margin:0;font-size:var(--t-body-sm)}
+@media (max-width:1199px){.fhighlights{grid-template-columns:1fr}}
+
+/* ===== Split Content ===== */
+.split{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:0;background:#FFFFFF;border:1px solid var(--c-divider)}
+.split>div{padding:56px}
+.split .body h3{font-size:42px;line-height:1.08;margin:14px 0 18px;font-weight:400;letter-spacing:-0.01em}
+.split .body p{color:var(--c-text-muted);margin:0 0 28px;max-width:480px;font-size:var(--t-body-lg)}
+.split .img{padding:0;aspect-ratio:5/4;min-height:460px;position:relative}
+.split .img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (max-width:1199px){.split{grid-template-columns:1fr}.split>div{padding:32px}.split .img{min-height:320px;aspect-ratio:4/3}}
+
+/* ===== Comparison Table ===== */
+.cmp{overflow-x:auto;background:#FFFFFF;border:1px solid var(--c-divider)}
+.cmp table{width:100%;border-collapse:collapse;font-family:var(--f-body)}
+.cmp th,.cmp td{padding:20px 26px;text-align:left;border-bottom:1px solid var(--c-divider);font-size:var(--t-body)}
+.cmp thead th{background:var(--c-charcoal);color:#FFFFFF;font-family:var(--f-eyebrow);font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;position:relative}
+.cmp thead th.best{background:var(--c-primary)}
+.cmp thead th.best::after{content:"BEST PICK";display:block;font-size:10px;font-weight:700;color:rgba(255,255,255,0.85);letter-spacing:0.18em;margin-top:4px}
+.cmp tbody td:first-child,.cmp tbody th:first-child{font-family:var(--f-eyebrow);font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--c-text-muted);width:24%;background:var(--c-surface-muted)}
+.cmp .check{color:var(--c-offer);font-weight:600}
+.cmp .x{color:var(--c-primary);font-weight:600}
+.cmp .summary{background:var(--c-tint-mustard);padding:16px 26px;font-family:var(--f-body);font-weight:400;color:var(--c-navy)}
+
+/* ===== Verdict Card — red peak band ===== */
+.verdict{background:var(--c-primary);color:#FFFFFF;padding:56px;position:relative;overflow:hidden}
+.verdict::before{content:"";position:absolute;right:-100px;top:-100px;width:380px;height:380px;border-radius:50%;background:rgba(255,255,255,0.04)}
+.verdict h3{font-size:42px;line-height:1.06;margin:0 0 16px;color:#FFFFFF;font-weight:400;letter-spacing:-0.015em;position:relative}
+.verdict>p{color:rgba(255,255,255,0.92);font-size:var(--t-body-lg);margin:0 0 36px;max-width:680px;position:relative}
+.verdict ul{list-style:none;padding:0;margin:0;display:grid;gap:14px;position:relative}
+.verdict li{padding:18px 0 18px 28px;position:relative;border-top:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.96)}
+.verdict li:last-child{border-bottom:1px solid rgba(255,255,255,0.22)}
+.verdict li::before{content:"→";position:absolute;left:0;color:#FFFFFF;font-family:var(--f-heading);font-weight:400}
+.verdict li b{font-family:var(--f-heading);font-weight:400;color:#FFFFFF}
+
+/* ===== Testimonials ===== */
+.testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.testimonial{padding:36px;background:#FFFFFF;border-bottom:4px solid var(--c-primary)}
+.testimonial:nth-child(2){border-bottom-color:var(--c-mustard)}
+.testimonial:nth-child(3){border-bottom-color:var(--c-pistachio)}
+.testimonial .stars{color:var(--c-mustard);font-size:18px;letter-spacing:2px;margin-bottom:18px}
+.testimonial blockquote{margin:0 0 24px;font-family:var(--f-heading);font-size:22px;line-height:1.32;color:var(--c-navy);font-weight:400;letter-spacing:-0.005em;position:relative}
+.testimonial blockquote::before{content:"\201C";display:block;font-size:64px;line-height:0.5;color:var(--c-primary);margin:0 0 16px;font-weight:400;font-family:var(--f-heading)}
+.testimonial cite{display:block;font-style:normal;font-family:var(--f-body);font-weight:600;color:var(--c-navy);font-size:var(--t-body-sm)}
+.testimonial .meta{font-family:var(--f-eyebrow);font-size:10px;letter-spacing:0.14em;color:var(--c-text-muted);text-transform:uppercase;margin-top:4px}
+@media (max-width:1199px){.testimonials{grid-template-columns:1fr}}
+
+/* ===== Tips Banner — cream + image ===== */
+.tips{display:grid;grid-template-columns:5fr 7fr;gap:0;background:#FFFFFF;border:1px solid var(--c-divider)}
+.tips .lead{padding:40px;background:var(--c-surface-cream);display:flex;flex-direction:column;justify-content:center;position:relative;min-height:380px}
+.tips .lead .img{position:absolute;inset:0;opacity:0.18}
+.tips .lead .img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tips .lead .content{position:relative;z-index:2}
+.tips .lead h3{font-size:36px;line-height:1.1;margin:0 0 16px;font-weight:400}
+.tips .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;padding:0}
+.tips .item{padding:32px;border-left:1px solid var(--c-divider);border-bottom:1px solid var(--c-divider)}
+.tips .item:nth-child(2){border-left:0}
+.tips .item:nth-child(3),.tips .item:nth-child(4){border-bottom:0}
+.tips .item .num{font-family:var(--f-heading);font-size:36px;color:var(--c-primary);font-weight:500;line-height:1;margin-bottom:10px;letter-spacing:-0.02em}
+.tips .item:nth-child(2) .num{color:var(--c-mustard)}
+.tips .item:nth-child(3) .num{color:var(--c-pistachio)}
+.tips .item:nth-child(4) .num{color:var(--c-ginger)}
+.tips .item h4{font-size:18px;margin:0 0 6px;font-weight:400}
+.tips .item p{margin:0;color:var(--c-text-muted);font-size:var(--t-body-sm)}
+@media (max-width:1199px){.tips{grid-template-columns:1fr}.tips .lead{padding:32px;min-height:240px}.tips .grid{grid-template-columns:1fr}.tips .item{border-left:0!important;border-bottom:1px solid var(--c-divider)!important}}
+
+/* ===== Product Cards ===== */
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.product-card{background:#FFFFFF;border:1px solid var(--c-divider);transition:box-shadow var(--d-base) var(--ease),transform var(--d-base) var(--ease);text-decoration:none;color:inherit;display:flex;flex-direction:column;position:relative}
+.product-card:hover{box-shadow:var(--s-hover);transform:translateY(-3px)}
+.product-card .img{aspect-ratio:1/1;background:var(--c-tint-blueberry);position:relative}
+.product-card .img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.product-card .badge{position:absolute;top:14px;left:14px;background:var(--c-primary);color:#FFFFFF;font-family:var(--f-eyebrow);font-weight:700;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;padding:6px 10px;z-index:2}
+.product-card .body{padding:28px;display:flex;flex-direction:column;flex:1}
+.product-card .series{font-family:var(--f-eyebrow);font-size:10px;letter-spacing:0.18em;color:var(--c-primary);text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.product-card h4{font-size:24px;line-height:1.18;margin:0 0 6px;font-weight:400}
+.product-card .desc{font-size:var(--t-body-sm);color:var(--c-text-muted);margin:0 0 12px;flex:1}
+.product-card .rating{font-size:var(--t-body-sm);color:var(--c-text-muted);margin:0 0 8px}
+.product-card .rating .stars{color:var(--c-mustard);letter-spacing:1px;margin-right:6px}
+.product-card .price{font-family:var(--f-heading);font-size:24px;font-weight:500;color:var(--c-navy);margin:6px 0 16px}
+@media (max-width:1199px){.products{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:599px){.products{grid-template-columns:1fr}}
+
+/* ===== Recipe Cards — bigger photo crops ===== */
+.recipes{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.recipe-card{background:#FFFFFF;text-decoration:none;color:inherit;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.recipe-card .img{aspect-ratio:3/4;background:var(--c-tint-pistachio);position:relative}
+.recipe-card .img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform var(--d-slow) var(--ease)}
+.recipe-card:hover .img>img{transform:scale(1.04)}
+.recipe-card .body{padding:18px 4px}
+.recipe-card .meta{font-family:var(--f-eyebrow);font-size:10px;letter-spacing:0.16em;color:var(--c-primary);text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.recipe-card h4{font-size:22px;line-height:1.18;margin:0;font-weight:400;letter-spacing:-0.005em}
+@media (max-width:1199px){.recipes{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:599px){.recipes{grid-template-columns:1fr}}
+
+/* ===== Product Recommendation ===== */
+.prec{display:grid;grid-template-columns:1fr 1fr;background:#FFFFFF;border:0;overflow:hidden;align-items:center;box-shadow:var(--s-hover)}
+.prec .img{aspect-ratio:1/1;min-height:480px;background:var(--c-tint-mustard);position:relative}
+.prec .img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.prec .img .corner{position:absolute;top:24px;right:24px;background:var(--c-mustard);color:var(--c-navy);font-family:var(--f-eyebrow);font-weight:700;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;padding:6px 12px}
+.prec .body{padding:64px}
+.prec .ribbon{display:inline-block;font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.18em;color:var(--c-primary);text-transform:uppercase;font-weight:700;margin-bottom:16px}
+.prec h3{font-size:42px;margin:0 0 14px;line-height:1.06;font-weight:400;letter-spacing:-0.015em}
+.prec p{color:var(--c-text-muted);margin:0 0 28px;max-width:440px;font-size:var(--t-body-lg)}
+.prec .price{font-family:var(--f-heading);font-size:38px;color:var(--c-navy);margin:0 0 6px;font-weight:500}
+.prec .warr{font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.14em;color:var(--c-text-muted);text-transform:uppercase;margin-bottom:24px;font-weight:600}
+.prec .ctas{display:flex;gap:12px;flex-wrap:wrap}
+@media (max-width:1199px){.prec{grid-template-columns:1fr}.prec .img{min-height:280px}.prec .body{padding:32px}}
+
+/* ===== Technique Spotlight ===== */
+.tech{display:grid;grid-template-columns:5fr 7fr;gap:56px;align-items:start}
+.tech .img{aspect-ratio:4/5;min-height:520px;position:relative}
+.tech .img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tech .body{padding-top:24px}
+.tech .body h3{font-size:42px;line-height:1.06;margin:8px 0 18px;font-weight:400;letter-spacing:-0.015em}
+.tech .body>p{color:var(--c-text-muted);font-size:var(--t-body-lg);margin:0 0 32px;max-width:520px}
+.tech ol.steps{list-style:none;padding:0;margin:0;counter-reset:step;display:grid;gap:0}
+.tech ol.steps li{counter-increment:step;display:grid;grid-template-columns:auto 1fr;gap:18px;padding:16px 0;border-top:1px solid rgba(51,63,72,0.16);align-items:baseline}
+.tech ol.steps li::before{content:counter(step,decimal-leading-zero);font-family:var(--f-eyebrow);font-size:11px;font-weight:700;letter-spacing:0.18em;color:var(--c-primary)}
+@media (max-width:1199px){.tech{grid-template-columns:1fr;gap:32px}.tech .img{min-height:340px;aspect-ratio:5/4}}
+
+/* ===== Nutrition Facts ===== */
+.nutri{max-width:560px;margin:0 auto;background:#FFFFFF;border:3px solid var(--c-charcoal);padding:32px;box-shadow:8px 8px 0 var(--c-mustard)}
+.nutri h3{font-family:var(--f-heading);font-size:32px;font-weight:400;margin:0 0 4px;line-height:1.06;letter-spacing:-0.01em}
+.nutri .serving{font-family:var(--f-eyebrow);font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--c-text-muted);margin-bottom:14px;padding-bottom:14px;border-bottom:8px solid var(--c-charcoal)}
+.nutri .row{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--c-divider);font-size:var(--t-body)}
+.nutri .row.cal{padding:14px 0;border-bottom:4px solid var(--c-charcoal);font-family:var(--f-heading)}
+.nutri .row.cal b{font-size:34px;font-weight:500;letter-spacing:-0.01em}
+.nutri .row b{font-weight:600;color:var(--c-navy)}
+
+/* ===== Recipe Steps ===== */
+.rsteps{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.rsteps .img{aspect-ratio:4/5;min-height:560px;position:relative}
+.rsteps .img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rsteps ol{list-style:none;padding:0;margin:0;counter-reset:rstep;display:grid;gap:0}
+.rsteps li{counter-increment:rstep;padding:24px 0;border-top:1px solid var(--c-divider);display:grid;grid-template-columns:56px 1fr;gap:20px}
+.rsteps li:last-child{border-bottom:1px solid var(--c-divider)}
+.rsteps li::before{content:counter(rstep,decimal-leading-zero);font-family:var(--f-heading);font-size:36px;line-height:1;color:var(--c-primary);font-weight:400;letter-spacing:-0.02em}
+.rsteps li:nth-child(2n)::before{color:var(--c-pistachio)}
+.rsteps li:nth-child(3n)::before{color:var(--c-mustard)}
+.rsteps li p{margin:0;color:var(--c-text)}
+@media (max-width:1199px){.rsteps{grid-template-columns:1fr}.rsteps .img{min-height:340px;aspect-ratio:5/3}}
+
+/* ===== Recipe Tips ===== */
+.rtips{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.rtip{padding:36px;background:var(--c-surface-cream);border-right:1px solid var(--c-divider)}
+.rtip:last-child{border-right:0}
+.rtip:nth-child(2){background:var(--c-tint-pistachio)}
+.rtip:nth-child(3){background:var(--c-tint-mustard)}
+.rtip h4{font-size:24px;line-height:1.18;margin:0 0 10px;font-weight:400}
+.rtip p{margin:0;color:var(--c-text-muted);font-size:var(--t-body-sm)}
+@media (max-width:1199px){.rtips{grid-template-columns:1fr}.rtip{border-right:0;border-bottom:1px solid var(--c-divider)}}
+
+/* ===== Timeline ===== */
+.timeline{position:relative}
+.timeline .row{display:grid;grid-template-columns:120px 1fr 180px;gap:36px;padding:24px 0;border-top:1px solid var(--c-divider);align-items:center}
+.timeline .row:last-child{border-bottom:1px solid var(--c-divider)}
+.timeline .year{font-family:var(--f-heading);font-size:54px;line-height:1;font-weight:400;color:var(--c-primary);letter-spacing:-0.03em}
+.timeline .row:nth-child(2) .year{color:var(--c-mustard)}
+.timeline .row:nth-child(3) .year{color:var(--c-pistachio)}
+.timeline .row:nth-child(4) .year{color:var(--c-ginger)}
+.timeline .body h4{font-size:22px;line-height:1.18;margin:0 0 4px;font-weight:500}
+.timeline .body p{margin:0;color:var(--c-text-muted);font-size:var(--t-body)}
+.timeline .img{aspect-ratio:1/1;min-height:120px;background:var(--c-tint-blueberry);position:relative}
+.timeline .img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (max-width:1199px){.timeline .row{grid-template-columns:1fr;gap:8px}.timeline .year{font-size:48px}.timeline .img{display:none}}
+
+/* ===== Countdown — red peak ===== */
+.countdown{background:var(--c-primary);color:#FFFFFF;padding:56px;text-align:center;position:relative;overflow:hidden}
+.countdown::before{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:780px;height:780px;border-radius:50%;background:rgba(255,255,255,0.04)}
+.countdown h3{color:#FFFFFF;font-size:34px;margin:0 0 8px;font-weight:400;position:relative}
+.countdown p{color:rgba(255,255,255,0.85);margin:0 0 36px;font-size:var(--t-body-lg);position:relative}
+.countdown .digits{display:inline-flex;gap:14px;position:relative}
+.countdown .digit{display:flex;flex-direction:column;align-items:center;background:rgba(0,0,0,0.18);padding:24px 32px;border:1px solid rgba(255,255,255,0.16)}
+.countdown .digit b{font-family:var(--f-heading);font-size:64px;font-weight:400;line-height:1;color:#FFFFFF;letter-spacing:-0.03em}
+.countdown .digit span{font-family:var(--f-eyebrow);font-size:10px;letter-spacing:0.18em;color:rgba(255,255,255,0.85);text-transform:uppercase;margin-top:6px;font-weight:600}
+
+/* ===== Category Cards — full image bleeds ===== */
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.cat{position:relative;aspect-ratio:3/4;display:flex;align-items:flex-end;padding:28px;background:var(--c-tint-blueberry);overflow:hidden;text-decoration:none;color:#FFFFFF;border:0;cursor:pointer;transition:transform var(--d-base) var(--ease)}
+.cat:hover{transform:translateY(-3px)}
+.cat::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(38,38,38,0.78) 100%);z-index:1}
+.cat .img{position:absolute;inset:0}
+.cat .img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cat .label{position:relative;z-index:2;font-family:var(--f-heading);font-size:24px;letter-spacing:-0.005em;color:#FFFFFF;font-weight:400;line-height:1.15}
+.cat .num{position:absolute;top:18px;right:18px;z-index:2;font-family:var(--f-eyebrow);font-size:11px;color:rgba(255,255,255,0.85);letter-spacing:0.16em;font-weight:600}
+@media (max-width:1199px){.cats{grid-template-columns:repeat(2,1fr)}}
+
+/* ===== Specs Table ===== */
+.specs{background:#FFFFFF;border:1px solid var(--c-divider)}
+.specs table{width:100%;border-collapse:collapse}
+.specs th,.specs td{padding:20px 28px;text-align:left;border-bottom:1px solid var(--c-divider);font-size:var(--t-body)}
+.specs th{font-family:var(--f-eyebrow);font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--c-primary);width:38%;background:var(--c-surface-muted)}
+.specs td{font-weight:400;color:var(--c-navy)}
+.specs tr:nth-child(2n) th{background:#FFFFFF}
+
+/* ===== Use Case Cards — bold tinted tiles ===== */
+.usecases{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:usecount}
+.usecase{padding:36px;background:var(--c-surface-cream);position:relative;text-align:left;border:0;cursor:pointer;text-decoration:none;color:inherit;counter-increment:usecount;transition:background var(--d-base) var(--ease)}
+.usecase:nth-child(2){background:var(--c-tint-pistachio)}
+.usecase:nth-child(3){background:var(--c-tint-mustard)}
+.usecase:nth-child(4){background:var(--c-tint-ginger)}
+.usecase:nth-child(5){background:var(--c-tint-blueberry)}
+.usecase:nth-child(6){background:var(--c-tint-rose)}
+.usecase:hover{transform:translateY(-3px)}
+.usecase::before{content:counter(usecount,decimal-leading-zero);position:absolute;top:18px;right:24px;font-family:var(--f-eyebrow);font-size:11px;font-weight:700;letter-spacing:0.18em;color:rgba(51,63,72,0.55)}
+.usecase span{display:block;font-family:var(--f-heading);font-size:26px;line-height:1.12;color:var(--c-navy);font-weight:400;letter-spacing:-0.01em}
+.usecase p{margin:10px 0 0;font-size:var(--t-body-sm);color:var(--c-text-muted)}
+@media (max-width:1199px){.usecases{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:599px){.usecases{grid-template-columns:1fr}}
+
+/* ===== FAQ accordion ===== */
+.accordion{max-width:880px;margin:0 auto}
+.accordion details{border-top:1px solid rgba(51,63,72,0.18);padding:8px 0}
+.accordion details:last-of-type{border-bottom:1px solid rgba(51,63,72,0.18)}
+.accordion summary{padding:26px 0;font-family:var(--f-heading);font-size:24px;color:var(--c-navy);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:24px;font-weight:400;line-height:1.3;letter-spacing:-0.005em}
+.accordion summary::-webkit-details-marker{display:none}
+.accordion summary::after{content:"+";font-family:var(--f-heading);font-size:24px;font-weight:300;width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--c-navy);transition:transform var(--d-base) var(--ease);flex-shrink:0;background:#FFFFFF}
+.accordion details[open] summary::after{content:"−";background:var(--c-primary);color:#FFFFFF;border-color:var(--c-primary)}
+.accordion .answer{padding:0 0 26px;color:var(--c-text-muted);max-width:680px}
+.accordion .answer p{margin:0 0 12px}
+
+/* ===== Follow Up — accent tinted ===== */
+.fu{display:grid;grid-template-columns:1fr;gap:8px;max-width:820px;margin:0 auto}
+.fu a{display:flex;justify-content:space-between;align-items:center;padding:20px 28px;background:#FFFFFF;border-left:3px solid var(--c-primary);text-decoration:none;color:var(--c-navy);font-family:var(--f-body);font-weight:400;font-size:var(--t-body);transition:all var(--d-base) var(--ease)}
+.fu a:nth-child(2){border-left-color:var(--c-mustard)}
+.fu a:nth-child(3){border-left-color:var(--c-pistachio)}
+.fu a:nth-child(4){border-left-color:var(--c-ginger)}
+.fu a:nth-child(5){border-left-color:var(--c-blueberry)}
+.fu a:hover{background:var(--c-surface-cream);transform:translateX(4px)}
+.fu a::after{content:"→";color:var(--c-primary);font-family:var(--f-heading);transition:transform var(--d-base) var(--ease)}
+.fu a:hover::after{transform:translateX(4px)}
+
+/* ===== Budget Breakdown ===== */
+.bud{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-bottom:32px}
+.bud-tier{padding:36px;background:#FFFFFF;border-top:6px solid var(--c-primary);border-right:1px solid var(--c-divider)}
+.bud-tier:nth-child(2){border-top-color:var(--c-pistachio)}
+.bud-tier:nth-child(3){border-top-color:var(--c-mustard);border-right:0}
+.bud-tier h4{font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--c-primary);font-weight:700;margin:0 0 18px}
+.bud-tier:nth-child(2) h4{color:var(--c-pistachio)}
+.bud-tier:nth-child(3) h4{color:#9c7a25}
+.bud-tier ul{list-style:none;padding:0;margin:0}
+.bud-tier li{display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid var(--c-divider)}
+.bud-tier li:first-child{border-top:0}
+.bud-tier li b{font-weight:400;color:var(--c-navy)}
+.bud-tier li span{font-family:var(--f-heading);font-weight:500;color:var(--c-navy)}
+.bud-recond{display:grid;grid-template-columns:1fr 1fr;gap:24px;background:var(--c-charcoal);color:#FFFFFF;padding:36px;align-items:center}
+.bud-recond h5{font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--c-mustard);font-weight:700;margin:0 0 8px}
+.bud-recond p{margin:0;color:rgba(255,255,255,0.78);font-size:var(--t-body-sm)}
+.bud-recond .pro{font-family:var(--f-body);font-size:var(--t-body-sm);font-weight:400;color:#FFFFFF;margin-bottom:8px}
+@media (max-width:1199px){.bud{grid-template-columns:1fr}.bud-tier{border-right:0;border-bottom:1px solid var(--c-divider)}.bud-recond{grid-template-columns:1fr}}
+
+/* ===== Accessibility ===== */
+.acc{background:#FFFFFF;border:1px solid var(--c-divider)}
+.acc table{width:100%;border-collapse:collapse}
+.acc th,.acc td{padding:18px 22px;text-align:left;border-bottom:1px solid var(--c-divider);font-size:var(--t-body-sm)}
+.acc thead th{background:var(--c-charcoal);color:#FFFFFF;font-family:var(--f-eyebrow);font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase}
+.acc tbody td:first-child{font-weight:600;color:var(--c-primary)}
+.acc-tips{margin-top:24px;padding:36px;background:var(--c-tint-pistachio)}
+.acc-tips h4{font-family:var(--f-heading);font-size:22px;color:var(--c-navy);font-weight:400;margin:0 0 18px;line-height:1.2}
+.acc-tips ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.acc-tips li{padding-left:24px;position:relative;color:var(--c-text);font-size:var(--t-body-sm)}
+.acc-tips li::before{content:"✓";position:absolute;left:0;color:var(--c-pistachio);font-weight:700;font-size:16px}
+
+/* ===== Empathy Hero ===== */
+.empathy{background:linear-gradient(135deg,var(--c-tint-rose) 0%, var(--c-surface-cream) 60%, transparent 100%);padding:56px;border-left:6px solid var(--c-primary);position:relative;overflow:hidden}
+.empathy::after{content:"";position:absolute;right:-160px;bottom:-160px;width:520px;height:520px;border-radius:50%;background:rgba(200,16,46,0.04)}
+.empathy .eyebrow{margin-bottom:18px}
+.empathy h3{font-size:40px;line-height:1.08;margin:0 0 20px;font-weight:400;letter-spacing:-0.015em;max-width:880px;position:relative}
+.empathy p{font-size:var(--t-body-lg);color:var(--c-navy);margin:0 0 16px;max-width:780px;position:relative}
+
+/* ===== Sustainability ===== */
+.sust{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+.sust-card{padding:40px;background:#FFFFFF;border-right:1px solid var(--c-divider);border-bottom:1px solid var(--c-divider);position:relative}
+.sust-card:nth-child(2){background:var(--c-tint-pistachio);border-right:0}
+.sust-card:nth-child(3){background:var(--c-tint-blueberry)}
+.sust-card:nth-child(4){background:var(--c-surface-cream);border-right:0}
+.sust-card .ico{font-size:34px;margin-bottom:18px;display:inline-flex;width:64px;height:64px;align-items:center;justify-content:center;background:#FFFFFF;color:var(--c-navy);box-shadow:var(--s-hover)}
+.sust-card h4{font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--c-primary);font-weight:700;margin:0 0 12px}
+.sust-card p{margin:0;color:var(--c-text-muted);font-size:var(--t-body-sm)}
+.sust-callout{grid-column:1/-1;padding:40px;background:var(--c-pistachio);color:#FFFFFF;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px}
+.sust-callout h4{font-family:var(--f-heading);font-size:28px;font-weight:400;margin:0;color:#FFFFFF;line-height:1.1;letter-spacing:-0.01em}
+.sust-callout .badges{display:flex;gap:12px;flex-wrap:wrap}
+.sust-callout .badge{padding:7px 16px;border:1px solid rgba(255,255,255,0.4);font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#FFFFFF}
+@media (max-width:899px){.sust{grid-template-columns:1fr}.sust-card{border-right:0}}
+
+/* ===== Smart Features ===== */
+.smart{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.smart .col{padding:36px;background:#FFFFFF;border-top:6px solid var(--c-primary)}
+.smart .col:nth-child(2){border-top-color:var(--c-mustard)}
+.smart .col h4{font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--c-primary);font-weight:700;margin:0 0 14px}
+.smart .col:nth-child(2) h4{color:#9c7a25}
+.smart .col h5{font-size:24px;line-height:1.18;margin:0 0 12px;font-weight:400}
+.smart .col p{color:var(--c-text-muted);margin:0 0 16px;font-size:var(--t-body-sm)}
+.smart .what{grid-column:1/-1;padding:36px;background:var(--c-charcoal);color:#FFFFFF;display:grid;grid-template-columns:1fr 1fr;gap:36px}
+.smart .what h5{font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--c-mustard);font-weight:700;margin:0 0 14px}
+.smart .what ul{list-style:none;padding:0;margin:0;display:grid;gap:8px;color:rgba(255,255,255,0.86);font-size:var(--t-body-sm)}
+.smart .what li{padding-left:18px;position:relative}
+.smart .what li::before{content:"›";position:absolute;left:0;color:var(--c-mustard);font-weight:700;font-family:var(--f-heading)}
+.smart .take{grid-column:1/-1;padding:28px 36px;background:#FFFFFF;border-left:4px solid var(--c-primary)}
+.smart .take h5{font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--c-primary);font-weight:700;margin:0 0 8px}
+.smart .take p{color:var(--c-navy);margin:0;font-size:var(--t-body-sm)}
+.smart .compatible{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding-top:12px}
+.smart .compatible h5{font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--c-text-muted);font-weight:600;margin:0 16px 0 0}
+.smart .pill{padding:7px 16px;border:1px solid var(--c-charcoal);font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:var(--c-navy);background:#FFFFFF}
+@media (max-width:1199px){.smart{grid-template-columns:1fr}.smart .what{grid-template-columns:1fr}}
+
+/* ===== Engineering Specs ===== */
+.eng{background:var(--c-surface-inverse);color:#FFFFFF;padding:44px;position:relative;overflow:hidden}
+.eng::before{content:"";position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;background:rgba(200,16,46,0.12)}
+.eng h3{color:#FFFFFF;font-size:34px;margin:0 0 4px;font-weight:400;position:relative}
+.eng .lead{font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--c-mustard);margin:0 0 36px;position:relative;font-weight:700}
+.eng table{width:100%;border-collapse:collapse;font-family:var(--f-mono),monospace;font-size:14px;position:relative}
+.eng th,.eng td{padding:16px 18px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.16)}
+.eng th{color:rgba(255,255,255,0.92);font-weight:400;font-family:var(--f-mono),monospace;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;width:30%}
+.eng td{color:#FFFFFF;font-family:var(--f-mono),monospace}
+.eng td .note{display:block;color:rgba(255,255,255,0.55);font-size:12px;margin-top:2px}
+.eng .notes{margin-top:32px;padding:22px;background:rgba(255,255,255,0.06);border-left:3px solid var(--c-mustard);color:rgba(255,255,255,0.78);font-size:13px;font-family:var(--f-mono),monospace;position:relative}
+.eng .download{margin-top:28px;position:relative}
+
+/* ===== Allergen Safety ===== */
+.allergen{background:var(--c-tint-mustard);padding:44px;border-left:6px solid var(--c-mustard)}
+.allergen .eyebrow{color:#9c7a25;margin-bottom:8px}
+.allergen .eyebrow::before{background:#9c7a25}
+.allergen h3{font-size:38px;margin:0 0 16px;font-weight:400;line-height:1.1;letter-spacing:-0.01em}
+.allergen .notice{margin:24px 0;padding:20px 26px;background:#FFFFFF;border-left:4px solid var(--c-charcoal);font-size:var(--t-body-sm);color:var(--c-navy)}
+.allergen h4{font-size:22px;margin:24px 0 8px;font-weight:400}
+.allergen p,.allergen li{font-size:var(--t-body-sm);color:var(--c-text);margin:0 0 8px}
+
+/* ===== Troubleshooting Steps ===== */
+.trouble{display:grid;gap:0;list-style:none;padding:0;margin:0}
+.trouble li{display:grid;grid-template-columns:96px 1fr;gap:28px;padding:32px 0;border-top:1px solid var(--c-divider);align-items:start}
+.trouble li:last-child{border-bottom:1px solid var(--c-divider)}
+.trouble .num{font-family:var(--f-heading);font-size:60px;line-height:1;font-weight:400;color:var(--c-primary);letter-spacing:-0.04em}
+.trouble li:nth-child(2) .num{color:var(--c-mustard)}
+.trouble li:nth-child(3) .num{color:var(--c-pistachio)}
+.trouble li:nth-child(4) .num{color:var(--c-ginger)}
+.trouble h4{font-size:24px;margin:0 0 8px;font-weight:400}
+.trouble p{color:var(--c-text-muted);margin:0;font-size:var(--t-body-sm)}
+.trouble .warn{margin-top:14px;padding:16px 22px;background:rgba(200,16,46,0.08);border-left:3px solid var(--c-primary);font-size:var(--t-body-sm);color:var(--c-navy)}
+
+/* ===== Query Form (Cerebras) ===== */
+.qform{padding:80px 56px;background:linear-gradient(135deg,var(--c-charcoal) 0%, var(--c-navy) 100%);color:#FFFFFF;text-align:center;position:relative;overflow:hidden}
+.qform::before{content:"";position:absolute;left:-150px;top:-150px;width:520px;height:520px;border-radius:50%;background:rgba(200,16,46,0.08)}
+.qform::after{content:"";position:absolute;right:-150px;bottom:-150px;width:520px;height:520px;border-radius:50%;background:rgba(125,153,124,0.08)}
+.qform .badge{display:inline-block;background:var(--c-primary);color:#FFFFFF;font-family:var(--f-eyebrow);font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;padding:6px 14px;margin-bottom:18px;position:relative}
+.qform h3{font-family:var(--f-heading);font-size:42px;font-weight:400;margin:0 0 28px;color:#FFFFFF;letter-spacing:-0.015em;position:relative}
+.qform .row{display:flex;gap:0;max-width:680px;margin:0 auto;position:relative}
+.qform input{flex:1;padding:18px 22px;font-family:var(--f-body);font-size:var(--t-body);border:1px solid #FFFFFF;background:rgba(255,255,255,0.06);color:#FFFFFF;border-right:0;outline:none}
+.qform input::placeholder{color:rgba(255,255,255,0.55)}
+.qform input:focus{background:rgba(255,255,255,0.12)}
+.qform .submit{padding:18px 32px;background:var(--c-primary);color:#FFFFFF;border:1px solid var(--c-primary);font-family:var(--f-body);font-weight:600;font-size:var(--t-cta);text-transform:uppercase;letter-spacing:0.04em;cursor:pointer}
+.qform .submit:hover{background:var(--c-primary-hover);border-color:var(--c-primary-hover)}
+.qform .examples{margin-top:28px;font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.14em;color:rgba(255,255,255,0.6);text-transform:uppercase;display:flex;flex-wrap:wrap;justify-content:center;gap:14px;align-items:center;position:relative}
+.qform .examples a{color:var(--c-mustard);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:1px;font-weight:600}
+.qform .examples a:hover{border-bottom-color:var(--c-mustard)}
+
+/* ===== Reasoning AI ===== */
+.rsn{background:#FFFFFF;border:0;overflow:hidden;box-shadow:var(--s-hover)}
+.rsn .hd{padding:24px 32px;background:linear-gradient(90deg,var(--c-charcoal) 0%, var(--c-navy) 100%);color:#FFFFFF;display:flex;justify-content:space-between;align-items:center;font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700}
+.rsn .hd h3{color:#FFFFFF;font-family:var(--f-heading);font-size:20px;font-weight:400;margin:0;text-transform:none;letter-spacing:-0.005em}
+.rsn .hd .badge{padding:5px 12px;border:1px solid var(--c-mustard);color:var(--c-mustard);font-size:10px;letter-spacing:0.18em}
+.rsn .body{padding:36px}
+.rsn .step{padding:20px 0;border-top:1px solid var(--c-divider)}
+.rsn .step:first-child{border-top:0;padding-top:0}
+.rsn .step h5{font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.16em;color:var(--c-primary);font-weight:700;text-transform:uppercase;margin:0 0 8px}
+.rsn .step p{margin:0;color:var(--c-text);font-size:var(--t-body-sm)}
+
+/* ===== Reasoning user-facing ===== */
+.rsnu{background:linear-gradient(135deg,var(--c-tint-pistachio) 0%, var(--c-surface-cream) 100%);padding:56px;border-left:6px solid var(--c-pistachio);position:relative;overflow:hidden}
+.rsnu .lead{font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.18em;color:var(--c-pistachio);font-weight:700;text-transform:uppercase;margin-bottom:14px}
+.rsnu h3{font-size:32px;margin:0 0 28px;font-weight:400;line-height:1.12;letter-spacing:-0.005em}
+.rsnu .item{padding:24px 28px;background:#FFFFFF;border-left:3px solid var(--c-pistachio);margin-bottom:14px;box-shadow:var(--s-hover)}
+.rsnu .item .label{font-family:var(--f-body);font-size:14px;font-weight:600;color:var(--c-navy);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.rsnu .item .label::before{content:"💬";font-size:14px}
+.rsnu .item p{margin:0;color:var(--c-text-muted);font-size:var(--t-body-sm)}
+
+/* ===== Follow Up Advisor ===== */
+.fua{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.fua-card{padding:36px;background:#FFFFFF;text-decoration:none;color:inherit;border-right:1px solid var(--c-divider);transition:background var(--d-base) var(--ease)}
+.fua-card:nth-child(2){background:var(--c-tint-pistachio)}
+.fua-card:nth-child(3){background:var(--c-tint-mustard);border-right:0}
+.fua-card:hover{transform:translateY(-3px)}
+.fua-card .ico{font-size:32px;margin-bottom:18px;display:inline-flex;width:56px;height:56px;background:#FFFFFF;align-items:center;justify-content:center;box-shadow:var(--s-hover)}
+.fua-card h4{font-size:20px;margin:0 0 8px;font-weight:400;line-height:1.22}
+.fua-card p{margin:0;color:var(--c-text-muted);font-size:var(--t-body-sm)}
+@media (max-width:899px){.fua{grid-template-columns:1fr}.fua-card{border-right:0;border-bottom:1px solid var(--c-divider)}}
+
+/* ===== Cerebras Generated ===== */
+.cgen{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.cgen-card{padding:28px 32px;background:#FFFFFF;border:1px solid var(--c-charcoal);text-decoration:none;color:var(--c-navy);font-family:var(--f-heading);font-weight:500;font-size:22px;line-height:1.2;display:flex;justify-content:space-between;align-items:center;gap:16px;transition:all var(--d-base) var(--ease);position:relative}
+.cgen-card:hover{background:var(--c-charcoal);color:#FFFFFF}
+.cgen-card::after{content:"";display:inline-block;width:32px;height:32px;border-radius:50%;background:var(--c-primary);color:#FFFFFF;flex-shrink:0;background-image:radial-gradient(circle,#FFFFFF 0,#FFFFFF 4px,transparent 4px),radial-gradient(circle at 70% 50%, #FFFFFF 0, #FFFFFF 3px, transparent 3px),radial-gradient(circle at 30% 50%, #FFFFFF 0, #FFFFFF 3px, transparent 3px);background-size:100% 100%;background-repeat:no-repeat}
+.cgen-card .label{flex:1}
+@media (max-width:899px){.cgen{grid-template-columns:1fr}.cgen-card{font-size:18px}}
+
+/* ===== Recommender Hero ===== */
+.r-hero{position:relative;min-height:520px;display:flex;align-items:center;color:#FFFFFF;overflow:hidden}
+.r-hero .bg{position:absolute;inset:0;background:linear-gradient(135deg,#cbb591 0%,#3d3220 100%)}
+.r-hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(38,38,38,0.65) 0%,rgba(38,38,38,0.25) 60%,transparent 100%)}
+.r-hero .bg>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.r-hero .container{position:relative;z-index:2}
+.r-hero h2{font-size:64px;line-height:1.04;color:#FFFFFF;margin:0 0 20px;font-weight:400;letter-spacing:-0.02em;max-width:780px}
+.r-hero p{font-size:var(--t-body-lg);color:rgba(255,255,255,0.92);max-width:520px;margin:0 0 32px}
+
+/* ===== Banner Split / Inset ===== */
+.banner-split{display:grid;grid-template-columns:5fr 7fr;align-items:center;background:#FFFFFF;border:0;overflow:hidden;box-shadow:var(--s-hover)}
+.banner-split>div{padding:56px}
+.banner-split .img{padding:0;aspect-ratio:5/4;min-height:380px;position:relative}
+.banner-split .img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.banner-split h3{font-size:42px;line-height:1.06;margin:0 0 14px;font-weight:400;letter-spacing:-0.015em}
+.banner-split p{color:var(--c-text-muted);margin:0 0 24px;font-size:var(--t-body-lg)}
+.banner-inset{position:relative;background:var(--c-charcoal);color:#FFFFFF;padding:56px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;overflow:hidden}
+.banner-inset::before{content:"";position:absolute;left:-100px;top:50%;transform:translateY(-50%);width:380px;height:380px;border-radius:50%;background:rgba(200,16,46,0.12)}
+.banner-inset>div{position:relative}
+.banner-inset h3{color:#FFFFFF;font-size:42px;font-weight:400;margin:0 0 8px;line-height:1.08;letter-spacing:-0.015em}
+.banner-inset p{color:rgba(255,255,255,0.85);margin:0;font-size:var(--t-body-lg)}
+.banner-inset .btn{position:relative}
+@media (max-width:1199px){.banner-split{grid-template-columns:1fr}}
+
+/* ===== Cards (basic) ===== */
+.basic-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.basic-cards .card{background:#FFFFFF;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:box-shadow var(--d-base) var(--ease),transform var(--d-base) var(--ease);position:relative}
+.basic-cards .card:hover{box-shadow:var(--s-hover);transform:translateY(-3px)}
+.basic-cards .img{aspect-ratio:4/3;background:var(--c-tint-blueberry);position:relative}
+.basic-cards .img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.basic-cards .body{padding:28px}
+.basic-cards h4{font-size:26px;line-height:1.18;margin:0 0 10px;font-weight:400;letter-spacing:-0.005em}
+.basic-cards p{color:var(--c-text-muted);font-size:var(--t-body-sm);margin:0 0 18px}
+@media (max-width:1199px){.basic-cards{grid-template-columns:1fr}}
+
+/* ===== Columns ===== */
+.basic-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.basic-cols .col{padding:36px;background:#FFFFFF;border-right:1px solid var(--c-divider);position:relative}
+.basic-cols .col:nth-child(2){background:var(--c-tint-pistachio)}
+.basic-cols .col:nth-child(3){background:var(--c-tint-mustard);border-right:0}
+.basic-cols .col h4{font-size:34px;line-height:1.1;margin:0 0 14px;font-weight:400;letter-spacing:-0.01em}
+.basic-cols .col .ico{font-family:var(--f-heading);font-size:48px;color:var(--c-primary);font-weight:400;line-height:1;margin-bottom:14px;letter-spacing:-0.04em}
+.basic-cols .col:nth-child(2) .ico{color:var(--c-pistachio)}
+.basic-cols .col:nth-child(3) .ico{color:#9c7a25}
+.basic-cols .col p{color:var(--c-text-muted);margin:0}
+@media (max-width:1199px){.basic-cols{grid-template-columns:1fr}.basic-cols .col{border-right:0;border-bottom:1px solid var(--c-divider)}}
+
+/* ===== Carousel — Quote ===== */
+.qcar{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:16px}
+.qcar .item{flex:0 0 calc((100% - 40px) / 3);scroll-snap-align:start;padding:36px;background:var(--c-surface-cream)}
+.qcar .item:nth-child(2){background:var(--c-tint-pistachio)}
+.qcar .item:nth-child(3){background:var(--c-tint-mustard)}
+.qcar .item:nth-child(4){background:var(--c-tint-blueberry)}
+.qcar blockquote{font-family:var(--f-heading);font-size:24px;line-height:1.28;margin:0 0 20px;color:var(--c-navy);font-weight:400;letter-spacing:-0.01em}
+.qcar blockquote::before{content:"\201C";display:block;font-family:var(--f-heading);font-size:64px;line-height:0.4;color:var(--c-primary);margin-bottom:14px;font-weight:400}
+.qcar cite{font-style:normal;font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.16em;color:var(--c-primary);text-transform:uppercase;font-weight:700}
+@media (max-width:1199px){.qcar .item{flex-basis:calc((100% - 20px) / 2)}}
+@media (max-width:599px){.qcar .item{flex-basis:84%}}
+
+/* ===== Collage — magazine grid ===== */
+.bcollage{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:140px;gap:14px}
+.bcollage .item{position:relative;display:flex;align-items:flex-end;padding:24px;color:#FFFFFF;overflow:hidden;border:0;text-decoration:none}
+.bcollage .item .img{position:absolute;inset:0;background:var(--c-tint-blueberry)}
+.bcollage .item::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(38,38,38,0.7) 100%);z-index:1}
+.bcollage .item span{position:relative;z-index:2;font-family:var(--f-heading);font-size:22px;letter-spacing:-0.005em;text-transform:none;font-weight:400;color:#FFFFFF;line-height:1.2}
+.bcollage .item .img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bcollage .a{grid-column:1/8;grid-row:1/3}
+.bcollage .b{grid-column:8/13;grid-row:1/3}
+.bcollage .c{grid-column:1/5;grid-row:3/5}
+.bcollage .d{grid-column:5/13;grid-row:3/5}
+@media (max-width:899px){.bcollage{grid-template-columns:repeat(2,1fr);grid-auto-rows:160px}.bcollage .a,.bcollage .b,.bcollage .c,.bcollage .d{grid-column:auto;grid-row:auto}}
+
+/* ===== Basic Table ===== */
+.btable{background:#FFFFFF;border:1px solid var(--c-divider)}
+.btable table{width:100%;border-collapse:collapse}
+.btable th,.btable td{padding:20px 26px;text-align:left;border-bottom:1px solid var(--c-divider);font-size:var(--t-body)}
+.btable thead th{background:var(--c-charcoal);color:#FFFFFF;font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:700}
+
+/* ===== Basic Video ===== */
+.bvideo{position:relative;aspect-ratio:16/9;background:#262626;cursor:pointer;overflow:hidden}
+.bvideo .img{position:absolute;inset:0;background:linear-gradient(135deg,#5e6c78 0%,#262626 100%)}
+.bvideo .img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bvideo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%, rgba(0,0,0,0.4) 100%)}
+.bvideo .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:96px;height:96px;border-radius:50%;background:var(--c-primary);color:#FFFFFF;display:flex;align-items:center;justify-content:center;border:0;cursor:pointer;z-index:2}
+.bvideo .play::before{content:"";width:0;height:0;border-style:solid;border-width:14px 0 14px 22px;border-color:transparent transparent transparent #FFFFFF;margin-left:6px}
+.bvideo .label{position:absolute;left:24px;bottom:24px;color:#FFFFFF;font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;z-index:2;background:rgba(0,0,0,0.45);padding:6px 12px}
+.bvideo .duration{position:absolute;right:24px;bottom:24px;color:#FFFFFF;font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.14em;background:rgba(0,0,0,0.55);padding:6px 12px;z-index:2}
+
+/* ===== Basic Hotspot ===== */
+.bhotspot{position:relative;aspect-ratio:16/9;background:var(--c-tint-blueberry);border:0}
+.bhotspot .img{position:absolute;inset:0}
+.bhotspot .img>img{width:100%;height:100%;object-fit:cover}
+.bhotspot .dot{position:absolute;width:36px;height:36px;border-radius:50%;background:var(--c-primary);color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-family:var(--f-heading);font-weight:400;font-size:14px;cursor:pointer;box-shadow:0 0 0 6px rgba(200,16,46,0.25);border:0}
+.bhotspot .dot:nth-child(3){background:var(--c-mustard);box-shadow:0 0 0 6px rgba(221,178,71,0.25);color:var(--c-navy)}
+.bhotspot .dot:nth-child(4){background:var(--c-pistachio);box-shadow:0 0 0 6px rgba(123,153,124,0.28)}
+
+/* ===== Speed Control ===== */
+.spd{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.dial{position:relative;width:380px;height:380px;margin:0 auto}
+.dial .ring{position:absolute;inset:0;border:2px solid var(--c-navy);border-radius:50%}
+.dial .ticks{position:absolute;inset:0}
+.dial .tick{position:absolute;left:50%;top:0;width:1px;height:14px;background:var(--c-navy);transform-origin:0 190px}
+.dial .label{position:absolute;left:50%;top:-22px;transform-origin:0 212px;font-family:var(--f-eyebrow);font-size:10px;font-weight:700;letter-spacing:0.14em;color:var(--c-navy);text-transform:uppercase;white-space:nowrap;margin-left:-12px;text-align:center}
+.dial .knob{position:absolute;inset:36px;background:linear-gradient(135deg,#3a4750 0%,#1a2026 100%);border-radius:50%;box-shadow:inset 0 4px 16px rgba(0,0,0,0.4),inset 0 -4px 16px rgba(255,255,255,0.05),0 12px 40px rgba(0,0,0,0.32)}
+.dial .knob .indicator{position:absolute;left:50%;top:8px;width:4px;height:64px;background:var(--c-primary);transform:translateX(-50%) rotate(135deg);transform-origin:50% 0}
+.dial .knob .center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center}
+.dial .knob .center b{display:block;font-family:var(--f-heading);font-size:56px;color:#FFFFFF;font-weight:400;line-height:1;letter-spacing:-0.02em}
+.dial .knob .center span{display:block;font-family:var(--f-eyebrow);font-size:10px;color:rgba(255,255,255,0.6);letter-spacing:0.18em;text-transform:uppercase;margin-top:4px;font-weight:700}
+.spd .ranges{display:grid;gap:0;margin-top:20px}
+.spd .range{padding:18px 0;border-top:1px solid rgba(51,63,72,0.18);display:grid;grid-template-columns:160px 1fr;gap:24px;align-items:start}
+.spd .range:first-child{border-top:0}
+.spd .range .label{font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--c-primary);font-weight:700}
+.spd .range:nth-child(2) .label{color:var(--c-mustard)}
+.spd .range:nth-child(3) .label{color:var(--c-pistachio)}
+.spd .range p{margin:0;color:var(--c-text-muted);font-size:var(--t-body-sm)}
+@media (max-width:1199px){.spd{grid-template-columns:1fr}.dial{width:280px;height:280px}}
+
+/* ===== Locator widget ===== */
+.locator{padding:40px;background:var(--c-tint-blueberry);border-left:6px solid var(--c-blueberry);display:grid;grid-template-columns:1fr 2fr 1fr;gap:18px;align-items:end}
+.locator label{display:block;font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--c-navy);font-weight:700;margin-bottom:8px}
+.locator input,.locator select{width:100%;padding:14px 16px;font-family:var(--f-body);font-size:var(--t-body);border:1px solid var(--c-charcoal);background:#FFFFFF;border-radius:var(--r-input);color:var(--c-navy);outline:none}
+.locator h4{grid-column:1/-1;margin:0 0 12px;font-size:30px;font-weight:400;letter-spacing:-0.01em}
+@media (max-width:899px){.locator{grid-template-columns:1fr}}
+
+/* ===== Alert Banners ===== */
+.alerts{display:grid;gap:14px}
+.alert{display:flex;gap:16px;align-items:flex-start;padding:20px 26px;border-left:4px solid;background:#FFFFFF}
+.alert.info{border-left-color:var(--c-link);background:#F4F8FD}
+.alert.success{border-left-color:var(--c-offer);background:#F1F6F1}
+.alert.warning{border-left-color:var(--c-mustard);background:#FCF7E9}
+.alert.danger{border-left-color:var(--c-primary);background:#FBEFF1}
+.alert .ico{width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;font-family:var(--f-heading);font-weight:400;flex-shrink:0;color:#FFFFFF;font-size:14px}
+.alert.info .ico{background:var(--c-link)}
+.alert.success .ico{background:var(--c-offer)}
+.alert.warning .ico{background:var(--c-mustard);color:var(--c-navy)}
+.alert.danger .ico{background:var(--c-primary)}
+.alert .text{font-size:var(--t-body-sm);color:var(--c-navy);line-height:1.55}
+.alert .text b{font-family:var(--f-body);font-weight:600;display:block;margin-bottom:2px;font-size:var(--t-body)}
+
+/* ===== Article Info ===== */
+.artinfo{display:flex;gap:28px;align-items:center;padding:28px 32px;background:var(--c-surface-cream);font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--c-text-muted)}
+.artinfo .author{display:flex;align-items:center;gap:14px}
+.artinfo .avatar{width:44px;height:44px;border-radius:50%;background:var(--c-charcoal);color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-family:var(--f-heading);font-weight:400;font-size:16px}
+.artinfo .name{font-family:var(--f-body);font-size:14px;font-weight:600;color:var(--c-navy);text-transform:none;letter-spacing:0}
+
+/* ===== Featured Recipe ===== */
+.frecipe{display:grid;grid-template-columns:1fr 1fr;align-items:center;background:#FFFFFF;border:0;overflow:hidden;box-shadow:var(--s-hover)}
+.frecipe .img{aspect-ratio:5/4;min-height:480px;background:var(--c-tint-pistachio);position:relative}
+.frecipe .img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.frecipe .body{padding:48px}
+.frecipe .badge{display:inline-block;background:var(--c-primary);color:#FFFFFF;font-family:var(--f-eyebrow);font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;padding:7px 14px;margin-bottom:18px}
+.frecipe h3{font-size:46px;line-height:1.06;margin:0 0 14px;font-weight:400;letter-spacing:-0.015em}
+.frecipe p{color:var(--c-text-muted);margin:0 0 28px;font-size:var(--t-body-lg)}
+.frecipe .meta{display:flex;gap:28px;font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.14em;color:var(--c-primary);text-transform:uppercase;font-weight:700;margin-bottom:28px}
+@media (max-width:1199px){.frecipe{grid-template-columns:1fr}.frecipe .img{min-height:280px}.frecipe .body{padding:32px}}
+
+/* ===== Recipe Full ===== */
+.recipe-full{display:grid;grid-template-columns:1fr 2fr;gap:48px;background:#FFFFFF;border:0;padding:56px;align-items:start;box-shadow:var(--s-hover)}
+.recipe-full .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.recipe-full .meta-grid .item{padding:14px 0;border-top:1px solid var(--c-divider)}
+.recipe-full .meta-grid .item:nth-child(-n+2){border-top:0;padding-top:0}
+.recipe-full .meta-grid .label{font-family:var(--f-eyebrow);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--c-text-muted);font-weight:700;margin-bottom:4px}
+.recipe-full .meta-grid .val{font-family:var(--f-heading);font-size:18px;font-weight:500;color:var(--c-navy)}
+.recipe-full .actions{display:flex;gap:16px;flex-wrap:wrap;margin-top:28px;font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--c-navy);font-weight:700}
+.recipe-full .actions a{color:var(--c-navy);text-decoration:none;border-bottom:1px solid var(--c-navy);padding-bottom:1px}
+.recipe-full h3{font-size:42px;line-height:1.06;margin:0 0 14px;font-weight:400;letter-spacing:-0.015em}
+.recipe-full .ing h4{margin:24px 0 14px;font-size:14px;font-family:var(--f-eyebrow);text-transform:uppercase;letter-spacing:0.14em;font-weight:700;color:var(--c-primary)}
+.recipe-full ul{list-style:none;padding:0;margin:0;display:grid;gap:0}
+.recipe-full ul li{padding:12px 0;border-top:1px solid var(--c-divider);font-size:var(--t-body);position:relative;padding-left:28px}
+.recipe-full ul li:first-child{border-top:0}
+.recipe-full ul li::before{content:"·";position:absolute;left:0;color:var(--c-primary);font-weight:700;font-size:24px;line-height:1}
+@media (max-width:1199px){.recipe-full{grid-template-columns:1fr;padding:32px}}
+
+/* ===== Related ===== */
+.related{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.related .card{background:#FFFFFF;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform var(--d-base) var(--ease)}
+.related .card:hover{transform:translateY(-3px)}
+.related .img{aspect-ratio:5/4;background:var(--c-tint-blueberry);position:relative}
+.related .img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.related .body{padding:24px 4px}
+.related .kind{font-family:var(--f-eyebrow);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--c-primary);font-weight:700;margin-bottom:8px}
+.related h4{font-size:22px;line-height:1.18;margin:0 0 6px;font-weight:400;letter-spacing:-0.005em}
+.related p{margin:0;color:var(--c-text-muted);font-size:var(--t-body-sm)}
+@media (max-width:1199px){.related{grid-template-columns:1fr}}
+
+/* ===== Footer ===== */
+.site-footer{background:var(--c-charcoal);color:#FFFFFF;padding:96px 0 32px;border-top:6px solid var(--c-primary)}
+.site-footer .container{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 1fr;gap:48px;align-items:start}
+.site-footer .col h5{font-family:var(--f-eyebrow);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--c-mustard);margin:0 0 20px}
+.site-footer .col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.site-footer .col a{color:rgba(255,255,255,0.78);text-decoration:none;font-size:14px}
+.site-footer .col a:hover{color:#FFFFFF;text-decoration:underline}
+.site-footer .brand-col .brand{color:#FFFFFF}
+.site-footer .brand-col p{color:rgba(255,255,255,0.7);font-size:14px;margin:16px 0 24px;max-width:280px}
+.site-footer .brand-col .social{display:flex;gap:12px}
+.site-footer .brand-col .social a{display:inline-flex;width:42px;height:42px;border:1px solid rgba(255,255,255,0.3);align-items:center;justify-content:center;color:#FFFFFF;font-size:14px}
+.site-footer .legal{grid-column:1/-1;margin-top:64px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.15);display:flex;justify-content:space-between;align-items:center;color:rgba(255,255,255,0.55);font-size:12px;font-family:var(--f-eyebrow);letter-spacing:0.06em}
+.site-footer .legal nav{display:flex;gap:24px}
+.site-footer .legal nav a{color:rgba(255,255,255,0.55)}
+@media (max-width:1199px){.site-footer .container{grid-template-columns:repeat(3,1fr)}.site-footer .brand-col{grid-column:1/-1}}
+@media (max-width:599px){.site-footer .container{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-variant="bold-blockdemo">
+
+<div class="announce" data-section="announcement" data-block="alert-banners"><strong>New</strong> AI-assisted blender finder · <a href="#b-32">Try the Cerebras query form</a></div>
+
+<header class="site-header" data-section="site-header" data-block="header">
+  <div class="row">
+    <a href="#" class="brand" aria-label="Vitamix">vitamix<sup>®</sup></a>
+    <nav class="site-nav" aria-label="Primary"><a href="#shop">Shop</a><a href="#why">Why Vitamix</a><a href="#recipes">Recipes</a><a href="#support">Support</a></nav>
+    <div class="site-utils"><button class="icon-btn" aria-label="Search">⌕</button><button class="icon-btn" aria-label="Account">○</button><button class="icon-btn" aria-label="Cart">▢<span class="badge">2</span></button></div>
+  </div>
+</header>
+
+<section class="showcase-hero" data-section="showcase-intro">
+  <div class="bg"><img src="https://www.vitamix.com/us/en_us/media_18838c424d602fadcdf84d8c558387bb45ac32bb9.png?width=2000&format=webply&optimize=medium" alt="Vitamix on a stainless steel countertop" loading="lazy"></div>
+  <div class="container">
+    <p class="eyebrow on-dark">Vitamix block library · Recommender deployment · Bold</p>
+    <h1>Every block in the recommender showcase, dressed for the brand.</h1>
+    <p>The full set of 55 blocks rendered with the broader Vitamix palette — Mustard, Ginger, Pistachio, Blueberry, Cream — plus charcoal peaks and Vitamix Red moments. More photography, more rhythm.</p>
+    <div class="meta">
+      <span class="pill"><span class="dot"></span> Mode A · brand-faithful</span>
+      <span class="pill"><span class="dot" style="background:#DDB247"></span> Bold palette · 55 blocks</span>
+      <span class="pill"><span class="dot" style="background:#7B997C"></span> Source-faithful order</span>
+      <span class="pill"><span class="dot" style="background:#A2B2BD"></span> Real Vitamix imagery</span>
+    </div>
+  </div>
+</section>
+
+
+    <section class="section-cream" data-section="quick-answer" data-block="quick-answer" id="b-01">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">01 · quick answer</span>
+            <span class="kind">AI Answer</span>
+    </div></div></div>
+      <div class="container"><div class="qa">
+    <p class="eyebrow">Quick answer</p>
+    <h3>Yes, Vitamix blenders can make hot soup from raw ingredients in about 6 minutes.</h3>
+    <p>The powerful motor generates enough friction heat to bring cold ingredients to steaming temperatures. Most Ascent and Venturist series models reach around 190°F in under seven minutes.</p>
+    <button class="toggle">Tell me more ↑</button>
+  </div></div>
+    </section>
+    <section class="" data-section="best-pick" data-block="best-pick" id="b-02">
+      <div class="vortex" aria-hidden="true"></div>
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">02 · best pick</span>
+            <span class="kind">Recommendation</span>
+    </div></div></div>
+      <div class="container"><div class="bp">
+    <div class="img"><span class="crown">★ Best pick</span><img src="https://www.vitamix.com/content/dam/vitamix/home/home-page/AscentX4_Image_PopUpWindow.jpg" alt="Vitamix A3500 — best pick studio shot" loading="lazy"></div>
+    <div class="body">
+      <p class="ribbon">Our top pick · Best for daily smoothies</p>
+      <h3>Vitamix A3500</h3>
+      <p class="p">The A3500 delivers the perfect balance of power, precision, and ease of use. Its touchscreen controls and five pre-programmed settings make it the ideal choice for anyone who wants restaurant-quality smoothies every morning.</p>
+      <div class="price-row"><span class="price">$649.95</span><span class="warranty">10-Year Full Warranty</span></div>
+      <a class="btn btn-primary" href="#">View on Vitamix</a>
+    </div>
+  </div></div>
+    </section>
+    <section class="section-blueberry" data-section="benefits-grid" data-block="benefits-grid" id="b-03">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">03 · benefits grid</span>
+            <span class="kind">Editorial</span>
+    </div></div></div>
+      <div class="container"><div class="benefits">
+    <div class="benefit"><div class="num">01</div><h4>Quick &amp; Easy</h4><p>Smoothies ready in under 60 seconds. Just add ingredients, select a program, and blend.</p></div>
+    <div class="benefit"><div class="num">02</div><h4>Whole-food nutrition</h4><p>Vitamix processes whole fruits and vegetables, retaining the fiber and nutrients juicers discard.</p></div>
+    <div class="benefit"><div class="num">03</div><h4>Built to last</h4><p>Aircraft-grade stainless steel blades and a 2.2 HP motor backed by a 10-year warranty.</p></div>
+    <div class="benefit"><div class="num">04</div><h4>Easy cleanup</h4><p>Add warm water and a drop of dish soap. Blend on high for 60 seconds and rinse. Done.</p></div>
+  </div></div>
+    </section>
+    <section class="section-cream" data-section="feature-highlights" data-block="feature-highlights" id="b-04">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">04 · feature highlights</span>
+            <span class="kind">Editorial</span>
+    </div></div></div>
+      <div class="container"><div class="fhighlights">
+    <div class="fhighlight"><div class="ico">○</div><h4>Touchscreen controls</h4><p>Intuitive LED interface for effortless operation. Adjust speed, select programs, and monitor progress at a glance.</p></div>
+    <div class="fhighlight"><div class="ico">⌧</div><h4>Self-detect technology</h4><p>Automatically recognizes container size and adjusts blending programs for optimal results every time.</p></div>
+    <div class="fhighlight"><div class="ico">5</div><h4>Five pre-programs</h4><p>Smoothies, Hot Soups, Frozen Desserts, Dips &amp; Spreads, Self-Cleaning. One-touch perfection.</p></div>
+  </div></div>
+    </section>
+    <section class="section-pistachio" data-section="split-content" data-block="split-content" id="b-05">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">05 · split content</span>
+            <span class="kind">Editorial</span>
+    </div></div></div>
+      <div class="container"><div class="split">
+    <div class="body">
+      <p class="eyebrow">Power &amp; performance</p>
+      <h3>Restaurant-Quality Results at Home</h3>
+      <p>The same blending technology used by top chefs and smoothie shops around the world. With a 2.2 peak HP motor and hardened stainless steel blades, Vitamix powers through the toughest ingredients for silky-smooth results every time.</p>
+      <a class="btn btn-secondary" href="#">Learn more</a>
+    </div>
+    <div class="img"><img src="https://blender-recommender-proxy.franklin-prod.workers.dev/us/en_us/media_1906d56da4c2c8eba80b05d988d0496666ff28612.avif?width=2000&amp;format=webply&amp;optimize=medium" alt="Vitamix blender in kitchen" loading="lazy"></div>
+  </div></div>
+    </section>
+    <section class="section-muted" data-section="comparison-table" data-block="comparison-table" id="b-06">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">06 · comparison table</span>
+            <span class="kind">Decision</span>
+    </div></div></div>
+      <div class="container"><div class="cmp"><table><thead><tr><th></th><th>Vitamix A3500</th><th>Vitamix A2500</th><th class="best">Vitamix E310</th></tr></thead><tbody><tr><th>Price</th><td>$649.95</td><td>$549.95</td><td>$349.95</td></tr><tr><th>Motor</th><td>2.2 HP <span class="check">✓</span></td><td>2.2 HP</td><td>2.0 HP</td></tr><tr><th>Container Size</th><td>64 oz <span class="check">✓</span></td><td>64 oz <span class="check">✓</span></td><td>48 oz</td></tr><tr><th>Programs</th><td>5 touchscreen <span class="check">✓</span></td><td>3 physical</td><td>None <span class="x">✗</span></td></tr><tr><th>Self-Detect</th><td>Yes <span class="check">✓</span></td><td>Yes <span class="check">✓</span></td><td>No <span class="x">✗</span></td></tr><tr><th>Warranty</th><td>10 years <span class="check">✓</span></td><td>10 years <span class="check">✓</span></td><td>5 years</td></tr><tr><td colspan="4" class="summary">🏆Best for smoothies: Vitamix A3500</td></tr><tr><td colspan="4" class="summary">🏆Best for budget: Vitamix E310</td></tr></tbody></table></div></div>
+    </section>
+    <section class="" data-section="verdict-card" data-block="verdict-card" id="b-07">
+      <div class="vortex" aria-hidden="true"></div>
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">07 · verdict card</span>
+            <span class="kind">Decision</span>
+    </div></div></div>
+      <div class="container"><div class="verdict">
+      <h3>The Verdict</h3>
+      <p>For most people, the Vitamix A2500 offers the best balance of power, features, and value. It handles everything from smoothies to hot soups with ease.</p>
+      <ul><li><b>Choose the A3500 if:</b> You want the touchscreen interface, all five programs, and the longest warranty coverage.</li><li><b>Choose the A2500 if:</b> You want excellent performance at a lower price point with three built-in programs.</li><li><b>Choose the E310 if:</b> You are on a budget and need reliable, high-powered blending without the extras.</li></ul>
+    </div></div>
+    </section>
+    <section class="section-cream" data-section="testimonials" data-block="testimonials" id="b-08">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">08 · testimonials</span>
+            <span class="kind">Social proof</span>
+    </div></div></div>
+      <div class="container"><div class="testimonials">
+    <div class="testimonial"><div class="stars">★★★★★</div><blockquote>This blender completely changed my morning routine. I make creamy green smoothies in 30 seconds that taste like they came from a juice bar. Worth every penny.</blockquote><cite>Sarah M.</cite><div class="meta">Purchased: Vitamix A3500</div></div>
+    <div class="testimonial"><div class="stars">★★★★★</div><blockquote>I was skeptical about making hot soup in a blender, but the results are incredible. Creamy butternut squash soup from raw ingredients in under 10 minutes.</blockquote><cite>James K.</cite><div class="meta">Purchased: Vitamix A2500</div></div>
+    <div class="testimonial"><div class="stars">★★★★★</div><blockquote>Quiet, powerful, and effortless to clean. It earns its place on the counter every day. The build quality is exactly what I expected from a premium tool.</blockquote><cite>Priya R.</cite><div class="meta">Purchased: Ascent X10</div></div>
+  </div></div>
+    </section>
+    <section class="section-mustard" data-section="tips-banner" data-block="tips-banner" id="b-09">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">09 · tips banner</span>
+            <span class="kind">Editorial</span>
+    </div></div></div>
+      <div class="container"><div class="tips">
+    <div class="lead">
+      <div class="img"><img src="https://www.vitamix.com/content/dam/vitamix/migration/media/other/images/w/wycm-almondbutter-01-ingredients-a.jpg" alt="ingredients laid out on a counter" loading="lazy"></div>
+      <div class="content"><p class="eyebrow muted">Pro tips</p><h3>Pro blending tips.</h3><p style="color:var(--c-text-muted);margin:0">Four habits that make the difference between a good blend and a perfect one.</p></div>
+    </div>
+    <div class="grid">
+      <div class="item"><div class="num">01</div><h4>Liquid first</h4><p>Always add your liquid base before solid ingredients for a smoother blend.</p></div>
+      <div class="item"><div class="num">02</div><h4>Layer smart</h4><p>Place soft items near the blades and frozen items on top.</p></div>
+      <div class="item"><div class="num">03</div><h4>Start low</h4><p>Begin at the lowest speed and gradually increase to create a vortex.</p></div>
+      <div class="item"><div class="num">04</div><h4>Use the tamper</h4><p>For thick recipes, push ingredients toward the blades.</p></div>
+    </div>
+  </div></div>
+    </section>
+    <section class="section-blueberry" data-section="product-cards" data-block="product-cards" id="b-10">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">10 · product cards</span>
+            <span class="kind">Commerce</span>
+    </div></div></div>
+      <div class="container"><div class="products">
+      <a class="product-card" href="#">
+          <div class="img"><img src="https://blender-recommender-proxy.franklin-prod.workers.dev/us/en_us/media_117aebed1a8dff8f868c0815dd98fb0dc5db0e0f2.avif?width=2000&amp;format=webply&amp;optimize=medium" alt="Vitamix A3500" loading="lazy"><span class="badge">Top Pick</span></div>
+          <div class="body">
+            <p class="series">Ascent® X Series</p>
+            <h4>Vitamix A3500</h4>
+            <p class="desc">Touchscreen blender with 5 programs</p>
+            <p class="rating"><span class="stars">★★★★★</span> (1,234)</p>
+            <p class="price">$649.95</p>
+            <span class="btn btn-secondary btn-block">View details</span>
+          </div>
+        </a><a class="product-card" href="#">
+          <div class="img"><img src="https://blender-recommender-proxy.franklin-prod.workers.dev/us/en_us/media_1906d56da4c2c8eba80b05d988d0496666ff28612.avif?width=2000&amp;format=webply&amp;optimize=medium" alt="Vitamix A2500" loading="lazy"></div>
+          <div class="body">
+            <p class="series">Ascent® Series</p>
+            <h4>Vitamix A2500</h4>
+            <p class="desc">3-program blender with variable speed</p>
+            <p class="rating"><span class="stars">★★★★★</span> (2,567)</p>
+            <p class="price">$549.95</p>
+            <span class="btn btn-secondary btn-block">View details</span>
+          </div>
+        </a><a class="product-card" href="#">
+          <div class="img"><img src="https://blender-recommender-proxy.franklin-prod.workers.dev/us/en_us/media_1d60b8f8e0812d0d86e5cd715406566fe76717f49.avif?width=2000&amp;format=webply&amp;optimize=medium" alt="Vitamix E310" loading="lazy"><span class="badge">Best Value</span></div>
+          <div class="body">
+            <p class="series">Explorian</p>
+            <h4>Vitamix E310</h4>
+            <p class="desc">Essential blending power</p>
+            <p class="rating"><span class="stars">★★★★☆</span> (856)</p>
+            <p class="price">$349.95</p>
+            <span class="btn btn-secondary btn-block">View details</span>
+          </div>
+        </a>
+    </div></div>
+    </section>
+    <section class="section-cream" data-section="recipe-cards" data-block="recipe-cards" id="b-11">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">11 · recipe cards</span>
+            <span class="kind">Recipe</span>
+    </div></div></div>
+      <div class="container"><div class="recipes">
+      <a class="recipe-card" href="#">
+          <div class="img"><img src="https://blender-recommender-proxy.franklin-prod.workers.dev/us/en_us/media_157b362be26ab9b6e3133bb1c13c22e6160ac3300.avif?width=2000&amp;format=webply&amp;optimize=medium" alt="Green Power Smoothie" loading="lazy"></div>
+          <div class="body"><p class="meta">5 minutes · Easy</p><h4>Green Power Smoothie</h4></div>
+        </a><a class="recipe-card" href="#">
+          <div class="img"><img src="https://blender-recommender-proxy.franklin-prod.workers.dev/us/en_us/media_11ed80b0b67771e1b7475399298491374b2b5752e.webp?width=2000&amp;format=webply&amp;optimize=medium" alt="Butternut Squash Soup" loading="lazy"></div>
+          <div class="body"><p class="meta">10 minutes · Intermediate</p><h4>Butternut Squash Soup</h4></div>
+        </a><a class="recipe-card" href="#">
+          <div class="img"><img src="https://blender-recommender-proxy.franklin-prod.workers.dev/us/en_us/media_1a4925c4078e5e7901683dc2952f3c991d0afdab2.avif?width=2000&amp;format=webply&amp;optimize=medium" alt="Homemade Almond Butter" loading="lazy"></div>
+          <div class="body"><p class="meta">8 minutes · Easy</p><h4>Homemade Almond Butter</h4></div>
+        </a><a class="recipe-card" href="#">
+          <div class="img"><img src="https://blender-recommender-proxy.franklin-prod.workers.dev/us/en_us/media_1d50fbaec43fae537d17c18d26ccf1006c01790e7.webp?width=2000&amp;format=webply&amp;optimize=medium" alt="Mango Sorbet" loading="lazy"></div>
+          <div class="body"><p class="meta">3 minutes · Easy</p><h4>Mango Sorbet</h4></div>
+        </a>
+    </div></div>
+    </section>
+    <section class="section-muted" data-section="product-recommendation" data-block="product-recommendation" id="b-12">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">12 · product recommendation</span>
+            <span class="kind">Recommendation</span>
+    </div></div></div>
+      <div class="container"><div class="prec">
+    <div class="img"><span class="corner">For hot soups</span><img src="https://blender-recommender-proxy.franklin-prod.workers.dev/us/en_us/media_117aebed1a8dff8f868c0815dd98fb0dc5db0e0f2.avif?width=2000&amp;format=webply&amp;optimize=medium" alt="Vitamix A3500" loading="lazy"></div>
+    <div class="body">
+      <span class="ribbon">Best for hot soups</span>
+      <h3>Vitamix A2500</h3>
+      <p>The A2500 delivers exceptional hot soup performance with three pre-programmed settings, variable speed control, and a pulse feature. Its 64-oz container handles family-sized batches with ease.</p>
+      <p class="price">$549.95</p>
+      <p class="warr">10-Year Warranty</p>
+      <div class="ctas"><a class="btn btn-primary" href="#">View on Vitamix</a><a class="btn btn-secondary" href="#">Browse soup recipes</a></div>
+    </div>
+  </div></div>
+    </section>
+    <section class="section-pistachio" data-section="technique-spotlight" data-block="technique-spotlight" id="b-13">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">13 · technique spotlight</span>
+            <span class="kind">Editorial</span>
+    </div></div></div>
+      <div class="container"><div class="tech">
+      <div class="img"><img src="https://blender-recommender-proxy.franklin-prod.workers.dev/us/en_us/media_13d4fcb02b84ffdcebaac253f809ef9219f911b30.avif?width=750&amp;format=avif&amp;optimize=medium" alt="Layering technique" loading="lazy"></div>
+      <div class="body">
+        <p class="eyebrow">Pro technique</p>
+        <h3>The Layering Technique</h3>
+        <p>Master the art of ingredient layering for consistently smooth, perfectly blended results every time you use your Vitamix.</p>
+        <ol class="steps"><li>Liquid base first (water, milk, juice)</li><li>Soft ingredients next (yogurt, fresh fruit, leafy greens)</li><li>Hard and frozen items on top (ice, frozen berries, nuts)</li><li>Always use the tamper for thick mixtures</li><li>Increase speed gradually from 1 to 10</li><li>Blend no longer than 60 seconds for smoothies</li></ol>
+      </div>
+    </div></div>
+    </section>
+    <section class="section-cream" data-section="nutrition-facts" data-block="nutrition-facts" id="b-14">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">14 · nutrition facts</span>
+            <span class="kind">Recipe</span>
+    </div></div></div>
+      <div class="container"><div class="nutri">
+    <h3>Green Power Smoothie</h3>
+    <div class="serving">Per serving · 16 oz</div>
+    <div class="row cal"><b>Calories</b><b>185</b></div>
+    <div class="row"><b>Total fat</b><span>3 g</span></div>
+    <div class="row"><b>Protein</b><span>8 g</span></div>
+    <div class="row"><b>Fiber</b><span>6 g</span></div>
+    <div class="row"><b>Carbohydrates</b><span>32 g</span></div>
+    <div class="row"><b>Sugar</b><span>18 g</span></div>
+    <div class="row"><b>Vitamin C</b><span>120% DV</span></div>
+    <div class="row"><b>Iron</b><span>15% DV</span></div>
+  </div></div>
+    </section>
+    <section class="" data-section="recipe-steps" data-block="recipe-steps" id="b-15">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">15 · recipe steps</span>
+            <span class="kind">Recipe</span>
+    </div></div></div>
+      <div class="container"><div class="rsteps">
+      <div class="img"><img src="https://www.vitamix.com/content/dam/vitamix/home/what-you-can-make/the-possibilities/ac-simple-3-grid__card__image__9.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg" alt="recipe steps · pouring smoothie hero" loading="lazy"></div>
+      <ol><li><p>Add 1 cup of almond milk and 1/2 cup of coconut water to the Vitamix container.</p></li><li><p>Add 2 cups of fresh spinach and 1 ripe banana on top of the liquid.</p></li><li><p>Add 1 cup of frozen mango chunks, 1/2 cup of frozen pineapple, and 1 tablespoon of chia seeds.</p></li><li><p>Secure the lid with the cap in place.</p></li><li><p>Select the Smoothie program, or manually blend starting at speed 1 and increasing to 10 over 30 seconds.</p></li><li><p>Pour into a tall glass and serve immediately.</p></li></ol>
+    </div></div>
+    </section>
+    <section class="section-muted" data-section="recipe-tips" data-block="recipe-tips" id="b-16">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">16 · recipe tips</span>
+            <span class="kind">Recipe</span>
+    </div></div></div>
+      <div class="container"><div class="rtips">
+    <div class="rtip"><h4>Freeze your greens</h4><p>Pre-freeze spinach and kale in portions for thicker, colder smoothies without extra ice.</p></div>
+    <div class="rtip"><h4>Add protein</h4><p>Blend in a scoop of protein powder or 2 tablespoons of Greek yogurt for sustained energy.</p></div>
+    <div class="rtip"><h4>Tropical twist</h4><p>Replace spinach with kale and add 1/2 cup of coconut cream for a tropical flavor.</p></div>
+  </div></div>
+    </section>
+    <section class="section-cream" data-section="timeline" data-block="timeline" id="b-17">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">17 · timeline</span>
+            <span class="kind">Brand</span>
+    </div></div></div>
+      <div class="container"><div class="timeline">
+    <div class="row"><div class="year">1921</div><div class="body"><h4>The beginning</h4><p>William Grover Barnard founded the Vitamix Corporation in Cleveland, Ohio, beginning a century-long journey of blending innovation.</p></div><div class="img"><img src="https://www.vitamix.com/us/en_us/media_171db2404e2e8e139bdda19402d00b70eb3b55e3e.avif?width=2000&format=webply&optimize=medium" alt="Vitamix founder in original commercial" loading="lazy"></div></div>
+    <div class="row"><div class="year">1949</div><div class="body"><h4>Television pioneer</h4><p>Vitamix became one of the first products ever sold on television, demonstrating its capabilities to a nationwide audience.</p></div><div class="img"><img src="https://www.vitamix.com/us/en_us/media_199b47fbbfb12da1906108376263a86106b10ca58.avif?width=2000&format=webply&optimize=medium" alt="quality assurance inspector" loading="lazy"></div></div>
+    <div class="row"><div class="year">1985</div><div class="body"><h4>Professional grade</h4><p>Vitamix blenders were adopted by restaurants and smoothie shops worldwide, becoming the industry standard for commercial blending.</p></div><div class="img"><img src="https://www.vitamix.com/content/dam/vitamix/migration/media/other/images/a/ascent-series-300x300.jpg" alt="ascent series" loading="lazy"></div></div>
+    <div class="row"><div class="year">2016</div><div class="body"><h4>Ascent series launch</h4><p>Introduction of the Ascent series with Self-Detect technology, touchscreen controls, and wireless connectivity.</p></div><div class="img"><img src="https://www.vitamix.com/content/dam/vitamix/home/home-page/AscentX4_Image_PopUpWindow.jpg" alt="Ascent X4" loading="lazy"></div></div>
+  </div></div>
+    </section>
+    <section class="" data-section="countdown-timer" data-block="countdown-timer" id="b-18">
+      <div class="vortex" aria-hidden="true"></div>
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">18 · countdown timer</span>
+            <span class="kind">Promo</span>
+    </div></div></div>
+      <div class="container"><div class="countdown">
+    <h3>Summer Blending Sale Ends In</h3>
+    <p>Save up to 30% on select Vitamix blenders and accessories.</p>
+    <div class="digits">
+      <div class="digit"><b>14</b><span>days</span></div>
+      <div class="digit"><b>06</b><span>hours</span></div>
+      <div class="digit"><b>32</b><span>minutes</span></div>
+      <div class="digit"><b>09</b><span>seconds</span></div>
+    </div>
+  </div></div>
+    </section>
+    <section class="section-charcoal" data-section="category-cards" data-block="category-cards" id="b-19">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">19 · category cards</span>
+            <span class="kind">Navigation</span>
+    </div></div></div>
+      <div class="container"><div class="cats">
+      <a class="cat" href="#">
+          <span class="num">01</span>
+          <div class="img"><img src="https://blender-recommender-proxy.franklin-prod.workers.dev/us/en_us/media_10d50cad6dde250db7d464e10921d8981436b061b.webp?width=2000&amp;format=webply&amp;optimize=medium" alt="Blenders" loading="lazy"></div>
+          <span class="label">Blenders</span>
+        </a><a class="cat" href="#">
+          <span class="num">02</span>
+          <div class="img"><img src="https://blender-recommender-proxy.franklin-prod.workers.dev/us/en_us/media_198ea1b7588fbe05575175fcedd57604089ffcf5d.avif?width=2000&amp;format=webply&amp;optimize=medium" alt="Containers &amp; accessories" loading="lazy"></div>
+          <span class="label">Containers &amp; accessories</span>
+        </a><a class="cat" href="#">
+          <span class="num">03</span>
+          <div class="img"><img src="https://blender-recommender-proxy.franklin-prod.workers.dev/us/en_us/media_1715cab6b93c35d03037bb98533a09747440714ac.webp?width=2000&amp;format=webply&amp;optimize=medium" alt="Immersion blenders" loading="lazy"></div>
+          <span class="label">Immersion blenders</span>
+        </a><a class="cat" href="#">
+          <span class="num">04</span>
+          <div class="img"><img src="https://www.vitamix.com/content/dam/vitamix/home/recipes/q2-2026/RecipeCenter_Header_RubyRenewal.jpg" alt="Cookbooks &amp; guides" loading="lazy"></div>
+          <span class="label">Cookbooks &amp; guides</span>
+        </a>
+    </div></div>
+    </section>
+    <section class="section-blueberry" data-section="specs-table" data-block="specs-table" id="b-20">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">20 · specs table</span>
+            <span class="kind">Decision</span>
+    </div></div></div>
+      <div class="container"><div class="specs"><table><tbody>
+    <tr><th>Motor power</th><td>2.2 Peak HP</td></tr>
+    <tr><th>Container size</th><td>64 oz (low-profile)</td></tr>
+    <tr><th>Speed settings</th><td>10 variable speeds + pulse</td></tr>
+    <tr><th>Pre-programmed settings</th><td>5 — Smoothies, Hot Soups, Frozen Desserts, Dips &amp; Spreads, Self-Cleaning</td></tr>
+    <tr><th>Interface</th><td>Touchscreen with LED display</td></tr>
+    <tr><th>Self-detect</th><td>Yes — RFID-tagged containers</td></tr>
+    <tr><th>Weight</th><td>12.5 lbs</td></tr>
+    <tr><th>Dimensions (H×W×D)</th><td>17" × 8" × 11"</td></tr>
+    <tr><th>Warranty</th><td>10-year full warranty</td></tr>
+  </tbody></table></div></div>
+    </section>
+    <section class="" data-section="use-case-cards" data-block="use-case-cards" id="b-21">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">21 · use case cards</span>
+            <span class="kind">Navigation</span>
+    </div></div></div>
+      <div class="container"><div class="usecases"><a class="usecase" href="#"><span>Daily smoothies</span><p>Five-second silk every morning.</p></a><a class="usecase" href="#"><span>Hot soups</span><p>From cold ingredients to steam in 6 minutes.</p></a><a class="usecase" href="#"><span>Nut butters</span><p>Almond, peanut, cashew — straight from the jar.</p></a><a class="usecase" href="#"><span>Frozen desserts</span><p>Sorbet and ice cream in four minutes flat.</p></a><a class="usecase" href="#"><span>Food prep</span><p>Chop, dice, purée, knead — one machine, every job.</p></a><a class="usecase" href="#"><span>Baby food</span><p>Pediatrician-approved smooth purées in seconds.</p></a></div></div>
+    </section>
+    <section class="section-cream" data-section="faq" data-block="faq" id="b-22">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">22 · faq</span>
+            <span class="kind">Support</span>
+    </div></div></div>
+      <div class="container"><div class="accordion">
+    <details open><summary>What makes a Vitamix different?</summary><div class="answer"><p>A 2.2 peak HP motor and aircraft-grade stainless steel blades engineered to last 10–20 years.</p></div></details>
+    <details><summary>How long does a Vitamix last?</summary><div class="answer"><p>The average Vitamix lasts 20+ years with proper care. The full warranty covers the machine for ten years. Most owners only replace pitchers, not motor bases.</p></div></details>
+    <details><summary>Can I make hot soup in a Vitamix?</summary><div class="answer"><p>Yes — friction generated by the high-speed blades heats contents from cold to steaming in under seven minutes.</p></div></details>
+    <details><summary>Is the container dishwasher-safe?</summary><div class="answer"><p>Ascent X containers are dishwasher-safe (top rack). For older Pro and Venturist pitchers, run the self-cleaning program.</p></div></details>
+  </div></div>
+    </section>
+    <section class="section-pistachio" data-section="follow-up" data-block="follow-up" id="b-23">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">23 · follow up</span>
+            <span class="kind">AI</span>
+    </div></div></div>
+      <div class="container">
+      <div class="section-heading"><div class="lead"><p class="eyebrow">Continue exploring</p><h2>Continue Exploring</h2></div></div>
+      <div class="fu"><a href="#">Compare A3500 vs A2500 in detail</a><a href="#">Show me smoothie recipes for the A3500</a><a href="#">What accessories does the A3500 support?</a><a href="#">Is the A3500 worth the price over the A2500?</a><a href="#">Which Vitamix is best for hot soups?</a></div>
+    </div>
+    </section>
+    <section class="section-mustard" data-section="budget-breakdown" data-block="budget-breakdown" id="b-24">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">24 · budget breakdown</span>
+            <span class="kind">Commerce</span>
+    </div></div></div>
+      <div class="container">
+    <div class="bud">
+      <div class="bud-tier"><h4>Entry-level · $300–$400</h4><ul><li><b>Vitamix E310</b><span>$349.95</span></li><li><b>Vitamix 5200</b><span>$399.95</span></li></ul></div>
+      <div class="bud-tier"><h4>Mid-range · $450–$600</h4><ul><li><b>Vitamix A2500</b><span>$549.95</span></li><li><b>Vitamix 7500</b><span>$499.95</span></li></ul></div>
+      <div class="bud-tier"><h4>Premium · $600+</h4><ul><li><b>Vitamix A3500</b><span>$649.95</span></li><li><b>Venturist V1200</b><span>$699.95</span></li></ul></div>
+    </div>
+    <div class="bud-recond">
+      <div><h5>Certified reconditioned</h5><p class="pro">Reconditioned A2500 — $349.95 · Reconditioned 5200 — $249.95</p><p>Pro tip: a $400 Vitamix used daily for 10 years = $0.11/day.</p></div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:flex-end"><a class="btn btn-primary" href="#">Shop reconditioned</a></div>
+    </div>
+  </div>
+    </section>
+    <section class="section-cream" data-section="accessibility-specs" data-block="accessibility-specs" id="b-25">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">25 · accessibility specs</span>
+            <span class="kind">Inclusion</span>
+    </div></div></div>
+      <div class="container"><div class="acc"><table>
+    <thead><tr><th>Model</th><th>Weight</th><th>Lid</th><th>Controls</th></tr></thead>
+    <tbody>
+      <tr><td>Vitamix A3500</td><td>12.5 lbs</td><td>Flip-top with tab — one-handed</td><td>Touchscreen — fine motor friendly</td></tr>
+      <tr><td>Vitamix A2500</td><td>12.0 lbs</td><td>Flip-top with tab — one-handed</td><td>Physical buttons — tactile</td></tr>
+      <tr><td>Vitamix E310</td><td>10.6 lbs</td><td>Standard locking lid</td><td>Dial + switch — tactile</td></tr>
+      <tr><td>Vitamix Immersion</td><td>2.5 lbs</td><td>N/A — immersion style</td><td>Trigger button — grip required</td></tr>
+    </tbody>
+  </table></div>
+  <div class="acc-tips">
+    <h4>🏆 Best for arthritis: Vitamix E310 — simple dial, lighter weight, easier grip</h4>
+    <ul>
+      <li>Dial controls are easier with limited grip strength than touchscreens.</li>
+      <li>Smaller containers (48 oz or personal cups) are lighter when full.</li>
+      <li>Keep your blender on the counter to avoid lifting.</li>
+      <li>Consider a blending station mat to prevent slipping.</li>
+    </ul>
+  </div></div>
+    </section>
+    <section class="" data-section="empathy-hero" data-block="empathy-hero" id="b-26">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">26 · empathy hero</span>
+            <span class="kind">Editorial</span>
+    </div></div></div>
+      <div class="container"><div class="empathy">
+    <p class="eyebrow">A note from us</p>
+    <h3>Managing a health condition takes real commitment — and what you eat matters.</h3>
+    <p>We understand that blending isn't just about convenience for you. It is about having tools that support your goals every single day, whether that means making nutrient-dense smoothies, easy-to-digest soups, or medications easier to take.</p>
+    <p>Vitamix blenders are built to be your long-term partner in that journey — powerful, reliable, and engineered for the daily demands of a health-led kitchen.</p>
+  </div></div>
+    </section>
+    <section class="" data-section="sustainability-info" data-block="sustainability-info" id="b-27">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">27 · sustainability info</span>
+            <span class="kind">Brand</span>
+    </div></div></div>
+      <div class="container"><div class="sust">
+    <div class="sust-card"><div class="ico">🏭</div><h4>Manufacturing</h4><p>Made in the USA since 1921. Our facility in Olmsted Township, Ohio runs on renewable energy and has reduced water usage by 40 % since 2015.</p></div>
+    <div class="sust-card"><div class="ico">🧪</div><h4>Materials</h4><p>Containers from BPA-free Tritan copolyester. Motor bases use recycled steel content. Packaging is 100 % recyclable and plastic-free.</p></div>
+    <div class="sust-card"><div class="ico">⏱</div><h4>Lifespan</h4><p>The average Vitamix lasts 20+ years with proper care, backed by a ten-year warranty. Smaller overall footprint than cheaper alternatives.</p></div>
+    <div class="sust-card"><div class="ico">♻</div><h4>End of life</h4><p>Vitamix accepts motor base trade-ins for recycling. All containers are fully recyclable. Contact customer service for disposal.</p></div>
+    <div class="sust-callout">
+      <h4>🌱 Built to last, not to landfill.</h4>
+      <div class="badges"><span class="badge">BPA-free containers</span><span class="badge">Made in USA</span><span class="badge">Repairable design</span></div>
+    </div>
+  </div></div>
+    </section>
+    <section class="section-cream" data-section="smart-features" data-block="smart-features" id="b-28">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">28 · smart features</span>
+            <span class="kind">Editorial</span>
+    </div></div></div>
+      <div class="container"><div class="smart">
+    <div class="col"><h4>Vitamix Perfect Blend App</h4><h5>iOS &amp; Android, Bluetooth-paired</h5><p>Connects to Ascent and Venturist series blenders. Browse 500+ guided recipes, create custom programs, and track nutrition.</p></div>
+    <div class="col"><h4>Voice-assistant compatible</h4><h5>Alexa &amp; Google Assistant</h5><p>Ask your assistant to start a smoothie program, adjust speed, or get recipe suggestions hands-free.</p></div>
+    <div class="what">
+      <div><h5>What you can do</h5><ul><li>Start and stop blending remotely from the app</li><li>Set custom speed ramps and timers</li><li>Save and share your own recipes</li><li>Track blends and nutritional intake over time</li><li>Download firmware updates automatically</li></ul></div>
+      <div><h5>Limitations</h5><ul><li>Bluetooth only — no WiFi or cloud dependency for core blending</li><li>App features require smartphone proximity (≈ 30 ft)</li><li>Cannot remotely start the blender (safety reasons)</li></ul></div>
+    </div>
+    <div class="take"><h5>Honest take</h5><p>The smart features are nice-to-have but not essential. The app provides guided recipes and timers, but you can't remotely start your blender for safety reasons. If smart-home integration is critical, this may not be the deciding factor.</p></div>
+    <div class="compatible"><h5>WiFi-enabled models</h5><span class="pill">Ascent A3500</span><span class="pill">Ascent A2500</span><span class="pill">Ascent X5</span><span class="pill">Ascent X4</span></div>
+  </div></div>
+    </section>
+    <section class="section-blueberry" data-section="engineering-specs" data-block="engineering-specs" id="b-29">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">29 · engineering specs</span>
+            <span class="kind">Technical</span>
+    </div></div></div>
+      <div class="container"><div class="eng">
+    <h3>Vitamix A3500 — Engineering Specifications</h3>
+    <p class="lead">Raw data. No marketing fluff.</p>
+    <table><tbody>
+      <tr><th>Motor type</th><td>Brushless DC induction motor<span class="note">Variable frequency drive controlled</span></td></tr>
+      <tr><th>Peak output</th><td>2.2 HP (1,641 W)<span class="note">Measured at motor shaft, not wall draw</span></td></tr>
+      <tr><th>Blade speed (max)</th><td>~240 mph tip speed<span class="note">At speed setting 10</span></td></tr>
+      <tr><th>RPM range</th><td>1,400 – 37,000 RPM<span class="note">Variable across 10 speed settings</span></td></tr>
+      <tr><th>Blade material</th><td>Aircraft-grade stainless steel<span class="note">Hardened and laser-cut</span></td></tr>
+      <tr><th>Container volume</th><td>64 fl oz (1.89 L)<span class="note">Low-profile design</span></td></tr>
+      <tr><th>Thermal protection</th><td>Automatic reset thermal cutoff<span class="note">Prevents motor overheating</span></td></tr>
+      <tr><th>Electrical</th><td>120 V / 60 Hz / 12 A<span class="note">Standard US outlet compatible</span></td></tr>
+      <tr><th>Noise output</th><td>88 dB at max speed<span class="note">A-weighted, 1 m distance</span></td></tr>
+    </tbody></table>
+    <div class="notes">Measurement notes — motor power is continuous output, not peak marketing numbers; sound levels measured at 1 m, A-weighted (dBA); RPM is no-load maximum blade speed.</div>
+    <div class="download"><a class="btn btn-secondary on-dark" href="#">Download full product manual (PDF)</a></div>
+  </div></div>
+    </section>
+    <section class="section-cream" data-section="allergen-safety" data-block="allergen-safety" id="b-30">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">30 · allergen safety</span>
+            <span class="kind">Support</span>
+    </div></div></div>
+      <div class="container"><div class="allergen">
+    <p class="eyebrow">Official Vitamix resources</p>
+    <h3>Allergen safety &amp; cross-contamination</h3>
+    <p>Everything you need to know about keeping your Vitamix clean and safe for allergen-sensitive food preparation.</p>
+    <div class="notice"><b>Important:</b> For specific allergen safety guidance, consult your allergist or healthcare provider. The information below is sourced from official Vitamix documentation.</div>
+    <h4>Cleaning your container</h4>
+    <p>Standard cleaning is not sufficient for allergen safety. Disassemble the container, wash with hot soapy water, sanitize the blade assembly, and air-dry completely. Replace the seal annually if used in an allergen-sensitive household.</p>
+    <h4>Cross-contamination risks</h4>
+    <p>Even after the self-cleaning program, trace amounts of allergens can remain in the blade assembly seal and lid gasket. For severe allergies, dedicate a separate container to allergen-free use.</p>
+  </div></div>
+    </section>
+    <section class="section-muted" data-section="troubleshooting-steps" data-block="troubleshooting-steps" id="b-31">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">31 · troubleshooting steps</span>
+            <span class="kind">Support</span>
+    </div></div></div>
+      <div class="container"><ol class="trouble">
+    <li><div class="num">01</div><div><h4>Check the power connection</h4><p>Ensure the power cord is fully plugged into both the motor base and a working wall outlet. Test the outlet with another device. Check your circuit breaker — Vitamix draws up to 12 A and can trip a shared circuit.</p></div></li>
+    <li><div class="num">02</div><div><h4>Confirm the container is properly seated</h4><p>Remove the container and reattach it firmly. You should hear a click or feel it lock. The safety interlock prevents the motor from running if the container is not fully seated on the drive socket.</p></div></li>
+    <li><div class="num">03</div><div><h4>Reset the thermal overload protector</h4><p>If the blender recently overheated, the thermal cutoff may have tripped. Turn the machine off, unplug it, and allow it to cool for 45 minutes. Then plug back in and retry.</p><div class="warn">⚠ Do not attempt to bypass the thermal protector. Doing so voids your warranty and poses a fire hazard.</div></div></li>
+    <li><div class="num">04</div><div><h4>Contact Vitamix support</h4><p>If the blender still does not start, contact Vitamix at 1-800-848-2649 or visit vitamix.com/support. All repairs within the warranty period are covered at no cost — including shipping.</p></div></li>
+  </ol></div>
+    </section>
+    <section class="" data-section="query-form-cerebras" data-block="query-form-cerebras" id="b-32">
+      <div class="vortex" aria-hidden="true"></div>
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">32 · query form cerebras</span>
+            <span class="kind">AI</span>
+    </div></div></div>
+      <div class="container"><div class="qform">
+    <span class="badge">⚡ AI-assisted</span>
+    <h3>What can we help you blend?</h3>
+    <div class="row">
+      <input type="text" placeholder="Ask about hot soups, smoothies, nut butters…">
+      <button class="submit">Find my Vitamix</button>
+    </div>
+    <div class="examples">Or try: <a href="#">daily smoothies</a><a href="#">hot soups</a><a href="#">nut butters</a><a href="#">baby food</a></div>
+  </div></div>
+    </section>
+    <section class="section-cream" data-section="reasoning" data-block="reasoning" id="b-33">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">33 · reasoning</span>
+            <span class="kind">AI</span>
+    </div></div></div>
+      <div class="container"><div class="rsn">
+    <div class="hd"><h3>How I'm thinking about this</h3><span class="badge">⚡ AI Reasoning</span></div>
+    <div class="body">
+      <div class="step"><h5>Understanding</h5><p>The user is asking about hot-soup capability — this is a product capability question, not a purchase decision query. They likely want to understand the mechanism and which models support it.</p></div>
+      <div class="step"><h5>Assessment</h5><p>All full-size Vitamix blenders can make hot soup via friction heat. The differentiator is whether the model has a dedicated Hot Soup program (Ascent series) or requires manual operation (Explorian).</p></div>
+      <div class="step"><h5>Recommendation</h5><p>Lead with the mechanism (friction heat → 6-minute steaming temperature), then list the models with dedicated programs. Include a budget alternative for users who want hot-soup capability without the touchscreen premium.</p></div>
+    </div>
+  </div></div>
+    </section>
+    <section class="" data-section="reasoning-user" data-block="reasoning-user" id="b-34">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">34 · reasoning user</span>
+            <span class="kind">AI</span>
+    </div></div></div>
+      <div class="container"><div class="rsnu">
+    <p class="lead">Personalized for you</p>
+    <h3>How I found your answer</h3>
+    <div class="item"><div class="label">Here's what I found</div><p>You're asking about making hot soup in a blender — I'll focus on the models that handle this best and explain exactly how it works.</p></div>
+    <div class="item"><div class="label">Here's what I found</div><p>The key detail is friction heat: Vitamix blades spin fast enough to heat liquid from cold to steaming in about six minutes — no separate burner needed.</p></div>
+    <div class="item"><div class="label">Here's what I found</div><p>The Ascent A3500 and A2500 both have a dedicated Hot Soup preset that times the blend automatically. The Explorian E310 can do it too, but you'll need to set the speed manually.</p></div>
+  </div></div>
+    </section>
+    <section class="section-pistachio" data-section="follow-up-advisor" data-block="follow-up-advisor" id="b-35">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">35 · follow up advisor</span>
+            <span class="kind">AI</span>
+    </div></div></div>
+      <div class="container"><div class="fua">
+    <a class="fua-card" href="#"><div class="ico">🥣</div><h4>Compare hot-soup performance</h4><p>A3500 vs A2500 vs E310 — friction-heat speeds and program options.</p></a>
+    <a class="fua-card" href="#"><div class="ico">🌱</div><h4>Smoothie-recipe library</h4><p>500+ recipes designed for the model you're considering.</p></a>
+    <a class="fua-card" href="#"><div class="ico">⚙</div><h4>Accessory compatibility</h4><p>Which containers and adapters fit each blender base.</p></a>
+  </div></div>
+    </section>
+    <section class="section-cream" data-section="cerebras-generated" data-block="cerebras-generated" id="b-36">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">36 · cerebras generated</span>
+            <span class="kind">AI</span>
+    </div></div></div>
+      <div class="container"><div class="cgen"><a class="cgen-card" href="#"><span class="label">What Vitamix blender is best for daily smoothies?</span></a><a class="cgen-card" href="#"><span class="label">How does a Vitamix make hot soup from raw ingredients?</span></a><a class="cgen-card" href="#"><span class="label">Which Vitamix containers fit the Ascent X line?</span></a><a class="cgen-card" href="#"><span class="label">Comparing Ascent A3500 to the Venturist V1200</span></a></div></div>
+    </section>
+    <section class="" data-section="hero" data-block="hero" id="b-37">
+      <div class="vortex" aria-hidden="true"></div>
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">37 · hero</span>
+            <span class="kind">Brand</span>
+    </div></div></div>
+      <div class="r-hero" data-section="hero">
+    <div class="bg"><img src="https://www.vitamix.com/us/en_us/media_18838c424d602fadcdf84d8c558387bb45ac32bb9.png?width=2000&amp;format=webply&amp;optimize=medium" alt="Vitamix Ascent X scene" loading="lazy"></div>
+    <div class="container">
+      <p class="eyebrow on-dark">Featured</p>
+      <h2>Ready to Blend Your Own Sauces?</h2>
+      <p>Pair your culinary creativity with the versatile Ascent X2.</p>
+      <a class="btn btn-primary" href="#">Shop Ascent X2</a>
+    </div>
+  </div>
+    </section>
+    <section class="section-pistachio" data-section="banner" data-block="banner" id="b-38">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">38 · banner</span>
+            <span class="kind"></span>
+    </div></div></div>
+      <div class="container"><div class="banner-split">
+    <div class="body"><p class="eyebrow">From the kitchen</p><h3>Elevate Your Everyday</h3><p>Find the perfect Vitamix for your kitchen.</p><a class="btn btn-primary" href="#">Explore blenders</a></div>
+    <div class="img"><img src="https://blender-recommender-proxy.franklin-prod.workers.dev/us/en_us/media_1d8ee771c4425a4f54307a98c218170c491eef5a2.webp?width=2000&amp;format=webply&amp;optimize=medium" alt="Vitamix A3500" loading="lazy"></div>
+  </div></div>
+    </section>
+    <section class="section-pistachio" data-section="banner" data-block="banner" id="b-39">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">39 · banner</span>
+            <span class="kind"></span>
+    </div></div></div>
+      <div class="container"><div class="banner-inset">
+    <div><h3>Free Shipping on All Orders</h3><p>Plus a 60-day money-back guarantee.</p></div>
+    <a class="btn btn-primary" href="#">Browse collection</a>
+  </div></div>
+    </section>
+    <section class="section-cream" data-section="cards" data-block="cards" id="b-40">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">40 · cards</span>
+            <span class="kind">Editorial</span>
+    </div></div></div>
+      <div class="container"><div class="basic-cards">
+      <a class="card" href="#">
+          <div class="img"><img src="https://www.vitamix.com/content/dam/vitamix/home/home-page/AscentX4_Image_PopUpWindow.jpg" alt="Ascent A3500" loading="lazy"></div>
+          <div class="body"><h4>Ascent A3500</h4><p>Touchscreen blender with five built-in programs and Self-Detect technology.</p><span class="btn btn-secondary btn-block">View details</span></div>
+        </a><a class="card" href="#">
+          <div class="img"><img src="https://www.vitamix.com/content/dam/vitamix/migration/media/other/images/a/A3500i-BSF-Self-Cleaning-Environment.jpg" alt="Ascent A2500" loading="lazy"></div>
+          <div class="body"><h4>Ascent A2500</h4><p>Three pre-programmed settings, variable speed, and a 64 oz container.</p><span class="btn btn-secondary btn-block">View details</span></div>
+        </a><a class="card" href="#">
+          <div class="img"><img src="https://www.vitamix.com/content/dam/vitamix/migration/media/other/images/a/ascent-series-300x300.jpg" alt="Explorian E310" loading="lazy"></div>
+          <div class="body"><h4>Explorian E310</h4><p>Powerful blending in a compact 48 oz footprint at an approachable price.</p><span class="btn btn-secondary btn-block">View details</span></div>
+        </a>
+    </div></div>
+    </section>
+    <section class="" data-section="columns" data-block="columns" id="b-41">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">41 · columns</span>
+            <span class="kind">Editorial</span>
+    </div></div></div>
+      <div class="container"><div class="basic-cols">
+    <div class="col"><div class="ico">01</div><h4>Power</h4><p>Aircraft-grade stainless steel blades driven by a 2.2 peak HP motor make light work of dense ingredients.</p></div>
+    <div class="col"><div class="ico">02</div><h4>Precision</h4><p>Variable speed and pulse give you complete control from the gentlest stir to the silkiest puree.</p></div>
+    <div class="col"><div class="ico">03</div><h4>Longevity</h4><p>Backed by a 10-year full warranty so your Vitamix lasts as long as your appetite for great food.</p></div>
+  </div></div>
+    </section>
+    <section class="section-cream" data-section="accordion" data-block="accordion" id="b-42">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">42 · accordion</span>
+            <span class="kind">Support</span>
+    </div></div></div>
+      <div class="container"><div class="accordion">
+    <details open><summary>What makes a Vitamix different?</summary><div class="answer"><p>A 2.2 peak HP motor and aircraft-grade stainless steel blades engineered to last 10–20 years.</p></div></details>
+    <details><summary>How long does a Vitamix last?</summary><div class="answer"><p>The average Vitamix lasts 20+ years with proper care.</p></div></details>
+    <details><summary>Can I make hot soup?</summary><div class="answer"><p>Yes — friction generated by the high-speed blades heats contents from cold to steaming in under seven minutes.</p></div></details>
+  </div></div>
+    </section>
+    <section class="section-cream" data-section="carousel" data-block="carousel" id="b-43">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">43 · carousel</span>
+            <span class="kind"></span>
+    </div></div></div>
+      <div class="container"><div class="qcar">
+    <div class="item"><blockquote>This blender changed how I cook. The crown jewel of the countertop.</blockquote><cite>— Sarah M.</cite></div>
+    <div class="item"><blockquote>The best kitchen investment I have ever made. Worth every dollar.</blockquote><cite>— James K.</cite></div>
+    <div class="item"><blockquote>Quiet, powerful, and effortless to clean. It earns its place on the counter.</blockquote><cite>— Priya R.</cite></div>
+    <div class="item"><blockquote>Eight years in and still running like new — that's a tool you keep.</blockquote><cite>— Marcus L.</cite></div>
+  </div></div>
+    </section>
+    <section class="section-mustard" data-section="collage" data-block="collage" id="b-44">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">44 · collage</span>
+            <span class="kind">Editorial</span>
+    </div></div></div>
+      <div class="container"><div class="bcollage">
+      <a class="item a" href="#"><div class="img"><img src="https://www.vitamix.com/content/dam/vitamix/home/what-you-can-make/the-possibilities/ac-simple-3-grid__card__image__9.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg" alt="Green smoothie" loading="lazy"></div><span>Green smoothie</span></a><a class="item b" href="#"><div class="img"><img src="https://www.vitamix.com/content/dam/vitamix/migration/media/other/images/w/wycm-curriedcarrotsoup-04-finished-a.jpg" alt="Butternut soup" loading="lazy"></div><span>Butternut soup</span></a><a class="item c" href="#"><div class="img"><img src="https://www.vitamix.com/content/dam/vitamix/migration/media/other/images/w/wycm-almondbutter-06-final-a.jpg" alt="Almond butter" loading="lazy"></div><span>Almond butter</span></a><a class="item d" href="#"><div class="img"><img src="https://www.vitamix.com/content/dam/vitamix/home/what-you-can-make/the-possibilities/ac-simple-3-grid__card__image__5.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg" alt="Mango sorbet" loading="lazy"></div><span>Mango sorbet</span></a>
+    </div></div>
+    </section>
+    <section class="section-cream" data-section="table" data-block="table" id="b-45">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">45 · table</span>
+            <span class="kind">Decision</span>
+    </div></div></div>
+      <div class="container"><div class="btable"><table>
+    <thead><tr><th>Feature</th><th>Ascent X5</th><th>Ascent X3</th></tr></thead>
+    <tbody>
+      <tr><td>Motor power</td><td>1,500 W</td><td>1,500 W</td></tr>
+      <tr><td>Touchscreen</td><td>Yes</td><td>No</td></tr>
+      <tr><td>Price</td><td>$749.95</td><td>$649.95</td></tr>
+    </tbody>
+  </table></div></div>
+    </section>
+    <section class="section-charcoal" data-section="video" data-block="video" id="b-46">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">46 · video</span>
+            <span class="kind">Editorial</span>
+    </div></div></div>
+      <div class="container"><div class="bvideo">
+    <div class="img"><img src="https://www.vitamix.com/us/en_us/media_18838c424d602fadcdf84d8c558387bb45ac32bb9.png?width=2000&format=webply&optimize=medium" alt="Video poster" loading="lazy"></div>
+    <button class="play" aria-label="Play"></button>
+    <span class="label">Recipe demo</span>
+    <span class="duration">1:32</span>
+  </div></div>
+    </section>
+    <section class="section-cream" data-section="hotspot" data-block="hotspot" id="b-47">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">47 · hotspot</span>
+            <span class="kind">Storytelling</span>
+    </div></div></div>
+      <div class="container"><div class="bhotspot">
+    <div class="img"><img src="https://www.vitamix.com/us/en_us/why-vitamix/fragments/media_183dff65cfcebeefaa3dfca71b4fa390e523dbb44.png?width=2000&format=webply&optimize=medium" alt="Hotspot diagram" loading="lazy"></div>
+    <button class="dot" style="left:22%;top:28%">1</button>
+    <button class="dot" style="left:54%;top:60%">2</button>
+    <button class="dot" style="left:78%;top:36%">3</button>
+  </div></div>
+    </section>
+    <section class="section-cream" data-section="speed-control" data-block="speed-control" id="b-48">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">48 · speed control</span>
+            <span class="kind">Signature</span>
+    </div></div></div>
+      <div class="container"><div class="spd">
+    <div class="dial-wrap">
+      <div class="dial">
+        <div class="ring"></div>
+        <div class="ticks">
+          <div class="tick" style="transform:rotate(-135deg)"></div><div class="tick" style="transform:rotate(-108deg)"></div><div class="tick" style="transform:rotate(-81deg)"></div><div class="tick" style="transform:rotate(-54deg)"></div><div class="tick" style="transform:rotate(-27deg)"></div><div class="tick" style="transform:rotate(0deg)"></div><div class="tick" style="transform:rotate(27deg)"></div><div class="tick" style="transform:rotate(54deg)"></div><div class="tick" style="transform:rotate(81deg)"></div><div class="tick" style="transform:rotate(108deg)"></div><div class="tick" style="transform:rotate(135deg)"></div>
+          <div class="label" style="transform:rotate(-135deg)">1</div><div class="label" style="transform:rotate(-81deg)">3</div><div class="label" style="transform:rotate(0deg)">5</div><div class="label" style="transform:rotate(81deg)">8</div><div class="label" style="transform:rotate(135deg)">10</div>
+        </div>
+        <div class="knob"><div class="indicator"></div><div class="center"><b>5</b><span>Variable</span></div></div>
+      </div>
+    </div>
+    <div class="specs-text">
+      <p class="eyebrow">Variable speed dial</p>
+      <h3 style="font-size:36px;line-height:1.1;margin:0 0 16px;font-weight:500;letter-spacing:-0.01em">Precise control across ten settings.</h3>
+      <p style="color:var(--c-text-muted);margin:0">From a gentle stir to a roaring puree — the mechanical dial feels like a chef's knife: solid steel travel, an audible detent, no software lag.</p>
+      <div class="ranges">
+        <div class="range"><span class="label">Variable 1–3</span><p>Stir, fold, and blend gently. Ideal for chunky soups, salsa, and dressings where texture matters.</p></div>
+        <div class="range"><span class="label">Variable 4–7</span><p>Mix and emulsify smooth sauces, dressings, and pancake batters. Standard cruising range.</p></div>
+        <div class="range"><span class="label">Variable 8–10</span><p>Pulverize and aerate. Smoothies, frozen desserts, hot soups via friction heat.</p></div>
+      </div>
+    </div>
+  </div></div>
+    </section>
+    <section class="section-cream" data-section="locator" data-block="locator" id="b-49">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">49 · locator</span>
+            <span class="kind">Utility</span>
+    </div></div></div>
+      <div class="container"><div class="locator">
+    <h4>Find Locally</h4>
+    <div><label>Your location</label><input type="text" placeholder="ZIP code or city"></div>
+    <div><label>What are you looking for?</label><select><option>Household products</option><option>Commercial products</option><option>Demonstrations</option></select></div>
+    <div><button class="btn btn-primary btn-block">Search</button></div>
+  </div></div>
+    </section>
+    <section class="section-muted" data-section="alert-banners" data-block="alert-banners" id="b-50">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">50 · alert banners</span>
+            <span class="kind">Utility</span>
+    </div></div></div>
+      <div class="container"><div class="alerts">
+    <div class="alert info"><span class="ico">i</span><div class="text"><b>Order shipped</b>Your Ascent A3500 is on the way. Tracking: 1Z999AA10123456784.</div></div>
+    <div class="alert success"><span class="ico">✓</span><div class="text"><b>Free shipping</b>Free standard shipping on every order, every day.</div></div>
+    <div class="alert warning"><span class="ico">!</span><div class="text"><b>Low stock</b>Only 3 Ascent X10s left in Black at this price.</div></div>
+    <div class="alert danger"><span class="ico">!</span><div class="text"><b>Recall notice</b>If your model number begins with V01-2019, please visit the recall page.</div></div>
+  </div></div>
+    </section>
+    <section class="section-cream" data-section="article-info" data-block="article-info" id="b-51">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">51 · article info</span>
+            <span class="kind">Editorial</span>
+    </div></div></div>
+      <div class="container"><div class="artinfo">
+    <div class="author"><div class="avatar">MK</div><div><div class="name">Mia Kim</div><span>Senior food editor</span></div></div>
+    <span>Published · April 22, 2026</span>
+    <span>5 min read</span>
+    <span>In: Recipes &amp; technique</span>
+  </div></div>
+    </section>
+    <section class="section-pistachio" data-section="featured-recipe" data-block="featured-recipe" id="b-52">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">52 · featured recipe</span>
+            <span class="kind">Recipe</span>
+    </div></div></div>
+      <div class="container"><div class="frecipe">
+    <div class="img"><img src="https://blender-recommender-proxy.franklin-prod.workers.dev/us/en_us/recipes/media_1b5f95d236d793b06f3c70999ffd32ef153130153.avif?width=1200&amp;format=pjpg&amp;optimize=medium" alt="featured recipe · tomatillo salsa overhead" loading="lazy"></div>
+    <div class="body">
+      <span class="badge">★ New · Featured recipe</span>
+      <h3>Tomatillo Salsa</h3>
+      <p>Made with tomatillos, scallions, and jalapeño — this authentic Mexican salsa verde has fabulous flavor. Use it to top enchiladas, or serve it with tortilla chips.</p>
+      <div class="meta"><span>10 minutes</span><span>2 servings</span><span>Easy</span></div>
+      <a class="btn btn-primary" href="#">Get the recipe</a>
+    </div>
+  </div></div>
+    </section>
+    <section class="section-cream" data-section="recipe" data-block="recipe" id="b-53">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">53 · recipe</span>
+            <span class="kind">Recipe</span>
+    </div></div></div>
+      <div class="container"><div class="recipe-full">
+    <div class="meta-grid">
+      <div class="item"><div class="label">Total time</div><div class="val">8 minutes</div></div>
+      <div class="item"><div class="label">Yields</div><div class="val">2 servings</div></div>
+      <div class="item"><div class="label">Difficulty</div><div class="val">Easy</div></div>
+      <div class="item"><div class="label">Dietary</div><div class="val">Vegan</div></div>
+      <div class="item" style="grid-column:1/-1"><div class="label">Submitted by</div><div class="val">Vitamix Test Kitchen</div></div>
+      <div class="actions" style="grid-column:1/-1"><a href="#">Save</a><a href="#">Print</a><a href="#">Share</a><a href="#">Manage preferences</a></div>
+    </div>
+    <div class="ing">
+      <h3>Green Power Smoothie</h3>
+      <p>A bright, nutrient-dense smoothie that comes together in under five minutes.</p>
+      <h4>Ingredients</h4>
+      <ul>
+        <li>1 cup almond milk</li>
+        <li>½ cup coconut water</li>
+        <li>2 cups fresh spinach</li>
+        <li>1 ripe banana</li>
+        <li>1 cup frozen mango chunks</li>
+        <li>½ cup frozen pineapple</li>
+        <li>1 tablespoon chia seeds</li>
+      </ul>
+    </div>
+  </div></div>
+    </section>
+    <section class="section-blueberry" data-section="related-articles" data-block="related-articles" id="b-54">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">54 · related articles</span>
+            <span class="kind">Editorial</span>
+    </div></div></div>
+      <div class="container"><div class="related"><a class="card" href="#"><div class="img"><img src="https://www.vitamix.com/content/dam/vitamix/home/what-you-can-make/the-possibilities/ac-simple-3-grid__card__image__9.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg" alt="Five common smoothie mistakes" loading="lazy"></div><div class="body"><p class="kind">Article</p><h4>Five common smoothie mistakes</h4><p>And the easy fixes for each.</p></div></a><a class="card" href="#"><div class="img"><img src="https://www.vitamix.com/content/dam/vitamix/home/home-page/AscentX4_Image_PopUpWindow.jpg" alt="How to choose your first Vitamix" loading="lazy"></div><div class="body"><p class="kind">Buying Guide</p><h4>How to choose your first Vitamix</h4><p>A short guide for new owners.</p></div></a><a class="card" href="#"><div class="img"><img src="https://www.vitamix.com/us/en_us/media_14eb2f42c238b525827b15d9b2b4984c79c8d9f70.webp?width=2000&amp;format=webply&amp;optimize=medium" alt="Cleaning your blender properly" loading="lazy"></div><div class="body"><p class="kind">Care</p><h4>Cleaning your blender properly</h4><p>Self-clean program walk-through.</p></div></a></div></div>
+    </section>
+    <section class="section-cream" data-section="related-recipes" data-block="related-recipes" id="b-55">
+      
+      
+    <div class="container"><div class="divider"><div class="row">
+      <span class="num">55 · related recipes</span>
+            <span class="kind">Recipe</span>
+    </div></div></div>
+      <div class="container"><div class="related"><a class="card" href="#"><div class="img"><img src="https://www.vitamix.com/content/dam/vitamix/migration/media/other/images/w/wycm-curriedcarrotsoup-04-finished-a.jpg" alt="Hot tomato bisque" loading="lazy"></div><div class="body"><p class="kind">Soup</p><h4>Hot tomato bisque</h4><p>20 minutes</p></div></a><a class="card" href="#"><div class="img"><img src="https://www.vitamix.com/content/dam/vitamix/migration/media/other/images/w/wycm-almondbutter-06-final-a.jpg" alt="Cashew cream cheese" loading="lazy"></div><div class="body"><p class="kind">Spread</p><h4>Cashew cream cheese</h4><p>5 minutes</p></div></a><a class="card" href="#"><div class="img"><img src="https://www.vitamix.com/content/dam/vitamix/home/what-you-can-make/the-possibilities/ac-simple-3-grid__card__image__5.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg" alt="Frozen mango sorbet" loading="lazy"></div><div class="body"><p class="kind">Dessert</p><h4>Frozen mango sorbet</h4><p>4 minutes</p></div></a></div></div>
+    </section>
+
+<footer class="site-footer" data-section="site-footer" data-block="footer">
+  <div class="container">
+    <div class="brand-col col">
+      <a href="#" class="brand">vitamix<sup>®</sup></a>
+      <p>Built to last. Made to make. The premium kitchen blender, since 1921.</p>
+      <div class="social"><a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="YouTube">YT</a><a href="#" aria-label="Pinterest">PI</a><a href="#" aria-label="Facebook">FB</a></div>
+    </div>
+    <div class="col"><h5>Shop</h5><ul><li><a href="#">Ascent® X Series</a></li><li><a href="#">Venturist Series</a></li><li><a href="#">Explorian Series</a></li><li><a href="#">Containers &amp; accessories</a></li><li><a href="#">Refurbished</a></li></ul></div>
+    <div class="col"><h5>Recipes</h5><ul><li><a href="#">Smoothies</a></li><li><a href="#">Hot soups</a></li><li><a href="#">Sauces</a></li><li><a href="#">Frozen desserts</a></li><li><a href="#">All recipes</a></li></ul></div>
+    <div class="col"><h5>Support</h5><ul><li><a href="#">Warranty registration</a></li><li><a href="#">Owners' manual</a></li><li><a href="#">Replacement parts</a></li><li><a href="#">Repair</a></li><li><a href="#">Contact us</a></li></ul></div>
+    <div class="col"><h5>Company</h5><ul><li><a href="#">Why Vitamix</a></li><li><a href="#">Our story</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li><li><a href="#">Sustainability</a></li></ul></div>
+    <div class="legal"><span>© 2026 Vitamix Corporation · 8615 Usher Rd, Olmsted Falls OH 44138</span><nav><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a><a href="#">Cookies</a></nav></div>
+  </div>
+</footer>
+
+</body>
+</html>
