@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <!-- stardust:provenance
+    migratedAt: 2026-04-29T14:04:03.417Z
+    writtenBy: stardust:migrate (composed from stardust:prototype)
+    writtenAt: 2026-04-29T14:02:16.129Z
+    renderedVia: stardust-direct (brand-faithful Mode A; --no-impeccable carve-out — content sourced from PDF, not fabricated)
+    page: effects-and-community
+    readArtifacts:
+      - DESIGN.md
+      - DESIGN.json
+      - stardust/direction.md
+      - stardust/current/pages/effects-and-community.json
+      - doc.json (PDF-derived content map)
+    contracts:
+      - skills/stardust/reference/token-contract.md (:root token block below)
+      - skills/stardust/reference/data-attributes.md (data-section / data-intent / data-layout / data-fragment*)
+    stardustVersion: 0.2.0
+  -->
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Effects &amp; community · Heathrow Airport Expansion</title>
+  <meta name="description" content="We are committed to developing Heathrow responsibly and sustainably, with a focus on the wellbeing of our communities and the environment. We are carefully considering the effects expansion may have o" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap" />
+  <style>
+
+:root {
+  /* ──────── Heathrow Airport Expansion microsite — token contract ────────
+     Generated from DESIGN.md frontmatter. Every prototype and migrated page
+     exposes the same names. Per skills/stardust/reference/token-contract.md. */
+
+  --heading-font-family: "FrutigerNextPaneuropeanMedium", "Open Sans", Arial, sans-serif;
+  --body-font-family:    "FrutigerNextPaneuropeanRegular", "Open Sans", Arial, sans-serif;
+
+  --heading-xxl: 64px;
+  --heading-xl:  42px;
+  --heading-lg:  32px;
+  --heading-md:  24px;
+  --body:        17px;
+  --body-sm:     15px;
+
+  --line-height-heading: 1.05;
+  --line-height-body:    1.55;
+
+  /* Color roles — brand-native names per divergence-toolkit.md § 4.
+     Hex retained per brand-faithful-inversions § "hex format retention". */
+  --color-bg:           #ffffff;       /* DESIGN.md colors.paper */
+  --color-fg:           #2c292a;       /* DESIGN.md colors.ink */
+  --color-fg-muted:     #5e6a75;       /* DESIGN.md colors.meta-grey */
+  --color-accent:       #462170;       /* DESIGN.md colors.brand-purple */
+  --color-accent-deep:  #371a59;       /* DESIGN.md colors.brand-purple-deep */
+  --color-chrome:       #1d2533;       /* DESIGN.md colors.navy-chrome */
+  --color-border:       #bec5cb;       /* DESIGN.md colors.divider */
+  --color-surface-alt:  #f5f5f5;       /* DESIGN.md colors.surface-alt */
+  --color-surface-tint: #faf9fb;       /* DESIGN.md colors.surface-tint */
+
+  --spacing-xs:  8px;
+  --spacing-sm:  16px;
+  --spacing-md:  24px;
+  --spacing-lg:  40px;
+  --spacing-xl:  64px;
+  --spacing-2xl: 96px;
+
+  --section-padding: 64px;             /* DESIGN.md spacing.section · density: balanced */
+  --max-width:       1280px;           /* DESIGN.json extensions.breakpoints.containerMaxWidth */
+  --radius:          8px;              /* DESIGN.md rounded.md */
+  --radius-pill:     9999px;
+  --radius-circle:   50%;
+
+  --header-h:        64px;
+  --duration-fast:   150ms;
+  --duration-medium: 180ms;
+  --ease-default:    cubic-bezier(0.4, 0, 0.2, 1);
+
+  --uppercase-tracking: 2px;           /* signage-label rule */
+}
+
+
+/* ───────── reset & base ───────── */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--body-font-family);
+  font-size: var(--body);
+  line-height: var(--line-height-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--color-accent); }
+a:hover { color: var(--color-accent-deep); }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font-family);
+  font-weight: 500;
+  color: var(--color-fg);
+  margin: 0;
+  line-height: var(--line-height-heading);
+  letter-spacing: -0.005em;
+}
+h1 { font-size: clamp(40px, 6vw, var(--heading-xxl)); letter-spacing: -0.015em; }
+h2 { font-size: clamp(28px, 3.5vw, var(--heading-xl)); line-height: 1.15; }
+h3 { font-size: var(--heading-md); line-height: 1.2; }
+p  { margin: 0 0 1em; }
+
+.label {
+  font-family: var(--heading-font-family);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: var(--uppercase-tracking);
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+  margin: 0;
+}
+.label--accent  { color: var(--color-accent); }
+.label--inverse { color: rgba(255,255,255,0.85); }
+
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+/* ───────── buttons ───────── */
+.ds-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--heading-font-family);
+  font-weight: 500; font-size: 15px;
+  border: none; border-radius: var(--radius);
+  padding: 14px 28px; cursor: pointer; text-decoration: none;
+  transition: background var(--duration-medium) var(--ease-default);
+}
+.ds-btn--primary  { background: var(--color-accent); color: var(--color-bg); }
+.ds-btn--primary:hover { background: var(--color-accent-deep); }
+.ds-btn--primary:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+.ds-btn--secondary { background: var(--color-bg); color: var(--color-fg); border: 1px solid var(--color-border); }
+.ds-btn--secondary:hover { background: var(--color-surface-alt); }
+.ds-btn--inverse  { background: var(--color-bg); color: var(--color-fg); }
+.ds-btn--inverse:hover { background: var(--color-surface-alt); }
+
+/* ───────── site-header (system component) ───────── */
+[data-section="site-header"] {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--color-chrome);
+  color: var(--color-bg);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+[data-section="site-header"] .row {
+  display: flex; align-items: center; gap: 32px;
+  height: var(--header-h); padding: 0 24px;
+}
+[data-section="site-header"] .brand {
+  display: flex; align-items: center; gap: 14px;
+  text-decoration: none; color: var(--color-bg);
+}
+[data-section="site-header"] .brand img { height: 22px; }
+[data-section="site-header"] .brand-meta {
+  font-family: var(--heading-font-family); font-size: 11px;
+  letter-spacing: var(--uppercase-tracking); text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  border-left: 1px solid rgba(255,255,255,0.18);
+  padding-left: 14px;
+}
+[data-section="site-header"] nav.primary { display: flex; align-items: center; gap: 4px; margin-left: auto; flex-wrap: wrap; }
+[data-section="site-header"] nav.primary a {
+  color: var(--color-bg); text-decoration: none;
+  padding: 8px 14px; font-family: var(--heading-font-family);
+  font-weight: 500; font-size: 14px; border-radius: var(--radius);
+  transition: background var(--duration-fast) var(--ease-default);
+}
+[data-section="site-header"] nav.primary a:hover, [data-section="site-header"] nav.primary a[aria-current] {
+  background: rgba(255,255,255,0.10);
+}
+[data-section="site-header"] .respond {
+  margin-left: 12px; background: var(--color-accent); color: var(--color-bg);
+}
+[data-section="site-header"] .respond:hover { background: var(--color-accent-deep); }
+
+@media (max-width: 1024px) { [data-section="site-header"] nav.primary { display: none; } }
+
+/* ───────── photo hero ───────── */
+[data-section="hero"][data-layout="full-bleed"] {
+  position: relative; overflow: hidden;
+  background: var(--color-chrome); color: var(--color-bg);
+  min-height: 540px;
+}
+[data-section="hero"][data-layout="full-bleed"] .media {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: 0;
+}
+[data-section="hero"][data-layout="full-bleed"]::before {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.72) 100%);
+}
+[data-section="hero"][data-layout="full-bleed"] .inner {
+  position: relative; z-index: 2; max-width: var(--max-width);
+  margin: 0 auto; padding: clamp(60px, 9vw, 120px) 24px clamp(48px, 7vw, 96px);
+}
+[data-section="hero"][data-layout="full-bleed"] h1 { color: var(--color-bg); max-width: 18ch; }
+[data-section="hero"][data-layout="full-bleed"] .lead { color: rgba(255,255,255,0.95); font-size: clamp(17px, 1.5vw, 19px); margin-top: 24px; max-width: 60ch; line-height: 1.55; }
+[data-section="hero"][data-layout="full-bleed"] .meta { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
+
+[data-section="hero"][data-layout="contained"] { background: var(--color-bg); }
+[data-section="hero"][data-layout="contained"] .inner { padding: clamp(64px, 9vw, 120px) 24px clamp(48px, 7vw, 96px); max-width: var(--max-width); margin: 0 auto; }
+
+/* ───────── page-hero (inner pages) ───────── */
+[data-section="page-hero"] {
+  position: relative; overflow: hidden;
+  background: var(--color-chrome); color: var(--color-bg);
+}
+[data-section="page-hero"] .media {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
+}
+[data-section="page-hero"]::before {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(29,37,51,0.85) 100%);
+}
+[data-section="page-hero"] .inner {
+  position: relative; z-index: 2; max-width: var(--max-width); margin: 0 auto;
+  padding: clamp(64px, 9vw, 120px) 24px clamp(48px, 7vw, 96px);
+}
+[data-section="page-hero"] .crumbs {
+  display: flex; gap: 8px; align-items: center;
+  font-family: var(--heading-font-family); font-size: 12px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.7); margin-bottom: 24px;
+}
+[data-section="page-hero"] .crumbs a { color: rgba(255,255,255,0.85); text-decoration: none; }
+[data-section="page-hero"] .crumbs span { color: rgba(255,255,255,0.4); }
+[data-section="page-hero"] h1 { color: var(--color-bg); max-width: 22ch; margin-bottom: 24px; }
+[data-section="page-hero"] .lead { color: rgba(255,255,255,0.92); font-size: clamp(17px, 1.5vw, 19px); max-width: 60ch; line-height: 1.55; margin: 0; }
+[data-section="page-hero"] .meta {
+  display: flex; gap: 24px; margin-top: 40px; flex-wrap: wrap;
+  font-family: var(--heading-font-family); font-size: 13px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.7);
+}
+[data-section="page-hero"] .meta strong { color: var(--color-bg); display: block; font-size: 22px; letter-spacing: -0.005em; text-transform: none; font-weight: 500; }
+
+/* ───────── subnav (system component) ───────── */
+[data-section="subnav"] {
+  position: sticky; top: var(--header-h); z-index: 5;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0 24px;
+}
+[data-section="subnav"] .inner {
+  max-width: var(--max-width); margin: 0 auto;
+  display: flex; align-items: center; gap: 32px;
+  height: 56px; overflow-x: auto; scrollbar-width: thin;
+}
+[data-section="subnav"] .label {
+  white-space: nowrap; padding-right: 24px;
+  border-right: 1px solid var(--color-border);
+}
+[data-section="subnav"] ul {
+  display: flex; gap: 4px; list-style: none; padding: 0; margin: 0; flex-wrap: nowrap;
+}
+[data-section="subnav"] ul a {
+  display: inline-block; padding: 8px 14px;
+  font-family: var(--heading-font-family); font-weight: 500; font-size: 14px;
+  color: var(--color-fg); text-decoration: none; border-radius: var(--radius);
+  white-space: nowrap; transition: background var(--duration-fast) var(--ease-default), color var(--duration-fast) var(--ease-default);
+}
+[data-section="subnav"] ul a:hover { background: var(--color-surface-alt); color: var(--color-accent); }
+
+/* ───────── editorial sections ───────── */
+[data-section="overview"], [data-section="five-minute-summary"], [data-section="pillar-grid"],
+[data-section="phase-timeline"], [data-section="five-minute-summary-band"],
+[data-section="quote-band"], [data-section="cta-band"], [data-section="continue-reading"] {
+  padding: var(--section-padding) 24px;
+}
+[data-section="overview"], [data-section="five-minute-summary"], [data-section="pillar-grid"],
+[data-section="phase-timeline"], [data-section="continue-reading"] { background: var(--color-bg); }
+[data-section="five-minute-summary-band"], [data-section="quote-band"] { background: var(--color-surface-tint); }
+
+.section-head { max-width: var(--max-width); margin: 0 auto var(--spacing-lg); }
+.section-head .label { margin-bottom: 12px; }
+.section-head h2 { max-width: 22ch; }
+.section-head p { margin-top: 16px; max-width: 60ch; font-size: 18px; color: var(--color-fg-muted); }
+
+/* ───────── pillar grid (story tiles) ───────── */
+[data-section="pillar-grid"] .grid {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;
+}
+.ds-tile {
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius); overflow: hidden;
+  display: flex; flex-direction: column;
+  text-decoration: none; color: inherit;
+  transition: transform var(--duration-medium) var(--ease-default), border-color var(--duration-medium) var(--ease-default);
+}
+.ds-tile:hover { transform: translateY(-2px); border-color: var(--color-accent); }
+.ds-tile__photo { aspect-ratio: 16 / 10; background-size: cover; background-position: center; background-color: var(--color-fg-muted); }
+.ds-tile__body { padding: 24px 28px 28px; display: flex; flex-direction: column; flex: 1; }
+.ds-tile__label { margin-bottom: 12px; }
+.ds-tile__title { font-family: var(--heading-font-family); font-weight: 500; font-size: 24px; margin-bottom: 12px; color: var(--color-fg); }
+.ds-tile__copy { color: var(--color-fg); font-size: 16px; line-height: 1.5; margin: 0; flex: 1; }
+.ds-tile__more { margin-top: 20px; color: var(--color-accent); font-family: var(--heading-font-family); font-weight: 500; font-size: 15px; }
+
+/* ───────── two-track hero band (home) ───────── */
+[data-section="two-track"] {
+  display: grid; grid-template-columns: 1fr 1fr;
+  max-width: var(--max-width); margin: 64px auto 0; padding: 0 24px; gap: 24px;
+}
+.ds-track {
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius); padding: 40px 36px;
+  display: flex; flex-direction: column;
+}
+.ds-track--accent { background: var(--color-accent); color: var(--color-bg); border: none; }
+.ds-track--accent .label { color: rgba(255,255,255,0.7); }
+.ds-track--accent h3 { color: var(--color-bg); }
+.ds-track--accent p { color: rgba(255,255,255,0.92); }
+.ds-track h3 { font-size: 28px; margin-bottom: 12px; }
+.ds-track p { color: var(--color-fg-muted); flex: 1; line-height: 1.55; }
+.ds-track .ds-btn { margin-top: 24px; align-self: flex-start; }
+.ds-track--accent .ds-btn { background: var(--color-bg); color: var(--color-accent); }
+.ds-track--accent .ds-btn:hover { background: var(--color-surface-alt); color: var(--color-accent); }
+@media (max-width: 800px) { [data-section="two-track"] { grid-template-columns: 1fr; } }
+
+/* ───────── four-pillar summary (home) ───────── */
+[data-section="five-minute-summary"] .grid {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;
+}
+[data-section="five-minute-summary"] .summary-card {
+  padding: 28px; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-bg);
+}
+[data-section="five-minute-summary"] .summary-card h3 { font-size: 20px; margin-bottom: 12px; }
+[data-section="five-minute-summary"] .summary-card p { color: var(--color-fg); margin: 0; }
+
+/* ───────── pull-quote band ───────── */
+[data-section="quote-band"] .pull {
+  max-width: 900px; margin: 0 auto; padding: 0 24px;
+}
+[data-section="quote-band"] .mark { font-family: var(--heading-font-family); font-size: 96px; line-height: 1; color: var(--color-accent); margin: 0; }
+[data-section="quote-band"] .quote { font-family: var(--heading-font-family); font-weight: 500; font-size: clamp(24px, 3vw, 34px); line-height: 1.3; color: var(--color-fg); margin: 16px 0 24px; }
+[data-section="quote-band"] .attrib { font-family: var(--heading-font-family); font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-fg-muted); }
+
+/* ───────── phase timeline ───────── */
+[data-section="phase-timeline"] .phases {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr); position: relative;
+}
+[data-section="phase-timeline"] .phases::before {
+  content: ""; position: absolute; top: 32px; left: 0; right: 0; height: 2px; background: var(--color-border);
+}
+[data-section="phase-timeline"] .phase { position: relative; padding: 0 16px; text-align: center; }
+[data-section="phase-timeline"] .phase .dot { width: 16px; height: 16px; border-radius: var(--radius-circle); background: var(--color-accent); margin: 24px auto 16px; position: relative; z-index: 1; box-shadow: 0 0 0 6px var(--color-bg); }
+[data-section="phase-timeline"] .phase .year { font-family: var(--heading-font-family); font-weight: 500; font-size: 32px; color: var(--color-fg); margin-bottom: 4px; letter-spacing: -0.01em; }
+[data-section="phase-timeline"] .phase .phase-label { font-family: var(--heading-font-family); font-size: 11px; letter-spacing: var(--uppercase-tracking); text-transform: uppercase; color: var(--color-accent); margin-bottom: 8px; }
+[data-section="phase-timeline"] .phase p { color: var(--color-fg-muted); font-size: 14px; line-height: 1.45; margin: 0; }
+@media (max-width: 700px) { [data-section="phase-timeline"] .phases { grid-template-columns: repeat(2, 1fr); row-gap: 32px; } [data-section="phase-timeline"] .phases::before { display: none; } }
+
+/* ───────── subsection (inner pages) ───────── */
+[data-section^="subsection"] {
+  padding: clamp(64px, 7vw, 96px) 24px;
+  border-bottom: 1px solid var(--color-border);
+  scroll-margin-top: calc(var(--header-h) + 56px + 16px);
+}
+[data-section^="subsection"]:last-of-type { border-bottom: 0; }
+[data-section^="subsection"] .inner {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1.5fr; gap: 64px; align-items: start;
+}
+[data-section^="subsection"] header { position: sticky; top: calc(var(--header-h) + 56px + 24px); }
+[data-section^="subsection"] .num {
+  font-family: var(--heading-font-family); font-weight: 500;
+  font-size: 64px; color: var(--color-accent);
+  line-height: 1; letter-spacing: -0.02em; margin-bottom: 12px;
+}
+[data-section^="subsection"] h2.title { font-size: 32px; margin-bottom: 16px; }
+[data-section^="subsection"] .sub-lead {
+  font-family: var(--heading-font-family); font-weight: 500;
+  font-size: 19px; line-height: 1.4; color: var(--color-fg);
+  margin: 0; max-width: 24ch;
+}
+[data-section^="subsection"] .body { display: flex; flex-direction: column; gap: 32px; }
+[data-section^="subsection"] .prose { max-width: 70ch; font-size: var(--body); line-height: 1.65; color: var(--color-fg); }
+[data-section^="subsection"] .prose p { margin: 0 0 1.1em; }
+[data-section^="subsection"] .prose p:last-child { margin-bottom: 0; }
+@media (max-width: 900px) {
+  [data-section^="subsection"] .inner { grid-template-columns: 1fr; gap: 32px; }
+  [data-section^="subsection"] header { position: static; }
+  [data-section^="subsection"] .num { font-size: 48px; }
+}
+
+/* callout box */
+.ds-callout {
+  border-left: 3px solid var(--color-accent); background: var(--color-surface-tint);
+  padding: 24px 28px; border-radius: 0 var(--radius) var(--radius) 0;
+}
+.ds-callout .label { color: var(--color-accent); margin-bottom: 8px; }
+.ds-callout p { margin: 0; color: var(--color-fg); font-size: 15px; line-height: 1.55; max-width: 60ch; }
+
+/* captioned figure */
+.ds-figure { margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.ds-figure img { width: 100%; border-radius: var(--radius); border: 1px solid var(--color-border); }
+.ds-figure figcaption { font-size: 13px; color: var(--color-fg-muted); line-height: 1.45; display: flex; flex-direction: column; gap: 4px; }
+.ds-figure figcaption strong { color: var(--color-fg); font-weight: 500; }
+
+/* continue-reading (system component role) */
+[data-section="continue-reading"] {
+  background: var(--color-surface-tint);
+  border-top: 1px solid var(--color-border);
+}
+[data-section="continue-reading"] .inner {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 2fr auto;
+  gap: 32px; align-items: center; padding: 32px;
+  background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius);
+  text-decoration: none; color: inherit;
+  transition: border-color var(--duration-fast) var(--ease-default), transform var(--duration-fast) var(--ease-default);
+}
+[data-section="continue-reading"] .inner:hover { border-color: var(--color-accent); transform: translateX(4px); }
+[data-section="continue-reading"] .label { margin-bottom: 8px; }
+[data-section="continue-reading"] .ttl { font-family: var(--heading-font-family); font-weight: 500; font-size: 24px; color: var(--color-fg); margin: 0; }
+[data-section="continue-reading"] .summary { font-size: 14px; color: var(--color-fg-muted); margin: 0; line-height: 1.5; }
+[data-section="continue-reading"] .arrow { font-family: var(--heading-font-family); font-weight: 500; font-size: 20px; color: var(--color-accent); }
+@media (max-width: 800px) { [data-section="continue-reading"] .inner { grid-template-columns: 1fr; } [data-section="continue-reading"] .arrow { display: none; } }
+
+/* cta-band (system component role) */
+[data-section="cta-band"] { background: var(--color-accent); color: var(--color-bg); }
+[data-section="cta-band"] .inner {
+  max-width: var(--max-width); margin: 0 auto;
+  padding: clamp(48px, 7vw, 80px) 24px;
+  display: grid; grid-template-columns: 2fr 1fr; gap: 48px; align-items: center;
+}
+[data-section="cta-band"] .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+[data-section="cta-band"] h2 { color: var(--color-bg); margin-bottom: 12px; max-width: 18ch; }
+[data-section="cta-band"] p  { color: rgba(255,255,255,0.92); font-size: 17px; max-width: 50ch; margin: 0; }
+@media (max-width: 800px) { [data-section="cta-band"] .inner { grid-template-columns: 1fr; } }
+
+/* site-footer (system component) */
+[data-section="site-footer"] {
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-border);
+  padding: 64px 24px 32px;
+}
+[data-section="site-footer"] .cols {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 48px;
+  padding-bottom: 48px; border-bottom: 1px solid var(--color-border);
+}
+[data-section="site-footer"] .brand-block p { color: var(--color-fg-muted); font-size: 14px; max-width: 35ch; margin-top: 16px; }
+[data-section="site-footer"] h4 {
+  font-family: var(--heading-font-family); font-size: 11px;
+  letter-spacing: var(--uppercase-tracking); text-transform: uppercase;
+  color: var(--color-fg-muted); margin-bottom: 16px;
+}
+[data-section="site-footer"] ul { list-style: none; padding: 0; margin: 0; }
+[data-section="site-footer"] li { padding: 6px 0; }
+[data-section="site-footer"] a { color: var(--color-fg); text-decoration: none; font-size: 15px; }
+[data-section="site-footer"] a:hover { color: var(--color-accent); }
+[data-section="site-footer"] .legal {
+  max-width: var(--max-width); margin: 0 auto; padding-top: 24px;
+  font-size: 13px; color: var(--color-fg-muted);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+@media (max-width: 800px) { [data-section="site-footer"] .cols { grid-template-columns: 1fr 1fr; } }
+
+/* have-your-say specific */
+[data-section="response-channels"] .grid {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;
+}
+.ds-channel { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 24px 28px; }
+.ds-channel .label { color: var(--color-accent); margin-bottom: 12px; }
+.ds-channel p { color: var(--color-fg); font-size: 16px; margin: 0; line-height: 1.5; }
+.ds-consultation-banner {
+  background: var(--color-accent); color: var(--color-bg);
+  padding: 32px 36px; border-radius: var(--radius);
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px;
+  max-width: var(--max-width); margin: 32px auto 0;
+}
+.ds-consultation-banner .cell { border-left: 1px solid rgba(255,255,255,0.25); padding-left: 24px; }
+.ds-consultation-banner .cell:first-child { border-left: 0; padding-left: 0; }
+.ds-consultation-banner .label { font-family: var(--heading-font-family); font-size: 11px; letter-spacing: var(--uppercase-tracking); text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 8px; }
+.ds-consultation-banner .value { font-family: var(--heading-font-family); font-weight: 500; font-size: 24px; color: var(--color-bg); letter-spacing: -0.005em; }
+@media (max-width: 700px) { .ds-consultation-banner { grid-template-columns: 1fr; } .ds-consultation-banner .cell { border-left: 0; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.25); padding-top: 16px; } .ds-consultation-banner .cell:first-child { border-top: 0; padding-top: 0; } }
+
+[data-section="events"] .grid {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px; background: var(--color-border); border: 1px solid var(--color-border);
+  border-radius: var(--radius); overflow: hidden;
+}
+.ds-event { background: var(--color-bg); padding: 24px 28px; }
+.ds-event .town { font-family: var(--heading-font-family); font-weight: 500; font-size: 18px; color: var(--color-fg); }
+.ds-event .date { font-family: var(--heading-font-family); font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-accent); margin: 8px 0; }
+.ds-event .venue { font-size: 14px; color: var(--color-fg-muted); margin: 0; line-height: 1.45; }
+
+[data-section="question-areas"] .grid {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;
+}
+.ds-question-area { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 28px; }
+.ds-question-area .count {
+  display: inline-block; font-family: var(--heading-font-family); font-size: 11px;
+  letter-spacing: var(--uppercase-tracking); text-transform: uppercase;
+  color: var(--color-bg); background: var(--color-accent);
+  padding: 4px 10px; border-radius: var(--radius-pill); margin-bottom: 12px;
+}
+.ds-question-area h3 { font-family: var(--heading-font-family); font-weight: 500; font-size: 20px; margin: 0 0 12px; }
+.ds-question-area p { color: var(--color-fg); font-size: 15px; margin: 0; line-height: 1.55; }
+
+[data-section="next-steps"] .steps { max-width: 900px; margin: 0 auto; display: grid; gap: 8px; counter-reset: step; }
+.ds-step {
+  display: grid; grid-template-columns: 56px 1fr; gap: 24px; align-items: start;
+  padding: 24px 28px; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius);
+}
+.ds-step::before {
+  counter-increment: step; content: counter(step, decimal-leading-zero);
+  font-family: var(--heading-font-family); font-weight: 500; font-size: 28px;
+  color: var(--color-accent); line-height: 1; letter-spacing: -0.02em;
+}
+.ds-step .ttl { font-family: var(--heading-font-family); font-weight: 500; font-size: 18px; color: var(--color-fg); margin: 0 0 6px; }
+.ds-step .detail { color: var(--color-fg-muted); font-size: 15px; line-height: 1.55; margin: 0; }
+
+
+  </style>
+</head>
+<body>
+
+
+  <header data-section="site-header" data-intent="global navigation" data-layout="full-bleed" data-fragment="site-header" data-fragment-role="reuse" data-fragment-source="/">
+    <div class="row">
+      <a class="brand" href="index.html" aria-label="Heathrow Airport Expansion home">
+        <img src="assets/logos/heathrow-white.png" alt="Heathrow" />
+        <span class="brand-meta">Airport Expansion · Consultation</span>
+      </a>
+      <nav class="primary" aria-label="Sections">
+        <a href="the-proposal.html">The proposal</a>
+        <a href="masterplan.html">The Masterplan</a>
+        <a href="construction-and-operations.html">Construction &amp; operations</a>
+        <a href="travel-and-access.html">Travel &amp; access</a>
+        <a href="effects-and-community.html" aria-current="page">Effects &amp; community</a>
+        <a href="have-your-say.html">Have your say</a>
+        <a class="respond" href="have-your-say.html#respond">Respond</a>
+      </nav>
+    </div>
+  </header>
+
+  <section data-section="page-hero" data-intent="orient and label" data-layout="full-bleed" data-media="image">
+    <img class="media" src="assets/photos/community-green.jpg" alt="" />
+    <div class="inner">
+      <div class="crumbs">
+        <a href="index.html">Heathrow Airport Expansion</a>
+        <span>›</span>
+        <span>Effects &amp; community</span>
+      </div>
+      <p class="label label--inverse">05 · Effects &amp; community</p>
+      <h1>Effects &amp; community</h1>
+      <p class="lead">We are committed to developing Heathrow responsibly and sustainably, with a focus on the wellbeing of our communities and the environment. We are carefully considering the effects expansion may have on the environment and local people, and have planned measures to avoid, reduce or — where possible — improve the current environment.</p>
+      <div class="meta"><span><strong>4 chapters</strong>PDF sections 7, 8, 9, 10</span>
+        <span><strong>14 min</strong>estimated read</span>
+        <span><strong>7 parts</strong>in this section</span></div>
+    </div>
+  </section>
+
+  <nav data-section="subnav" data-intent="in-page wayfinding" data-layout="full-bleed" data-fragment="subnav" data-fragment-role="reuse" data-fragment-source="/" aria-label="On this page">
+    <div class="inner">
+      <span class="label">On this page</span>
+      <ul>
+        <li><a href="#assessing-effects">7.0 · Assessing the effects</a></li>
+        <li><a href="#air-and-noise">7.1 / 7.4 · Air quality and noise</a></li>
+        <li><a href="#community-and-health">7.2 / 7.3 · Community and health</a></li>
+        <li><a href="#carbon-and-climate">7.12 / 7.13 · Carbon and climate</a></li>
+        <li><a href="#managed-growth">8. · Growing within environmental limits</a></li>
+        <li><a href="#community-fund">9. · Community fund</a></li>
+        <li><a href="#property-and-compensation">10. · Property and compensation</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<section data-section="overview" data-intent="orient" data-layout="contained">
+  <div style="max-width: 70ch; margin: 0 auto;">
+    <div style="font-size: 19px; line-height: 1.55;">
+      <p>Our preliminary Environmental Impact Assessment (EIA) sets out our initial conclusions on the 'likely significant environmental effects' of the Project. The full assessment will be reported in the Environmental Statement that supports our DCO application.</p>
+    </div>
+    
+    <aside class="ds-callout" style="margin-top: 24px;">
+      <p class="label">Read alongside</p>
+      <p>Detail on every topic in this pillar lives in the Preliminary Environmental Information Report (PEIR) and its Non-Technical Summary, the Heathrow Expansion and Your Area documents (one per local area), the Environmentally Managed Growth document, and our Property Policies Information Paper.</p>
+    </aside>
+  </div>
+</section>
+
+<div style="background: var(--color-surface-tint); border-top: 1px solid var(--color-border);">
+  
+  <article data-section="subsection-assessing-effects" data-intent="explain mechanic" data-layout="split-media">
+    <div class="inner">
+      <header>
+        <div class="num">7.0</div>
+        <h2 class="title">Assessing the effects</h2>
+        <p class="sub-lead">Section 7 of the consultation document covers fourteen environmental and social topics. Each is assessed in the PEIR and summarised in the local-area documents.</p>
+      </header>
+      <div class="body">
+        <div class="prose">
+          <p>The fourteen topics are: air quality and odour; community; health; noise; socio-economic and employment; transport network users; biodiversity; historic environment; land quality; landscape and visual impact; water environment; carbon; climate change; and waste. The EIA process identifies and incorporates environmental measures (often referred to as 'mitigation') to avoid, reduce or offset significant adverse effects, and looks for opportunities to enhance the environment through environmental design.</p>
+          <p>The topics that follow distil the four areas with the highest community concern — air quality and noise; community and health; carbon and climate — alongside the cross-cutting frameworks that bind them: Environmentally Managed Growth, the Community Fund, and our Property and Compensation policies.</p>
+        </div>
+        
+        
+      </div>
+    </div>
+  </article>
+
+  <article data-section="subsection-air-and-noise" data-intent="explain mechanic" data-layout="split-media">
+    <div class="inner">
+      <header>
+        <div class="num">7.1 / 7.4</div>
+        <h2 class="title">Air quality and noise</h2>
+        <p class="sub-lead">Air quality and aircraft noise are the two environmental effects most directly experienced by communities around Heathrow. Both are addressed through hard limits and targeted mitigation.</p>
+      </header>
+      <div class="body">
+        <div class="prose">
+          <p>Air quality: the influence of Heathrow on air quality falls sharply with distance from the airport. Outside the airport boundary, the main source of pollution is road traffic — most of which is not airport-related. During operation of an expanded Heathrow, air quality is expected to improve over time as cleaner road vehicles and increasingly modern aircraft meet tighter emission standards. Our surface access proposals — HULEZ, HVAC, public transport investment, and a phased reduction in colleague parking — are central to managing operational air quality.</p>
+          <p>Noise: our framework proposes a noise envelope that defines limits using contour areas or quota count systems. The envelope will control total noise emissions and will be regularly revised to become progressively tighter, incentivising airlines and the airport to develop quieter aircraft. Combined with the scheduled night flight ban, runway alternation and reflective alternation, the proposals are designed to deliver progressive improvement in Heathrow's noise performance compared to the 2013 baseline.</p>
+        </div>
+        
+        <aside class="ds-callout">
+          <p class="label">What is the noise envelope?</p>
+          <p>A formal limit on total aircraft noise emissions from the airport. It can be defined by reference to noise contour areas, by a quota count system, or both. As airlines and the airport adopt quieter aircraft, the envelope tightens — meaning communities benefit from the reduction.</p>
+        </aside>
+        
+      </div>
+    </div>
+  </article>
+
+  <article data-section="subsection-community-and-health" data-intent="explain mechanic" data-layout="split-media">
+    <div class="inner">
+      <header>
+        <div class="num">7.2 / 7.3</div>
+        <h2 class="title">Community and health</h2>
+        <p class="sub-lead">The construction and operation of the Project will affect the community in different ways — particularly in relation to homes, businesses, community facilities and services.</p>
+      </header>
+      <div class="body">
+        <div class="prose">
+          <p>Construction will require the acquisition of 756 homes; their residents will be displaced — a significant negative effect. Some community facilities will need to be relocated. Some construction workers will need to move to the area temporarily, which may affect housing availability — particularly rented homes.</p>
+          <p>We have identified mitigation including: replacement of community facilities, public open space (including sports facilities and allotments) and recreational routes; compensation for home-owners in the Compulsory Purchase Zone and Wider Property Offer Zone; a Home Relocation Support Service; an independent Resident Advice Service; a Construction Workforce Accommodation Strategy to reduce pressure on private-sector housing; welfare provision and occupational health services within construction sites; and a Community Safety Management Plan. The economic and employment benefits of the Project are expected to have a long-term and major positive benefit for health and quality of life.</p>
+        </div>
+        
+        
+        <figure class="ds-figure">
+          <img src="assets/photos/community-green.jpg" alt="Communities surrounding the airport — protecting and enhancing the places people live is the foundation of the social mitigation framework." loading="lazy" />
+          <figcaption>
+            <strong>Communities surrounding the airport — protecting and enhancing the places people live is the foundation of the social mitigation framework.</strong>
+            <span>© Heathrow Airport Limited 2019</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <article data-section="subsection-carbon-and-climate" data-intent="explain mechanic" data-layout="split-media">
+    <div class="inner">
+      <header>
+        <div class="num">7.12 / 7.13</div>
+        <h2 class="title">Carbon and climate</h2>
+        <p class="sub-lead">Carbon emissions from expansion must not have a material effect on the ability of Government to meet its carbon reduction targets, including carbon budgets.</p>
+      </header>
+      <div class="body">
+        <div class="prose">
+          <p>The Environmentally Managed Growth framework commits Heathrow to: implementation of specific mitigation measures to ensure expansion does not have a material effect on Government's ability to meet carbon reduction targets; a mechanism for ongoing review and reporting of carbon emissions involving independent oversight; and taking appropriate additional action in the event the carbon objective is threatened.</p>
+          <p>Carbon emissions are considered in the context of action being taken at international level by the aviation industry and nationally by the UK Government. The framework treats carbon as a hard limit alongside surface access, air quality, and noise — all monitored annually with the right to grow contingent on staying within the limits.</p>
+        </div>
+        
+        
+      </div>
+    </div>
+  </article>
+
+  <article data-section="subsection-managed-growth" data-intent="explain mechanic" data-layout="split-media">
+    <div class="inner">
+      <header>
+        <div class="num">8.</div>
+        <h2 class="title">Growing within environmental limits</h2>
+        <p class="sub-lead">Expansion at Heathrow is not a choice between the economy and the environment — it must deliver for both.</p>
+      </header>
+      <div class="body">
+        <div class="prose">
+          <p>Our framework — Environmentally Managed Growth — sets clear limits on surface access (traffic), air quality, aircraft noise and carbon emissions. These limits set the maximum level of effect we will be allowed to have as the airport grows, and will align with the policies in the Airports NPS. If acceptable to the Secretary of State for Transport, the framework and limits will be part of our approval to grow — and we will be legally bound to remain within them.</p>
+          <p>An Independent Scrutiny Panel will oversee future growth. Data will be published regularly online and a detailed Annual Monitoring Report will show how the airport is performing in relation to the limits. The Panel will have powers to enforce the limits, hold us to account, and require corrective action — including, if necessary, implementing its own mitigation strategy.</p>
+        </div>
+        
+        <aside class="ds-callout">
+          <p class="label">We will have to earn the right to grow</p>
+          <p>Environmental performance will become central to the day-to-day operation and growth of the airport. Heathrow's objective will be closely aligned with the objectives of affected communities — and growth contingent on staying within the published limits.</p>
+        </aside>
+        
+      </div>
+    </div>
+  </article>
+
+  <article data-section="subsection-community-fund" data-intent="explain mechanic" data-layout="split-media">
+    <div class="inner">
+      <header>
+        <div class="num">9.</div>
+        <h2 class="title">Community fund</h2>
+        <p class="sub-lead">We are proposing a new Community Fund to help address the positive and negative effects of the Project and improve quality of life in the area around the airport.</p>
+      </header>
+      <div class="body">
+        <div class="prose">
+          <p>The Airports NPS requires us to consult on five areas of the Fund: eligibility, size, duration, delivery, and source of funding. We have generated ideas on each and want to hear your feedback so you can help shape how the Fund works for your community.</p>
+          <p>In principle, we think the Fund could be used for: enhancements to quality of life (community activities, health, transport, environment); initiatives that enhance the benefits of expansion (Heathrow Academy, skills, jobs, apprenticeships); enhancements of re-provided facilities (additional play areas, school places); and additional or ongoing mitigation measures where it is not possible to identify or quantify the necessary measures at the time of submitting our DCO application. Funding sources we are considering include Heathrow funding of transport, environmental, community and health measures; a passenger levy similar to the noise levy concept recommended by the Airports Commission; and an airport charge paid by airlines.</p>
+        </div>
+        
+        
+      </div>
+    </div>
+  </article>
+
+  <article data-section="subsection-property-and-compensation" data-intent="explain mechanic" data-layout="split-media">
+    <div class="inner">
+      <header>
+        <div class="num">10.</div>
+        <h2 class="title">Property and compensation</h2>
+        <p class="sub-lead">We have developed five interim property compensation policies for owners or occupiers of land that may need to be acquired, or may be affected by expansion.</p>
+      </header>
+      <div class="body">
+        <div class="prose">
+          <p>The five interim policies are: Residential Property Policy (covering the Compulsory Purchase Zone and Wider Property Offer Zone); Agricultural Land and Property Policy (covering owners of agricultural land, farmhouses and farm buildings); Commercial Property Policy (for larger commercial interests and small businesses); Property Hardship Scheme (for owners with a compelling need to sell before they would be eligible under one of the other policies); and Professional Fees Policy (covering fees incurred during the compulsory acquisition process).</p>
+          <p>The policies apply within three areas: the Compulsory Purchase Zone — the area we anticipate needing for the future expanded airport; the Wider Property Offer Zone — outside the Compulsory Purchase Zone but in close proximity to the proposed new boundary; and the Draft Development Consent Order Limits — the maximum extent of land we may need to take temporarily or permanently to support the airport. The interim Property Hardship Scheme is already in operation and will remain so until we obtain consent and construction has begun. All interim policies will be updated following this consultation.</p>
+        </div>
+        
+        
+      </div>
+    </div>
+  </article>
+</div>
+
+
+
+  <section data-section="continue-reading" data-intent="cross-link" data-layout="contained" data-fragment="continue-reading" data-fragment-role="reuse" data-fragment-source="/">
+    <a class="inner" href="have-your-say.html">
+      <div>
+        <p class="label">Continue reading</p>
+        <p class="ttl">06 · Have your say</p>
+      </div>
+      <p class="summary">How to give us your views before the consultation closes, what we'll do with your feedback, and the consultation questions in full.</p>
+      <span class="arrow">→</span>
+    </a>
+  </section>
+
+  <section data-section="cta-band" data-intent="drive action" data-layout="full-bleed" data-fragment="cta-band" data-fragment-role="reuse" data-fragment-source="/">
+    <div class="inner">
+      <div>
+        <p class="label label--inverse">Section 06</p>
+        <h2>Have your say on Effects &amp; community</h2>
+        <p>Tell us what you think. The consultation closes at 11:55 pm on 13 September 2019.</p>
+      </div>
+      <div class="actions">
+        <a class="ds-btn ds-btn--inverse" href="have-your-say.html#respond">Respond to the consultation</a>
+        <a class="ds-btn ds-btn--inverse" href="have-your-say.html#questions" style="background: transparent; color: var(--color-bg); border: 1px solid rgba(255,255,255,0.5);">Read the consultation questions</a>
+      </div>
+    </div>
+  </section>
+
+  <footer data-section="site-footer" data-intent="global wayfinding" data-layout="grid" data-fragment="site-footer" data-fragment-role="reuse" data-fragment-source="/">
+    <div class="cols">
+      <div class="brand-block">
+        <img src="assets/logos/heathrow-white.png" alt="Heathrow" style="height: 24px; filter: invert(1) brightness(0.2);" />
+        <p>Our June 2019 consultation document set out our developed thinking for an expanded Heathrow and invited views from communities, passengers, businesses and government.</p>
+      </div>
+      <div>
+        <h4>Helpful links</h4>
+        <ul>
+          <li><a href="#">Download the consultation PDF</a></li>
+          <li><a href="#">Read in another language</a></li>
+          <li><a href="#">Accessibility statement</a></li>
+          <li><a href="#">Cookie preferences</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Discover Heathrow</h4>
+        <ul>
+          <li><a href="https://www.heathrow.com/expansion">Heathrow Expansion</a></li>
+          <li><a href="https://www.heathrow.com/at-the-airport">At the airport</a></li>
+          <li><a href="https://www.heathrow.com/transport-and-directions">Transport and directions</a></li>
+          <li><a href="https://www.heathrow.com/heathrow-blog">Heathrow blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Our company</h4>
+        <ul>
+          <li><a href="https://www.heathrow.com/company">About Heathrow</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press office</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>&copy; Heathrow Airport Limited 2019. POC microsite generated 2026-04-29 from the original 110-page consultation document.</span>
+      <span>Built via stardust v0.2: extract → direct → prototype → migrate.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <!-- stardust:provenance
+    migratedAt: 2026-04-29T14:04:03.414Z
+    writtenBy: stardust:migrate (composed from stardust:prototype)
+    writtenAt: 2026-04-29T14:02:16.128Z
+    renderedVia: stardust-direct (brand-faithful Mode A; --no-impeccable carve-out — content sourced from PDF, not fabricated)
+    page: masterplan
+    readArtifacts:
+      - DESIGN.md
+      - DESIGN.json
+      - stardust/direction.md
+      - stardust/current/pages/masterplan.json
+      - doc.json (PDF-derived content map)
+    contracts:
+      - skills/stardust/reference/token-contract.md (:root token block below)
+      - skills/stardust/reference/data-attributes.md (data-section / data-intent / data-layout / data-fragment*)
+    stardustVersion: 0.2.0
+  -->
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Masterplan · Heathrow Airport Expansion</title>
+  <meta name="description" content="Heathrow's vision is to give passengers the best airport service in the world. The layout of an expanded Heathrow — and all the different parts or components within it — is crucial to achieving this v" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap" />
+  <style>
+
+:root {
+  /* ──────── Heathrow Airport Expansion microsite — token contract ────────
+     Generated from DESIGN.md frontmatter. Every prototype and migrated page
+     exposes the same names. Per skills/stardust/reference/token-contract.md. */
+
+  --heading-font-family: "FrutigerNextPaneuropeanMedium", "Open Sans", Arial, sans-serif;
+  --body-font-family:    "FrutigerNextPaneuropeanRegular", "Open Sans", Arial, sans-serif;
+
+  --heading-xxl: 64px;
+  --heading-xl:  42px;
+  --heading-lg:  32px;
+  --heading-md:  24px;
+  --body:        17px;
+  --body-sm:     15px;
+
+  --line-height-heading: 1.05;
+  --line-height-body:    1.55;
+
+  /* Color roles — brand-native names per divergence-toolkit.md § 4.
+     Hex retained per brand-faithful-inversions § "hex format retention". */
+  --color-bg:           #ffffff;       /* DESIGN.md colors.paper */
+  --color-fg:           #2c292a;       /* DESIGN.md colors.ink */
+  --color-fg-muted:     #5e6a75;       /* DESIGN.md colors.meta-grey */
+  --color-accent:       #462170;       /* DESIGN.md colors.brand-purple */
+  --color-accent-deep:  #371a59;       /* DESIGN.md colors.brand-purple-deep */
+  --color-chrome:       #1d2533;       /* DESIGN.md colors.navy-chrome */
+  --color-border:       #bec5cb;       /* DESIGN.md colors.divider */
+  --color-surface-alt:  #f5f5f5;       /* DESIGN.md colors.surface-alt */
+  --color-surface-tint: #faf9fb;       /* DESIGN.md colors.surface-tint */
+
+  --spacing-xs:  8px;
+  --spacing-sm:  16px;
+  --spacing-md:  24px;
+  --spacing-lg:  40px;
+  --spacing-xl:  64px;
+  --spacing-2xl: 96px;
+
+  --section-padding: 64px;             /* DESIGN.md spacing.section · density: balanced */
+  --max-width:       1280px;           /* DESIGN.json extensions.breakpoints.containerMaxWidth */
+  --radius:          8px;              /* DESIGN.md rounded.md */
+  --radius-pill:     9999px;
+  --radius-circle:   50%;
+
+  --header-h:        64px;
+  --duration-fast:   150ms;
+  --duration-medium: 180ms;
+  --ease-default:    cubic-bezier(0.4, 0, 0.2, 1);
+
+  --uppercase-tracking: 2px;           /* signage-label rule */
+}
+
+
+/* ───────── reset & base ───────── */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--body-font-family);
+  font-size: var(--body);
+  line-height: var(--line-height-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--color-accent); }
+a:hover { color: var(--color-accent-deep); }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font-family);
+  font-weight: 500;
+  color: var(--color-fg);
+  margin: 0;
+  line-height: var(--line-height-heading);
+  letter-spacing: -0.005em;
+}
+h1 { font-size: clamp(40px, 6vw, var(--heading-xxl)); letter-spacing: -0.015em; }
+h2 { font-size: clamp(28px, 3.5vw, var(--heading-xl)); line-height: 1.15; }
+h3 { font-size: var(--heading-md); line-height: 1.2; }
+p  { margin: 0 0 1em; }
+
+.label {
+  font-family: var(--heading-font-family);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: var(--uppercase-tracking);
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+  margin: 0;
+}
+.label--accent  { color: var(--color-accent); }
+.label--inverse { color: rgba(255,255,255,0.85); }
+
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+/* ───────── buttons ───────── */
+.ds-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--heading-font-family);
+  font-weight: 500; font-size: 15px;
+  border: none; border-radius: var(--radius);
+  padding: 14px 28px; cursor: pointer; text-decoration: none;
+  transition: background var(--duration-medium) var(--ease-default);
+}
+.ds-btn--primary  { background: var(--color-accent); color: var(--color-bg); }
+.ds-btn--primary:hover { background: var(--color-accent-deep); }
+.ds-btn--primary:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+.ds-btn--secondary { background: var(--color-bg); color: var(--color-fg); border: 1px solid var(--color-border); }
+.ds-btn--secondary:hover { background: var(--color-surface-alt); }
+.ds-btn--inverse  { background: var(--color-bg); color: var(--color-fg); }
+.ds-btn--inverse:hover { background: var(--color-surface-alt); }
+
+/* ───────── site-header (system component) ───────── */
+[data-section="site-header"] {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--color-chrome);
+  color: var(--color-bg);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+[data-section="site-header"] .row {
+  display: flex; align-items: center; gap: 32px;
+  height: var(--header-h); padding: 0 24px;
+}
+[data-section="site-header"] .brand {
+  display: flex; align-items: center; gap: 14px;
+  text-decoration: none; color: var(--color-bg);
+}
+[data-section="site-header"] .brand img { height: 22px; }
+[data-section="site-header"] .brand-meta {
+  font-family: var(--heading-font-family); font-size: 11px;
+  letter-spacing: var(--uppercase-tracking); text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  border-left: 1px solid rgba(255,255,255,0.18);
+  padding-left: 14px;
+}
+[data-section="site-header"] nav.primary { display: flex; align-items: center; gap: 4px; margin-left: auto; flex-wrap: wrap; }
+[data-section="site-header"] nav.primary a {
+  color: var(--color-bg); text-decoration: none;
+  padding: 8px 14px; font-family: var(--heading-font-family);
+  font-weight: 500; font-size: 14px; border-radius: var(--radius);
+  transition: background var(--duration-fast) var(--ease-default);
+}
+[data-section="site-header"] nav.primary a:hover, [data-section="site-header"] nav.primary a[aria-current] {
+  background: rgba(255,255,255,0.10);
+}
+[data-section="site-header"] .respond {
+  margin-left: 12px; background: var(--color-accent); color: var(--color-bg);
+}
+[data-section="site-header"] .respond:hover { background: var(--color-accent-deep); }
+
+@media (max-width: 1024px) { [data-section="site-header"] nav.primary { display: none; } }
+
+/* ───────── photo hero ───────── */
+[data-section="hero"][data-layout="full-bleed"] {
+  position: relative; overflow: hidden;
+  background: var(--color-chrome); color: var(--color-bg);
+  min-height: 540px;
+}
+[data-section="hero"][data-layout="full-bleed"] .media {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: 0;
+}
+[data-section="hero"][data-layout="full-bleed"]::before {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.72) 100%);
+}
+[data-section="hero"][data-layout="full-bleed"] .inner {
+  position: relative; z-index: 2; max-width: var(--max-width);
+  margin: 0 auto; padding: clamp(60px, 9vw, 120px) 24px clamp(48px, 7vw, 96px);
+}
+[data-section="hero"][data-layout="full-bleed"] h1 { color: var(--color-bg); max-width: 18ch; }
+[data-section="hero"][data-layout="full-bleed"] .lead { color: rgba(255,255,255,0.95); font-size: clamp(17px, 1.5vw, 19px); margin-top: 24px; max-width: 60ch; line-height: 1.55; }
+[data-section="hero"][data-layout="full-bleed"] .meta { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
+
+[data-section="hero"][data-layout="contained"] { background: var(--color-bg); }
+[data-section="hero"][data-layout="contained"] .inner { padding: clamp(64px, 9vw, 120px) 24px clamp(48px, 7vw, 96px); max-width: var(--max-width); margin: 0 auto; }
+
+/* ───────── page-hero (inner pages) ───────── */
+[data-section="page-hero"] {
+  position: relative; overflow: hidden;
+  background: var(--color-chrome); color: var(--color-bg);
+}
+[data-section="page-hero"] .media {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
+}
+[data-section="page-hero"]::before {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(29,37,51,0.85) 100%);
+}
+[data-section="page-hero"] .inner {
+  position: relative; z-index: 2; max-width: var(--max-width); margin: 0 auto;
+  padding: clamp(64px, 9vw, 120px) 24px clamp(48px, 7vw, 96px);
+}
+[data-section="page-hero"] .crumbs {
+  display: flex; gap: 8px; align-items: center;
+  font-family: var(--heading-font-family); font-size: 12px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.7); margin-bottom: 24px;
+}
+[data-section="page-hero"] .crumbs a { color: rgba(255,255,255,0.85); text-decoration: none; }
+[data-section="page-hero"] .crumbs span { color: rgba(255,255,255,0.4); }
+[data-section="page-hero"] h1 { color: var(--color-bg); max-width: 22ch; margin-bottom: 24px; }
+[data-section="page-hero"] .lead { color: rgba(255,255,255,0.92); font-size: clamp(17px, 1.5vw, 19px); max-width: 60ch; line-height: 1.55; margin: 0; }
+[data-section="page-hero"] .meta {
+  display: flex; gap: 24px; margin-top: 40px; flex-wrap: wrap;
+  font-family: var(--heading-font-family); font-size: 13px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.7);
+}
+[data-section="page-hero"] .meta strong { color: var(--color-bg); display: block; font-size: 22px; letter-spacing: -0.005em; text-transform: none; font-weight: 500; }
+
+/* ───────── subnav (system component) ───────── */
+[data-section="subnav"] {
+  position: sticky; top: var(--header-h); z-index: 5;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0 24px;
+}
+[data-section="subnav"] .inner {
+  max-width: var(--max-width); margin: 0 auto;
+  display: flex; align-items: center; gap: 32px;
+  height: 56px; overflow-x: auto; scrollbar-width: thin;
+}
+[data-section="subnav"] .label {
+  white-space: nowrap; padding-right: 24px;
+  border-right: 1px solid var(--color-border);
+}
+[data-section="subnav"] ul {
+  display: flex; gap: 4px; list-style: none; padding: 0; margin: 0; flex-wrap: nowrap;
+}
+[data-section="subnav"] ul a {
+  display: inline-block; padding: 8px 14px;
+  font-family: var(--heading-font-family); font-weight: 500; font-size: 14px;
+  color: var(--color-fg); text-decoration: none; border-radius: var(--radius);
+  white-space: nowrap; transition: background var(--duration-fast) var(--ease-default), color var(--duration-fast) var(--ease-default);
+}
+[data-section="subnav"] ul a:hover { background: var(--color-surface-alt); color: var(--color-accent); }
+
+/* ───────── editorial sections ───────── */
+[data-section="overview"], [data-section="five-minute-summary"], [data-section="pillar-grid"],
+[data-section="phase-timeline"], [data-section="five-minute-summary-band"],
+[data-section="quote-band"], [data-section="cta-band"], [data-section="continue-reading"] {
+  padding: var(--section-padding) 24px;
+}
+[data-section="overview"], [data-section="five-minute-summary"], [data-section="pillar-grid"],
+[data-section="phase-timeline"], [data-section="continue-reading"] { background: var(--color-bg); }
+[data-section="five-minute-summary-band"], [data-section="quote-band"] { background: var(--color-surface-tint); }
+
+.section-head { max-width: var(--max-width); margin: 0 auto var(--spacing-lg); }
+.section-head .label { margin-bottom: 12px; }
+.section-head h2 { max-width: 22ch; }
+.section-head p { margin-top: 16px; max-width: 60ch; font-size: 18px; color: var(--color-fg-muted); }
+
+/* ───────── pillar grid (story tiles) ───────── */
+[data-section="pillar-grid"] .grid {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;
+}
+.ds-tile {
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius); overflow: hidden;
+  display: flex; flex-direction: column;
+  text-decoration: none; color: inherit;
+  transition: transform var(--duration-medium) var(--ease-default), border-color var(--duration-medium) var(--ease-default);
+}
+.ds-tile:hover { transform: translateY(-2px); border-color: var(--color-accent); }
+.ds-tile__photo { aspect-ratio: 16 / 10; background-size: cover; background-position: center; background-color: var(--color-fg-muted); }
+.ds-tile__body { padding: 24px 28px 28px; display: flex; flex-direction: column; flex: 1; }
+.ds-tile__label { margin-bottom: 12px; }
+.ds-tile__title { font-family: var(--heading-font-family); font-weight: 500; font-size: 24px; margin-bottom: 12px; color: var(--color-fg); }
+.ds-tile__copy { color: var(--color-fg); font-size: 16px; line-height: 1.5; margin: 0; flex: 1; }
+.ds-tile__more { margin-top: 20px; color: var(--color-accent); font-family: var(--heading-font-family); font-weight: 500; font-size: 15px; }
+
+/* ───────── two-track hero band (home) ───────── */
+[data-section="two-track"] {
+  display: grid; grid-template-columns: 1fr 1fr;
+  max-width: var(--max-width); margin: 64px auto 0; padding: 0 24px; gap: 24px;
+}
+.ds-track {
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius); padding: 40px 36px;
+  display: flex; flex-direction: column;
+}
+.ds-track--accent { background: var(--color-accent); color: var(--color-bg); border: none; }
+.ds-track--accent .label { color: rgba(255,255,255,0.7); }
+.ds-track--accent h3 { color: var(--color-bg); }
+.ds-track--accent p { color: rgba(255,255,255,0.92); }
+.ds-track h3 { font-size: 28px; margin-bottom: 12px; }
+.ds-track p { color: var(--color-fg-muted); flex: 1; line-height: 1.55; }
+.ds-track .ds-btn { margin-top: 24px; align-self: flex-start; }
+.ds-track--accent .ds-btn { background: var(--color-bg); color: var(--color-accent); }
+.ds-track--accent .ds-btn:hover { background: var(--color-surface-alt); color: var(--color-accent); }
+@media (max-width: 800px) { [data-section="two-track"] { grid-template-columns: 1fr; } }
+
+/* ───────── four-pillar summary (home) ───────── */
+[data-section="five-minute-summary"] .grid {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;
+}
+[data-section="five-minute-summary"] .summary-card {
+  padding: 28px; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-bg);
+}
+[data-section="five-minute-summary"] .summary-card h3 { font-size: 20px; margin-bottom: 12px; }
+[data-section="five-minute-summary"] .summary-card p { color: var(--color-fg); margin: 0; }
+
+/* ───────── pull-quote band ───────── */
+[data-section="quote-band"] .pull {
+  max-width: 900px; margin: 0 auto; padding: 0 24px;
+}
+[data-section="quote-band"] .mark { font-family: var(--heading-font-family); font-size: 96px; line-height: 1; color: var(--color-accent); margin: 0; }
+[data-section="quote-band"] .quote { font-family: var(--heading-font-family); font-weight: 500; font-size: clamp(24px, 3vw, 34px); line-height: 1.3; color: var(--color-fg); margin: 16px 0 24px; }
+[data-section="quote-band"] .attrib { font-family: var(--heading-font-family); font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-fg-muted); }
+
+/* ───────── phase timeline ───────── */
+[data-section="phase-timeline"] .phases {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr); position: relative;
+}
+[data-section="phase-timeline"] .phases::before {
+  content: ""; position: absolute; top: 32px; left: 0; right: 0; height: 2px; background: var(--color-border);
+}
+[data-section="phase-timeline"] .phase { position: relative; padding: 0 16px; text-align: center; }
+[data-section="phase-timeline"] .phase .dot { width: 16px; height: 16px; border-radius: var(--radius-circle); background: var(--color-accent); margin: 24px auto 16px; position: relative; z-index: 1; box-shadow: 0 0 0 6px var(--color-bg); }
+[data-section="phase-timeline"] .phase .year { font-family: var(--heading-font-family); font-weight: 500; font-size: 32px; color: var(--color-fg); margin-bottom: 4px; letter-spacing: -0.01em; }
+[data-section="phase-timeline"] .phase .phase-label { font-family: var(--heading-font-family); font-size: 11px; letter-spacing: var(--uppercase-tracking); text-transform: uppercase; color: var(--color-accent); margin-bottom: 8px; }
+[data-section="phase-timeline"] .phase p { color: var(--color-fg-muted); font-size: 14px; line-height: 1.45; margin: 0; }
+@media (max-width: 700px) { [data-section="phase-timeline"] .phases { grid-template-columns: repeat(2, 1fr); row-gap: 32px; } [data-section="phase-timeline"] .phases::before { display: none; } }
+
+/* ───────── subsection (inner pages) ───────── */
+[data-section^="subsection"] {
+  padding: clamp(64px, 7vw, 96px) 24px;
+  border-bottom: 1px solid var(--color-border);
+  scroll-margin-top: calc(var(--header-h) + 56px + 16px);
+}
+[data-section^="subsection"]:last-of-type { border-bottom: 0; }
+[data-section^="subsection"] .inner {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1.5fr; gap: 64px; align-items: start;
+}
+[data-section^="subsection"] header { position: sticky; top: calc(var(--header-h) + 56px + 24px); }
+[data-section^="subsection"] .num {
+  font-family: var(--heading-font-family); font-weight: 500;
+  font-size: 64px; color: var(--color-accent);
+  line-height: 1; letter-spacing: -0.02em; margin-bottom: 12px;
+}
+[data-section^="subsection"] h2.title { font-size: 32px; margin-bottom: 16px; }
+[data-section^="subsection"] .sub-lead {
+  font-family: var(--heading-font-family); font-weight: 500;
+  font-size: 19px; line-height: 1.4; color: var(--color-fg);
+  margin: 0; max-width: 24ch;
+}
+[data-section^="subsection"] .body { display: flex; flex-direction: column; gap: 32px; }
+[data-section^="subsection"] .prose { max-width: 70ch; font-size: var(--body); line-height: 1.65; color: var(--color-fg); }
+[data-section^="subsection"] .prose p { margin: 0 0 1.1em; }
+[data-section^="subsection"] .prose p:last-child { margin-bottom: 0; }
+@media (max-width: 900px) {
+  [data-section^="subsection"] .inner { grid-template-columns: 1fr; gap: 32px; }
+  [data-section^="subsection"] header { position: static; }
+  [data-section^="subsection"] .num { font-size: 48px; }
+}
+
+/* callout box */
+.ds-callout {
+  border-left: 3px solid var(--color-accent); background: var(--color-surface-tint);
+  padding: 24px 28px; border-radius: 0 var(--radius) var(--radius) 0;
+}
+.ds-callout .label { color: var(--color-accent); margin-bottom: 8px; }
+.ds-callout p { margin: 0; color: var(--color-fg); font-size: 15px; line-height: 1.55; max-width: 60ch; }
+
+/* captioned figure */
+.ds-figure { margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.ds-figure img { width: 100%; border-radius: var(--radius); border: 1px solid var(--color-border); }
+.ds-figure figcaption { font-size: 13px; color: var(--color-fg-muted); line-height: 1.45; display: flex; flex-direction: column; gap: 4px; }
+.ds-figure figcaption strong { color: var(--color-fg); font-weight: 500; }
+
+/* continue-reading (system component role) */
+[data-section="continue-reading"] {
+  background: var(--color-surface-tint);
+  border-top: 1px solid var(--color-border);
+}
+[data-section="continue-reading"] .inner {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 2fr auto;
+  gap: 32px; align-items: center; padding: 32px;
+  background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius);
+  text-decoration: none; color: inherit;
+  transition: border-color var(--duration-fast) var(--ease-default), transform var(--duration-fast) var(--ease-default);
+}
+[data-section="continue-reading"] .inner:hover { border-color: var(--color-accent); transform: translateX(4px); }
+[data-section="continue-reading"] .label { margin-bottom: 8px; }
+[data-section="continue-reading"] .ttl { font-family: var(--heading-font-family); font-weight: 500; font-size: 24px; color: var(--color-fg); margin: 0; }
+[data-section="continue-reading"] .summary { font-size: 14px; color: var(--color-fg-muted); margin: 0; line-height: 1.5; }
+[data-section="continue-reading"] .arrow { font-family: var(--heading-font-family); font-weight: 500; font-size: 20px; color: var(--color-accent); }
+@media (max-width: 800px) { [data-section="continue-reading"] .inner { grid-template-columns: 1fr; } [data-section="continue-reading"] .arrow { display: none; } }
+
+/* cta-band (system component role) */
+[data-section="cta-band"] { background: var(--color-accent); color: var(--color-bg); }
+[data-section="cta-band"] .inner {
+  max-width: var(--max-width); margin: 0 auto;
+  padding: clamp(48px, 7vw, 80px) 24px;
+  display: grid; grid-template-columns: 2fr 1fr; gap: 48px; align-items: center;
+}
+[data-section="cta-band"] .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+[data-section="cta-band"] h2 { color: var(--color-bg); margin-bottom: 12px; max-width: 18ch; }
+[data-section="cta-band"] p  { color: rgba(255,255,255,0.92); font-size: 17px; max-width: 50ch; margin: 0; }
+@media (max-width: 800px) { [data-section="cta-band"] .inner { grid-template-columns: 1fr; } }
+
+/* site-footer (system component) */
+[data-section="site-footer"] {
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-border);
+  padding: 64px 24px 32px;
+}
+[data-section="site-footer"] .cols {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 48px;
+  padding-bottom: 48px; border-bottom: 1px solid var(--color-border);
+}
+[data-section="site-footer"] .brand-block p { color: var(--color-fg-muted); font-size: 14px; max-width: 35ch; margin-top: 16px; }
+[data-section="site-footer"] h4 {
+  font-family: var(--heading-font-family); font-size: 11px;
+  letter-spacing: var(--uppercase-tracking); text-transform: uppercase;
+  color: var(--color-fg-muted); margin-bottom: 16px;
+}
+[data-section="site-footer"] ul { list-style: none; padding: 0; margin: 0; }
+[data-section="site-footer"] li { padding: 6px 0; }
+[data-section="site-footer"] a { color: var(--color-fg); text-decoration: none; font-size: 15px; }
+[data-section="site-footer"] a:hover { color: var(--color-accent); }
+[data-section="site-footer"] .legal {
+  max-width: var(--max-width); margin: 0 auto; padding-top: 24px;
+  font-size: 13px; color: var(--color-fg-muted);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+@media (max-width: 800px) { [data-section="site-footer"] .cols { grid-template-columns: 1fr 1fr; } }
+
+/* have-your-say specific */
+[data-section="response-channels"] .grid {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;
+}
+.ds-channel { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 24px 28px; }
+.ds-channel .label { color: var(--color-accent); margin-bottom: 12px; }
+.ds-channel p { color: var(--color-fg); font-size: 16px; margin: 0; line-height: 1.5; }
+.ds-consultation-banner {
+  background: var(--color-accent); color: var(--color-bg);
+  padding: 32px 36px; border-radius: var(--radius);
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px;
+  max-width: var(--max-width); margin: 32px auto 0;
+}
+.ds-consultation-banner .cell { border-left: 1px solid rgba(255,255,255,0.25); padding-left: 24px; }
+.ds-consultation-banner .cell:first-child { border-left: 0; padding-left: 0; }
+.ds-consultation-banner .label { font-family: var(--heading-font-family); font-size: 11px; letter-spacing: var(--uppercase-tracking); text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 8px; }
+.ds-consultation-banner .value { font-family: var(--heading-font-family); font-weight: 500; font-size: 24px; color: var(--color-bg); letter-spacing: -0.005em; }
+@media (max-width: 700px) { .ds-consultation-banner { grid-template-columns: 1fr; } .ds-consultation-banner .cell { border-left: 0; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.25); padding-top: 16px; } .ds-consultation-banner .cell:first-child { border-top: 0; padding-top: 0; } }
+
+[data-section="events"] .grid {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px; background: var(--color-border); border: 1px solid var(--color-border);
+  border-radius: var(--radius); overflow: hidden;
+}
+.ds-event { background: var(--color-bg); padding: 24px 28px; }
+.ds-event .town { font-family: var(--heading-font-family); font-weight: 500; font-size: 18px; color: var(--color-fg); }
+.ds-event .date { font-family: var(--heading-font-family); font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-accent); margin: 8px 0; }
+.ds-event .venue { font-size: 14px; color: var(--color-fg-muted); margin: 0; line-height: 1.45; }
+
+[data-section="question-areas"] .grid {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;
+}
+.ds-question-area { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 28px; }
+.ds-question-area .count {
+  display: inline-block; font-family: var(--heading-font-family); font-size: 11px;
+  letter-spacing: var(--uppercase-tracking); text-transform: uppercase;
+  color: var(--color-bg); background: var(--color-accent);
+  padding: 4px 10px; border-radius: var(--radius-pill); margin-bottom: 12px;
+}
+.ds-question-area h3 { font-family: var(--heading-font-family); font-weight: 500; font-size: 20px; margin: 0 0 12px; }
+.ds-question-area p { color: var(--color-fg); font-size: 15px; margin: 0; line-height: 1.55; }
+
+[data-section="next-steps"] .steps { max-width: 900px; margin: 0 auto; display: grid; gap: 8px; counter-reset: step; }
+.ds-step {
+  display: grid; grid-template-columns: 56px 1fr; gap: 24px; align-items: start;
+  padding: 24px 28px; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius);
+}
+.ds-step::before {
+  counter-increment: step; content: counter(step, decimal-leading-zero);
+  font-family: var(--heading-font-family); font-weight: 500; font-size: 28px;
+  color: var(--color-accent); line-height: 1; letter-spacing: -0.02em;
+}
+.ds-step .ttl { font-family: var(--heading-font-family); font-weight: 500; font-size: 18px; color: var(--color-fg); margin: 0 0 6px; }
+.ds-step .detail { color: var(--color-fg-muted); font-size: 15px; line-height: 1.55; margin: 0; }
+
+
+  </style>
+</head>
+<body>
+
+
+  <header data-section="site-header" data-intent="global navigation" data-layout="full-bleed" data-fragment="site-header" data-fragment-role="reuse" data-fragment-source="/">
+    <div class="row">
+      <a class="brand" href="index.html" aria-label="Heathrow Airport Expansion home">
+        <img src="assets/logos/heathrow-white.png" alt="Heathrow" />
+        <span class="brand-meta">Airport Expansion · Consultation</span>
+      </a>
+      <nav class="primary" aria-label="Sections">
+        <a href="the-proposal.html">The proposal</a>
+        <a href="masterplan.html" aria-current="page">The Masterplan</a>
+        <a href="construction-and-operations.html">Construction &amp; operations</a>
+        <a href="travel-and-access.html">Travel &amp; access</a>
+        <a href="effects-and-community.html">Effects &amp; community</a>
+        <a href="have-your-say.html">Have your say</a>
+        <a class="respond" href="have-your-say.html#respond">Respond</a>
+      </nav>
+    </div>
+  </header>
+
+  <section data-section="page-hero" data-intent="orient and label" data-layout="full-bleed" data-media="image">
+    <img class="media" src="assets/photos/masterplan-aerial.jpg" alt="" />
+    <div class="inner">
+      <div class="crumbs">
+        <a href="index.html">Heathrow Airport Expansion</a>
+        <span>›</span>
+        <span>The Masterplan</span>
+      </div>
+      <p class="label label--inverse">02 · Masterplan</p>
+      <h1>The Masterplan</h1>
+      <p class="lead">Heathrow's vision is to give passengers the best airport service in the world. The layout of an expanded Heathrow — and all the different parts or components within it — is crucial to achieving this vision. Our latest thinking on the layout of the future airport's physical infrastructure is called our Preferred Masterplan.</p>
+      <div class="meta"><span><strong>Section 3</strong>PDF chapter</span>
+        <span><strong>18 min</strong>estimated read</span>
+        <span><strong>11 parts</strong>in this section</span></div>
+    </div>
+  </section>
+
+  <nav data-section="subnav" data-intent="in-page wayfinding" data-layout="full-bleed" data-fragment="subnav" data-fragment-role="reuse" data-fragment-source="/" aria-label="On this page">
+    <div class="inner">
+      <span class="label">On this page</span>
+      <ul>
+        <li><a href="#airfield">3.1 · Airfield</a></li>
+        <li><a href="#terminals">3.2 · Terminals, satellites and aprons</a></li>
+        <li><a href="#roads-and-rail">3.3 · Roads and rail</a></li>
+        <li><a href="#active-travel">3.4 · Active travel</a></li>
+        <li><a href="#water-environment">3.5 · Water environment</a></li>
+        <li><a href="#supporting-development">3.6 · Airport supporting development</a></li>
+        <li><a href="#parking">3.7 · Parking</a></li>
+        <li><a href="#displaced-uses">3.8 · Displaced land uses and community facilities</a></li>
+        <li><a href="#landscape">3.9 · Landscape</a></li>
+        <li><a href="#utilities">3.10 · Utilities</a></li>
+        <li><a href="#phasing">3.11 · Phasing the expansion</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<section data-section="overview" data-intent="orient" data-layout="contained">
+  <div style="max-width: 70ch; margin: 0 auto;">
+    <div style="font-size: 19px; line-height: 1.55;">
+      <p>As well as providing excellent passenger experience, our Preferred Masterplan must also work for local communities, airlines, freight operators, commuters, our investors and other airport users — while being sustainable, efficient, and fulfilling our commitments to the environment.</p>
+    </div>
+    
+    <aside class="ds-callout" style="margin-top: 24px;">
+      <p class="label">An illustrative interpretation</p>
+      <p>The Preferred Masterplan is illustrative but represents an interpretation of how the end state could look when constructed within parameters. We expect to apply for some parts in detail and for some in outline, by reference to parameters.</p>
+    </aside>
+  </div>
+</section>
+
+<div style="background: var(--color-surface-tint); border-top: 1px solid var(--color-border);">
+  
+  <article data-section="subsection-airfield" data-intent="explain mechanic" data-layout="split-media">
+    <div class="inner">
+      <header>
+        <div class="num">3.1</div>
+        <h2 class="title">Airfield</h2>
+        <p class="sub-lead">Since the first private aerodrome opened on the site in 1930, Heathrow's airfield has been continually adapted and improved, resulting in the strategically important hub airport which exists today.</p>
+      </header>
+      <div class="body">
+        <div class="prose">
+          <p>Expansion will enable us to further improve our airfield, prioritising efficiency for airlines and passengers whilst balancing the needs of our local communities. Our entire Project has been designed around a scheme with the proposed new runway to the north west of the existing two runways, to minimise the effects of noise on local communities, including densely populated areas in London.</p>
+          <p>The new runway will be 3,500m long. The distance between the centreline of the proposed new runway and the centreline of the existing northern runway will be 1,035m. The position of this runway was considered to be the best performing option as it will minimise environmental effects and property loss.</p>
+        </div>
+        
+        <aside class="ds-callout">
+          <p class="label">What are taxiways?</p>
+          <p>Taxiways act as the 'arteries' of the airport, enabling aircraft to move between areas for parking, refuelling and boarding passengers safely and efficiently.</p>
+        </aside>
+        
+        <figure class="ds-figure">
+          <img src="assets/photos/construction-silhouette.jpg" alt="Around-the-End Taxiways at the western end of the central runway will allow aircraft to travel between the new runway and the existing airfield." loading="lazy" />
+          <figcaption>
+            <strong>Around-the-End Taxiways at the western end of the central runway will allow aircraft to travel between the new runway and the existing airfield.</strong>
+            <span>© Heathrow Airport Limited 2019</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <article data-section="subsection-terminals" data-intent="explain mechanic" data-layout="split-media">
+    <div class="inner">
+      <header>
+        <div class="num">3.2</div>
+        <h2 class="title">Terminals, satellites and aprons</h2>
+        <p class="sub-lead">Terminals are where passengers spend most of their time at an airport. Terminals 2 and 5 have both been named the world's best airport terminal in the last two years, and Heathrow has been voted the best airport in Western Europe.</p>
+      </header>
+      <div class="body">
+        <div class="prose">
+          <p>Expansion is an opportunity to build on this and make our terminal capacity more efficient, support world-class passenger service, and build sustainability and great design into our plans.</p>
+          <p>New terminal capacity and apron space will be split between the expanded Terminal 5 Campus and the Central Terminal Area (CTA), comprising Terminals 2 and 3. Terminal 2 will be extended (T2A) with new satellites T2C and T2D, increasing capacity to 52 mppa. Terminal 3 is proposed to be demolished in the later stages of construction. Terminal 1 will be demolished. The Terminal 5 Campus will be reconfigured and expanded, increasing throughput from 33 mppa to 40 mppa, with a new terminal T5X built to the west.</p>
+        </div>
+        
+        <aside class="ds-callout">
+          <p class="label">What are terminals, satellites and aprons?</p>
+          <p>Terminals are buildings that provide all the facilities needed for passengers to board and disembark from aircraft. Some passengers board directly from terminals; others transfer to remote satellites. Aprons are the areas where aircraft park, refuel, load and unload — usually adjacent to terminals.</p>
+        </aside>
+        
+        <figure class="ds-figure">
+          <img src="assets/photos/terminal-interior.jpg" alt="Terminal 2 — The Queen's Terminal — has been named the world's best airport terminal." loading="lazy" />
+          <figcaption>
+            <strong>Terminal 2 — The Queen's Terminal — has been named the world's best airport terminal.</strong>
+            <span>© Heathrow Airport Limited 2019</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <article data-section="subsection-roads-and-rail" data-intent="explain mechanic" data-layout="split-media">
+    <div class="inner">
+      <header>
+        <div class="num">3.3</div>
+        <h2 class="title">Roads and rail</h2>
+        <p class="sub-lead">Sustainable and resilient surface connections play a key role in ensuring our passengers and colleagues can reach the airport. With expansion, Heathrow's position as an integrated transport hub will grow.</p>
+      </header>
+      <div class="body">
+        <div class="prose">
+          <p>A number of roads around the airport, including the M25 and local roads such as the A4 and A3044, will need to be diverted. The M25 will be diverted offline so the existing motorway remains open while the diversion is built. Junction 14 will have an enlarged roundabout to enable connection to the new A3044 north. A new Southern Road Tunnel will connect Beacon Road Junction roundabout to the Central Terminal Area, transforming access from the south.</p>
+          <p>Rail: the existing Colnbrook branch line is displaced by the new runway but will be realigned to ensure aviation fuel supply is maintained. Heathrow is also supporting and has safeguarded the on-airport development needed for both Western and Southern Rail to directly serve the airport.</p>
+        </div>
+        
+        
+        <figure class="ds-figure">
+          <img src="assets/photos/airport-roads.jpg" alt="Aerial view of the airport perimeter showing existing road infrastructure that will be substantially changed." loading="lazy" />
+          <figcaption>
+            <strong>Aerial view of the airport perimeter showing existing road infrastructure that will be substantially changed.</strong>
+            <span>© Heathrow Airport Limited 2019</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <article data-section="subsection-active-travel" data-intent="explain mechanic" data-layout="split-media">
+    <div class="inner">
+      <header>
+        <div class="num">3.4</div>
+        <h2 class="title">Active travel</h2>
+        <p class="sub-lead">Walking and cycling are an important part of how an expanded Heathrow will be reached.</p>
+      </header>
+      <div class="body">
+        <div class="prose">
+          <p>We are introducing bus priority and cycling measures across our surface access proposals. The diverted A3044 will include a cycleway and we are investigating the option of incorporating local connectivity. We are also investigating the suitability of the new Southern Road Tunnel as a route for cyclists accessing the CTA from the south.</p>
+        </div>
+        
+        
+      </div>
+    </div>
+  </article>
+
+  <article data-section="subsection-water-environment" data-intent="explain mechanic" data-layout="split-media">
+    <div class="inner">
+      <header>
+        <div class="num">3.5</div>
+        <h2 class="title">Water environment</h2>
+        <p class="sub-lead">Three rivers — the Duke of Northumberland's River, the Longford River and the Wraysbury River — will be diverted as part of the project, alongside flood mitigation infrastructure.</p>
+      </header>
+      <div class="body">
+        <div class="prose">
+          <p>We have designed our diversions to enhance water habitats where possible, and to support the wider water environment. Our proposals include a new river corridor running parallel to the M25 diversion, and improved flood storage to manage surface water at our scale of expansion.</p>
+        </div>
+        
+        
+      </div>
+    </div>
+  </article>
+
+  <article data-section="subsection-supporting-development" data-intent="explain mechanic" data-layout="split-media">
+    <div class="inner">
+      <header>
+        <div class="num">3.6</div>
+        <h2 class="title">Airport supporting development</h2>
+        <p class="sub-lead">Beyond runway and terminals, an expanded airport needs cargo facilities, hotels, offices, fuel facilities, maintenance bases and immigration removal centres.</p>
+      </header>
+      <div class="body">
+        <div class="prose">
+          <p>These functions will be re-provided across the expanded estate. Some are relocated to make way for the new runway; others are introduced new to support the airport at scale. Our supporting-development proposals are illustrative and refined throughout the consultation process.</p>
+        </div>
+        
+        
+      </div>
+    </div>
+  </article>
+
+  <article data-section="subsection-parking" data-intent="explain mechanic" data-layout="split-media">
+    <div class="inner">
+      <header>
+        <div class="num">3.7</div>
+        <h2 class="title">Parking</h2>
+        <p class="sub-lead">Passenger parking is being consolidated into two large multi-storey 'parkways' — Northern and Southern — near the strategic road network.</p>
+      </header>
+      <div class="body">
+        <div class="prose">
+          <p>These parkways will be located near the M25 and the new road infrastructure to reduce journeys on airport and local roads. Drop-off and pick-up will be reorganised at terminals to support the new layout. Colleague parking is being separately designed alongside our colleague-travel proposals.</p>
+        </div>
+        
+        
+      </div>
+    </div>
+  </article>
+
+  <article data-section="subsection-displaced-uses" data-intent="explain mechanic" data-layout="split-media">
+    <div class="inner">
+      <header>
+        <div class="num">3.8</div>
+        <h2 class="title">Displaced land uses and community facilities</h2>
+        <p class="sub-lead">Expansion requires us to relocate or replace some existing buildings and land uses, including some homes, businesses and community facilities.</p>
+      </header>
+      <div class="body">
+        <div class="prose">
+          <p>We are working to identify suitable sites for re-provided community facilities. The Immigration Removal Centres at Harmondsworth and Colnbrook are among the facilities that need re-provision. We will continue to work with affected communities through detailed local engagement.</p>
+        </div>
+        
+        
+      </div>
+    </div>
+  </article>
+
+  <article data-section="subsection-landscape" data-intent="explain mechanic" data-layout="split-media">
+    <div class="inner">
+      <header>
+        <div class="num">3.9</div>
+        <h2 class="title">Landscape</h2>
+        <p class="sub-lead">The boundary of an expanded Heathrow will be carefully designed to improve the overall appearance of the airport and help it blend into the surrounding area.</p>
+      </header>
+      <div class="body">
+        <div class="prose">
+          <p>Boundary design integrates noise mitigation, visual screening and ecological enhancement. We are investigating new green-belt-style boundary features that combine landscape mounds, planting and water features. The result is intended to soften the airport's footprint where it meets surrounding communities.</p>
+        </div>
+        
+        
+      </div>
+    </div>
+  </article>
+
+  <article data-section="subsection-utilities" data-intent="explain mechanic" data-layout="split-media">
+    <div class="inner">
+      <header>
+        <div class="num">3.10</div>
+        <h2 class="title">Utilities</h2>
+        <p class="sub-lead">Power, water, drainage and telecoms infrastructure must be expanded to support a 142 mppa airport.</p>
+      </header>
+      <div class="body">
+        <div class="prose">
+          <p>Our proposals for utilities form part of the supporting development land use and are being co-ordinated with infrastructure providers. We expect significant local works to upgrade and re-route utility connections in step with the wider construction programme.</p>
+        </div>
+        
+        
+      </div>
+    </div>
+  </article>
+
+  <article data-section="subsection-phasing" data-intent="explain mechanic" data-layout="split-media">
+    <div class="inner">
+      <header>
+        <div class="num">3.11</div>
+        <h2 class="title">Phasing the expansion</h2>
+        <p class="sub-lead">Expansion is delivered across four phases, from the Northwest Runway opening in 2026 to the end-state Masterplan around 2050.</p>
+      </header>
+      <div class="body">
+        <div class="prose">
+          <p>Phase 1 (Opening day, around 2026): the new runway opens. Phase 2 (around 2030): capacity reaches approximately 115 mppa. Phase 3 (around 2035): new terminal capacity comes online to support around 130 mppa. Phase 4 (around 2050): the end-state Masterplan is delivered, supporting approximately 142 mppa.</p>
+          <p>This phasing reflects the sequence in which infrastructure becomes operational. Some elements — like the runway — must complete before later phases can begin; others can be delivered in parallel.</p>
+        </div>
+        
+        
+      </div>
+    </div>
+  </article>
+</div>
+
+
+  <section data-section="phase-timeline" data-intent="explain timeline" data-layout="grid" data-items="4" data-fragment="phase-timeline" data-fragment-role="reuse" data-fragment-source="/">
+    <div class="section-head">
+      <p class="label label--accent">A phased expansion</p>
+      <h2>2026 to 2050.</h2>
+    </div>
+    <div class="phases">
+      
+      <div class="phase">
+        <div class="dot"></div>
+        <div class="phase-label">Phase 1</div>
+        <div class="year">2026</div>
+        <p><strong>Opening day</strong><br />Northwest runway opens</p>
+      </div>
+
+      <div class="phase">
+        <div class="dot"></div>
+        <div class="phase-label">Phase 2</div>
+        <div class="year">2030</div>
+        <p><strong>≈ 115 mppa</strong><br />Capacity grows to 115 million passengers</p>
+      </div>
+
+      <div class="phase">
+        <div class="dot"></div>
+        <div class="phase-label">Phase 3</div>
+        <div class="year">2035</div>
+        <p><strong>≈ 130 mppa</strong><br />New terminal capacity online</p>
+      </div>
+
+      <div class="phase">
+        <div class="dot"></div>
+        <div class="phase-label">Phase 4</div>
+        <div class="year">2050</div>
+        <p><strong>≈ 142 mppa</strong><br />End-state masterplan delivered</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="continue-reading" data-intent="cross-link" data-layout="contained" data-fragment="continue-reading" data-fragment-role="reuse" data-fragment-source="/">
+    <a class="inner" href="construction-and-operations.html">
+      <div>
+        <p class="label">Continue reading</p>
+        <p class="ttl">03 · Construction &amp; operations</p>
+      </div>
+      <p class="summary">The construction programme, how an expanded airport will be operated, runway alternation, the night-flight ban, and changes to airspace.</p>
+      <span class="arrow">→</span>
+    </a>
+  </section>
+
+  <section data-section="cta-band" data-intent="drive action" data-layout="full-bleed" data-fragment="cta-band" data-fragment-role="reuse" data-fragment-source="/">
+    <div class="inner">
+      <div>
+        <p class="label label--inverse">Section 06</p>
+        <h2>Have your say on The Masterplan</h2>
+        <p>Tell us what you think. The consultation closes at 11:55 pm on 13 September 2019.</p>
+      </div>
+      <div class="actions">
+        <a class="ds-btn ds-btn--inverse" href="have-your-say.html#respond">Respond to the consultation</a>
+        <a class="ds-btn ds-btn--inverse" href="have-your-say.html#questions" style="background: transparent; color: var(--color-bg); border: 1px solid rgba(255,255,255,0.5);">Read the consultation questions</a>
+      </div>
+    </div>
+  </section>
+
+  <footer data-section="site-footer" data-intent="global wayfinding" data-layout="grid" data-fragment="site-footer" data-fragment-role="reuse" data-fragment-source="/">
+    <div class="cols">
+      <div class="brand-block">
+        <img src="assets/logos/heathrow-white.png" alt="Heathrow" style="height: 24px; filter: invert(1) brightness(0.2);" />
+        <p>Our June 2019 consultation document set out our developed thinking for an expanded Heathrow and invited views from communities, passengers, businesses and government.</p>
+      </div>
+      <div>
+        <h4>Helpful links</h4>
+        <ul>
+          <li><a href="#">Download the consultation PDF</a></li>
+          <li><a href="#">Read in another language</a></li>
+          <li><a href="#">Accessibility statement</a></li>
+          <li><a href="#">Cookie preferences</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Discover Heathrow</h4>
+        <ul>
+          <li><a href="https://www.heathrow.com/expansion">Heathrow Expansion</a></li>
+          <li><a href="https://www.heathrow.com/at-the-airport">At the airport</a></li>
+          <li><a href="https://www.heathrow.com/transport-and-directions">Transport and directions</a></li>
+          <li><a href="https://www.heathrow.com/heathrow-blog">Heathrow blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Our company</h4>
+        <ul>
+          <li><a href="https://www.heathrow.com/company">About Heathrow</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press office</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>&copy; Heathrow Airport Limited 2019. POC microsite generated 2026-04-29 from the original 110-page consultation document.</span>
+      <span>Built via stardust v0.2: extract → direct → prototype → migrate.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

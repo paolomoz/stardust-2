@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <!-- stardust:provenance
+    migratedAt: 2026-04-29T14:04:03.418Z
+    writtenBy: stardust:migrate (composed from stardust:prototype)
+    writtenAt: 2026-04-29T14:02:16.129Z
+    renderedVia: stardust-direct (brand-faithful Mode A; --no-impeccable carve-out — content sourced from PDF, not fabricated)
+    page: have-your-say
+    readArtifacts:
+      - DESIGN.md
+      - DESIGN.json
+      - stardust/direction.md
+      - stardust/current/pages/have-your-say.json
+      - doc.json (PDF-derived content map)
+    contracts:
+      - skills/stardust/reference/token-contract.md (:root token block below)
+      - skills/stardust/reference/data-attributes.md (data-section / data-intent / data-layout / data-fragment*)
+    stardustVersion: 0.2.0
+  -->
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Have your say · Heathrow Airport Expansion</title>
+  <meta name="description" content="You can find more information about this consultation on our website, at consultation events and at our document inspection locations. Your feedback is important and will help us determine our final p" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap" />
+  <style>
+
+:root {
+  /* ──────── Heathrow Airport Expansion microsite — token contract ────────
+     Generated from DESIGN.md frontmatter. Every prototype and migrated page
+     exposes the same names. Per skills/stardust/reference/token-contract.md. */
+
+  --heading-font-family: "FrutigerNextPaneuropeanMedium", "Open Sans", Arial, sans-serif;
+  --body-font-family:    "FrutigerNextPaneuropeanRegular", "Open Sans", Arial, sans-serif;
+
+  --heading-xxl: 64px;
+  --heading-xl:  42px;
+  --heading-lg:  32px;
+  --heading-md:  24px;
+  --body:        17px;
+  --body-sm:     15px;
+
+  --line-height-heading: 1.05;
+  --line-height-body:    1.55;
+
+  /* Color roles — brand-native names per divergence-toolkit.md § 4.
+     Hex retained per brand-faithful-inversions § "hex format retention". */
+  --color-bg:           #ffffff;       /* DESIGN.md colors.paper */
+  --color-fg:           #2c292a;       /* DESIGN.md colors.ink */
+  --color-fg-muted:     #5e6a75;       /* DESIGN.md colors.meta-grey */
+  --color-accent:       #462170;       /* DESIGN.md colors.brand-purple */
+  --color-accent-deep:  #371a59;       /* DESIGN.md colors.brand-purple-deep */
+  --color-chrome:       #1d2533;       /* DESIGN.md colors.navy-chrome */
+  --color-border:       #bec5cb;       /* DESIGN.md colors.divider */
+  --color-surface-alt:  #f5f5f5;       /* DESIGN.md colors.surface-alt */
+  --color-surface-tint: #faf9fb;       /* DESIGN.md colors.surface-tint */
+
+  --spacing-xs:  8px;
+  --spacing-sm:  16px;
+  --spacing-md:  24px;
+  --spacing-lg:  40px;
+  --spacing-xl:  64px;
+  --spacing-2xl: 96px;
+
+  --section-padding: 64px;             /* DESIGN.md spacing.section · density: balanced */
+  --max-width:       1280px;           /* DESIGN.json extensions.breakpoints.containerMaxWidth */
+  --radius:          8px;              /* DESIGN.md rounded.md */
+  --radius-pill:     9999px;
+  --radius-circle:   50%;
+
+  --header-h:        64px;
+  --duration-fast:   150ms;
+  --duration-medium: 180ms;
+  --ease-default:    cubic-bezier(0.4, 0, 0.2, 1);
+
+  --uppercase-tracking: 2px;           /* signage-label rule */
+}
+
+
+/* ───────── reset & base ───────── */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--body-font-family);
+  font-size: var(--body);
+  line-height: var(--line-height-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--color-accent); }
+a:hover { color: var(--color-accent-deep); }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font-family);
+  font-weight: 500;
+  color: var(--color-fg);
+  margin: 0;
+  line-height: var(--line-height-heading);
+  letter-spacing: -0.005em;
+}
+h1 { font-size: clamp(40px, 6vw, var(--heading-xxl)); letter-spacing: -0.015em; }
+h2 { font-size: clamp(28px, 3.5vw, var(--heading-xl)); line-height: 1.15; }
+h3 { font-size: var(--heading-md); line-height: 1.2; }
+p  { margin: 0 0 1em; }
+
+.label {
+  font-family: var(--heading-font-family);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: var(--uppercase-tracking);
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+  margin: 0;
+}
+.label--accent  { color: var(--color-accent); }
+.label--inverse { color: rgba(255,255,255,0.85); }
+
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+/* ───────── buttons ───────── */
+.ds-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--heading-font-family);
+  font-weight: 500; font-size: 15px;
+  border: none; border-radius: var(--radius);
+  padding: 14px 28px; cursor: pointer; text-decoration: none;
+  transition: background var(--duration-medium) var(--ease-default);
+}
+.ds-btn--primary  { background: var(--color-accent); color: var(--color-bg); }
+.ds-btn--primary:hover { background: var(--color-accent-deep); }
+.ds-btn--primary:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+.ds-btn--secondary { background: var(--color-bg); color: var(--color-fg); border: 1px solid var(--color-border); }
+.ds-btn--secondary:hover { background: var(--color-surface-alt); }
+.ds-btn--inverse  { background: var(--color-bg); color: var(--color-fg); }
+.ds-btn--inverse:hover { background: var(--color-surface-alt); }
+
+/* ───────── site-header (system component) ───────── */
+[data-section="site-header"] {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--color-chrome);
+  color: var(--color-bg);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+[data-section="site-header"] .row {
+  display: flex; align-items: center; gap: 32px;
+  height: var(--header-h); padding: 0 24px;
+}
+[data-section="site-header"] .brand {
+  display: flex; align-items: center; gap: 14px;
+  text-decoration: none; color: var(--color-bg);
+}
+[data-section="site-header"] .brand img { height: 22px; }
+[data-section="site-header"] .brand-meta {
+  font-family: var(--heading-font-family); font-size: 11px;
+  letter-spacing: var(--uppercase-tracking); text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  border-left: 1px solid rgba(255,255,255,0.18);
+  padding-left: 14px;
+}
+[data-section="site-header"] nav.primary { display: flex; align-items: center; gap: 4px; margin-left: auto; flex-wrap: wrap; }
+[data-section="site-header"] nav.primary a {
+  color: var(--color-bg); text-decoration: none;
+  padding: 8px 14px; font-family: var(--heading-font-family);
+  font-weight: 500; font-size: 14px; border-radius: var(--radius);
+  transition: background var(--duration-fast) var(--ease-default);
+}
+[data-section="site-header"] nav.primary a:hover, [data-section="site-header"] nav.primary a[aria-current] {
+  background: rgba(255,255,255,0.10);
+}
+[data-section="site-header"] .respond {
+  margin-left: 12px; background: var(--color-accent); color: var(--color-bg);
+}
+[data-section="site-header"] .respond:hover { background: var(--color-accent-deep); }
+
+@media (max-width: 1024px) { [data-section="site-header"] nav.primary { display: none; } }
+
+/* ───────── photo hero ───────── */
+[data-section="hero"][data-layout="full-bleed"] {
+  position: relative; overflow: hidden;
+  background: var(--color-chrome); color: var(--color-bg);
+  min-height: 540px;
+}
+[data-section="hero"][data-layout="full-bleed"] .media {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: 0;
+}
+[data-section="hero"][data-layout="full-bleed"]::before {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.72) 100%);
+}
+[data-section="hero"][data-layout="full-bleed"] .inner {
+  position: relative; z-index: 2; max-width: var(--max-width);
+  margin: 0 auto; padding: clamp(60px, 9vw, 120px) 24px clamp(48px, 7vw, 96px);
+}
+[data-section="hero"][data-layout="full-bleed"] h1 { color: var(--color-bg); max-width: 18ch; }
+[data-section="hero"][data-layout="full-bleed"] .lead { color: rgba(255,255,255,0.95); font-size: clamp(17px, 1.5vw, 19px); margin-top: 24px; max-width: 60ch; line-height: 1.55; }
+[data-section="hero"][data-layout="full-bleed"] .meta { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
+
+[data-section="hero"][data-layout="contained"] { background: var(--color-bg); }
+[data-section="hero"][data-layout="contained"] .inner { padding: clamp(64px, 9vw, 120px) 24px clamp(48px, 7vw, 96px); max-width: var(--max-width); margin: 0 auto; }
+
+/* ───────── page-hero (inner pages) ───────── */
+[data-section="page-hero"] {
+  position: relative; overflow: hidden;
+  background: var(--color-chrome); color: var(--color-bg);
+}
+[data-section="page-hero"] .media {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
+}
+[data-section="page-hero"]::before {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(29,37,51,0.85) 100%);
+}
+[data-section="page-hero"] .inner {
+  position: relative; z-index: 2; max-width: var(--max-width); margin: 0 auto;
+  padding: clamp(64px, 9vw, 120px) 24px clamp(48px, 7vw, 96px);
+}
+[data-section="page-hero"] .crumbs {
+  display: flex; gap: 8px; align-items: center;
+  font-family: var(--heading-font-family); font-size: 12px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.7); margin-bottom: 24px;
+}
+[data-section="page-hero"] .crumbs a { color: rgba(255,255,255,0.85); text-decoration: none; }
+[data-section="page-hero"] .crumbs span { color: rgba(255,255,255,0.4); }
+[data-section="page-hero"] h1 { color: var(--color-bg); max-width: 22ch; margin-bottom: 24px; }
+[data-section="page-hero"] .lead { color: rgba(255,255,255,0.92); font-size: clamp(17px, 1.5vw, 19px); max-width: 60ch; line-height: 1.55; margin: 0; }
+[data-section="page-hero"] .meta {
+  display: flex; gap: 24px; margin-top: 40px; flex-wrap: wrap;
+  font-family: var(--heading-font-family); font-size: 13px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.7);
+}
+[data-section="page-hero"] .meta strong { color: var(--color-bg); display: block; font-size: 22px; letter-spacing: -0.005em; text-transform: none; font-weight: 500; }
+
+/* ───────── subnav (system component) ───────── */
+[data-section="subnav"] {
+  position: sticky; top: var(--header-h); z-index: 5;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0 24px;
+}
+[data-section="subnav"] .inner {
+  max-width: var(--max-width); margin: 0 auto;
+  display: flex; align-items: center; gap: 32px;
+  height: 56px; overflow-x: auto; scrollbar-width: thin;
+}
+[data-section="subnav"] .label {
+  white-space: nowrap; padding-right: 24px;
+  border-right: 1px solid var(--color-border);
+}
+[data-section="subnav"] ul {
+  display: flex; gap: 4px; list-style: none; padding: 0; margin: 0; flex-wrap: nowrap;
+}
+[data-section="subnav"] ul a {
+  display: inline-block; padding: 8px 14px;
+  font-family: var(--heading-font-family); font-weight: 500; font-size: 14px;
+  color: var(--color-fg); text-decoration: none; border-radius: var(--radius);
+  white-space: nowrap; transition: background var(--duration-fast) var(--ease-default), color var(--duration-fast) var(--ease-default);
+}
+[data-section="subnav"] ul a:hover { background: var(--color-surface-alt); color: var(--color-accent); }
+
+/* ───────── editorial sections ───────── */
+[data-section="overview"], [data-section="five-minute-summary"], [data-section="pillar-grid"],
+[data-section="phase-timeline"], [data-section="five-minute-summary-band"],
+[data-section="quote-band"], [data-section="cta-band"], [data-section="continue-reading"] {
+  padding: var(--section-padding) 24px;
+}
+[data-section="overview"], [data-section="five-minute-summary"], [data-section="pillar-grid"],
+[data-section="phase-timeline"], [data-section="continue-reading"] { background: var(--color-bg); }
+[data-section="five-minute-summary-band"], [data-section="quote-band"] { background: var(--color-surface-tint); }
+
+.section-head { max-width: var(--max-width); margin: 0 auto var(--spacing-lg); }
+.section-head .label { margin-bottom: 12px; }
+.section-head h2 { max-width: 22ch; }
+.section-head p { margin-top: 16px; max-width: 60ch; font-size: 18px; color: var(--color-fg-muted); }
+
+/* ───────── pillar grid (story tiles) ───────── */
+[data-section="pillar-grid"] .grid {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;
+}
+.ds-tile {
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius); overflow: hidden;
+  display: flex; flex-direction: column;
+  text-decoration: none; color: inherit;
+  transition: transform var(--duration-medium) var(--ease-default), border-color var(--duration-medium) var(--ease-default);
+}
+.ds-tile:hover { transform: translateY(-2px); border-color: var(--color-accent); }
+.ds-tile__photo { aspect-ratio: 16 / 10; background-size: cover; background-position: center; background-color: var(--color-fg-muted); }
+.ds-tile__body { padding: 24px 28px 28px; display: flex; flex-direction: column; flex: 1; }
+.ds-tile__label { margin-bottom: 12px; }
+.ds-tile__title { font-family: var(--heading-font-family); font-weight: 500; font-size: 24px; margin-bottom: 12px; color: var(--color-fg); }
+.ds-tile__copy { color: var(--color-fg); font-size: 16px; line-height: 1.5; margin: 0; flex: 1; }
+.ds-tile__more { margin-top: 20px; color: var(--color-accent); font-family: var(--heading-font-family); font-weight: 500; font-size: 15px; }
+
+/* ───────── two-track hero band (home) ───────── */
+[data-section="two-track"] {
+  display: grid; grid-template-columns: 1fr 1fr;
+  max-width: var(--max-width); margin: 64px auto 0; padding: 0 24px; gap: 24px;
+}
+.ds-track {
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius); padding: 40px 36px;
+  display: flex; flex-direction: column;
+}
+.ds-track--accent { background: var(--color-accent); color: var(--color-bg); border: none; }
+.ds-track--accent .label { color: rgba(255,255,255,0.7); }
+.ds-track--accent h3 { color: var(--color-bg); }
+.ds-track--accent p { color: rgba(255,255,255,0.92); }
+.ds-track h3 { font-size: 28px; margin-bottom: 12px; }
+.ds-track p { color: var(--color-fg-muted); flex: 1; line-height: 1.55; }
+.ds-track .ds-btn { margin-top: 24px; align-self: flex-start; }
+.ds-track--accent .ds-btn { background: var(--color-bg); color: var(--color-accent); }
+.ds-track--accent .ds-btn:hover { background: var(--color-surface-alt); color: var(--color-accent); }
+@media (max-width: 800px) { [data-section="two-track"] { grid-template-columns: 1fr; } }
+
+/* ───────── four-pillar summary (home) ───────── */
+[data-section="five-minute-summary"] .grid {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;
+}
+[data-section="five-minute-summary"] .summary-card {
+  padding: 28px; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-bg);
+}
+[data-section="five-minute-summary"] .summary-card h3 { font-size: 20px; margin-bottom: 12px; }
+[data-section="five-minute-summary"] .summary-card p { color: var(--color-fg); margin: 0; }
+
+/* ───────── pull-quote band ───────── */
+[data-section="quote-band"] .pull {
+  max-width: 900px; margin: 0 auto; padding: 0 24px;
+}
+[data-section="quote-band"] .mark { font-family: var(--heading-font-family); font-size: 96px; line-height: 1; color: var(--color-accent); margin: 0; }
+[data-section="quote-band"] .quote { font-family: var(--heading-font-family); font-weight: 500; font-size: clamp(24px, 3vw, 34px); line-height: 1.3; color: var(--color-fg); margin: 16px 0 24px; }
+[data-section="quote-band"] .attrib { font-family: var(--heading-font-family); font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-fg-muted); }
+
+/* ───────── phase timeline ───────── */
+[data-section="phase-timeline"] .phases {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr); position: relative;
+}
+[data-section="phase-timeline"] .phases::before {
+  content: ""; position: absolute; top: 32px; left: 0; right: 0; height: 2px; background: var(--color-border);
+}
+[data-section="phase-timeline"] .phase { position: relative; padding: 0 16px; text-align: center; }
+[data-section="phase-timeline"] .phase .dot { width: 16px; height: 16px; border-radius: var(--radius-circle); background: var(--color-accent); margin: 24px auto 16px; position: relative; z-index: 1; box-shadow: 0 0 0 6px var(--color-bg); }
+[data-section="phase-timeline"] .phase .year { font-family: var(--heading-font-family); font-weight: 500; font-size: 32px; color: var(--color-fg); margin-bottom: 4px; letter-spacing: -0.01em; }
+[data-section="phase-timeline"] .phase .phase-label { font-family: var(--heading-font-family); font-size: 11px; letter-spacing: var(--uppercase-tracking); text-transform: uppercase; color: var(--color-accent); margin-bottom: 8px; }
+[data-section="phase-timeline"] .phase p { color: var(--color-fg-muted); font-size: 14px; line-height: 1.45; margin: 0; }
+@media (max-width: 700px) { [data-section="phase-timeline"] .phases { grid-template-columns: repeat(2, 1fr); row-gap: 32px; } [data-section="phase-timeline"] .phases::before { display: none; } }
+
+/* ───────── subsection (inner pages) ───────── */
+[data-section^="subsection"] {
+  padding: clamp(64px, 7vw, 96px) 24px;
+  border-bottom: 1px solid var(--color-border);
+  scroll-margin-top: calc(var(--header-h) + 56px + 16px);
+}
+[data-section^="subsection"]:last-of-type { border-bottom: 0; }
+[data-section^="subsection"] .inner {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1.5fr; gap: 64px; align-items: start;
+}
+[data-section^="subsection"] header { position: sticky; top: calc(var(--header-h) + 56px + 24px); }
+[data-section^="subsection"] .num {
+  font-family: var(--heading-font-family); font-weight: 500;
+  font-size: 64px; color: var(--color-accent);
+  line-height: 1; letter-spacing: -0.02em; margin-bottom: 12px;
+}
+[data-section^="subsection"] h2.title { font-size: 32px; margin-bottom: 16px; }
+[data-section^="subsection"] .sub-lead {
+  font-family: var(--heading-font-family); font-weight: 500;
+  font-size: 19px; line-height: 1.4; color: var(--color-fg);
+  margin: 0; max-width: 24ch;
+}
+[data-section^="subsection"] .body { display: flex; flex-direction: column; gap: 32px; }
+[data-section^="subsection"] .prose { max-width: 70ch; font-size: var(--body); line-height: 1.65; color: var(--color-fg); }
+[data-section^="subsection"] .prose p { margin: 0 0 1.1em; }
+[data-section^="subsection"] .prose p:last-child { margin-bottom: 0; }
+@media (max-width: 900px) {
+  [data-section^="subsection"] .inner { grid-template-columns: 1fr; gap: 32px; }
+  [data-section^="subsection"] header { position: static; }
+  [data-section^="subsection"] .num { font-size: 48px; }
+}
+
+/* callout box */
+.ds-callout {
+  border-left: 3px solid var(--color-accent); background: var(--color-surface-tint);
+  padding: 24px 28px; border-radius: 0 var(--radius) var(--radius) 0;
+}
+.ds-callout .label { color: var(--color-accent); margin-bottom: 8px; }
+.ds-callout p { margin: 0; color: var(--color-fg); font-size: 15px; line-height: 1.55; max-width: 60ch; }
+
+/* captioned figure */
+.ds-figure { margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.ds-figure img { width: 100%; border-radius: var(--radius); border: 1px solid var(--color-border); }
+.ds-figure figcaption { font-size: 13px; color: var(--color-fg-muted); line-height: 1.45; display: flex; flex-direction: column; gap: 4px; }
+.ds-figure figcaption strong { color: var(--color-fg); font-weight: 500; }
+
+/* continue-reading (system component role) */
+[data-section="continue-reading"] {
+  background: var(--color-surface-tint);
+  border-top: 1px solid var(--color-border);
+}
+[data-section="continue-reading"] .inner {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 2fr auto;
+  gap: 32px; align-items: center; padding: 32px;
+  background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius);
+  text-decoration: none; color: inherit;
+  transition: border-color var(--duration-fast) var(--ease-default), transform var(--duration-fast) var(--ease-default);
+}
+[data-section="continue-reading"] .inner:hover { border-color: var(--color-accent); transform: translateX(4px); }
+[data-section="continue-reading"] .label { margin-bottom: 8px; }
+[data-section="continue-reading"] .ttl { font-family: var(--heading-font-family); font-weight: 500; font-size: 24px; color: var(--color-fg); margin: 0; }
+[data-section="continue-reading"] .summary { font-size: 14px; color: var(--color-fg-muted); margin: 0; line-height: 1.5; }
+[data-section="continue-reading"] .arrow { font-family: var(--heading-font-family); font-weight: 500; font-size: 20px; color: var(--color-accent); }
+@media (max-width: 800px) { [data-section="continue-reading"] .inner { grid-template-columns: 1fr; } [data-section="continue-reading"] .arrow { display: none; } }
+
+/* cta-band (system component role) */
+[data-section="cta-band"] { background: var(--color-accent); color: var(--color-bg); }
+[data-section="cta-band"] .inner {
+  max-width: var(--max-width); margin: 0 auto;
+  padding: clamp(48px, 7vw, 80px) 24px;
+  display: grid; grid-template-columns: 2fr 1fr; gap: 48px; align-items: center;
+}
+[data-section="cta-band"] .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+[data-section="cta-band"] h2 { color: var(--color-bg); margin-bottom: 12px; max-width: 18ch; }
+[data-section="cta-band"] p  { color: rgba(255,255,255,0.92); font-size: 17px; max-width: 50ch; margin: 0; }
+@media (max-width: 800px) { [data-section="cta-band"] .inner { grid-template-columns: 1fr; } }
+
+/* site-footer (system component) */
+[data-section="site-footer"] {
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-border);
+  padding: 64px 24px 32px;
+}
+[data-section="site-footer"] .cols {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 48px;
+  padding-bottom: 48px; border-bottom: 1px solid var(--color-border);
+}
+[data-section="site-footer"] .brand-block p { color: var(--color-fg-muted); font-size: 14px; max-width: 35ch; margin-top: 16px; }
+[data-section="site-footer"] h4 {
+  font-family: var(--heading-font-family); font-size: 11px;
+  letter-spacing: var(--uppercase-tracking); text-transform: uppercase;
+  color: var(--color-fg-muted); margin-bottom: 16px;
+}
+[data-section="site-footer"] ul { list-style: none; padding: 0; margin: 0; }
+[data-section="site-footer"] li { padding: 6px 0; }
+[data-section="site-footer"] a { color: var(--color-fg); text-decoration: none; font-size: 15px; }
+[data-section="site-footer"] a:hover { color: var(--color-accent); }
+[data-section="site-footer"] .legal {
+  max-width: var(--max-width); margin: 0 auto; padding-top: 24px;
+  font-size: 13px; color: var(--color-fg-muted);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+@media (max-width: 800px) { [data-section="site-footer"] .cols { grid-template-columns: 1fr 1fr; } }
+
+/* have-your-say specific */
+[data-section="response-channels"] .grid {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;
+}
+.ds-channel { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 24px 28px; }
+.ds-channel .label { color: var(--color-accent); margin-bottom: 12px; }
+.ds-channel p { color: var(--color-fg); font-size: 16px; margin: 0; line-height: 1.5; }
+.ds-consultation-banner {
+  background: var(--color-accent); color: var(--color-bg);
+  padding: 32px 36px; border-radius: var(--radius);
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px;
+  max-width: var(--max-width); margin: 32px auto 0;
+}
+.ds-consultation-banner .cell { border-left: 1px solid rgba(255,255,255,0.25); padding-left: 24px; }
+.ds-consultation-banner .cell:first-child { border-left: 0; padding-left: 0; }
+.ds-consultation-banner .label { font-family: var(--heading-font-family); font-size: 11px; letter-spacing: var(--uppercase-tracking); text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 8px; }
+.ds-consultation-banner .value { font-family: var(--heading-font-family); font-weight: 500; font-size: 24px; color: var(--color-bg); letter-spacing: -0.005em; }
+@media (max-width: 700px) { .ds-consultation-banner { grid-template-columns: 1fr; } .ds-consultation-banner .cell { border-left: 0; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.25); padding-top: 16px; } .ds-consultation-banner .cell:first-child { border-top: 0; padding-top: 0; } }
+
+[data-section="events"] .grid {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px; background: var(--color-border); border: 1px solid var(--color-border);
+  border-radius: var(--radius); overflow: hidden;
+}
+.ds-event { background: var(--color-bg); padding: 24px 28px; }
+.ds-event .town { font-family: var(--heading-font-family); font-weight: 500; font-size: 18px; color: var(--color-fg); }
+.ds-event .date { font-family: var(--heading-font-family); font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-accent); margin: 8px 0; }
+.ds-event .venue { font-size: 14px; color: var(--color-fg-muted); margin: 0; line-height: 1.45; }
+
+[data-section="question-areas"] .grid {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;
+}
+.ds-question-area { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 28px; }
+.ds-question-area .count {
+  display: inline-block; font-family: var(--heading-font-family); font-size: 11px;
+  letter-spacing: var(--uppercase-tracking); text-transform: uppercase;
+  color: var(--color-bg); background: var(--color-accent);
+  padding: 4px 10px; border-radius: var(--radius-pill); margin-bottom: 12px;
+}
+.ds-question-area h3 { font-family: var(--heading-font-family); font-weight: 500; font-size: 20px; margin: 0 0 12px; }
+.ds-question-area p { color: var(--color-fg); font-size: 15px; margin: 0; line-height: 1.55; }
+
+[data-section="next-steps"] .steps { max-width: 900px; margin: 0 auto; display: grid; gap: 8px; counter-reset: step; }
+.ds-step {
+  display: grid; grid-template-columns: 56px 1fr; gap: 24px; align-items: start;
+  padding: 24px 28px; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius);
+}
+.ds-step::before {
+  counter-increment: step; content: counter(step, decimal-leading-zero);
+  font-family: var(--heading-font-family); font-weight: 500; font-size: 28px;
+  color: var(--color-accent); line-height: 1; letter-spacing: -0.02em;
+}
+.ds-step .ttl { font-family: var(--heading-font-family); font-weight: 500; font-size: 18px; color: var(--color-fg); margin: 0 0 6px; }
+.ds-step .detail { color: var(--color-fg-muted); font-size: 15px; line-height: 1.55; margin: 0; }
+
+
+  </style>
+</head>
+<body>
+
+
+  <header data-section="site-header" data-intent="global navigation" data-layout="full-bleed" data-fragment="site-header" data-fragment-role="reuse" data-fragment-source="/">
+    <div class="row">
+      <a class="brand" href="index.html" aria-label="Heathrow Airport Expansion home">
+        <img src="assets/logos/heathrow-white.png" alt="Heathrow" />
+        <span class="brand-meta">Airport Expansion · Consultation</span>
+      </a>
+      <nav class="primary" aria-label="Sections">
+        <a href="the-proposal.html">The proposal</a>
+        <a href="masterplan.html">The Masterplan</a>
+        <a href="construction-and-operations.html">Construction &amp; operations</a>
+        <a href="travel-and-access.html">Travel &amp; access</a>
+        <a href="effects-and-community.html">Effects &amp; community</a>
+        <a href="have-your-say.html" aria-current="page">Have your say</a>
+        <a class="respond" href="have-your-say.html#respond">Respond</a>
+      </nav>
+    </div>
+  </header>
+
+  <section data-section="page-hero" data-intent="orient and label" data-layout="full-bleed" data-media="image">
+    <img class="media" src="assets/photos/terminal-interior.jpg" alt="" />
+    <div class="inner">
+      <div class="crumbs">
+        <a href="index.html">Heathrow Airport Expansion</a>
+        <span>›</span>
+        <span>Have your say</span>
+      </div>
+      <p class="label label--inverse">06 · Have your say</p>
+      <h1>Have your say</h1>
+      <p class="lead">You can find more information about this consultation on our website, at consultation events and at our document inspection locations. Your feedback is important and will help us determine our final proposals for expansion.</p>
+      <div class="meta"><span><strong>12 weeks</strong>consultation period</span>
+        <span><strong>40+</strong>consultation events</span>
+        <span><strong>6 areas</strong>of questions</span></div>
+    </div>
+  </section>
+
+  <nav data-section="subnav" data-intent="in-page wayfinding" data-layout="full-bleed" data-fragment="subnav" data-fragment-role="reuse" data-fragment-source="/" aria-label="On this page">
+    <div class="inner">
+      <span class="label">On this page</span>
+      <ul>
+        <li><a href="#respond">12.1 · How to respond</a></li>
+        <li><a href="#events">12.2 · Events</a></li>
+        <li><a href="#questions">14 · Questions</a></li>
+        <li><a href="#next-steps">13 · Next steps</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<section data-section="response-channels" data-intent="capture lead" data-layout="grid" data-items="6" id="respond">
+  <div class="section-head">
+    <p class="label label--accent">How to respond</p>
+    <h2>Six ways to share your views.</h2>
+    <p>Your feedback is important. It will help us determine our final proposals before we submit our application for a Development Consent Order in 2020.</p>
+  </div>
+  <div class="grid">
+    
+    <div class="ds-channel">
+      <p class="label">Online</p>
+      <p>Use the feedback form at <a href="#">aec.heathrowconsultation.com</a></p>
+    </div>
+
+    <div class="ds-channel">
+      <p class="label">Email</p>
+      <p><a href="mailto:feedback@heathrowconsultation.com">feedback@heathrowconsultation.com</a></p>
+    </div>
+
+    <div class="ds-channel">
+      <p class="label">Post</p>
+      <p>Freepost LHR AIRPORT EXPANSION CONSULTATION</p>
+    </div>
+
+    <div class="ds-channel">
+      <p class="label">Phone</p>
+      <p>Freephone <strong>0800 307 7996</strong> · Monday to Friday, 9am – 6pm</p>
+    </div>
+
+    <div class="ds-channel">
+      <p class="label">In person</p>
+      <p>40+ consultation events across London, Surrey and the Home Counties</p>
+    </div>
+
+    <div class="ds-channel">
+      <p class="label">Twitter</p>
+      <p>Follow <a href="#">@LHRconsultation</a> for event updates</p>
+    </div>
+  </div>
+  <div class="ds-consultation-banner">
+    <div class="cell"><p class="label">Opens</p><p class="value">18 June 2019</p></div>
+    <div class="cell"><p class="label">Closes</p><p class="value">11:55 pm on 13 September 2019</p></div>
+    <div class="cell"><p class="label">Duration</p><p class="value">12 weeks</p></div>
+  </div>
+</section>
+
+<section data-section="events" data-intent="explain mechanic" data-layout="grid" data-items="8" id="events" style="background: var(--color-surface-tint);">
+  <div class="section-head">
+    <p class="label label--accent">Consultation events</p>
+    <h2>Come and speak to us.</h2>
+    <p>40+ events run from July through early September. Pick up copies of the documents, watch our videos and animations, view our model of the expanded airport, and listen to sound demonstrations.</p>
+  </div>
+  <div class="grid">
+    
+    <div class="ds-event">
+      <p class="town">Wandsworth</p>
+      <p class="date">Tue 2 July, 2–8pm</p>
+      <p class="venue">Wandsworth Civic Suite</p>
+    </div>
+
+    <div class="ds-event">
+      <p class="town">Harmondsworth</p>
+      <p class="date">Wed 3 July, 2–8pm</p>
+      <p class="venue">St Mary's Church, High Street</p>
+    </div>
+
+    <div class="ds-event">
+      <p class="town">Chelsea</p>
+      <p class="date">Fri 5 July, 2–8pm</p>
+      <p class="venue">Chelsea Old Town Hall, King's Road</p>
+    </div>
+
+    <div class="ds-event">
+      <p class="town">Maidenhead</p>
+      <p class="date">Sat 6 July, 10am–4pm</p>
+      <p class="venue">Nicholsons Shopping Centre</p>
+    </div>
+
+    <div class="ds-event">
+      <p class="town">Stanwell Moor</p>
+      <p class="date">Sun 7 July, 10am–4pm</p>
+      <p class="venue">Stanwell Moor Village Hall</p>
+    </div>
+
+    <div class="ds-event">
+      <p class="town">Longford</p>
+      <p class="date">Tue 9 July, 2–8pm</p>
+      <p class="venue">Thistle London Heathrow Terminal 5</p>
+    </div>
+
+    <div class="ds-event">
+      <p class="town">Ealing</p>
+      <p class="date">Wed 10 July, 2–8pm</p>
+      <p class="venue">DoubleTree by Hilton London – Ealing</p>
+    </div>
+
+    <div class="ds-event">
+      <p class="town">Woking</p>
+      <p class="date">Thu 11 July, 2–8pm</p>
+      <p class="venue">H.G. Wells Conference Centre</p>
+    </div>
+  </div>
+  <p style="max-width: 70ch; margin: 32px auto 0; color: var(--color-fg-muted); text-align: center;">32 further events run through July, August and into early September across Northolt, Hounslow, Lambeth, Brent, Slough, Twickenham, Kingston, Wimbledon, Windsor and the wider region.</p>
+</section>
+
+<section data-section="question-areas" data-intent="explain mechanic" data-layout="grid" data-items="6" id="questions">
+  <div class="section-head">
+    <p class="label label--accent">The consultation questions</p>
+    <h2>Six areas we want your views on.</h2>
+    <p>The full questionnaire spans these six areas. Each question links to the relevant section of this document and to the supporting Heathrow Expansion publications.</p>
+  </div>
+  <div class="grid">
+    
+    <div class="ds-question-area">
+      <span class="count">3 questions</span>
+      <h3>Masterplan</h3>
+      <p>Tell us what you think about the Preferred Masterplan and the components that make it up — boundary design, displaced facilities, landscape and noise.</p>
+    </div>
+
+    <div class="ds-question-area">
+      <span class="count">1 question</span>
+      <h3>Construction</h3>
+      <p>Tell us what you think of our construction proposals and the ways we are proposing to minimise effects on communities and the environment.</p>
+    </div>
+
+    <div class="ds-question-area">
+      <span class="count">3 questions</span>
+      <h3>Future Operations</h3>
+      <p>Tell us what you think of our runway alternation proposals, the ban on scheduled night flights, and our proposals for managing early growth.</p>
+    </div>
+
+    <div class="ds-question-area">
+      <span class="count">3 questions</span>
+      <h3>Surface Access</h3>
+      <p>Tell us what you think about public transport access and the Heathrow Ultra-Low Emission Zone and Vehicle Access Charge.</p>
+    </div>
+
+    <div class="ds-question-area">
+      <span class="count">1 question</span>
+      <h3>Managing the Effects of Expansion</h3>
+      <p>Tell us what you think about our proposals to manage the environmental effects of expansion.</p>
+    </div>
+
+    <div class="ds-question-area">
+      <span class="count">1 question</span>
+      <h3>Other comments</h3>
+      <p>Anything else we should consider that the named questions don't cover.</p>
+    </div>
+  </div>
+</section>
+
+<section data-section="next-steps" data-intent="explain timeline" data-layout="stack" data-items="6" id="next-steps" style="background: var(--color-surface-alt);">
+  <div class="section-head">
+    <p class="label label--accent">Next steps</p>
+    <h2>What happens after the consultation closes.</h2>
+    <p>Following the close of this consultation we will review our proposals, taking into account all feedback alongside our ongoing evaluations.</p>
+  </div>
+  <div class="steps">
+    
+    <div class="ds-step">
+      <div>
+        <p class="ttl">Review feedback</p>
+        <p class="detail">Following the close of the consultation we review all feedback alongside our ongoing evaluations and engagement findings.</p>
+      </div>
+    </div>
+
+    <div class="ds-step">
+      <div>
+        <p class="ttl">Refine proposals</p>
+        <p class="detail">We refine our masterplan and our proposals to build and operate a new runway.</p>
+      </div>
+    </div>
+
+    <div class="ds-step">
+      <div>
+        <p class="ttl">Finalise documents</p>
+        <p class="detail">We finalise our Environmental Statement and a range of supporting technical documents.</p>
+      </div>
+    </div>
+
+    <div class="ds-step">
+      <div>
+        <p class="ttl">Publish Consultation Report</p>
+        <p class="detail">We publish a Consultation Report setting out the feedback received, our response, and how it has been considered.</p>
+      </div>
+    </div>
+
+    <div class="ds-step">
+      <div>
+        <p class="ttl">Submit DCO application</p>
+        <p class="detail">We submit our application for a Development Consent Order to the Planning Inspectorate in 2020.</p>
+      </div>
+    </div>
+
+    <div class="ds-step">
+      <div>
+        <p class="ttl">Runway opens</p>
+        <p class="detail">Subject to consent, our new runway opens in around 2026.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <section data-section="continue-reading" data-intent="cross-link" data-layout="contained" data-fragment="continue-reading" data-fragment-role="reuse" data-fragment-source="/">
+    <a class="inner" href="the-proposal.html">
+      <div>
+        <p class="label">Continue reading</p>
+        <p class="ttl">01 · The proposal</p>
+      </div>
+      <p class="summary">Why expansion, and what this consultation is about. The case for a third runway, the previous consultations behind it, and how to take part.</p>
+      <span class="arrow">→</span>
+    </a>
+  </section>
+
+  <footer data-section="site-footer" data-intent="global wayfinding" data-layout="grid" data-fragment="site-footer" data-fragment-role="reuse" data-fragment-source="/">
+    <div class="cols">
+      <div class="brand-block">
+        <img src="assets/logos/heathrow-white.png" alt="Heathrow" style="height: 24px; filter: invert(1) brightness(0.2);" />
+        <p>Our June 2019 consultation document set out our developed thinking for an expanded Heathrow and invited views from communities, passengers, businesses and government.</p>
+      </div>
+      <div>
+        <h4>Helpful links</h4>
+        <ul>
+          <li><a href="#">Download the consultation PDF</a></li>
+          <li><a href="#">Read in another language</a></li>
+          <li><a href="#">Accessibility statement</a></li>
+          <li><a href="#">Cookie preferences</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Discover Heathrow</h4>
+        <ul>
+          <li><a href="https://www.heathrow.com/expansion">Heathrow Expansion</a></li>
+          <li><a href="https://www.heathrow.com/at-the-airport">At the airport</a></li>
+          <li><a href="https://www.heathrow.com/transport-and-directions">Transport and directions</a></li>
+          <li><a href="https://www.heathrow.com/heathrow-blog">Heathrow blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Our company</h4>
+        <ul>
+          <li><a href="https://www.heathrow.com/company">About Heathrow</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press office</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>&copy; Heathrow Airport Limited 2019. POC microsite generated 2026-04-29 from the original 110-page consultation document.</span>
+      <span>Built via stardust v0.2: extract → direct → prototype → migrate.</span>
+    </div>
+  </footer>
+
+</body>
+</html>
