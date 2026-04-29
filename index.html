@@ -2,166 +2,30 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>stardust — sample migrations</title>
-<meta name="description" content="Showcase migrations produced by the stardust + impeccable Claude Code plugins. Each card links to a deployed redesigned site.">
-<link rel="canonical" href="https://paolomoz.github.io/stardust-2/">
+<title>Redirecting…</title>
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/samples/">
+<script>
+  // Preserve querystring + fragment when redirecting.
+  (function(){
+    var target = 'samples/' + window.location.search + window.location.hash;
+    window.location.replace(target);
+  })();
+</script>
+<meta http-equiv="refresh" content="0; url=samples/">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;700;900&family=Source+Code+Pro:wght@400;500;700&display=swap');
-
-  :root {
-    --bg:#ffffff; --surface:#f6f6f7; --text:#15171d; --muted:#5b5e6a; --subtle:#8b8e98;
-    --border:rgba(20,22,30,.08); --border-strong:rgba(20,22,30,.16);
-    --primary:#3a4cf5; --primary-hover:#2d3ae0;
-    --display:'Source Sans 3', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-    --body:'Source Sans 3', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-    --mono:'Source Code Pro', ui-monospace, 'SF Mono', monospace;
-  }
-  *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
-  body { font-family:var(--body); color:var(--text); background:var(--bg); line-height:1.65; -webkit-font-smoothing:antialiased; }
-  a { color:inherit; text-decoration:none; }
-
-  .wrap { max-width:1080px; margin-inline:auto; padding:64px 24px 96px; }
-  @media (min-width:768px){ .wrap { padding:96px 8.333% 128px; } }
-
-  .eyebrow {
-    font-family:var(--mono); font-size:12px; font-weight:700;
-    letter-spacing:.08em; text-transform:uppercase; color:var(--muted);
-  }
-  h1 {
-    font-family:var(--display); font-weight:900;
-    font-size:clamp(48px, 8vw, 96px);
-    line-height:.94; letter-spacing:-.04em;
-    margin-block:24px 32px;
-  }
-  .lede { font-size:20px; line-height:1.5; color:var(--muted); max-width:62ch; margin-bottom:48px; }
-  .lede a { color:var(--primary); border-bottom:1px solid rgba(58,76,245,.3); }
-  .lede a:hover { border-bottom-color:var(--primary); }
-
-  .section { margin-top:80px; }
-  .section-eyebrow { margin-bottom:24px; }
-  h2 {
-    font-family:var(--display); font-weight:800;
-    font-size:clamp(28px, 4vw, 40px);
-    letter-spacing:-.025em; line-height:1.05;
-    margin-bottom:32px;
-  }
-
-  .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px; }
-
-  .card {
-    position:relative;
-    display:grid; grid-template-rows:auto auto 1fr auto; gap:8px;
-    padding:24px; padding-left:28px;
-    background:var(--bg);
-    border:1px solid var(--border);
-    border-radius:16px;
-    transition:transform 240ms cubic-bezier(.42,0,0,1), box-shadow 240ms cubic-bezier(.42,0,0,1), border-color 240ms cubic-bezier(.42,0,0,1);
-  }
-  .card::before {
-    content:''; position:absolute; left:0; top:24px; bottom:24px;
-    width:4px; background:var(--primary); border-radius:0 4px 4px 0;
-  }
-  .card:hover {
-    transform:translateY(-1px);
-    box-shadow:0 12px 32px rgba(20,22,30,.10);
-    border-color:var(--border-strong);
-  }
-  .card:focus-within {
-    box-shadow:0 0 0 4px rgba(58,76,245,.18);
-    border-color:var(--primary);
-  }
-  .card__eyebrow {
-    font-family:var(--mono); font-size:11px; font-weight:700;
-    letter-spacing:.08em; text-transform:uppercase; color:var(--muted);
-  }
-  .card__title { font-family:var(--display); font-weight:800; font-size:22px; line-height:1.15; letter-spacing:-.02em; }
-  .card__title a::before { content:''; position:absolute; inset:0; border-radius:16px; }
-  .card__body { color:var(--muted); font-size:15px; line-height:1.55; }
-  .card__foot {
-    display:flex; align-items:center; gap:6px;
-    font-family:var(--mono); font-size:11px; color:var(--subtle);
-    padding-top:8px; border-top:1px dashed var(--border); margin-top:8px;
-  }
-  .card__arrow { margin-left:auto; color:var(--primary); font-size:18px; transition:transform 150ms; }
-  .card:hover .card__arrow { transform:translateX(4px); }
-
-  .cards--samples .card::before { background:var(--subtle); }
-
-  footer {
-    margin-top:128px;
-    padding-top:32px;
-    border-top:1px solid var(--border);
-    font-family:var(--mono); font-size:12px;
-    color:var(--subtle);
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px;
-  }
-  footer a { color:var(--muted); }
-  footer a:hover { color:var(--primary); }
+  body{font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:#f6f6f7;color:#15171d;display:grid;place-items:center;min-height:100vh;margin:0;padding:24px;text-align:center}
+  .card{max-width:480px;background:#fff;border:1px solid rgba(20,22,30,.08);border-radius:16px;padding:32px}
+  p{margin:0 0 12px;line-height:1.6}
+  .meta{font-family:'Source Code Pro',ui-monospace,monospace;font-size:12px;color:#5b5e6a;letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px}
+  a{color:#3a4cf5;font-weight:700;text-decoration:none}
+  a:hover{text-decoration:underline}
 </style>
 </head>
 <body>
-<div class="wrap">
-
-  <p class="eyebrow">Stardust · showcase</p>
-  <h1>Redesigned sites,<br>shipped end-to-end.</h1>
-  <p class="lede">
-    Every entry below is a public deploy of a real website redesigned by the
-    <a href="https://github.com/paolomoz/stardust-2">stardust</a> Claude Code plugin
-    on top of <a href="https://github.com/pbakaus/impeccable">impeccable</a>.
-    Each site was extracted, directed, prototyped, and migrated end-to-end —
-    static HTML, deployable to any host.
-  </p>
-
-  <section class="section">
-    <p class="eyebrow section-eyebrow">Live sites</p>
-    <h2>Production-shape deploys</h2>
-    <div class="grid">
-
-      <article class="card">
-        <p class="card__eyebrow">Mode A · brand-faithful</p>
-        <h3 class="card__title"><a href="sites/aemlive/">aem.live</a></h3>
-        <p class="card__body">Adobe Experience Manager Edge Delivery Services docs site, redesigned. 186 pages, Adobe Clean Display editorial typography, electric-indigo accent, dark-moment code blocks.</p>
-        <p class="card__foot">186 pages · 3.4 MB <span class="card__arrow" aria-hidden="true">→</span></p>
-      </article>
-
-      <article class="card">
-        <p class="card__eyebrow">Mode A · brand-faithful</p>
-        <h3 class="card__title"><a href="sites/of1/">of1.live</a></h3>
-        <p class="card__body">Sample migration from the stardust plugin's prior milestone.</p>
-        <p class="card__foot">Sample <span class="card__arrow" aria-hidden="true">→</span></p>
-      </article>
-
-    </div>
-  </section>
-
-  <section class="section">
-    <p class="eyebrow section-eyebrow">Samples</p>
-    <h2>Earlier migration experiments</h2>
-    <div class="grid cards--samples">
-
-      <article class="card">
-        <p class="card__eyebrow">Block-demo · 2026-04-29</p>
-        <h3 class="card__title"><a href="samples/sites/vitamix-blocks-2026-04-29/">vitamix · block-demo (bold)</a></h3>
-        <p class="card__body">Block-collection migration sample — bold direction.</p>
-        <p class="card__foot">samples/sites/ <span class="card__arrow" aria-hidden="true">→</span></p>
-      </article>
-
-      <article class="card">
-        <p class="card__eyebrow">Sample · 2026-04-29</p>
-        <h3 class="card__title"><a href="samples/sites/heathrow-2026-04-29/">heathrow</a></h3>
-        <p class="card__body">Heathrow Airport site migration sample.</p>
-        <p class="card__foot">samples/sites/ <span class="card__arrow" aria-hidden="true">→</span></p>
-      </article>
-
-    </div>
-  </section>
-
-  <footer>
-    <span>stardust + impeccable · Claude Code plugins</span>
-    <span><a href="https://github.com/paolomoz/stardust-2">github.com/paolomoz/stardust-2</a></span>
-  </footer>
-
+<div class="card">
+<p class="meta">Redirect</p>
+<p>The showcase lives at <a href="samples/">samples/</a>.</p>
+<p style="font-size:13px;color:#5b5e6a">Redirecting now. Use the link above if it doesn't auto-redirect.</p>
 </div>
 </body>
 </html>
