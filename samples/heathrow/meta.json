@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 2,
+  "slug": "heathrow",
+  "title": "Heathrow Airport Expansion",
+  "tagline": "POC microsite for the 110-page June-2019 consultation document. Same content, three home-page approaches: editorial stewardship, IA-led wayfinder, two-track skim/deep-dive.",
+
+  "source": {
+    "url": "https://www.heathrow.com/expansion",
+    "register": "brand",
+    "category": "infrastructure · public consultation"
+  },
+
+  "direction": {
+    "phrase": "Three approaches to a single static home page for the Heathrow Expansion consultation document. Brand-faithful: Frutiger Next type stack, brand-purple #462170, navy chrome, 8px radius, photo-led story tiles.",
+    "movements": [
+      "PDF (110pp) → microsite home (one page; six pillar pages downstream)",
+      "register: corporate-consultation → reader-led (depending on variant)",
+      "type-stack: pinned (Frutiger Next / Open Sans fallback)",
+      "palette: pinned (#462170 brand-purple + navy chrome)"
+    ],
+    "seed": {
+      "input": "Heathrow|2026-04-29",
+      "decade": "2025-now",
+      "craft": "civic-corporate consultation",
+      "register": "brand",
+      "groundFamily": "stark-white",
+      "pickedBy": "user-constraint (brand-faithful)"
+    },
+    "fontDeck": {
+      "name": "brand-inherited",
+      "value": "Frutiger Next (Open Sans web fallback)",
+      "pickedBy": "user-constraint"
+    },
+    "palette": {
+      "name": "Heathrow brand-pinned",
+      "anchor": "#462170",
+      "pickedBy": "user-constraint",
+      "brandFaithfulInversions": [
+        "brand purple #462170 retained as primary",
+        "navy chrome retained",
+        "8px radius retained",
+        "hex format retained"
+      ]
+    },
+    "antiToolbox": { "hits": 0, "justified": 0 }
+  },
+
+  "originalCritique": "The source isn't a tired website — it's a 110-page PDF consultation document from June 2019 (Heathrow's Preferred Masterplan). PDFs do badly online: no in-page wayfinding, no skim path, no estimated reading time, no progressive disclosure. <strong>The consultation invited views from communities, passengers, businesses and government — and asked them to read 110 pages to do it.</strong> The microsite re-houses the document on the brand's surface and bracket-tests three home-page treatments before the inner pillars are built.",
+
+  "variants": [
+    {
+      "id": "A",
+      "name": "Stewardship",
+      "dominantDimension": "register",
+      "thesis": "Editorial document-led. Full-bleed sunset hero of the expanded airport, foreword-style intro, six photo-led pillar cards in a 3×2 grid. Closest in feel to heathrow.com/expansion. The brand voice carries the IA — readers arrive into stewardship, not a chooser.",
+      "fix": "<strong>Editorial document-led.</strong> Full-bleed sunset hero of the expanded airport, foreword-style intro, six photo-led pillar cards in a 3×2 grid. Closest in feel to heathrow.com/expansion. The brand voice carries the IA — readers arrive into stewardship, not a chooser. Best when the brand statement should land first and the document second.",
+      "proposedFile": "proposed-A.html",
+      "isPrimary": true
+    },
+    {
+      "id": "B",
+      "name": "Wayfinder",
+      "dominantDimension": "ia",
+      "thesis": "IA-led. Two-column hero with a quick-links panel; phase timeline strip; the six pillars rendered as a list with reading-time, sub-section count, and PDF source. For readers who want orientation before they read.",
+      "fix": "<strong>IA-led wayfinder.</strong> Two-column hero pairs the brand statement with a quick-links panel; a phase timeline strip lets readers locate themselves in the 2026–2050 programme; the six pillars render as a list with estimated reading time, sub-section count, and source PDF section number. Built for a reader who wants orientation before commitment.",
+      "proposedFile": "proposed-B.html"
+    },
+    {
+      "id": "C",
+      "name": "Two-Track",
+      "dominantDimension": "audience",
+      "thesis": "Skim or deep-dive. Hero offers two routes: a five-minute summary or the full proposal. Phase timeline runs through the page. Foreword pull-quote. Built for two reader types in the same surface.",
+      "fix": "<strong>Skim or deep-dive — two reader paths in the same surface.</strong> The hero offers two routes immediately: a five-minute summary or the full proposal. The phase timeline runs through the page rather than sitting in a single strip. A foreword pull-quote anchors the brand voice. Best when the consultation has both informed stakeholders and curious neighbours arriving on the same page.",
+      "proposedFile": "proposed-C.html"
+    }
+  ],
+
+  "createdAt": "2026-04-29",
+  "stardustVersion": "0.2.0",
+  "submittedBy": "paolomoz",
+  "license": "Apache-2.0",
+  "thumbnail": "logo.png"
+}
