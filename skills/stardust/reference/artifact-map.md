@@ -29,6 +29,28 @@ time; stardust does not own those commands and will not interfere.
 The same direct-authoring pattern is used for the descriptive files
 under `stardust/current/` written by `$stardust extract`.
 
+### `DESIGN.json.extensions`
+
+The `extensions` object grows with the migrate-template-canon
+refactor (see `notes/migrate-template-canon-refactor.md`):
+
+- **`extensions.canon`** — pinned token values, compositional moves
+  (free-text), and references to `stardust/canon/*` chrome and CSS
+  files (`{ path, sha }` per file). Written by `$stardust prototype
+  --prep` on first approval; extended on subsequent approvals.
+- **`extensions.modules[]`** — brand module catalog: `id`, `slots`
+  (with `name`, `type`, `required`, optional `default`),
+  `canonicalRendering` reference. Auto-detected during `$stardust
+  extract --prep`; promoted/refined during `$stardust direct
+  --prep`.
+- **`extensions.colorReservations[]`** — colors reserved to specific
+  modules or contexts (e.g., centennial-red reserved to a
+  `trh-100-lockup` module). Validated at migrate time; violation
+  refuses the page.
+- **`extensions.metadata`** — site-level metadata defaults: site
+  name, default OG image, theme color, organization JSON-LD,
+  default locale. Composed with per-page metadata at migrate time.
+
 ---
 
 ## `stardust/` (stardust's territory)
@@ -37,6 +59,12 @@ under `stardust/current/` written by `$stardust extract`.
 stardust/
 ├── state.json                        # state machine (state-machine.md)
 ├── direction.md                      # resolved intent + reasoning trace
+├── canon/                            # design canon (canon-extraction.md) — written by prototype --prep on first approval, extended on subsequent approvals
+│   ├── header.html                   # canonical header chrome
+│   ├── footer.html                   # canonical footer chrome
+│   ├── canon.css                     # compound CSS (button/card/link/form language)
+│   └── modules/
+│       └── <module-id>.html          # canonical rendering per brand module
 ├── current/
 │   ├── PRODUCT.md                    # impeccable-format strategy of the EXISTING site
 │   ├── DESIGN.md                     # impeccable-format visual system of the EXISTING site
@@ -45,7 +73,7 @@ stardust/
 │   ├── _brand-extraction.json        # consolidated brand surface (palette, type, motifs, voice, system components)
 │   ├── _crawl-log.json               # discovery + crawl audit trail
 │   ├── pages/
-│   │   └── <slug>.json               # per-page parsed structure + content
+│   │   └── <slug>.json               # per-page parsed structure + content (includes metadata block)
 │   └── assets/
 │       ├── logo.<ext>                # extracted logo
 │       ├── screenshots/<slug>.png    # per-page viewport screenshots (used by brand-review)
@@ -54,17 +82,24 @@ stardust/
 │   ├── <slug>-shape.md               # per-page compositional brief (page-level deployment record)
 │   ├── <slug>.html                   # before/after viewer (user-facing review surface)
 │   └── <slug>-proposed.html          # proposed redesign on its own (live-mode iteration target, migration source)
-└── migrated/                       # deployable static HTML site
-    ├── index.html                   # the home page (slug "home" -> root)
+└── migrated/                         # deployable static HTML site
+    ├── index.html                    # the home page (slug "home" -> root)
+    ├── _meta.json                    # sidecar JSON (full reasoning trace) — one per migrated page
     ├── <slug>/
-    │   └── index.html               # one per non-home slug (URL-faithful nesting)
-    ├── docs/api/index.html          # multi-segment slugs nest naturally
+    │   ├── index.html                # one per non-home slug (URL-faithful nesting)
+    │   └── _meta.json
+    ├── docs/api/                     # multi-segment slugs nest naturally
+    │   ├── index.html
+    │   └── _meta.json
     ├── assets/
-    │   ├── logo.<ext>               # copied from current/assets/
-    │   ├── favicon.<ext>            # copied from current/assets/
-    │   └── media/                   # only files referenced by migrated pages
-    ├── robots.txt                   # minimal
-    └── sitemap.xml                  # derived from migrated inventory
+    │   ├── logo.<ext>                # copied from current/assets/
+    │   ├── favicon.<ext>             # canonical favicon
+    │   ├── favicon-512.png           # variants generated during prepare-migration phase 4
+    │   ├── apple-touch-icon.png
+    │   ├── fonts/                    # @font-face files downloaded during prepare-migration phase 4
+    │   └── media/                    # only files referenced by migrated pages
+    ├── robots.txt                    # minimal
+    └── sitemap.xml                   # derived from migrated inventory
 ```
 
 ### `stardust/state.json`
@@ -166,6 +201,47 @@ The migrated tree is **incremental and idempotent**. Re-running
 migrate writes only pages whose source has changed (sha-compared in
 provenance). Migration is per-page — the user can migrate part of
 the site today and the rest later.
+
+### `stardust/canon/`
+Owner: `$stardust prototype --prep`. Written on first prototype
+approval (typically the home; `--canon-from <slug>` overrides),
+extended on subsequent approvals. Contains the design canon — the
+load-bearing visual decisions extracted from approved prototypes
+that govern every other template's rendering.
+
+- **`header.html` / `footer.html`** — chrome HTML lifted verbatim
+  from the canon-author prototype. Other templates inject these
+  files into their proposed and migrated output.
+- **`canon.css`** — compound CSS for the named visual language
+  (`.btn-primary`, `.btn-secondary`, `.card`, `.link`, form
+  inputs). Consumes DESIGN.md tokens; injected into every migrated
+  page's `<style>` block alongside `:root`.
+- **`modules/<module-id>.html`** — canonical rendering per brand
+  module. Each file's path + sha is referenced by
+  `DESIGN.json.extensions.modules[].canonicalRendering`.
+
+Pinned token values, compositional moves, and conflict-resolution
+metadata live inside `DESIGN.json.extensions.canon` rather than as
+standalone files. Canon-extraction procedure:
+`skills/prototype/reference/canon-extraction.md`.
+
+### `stardust/migrated/<slug-path>/_meta.json`
+Owner: `$stardust migrate`. Sidecar JSON written alongside every
+migrated `index.html` — one for the home at `migrated/_meta.json`,
+one per nested slug at `migrated/<slug-path>/_meta.json`. Carries:
+
+- Resolved metadata (system-fixed, brand-level, preserved, derived).
+- Resolved JSON-LD (when page-type is known).
+- Filled slot list and module-instance list.
+- The `migrationDecisions[]` array — per-page reasoning trace
+  (`template-applied` / `template-adapted` / `unique-render` /
+  `module-bespoke-slot` / `canon-deviation` / `metadata-override`).
+- Canon shas at the time of migration (so re-runs detect canon
+  drift).
+
+The HTML `<head>` provenance block stays compact; the sidecar
+carries the full trace. Both are redundant on purpose — downstream
+consumers can read either source.
 
 ---
 
