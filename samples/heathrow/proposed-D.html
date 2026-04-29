@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Heathrow Expansion · Public Consultation</title>
+<style>
+:root {
+  --purple: #462170;
+  --purple-dark: #2b0b50;
+  --ink: #2c292a;
+  --ink-muted: #6f6a6a;
+  --surface: #ffffff;
+  --surface-alt: #f5f4f7;
+  --rule: #dadee1;
+  --display: 'FrutigerNextPaneuropeanMedium', 'Frutiger Neue', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --body: 'FrutigerNextPaneuropeanRegular', 'Frutiger Neue', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --container: 1280px;
+  --gutter: 24px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { font-family: var(--body); color: var(--ink); background: var(--surface); line-height: 1.5; font-size: 17px; }
+a { color: var(--purple); text-decoration: none; }
+a:hover { color: var(--purple-dark); text-decoration: underline; }
+img { max-width: 100%; display: block; }
+h1, h2, h3, h4 { font-family: var(--display); color: var(--purple); margin: 0 0 0.5em; line-height: 1.1; font-weight: 500; }
+h1 { font-size: clamp(40px, 6vw, 64px); }
+h2 { font-size: clamp(28px, 3.6vw, 42px); }
+h3 { font-size: 20px; }
+h4 { font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); margin: 0 0 8px; }
+p { margin: 0 0 1em; max-width: 70ch; }
+.container { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* Skip link */
+.skip { position: absolute; left: -9999px; top: auto; }
+.skip:focus { left: 16px; top: 16px; background: var(--purple); color: #fff; padding: 8px 16px; z-index: 100; }
+
+/* Header */
+.site-header { background: var(--purple); color: #fff; }
+.site-header__inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; gap: 24px; }
+.site-header__logo img { height: 44px; width: auto; }
+.site-header nav { display: flex; gap: 4px; flex-wrap: wrap; }
+.site-header nav a { color: #fff; padding: 10px 16px; font-family: var(--display); font-weight: 500; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; }
+.site-header nav a:hover, .site-header nav a[aria-current] { background: var(--purple-dark); text-decoration: none; }
+.site-header__cta { background: #fff; color: var(--purple); padding: 10px 18px; font-family: var(--display); font-weight: 500; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; }
+.site-header__cta:hover { background: var(--purple-dark); color: #fff; text-decoration: none; }
+
+/* Consult banner */
+.consult-banner { background: var(--purple-dark); color: #fff; padding: 8px 0; font-size: 13px; text-align: center; letter-spacing: 0.02em; }
+.consult-banner strong { font-family: var(--display); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; margin-right: 12px; }
+.consult-banner a { color: #fff; text-decoration: underline; }
+
+/* Hero */
+.hero { position: relative; isolation: isolate; min-height: 640px; display: grid; align-items: end; color: #fff; overflow: hidden; }
+.hero__media { position: absolute; inset: 0; z-index: -1; }
+.hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.hero__media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(43,11,80,0.35) 0%, rgba(43,11,80,0) 30%, rgba(43,11,80,0) 50%, rgba(43,11,80,0.85) 100%); }
+.hero__content { padding: 96px 0 64px; max-width: 920px; }
+.hero__eyebrow { font-family: var(--display); font-weight: 500; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.92; margin-bottom: 24px; display: inline-flex; align-items: center; gap: 12px; }
+.hero__eyebrow::before { content: ''; width: 32px; height: 2px; background: #fff; }
+.hero h1 { color: #fff; font-size: clamp(44px, 6.5vw, 76px); font-weight: 500; line-height: 1.05; margin: 0 0 24px; max-width: 18ch; }
+.hero p.deck { font-family: var(--body); font-size: clamp(17px, 1.6vw, 22px); line-height: 1.45; max-width: 60ch; margin: 0 0 32px; color: rgba(255,255,255,0.92); }
+.hero__cta-row { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 12px; padding: 14px 28px; font-family: var(--display); font-weight: 500; font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; border: 0; border-radius: 0; transition: background-color 0.18s ease, transform 0.18s ease; text-decoration: none; }
+.btn--primary { background: #fff; color: var(--purple); }
+.btn--primary:hover { background: var(--purple-dark); color: #fff; text-decoration: none; }
+.btn--ghost { background: transparent; color: #fff; border: 2px solid #fff; }
+.btn--ghost:hover { background: #fff; color: var(--purple); text-decoration: none; }
+.btn--inline { background: var(--purple); color: #fff; }
+.btn--inline:hover { background: var(--purple-dark); color: #fff; text-decoration: none; }
+.btn__arrow { font-size: 16px; line-height: 1; }
+
+/* Quick stats */
+.facts { background: var(--surface-alt); padding: 56px 0; }
+.facts__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; }
+.fact__num { font-family: var(--display); font-weight: 500; font-size: 56px; color: var(--purple); line-height: 1; margin-bottom: 8px; }
+.fact__lbl { font-family: var(--body); color: var(--ink); font-size: 15px; max-width: 28ch; }
+
+/* Section */
+section.block { padding: 96px 0; }
+section.block--alt { background: var(--surface-alt); }
+.eyebrow { font-family: var(--display); font-weight: 500; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--purple); margin-bottom: 16px; display: inline-block; }
+.section-head { max-width: 720px; margin: 0 auto 48px; text-align: center; }
+.section-head--left { text-align: left; margin-left: 0; }
+
+/* About this consultation */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.about-grid h2 { color: var(--purple); }
+.about-points { display: grid; gap: 20px; }
+.about-points li { list-style: none; padding-left: 40px; position: relative; font-size: 16px; line-height: 1.5; }
+.about-points li::before { content: ''; position: absolute; left: 0; top: 6px; width: 24px; height: 2px; background: var(--purple); }
+.about-points strong { color: var(--purple); font-family: var(--display); display: block; margin-bottom: 4px; font-size: 17px; font-weight: 500; }
+
+/* Chapter list */
+.chapters { padding: 96px 0; background: #fff; }
+.chapters__head { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; margin-bottom: 48px; }
+.chapters__head p.lead { font-size: 19px; max-width: 56ch; }
+.chapters__hint { font-family: var(--display); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); }
+.chapter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--rule); }
+.chapter { display: grid; grid-template-columns: 80px 1fr; gap: 24px; padding: 28px 16px; border-bottom: 1px solid var(--rule); align-items: baseline; transition: background 0.15s ease; cursor: pointer; }
+.chapter:nth-child(odd) { border-right: 1px solid var(--rule); }
+.chapter:hover { background: var(--surface-alt); }
+.chapter:hover .chapter__title { color: var(--purple-dark); }
+.chapter__num { font-family: var(--display); font-weight: 500; font-size: 32px; color: var(--purple); line-height: 1; }
+.chapter__title { font-family: var(--display); font-weight: 500; font-size: 22px; color: var(--purple); margin-bottom: 8px; }
+.chapter__meta { font-size: 13px; color: var(--ink-muted); display: flex; gap: 16px; }
+
+/* Foreword */
+.foreword { background: var(--purple); color: #fff; padding: 96px 0; }
+.foreword__inner { display: grid; grid-template-columns: 280px 1fr; gap: 64px; align-items: start; max-width: 1100px; margin: 0 auto; }
+.foreword__portrait { background: var(--purple-dark); aspect-ratio: 4/5; display: flex; align-items: end; padding: 16px; color: #fff; font-family: var(--display); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.4; background-image: url('assets/expansion/cq5dam.web.928.1390-9b19d41f.jpeg'); background-size: cover; background-position: center; position: relative; isolation: isolate; }
+.foreword__portrait::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(43,11,80,0) 50%, rgba(43,11,80,0.85) 100%); z-index: -1; }
+.foreword__portrait > * { position: relative; z-index: 1; }
+.foreword h2 { color: #fff; }
+.foreword .eyebrow { color: #fff; opacity: 0.85; }
+.foreword blockquote { font-family: var(--display); font-weight: 500; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.35; color: #fff; margin: 0 0 24px; max-width: 28ch; quotes: '"' '"'; }
+.foreword blockquote::before { content: open-quote; }
+.foreword blockquote::after { content: close-quote; }
+.foreword p { color: rgba(255,255,255,0.92); }
+.foreword cite { font-family: var(--display); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; font-style: normal; color: rgba(255,255,255,0.85); display: block; margin-top: 16px; }
+
+/* Have your say band */
+.cta-band { background: var(--purple-dark); color: #fff; padding: 96px 0; text-align: center; background-image: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple) 100%); }
+.cta-band h2 { color: #fff; max-width: 24ch; margin-left: auto; margin-right: auto; }
+.cta-band p { max-width: 56ch; margin-left: auto; margin-right: auto; color: rgba(255,255,255,0.92); font-size: 18px; }
+.cta-band__row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+.cta-band .btn--primary { background: #fff; color: var(--purple); }
+.cta-band .btn--primary:hover { background: var(--purple); color: #fff; }
+
+/* Footer */
+.site-footer { background: var(--ink); color: rgba(255,255,255,0.78); padding: 64px 0 32px; font-size: 14px; }
+.site-footer__top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.12); }
+.site-footer h4 { color: #fff; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 16px; }
+.site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.site-footer a { color: rgba(255,255,255,0.78); }
+.site-footer a:hover { color: #fff; }
+.site-footer__bottom { padding-top: 24px; display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; font-size: 13px; color: rgba(255,255,255,0.6); }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero { min-height: 520px; }
+  .hero__content { padding: 48px 0 32px; }
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  .chapter-grid { grid-template-columns: 1fr; }
+  .chapter:nth-child(odd) { border-right: 0; }
+  .foreword__inner { grid-template-columns: 1fr; }
+  .foreword__portrait { max-width: 240px; }
+  .site-footer__top { grid-template-columns: 1fr 1fr; }
+  .chapters__head { grid-template-columns: 1fr; }
+  .site-header nav { display: none; }
+  section.block { padding: 64px 0; }
+  .foreword, .cta-band, .chapters { padding: 64px 0; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="consult-banner">
+  <span><strong>Public consultation open</strong>September 2026 · 12-week feedback period · <a href="#participate">Have your say →</a></span>
+</div>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="#" class="site-header__logo" aria-label="Heathrow Expansion home">
+      <img src="assets/expansion/white-logo-9ed42c60.png" alt="Heathrow Expansion" />
+    </a>
+    <nav aria-label="Primary">
+      <a href="#proposal" aria-current="page">The proposal</a>
+      <a href="#about">About expansion</a>
+      <a href="#community">Local community</a>
+      <a href="#updates">News</a>
+    </nav>
+    <a href="#participate" class="site-header__cta">Subscribe</a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" aria-label="Heathrow Expansion consultation">
+  <div class="hero__media">
+    <img src="assets/expansion/cq5dam.web.3360.1248-62f17d54.jpeg" alt="" loading="eager" />
+  </div>
+  <div class="container">
+    <div class="hero__content">
+      <span class="hero__eyebrow">Airport Expansion Consultation · 2026</span>
+      <h1>The UK's Gateway to Growth — and how it grows responsibly.</h1>
+      <p class="deck">Heathrow's plans for a third runway are now in formal public consultation. Read our preferred masterplan, the effects on local communities and the environment, and the measures we propose to manage them. Then tell us what you think.</p>
+      <div class="hero__cta-row">
+        <a href="#proposal" class="btn btn--primary">Read the proposal <span class="btn__arrow" aria-hidden="true">→</span></a>
+        <a href="#participate" class="btn btn--ghost">Have your say</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="facts" aria-label="At a glance">
+  <div class="container">
+    <div class="facts__grid">
+      <div class="fact"><div class="fact__num">14</div><div class="fact__lbl">Chapters in the proposal — read in any order, or all the way through.</div></div>
+      <div class="fact"><div class="fact__num">12</div><div class="fact__lbl">Weeks of public consultation, opening September 2026.</div></div>
+      <div class="fact"><div class="fact__num">£100bn+</div><div class="fact__lbl">In annual UK trade with non-EU markets that travels through Heathrow today.</div></div>
+      <div class="fact"><div class="fact__num">2026</div><div class="fact__lbl">First operational year of the expanded airport, in our preferred masterplan.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block block--alt" id="about" aria-label="About this consultation">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <span class="eyebrow">About this consultation</span>
+        <h2>What we're consulting on, and why now.</h2>
+        <p>This is Heathrow's statutory consultation on our preferred proposals for expanding the airport with a third runway. Following two earlier non-statutory consultations, we have developed a Preferred Masterplan, an indicative phased delivery, and a set of measures to manage the effects of construction and operation on local communities and the environment.</p>
+        <p>Your feedback during this period will directly inform the Development Consent Order (DCO) we submit to the Secretary of State for Transport.</p>
+      </div>
+      <ul class="about-points">
+        <li><strong>Our Preferred Masterplan.</strong> The future layout of the airport: runway, terminals, road and rail access, parking, displaced land uses, and how growth will be phased.</li>
+        <li><strong>Future operations.</strong> How a three-runway airport would be operated, including runway alternation and a ban on scheduled night flights.</li>
+        <li><strong>Effects of expansion.</strong> Our preliminary assessment of effects on the environment, communities, health, transport, and the historic environment.</li>
+        <li><strong>Mitigation and compensation.</strong> Property compensation, noise insulation, a Community Fund, and the measures that will manage construction and operating effects.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapters" id="proposal" aria-label="Proposal chapters">
+  <div class="container">
+    <div class="chapters__head">
+      <div>
+        <span class="eyebrow">The proposal · 14 chapters</span>
+        <h2>Read by section, or read it all.</h2>
+        <p class="lead">Each chapter mirrors a section of the proposal document. Read in order for the full case for expansion, or jump straight to what affects you.</p>
+      </div>
+      <p class="chapters__hint">Approx. reading time<br><strong>· 110 minutes total ·</strong></p>
+    </div>
+    <div class="chapter-grid">
+      <a class="chapter" href="#"><span class="chapter__num">01</span><div><div class="chapter__title">Foreword</div><div class="chapter__meta"><span>1 page</span><span>From the Chief Executive</span></div></div></a>
+      <a class="chapter" href="#"><span class="chapter__num">02</span><div><div class="chapter__title">Introduction</div><div class="chapter__meta"><span>8 pages</span><span>5 sub-sections</span></div></div></a>
+      <a class="chapter" href="#"><span class="chapter__num">03</span><div><div class="chapter__title">Our Preferred Masterplan</div><div class="chapter__meta"><span>25 pages</span><span>11 sub-sections</span></div></div></a>
+      <a class="chapter" href="#"><span class="chapter__num">04</span><div><div class="chapter__title">Construction</div><div class="chapter__meta"><span>10 pages</span><span>3 sub-sections</span></div></div></a>
+      <a class="chapter" href="#"><span class="chapter__num">05</span><div><div class="chapter__title">Future operations</div><div class="chapter__meta"><span>14 pages</span><span>4 sub-sections</span></div></div></a>
+      <a class="chapter" href="#"><span class="chapter__num">06</span><div><div class="chapter__title">Travelling to and from Heathrow</div><div class="chapter__meta"><span>8 pages</span><span>7 sub-sections</span></div></div></a>
+      <a class="chapter" href="#"><span class="chapter__num">07</span><div><div class="chapter__title">Managing the effects of expansion</div><div class="chapter__meta"><span>20 pages</span><span>14 sub-sections</span></div></div></a>
+      <a class="chapter" href="#"><span class="chapter__num">08</span><div><div class="chapter__title">Growing within environmental limits</div><div class="chapter__meta"><span>2 pages</span><span>Environmental envelope</span></div></div></a>
+      <a class="chapter" href="#"><span class="chapter__num">09</span><div><div class="chapter__title">Community fund</div><div class="chapter__meta"><span>2 pages</span><span>Eligibility, size, duration</span></div></div></a>
+      <a class="chapter" href="#"><span class="chapter__num">10</span><div><div class="chapter__title">Property and compensation</div><div class="chapter__meta"><span>4 pages</span><span>5 interim policies</span></div></div></a>
+      <a class="chapter" href="#"><span class="chapter__num">11</span><div><div class="chapter__title">Airspace</div><div class="chapter__meta"><span>2 pages</span><span>Flight paths process</span></div></div></a>
+      <a class="chapter" href="#"><span class="chapter__num">12</span><div><div class="chapter__title">Have your say</div><div class="chapter__meta"><span>3 pages</span><span>Feedback channels</span></div></div></a>
+      <a class="chapter" href="#"><span class="chapter__num">13</span><div><div class="chapter__title">Next steps</div><div class="chapter__meta"><span>1 page</span><span>From here to DCO</span></div></div></a>
+      <a class="chapter" href="#"><span class="chapter__num">14</span><div><div class="chapter__title">Consultation questions</div><div class="chapter__meta"><span>4 pages</span><span>24 questions</span></div></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="foreword" aria-label="From the Chief Executive">
+  <div class="container">
+    <div class="foreword__inner">
+      <div class="foreword__portrait" aria-hidden="true"></div>
+      <div>
+        <span class="eyebrow">Foreword</span>
+        <blockquote>Expansion is not just about minimising impacts, but about maximising opportunities — for the whole of the UK.</blockquote>
+        <p>Since our airport operations began over 70 years ago, Heathrow has played a unique role in the development of the surrounding area, and we are proud of the partnerships we share with local communities. Today, we are committed to working closely with our neighbours to develop plans for an expanded airport and ensure that we deliver a fairer Heathrow for the next generation.</p>
+        <p><a href="#" style="color:#fff; border-bottom:1px solid currentColor;">Read the full foreword →</a></p>
+        <cite>John Holland-Kaye, Chief Executive, Heathrow</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="participate" aria-label="Have your say">
+  <div class="container">
+    <span class="eyebrow" style="color:#fff;opacity:0.85;">Have your say</span>
+    <h2>Your feedback shapes the final proposals.</h2>
+    <p>Tell us what you think about the masterplan, the effects of expansion, and the measures we propose to manage them. The consultation runs for 12 weeks from September 2026.</p>
+    <div class="cta-band__row">
+      <a href="#" class="btn btn--primary">Open the feedback form <span class="btn__arrow" aria-hidden="true">→</span></a>
+      <a href="#" class="btn btn--ghost">Find a consultation event</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__top">
+      <div>
+        <img src="assets/expansion/white-logo-9ed42c60.png" alt="Heathrow" style="height:40px; margin-bottom:16px;" />
+        <p style="color: rgba(255,255,255,0.78); max-width: 36ch;">Heathrow Airport's statutory consultation on our preferred proposals for expanding the airport.</p>
+      </div>
+      <div>
+        <h4>The proposal</h4>
+        <ul>
+          <li><a href="#">Preferred Masterplan</a></li>
+          <li><a href="#">Construction</a></li>
+          <li><a href="#">Future operations</a></li>
+          <li><a href="#">Surface access</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Effects &amp; mitigation</h4>
+        <ul>
+          <li><a href="#">Managing effects</a></li>
+          <li><a href="#">Property &amp; compensation</a></li>
+          <li><a href="#">Community fund</a></li>
+          <li><a href="#">Airspace</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Have your say</h4>
+        <ul>
+          <li><a href="#">Feedback questionnaire</a></li>
+          <li><a href="#">Consultation events</a></li>
+          <li><a href="#">Document inspection</a></li>
+          <li><a href="#">Subscribe for updates</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span>© Heathrow Airport Limited · Public consultation prototype</span>
+      <span><a href="#">Privacy</a> · <a href="#">Cookies</a> · <a href="#">Accessibility</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -72,6 +72,14 @@
       "thesis": "Skim or deep-dive. Hero offers two routes: a five-minute summary or the full proposal. Phase timeline runs through the page. Foreword pull-quote. Built for two reader types in the same surface.",
       "fix": "<strong>Skim or deep-dive — two reader paths in the same surface.</strong> The hero offers two routes immediately: a five-minute summary or the full proposal. The phase timeline runs through the page rather than sitting in a single strip. A foreword pull-quote anchors the brand voice. Best when the consultation has both informed stakeholders and curious neighbours arriving on the same page.",
       "proposedFile": "proposed-C.html"
+    },
+    {
+      "id": "D",
+      "name": "Civic Prospectus",
+      "dominantDimension": "register",
+      "thesis": "Faithful renewal of the current /expansion section. Full-bleed dark aerial photograph as hero; 14 numbered chapters in a 2-column index, monochromatic and hover-active. Civic-formal voice — British English, declarative, present tense.",
+      "fix": "<strong>Faithful renewal of the current /expansion section.</strong> Full-bleed dark aerial photograph as hero with white display headline overlay and primary + ghost CTAs. 14 numbered chapters render in a 2-column monochromatic index with hover-active rows. Civic-formal voice matches the current site register: British English, declarative, present tense. The closest of the four variants in feel to the live heathrow.com/expansion section — the option a brand stakeholder picks to validate that stardust can do faithful before it does inventive.",
+      "proposedFile": "proposed-D.html"
     }
   ],
 
