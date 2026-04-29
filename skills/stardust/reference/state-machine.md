@@ -18,6 +18,7 @@ and resumable. The state file is `stardust/state.json`. It is written by
   },
   "site": {
     "originUrl": "https://example.com",
+    "deployUrl": null,
     "extractedAt": "<ISO timestamp>",
     "pageCap": 25,
     "totalDiscovered": 38,
@@ -33,6 +34,7 @@ and resumable. The state file is `stardust/state.json`. It is written by
       "slug": "home",
       "url": "https://example.com/",
       "title": "Example Home",
+      "type": "landing",
       "status": "approved",
       "history": [
         { "status": "extracted",   "at": "..." },
@@ -75,6 +77,40 @@ new history entry, and the user must re-approve to advance.
 
 ---
 
+## Page types
+
+A page carries a `type` field describing its content shape. Types let
+`migrate` apply the right approved-template-archetype across siblings:
+an approved `article` template renders every other `article` page;
+an approved `listing` template renders every `listing` page.
+
+| Value      | When the page is...                                                       |
+|------------|---------------------------------------------------------------------------|
+| `landing`  | Multi-audience landing or home page                                       |
+| `article`  | Blog post, news article, story — long-form prose with a single subject    |
+| `listing`  | Index of articles, programs, products — repeating cards                   |
+| `program`  | Service / program / product detail — feature-rich                         |
+| `form`     | Donation, contact, sign-up — form-driven funnel                           |
+| `static`   | About / team / financials — content-driven, low-frequency change          |
+| `unique`   | Escape hatch — none of the above; render as one-off                       |
+
+The catalog is per-site; new types may be added at `direct --prep`
+time when the inventory surfaces a shape no existing type covers.
+
+**When set.** `type` is inferred during `extract --prep` from URL
+pattern and content shape (LLM judgment). The user confirms or
+refines the catalog during `direct --prep`. Discovery-mode runs of
+`extract` skip type-tagging — `type` is `null` until prep-mode sets
+it.
+
+**Effect on migrate.** A page typed `article` whose own status is
+`directed` is migrated by forking the approved `article` sibling's
+structure (Path A′ in `skills/migrate/SKILL.md`). A page typed
+`unique` is rendered as a one-off using DESIGN.md/json + canon +
+brand modules.
+
+---
+
 ## Stale flagging (content-aware)
 
 When `$stardust direct` resolves a new direction that differs from
@@ -101,6 +137,20 @@ The rule:
      component.
    - Named system-component role changes — affects every page
      deploying that role.
+   - Canon changes (chrome HTML in `stardust/canon/header.html`
+     or `footer.html`, compound CSS in `canon.css`, pinned token
+     values, compositional moves) — affects every approved or
+     migrated page (canon is universal once written).
+   - Module catalog changes (a module added or removed; a
+     module's `canonicalRendering` edited; a slot added,
+     removed, or re-typed) — affects every page deploying that
+     module.
+
+   The trigger for delta computation is direction-edit by default,
+   but applies identically when canon updates land via
+   `prototype --prep` approval or when the module catalog updates
+   via `extract --prep`. Stale-flagging is content-aware in all
+   three cases.
 2. For each page in `prototyped`, `approved`, or `migrated`:
    - Read its `<slug>-shape.md` (per
      `skills/prototype/reference/page-shape-brief.md`) to see

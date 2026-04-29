@@ -38,6 +38,11 @@ critique, and it does not modify the live site. It writes only under
   Default `medium`. See `reference/playwright-recipe.md` § Wait modes.
 - `--no-junk-filter` — optional. Disable the default junk-page filter
   in discovery (see `reference/ia-extraction.md` § Filtering).
+- `--prep` — optional. Run in **migrate-prep mode**: lift the cap,
+  type each page, detect module candidates, capture typed content
+  slots, emit the prep summary. See § Prep mode below. Typically
+  invoked via the `prepare-migration` orchestrator skill rather
+  than directly.
 
 ## Setup
 
@@ -349,6 +354,108 @@ report; do not engineer around it.
   `domcontentloaded` and capture what is rendered. Record the
   fallback in the per-page `_provenance.waitMode` and surface in the
   wait-summary line of the final report.
+
+## Prep mode (--prep)
+
+When invoked with `--prep`, extract runs an extended pass that
+prepares the inventory for migration. Discovery-mode runs (without
+`--prep`) are unchanged: small cap, no typing, no module detection,
+presales-friendly. `--prep` is the gesture that says "the user is
+committing to migrate; build the data structure migrate consumes."
+
+`--prep` adds five things on top of the standard procedure:
+
+### 1. Lift the cap
+
+`--prep` implies `--all`. Migration coverage requires the full
+inventory — the small discovery cap (5 pages) is insufficient. The
+cap-respecting selection logic from `reference/ia-extraction.md`
+§ Page selection still applies for ordering and junk-filtering;
+it just doesn't truncate.
+
+### 2. Page typing
+
+For each extracted page, infer the `type` field from URL pattern
+and content shape (LLM judgment). Catalog from
+`skills/stardust/reference/state-machine.md` § Page types:
+`landing | article | listing | program | form | static | unique`.
+
+Write the inferred type to `state.json.pages[].type`. The user
+confirms or refines during `direct --prep`. Discovery-mode runs
+leave `type` as `null`.
+
+### 3. Module candidate detection
+
+After Phase 3 (brand-surface extraction), scan extracted pages for
+**recurring structural patterns**. A pattern that appears in N+
+pages with similar shape (same sequence of elements, same
+`data-section` / `data-purpose`, similar text shape) is surfaced
+as a module candidate.
+
+Candidate output is a draft entry under
+`DESIGN.json.extensions.modules[]`:
+
+```json
+{
+  "id": "candidate-<short-hash>",
+  "slots": [
+    { "name": "<inferred>", "type": "text|link|image|...", "required": false }
+  ],
+  "instances": [
+    { "slug": "home",   "selector": "..." },
+    { "slug": "donate", "selector": "..." }
+  ],
+  "status": "candidate"
+}
+```
+
+The `status: "candidate"` flag distinguishes draft entries from
+confirmed modules. `direct --prep` is where the user names them
+and promotes (or prunes).
+
+### 4. Typed content slots
+
+Per-page JSON (`current/pages/<slug>.json`) gains a `slots`
+section that identifies content slots per page-type:
+
+- `article` pages: `headline`, `deck`, `byline`, `meta`,
+  `lead-image`, `body`, `pullquotes[]`, `related[]`
+- `listing` pages: `index-headline`, `filter-controls`,
+  `card-grid` with typed sub-slots per card
+- `program` pages: `program-headline`, `summary`,
+  `feature-grid`, `cta-band`
+- `landing`, `form`, `static` — typed slots inferred per
+  content shape
+
+Schema additions live in `reference/current-state-schema.md`
+§ Typed slots (extend that doc separately).
+
+### 5. Prep summary
+
+Replace Phase 6's standard report with the prep summary format:
+
+```
+extract --prep complete
+=======================
+
+Inventory:    127 pages crawled (5 prior, 122 new)
+Page types:   landing 1 · article 84 · listing 6 · program 12 · form 3 · static 18 · unique 3
+              (LLM-inferred; refine in direct --prep)
+
+Module candidates: 8
+  hotline-211         5 instances  (home, get-help, donate, news, programs)
+  donate-band         12 instances (home, donate, news, all article footers)
+  story-card          7 instances  (home, news, programs)
+  ...
+
+Typed slots:  filled per page-type (see current/pages/<slug>.json § slots)
+
+Next: $stardust direct --prep  (confirm types, name modules)
+```
+
+Default mode (no `--prep`) is unchanged. The flag is intended for
+the `prepare-migration` orchestrator, though direct invocation is
+supported.
 
 ## References
 

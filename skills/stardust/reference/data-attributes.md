@@ -81,6 +81,70 @@ future shared-component extractor: pages with `data-fragment-role="source"`
 become the components, pages with `data-fragment-role="reuse"`
 become consumers.
 
+## Template, module, and slot vocabulary
+
+Page-level identity, module-instance identity, and content-slot
+identity. Added with the migrate-template-canon refactor (see
+`notes/migrate-template-canon-refactor.md`). These are the contract
+`migrate` consumes when forking an approved template's structure
+across sibling pages, and the contract downstream conversion plugins
+(EDS, CMS, framework) consume to rewrite stardust's HTML
+mechanically rather than re-deriving structure.
+
+### Page-level
+
+- **`data-template`** — the page's type. Mirrors the `type` field on
+  the page entry in `state.json`. Lives on `<body>` or `<main>`.
+  Values mirror the type catalog (`landing`, `article`, `listing`,
+  `program`, `form`, `static`, `unique`, plus any per-site
+  additions).
+
+### Module-instance
+
+- **`data-module`** — module identifier matching an entry in
+  `DESIGN.json.extensions.modules[]`. Lives on the module's root
+  element. Examples: `"hotline-211"`, `"donate-band"`,
+  `"story-card"`.
+
+### Slot identity
+
+- **`data-slot`** — slot name within the nearest enclosing
+  `data-template` or `data-module`. Locally scoped — `<div
+  data-module="hotline-211"><span data-slot="phone">211</span></div>`
+  reads as "the `phone` slot of the `hotline-211` module."
+
+  Slot vocabulary is per-template and per-module, declared in
+  catalog entries. Slots mark **containers of identifiable content
+  units**, not arbitrary leaf nodes — `data-slot="article-body"`
+  goes on the prose container, not on every paragraph inside it.
+
+- **`data-bespoke`** — flag (no value) on a slot not in the
+  template/module catalog. The slot is one-off for this instance,
+  logged in the page's `migrationDecisions[]`, and counted toward
+  the auto-promotion threshold (3 instances → `migrate` suggests
+  promotion to canonical).
+
+### Canon and deviation markers
+
+- **`data-canon`** — flag (no value) on a chrome container (header,
+  footer, nav, global banner) lifted verbatim from
+  `stardust/canon/`. Tells downstream consumers: preserve verbatim,
+  do not re-style, do not let template-specific treatments
+  override.
+
+- **`data-deviation="<reason>"`** — on a chrome or canon-derived
+  element deliberately changed for this template. Reason is a
+  short human-readable phrase (e.g., `"sticky reading-progress
+  bar for long-form"`). Mirrored as a `canon-deviation` entry in
+  the page's `migrationDecisions[]`.
+
+### Broken-link marker
+
+- **`data-broken-link="true"`** — on `<a href>` whose same-host
+  target slug is not in the migrated inventory. Surfaced in
+  `migrate`'s run summary; user resolves by extracting the
+  missing page and re-migrating, or accepts the broken link.
+
 ## Examples
 
 ```html
@@ -134,7 +198,11 @@ become consumers.
   per-page JSON's source HTML capture — they are stardust's output
   vocabulary, not an input description.
 - A downstream EDS skill (out of scope) reads them from migrated
-  pages to map sections to blocks.
+  pages to map sections to blocks. The template/module/slot
+  vocabulary is the load-bearing surface for that conversion:
+  `data-template` maps to a page template, `data-module` to a
+  block, `data-slot` to a block-cell, and `data-canon` to
+  verbatim-chrome regions.
 
 ## What this vocabulary is **not**
 
@@ -148,9 +216,18 @@ become consumers.
 
 ## Versioning
 
-The vocabulary version is implicit in the stardust version. The seven
-attributes above (`data-section`, `data-intent`, `data-layout`,
+The vocabulary version is implicit in the stardust version.
+
+**v2 base set.** `data-section`, `data-intent`, `data-layout`,
 `data-items`, `data-media`, `data-interactive`, `data-fragment`,
-`data-fragment-role`, `data-fragment-source`) are the v2 set. New
-attributes can be added in a backward-compatible way; renaming
+`data-fragment-role`, `data-fragment-source` — ship with stardust
+v0.2.0.
+
+**v2.1 additive set.** `data-template`, `data-module`, `data-slot`,
+`data-bespoke`, `data-canon`, `data-deviation`, `data-broken-link`
+— ship with the migrate-template-canon refactor. Additive: every
+v2-only consumer continues to work; v2.1-aware consumers gain the
+template/module/slot/canon surface.
+
+New attributes can be added in a backward-compatible way; renaming
 existing ones requires a version bump.
