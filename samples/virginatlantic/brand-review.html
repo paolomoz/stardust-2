@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Brand review — Virgin Atlantic — current state</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #030c16;
+      --surface: #e6e7e8;
+      --primary: #da0530;
+      --chrome: #111921;
+      --purple: #4c1d4f;
+      --purple-deep: #2d0f33;
+      --rose: #a05c8a;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: Gotham, Helvetica, Arial, sans-serif;
+      color: var(--text); background: var(--bg);
+      margin: 0; -webkit-font-smoothing: antialiased; line-height: 1.5;
+    }
+    header.cover {
+      background: var(--chrome); color: #fff;
+      padding: 56px 64px;
+    }
+    header.cover h1 { margin: 0 0 8px; font-size: 36px; font-weight: 500; letter-spacing: -0.01em; }
+    header.cover .lede { color: #efe6f3; max-width: 640px; }
+    main { padding: 56px 64px 96px; max-width: 1200px; }
+    section + section { margin-top: 56px; }
+    h2 { font-size: 24px; font-weight: 500; margin: 0 0 16px; }
+    h3 { font-size: 16px; font-weight: 500; margin: 0 0 8px; }
+    .grid { display: grid; gap: 16px; }
+    .grid-pal { grid-template-columns: repeat(3, minmax(220px, 1fr)); }
+    .swatch { display: flex; align-items: center; gap: 12px; }
+    .swatch .chip { width: 56px; height: 56px; border-radius: 4px; flex: 0 0 56px; }
+    .swatch .meta { display: flex; flex-direction: column; }
+    .swatch .meta b { font-weight: 500; }
+    .swatch .meta span { font-size: 12px; color: #666; }
+    .grid-headings { grid-template-columns: 1fr; }
+    .grid-headings li { list-style: none; padding: 12px 0; border-bottom: 1px solid #eee; }
+    .grid-headings .lvl { display: inline-block; padding: 2px 6px; background: var(--surface); border-radius: 2px; font-size: 11px; margin-right: 8px; }
+    .grid-headings .meta { font-size: 12px; color: #666; }
+    .ctas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .cta-card { background: #fff; padding: 16px; border: 1px solid #eee; border-radius: 4px; }
+    .cta-card .meta { font-size: 11px; color: #666; margin-top: 8px; }
+    .images { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .images figure { margin: 0; }
+    .images img { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; }
+    .images figcaption { font-size: 12px; padding: 8px 0; color: #444; }
+    .images .meta { color: #999; }
+    .tensions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .tension { background: var(--surface); padding: 20px; border-left: 3px solid var(--primary); border-radius: 4px; }
+    .tension h3 { color: var(--purple); margin-bottom: 6px; }
+    .tension p { margin: 0; color: #333; font-size: 14px; }
+    .system-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .system-card { background: var(--surface); padding: 16px; border-radius: 4px; }
+    .system-card .kind { font-size: 11px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.04em; }
+    .citation { font-size: 11px; color: #888; margin-top: 8px; }
+    code { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 13px; background: var(--surface); padding: 1px 4px; border-radius: 2px; }
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <h1>Brand review — Virgin Atlantic</h1>
+    <p class="lede">Descriptive snapshot of <code>https://www.virginatlantic.com/</code> as captured by <code>stardust:extract</code> on 2026-04-28. The colours, fonts and motifs below are pulled from the live site and are the constraint for any brand-faithful refresh.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Tensions</h2>
+      <div class="tensions">
+  <article class="tension">
+    <h3>Hero relies on photo + photo-anchored card for legibility</h3>
+    <p>The H1 ("Take off to the UK and beyond") sits on a white card pinned over the photograph; the booking widget sits directly on the purple chrome. Contrast is fine on the captured frame but the pattern is fragile to image variation. Any refresh that loosens the headline-card structure must keep contrast guaranteed.</p>
+  </article>
+
+  <article class="tension">
+    <h3>Two unrelated H2 sizes (24 / 40)</h3>
+    <p>Section headers ship at both 24 px and 40 px with no intermediate step, which makes the "Fly in style" and "Flying with us" headings feel like a different typographic system from "Even more flights across the Atlantic" or "Pre-travel advice". A consolidated heading rhythm is the cheapest legibility win in a refresh.</p>
+  </article></div>
+    </section>
+
+    <section>
+      <h2>Palette</h2>
+      <div class="grid grid-pal">
+        <div class="swatch"><div class="chip" style="background:#ffffff;border:1px solid #ddd;"></div><div class="meta"><b>background</b><span>#ffffff · #ffffff</span></div></div>
+        <div class="swatch"><div class="chip" style="background:#e6e7e8;"></div><div class="meta"><b>surface</b><span>#e6e7e8 · #e6e7e8</span></div></div>
+        <div class="swatch"><div class="chip" style="background:#030c16;"></div><div class="meta"><b>text</b><span>#030c16 · #030c16</span></div></div>
+        <div class="swatch"><div class="chip" style="background:#da0530;"></div><div class="meta"><b>primary (CTA red)</b><span>#da0530 · #da0530</span></div></div>
+        <div class="swatch"><div class="chip" style="background:#111921;"></div><div class="meta"><b>chrome (header/footer)</b><span>#111921 · #111921</span></div></div>
+        <div class="swatch"><div class="chip" style="background:#4c1d4f;"></div><div class="meta"><b>brand purple (photographic)</b><span>#4c1d4f · #4c1d4f</span></div></div>
+        <div class="swatch"><div class="chip" style="background:#2d0f33;"></div><div class="meta"><b>brand purple deep</b><span>#2d0f33 · #2d0f33</span></div></div>
+        <div class="swatch"><div class="chip" style="background:#a05c8a;"></div><div class="meta"><b>brand rose (gradient stop)</b><span>#a05c8a · #a05c8a</span></div></div>
+      </div>
+      <p class="citation">_brand-extraction.json § palette · raw cluster of 9 computed colours, role-mapped per stardust v0.2 conventions.</p>
+    </section>
+
+    <section>
+      <h2>Typography</h2>
+      <p>Heading and body run on <b>Gotham</b> across every weight observed (325, 400, 500, 700), falling back to Helvetica then Arial. Sizes in use: 16, 18, 24, 40, 48px.</p>
+      <p class="citation">_brand-extraction.json § type · scaleAudit.kind = <code>modular</code> (mean 1.331, variance 0.043).</p>
+      <ul class="grid grid-headings"><li><span class="lvl">H1</span> <span class="text">Take off to the UK and beyond</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 48px · 300 · rgb(3, 12, 22)</span></li><li><span class="lvl">H2</span> <span class="text">Even more flights across the Atlantic</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 24px · 325 · rgb(3, 12, 22)</span></li><li><span class="lvl">H2</span> <span class="text">Join our Flying Club</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 24px · 325 · rgb(3, 12, 22)</span></li><li><span class="lvl">H2</span> <span class="text">Fly in style, in any seat</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 40px · 300 · rgb(3, 12, 22)</span></li><li><span class="lvl">H2</span> <span class="text">Economy</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 24px · 325 · rgb(3, 12, 22)</span></li><li><span class="lvl">H2</span> <span class="text">Premium</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 24px · 325 · rgb(3, 12, 22)</span></li><li><span class="lvl">H2</span> <span class="text">Upper Class</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 24px · 325 · rgb(3, 12, 22)</span></li><li><span class="lvl">H2</span> <span class="text">Flying with us</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 40px · 300 · rgb(3, 12, 22)</span></li><li><span class="lvl">H2</span> <span class="text">Our unique experience</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 24px · 325 · rgb(3, 12, 22)</span></li><li><span class="lvl">H2</span> <span class="text">Baggage unpacked</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 24px · 325 · rgb(3, 12, 22)</span></li><li><span class="lvl">H2</span> <span class="text">Flying Club</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 24px · 325 · rgb(3, 12, 22)</span></li><li><span class="lvl">H2</span> <span class="text">Our mission to net zero</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 24px · 325 · rgb(3, 12, 22)</span></li><li><span class="lvl">H2</span> <span class="text">Sustainable fuel Flight 100</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 24px · 325 · rgb(3, 12, 22)</span></li><li><span class="lvl">H2</span> <span class="text">Pre-travel advice</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 18px · 350 · rgb(3, 12, 22)</span></li><li><span class="lvl">H2</span> <span class="text">Flight information</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 18px · 350 · rgb(3, 12, 22)</span></li><li><span class="lvl">H2</span> <span class="text">Flying with baggage</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 18px · 350 · rgb(3, 12, 22)</span></li><li><span class="lvl">H2</span> <span class="text">Pay with Virgin Points</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 18px · 350 · rgb(3, 12, 22)</span></li><li><span class="lvl">H2</span> <span class="text">About Virgin Atlantic</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 16px · 350 · rgb(255, 255, 255)</span></li><li><span class="lvl">H2</span> <span class="text">Policies</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 16px · 350 · rgb(255, 255, 255)</span></li><li><span class="lvl">H2</span> <span class="text">Support</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 16px · 350 · rgb(255, 255, 255)</span></li><li><span class="lvl">H2</span> <span class="text">More</span><br><span class="meta">Gotham, Helvetica, Arial, sans-serif · 16px · 350 · rgb(255, 255, 255)</span></li></ul>
+    </section>
+
+    <section>
+      <h2>CTAs</h2>
+      <div class="ctas"><div class="cta-card"><button class="proto" style="background:rgba(0, 0, 0, 0);color:rgb(3, 12, 22);border-radius:4px;padding:11px 16px;font-family:Gotham, Helvetica, Arial, sans-serif;font-weight:325;border:0;">Log in</button><div class="meta">rgba(0, 0, 0, 0) · 4px · 325</div></div><div class="cta-card"><button class="proto" style="background:rgba(0, 0, 0, 0);color:rgb(3, 12, 22);border-radius:4px;padding:11px 16px;font-family:Gotham, Helvetica, Arial, sans-serif;font-weight:325;border:0;">My booking</button><div class="meta">rgba(0, 0, 0, 0) · 4px · 325</div></div><div class="cta-card"><button class="proto" style="background:rgba(0, 0, 0, 0);color:rgb(3, 12, 22);border-radius:4px;padding:11px 16px;font-family:Gotham, Helvetica, Arial, sans-serif;font-weight:325;border:0;">Menu</button><div class="meta">rgba(0, 0, 0, 0) · 4px · 325</div></div><div class="cta-card"><button class="proto" style="background:rgba(0, 0, 0, 0);color:rgb(3, 12, 22);border-radius:0px;padding:0px;font-family:Gotham, Helvetica, Arial, sans-serif;font-weight:325;border:0;">Got a discount code?</button><div class="meta">rgba(0, 0, 0, 0) · 0px · 325</div></div><div class="cta-card"><button class="proto" style="background:rgb(218, 5, 48);color:rgb(255, 255, 255);border-radius:4px;padding:11px 16px;font-family:Gotham, Helvetica, Arial, sans-serif;font-weight:325;border:0;">Search flights</button><div class="meta">rgb(218, 5, 48) · 4px · 325</div></div><div class="cta-card"><button class="proto" style="background:rgb(218, 5, 48);color:rgb(255, 255, 255);border-radius:4px;padding:9px 12px;font-family:Gotham, Helvetica, Arial, sans-serif;font-weight:325;border:0;">Find your flight</button><div class="meta">rgb(218, 5, 48) · 4px · 325</div></div><div class="cta-card"><button class="proto" style="background:rgba(0, 0, 0, 0);color:rgb(0, 0, 0);border-radius:0px;padding:0px;font-family:Gotham-Light, sans-serif;font-weight:400;border:0;">clicking here</button><div class="meta">rgba(0, 0, 0, 0) · 0px · 400</div></div><div class="cta-card"><button class="proto" style="background:rgb(218, 5, 48);color:rgb(255, 255, 255);border-radius:4px;padding:0px 16px;font-family:Gotham-Book, sans-serif;font-weight:400;border:0;">Yes, I Agree</button><div class="meta">rgb(218, 5, 48) · 4px · 400</div></div><div class="cta-card"><button class="proto" style="background:rgb(218, 5, 48);color:rgb(255, 255, 255);border-radius:4px;padding:0px 16px;font-family:Gotham-Book, sans-serif;font-weight:400;border:0;">Reject All</button><div class="meta">rgb(218, 5, 48) · 4px · 400</div></div></div>
+      <p class="citation">_brand-extraction.json § motifs.patterns · all CTAs share radius 4px and Gotham 325; primary uses <code>#da0530</code>.</p>
+    </section>
+
+    <section>
+      <h2>Photography</h2>
+      <div class="images"><figure><img src="assets/media/web-exclusive-deals-38b22175.jpg" alt="" loading="lazy"><figcaption>(no alt)<br><span class="meta">1600×624</span></figcaption></figure><figure><img src="assets/media/Lady-in-car-LA-992845eb.jpg" alt="Lady in car in LA" loading="lazy"><figcaption>Lady in car in LA<br><span class="meta">1024×768</span></figcaption></figure><figure><img src="assets/media/Barbados-5ca17de3.jpg" alt="Join Flying Club" loading="lazy"><figcaption>Join Flying Club<br><span class="meta">1200×900</span></figcaption></figure><figure><img src="assets/media/flying-kids-economy-cabin-vaa-0823296c.jpg" alt="Economy" loading="lazy"><figcaption>Economy<br><span class="meta">1024×768</span></figcaption></figure><figure><img src="assets/media/TOL297_WH_VA_250218_VA_Experience_10308_RGB-b0f982b4.jpg" alt="Premium" loading="lazy"><figcaption>Premium<br><span class="meta">1024×768</span></figcaption></figure><figure><img src="assets/media/upper-class-yellow-jumper-1024x768-1578fa3a.jpg" alt="Upper Class" loading="lazy"><figcaption>Upper Class<br><span class="meta">1024×768</span></figcaption></figure><figure><img src="assets/media/va_shot_9_international-biz_traveller_1024x768-eabd4d10.jpg" alt="Onboard experience" loading="lazy"><figcaption>Onboard experience<br><span class="meta">1024×768</span></figcaption></figure><figure><img src="assets/media/Check-in-bf2c88f5.png" alt="Check in" loading="lazy"><figcaption>Check in<br><span class="meta">795×448</span></figcaption></figure><figure><img src="assets/media/clubhouse-spa-image-07190a3c.jpg" alt="Sunglasses" loading="lazy"><figcaption>Sunglasses<br><span class="meta">795×448</span></figcaption></figure><figure><img src="assets/media/aircraft-model-795x448-V2-7bb95ce4.jpg" alt="Virgin Atlantic aircraft" loading="lazy"><figcaption>Virgin Atlantic aircraft<br><span class="meta">795×448</span></figcaption></figure><figure><img src="assets/media/SAF-flight_mobile_700x670--1--8fe57df6.jpg" alt="Virgin Atlantic aircraft in hanger" loading="lazy"><figcaption>Virgin Atlantic aircraft in hanger<br><span class="meta">700×670</span></figcaption></figure></div>
+      <p class="citation">stardust/current/assets/media · captured photography, downloaded for offline review.</p>
+    </section>
+
+    <section>
+      <h2>System components</h2>
+      <div class="system-grid">
+          <article class="system-card">
+            <div class="kind">site-header</div>
+            <p>Top dark-purple bar with logo left, utility links + login on the right; dropdown-driven main nav.</p>
+          </article>
+          <article class="system-card">
+            <div class="kind">booking-widget</div>
+            <p>Primary tool above the fold: trip-type tabs, origin/destination, dates, passengers, red Search-flights CTA.</p>
+          </article>
+          <article class="system-card">
+            <div class="kind">hero-photo</div>
+            <p>Full-bleed plane-in-purple-sky photograph; "Take off to the UK and beyond" headline reverses out of a light card pinned bottom-left over the photo.</p>
+          </article>
+          <article class="system-card">
+            <div class="kind">content-card</div>
+            <p>Image-on-top, headline, paragraph, ghost-link CTA. Repeated for promos, cabins, experience, sustainability.</p>
+          </article>
+          <article class="system-card">
+            <div class="kind">icon-row</div>
+            <p>Four-up icon + label tiles (pre-travel advice, flight info, baggage, app/myFlights).</p>
+          </article>
+          <article class="system-card">
+            <div class="kind">site-footer</div>
+            <p>Dark purple, four columns of link lists, small social icons row.</p>
+          </article></div>
+      <p class="citation">_brand-extraction.json § systemComponents · home-page-only inventory; flagged as load-bearing for any refresh.</p>
+    </section>
+  </main>
+</body>
+</html>

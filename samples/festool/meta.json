@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 2,
+  "slug": "festool",
+  "title": "Festool",
+  "tagline": "DIN-driven product-commerce, three theses on hierarchy and IA. Brand-faithful refresh: same palette and type, sharpened scale, scrim'd hero, sized 6-up grid.",
+
+  "source": {
+    "url": "https://www.festool.com/",
+    "register": "brand",
+    "category": "industrial · power tools · trade-led commerce",
+    "extractedAt": "2026-04-28"
+  },
+
+  "direction": {
+    "phrase": "Redesign this home page for presales. Brand-faithful Mode A. Three variants: A Conservative refresh, B Compositional shift, C Bold direction.",
+    "movements": [
+      "type-scale: ad-hoc → modular major-third 1.25",
+      "section-padding: variable → balanced 64px desktop",
+      "hero-contrast: photo-anchored → guaranteed scrim",
+      "ia: A=held, B=JTBD-led, C=held"
+    ],
+    "seed": {
+      "input": "Festool|2026-04-28",
+      "decade": "2024-now",
+      "craft": "industrial / engineering",
+      "register": "brand",
+      "groundFamily": "stark-white",
+      "pickedBy": "inherited (Mode A)"
+    },
+    "fontDeck": {
+      "name": "brand-inherited",
+      "value": "DINWebPro single-family",
+      "pickedBy": "user-constraint"
+    },
+    "palette": {
+      "name": "Festool brand-pinned",
+      "source": "inherited from stardust/current/_brand-extraction.json",
+      "anchor": "#191e2b",
+      "pickedBy": "user-constraint",
+      "brandFaithfulInversions": [
+        "pure-color: white #ffffff retained",
+        "pure-color: navy #191e2b retained",
+        "hex format retained"
+      ]
+    },
+    "antiToolbox": { "hits": 0, "justified": 0 }
+  },
+
+  "originalCritique": "Hero text floats over a photo without a scrim. The heading scale is ad-hoc — at least four near-identical sizes between 28–44px. The 6-up \"Discover Festool\" grid treats every tile equally, eroding hierarchy. <strong>The page tells you nothing about what's new for the trade — it tells you what marketing shipped this quarter.</strong>",
+
+  "variants": [
+    {
+      "id": "A",
+      "name": "Conservative refresh",
+      "dominantDimension": "register",
+      "thesis": "Same IA, modernised tokens. Hero gains a contrast scrim with the product name leading; heading scale snaps to 1.25 modular; the 6-up grid gets a 2-up feature tile; long-form copy moves to a single readable column with drop initials.",
+      "fix": "Same IA, modernised tokens. Hero text moves to a left-rail block over a contrast scrim; product name leads, value follows. Heading scale snaps to a major-third (1.25) modular ratio. The 6-up grid gets size hierarchy: one feature tile spans 2 cells, the rest are single. <strong>The risk-averse stakeholder option — almost nothing the legal team would push back on.</strong>",
+      "proposedFile": "proposed-A.html",
+      "isPrimary": true
+    },
+    {
+      "id": "B",
+      "name": "JTBD-led",
+      "dominantDimension": "ia",
+      "thesis": "Same palette, type, photography. Different homepage thesis: a job-to-be-done router (Cordless · Sanding · Dust extraction · Mobility · Service) replaces the single hero campaign. Service-equal band rises above the brand teaser.",
+      "fix": "Same palette, type, photography. <strong>Different homepage thesis.</strong> The page opens with a job-to-be-done router (Cordless · Sanding · Dust extraction · Mobility · Service), not a single hero campaign. The \"Tabless\" cordless campaign moves into the cordless route as a detail panel. Service-equal band rises above the brand teaser because for owners, service is the most-used surface.",
+      "proposedFile": "proposed-B.html"
+    },
+    {
+      "id": "C",
+      "name": "Bold direction",
+      "dominantDimension": "typography",
+      "thesis": "DIN at 96px on the hero — single declarative line, the brand mark gets to be the brand mark. A green ground-line motif runs through every section break, an industrial signal that ties hero to footer.",
+      "fix": "DIN at 96px on the hero — single declarative line, the brand mark gets to <strong>be</strong> the brand mark instead of a logo lockup. A green ground-line motif runs through every section break, an industrial-engineering signal that ties hero to footer. Same IA as A, but every section gains a single confident move.",
+      "proposedFile": "proposed-C.html"
+    }
+  ],
+
+  "createdAt": "2026-04-28",
+  "stardustVersion": "0.2.0",
+  "submittedBy": "paolomoz",
+  "license": "Apache-2.0",
+  "thumbnail": "logo.png"
+}

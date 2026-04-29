@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+  stardust:provenance
+  writtenBy: stardust:prototype (Variant C — photography-led story pacing)
+  writtenAt: 2026-04-28T16:18:30Z
+  readArtifacts:
+    - stardust/current/pages/home.json
+    - stardust/current/_brand-extraction.json
+    - stardust/prototypes/home-improvements.md
+    - stardust/prototypes/home-c-shape.md
+    - DESIGN.md, DESIGN.json
+  againstDirection: stardust/direction.md (mode A — brand-faithful)
+  unsourcedContent: []
+  stardustVersion: 0.2.0
+  variant: C
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OneMedical — refreshed (Variant C · photography-led)</title>
+<style>
+:root {
+  --page-bg: #ffffff;
+  --alt-section-bg: #f3eee5;
+  --jade: #005450;
+  --deep-jade: #004d49;
+  --emerald: #068466;
+  --melon: #ffc776;
+  --hero-blue: #0578ff;
+  --ink: #004d49;
+  --ink-muted: #3a4a48;
+  --ink-soft: #5e6e6c;
+  --rule: rgba(0,77,73,0.16);
+  --scrim: rgba(0,77,73,0.55);
+
+  --serif: "GT Super Display", "Times New Roman", Georgia, serif;
+  --sans: "Ginto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --t-h1: 64px;
+  --t-h2: 52px;
+  --t-h3: 32px;
+  --t-h4: 22px;
+  --t-body: 16px;
+  --t-eyebrow: 13px;
+  --t-nav: 14px;
+
+  --section-py: 56px;
+  --container: 1240px;
+  --gutter: 32px;
+  --gap: 24px;
+
+  --r-pill: 36px;
+  --r-card: 4px;
+  --r-callout: 8px;
+
+  --ease: cubic-bezier(.2,.7,.2,1);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--sans);
+  font-size: var(--t-body);
+  line-height: 1.55;
+  color: var(--ink-muted);
+  background: var(--page-bg);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--hero-blue); outline-offset: 3px; }
+.container { max-width: var(--container); margin: 0 auto; padding-inline: var(--gutter); }
+.eyebrow { font: 600 var(--t-eyebrow)/1.4 var(--sans); letter-spacing: 1.4px; text-transform: uppercase; color: var(--emerald); margin: 0; }
+h1, h2, h3, h4 { font-family: var(--serif); color: var(--ink); margin: 0; }
+h1 { font-size: var(--t-h1); line-height: 1.05; font-weight: 500; letter-spacing: -0.015em; }
+h2 { font-size: var(--t-h2); line-height: 1.08; font-weight: 600; letter-spacing: -0.005em; }
+h3 { font-size: var(--t-h3); line-height: 1.2; font-weight: 500; }
+h4 { font-size: var(--t-h4); line-height: 1.3; font-weight: 600; }
+
+.btn { display: inline-flex; align-items: center; gap: 8px; font: 600 15px/1 var(--sans); padding: 16px 36px; border-radius: var(--r-pill); border: 0; cursor: pointer; text-decoration: none; transition: transform .15s var(--ease), background-color .15s var(--ease); }
+.btn-primary { background: var(--jade); color: #fff; }
+.btn-primary:hover { background: var(--deep-jade); transform: translateY(-1px); }
+.btn-melon { background: var(--melon); color: var(--deep-jade); }
+.btn-melon:hover { background: #f9bc63; transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--deep-jade); padding: 8px 0; font: 600 14px/1 var(--sans); text-decoration: none; }
+.btn-ghost::after { content: "→"; transition: transform .2s var(--ease); margin-left: 8px; }
+.btn-ghost:hover::after { transform: translateX(3px); }
+
+/* HEADER */
+.site-header { position: absolute; top: 0; left: 0; right: 0; z-index: 50; background: transparent; transition: background-color .3s var(--ease), border-color .3s var(--ease); }
+.site-header.scrolled { position: sticky; top: 0; background: var(--page-bg); border-bottom: 1px solid var(--rule); }
+.site-header.scrolled .nav-list a, .site-header.scrolled .nav-list button, .site-header.scrolled .nav-cta .login { color: var(--deep-jade); }
+.nav-row { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; gap: 24px; }
+.brand-mark { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+.nav-list { display: flex; align-items: center; gap: 28px; list-style: none; padding: 0; margin: 0; }
+.nav-list a, .nav-list button { background: transparent; border: 0; padding: 8px 0; font: 600 var(--t-nav)/1 var(--sans); color: #fff; cursor: pointer; text-decoration: none; transition: color .2s var(--ease); }
+.nav-list a:hover, .nav-list button:hover { color: var(--melon); }
+.nav-cta { display: flex; align-items: center; gap: 14px; }
+.nav-cta .login { font: 600 var(--t-nav)/1 var(--sans); color: #fff; text-decoration: none; transition: color .2s var(--ease); }
+.nav-cta .pill { padding: 12px 22px; font-size: 14px; }
+
+/* HERO — full-bleed photograph + bottom-left scrim + h1 + CTA */
+.hero {
+  position: relative;
+  height: 720px;
+  overflow: hidden;
+  background-color: #d8eaff;
+  display: flex; align-items: flex-end;
+}
+.hero .photo-stage {
+  position: absolute; inset: 0;
+  background-image: url("https://www.onemedical.com/media/images/OM-homepage-hero-transparent-bg-DESKTOP_nKkownV.original.png");
+  background-size: contain;
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-color: linear-gradient(180deg, #eaf2ff 0%, #d8eaff 100%);
+}
+.hero .photo-stage::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, #eaf2ff 0%, #d8eaff 100%);
+  z-index: -1;
+}
+.hero .scrim {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(110deg, rgba(0,77,73,.55) 0%, rgba(0,77,73,.20) 38%, rgba(0,77,73,0) 64%),
+    linear-gradient(0deg, rgba(0,0,0,.18) 0%, rgba(0,0,0,0) 50%);
+  pointer-events: none;
+}
+.hero .hero-content {
+  position: relative; z-index: 2;
+  width: 100%;
+  padding: 0 0 80px;
+}
+.hero .hero-copy { max-width: 640px; color: #fff; }
+.hero .hero-copy .eyebrow { color: var(--melon); margin-bottom: 16px; }
+.hero h1 { color: #fff; font-size: 80px; line-height: 1.02; font-weight: 500; letter-spacing: -0.02em; }
+.hero .promo-line { font: 400 18px/1.55 var(--sans); color: rgba(255,255,255,.92); margin: 24px 0 32px; max-width: 540px; }
+.hero .promo-line strong { font-weight: 600; }
+.hero-cta-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.hero-cta-row .btn-ghost { color: #fff; }
+.hero-cta-row .btn-ghost::after { color: var(--melon); }
+.hero .terms { font: 400 13px/1.5 var(--sans); color: rgba(255,255,255,.75); margin: 16px 0 0; max-width: 520px; }
+.hero .terms a { color: var(--melon); }
+
+/* STORY SECTIONS — photo-led 5/3 splits */
+.story {
+  padding: var(--section-py) 0;
+  background: var(--page-bg);
+  border-bottom: 1px solid var(--rule);
+}
+.story .story-grid {
+  display: grid;
+  grid-template-columns: 5fr 4fr;
+  gap: 64px;
+  align-items: center;
+}
+.story.flip .story-grid { grid-template-columns: 4fr 5fr; }
+.story.flip .story-photo { order: 2; }
+.story.flip .story-text { order: 1; }
+.story-photo {
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  border-radius: 4px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--alt-section-bg);
+}
+.story-text { max-width: 460px; }
+.story-text .eyebrow { margin-bottom: 12px; }
+.story-text h2 { color: var(--deep-jade); margin: 0 0 16px; font-size: 44px; line-height: 1.1; }
+.story-text p { font: 400 17px/1.6 var(--sans); color: var(--ink-muted); margin: 0 0 24px; }
+.story-text .row { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+.story-text .row a.btn-ghost { color: var(--jade); font-weight: 600; }
+.story-text .row .meta-tag {
+  font: 600 12px/1 var(--sans);
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-left: 2px solid var(--rule);
+  padding-left: 12px;
+}
+
+/* ROTATING SERVICES — quieter, alt-bg */
+.rotating-section {
+  background: var(--alt-section-bg);
+  padding: 80px 0;
+  text-align: center;
+  border-bottom: 1px solid var(--rule);
+}
+.rotating-section .eyebrow { color: var(--emerald); margin-bottom: 12px; }
+.rotating-section h2 { font-size: 40px; line-height: 1.12; color: var(--deep-jade); display: inline; }
+.rotator-c { display: inline-flex; height: 48px; overflow: hidden; vertical-align: bottom; min-width: 280px; text-align: left; }
+.rotator-c > span { display: block; font-style: italic; color: var(--jade); animation: rotateConditionsC 14s steps(7) infinite; }
+.rotator-c > span span { display: block; line-height: 48px; }
+@keyframes rotateConditionsC {
+  0%, 11%   { transform: translateY(0); }
+  14%, 25%  { transform: translateY(-48px); }
+  28%, 39%  { transform: translateY(-96px); }
+  42%, 53%  { transform: translateY(-144px); }
+  56%, 67%  { transform: translateY(-192px); }
+  70%, 81%  { transform: translateY(-240px); }
+  84%, 95%  { transform: translateY(-288px); }
+  100%      { transform: translateY(-336px); }
+}
+.rotating-section .footer-line {
+  font: 400 15px/1.5 var(--sans);
+  color: var(--ink-muted);
+  margin: 24px 0 0;
+}
+.rotating-section .footer-line a { color: var(--jade); font-weight: 600; }
+
+/* APP SECTION — photo-led emphasis */
+.app-section { padding: var(--section-py) 0; background: var(--page-bg); }
+.app-grid { display: grid; grid-template-columns: 4fr 5fr; gap: 56px; align-items: center; }
+.app-text .eyebrow { margin-bottom: 12px; }
+.app-text h2 { color: var(--deep-jade); margin-bottom: 24px; font-size: 44px; }
+.app-text ul { padding: 0; margin: 0 0 24px; list-style: none; }
+.app-text li {
+  font: 400 16px/1.55 var(--sans);
+  color: var(--deep-jade);
+  position: relative; padding: 12px 0 12px 28px;
+  border-top: 1px solid var(--rule);
+}
+.app-text li:last-child { border-bottom: 1px solid var(--rule); }
+.app-text li::before { content: ""; position: absolute; left: 0; top: 18px; width: 14px; height: 7px; border: 2px solid var(--jade); border-right: 0; border-top: 0; transform: rotate(-45deg); }
+.app-photo { display: flex; justify-content: center; align-items: center; background: var(--alt-section-bg); padding: 48px 32px; border-radius: 8px; }
+.app-photo img { max-width: 100%; height: auto; }
+
+/* COMBINED MEMBERSHIP × EMPLOYER BAND */
+.combined-band {
+  background: linear-gradient(120deg, var(--jade) 0%, var(--deep-jade) 100%);
+  color: #fff; padding: 80px 0;
+}
+.combined-grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.combined-divider { background: rgba(255,255,255,.18); width: 1px; height: 100%; min-height: 200px; }
+.combined-band .track .eyebrow { color: var(--melon); margin-bottom: 12px; }
+.combined-band .track h3 { color: #fff; font-size: 36px; line-height: 1.1; margin: 0 0 16px; font-weight: 600; }
+.combined-band .track p { font: 400 16px/1.55 var(--sans); color: rgba(255,255,255,.85); margin: 0 0 24px; max-width: 360px; }
+.combined-band .track .logo-mini-row { display: flex; gap: 20px; align-items: center; margin: 20px 0 0; }
+.combined-band .track .logo-mini-row img { height: 22px; opacity: .85; filter: brightness(0) invert(1); }
+
+/* SIGNUP FOOTER */
+.signup-footer { background: var(--alt-section-bg); color: var(--deep-jade); padding: 96px 0 72px; text-align: center; }
+.signup-footer .eyebrow { color: var(--emerald); margin-bottom: 16px; }
+.signup-footer h2 { color: var(--deep-jade); font-size: 56px; }
+.signup-footer .signup-sub { font: 400 17px/1.55 var(--sans); color: var(--ink-muted); max-width: 560px; margin: 16px auto 32px; }
+
+/* FOOTER */
+.site-footer { background: var(--deep-jade); color: rgba(255,255,255,.78); padding: 56px 0 32px; font-size: 14px; line-height: 1.7; }
+.site-footer .footer-grid { display: grid; grid-template-columns: 1.4fr 2fr 1fr; gap: 48px; margin-bottom: 48px; }
+.site-footer h4 { font-family: var(--sans); text-transform: uppercase; letter-spacing: 1.4px; font-size: 12px; color: rgba(255,255,255,.55); font-weight: 600; margin: 0 0 16px; }
+.site-footer ul { list-style: none; padding: 0; margin: 0; }
+.site-footer ul li { padding: 4px 0; }
+.site-footer a { color: rgba(255,255,255,.78); text-decoration: none; }
+.site-footer a:hover { color: #fff; }
+.location-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 36px; padding: 10px 16px; cursor: pointer; }
+.social-row { display: flex; gap: 16px; margin-top: 16px; }
+.social-row a { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,.18); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
+.subfooter { border-top: 1px solid rgba(255,255,255,.12); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 12px; color: rgba(255,255,255,.5); }
+.subfooter ul { display: flex; flex-wrap: wrap; gap: 16px; padding: 0; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  :root { --section-py: 40px; }
+  .hero { height: 580px; }
+  .hero h1 { font-size: 56px; }
+  .story .story-grid, .story.flip .story-grid { grid-template-columns: 1fr; gap: 32px; }
+  .story.flip .story-photo { order: 1; }
+  .story.flip .story-text { order: 2; }
+  .app-grid { grid-template-columns: 1fr; }
+  .combined-grid { grid-template-columns: 1fr; }
+  .combined-divider { display: none; }
+  .nav-list { display: none; }
+}
+@media (max-width: 640px) {
+  :root { --section-py: 32px; --gutter: 20px; }
+  .hero { height: 480px; }
+  .hero h1 { font-size: 38px; }
+  .story-text h2, .app-text h2 { font-size: 32px; }
+  .signup-footer h2 { font-size: 32px; }
+  .combined-band .track h3 { font-size: 26px; }
+}
+</style>
+</head>
+<body data-stardust-page="home" data-stardust-variant="C">
+
+<header class="site-header" data-section="header" data-purpose="navigation">
+  <div class="container nav-row">
+    <a class="brand-mark" href="/" aria-label="One Medical">
+      <svg width="120" height="24" viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <text x="0" y="18" font-family="GT Super Display, Times New Roman, serif" font-size="20" font-weight="600" fill="white">One Medical</text>
+      </svg>
+    </a>
+    <ul class="nav-list" role="menubar">
+      <li><button>Locations</button></li>
+      <li><button>For You</button></li>
+      <li><button>For Business</button></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="login" href="https://app.onemedical.com">Log in</a>
+      <a class="btn btn-primary pill" href="https://app.onemedical.com/registration/signup">Sign up</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" data-section="hero" data-purpose="hero">
+  <div class="photo-stage" aria-hidden="true"></div>
+  <div class="scrim" aria-hidden="true"></div>
+  <div class="container hero-content">
+    <div class="hero-copy">
+      <p class="eyebrow">Same-day primary care</p>
+      <h1>Comprehensive healthcare just got less painful</h1>
+      <p class="promo-line">Now Amazon Prime members can purchase One Medical membership for <strong>$99/year</strong>. Same-day visits, longer appointments, 24/7 video chat — all included.</p>
+      <div class="hero-cta-row">
+        <a class="btn btn-primary" href="https://app.onemedical.com/registration/signup">Get Started</a>
+        <a class="btn-ghost" href="#stories">See what's included</a>
+      </div>
+      <p class="terms">*Purchase terms apply. Already a member? <a href="#">Apply your Amazon Prime savings.</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="stories" data-section="story-mental-health" data-purpose="feature-list">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-photo" style="background-image:url('https://www.onemedical.com/media/images/OM_Meditation_0697.original.jpg')"></div>
+      <div class="story-text">
+        <p class="eyebrow">Mental Health</p>
+        <h2>Care for your mental health</h2>
+        <p>Same-day virtual or in-person visits with primary-care providers who actually listen. Therapy referrals, medication, and follow-up — coordinated through the same app.</p>
+        <div class="row">
+          <a class="btn-ghost" href="#">Learn more</a>
+          <span class="meta-tag">Same-day · Virtual or in-person</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story flip" data-section="story-annual-wellness" data-purpose="feature-list">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-photo" style="background-image:url('https://www.onemedical.com/media/images/OM_ExamRoom4_2843.original.jpg')"></div>
+      <div class="story-text">
+        <p class="eyebrow">Annual Wellness</p>
+        <h2>The annual physical, reimagined</h2>
+        <p>Longer appointments that don't feel rushed. Lab work that drops in instead of being a separate trip. A provider who reads your file before walking in.</p>
+        <div class="row">
+          <a class="btn-ghost" href="#">Learn more</a>
+          <span class="meta-tag">Longer appointments · Drop-in labs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story" data-section="story-pharmacy" data-purpose="feature-list">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-photo" style="background-image:url('https://www.onemedical.com/media/images/OM-homepage-AMZ-Pharmacy-thumbnail_4eS3ecY.original.png')"></div>
+      <div class="story-text">
+        <p class="eyebrow">Amazon Pharmacy</p>
+        <h2>Finally, a pharmacy that really delivers</h2>
+        <p>Refill, ship, and track from inside the One Medical app. Prime members get faster delivery and lower prices on most prescriptions.</p>
+        <div class="row">
+          <a class="btn-ghost" href="#">Learn more</a>
+          <span class="meta-tag">Through the app · Free for Prime</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rotating-section" data-section="rotating-services" data-purpose="signature">
+  <div class="container">
+    <p class="eyebrow">Same-day care, 40+ conditions</p>
+    <h2>Get care today for&nbsp;<span class="rotator-c" aria-live="polite"><span>
+      <span>sleep issues</span>
+      <span>anxiety</span>
+      <span>back pain</span>
+      <span>menopause</span>
+      <span>heartburn</span>
+      <span>that weird rash</span>
+      <span>knee pain</span>
+      <span>depression</span>
+    </span></span></h2>
+    <p class="footer-line">…and 40+ more conditions, in person or over video. <a href="#">See the full list →</a></p>
+  </div>
+</section>
+
+<section class="app-section" data-section="app-services" data-purpose="feature-list">
+  <div class="container">
+    <div class="app-grid">
+      <div class="app-text">
+        <p class="eyebrow">The One Medical app</p>
+        <h2>With the One Medical app you can:</h2>
+        <ul>
+          <li>Get 24/7 on-demand care nationwide via Video Chat at no extra cost</li>
+          <li>Send and receive secure messages with a provider</li>
+          <li>Easily access your health records and care plans</li>
+          <li>Book appointments and renew prescriptions</li>
+        </ul>
+        <a class="btn-ghost" href="#" style="color:var(--jade)">See how it works</a>
+      </div>
+      <div class="app-photo">
+        <img src="https://www.onemedical.com/media/images/OM-homepage-block-media-right_1.width-1440.png" alt="One Medical app on a phone">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="combined-band" data-section="cta-band-combined" data-purpose="cta-band">
+  <div class="container combined-grid">
+    <div class="track">
+      <p class="eyebrow">For you</p>
+      <h3>$99/year for primary care that actually shows up.</h3>
+      <p>Same-day visits, longer appointments, 24/7 virtual chat, and a pharmacy that delivers.</p>
+      <a class="btn btn-melon" href="https://app.onemedical.com/registration/signup">Join now</a>
+    </div>
+    <div class="combined-divider" aria-hidden="true"></div>
+    <div class="track">
+      <p class="eyebrow">For your team</p>
+      <h3>Better primary care as an employee benefit.</h3>
+      <p>An employee benefit at 11,600+ companies — including:</p>
+      <div class="logo-mini-row">
+        <img src="https://www.onemedical.com/media/images/logo-airbnb.original.jpg" alt="Airbnb">
+        <img src="https://www.onemedical.com/media/images/logo-allbirds.original.png" alt="Allbirds">
+        <img src="https://www.onemedical.com/media/images/logo-nasdaq.original.png" alt="Nasdaq">
+      </div>
+      <a class="btn-ghost" href="#" style="color:var(--melon); margin-top: 20px; display: inline-block;">See plans for employers</a>
+    </div>
+  </div>
+</section>
+
+<section class="signup-footer" data-section="cta-band-final" data-purpose="cta-band">
+  <div class="container">
+    <p class="eyebrow">Ready when you are</p>
+    <h2>Sign up for membership</h2>
+    <p class="signup-sub">$99/year for Amazon Prime members. Same-day visits in person or by video.</p>
+    <a class="btn btn-primary" href="https://app.onemedical.com/registration/signup">Join now</a>
+  </div>
+</section>
+
+<footer class="site-footer" data-section="footer" data-purpose="footer-nav">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Locations</h4>
+        <button class="location-pill">Your Location (ALL) ▾</button>
+      </div>
+      <div>
+        <h4>One Medical</h4>
+        <ul>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Media center</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Sponsored membership</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Give a membership</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <div class="social-row">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Twitter">x</a>
+          <a href="#" aria-label="YouTube">▶</a>
+          <a href="#" aria-label="Instagram">○</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+    </div>
+    <div class="subfooter">
+      <ul>
+        <li><a href="#">Terms of Use</a></li>
+        <li><a href="#">Privacy Notice</a></li>
+        <li><a href="#">Notice of Privacy Practices</a></li>
+        <li><a href="#">Notice of Non-Discrimination</a></li>
+      </ul>
+      <span>©2026 1Life Healthcare, Inc. — All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const hdr = document.querySelector('.site-header');
+window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 80));
+</script>
+
+</body>
+</html>

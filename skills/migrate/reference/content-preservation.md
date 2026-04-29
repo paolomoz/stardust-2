@@ -84,11 +84,17 @@ For every `<a href>`:
      mapping in `migration-procedure.md` § Output path mapping).
      Use **root-relative** paths (`/about/`, `/docs/api/`) so the
      migrated site moves cleanly across hosts.
-   - If not found (the target was never extracted, was filtered out,
-     or was below the cap), keep the original href but add
-     `data-broken-link="true"` and log it under
-     `provenance.brokenInternalLinks[]`. The user decides whether to
-     extract the missing page or leave the broken link.
+   - If not found (target was never extracted or was filtered out),
+     compute the migrated path the slug would resolve to (per
+     `migration-procedure.md` § Output path mapping) and rewrite
+     the href to that path anyway. Mark the link
+     `data-broken-link="true"` and log under
+     `provenance.brokenInternalLinks[]`. The migrated tree stays
+     internally consistent — every same-host link is a relative
+     migrated path; broken links surface as an explicit signal,
+     not as escape hatches to the live origin. The user resolves
+     by extracting the missing page (and re-running migrate) or
+     accepting the broken link.
 4. **Preserve** any href fragment (`#section-3`) and query string
    (`?ref=foo`) exactly when rewriting.
 
@@ -172,11 +178,25 @@ The following come from `direction.md` and apply to every migrated
 page identically (not page-by-page deviations):
 
 - Logo path (always `/assets/logo.<ext>`).
-- Favicon (extracted at extract time; re-emitted at
-  `stardust/migrated/assets/favicon.<ext>` and linked via `<link rel="icon">`).
-- Site-wide nav structure (if `direction.md` declares an updated nav,
-  every page's nav reflects it; otherwise the per-page nav from the
-  current site is preserved).
-- `<meta name="theme-color">` from DESIGN.md `colors.background`.
-- `<meta name="description">` per page is preserved from the current
-  page's metadata.
+- Favicon — extracted at extract time, variants generated at
+  `prepare-migration` Phase 4, linked via `<link rel="icon">`
+  per `metadata-and-jsonld.md` § Favicon.
+- Site-wide nav structure — emitted from `stardust/canon/header.html`
+  on every page; re-iterating the canon-author prototype updates
+  it sitewide.
+
+## Delegated concerns
+
+This doc covers **body content**. Two adjacent concerns are
+delegated to dedicated references:
+
+- **Head metadata** (title, description, OG, Twitter, JSON-LD,
+  canonical, robots, theme-color, favicon) →
+  `metadata-and-jsonld.md`. The five-category model
+  (system-fixed, brand-level, preserved, derived, stripped)
+  governs head composition end-to-end.
+- **Font handling** — `@font-face` URLs are downloaded to
+  `stardust/migrated/assets/fonts/` during `prepare-migration`
+  Phase 4 (assets prep). Migrate-time fonts are local; missing
+  downloads surface a warning per affected page in the run
+  summary.

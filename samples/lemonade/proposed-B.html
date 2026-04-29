@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lemonade — variant B · illustration-led</title>
+<meta name="x-stardust-provenance" content='{"writtenBy":"stardust:prototype","writtenAt":"2026-04-28","variant":"B","variantBrief":"Illustration-led — amplify captured illustrated character vocabulary","againstDirection":"stardust/direction.md","mode":"brand-faithful-A","sources":["stardust/current/pages/home.json","stardust/current/_brand-extraction.json","stardust/prototypes/home-B-shape.md","stardust/prototypes/home-improvements.md"],"unsourcedContent":["tweet-quote-1","tweet-quote-2","tweet-quote-3","tweet-quote-4","pizza-caption-1","pizza-caption-2","pizza-caption-3","app-sketch-caption"],"renderedVia":"stardust-direct (LLM as craft proxy)"}' />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato:wght@400;700;900&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-bg: #ffffff;
+  --color-surface: #f7f7f7;
+  --color-surface-alt: #fbfbfb;
+  --color-surface-dark: #161616;
+  --color-surface-tint-pink: #ffe4f2;
+  --color-surface-tint-pink-soft: #fff7fb;
+  --color-surface-tint-cream: #FFF7E6;
+  --color-text: #4a4a4a;
+  --color-text-strong: #161616;
+  --color-text-muted: #7b7b7b;
+  --color-text-on-dark: #dedede;
+  --color-primary: #ff0083;
+  --color-primary-pressed: #b40060;
+  --color-primary-soft: #ffe4f2;
+  --color-link: #ff0083;
+  --color-border: #e0e0e0;
+  --color-border-soft: #ececec;
+  --color-rainbow-yellow: #FFDB95;
+  --color-rainbow-green: #9ADFC6;
+  --color-rainbow-blue: #4391BD;
+  --color-rainbow-orange: #FF9900;
+  --color-rainbow-pink-soft: #FFB4DA;
+  --color-rainbow-cream: #FFEECE;
+  --color-rainbow-mint: #DBFFEC;
+  --color-rainbow-lavender: #B3D9FF;
+  --font-body: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Merriweather', Georgia, serif;
+  --font-signature: 'Dancing Script', Arial, sans-serif;
+  --size-h1: 56px;
+  --size-h2: 40px;
+  --size-h3: 28px;
+  --size-h4: 22px;
+  --size-eyebrow: 13px;
+  --size-body: 16px;
+  --size-small: 14px;
+  --size-caption: 12px;
+  --weight-body: 400;
+  --weight-bold: 700;
+  --weight-black: 900;
+  --line-tight: 1.15;
+  --line-body: 1.5;
+  --tracking-eyebrow: 0.08em;
+  --section-pad-desktop: 56px;
+  --section-pad-tablet: 48px;
+  --section-pad-mobile: 40px;
+  --section-gap: 40px;
+  --card-pad: 24px;
+  --container-max: 1240px;
+  --grid-gutter: 24px;
+  --radius-button: 5px;
+  --radius-card: 12px;
+  --radius-panel: 24px;
+  --radius-pill: 999px;
+  --shadow-card-soft: rgba(0,0,0,0.06) 0 1px 8px 0, rgba(0,0,0,0.16) 0 31px 30px -18px;
+  --shadow-card-elevated: rgba(0,0,0,0.16) 0 47px 46px -27px, rgba(0,0,0,0.06) 0 2px 12px 0;
+  --shadow-cta-pink-glow: rgba(255,0,131,0.5) 0 10px 40px -10px;
+  --shadow-cta-pink-glow-hover: rgba(255,0,131,0.65) 0 14px 50px -10px;
+  --duration-fast: 120ms;
+  --duration-default: 240ms;
+  --easing: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  font-weight: var(--weight-body);
+  line-height: var(--line-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: var(--color-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.ds-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+@media (max-width: 768px) {
+  .ds-container { padding-left: 20px; padding-right: 20px; }
+}
+.ds-section {
+  padding-top: var(--section-pad-desktop);
+  padding-bottom: var(--section-pad-desktop);
+}
+@media (max-width: 1024px) {
+  .ds-section { padding-top: var(--section-pad-tablet); padding-bottom: var(--section-pad-tablet); }
+}
+@media (max-width: 768px) {
+  .ds-section { padding-top: var(--section-pad-mobile); padding-bottom: var(--section-pad-mobile); }
+}
+
+/* HEADER (slimmer 72px) */
+.ds-header {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border-soft);
+  height: 72px;
+  display: flex; align-items: center;
+}
+.ds-header__inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+}
+.ds-header__nav { display: flex; gap: 28px; font-weight: var(--weight-bold); font-size: var(--size-small); }
+.ds-header__nav a { color: var(--color-text-strong); }
+.ds-header__wordmark {
+  font-family: var(--font-signature);
+  font-size: 36px; color: var(--color-text-strong);
+  text-align: center; line-height: 1;
+}
+.ds-header__right { display: flex; justify-content: flex-end; gap: 16px; align-items: center; font-size: var(--size-small); font-weight: var(--weight-bold); }
+@media (max-width: 768px) { .ds-header__nav { display: none; } .ds-header__inner { grid-template-columns: auto 1fr; } .ds-header__wordmark { text-align: left; padding-left: 8px; } }
+
+/* BUTTONS */
+.ds-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--font-body); font-weight: var(--weight-bold); font-size: var(--size-small);
+  padding: 14px 28px; border-radius: var(--radius-button); border: 0; cursor: pointer; text-decoration: none;
+  min-height: 44px;
+  transition: transform var(--duration-default) var(--easing), background var(--duration-default) var(--easing), box-shadow var(--duration-default) var(--easing);
+}
+.ds-btn-primary { background: var(--color-primary); color: #fff; box-shadow: var(--shadow-cta-pink-glow); }
+.ds-btn-primary:hover { background: var(--color-primary-pressed); box-shadow: var(--shadow-cta-pink-glow-hover); transform: translateY(-2px); text-decoration: none; color: #fff; }
+.ds-btn-secondary { background: #fff; color: var(--color-text-strong); box-shadow: var(--shadow-card-soft); }
+.ds-btn-secondary:hover { transform: translateY(-2px); text-decoration: none; color: var(--color-text-strong); }
+
+.ds-eyebrow { font-size: var(--size-eyebrow); font-weight: var(--weight-bold); text-transform: uppercase; letter-spacing: var(--tracking-eyebrow); color: var(--color-text-muted); margin: 0 0 16px; }
+.ds-h1 { font-family: var(--font-display); font-weight: var(--weight-body); font-size: var(--size-h1); line-height: var(--line-tight); color: var(--color-text-strong); margin: 0; }
+.ds-h2 { font-family: var(--font-body); font-weight: var(--weight-bold); font-size: var(--size-h2); line-height: var(--line-tight); color: var(--color-text-strong); margin: 0 0 16px; }
+.ds-h3 { font-family: var(--font-body); font-weight: var(--weight-bold); font-size: var(--size-h3); color: var(--color-text-strong); margin: 0 0 12px; }
+.ds-h4 { font-family: var(--font-body); font-weight: var(--weight-bold); font-size: var(--size-h4); color: var(--color-text-strong); margin: 0 0 8px; }
+.ds-lede { font-family: var(--font-body); font-size: var(--size-h4); font-weight: var(--weight-body); line-height: 1.4; color: var(--color-text); margin: 16px 0 28px; }
+
+/* HERO — illustration-first scene (B's defining move) */
+.ds-hero-scene {
+  position: relative;
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg) 60%, var(--color-surface) 100%);
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+.ds-hero-scene__inner {
+  display: grid;
+  grid-template-columns: 1fr minmax(360px, 480px) 1fr;
+  align-items: end;
+  min-height: 600px;
+  position: relative;
+}
+.ds-hero-scene__illo {
+  display: flex;
+  align-items: flex-end;
+}
+.ds-hero-scene__illo--left img,
+.ds-hero-scene__illo--right img {
+  width: 100%;
+  height: auto;
+  max-height: 580px;
+  display: block;
+}
+.ds-hero-scene__illo--left { justify-content: flex-end; }
+.ds-hero-scene__illo--right { justify-content: flex-start; }
+.ds-hero-scene__copy {
+  text-align: center;
+  padding: 80px 16px 100px;
+  z-index: 2;
+  position: relative;
+}
+.ds-hero-scene__copy h1 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-body);
+  font-size: 60px;
+  line-height: var(--line-tight);
+  color: var(--color-text-strong);
+  margin: 0 0 18px;
+}
+.ds-hero-scene__copy p { font-size: var(--size-h4); color: var(--color-text); margin: 0 0 32px; }
+.ds-hero-scene__caption {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--size-caption);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+@media (max-width: 1024px) {
+  .ds-hero-scene__inner { grid-template-columns: 1fr; min-height: auto; }
+  .ds-hero-scene__illo--left, .ds-hero-scene__illo--right {
+    max-width: 360px;
+    margin: 0 auto;
+    justify-content: center;
+  }
+  .ds-hero-scene__illo--left img, .ds-hero-scene__illo--right img { max-height: 280px; }
+  .ds-hero-scene__copy h1 { font-size: 40px; }
+  .ds-hero-scene__copy { padding: 48px 16px 32px; }
+}
+
+/* PRODUCT ROW — larger, no tints (B is illustration-monochrome) */
+.ds-product-section { background: var(--color-bg); padding-top: 72px; padding-bottom: 72px; }
+.ds-product-section__head { text-align: center; max-width: 720px; margin: 0 auto 48px; }
+.ds-product-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+.ds-product-tile {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 24px 12px;
+  border-radius: var(--radius-card);
+  background: #fff;
+  text-decoration: none; color: inherit;
+  transition: transform var(--duration-default) var(--easing);
+}
+.ds-product-tile:hover { transform: translateY(-4px); text-decoration: none; }
+.ds-product-tile img { width: 140px; height: 140px; margin-bottom: 12px; }
+.ds-product-tile__label { font-size: var(--size-eyebrow); font-weight: var(--weight-bold); text-transform: uppercase; letter-spacing: var(--tracking-eyebrow); color: var(--color-text-strong); }
+@media (max-width: 1024px) { .ds-product-row { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 640px) { .ds-product-row { grid-template-columns: repeat(2, 1fr); } .ds-product-tile img { width: 100px; height: 100px; } }
+
+/* HOW IT WORKS — pizza promoted, signature moment */
+.ds-how-signature {
+  background: var(--color-surface-tint-cream);
+  padding-top: 80px;
+  padding-bottom: 80px;
+  position: relative;
+}
+.ds-how-signature__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.ds-how-signature__pizza img { max-width: 720px; width: 100%; height: auto; }
+.ds-how-signature__copy h2 { font-size: 48px; }
+.ds-how-signature__captions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-top: 24px;
+}
+.ds-how-signature__caption {
+  border-left: 3px solid var(--color-primary);
+  padding: 8px 16px;
+}
+.ds-how-signature__caption h4 { color: var(--color-primary); margin: 0 0 4px; font-size: 18px; }
+.ds-how-signature__caption p { font-size: var(--size-small); margin: 0; }
+@media (max-width: 1024px) {
+  .ds-how-signature__inner { grid-template-columns: 1fr; gap: 32px; }
+  .ds-how-signature__pizza { display: flex; justify-content: center; }
+  .ds-how-signature__copy h2 { font-size: 36px; }
+}
+
+/* BUNDLES — illustration-led 70/30 (B's bundle move) */
+.ds-bundle-band-illo { background: var(--color-bg); padding-top: 72px; padding-bottom: 72px; }
+.ds-bundle-band-illo__head { text-align: center; max-width: 720px; margin: 0 auto 40px; }
+.ds-bundle-grid-illo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.ds-bundle-card-illo {
+  background: #fff;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card-soft);
+  padding: 0 0 24px;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  text-align: center;
+}
+.ds-bundle-card-illo__art {
+  background: var(--color-surface-tint-pink-soft);
+  height: 240px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px 16px;
+}
+.ds-bundle-card-illo__art img { max-height: 200px; width: auto; }
+.ds-bundle-card-illo h4 { margin: 20px 0 8px; padding: 0 16px; }
+.ds-bundle-card-illo p { font-size: var(--size-small); margin: 0 0 18px; padding: 0 24px; flex: 1; }
+.ds-bundle-card-illo a { margin: 0 24px; }
+@media (max-width: 1024px) { .ds-bundle-grid-illo { grid-template-columns: 1fr; gap: 20px; } }
+
+/* INSTANT AI — full-bleed app sketch */
+.ds-instant-bleed {
+  background: var(--color-surface);
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+.ds-instant-bleed__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.ds-instant-bleed__copy { padding-right: 24px; }
+.ds-instant-bleed__art {
+  display: flex; justify-content: center;
+}
+.ds-instant-bleed__art img { width: 100%; max-width: 560px; }
+@media (max-width: 1024px) { .ds-instant-bleed__inner { grid-template-columns: 1fr; gap: 32px; } }
+
+/* SOCIAL PROOF */
+.ds-social-proof { background: var(--color-bg); }
+.ds-social-proof__head { text-align: center; max-width: 760px; margin: 0 auto 36px; }
+.ds-social-proof__rating { font-family: var(--font-body); font-weight: var(--weight-bold); font-size: 56px; color: var(--color-primary); line-height: 1; }
+.ds-social-proof__rating span { font-size: 24px; color: var(--color-text-muted); margin-left: 6px; }
+.ds-social-proof__stars { font-size: 24px; color: var(--color-rainbow-orange); margin: 8px 0 12px; letter-spacing: 4px; }
+.ds-tweet-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.ds-tweet { background: var(--color-surface-alt); border: 1px solid var(--color-border-soft); border-radius: var(--radius-card); padding: 20px; font-size: var(--size-small); color: var(--color-text); }
+.ds-tweet__avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--color-rainbow-pink-soft), var(--color-primary)); display: inline-block; vertical-align: middle; margin-right: 8px; }
+.ds-tweet__handle { font-weight: var(--weight-bold); color: var(--color-text-strong); }
+.ds-tweet__text { margin-top: 12px; line-height: 1.45; }
+.ds-placeholder { position: relative; }
+.ds-placeholder::after { content: 'PLACEHOLDER'; position: absolute; top: 6px; right: 6px; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; color: var(--color-primary); background: var(--color-primary-soft); padding: 2px 6px; border-radius: 3px; pointer-events: none; }
+@media (max-width: 1024px) { .ds-tweet-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .ds-tweet-grid { grid-template-columns: 1fr; } }
+
+/* SWITCH */
+.ds-switch { background: var(--color-bg); }
+.ds-switch__panel {
+  background-image: url('https://marketing-edge-assets.lemonade.com/_next/static/media/bg-switching.0c3ff5f6.webp?w=1200&q=100');
+  background-size: cover;
+  background-position: right center;
+  background-color: var(--color-surface-alt);
+  border-radius: var(--radius-card);
+  padding: 64px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  box-shadow: var(--shadow-card-soft);
+}
+.ds-switch__copy .ds-eyebrow { color: var(--color-primary); }
+@media (max-width: 1024px) { .ds-switch__panel { grid-template-columns: 1fr; padding: 32px 20px; } }
+
+/* SOCIAL IMPACT */
+.ds-impact { background: var(--color-bg); }
+.ds-impact__head { text-align: center; max-width: 720px; margin: 0 auto 32px; }
+.ds-impact__badges { display: flex; justify-content: center; align-items: center; gap: 56px; flex-wrap: wrap; }
+.ds-impact__badge { text-align: center; font-size: var(--size-eyebrow); font-weight: var(--weight-bold); text-transform: uppercase; letter-spacing: var(--tracking-eyebrow); color: var(--color-text-muted); }
+.ds-impact__badge img { width: 96px; height: auto; margin: 0 auto 8px; }
+
+/* FOOTER */
+.ds-footer { background: var(--color-surface-dark); color: var(--color-text-on-dark); padding: 64px 0 32px; }
+.ds-footer__grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 48px; }
+.ds-footer__col h5 { font-size: var(--size-eyebrow); font-weight: var(--weight-bold); text-transform: uppercase; letter-spacing: var(--tracking-eyebrow); color: #b7b7b7; margin: 0 0 16px; }
+.ds-footer__col a { display: block; color: var(--color-text-on-dark); font-size: var(--size-small); padding: 4px 0; text-decoration: none; }
+.ds-footer__col a:hover { color: var(--color-primary); text-decoration: none; }
+.ds-footer__bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #2a2a2a; padding-top: 24px; font-size: var(--size-caption); color: #b7b7b7; }
+.ds-footer__wordmark { font-family: var(--font-signature); color: #fff; font-size: 32px; line-height: 1; }
+@media (max-width: 1024px) { .ds-footer__grid { grid-template-columns: repeat(2, 1fr); } .ds-footer__bottom { flex-direction: column; gap: 12px; align-items: flex-start; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body data-stardust-variant="B" data-stardust-mode="brand-faithful-A">
+
+<!-- HEADER -->
+<header class="ds-header" data-section="header">
+  <div class="ds-container ds-header__inner">
+    <nav class="ds-header__nav" aria-label="Primary">
+      <a href="#renters">Renters</a>
+      <a href="#homeowners">Homeowners</a>
+      <a href="#car">Car</a>
+      <a href="#pet">Pet</a>
+      <a href="#life">Life</a>
+      <a href="#giveback">Giveback</a>
+    </nav>
+    <a href="/" class="ds-header__wordmark" aria-label="Lemonade home">Lemonade</a>
+    <div class="ds-header__right">
+      <a href="#account">My Account</a>
+      <a href="/onboarding/start" class="ds-btn ds-btn-primary" style="padding: 10px 18px; font-size: 13px;">Check our prices</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO — illustration-first scene -->
+<section class="ds-hero-scene" data-section="hero" data-section-variant="illustration-first">
+  <div class="ds-hero-scene__inner">
+    <div class="ds-hero-scene__illo ds-hero-scene__illo--left" aria-hidden="true">
+      <img src="https://marketing-edge-assets.lemonade.com/_next/static/media/home-left.c60a6d01.svg?w=1920&q=100" alt="" />
+    </div>
+    <div class="ds-hero-scene__copy">
+      <h1>Forget everything you know about insurance</h1>
+      <p>Instant everything. Incredible prices. Big heart.</p>
+      <a href="/onboarding/start" class="ds-btn ds-btn-primary">Check our prices</a>
+    </div>
+    <div class="ds-hero-scene__illo ds-hero-scene__illo--right" aria-hidden="true">
+      <img src="https://marketing-edge-assets.lemonade.com/_next/static/media/home-right.70d304d0.svg?w=1920&q=100" alt="" />
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT ROW — larger, monochrome -->
+<section class="ds-product-section" data-section="product-row">
+  <div class="ds-container">
+    <div class="ds-product-section__head">
+      <p class="ds-eyebrow">What you can cover</p>
+      <h2 class="ds-h2">Renters, home, car, pet, life — start in seconds.</h2>
+    </div>
+    <div class="ds-product-row">
+      <a href="/onboarding/start?p=home_us_renters" class="ds-product-tile" id="renters">
+        <img src="https://marketing-edge-assets.lemonade.com/_next/static/media/renters_desktop.c01e682f.svg?w=384&q=100" alt="Renters illustration" />
+        <span class="ds-product-tile__label">Renters</span>
+      </a>
+      <a href="/onboarding/start?p=home_us_owners" class="ds-product-tile" id="homeowners">
+        <img src="https://marketing-edge-assets.lemonade.com/_next/static/media/homeowners_desktop.98f9c1b4.svg?w=384&q=100" alt="Homeowners illustration" />
+        <span class="ds-product-tile__label">Homeowners</span>
+      </a>
+      <a href="/onboarding/start?p=car" class="ds-product-tile" id="car">
+        <img src="https://marketing-edge-assets.lemonade.com/_next/static/media/car_desktop.2ab76640.svg?w=384&q=100" alt="Car insurance illustration" />
+        <span class="ds-product-tile__label">Car</span>
+      </a>
+      <a href="/onboarding/start?p=pet" class="ds-product-tile" id="pet">
+        <img src="https://marketing-edge-assets.lemonade.com/_next/static/media/pet_desktop.f68654f6.svg?w=384&q=100" alt="Pet insurance illustration" />
+        <span class="ds-product-tile__label">Pet</span>
+      </a>
+      <a href="/onboarding/start?p=life" class="ds-product-tile" id="life">
+        <img src="https://marketing-edge-assets.lemonade.com/_next/static/media/life_desktop.a1f2740e.svg?w=384&q=100" alt="Life insurance illustration" />
+        <span class="ds-product-tile__label">Life</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS — promoted to section 4, signature moment -->
+<section class="ds-how-signature" data-section="how-it-works" data-signature-moment="true">
+  <div class="ds-container">
+    <div class="ds-how-signature__inner">
+      <div class="ds-how-signature__pizza">
+        <img src="https://marketing-edge-assets.lemonade.com/_next/static/media/pizza_desktop_en-US.6c0dced9.svg?w=1920&q=100" alt="Diagram showing how Lemonade allocates premiums between claims, operations, and Giveback" />
+      </div>
+      <div class="ds-how-signature__copy">
+        <p class="ds-eyebrow">How Lemonade works</p>
+        <h2 class="ds-h2">Insurance, redrawn from scratch.</h2>
+        <p>Lemonade is built around a simple idea: insurance should take minutes, not hours, and unclaimed premiums should give back to causes you care about.</p>
+        <div class="ds-how-signature__captions">
+          <div class="ds-how-signature__caption ds-placeholder">
+            <h4>Pay your premium</h4>
+            <p>Caption placeholder — copy pending sourcing from approved how-it-works narrative.</p>
+          </div>
+          <div class="ds-how-signature__caption ds-placeholder">
+            <h4>We pay claims</h4>
+            <p>Caption placeholder — copy pending sourcing from approved how-it-works narrative.</p>
+          </div>
+          <div class="ds-how-signature__caption ds-placeholder">
+            <h4>Unclaimed funds Giveback</h4>
+            <p>Caption placeholder — copy pending sourcing from approved how-it-works narrative.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUNDLES — illustration-led 70/30 -->
+<section class="ds-bundle-band-illo" data-section="bundle-band">
+  <div class="ds-container">
+    <div class="ds-bundle-band-illo__head">
+      <p class="ds-eyebrow">Bundle &amp; save</p>
+      <h2 class="ds-h2">Better together</h2>
+      <p>A bundle levels up your policy with more coverage, automatic discounts, and one easy app.</p>
+    </div>
+    <div class="ds-bundle-grid-illo">
+      <article class="ds-bundle-card-illo">
+        <div class="ds-bundle-card-illo__art">
+          <img src="https://marketing-edge-assets.lemonade.com/_next/static/media/pet-renters.3618e7d0.svg?w=1920&q=100" alt="Pet plus Renters bundle illustration" />
+        </div>
+        <h4 class="ds-h4">Pet + Renters</h4>
+        <p>Save when you protect your apartment and your pet under one roof.</p>
+        <a href="https://www.lemonade.com/onboarding?p=renters_and_pet" class="ds-btn ds-btn-primary">Check our prices</a>
+      </article>
+      <article class="ds-bundle-card-illo">
+        <div class="ds-bundle-card-illo__art">
+          <img src="https://marketing-edge-assets.lemonade.com/_next/static/media/car-renters.ba3d4609.svg?w=1920&q=100" alt="Car plus Renters bundle illustration" />
+        </div>
+        <h4 class="ds-h4">Car + Renters</h4>
+        <p>Two policies, one app, automatic savings the moment you bundle.</p>
+        <a href="https://www.lemonade.com/onboarding?p=car_and_renters" class="ds-btn ds-btn-primary">Check our prices</a>
+      </article>
+      <article class="ds-bundle-card-illo">
+        <div class="ds-bundle-card-illo__art">
+          <img src="https://marketing-edge-assets.lemonade.com/_next/static/media/car-home.2d3f5fd6.svg?w=1920&q=100" alt="Car plus Home bundle illustration" />
+        </div>
+        <h4 class="ds-h4">Car + Home</h4>
+        <p>Cover your home and your car together — bigger coverage, smaller bill.</p>
+        <a href="https://www.lemonade.com/onboarding?p=home_and_car" class="ds-btn ds-btn-primary">Check our prices</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- INSTANT AI — full-bleed app sketch -->
+<section class="ds-instant-bleed" data-section="instant-ai">
+  <div class="ds-container">
+    <div class="ds-instant-bleed__inner">
+      <div class="ds-instant-bleed__art">
+        <img src="https://marketing-edge-assets.lemonade.com/_next/static/media/app-sketch-us.8bf3d83c.svg?w=1080&q=100" alt="Lemonade app onboarding sketch" />
+      </div>
+      <div class="ds-instant-bleed__copy">
+        <p class="ds-eyebrow">Powered by AI</p>
+        <h2 class="ds-h2">Instant everything</h2>
+        <p class="ds-lede">We use AI to craft the perfect policy for you, and to pay claims in seconds. No paperwork, no waiting on hold, no insurance gymnastics.</p>
+        <a href="/onboarding/start" class="ds-btn ds-btn-primary">Get a quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="ds-social-proof ds-section" data-section="social-proof">
+  <div class="ds-container">
+    <div class="ds-social-proof__head">
+      <p class="ds-eyebrow">App Store</p>
+      <h2 class="ds-h2">The (Almost) 5 stars insurance company</h2>
+      <div class="ds-social-proof__rating">4.9<span>/5</span></div>
+      <div class="ds-social-proof__stars" aria-label="4.9 out of 5 stars">★★★★★</div>
+      <p>Lemonade has earned 4.9 stars in the App Store from real customers — here's what some of them say.</p>
+    </div>
+    <div class="ds-tweet-grid">
+      <div class="ds-tweet ds-placeholder">
+        <span class="ds-tweet__avatar"></span><span class="ds-tweet__handle">@happy_customer</span>
+        <p class="ds-tweet__text">Customer review placeholder — verbatim quotes pending sourcing from approved testimonials.</p>
+      </div>
+      <div class="ds-tweet ds-placeholder">
+        <span class="ds-tweet__avatar"></span><span class="ds-tweet__handle">@another_review</span>
+        <p class="ds-tweet__text">Customer review placeholder — verbatim quotes pending sourcing from approved testimonials.</p>
+      </div>
+      <div class="ds-tweet ds-placeholder">
+        <span class="ds-tweet__avatar"></span><span class="ds-tweet__handle">@third_quote</span>
+        <p class="ds-tweet__text">Customer review placeholder — verbatim quotes pending sourcing from approved testimonials.</p>
+      </div>
+      <div class="ds-tweet ds-placeholder">
+        <span class="ds-tweet__avatar"></span><span class="ds-tweet__handle">@fourth_quote</span>
+        <p class="ds-tweet__text">Customer review placeholder — verbatim quotes pending sourcing from approved testimonials.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SWITCH -->
+<section class="ds-switch ds-section" data-section="switch-flow">
+  <div class="ds-container">
+    <div class="ds-switch__panel">
+      <div class="ds-switch__copy">
+        <p class="ds-eyebrow">Switch &amp; save</p>
+        <h2 class="ds-h2" style="color: var(--color-text-strong);">Already insured? We'll help you switch.</h2>
+        <p style="margin-bottom: 28px; max-width: 480px;">People leave their old insurance for Lemonade every day. We make it painless — cancel for them, prorate refunds, set you up in minutes.</p>
+        <a href="/onboarding/start" class="ds-btn ds-btn-primary">Check prices and switch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL IMPACT -->
+<section class="ds-impact ds-section" data-section="social-impact">
+  <div class="ds-container">
+    <div class="ds-impact__head">
+      <p class="ds-eyebrow">Designed for social impact</p>
+      <h2 class="ds-h2">A Public Benefit Corporation, on purpose.</h2>
+      <p>Lemonade Inc. is a Public Benefit Corporation and certified B Corporation — backed by giants and listed on the NYSE.</p>
+    </div>
+    <div class="ds-impact__badges">
+      <div class="ds-impact__badge">
+        <img src="https://marketing-edge-assets.lemonade.com/_next/static/media/b-corp.7e89f2bd.png?w=256&q=100" alt="Certified B Corporation" />
+        <div>Certified B Corp</div>
+      </div>
+      <div class="ds-impact__badge">
+        <img src="https://marketing-edge-assets.lemonade.com/_next/static/media/nyse.b055bec6.png?w=256&q=100" alt="NYSE LMND" />
+        <div>NYSE: LMND</div>
+      </div>
+      <div class="ds-impact__badge">
+        <img src="https://marketing-edge-assets.lemonade.com/_next/static/media/a-rated.d69596b0.png?w=256&q=100" alt="A-rated and backed by giants" />
+        <div>A-rated, backed by giants</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="ds-footer" data-section="footer">
+  <div class="ds-container">
+    <div class="ds-footer__grid">
+      <div class="ds-footer__col">
+        <h5>Renters</h5>
+        <a href="#">Renters Insurance</a>
+        <a href="#">What is renters insurance</a>
+        <a href="#">Coverage</a>
+      </div>
+      <div class="ds-footer__col">
+        <h5>Homeowners</h5>
+        <a href="#">Homeowners Insurance</a>
+        <a href="#">What is homeowners insurance</a>
+        <a href="#">Condo Insurance</a>
+      </div>
+      <div class="ds-footer__col">
+        <h5>Car</h5>
+        <a href="#">Car Insurance</a>
+        <a href="#">Coverage</a>
+        <a href="#">Roadside Assistance</a>
+      </div>
+      <div class="ds-footer__col">
+        <h5>Pet</h5>
+        <a href="#">Pet Health Insurance</a>
+        <a href="#">Wellness</a>
+        <a href="#">Vet Visits</a>
+      </div>
+      <div class="ds-footer__col">
+        <h5>Life</h5>
+        <a href="#">Term Life Insurance</a>
+        <a href="#">Coverage</a>
+        <a href="#">FAQs</a>
+      </div>
+    </div>
+    <div class="ds-footer__bottom">
+      <div class="ds-footer__wordmark" aria-hidden="true">Lemonade</div>
+      <div>© Lemonade Inc. — A Public Benefit Corporation &amp; certified B Corp. NYSE: LMND.</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

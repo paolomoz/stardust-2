@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy:         stardust:prototype
+  writtenAt:         2026-04-28T16:25:00Z
+  page:              home
+  variant:           B (catalog amplified — "the cans ARE the brand")
+  pageUrl:           https://liquiddeath.com/
+  proposedFile:      ./home-b.html
+  againstDirection:  stardust/direction.md (Active 2026-04-28T16:18:00Z)
+  readArtifacts:
+    - stardust/current/pages/home.json
+    - stardust/current/_brand-extraction.json
+    - DESIGN.md
+    - DESIGN.json
+    - stardust/prototypes/home-improvements.md
+    - stardust/prototypes/home-b-shape.md
+  divergenceVersion: brand-faithful Mode A (palette + typography pinned)
+  fontDeck:          brand-inherited (Acumin Pro / Acumin Pro Condensed; Barlow Condensed fallback)
+  paletteSource:     inherited from _brand-extraction.json
+  brandTraitAmplified: catalog density (the cans ARE the brand)
+  renderedVia:       stardust-direct
+  unsourcedContent:  []
+  stardustVersion:   0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liquid Death | Murder Your Thirst</title>
+<link rel="icon" href="https://liquiddeath.com/cdn/shop/files/Liquiddeath-Skull-Favicon_32x32.png?v=1682460908">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap');
+
+:root {
+  --heading-font-family: "Acumin Pro Condensed", "Barlow Condensed", system-ui, sans-serif;
+  --body-font-family:    "Acumin Pro", "Barlow", system-ui, sans-serif;
+
+  --heading-xxl: clamp(56px, 12vw, 180px);
+  --heading-xl:  clamp(40px, 8vw, 120px);
+  --heading-lg:  clamp(32px, 5vw, 72px);
+  --heading-md:  clamp(22px, 3vw, 44px);
+  --body:        18px;
+  --body-sm:     14px;
+
+  --line-height-heading: 0.95;
+  --line-height-body:    1.45;
+
+  --color-bg:        #ffffff;
+  --color-fg:        #000000;
+  --color-accent:    #000000;
+  --color-ground-alt:#f4f4f4;
+  --color-ink-soft:  #151515;
+  --color-ink-muted: #696969;
+  --color-rule:      #e6e6e6;
+  --color-invert-bg: #000000;
+  --color-invert-fg: #ffffff;
+
+  --spacing-xs:  4px;
+  --spacing-sm:  8px;
+  --spacing-md:  16px;
+  --spacing-lg:  24px;
+  --spacing-xl:  48px;
+  --spacing-2xl: 96px;
+
+  --section-padding: 48px;   /* B leans tighter — denser end of balanced */
+  --max-width:       1440px;
+  --rail-max:        1280px;
+  --radius:          0px;
+  --pill:            9999px;
+}
+@media (max-width: 768px) { :root { --section-padding: 24px; } }
+@media (min-width: 769px) and (max-width: 1080px) { :root { --section-padding: 36px; } }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--body-font-family);
+  font-size: var(--body);
+  line-height: var(--line-height-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+
+::selection { background: var(--color-accent); color: var(--color-invert-fg); }
+
+.t-display {
+  font-family: var(--heading-font-family);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  line-height: var(--line-height-heading);
+  font-stretch: 75%;
+}
+.t-d1 { font-size: var(--heading-xxl); }
+.t-d2 { font-size: var(--heading-xl); }
+.t-d3 { font-size: var(--heading-lg); }
+.t-mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: var(--spacing-sm);
+  font-family: var(--heading-font-family); font-weight: 700; font-stretch: 75%;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  border: 0; border-radius: var(--radius); line-height: 1; white-space: nowrap;
+  transition: background .18s, color .18s; cursor: pointer; font-size: 16px;
+}
+.btn--primary { background: var(--color-accent); color: var(--color-invert-fg); padding: 16px 32px; }
+.btn--primary:hover { background: var(--color-invert-fg); color: var(--color-accent); outline: 2px solid var(--color-accent); outline-offset: -2px; }
+.btn--primary-invert { background: var(--color-invert-fg); color: var(--color-accent); padding: 16px 32px; }
+.btn--primary-invert:hover { background: var(--color-accent); color: var(--color-invert-fg); outline: 2px solid var(--color-invert-fg); outline-offset: -2px; }
+.btn--secondary { background: transparent; color: var(--color-fg); border: 2px solid var(--color-fg); padding: 14px 28px; }
+.btn--secondary:hover { background: var(--color-fg); color: var(--color-invert-fg); }
+.btn--ghost { background: transparent; color: var(--color-fg); padding: 0; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
+.btn--ghost-invert { color: var(--color-invert-fg); padding: 0; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
+
+/* promo */
+.promo-strip {
+  background: var(--color-invert-bg);
+  color: var(--color-invert-fg);
+  text-align: center;
+  padding: 10px var(--spacing-md);
+  font-family: var(--heading-font-family);
+  font-weight: 700; font-stretch: 75%;
+  text-transform: uppercase; letter-spacing: 0.06em; font-size: 12px;
+}
+
+/* header */
+.site-header { position: sticky; top: 0; z-index: 50; background: var(--color-bg); border-bottom: 1px solid var(--color-rule); }
+.site-header__inner {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center;
+  gap: var(--spacing-lg); padding: 16px var(--section-padding);
+  max-width: var(--max-width); margin: 0 auto;
+}
+.brand { font-family: var(--heading-font-family); font-weight: 900; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; font-stretch: 75%; }
+.brand::after { content: " ☠"; font-size: 16px; }
+.nav { display: flex; gap: var(--spacing-xl); justify-content: center; }
+.nav a { font-family: var(--heading-font-family); font-weight: 700; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; font-stretch: 75%; position: relative; }
+.nav a:hover::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: var(--color-fg); }
+.util { display: flex; gap: var(--spacing-md); align-items: center; }
+.util a { font-size: 13px; font-weight: 700; text-transform: uppercase; }
+.util .icon { width: 22px; height: 22px; display: inline-block; }
+@media (max-width: 1080px) { .nav { display: none; } }
+
+/* ============== TAGLINE MARQUEE (replaces hero) ============== */
+.marquee {
+  background: var(--color-invert-bg);
+  color: var(--color-invert-fg);
+  padding: clamp(48px, 8vw, 96px) 0;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid #1a1a1a;
+}
+.marquee__track {
+  display: flex;
+  gap: clamp(40px, 6vw, 80px);
+  white-space: nowrap;
+  animation: marquee 36s linear infinite;
+  width: max-content;
+}
+.marquee__phrase {
+  font-family: var(--heading-font-family);
+  font-weight: 900;
+  font-stretch: 75%;
+  text-transform: uppercase;
+  font-size: clamp(72px, 14vw, 220px);
+  line-height: 0.85;
+  letter-spacing: -0.005em;
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 3vw, 48px);
+}
+.marquee__phrase svg { width: clamp(48px, 6vw, 96px); height: auto; flex-shrink: 0; }
+.marquee__sub {
+  text-align: center;
+  margin-top: var(--spacing-xl);
+  padding: 0 var(--section-padding);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+.marquee__intro {
+  font-family: var(--heading-font-family);
+  font-stretch: 75%;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(14px, 1.4vw, 18px);
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.78);
+  max-width: 56ch;
+  text-align: center;
+  line-height: 1.4;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track { animation: none; justify-content: center; width: auto; flex-wrap: wrap; }
+}
+
+/* ============== CATALOG WALL ============== */
+.catalog-wall {
+  padding: var(--section-padding);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+.catalog-wall__head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  flex-wrap: wrap; gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+.catalog-wall__title {
+  font-family: var(--heading-font-family);
+  font-weight: 900;
+  font-stretch: 75%;
+  text-transform: uppercase;
+  font-size: clamp(28px, 3.5vw, 56px);
+  line-height: 0.95;
+}
+.catalog-wall__filters { display: flex; gap: var(--spacing-md); flex-wrap: wrap; }
+.catalog-wall__filter {
+  font-family: var(--heading-font-family);
+  font-weight: 700; font-stretch: 75%;
+  text-transform: uppercase; font-size: 13px; letter-spacing: 0.05em;
+  padding: 8px 14px; border: 1px solid var(--color-rule); cursor: pointer; background: transparent;
+}
+.catalog-wall__filter[aria-current="true"] { background: var(--color-fg); color: var(--color-invert-fg); border-color: var(--color-fg); }
+
+.catalog-wall__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--spacing-md);
+}
+@media (max-width: 1080px) { .catalog-wall__grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 720px) { .catalog-wall__grid { grid-template-columns: repeat(3, 1fr); gap: 12px; } }
+@media (max-width: 480px) { .catalog-wall__grid { grid-template-columns: repeat(2, 1fr); } }
+
+.card { display: flex; flex-direction: column; gap: var(--spacing-sm); position: relative; }
+.card__media {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--color-ground-alt);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.card__media img { width: 100%; height: 100%; object-fit: contain; transition: transform .35s ease; }
+.card:hover .card__media img { transform: scale(1.05); }
+.card__title {
+  font-family: var(--heading-font-family);
+  font-weight: 800; font-stretch: 75%;
+  text-transform: uppercase;
+  font-size: clamp(15px, 1.6vw, 22px);
+  line-height: 0.95;
+  margin-top: 8px;
+}
+.card__sub {
+  font-size: 12px;
+  color: var(--color-ink-soft);
+  display: flex; justify-content: space-between; gap: 8px;
+}
+.card__sub span:last-child { font-family: ui-monospace, monospace; color: var(--color-ink-muted); font-size: 10px; letter-spacing: 0.06em; }
+.card__addtocart {
+  position: absolute;
+  bottom: 8px; left: 8px; right: 8px;
+  background: var(--color-accent);
+  color: var(--color-invert-fg);
+  padding: 8px 6px;
+  text-align: center;
+  font-family: var(--heading-font-family);
+  font-weight: 700; font-stretch: 75%; letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 11px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .2s, transform .2s;
+  pointer-events: none;
+}
+.card:hover .card__addtocart { opacity: 1; transform: translateY(0); }
+.card a { display: contents; }
+
+/* SKU bracket / category divider rows */
+.cat-bracket {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  gap: var(--spacing-md);
+  align-items: center;
+  padding: var(--spacing-md) 0 8px;
+  border-bottom: 1px solid var(--color-rule);
+  margin-top: var(--spacing-lg);
+}
+.cat-bracket__title { font-family: var(--heading-font-family); font-stretch: 75%; font-weight: 800; text-transform: uppercase; font-size: clamp(20px, 2vw, 32px); line-height: 0.95; }
+.cat-bracket__count { font-family: ui-monospace, monospace; font-size: 12px; color: var(--color-ink-muted); letter-spacing: 0.08em; }
+.cat-bracket__rule { height: 2px; background: var(--color-fg); align-self: end; margin-bottom: 4px; }
+
+/* ============== CAMPAIGN BREAK ============== */
+.campaign-break {
+  position: relative;
+  width: 100%;
+  margin: var(--spacing-2xl) 0;
+  overflow: hidden;
+  isolation: isolate;
+  aspect-ratio: 16 / 8;
+  max-height: 720px;
+}
+.campaign-break img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+.campaign-break:hover img { transform: scale(1.03); }
+.campaign-break__scrim { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 50%); }
+.campaign-break__caption {
+  position: absolute;
+  left: var(--section-padding);
+  bottom: var(--section-padding);
+  right: var(--section-padding);
+  z-index: 2;
+  color: var(--color-invert-fg);
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+.campaign-break__head {
+  font-family: var(--heading-font-family);
+  font-weight: 900; font-stretch: 75%;
+  text-transform: uppercase;
+  font-size: clamp(28px, 4vw, 64px);
+  line-height: 0.95;
+  max-width: 22ch;
+}
+.campaign-break__eyebrow { font-family: ui-monospace, monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.85; margin-bottom: 12px; display: block; }
+
+/* ============== manifesto ============== */
+.manifesto {
+  background: var(--color-invert-bg);
+  color: var(--color-invert-fg);
+  padding: clamp(64px, 12vw, 160px) var(--section-padding);
+  position: relative;
+  overflow: hidden;
+}
+.manifesto__inner { max-width: var(--rail-max); margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: var(--spacing-xl); }
+.manifesto__head {
+  font-family: var(--heading-font-family);
+  font-weight: 900; font-stretch: 75%;
+  text-transform: uppercase;
+  font-size: clamp(48px, 9vw, 144px);
+  line-height: 0.92;
+  max-width: 16ch;
+}
+.manifesto__sub {
+  font-family: var(--heading-font-family);
+  font-weight: 700; font-stretch: 75%;
+  text-transform: uppercase;
+  font-size: clamp(20px, 2.8vw, 38px);
+  line-height: 1.05; max-width: 28ch;
+}
+.manifesto__cta { display: flex; gap: var(--spacing-md); align-items: center; }
+
+/* ============== merch (same as A but tighter) ============== */
+.merch { padding: var(--section-padding); max-width: var(--max-width); margin: 0 auto; }
+.section-head {
+  display: flex; align-items: end; justify-content: space-between;
+  margin-bottom: var(--spacing-xl); gap: var(--spacing-lg); flex-wrap: wrap;
+}
+.merch__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--spacing-lg); }
+@media (max-width: 1080px) { .merch__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .merch__grid { grid-template-columns: 1fr; } }
+.merch-card .card__media { aspect-ratio: 1 / 1; }
+.merch-card .card__title { text-transform: none; font-weight: 700; font-size: clamp(18px, 2vw, 24px); }
+
+/* ============== dual end CTA ============== */
+.dual-cta {
+  background: var(--color-invert-bg); color: var(--color-invert-fg);
+  padding: clamp(64px, 9vw, 120px) var(--section-padding);
+}
+.dual-cta__grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-2xl);
+  max-width: var(--rail-max); margin: 0 auto;
+}
+@media (max-width: 1080px) { .dual-cta__grid { grid-template-columns: 1fr; gap: var(--spacing-xl); } }
+.dual-cta__half { display: flex; flex-direction: column; gap: var(--spacing-md); padding-right: var(--spacing-md); border-right: 1px solid rgba(255,255,255,0.12); }
+.dual-cta__half:last-child { border-right: 0; padding-right: 0; padding-left: var(--spacing-md); }
+@media (max-width: 1080px) { .dual-cta__half { border-right: 0; padding-right: 0; padding-bottom: var(--spacing-xl); border-bottom: 1px solid rgba(255,255,255,0.12); } .dual-cta__half:last-child { border-bottom: 0; } }
+.dual-cta__eyebrow { font-family: ui-monospace, monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.65); }
+.dual-cta__head { font-family: var(--heading-font-family); font-weight: 900; font-stretch: 75%; text-transform: uppercase; font-size: clamp(36px, 6vw, 84px); line-height: 0.95; margin-bottom: var(--spacing-sm); }
+.dual-cta__body { color: rgba(255,255,255,0.78); font-size: 16px; line-height: 1.5; max-width: 36ch; margin-bottom: var(--spacing-md); }
+
+/* ============== footer ============== */
+.site-footer { background: var(--color-bg); padding: var(--section-padding); border-top: 1px solid var(--color-rule); }
+.site-footer__grid { display: grid; grid-template-columns: 1.4fr 1.6fr 1fr 1fr; gap: var(--spacing-2xl); max-width: var(--rail-max); margin: 0 auto; }
+@media (max-width: 1080px) { .site-footer__grid { grid-template-columns: 1fr 1fr; gap: var(--spacing-xl); } }
+@media (max-width: 480px) { .site-footer__grid { grid-template-columns: 1fr; gap: var(--spacing-xl); } }
+.footer__head { font-family: var(--heading-font-family); font-weight: 800; font-stretch: 75%; text-transform: uppercase; font-size: 14px; letter-spacing: 0.05em; margin-bottom: var(--spacing-md); }
+.footer__handle { font-family: var(--heading-font-family); font-stretch: 75%; font-weight: 800; font-size: clamp(28px, 3vw, 44px); text-transform: uppercase; line-height: 1; margin-top: var(--spacing-sm); }
+.footer__handle a { display: block; }
+.footer__handle a + a { margin-top: 8px; }
+.footer__list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.footer__list a { font-size: 14px; }
+.footer__list a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.footer__email { display: flex; border: 1px solid var(--color-fg); }
+.footer__email input { flex: 1; border: 0; padding: 12px 14px; background: transparent; font-family: var(--body-font-family); font-size: 14px; color: var(--color-fg); outline: none; }
+.footer__email button { background: var(--color-fg); color: var(--color-invert-fg); border: 0; padding: 0 18px; font-family: var(--heading-font-family); font-weight: 800; font-stretch: 75%; text-transform: uppercase; letter-spacing: 0.04em; font-size: 13px; }
+.footer__legal { margin-top: var(--spacing-2xl); padding-top: var(--spacing-lg); border-top: 1px solid var(--color-rule); display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--spacing-sm); max-width: var(--rail-max); margin-left: auto; margin-right: auto; font-size: 12px; color: var(--color-ink-muted); text-transform: uppercase; letter-spacing: 0.06em; font-family: var(--heading-font-family); font-stretch: 75%; font-weight: 600; }
+.footer__legal ul { list-style: none; display: flex; gap: var(--spacing-md); flex-wrap: wrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+.skip-link { position: absolute; left: -10000px; top: -10000px; }
+.skip-link:focus-visible { left: 16px; top: 16px; background: var(--color-fg); color: var(--color-invert-fg); padding: 8px 12px; z-index: 100; }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="promo-strip" data-section="promo-strip" data-intent="commercial notice" data-layout="edge-to-edge">
+  Free shipping on all orders above €120.00
+</div>
+
+<header class="site-header" data-section="header" data-intent="navigation" data-layout="full-bleed">
+  <div class="site-header__inner">
+    <a class="brand" href="/" aria-label="Liquid Death — Home">LIQUID DEATH</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/collections/beverages-eu">Beverages</a>
+      <a href="/collections/merch-store">Merch</a>
+      <a href="/pages/where-to-buy">Store Locator</a>
+      <a href="/pages/sell-your-soul-eu">Sell Your Soul</a>
+      <a href="/pages/manifesto">About</a>
+      <a href="/pages/timewaster-5000">Timewaster 5000</a>
+    </nav>
+    <div class="util">
+      <a class="locale" href="#locale">Italy (EUR €)</a>
+      <a href="/account" aria-label="Account"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg></a>
+      <a href="/cart" aria-label="Cart"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 6h14l-1.5 12h-11L5 6z"/><path d="M9 6V4a3 3 0 0 1 6 0v2"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="marquee" data-section="tagline-marquee" data-intent="emotional hook — typography as hero" data-layout="edge-to-edge" data-interactive="carousel" data-media="none">
+    <div class="marquee__track" aria-label="Murder Your Thirst">
+      <span class="marquee__phrase">Murder Your Thirst <svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M50 5C25 5 5 22 5 47c0 14 7 26 18 33v15c0 3 2 5 5 5h6v-9c0-2 2-4 4-4s4 2 4 4v9h16v-9c0-2 2-4 4-4s4 2 4 4v9h6c3 0 5-2 5-5V80c11-7 18-19 18-33C95 22 75 5 50 5zm-14 45c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm28 0c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm-14 22l-5 9h10l-5-9z"/></svg></span>
+      <span class="marquee__phrase">Murder Your Thirst <svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M50 5C25 5 5 22 5 47c0 14 7 26 18 33v15c0 3 2 5 5 5h6v-9c0-2 2-4 4-4s4 2 4 4v9h16v-9c0-2 2-4 4-4s4 2 4 4v9h6c3 0 5-2 5-5V80c11-7 18-19 18-33C95 22 75 5 50 5zm-14 45c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm28 0c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm-14 22l-5 9h10l-5-9z"/></svg></span>
+      <span class="marquee__phrase">Murder Your Thirst <svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M50 5C25 5 5 22 5 47c0 14 7 26 18 33v15c0 3 2 5 5 5h6v-9c0-2 2-4 4-4s4 2 4 4v9h16v-9c0-2 2-4 4-4s4 2 4 4v9h6c3 0 5-2 5-5V80c11-7 18-19 18-33C95 22 75 5 50 5zm-14 45c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm28 0c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm-14 22l-5 9h10l-5-9z"/></svg></span>
+      <span class="marquee__phrase">Murder Your Thirst <svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M50 5C25 5 5 22 5 47c0 14 7 26 18 33v15c0 3 2 5 5 5h6v-9c0-2 2-4 4-4s4 2 4 4v9h16v-9c0-2 2-4 4-4s4 2 4 4v9h6c3 0 5-2 5-5V80c11-7 18-19 18-33C95 22 75 5 50 5zm-14 45c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm28 0c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm-14 22l-5 9h10l-5-9z"/></svg></span>
+    </div>
+    <div class="marquee__sub">
+      <p class="marquee__intro">18 cans of canned water, sparkling water, iced tea, and sparkling energy. None of it in plastic.</p>
+      <a class="btn btn--primary-invert" href="/collections/beverages-eu" style="margin-left:8px;">Shop the Lineup</a>
+    </div>
+  </section>
+
+  <section class="catalog-wall" data-section="catalog-wall" data-intent="drive action — full catalog" data-layout="grid" data-items="15" data-fragment="product-card" data-fragment-role="source" data-media="image">
+    <div class="catalog-wall__head">
+      <h2 class="catalog-wall__title">The Whole<br>Lineup</h2>
+      <div class="catalog-wall__filters" role="tablist" aria-label="Filter by category">
+        <button class="catalog-wall__filter" aria-current="true">All 18</button>
+        <button class="catalog-wall__filter">Sparkling Energy</button>
+        <button class="catalog-wall__filter">Sparkling Water</button>
+        <button class="catalog-wall__filter">Iced Tea</button>
+        <button class="catalog-wall__filter">Mountain Water</button>
+      </div>
+    </div>
+
+    <div class="catalog-wall__grid">
+
+      <div class="cat-bracket"><span class="cat-bracket__title">Sparkling Energy</span><span class="cat-bracket__rule"></span><span class="cat-bracket__count">04 SKUs · 5 cal</span></div>
+      <article class="card"><a href="/products/scary-strawberry"><div class="card__media"><img src="https://liquiddeath.com/cdn/shop/files/LD_Energy_SS_12oz_Can.webp?v=1763588489&width=1550" alt="Scary Strawberry sparkling energy"></div><h3 class="card__title">Scary Strawberry</h3><p class="card__sub"><span>Sparkling Energy</span><span>5 cal</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+      <article class="card"><a href="/products/tropical-terror"><div class="card__media"><img src="https://liquiddeath.com/cdn/shop/files/LD_Energy_TT_12oz_Can_67c50c4a-91ee-4861-a1aa-599d34257aa0.webp?v=1769737285&width=1550" alt="Tropical Terror sparkling energy"></div><h3 class="card__title">Tropical Terror</h3><p class="card__sub"><span>Sparkling Energy</span><span>5 cal</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+      <article class="card"><a href="/products/orange-horror"><div class="card__media"><img src="https://liquiddeath.com/cdn/shop/files/LD_Energy_OH_12oz_Can_251419a0-51cd-43d4-960d-cc159f5024f3.webp?v=1769737285&width=1550" alt="Orange Horror sparkling energy"></div><h3 class="card__title">Orange Horror</h3><p class="card__sub"><span>Sparkling Energy</span><span>5 cal</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+      <article class="card"><a href="/products/murder-mystery"><div class="card__media"><img src="https://liquiddeath.com/cdn/shop/files/LD_Energy_MM_12oz_Can_a7ffc4bb-178a-49fe-8335-e37c15da15a7.webp?v=1769736929&width=1550" alt="Murder Mystery sparkling energy"></div><h3 class="card__title">Murder Mystery</h3><p class="card__sub"><span>Sparkling Energy</span><span>5 cal</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+
+      <div class="cat-bracket"><span class="cat-bracket__title">Sparkling Water</span><span class="cat-bracket__rule"></span><span class="cat-bracket__count">06 SKUs · 10 cal</span></div>
+      <article class="card"><a href="/products/grave-fruit"><div class="card__media"><img src="https://liquiddeath.com/cdn/shop/files/LD_Grave_Fruit_12oz_Can_-_PREFERRED_IMAGE.webp?v=1736804248&width=1550" alt="Grave Fruit sparkling water"></div><h3 class="card__title">Grave Fruit</h3><p class="card__sub"><span>Sparkling Water</span><span>10 cal</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+      <article class="card"><a href="/products/cherry-obituary"><div class="card__media"><img src="https://liquiddeath.com/cdn/shop/files/LD_Cherry_Obituary_12oz_Can_a4d69aaa-d205-4363-b360-8f47dc5a6508.webp?v=1738269393&width=1500" alt="Cherry Obituary sparkling water"></div><h3 class="card__title">Cherry Obituary</h3><p class="card__sub"><span>Sparkling Water</span><span>10 cal</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+      <article class="card"><a href="/products/doctor-death"><div class="card__media"><img src="https://liquiddeath.com/cdn/shop/files/LD_Doctor_Death_12oz_Can_-_PREFERRED_IMAGE_0470d13f-8cb5-4dfd-bc82-ed5b11a86c3c.webp?v=1738269262&width=1550" alt="Doctor Death sparkling water"></div><h3 class="card__title">Doctor Death</h3><p class="card__sub"><span>Sparkling Water</span><span>10 cal</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+      <article class="card"><a href="/products/killer-cola"><div class="card__media"><img src="https://liquiddeath.com/cdn/shop/files/LD_Killer_Cola_12oz_Can_-_PREFERRED_IMAGE_9f58ff2c-dbe4-4deb-aca7-7124fe5bd5ee.webp?v=1738268981&width=1550" alt="Killer Cola sparkling water"></div><h3 class="card__title">Killer Cola</h3><p class="card__sub"><span>Sparkling Water</span><span>10 cal</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+      <article class="card"><a href="/products/severed-lime"><div class="card__media"><img src="https://liquiddeath.com/cdn/shop/files/LD_Severed_Lime_12oz_Can_-_PREFERRED_IMAGE.webp?v=1736804456&width=1550" alt="Severed Lime sparkling water"></div><h3 class="card__title">Severed Lime</h3><p class="card__sub"><span>Sparkling Water</span><span>10 cal</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+      <article class="card"><a href="/products/mountain-water-sparkling"><div class="card__media"><img src="https://liquiddeath.com/cdn/shop/files/LD_Mountain_Sparkling_Drinking_Water_12oz_Can.webp?v=1736804527&width=1550" alt="Mountain Water sparkling"></div><h3 class="card__title">Mountain Water</h3><p class="card__sub"><span>Sparkling</span><span>0 cal</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+
+    </div>
+
+    <!-- editorial campaign break between catalog rows -->
+    <section class="campaign-break" data-section="campaign-break" data-intent="build brand — editorial photo break" data-layout="full-bleed" data-media="image">
+      <img src="https://liquiddeath.com/cdn/shop/files/PT-Homepage-DT-2624x1300.webp?v=1776277884&width=3000" alt="Liquid Death × Pop-Tarts™ Carnage Iced Tea campaign photograph">
+      <div class="campaign-break__scrim" aria-hidden="true"></div>
+      <div class="campaign-break__caption">
+        <div>
+          <span class="campaign-break__eyebrow">Latest Drop · Limited</span>
+          <h3 class="campaign-break__head">Liquid Death × Pop-Tarts™ Carnage Iced Tea</h3>
+        </div>
+        <a class="btn btn--primary-invert" href="/products/scary-strawberry">Shop the Collab</a>
+      </div>
+    </section>
+
+    <div class="catalog-wall__grid">
+      <div class="cat-bracket"><span class="cat-bracket__title">Iced Tea</span><span class="cat-bracket__rule"></span><span class="cat-bracket__count">04 SKUs · 20 cal</span></div>
+      <article class="card"><a href="/products/green-guillotine"><div class="card__media"><img src="https://liquiddeath.com/cdn/shop/files/LD_Green_Guilloteen_12oz_Can_5a3a9e90-7203-453b-a28c-bbe251940c34.webp?v=1738269809&width=1550" alt="Green Guillotine iced tea"></div><h3 class="card__title">Green Guillotine</h3><p class="card__sub"><span>Iced Tea</span><span>20 cal</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+      <article class="card"><a href="/products/slaughter-berry"><div class="card__media"><img src="https://liquiddeath.com/cdn/shop/files/LD_FT_Slaughter_Berry_12oz_Can.webp?v=1736804760&width=1550" alt="Slaughter Berry iced tea"></div><h3 class="card__title">Slaughter Berry</h3><p class="card__sub"><span>Iced Tea</span><span>20 cal</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+      <article class="card"><a href="/products/dead-billionaire"><div class="card__media"><img src="https://liquiddeath.com/cdn/shop/files/LD_Dead_Billionaire_12oz_Can.webp?v=1736804596&width=1550" alt="Dead Billionaire iced tea"></div><h3 class="card__title">Dead Billionaire</h3><p class="card__sub"><span>Iced Tea</span><span>20 cal</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+      <article class="card"><a href="/products/rest-in-peach"><div class="card__media"><img src="https://liquiddeath.com/cdn/shop/files/LD_FT_Rest_In_Peach_12oz_Can.webp?v=1736804674&width=1550" alt="Rest in Peach iced tea"></div><h3 class="card__title">Rest in Peach</h3><p class="card__sub"><span>Iced Tea</span><span>20 cal</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+
+      <div class="cat-bracket"><span class="cat-bracket__title">Mountain Water</span><span class="cat-bracket__rule"></span><span class="cat-bracket__count">01 SKU · 0 cal</span></div>
+      <article class="card"><a href="/products/mountain-water-still"><div class="card__media"><img src="https://liquiddeath.com/cdn/shop/files/LD_Mountain_Still_12oz_Can_-_PREFERRED_IMAGE_80d31a61-16b3-4a14-b619-59ff475d5127.webp?v=1738268731&width=1550" alt="Mountain Water still"></div><h3 class="card__title">Mountain Water</h3><p class="card__sub"><span>Still</span><span>0 cal</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+      <article class="card" style="grid-column:span 2;">
+        <a href="/collections/beverages-eu" style="display:flex;flex-direction:column;justify-content:center;align-items:center;background:var(--color-fg);color:var(--color-invert-fg);aspect-ratio:8/5;text-align:center;padding:24px;height:100%;">
+          <div style="font-family:var(--heading-font-family);font-weight:900;font-stretch:75%;text-transform:uppercase;font-size:clamp(28px,2.6vw,52px);line-height:0.95;">View All<br>18 Cans →</div>
+          <div style="margin-top:8px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);font-family:ui-monospace,monospace;">Including Sweet Reaper, Mango Chainsaw, Rootbeer Wrath, more</div>
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <section class="manifesto" data-section="manifesto-strip" data-intent="build trust" data-layout="full-bleed" data-media="none">
+    <div class="manifesto__inner">
+      <h2 class="manifesto__head">Plastic Recycling Is&nbsp;a&nbsp;Myth.</h2>
+      <p class="manifesto__sub">Most plastic is sent to landfills.<br>Aluminum is infinitely recyclable.</p>
+      <div class="manifesto__cta">
+        <a class="btn btn--ghost-invert" href="/pages/manifesto">Learn more →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="merch" data-section="merch-grid" data-intent="drive action — merch" data-layout="grid" data-items="4" data-media="image">
+    <div class="section-head">
+      <h2 class="t-display t-d2">Killer Merch</h2>
+      <a class="btn btn--ghost" href="/collections/merch-store">Shop all merch →</a>
+    </div>
+    <div class="merch__grid">
+      <article class="card merch-card"><a href="/collections/merch-store"><div class="card__media"><img src="https://liquiddeath.com/cdn/shop/files/Liquiddeath-Countryclub-homepage_339e32da-c3cd-4153-b72c-761a989c9cf9.webp?v=1738782653&width=1000" alt="The Flasket — silver flask with skull and snake"></div><h3 class="card__title">The Flasket</h3><p class="card__sub"><span>Stainless steel · 6oz</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+      <article class="card merch-card"><a href="/collections/merch-store"><div class="card__media"><img src="https://liquiddeath.com/cdn/shop/files/Liquiddeath-Deathpeddlers-Homepage_0005f134-c761-4805-a47a-6a6a6f949750.webp?v=1738782669&width=1000" alt="Masked Death Can Cooler 2-Pack"></div><h3 class="card__title">Masked Death Can Cooler (2-Pack)</h3><p class="card__sub"><span>Neoprene · fits 12oz tallboys</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+      <article class="card merch-card"><a href="/collections/merch-store"><div class="card__media" style="background:#000"><img src="https://liquiddeath.com/cdn/shop/files/DTPB_Ribbon_Transparent_916837d9-6074-4f4e-99e4-0a8cb7c6043e.png?v=1763425030&width=596" alt="Ride or Die tee" style="object-fit:contain;padding:24px;filter:invert(1);"></div><h3 class="card__title">Ride or Die Tee</h3><p class="card__sub"><span>100% cotton · S–XXL</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+      <article class="card merch-card"><a href="/collections/merch-store"><div class="card__media" style="background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--heading-font-family);font-weight:800;font-stretch:75%;text-transform:uppercase;font-size:42px;letter-spacing:0;line-height:0.95;text-align:center;padding:24px;">Instant<br>Death<br>Tee</div><h3 class="card__title">Instant Death Tee</h3><p class="card__sub"><span>100% cotton · S–XXL</span></p><span class="card__addtocart">Add to Cart</span></a></article>
+    </div>
+  </section>
+
+  <section class="dual-cta" data-section="dual-end-cta" data-intent="drive action — loyalty + B2B" data-layout="side-by-side" data-items="2">
+    <div class="dual-cta__grid">
+      <div class="dual-cta__half">
+        <span class="dual-cta__eyebrow">Country Club · Loyalty</span>
+        <h3 class="dual-cta__head">Join the Club</h3>
+        <p class="dual-cta__body">Get drops before anyone, exclusive merch, and a free can to celebrate every birthday.</p>
+        <a class="btn btn--primary-invert" href="/pages/country-club">Join the Club</a>
+      </div>
+      <div class="dual-cta__half">
+        <span class="dual-cta__eyebrow">Wholesale · B2B</span>
+        <h3 class="dual-cta__head">Sell Liquid Death</h3>
+        <p class="dual-cta__body">Stock cans of canned water for your store, café, gym, arena, or unholy ritual hall.</p>
+        <a class="btn btn--primary-invert" href="/pages/sell-your-soul-eu">Sell Liquid Death</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" data-section="footer" data-intent="navigation + legal" data-layout="grid">
+  <div class="site-footer__grid">
+    <div>
+      <p class="footer__head">For a Good Time Call:</p>
+      <p class="footer__handle">
+        <a href="https://www.instagram.com/liquiddeath" target="_blank" rel="noopener">@liquiddeath</a>
+        <a href="https://www.tiktok.com/@liquiddeath" target="_blank" rel="noopener">@liquiddeath</a>
+      </p>
+    </div>
+    <div>
+      <p class="footer__head">Stay Updated</p>
+      <p style="color:var(--color-ink-soft);font-size:14px;margin-bottom:12px;">Get drops, killer merch, and your daily horror dose.</p>
+      <form class="footer__email" onsubmit="event.preventDefault();this.querySelector('button').textContent='Subscribed ☠';">
+        <input type="email" placeholder="Email address" aria-label="Email address" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+    <div>
+      <p class="footer__head">Information</p>
+      <ul class="footer__list">
+        <li><a href="/pages/where-to-buy">Store Locator</a></li>
+        <li><a href="/pages/manifesto">About</a></li>
+        <li><a href="/pages/contact">Contact</a></li>
+        <li><a href="/pages/faq">FAQ</a></li>
+        <li><a href="/pages/shipping">Shipping</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer__head">Company</p>
+      <ul class="footer__list">
+        <li><a href="/pages/sell-your-soul-eu">Sell Your Soul (B2B)</a></li>
+        <li><a href="/pages/timewaster-5000">Timewaster 5000</a></li>
+        <li><a href="/pages/sodahouse">Contests</a></li>
+        <li><a href="/pages/press">Press</a></li>
+        <li><a href="/pages/careers">Careers</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__legal">
+    <span>© Liquid Death — Murder Your Thirst</span>
+    <ul>
+      <li><a href="#locale">Italy (EUR €)</a></li>
+      <li><a href="#cookies">Cookie Settings</a></li>
+      <li><a href="#privacy">Your Privacy Choices</a></li>
+      <li><a href="/pages/terms">Terms</a></li>
+      <li><a href="/pages/privacy">Privacy</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 2,
+  "slug": "polestar",
+  "title": "Polestar",
+  "tagline": "Cinematic minimalism — but the homepage is one-note. Variants test typographic hierarchy and named-vehicle navigation without breaking the brand's restraint.",
+
+  "source": {
+    "url": "https://www.polestar.com/us/",
+    "register": "brand",
+    "category": "automotive · electric vehicles",
+    "extractedAt": "2026-04-28"
+  },
+
+  "direction": {
+    "phrase": "Redesign this home page for presales. Brand-faithful Mode A. Palette and typography pinned to the captured surface. Three variants: A Conservative, B Compositional shift, C Bold direction.",
+    "movements": [
+      "distinctiveness: familiar → distinctive (the only axis that moves)",
+      "scale: hierarchy added (1.25 inside captured pixel range)",
+      "ia: A=held, B=named-vehicles, C=held + one bold lever"
+    ],
+    "seed": {
+      "input": "Polestar|2026-04-28",
+      "decade": "2025-now",
+      "craft": "automotive industrial-minimal",
+      "register": "brand",
+      "groundFamily": "stark-white (signalWhite #ECECE7)",
+      "pickedBy": "inherited (Mode A)"
+    },
+    "fontDeck": {
+      "name": "brand-inherited",
+      "value": "Polestar Unica single-family",
+      "pickedBy": "user-constraint"
+    },
+    "palette": {
+      "name": "Polestar brand-pinned",
+      "source": "inherited from stardust/current/_brand-extraction.json",
+      "anchor": "#101820",
+      "pickedBy": "user-constraint",
+      "brandFaithfulInversions": [
+        "pure-black #101820 retained (graphiteBlack)",
+        "single-typeface allowed (Polestar Unica)",
+        "flat-hierarchy allowed (h1/h2/h3 may render at 30/400)",
+        "hex format retained"
+      ]
+    },
+    "antiToolbox": { "hits": 0, "justified": 0 }
+  },
+
+  "originalCritique": "Polestar's restraint is genuine — but on the home page it reads as one note: every section is the same weight, the same scale, the same composition. There is no hierarchy because there is no variance. The vehicle lineup hides inside a single-image hero that names nothing. <strong>The brand has earned the right to commit to a moment and is choosing not to.</strong>",
+
+  "variants": [
+    {
+      "id": "A",
+      "name": "Conservative refresh",
+      "dominantDimension": "tokens",
+      "thesis": "Same IA, refined tokens. A modular 1.25 scale inside the captured pixel range gives the page hierarchy without breaking the flat-typeface signature. Section padding balanced at 64px.",
+      "fix": "Same IA, refined tokens. A modular 1.25 scale inside the captured pixel range <strong>gives the page hierarchy without breaking the flat-typeface signature</strong>. Section padding balances at 64px; photo-radius aligns to card-radius. The page reads as Polestar — but you can finally see where one section ends and the next begins.",
+      "proposedFile": "proposed-A.html",
+      "isPrimary": true
+    },
+    {
+      "id": "B",
+      "name": "Compositional shift",
+      "dominantDimension": "ia",
+      "thesis": "Named-vehicles IA. The home opens with the lineup as a primary navigation surface (Polestar 2 · 3 · 4 · 5), each named, each with its own moment. Same palette, type, photography. Different IA.",
+      "fix": "Same palette, type, photography. <strong>Different IA:</strong> the lineup opens the page — Polestar 2, 3, 4, 5 — each named, each with its own moment, instead of hiding inside a single-image hero. The page becomes a chooser before it becomes a brand statement. \"Which Polestar?\" is the question the home should answer first.",
+      "proposedFile": "proposed-B.html"
+    },
+    {
+      "id": "C",
+      "name": "Bold direction",
+      "dominantDimension": "expressive",
+      "thesis": "One element pushed: full-bleed cinematic vehicle moment with a single typographic line set bigger than the brand has shipped. Restraint elsewhere holds the brand together.",
+      "fix": "<strong>One element pushed.</strong> A full-bleed cinematic vehicle moment with a single typographic line set bigger than Polestar has shipped — a hero that commits. Restraint elsewhere holds the brand together: same palette, same single typeface, same flat hierarchy on every other surface. The page reads as restrained-then-loud, not loud-everywhere.",
+      "proposedFile": "proposed-C.html"
+    },
+    {
+      "id": "D",
+      "name": "v2 · Faithful + 5 improvements",
+      "dominantDimension": "tokens",
+      "thesis": "Same IA, same photography, same voice — apply the five identified improvements (I-1 through I-5) and nothing else. The risk-averse green-light variant: the customer's design team should see their site, with the unforced errors fixed.",
+      "fix": "<strong>The risk-averse green-light variant.</strong> Same IA, same photography, same voice — apply the five identified improvements and nothing else. No new direction, no creative reach. The customer's design team should look at it and see their site, with the unforced errors fixed. \"This is what your site should be tomorrow.\"",
+      "proposedFile": "proposed-D.html"
+    },
+    {
+      "id": "E",
+      "name": "v2 · Sustainability-led showroom",
+      "dominantDimension": "voice",
+      "thesis": "Amplify the brand statement Polestar already wrote: \"determined to improve the society we live in.\" On the captured home it ships in a 535×182 thumbnail card at slot 06. Variant E promotes the statement to a primary moment.",
+      "fix": "<strong>Amplify the brand statement Polestar already wrote.</strong> The meta description begins: \"We are an electric performance car brand, determined to improve the society we live in.\" On the captured home, that statement is delivered in a 535×182 thumbnail card at slot 06. E promotes it to a primary moment — the page reads as a brand statement first, a configurator second.",
+      "proposedFile": "proposed-E.html"
+    },
+    {
+      "id": "F",
+      "name": "v2 · Editorial gallery",
+      "dominantDimension": "craft",
+      "thesis": "One car at a time — the rhythm of a Polestar showroom floor. Studio photography at scale, alternating sides, each vehicle gets its own folio. Amplifies the brand's strongest commercial asset.",
+      "fix": "<strong>One car at a time — the rhythm of a Polestar showroom floor.</strong> The captured studio photography (clean, side-profile, flat ground, no environment, no people) is the brand's strongest commercial asset. F amplifies it: one vehicle per fold, alternating sides, photography at scale. Each vehicle gets its own folio instead of competing in a row.",
+      "proposedFile": "proposed-F.html"
+    }
+  ],
+
+  "createdAt": "2026-04-28",
+  "stardustVersion": "0.2.0",
+  "submittedBy": "paolomoz",
+  "license": "Apache-2.0",
+  "brandReview": "brand-review.html",
+  "thumbnail": "logo.png"
+}

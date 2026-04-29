@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 2,
+  "slug": "glossier",
+  "title": "Glossier",
+  "tagline": "Strong brand surface, weak homepage thesis — feels like a rolling promo. Variants try a JTBD chooser and a routine-led IA, plus a deliberate Glossier Pink in body.",
+
+  "source": {
+    "url": "https://www.glossier.com/",
+    "register": "brand",
+    "category": "beauty · DTC commerce",
+    "extractedAt": "2026-04-28"
+  },
+
+  "direction": {
+    "phrase": "Brand-faithful refresh. Mode A: pin palette and typography to the captured surface. Density: balanced. Three variants (conservative / compositional / bold).",
+    "movements": [
+      "distinctiveness: familiar → distinctive (sharpen out of \"default Apercu-on-white\")",
+      "type-scale: ad-hoc 12/14/16/20 → modular 1.25 with 72px display",
+      "density: flat 32–48 → balanced + 3-tier rhythm",
+      "palette-distribution: pink only in footer → pink in footer + one in-body moment",
+      "tag-policy: up to 5 per card → 1 priority per card"
+    ],
+    "seed": {
+      "input": "Glossier|2026-04-28",
+      "decade": "2025-now",
+      "craft": "web-modern",
+      "register": "brand-commerce",
+      "groundFamily": "stark-white (Mode C: brand-faithful override)",
+      "pickedBy": "inherited (Mode A)"
+    },
+    "fontDeck": {
+      "name": "brand-inherited",
+      "value": "Apercu single-family",
+      "pickedBy": "user-constraint"
+    },
+    "palette": {
+      "name": "Glossier brand-pinned",
+      "source": "inherited from stardust/current/_brand-extraction.json (8-color set)",
+      "anchor": "#f7c4b3",
+      "pickedBy": "user-constraint",
+      "brandFaithfulInversions": [
+        "stark-white #ffffff retained as page ground",
+        "lowercase intimate hero voice retained",
+        "ALL-CAPS micro-labels retained",
+        "hex format retained"
+      ]
+    },
+    "antiToolbox": { "hits": 0, "justified": 0 }
+  },
+
+  "originalCritique": "The brand voice and palette are unmistakable — but the homepage is a rolling promo. Type sits at 12/14/16/20 with no display step the brand has earned. Cards stack five tags each (promo + scarcity + status + size + finish) so nothing reads as priority. Glossier Pink lives only in the footer — the brand's most valuable color is hidden. <strong>The page reads as commerce that forgot it was a brand.</strong>",
+
+  "variants": [
+    {
+      "id": "A",
+      "name": "Conservative refresh",
+      "dominantDimension": "tokens",
+      "thesis": "Same IA, refined tokens. Modular 1.25 scale with a 72px display moment in the hero; one priority tag per card; one in-body Glossier Pink moment beyond the footer.",
+      "fix": "Same IA, refined tokens. <strong>Modular 1.25 scale with a 72px display step</strong> the brand currently lacks. One priority tag per card (promo > scarcity > status); the other four go away. One Glossier Pink moment in body — not the footer ghetto. The page is the same Glossier; it just stops apologising for being Glossier.",
+      "proposedFile": "proposed-A.html",
+      "isPrimary": true
+    },
+    {
+      "id": "B",
+      "name": "Compositional shift",
+      "dominantDimension": "ia",
+      "thesis": "Routine-led IA. The home opens with a routine builder (cleanse → moisturise → finish), each step a Glossier product moment. Same palette, same type. Different homepage thesis.",
+      "fix": "Same palette, same type. <strong>Routine-led IA</strong> replaces the rolling promo. The home opens with a routine builder — cleanse → moisturise → finish — each step a single product moment. The page becomes a chooser, not a sale; the brand sells what to wear with what, not which SKU is on promo this week.",
+      "proposedFile": "proposed-B.html"
+    },
+    {
+      "id": "C",
+      "name": "Bold direction",
+      "dominantDimension": "palette",
+      "thesis": "Glossier Pink as a primary section ground, not an accent. One drenched-pink band carries a hero moment; everything else stays Apercu-on-white. The pink moment that the brand has been hiding from itself.",
+      "fix": "<strong>Glossier Pink as a primary section ground</strong>, not an accent. One drenched-pink band carries a hero product moment — full-bleed, lowercase intimate hero voice, single SKU. Everything else stays Apercu-on-white. The pink finally has the weight the brand has been refusing it.",
+      "proposedFile": "proposed-C.html"
+    }
+  ],
+
+  "createdAt": "2026-04-28",
+  "stardustVersion": "0.2.0",
+  "submittedBy": "paolomoz",
+  "license": "Apache-2.0",
+  "brandReview": "brand-review.html",
+  "thumbnail": "logo.png"
+}

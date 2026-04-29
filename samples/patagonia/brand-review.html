@@ -1,0 +1,257 @@
+<!--
+provenance: stardust:extract — descriptive review of patagonia.com via patagonia.com.au surrogate. Same global design system, English-language. Live patagonia.com is currently serving an overload "Sit tight" interstitial.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Patagonia — current-state brand review</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f5f5f5;
+    --text: #000000;
+    --text-2: #212428;
+    --on-dark: #ffffff;
+    --dark: #121212;
+    --primary: #500778;
+    --border: #eaeaea;
+    --shadow-card: 0 20px 30px rgba(23, 73, 77, 0.15);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.55;
+    font-size: 16px;
+  }
+  .ribbon {
+    background: var(--primary);
+    color: var(--on-dark);
+    font-size: 12px;
+    padding: 8px 24px;
+    display: flex; gap: 24px; justify-content: center; align-items: center;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .ribbon span { opacity: 0.85; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 24px 96px; }
+  h1 { font-size: 40px; line-height: 1.1; margin: 0 0 8px; letter-spacing: -0.01em; }
+  h2 { font-size: 24px; margin: 48px 0 16px; padding-top: 24px; border-top: 1px solid var(--border); }
+  h3 { font-size: 18px; margin: 24px 0 8px; }
+  p, li { font-size: 15px; }
+  .lede { font-size: 18px; color: var(--text-2); max-width: 680px; }
+  .meta { font-size: 13px; color: var(--text-2); margin-top: 8px; }
+  .cite { font-size: 12px; color: var(--text-2); margin-top: 8px; opacity: 0.7; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .swatch { aspect-ratio: 4/3; border-radius: 8px; border: 1px solid var(--border); position: relative; overflow: hidden; }
+  .swatch .label { position: absolute; left: 12px; bottom: 8px; font-size: 12px; line-height: 1.3; }
+  .swatch.is-light .label { color: #111; }
+  .swatch.is-dark .label { color: #fff; }
+  .swatch .role { font-weight: 600; display: block; }
+  .swatch .hex { opacity: 0.8; font-feature-settings: "tnum"; }
+  .typeblock { background: var(--surface); padding: 16px; border-radius: 8px; }
+  .specimen-1 { font-size: 64px; line-height: 1.05; letter-spacing: -0.01em; font-weight: 700; }
+  .specimen-2 { font-size: 40px; line-height: 1.1; font-weight: 500; }
+  .specimen-3 { font-size: 24px; line-height: 1.25; font-weight: 500; }
+  .specimen-4 { font-size: 16px; line-height: 1.55; }
+  .pill { display: inline-block; padding: 12px 24px; border-radius: 36px; font-weight: 500; font-size: 14px; line-height: 1; }
+  .pill.dark { background: #000; color: #fff; }
+  .pill.light { background: #fff; color: #000; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 12px; }
+  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  th { font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-2); }
+  .tension {
+    background: var(--surface);
+    border-left: 3px solid var(--primary);
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .tension h3 { margin: 0 0 4px; font-size: 16px; }
+  .tension p { margin: 0; font-size: 14px; }
+  .coverage {
+    background: var(--dark); color: var(--on-dark);
+    padding: 16px 24px; border-radius: 8px;
+    font-size: 13px; line-height: 1.55;
+    margin: 24px 0;
+  }
+  .coverage strong { color: var(--on-dark); }
+  .screenshot { width: 100%; border: 1px solid var(--border); border-radius: 8px; }
+  .badge {
+    display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 999px;
+    background: var(--surface); color: var(--text-2); letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .pillars { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin: 16px 0; }
+  .pillars > div { font-size: 14px; line-height: 1.4; }
+  .pillars h4 { margin: 0 0 8px; font-weight: 700; font-size: 15px; }
+  .swatch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+</style>
+</head>
+<body>
+
+<div class="ribbon">
+  <span>ROARING JOURNALS</span>
+  <span>·</span>
+  <span>Activism</span>
+  <span>·</span>
+  <span>Business Unusual</span>
+  <span>·</span>
+  <span>Free Shipping on Orders $200+</span>
+</div>
+
+<div class="wrap">
+  <span class="badge">stardust:extract — current state</span>
+  <h1>Patagonia — current-state brand review</h1>
+  <p class="lede">A descriptive read of the home page as it ships today, surfaced for the redesign brief. Black, white, eggplant. Ridgeway Sans across the system. Photographic tile density.</p>
+  <p class="meta">Source: patagonia.com.au (surrogate) · 2026-04-28 · single-page extraction. patagonia.com is currently serving an overload "Sit tight" interstitial — see coverage note below.</p>
+
+  <div class="coverage">
+    <strong>Coverage note.</strong>
+    The user-targeted origin (<code>patagonia.com</code>) was returning a 200-OK overload page (<em>"Hang Tight! Routing to checkout..."</em>) on every request — and on every Wayback capture for the past 18 months — so brand surface was extracted from <code>patagonia.com.au</code>, which serves the same global Patagonia design system in English.
+    Same typography (Ridgeway Sans), same component vocabulary, same eggplant ribbon, same dual-radius CTA pattern. The IA on <code>.com</code> is broader (Men/Women/Kids/Sport/Activism/Stories nav + sale/clearance), but the visual system is shared.
+    Cross-page brand aggregation is therefore not available; values reported below are home-page modes weighted by element count.
+  </div>
+
+  <h2>Home, in situ</h2>
+  <div class="grid-2">
+    <div>
+      <img src="assets/screenshots/home-fold.jpg" alt="Patagonia home, above the fold" class="screenshot">
+      <p class="cite">Above the fold — eggplant ribbon, centred wordmark header, full-bleed photo hero ("Outlast the Winter") with white pill CTA over imagery (no scrim).</p>
+    </div>
+    <div>
+      <img src="assets/screenshots/home.jpg" alt="Full-page Patagonia home" class="screenshot">
+      <p class="cite">Full page — hero → 6-up activity tiles → secondary photo hero → 6-up category tiles → "Life's in the Bag" hero → 5-column values row → dense mega-footer.</p>
+    </div>
+  </div>
+
+  <h2>Palette</h2>
+  <p>Black-and-white-and-one-colour. Eggplant <code>#500778</code> is structural and reserved for the activism ribbon. Photography supplies all other chroma.</p>
+  <div class="swatch-grid">
+    <div class="swatch is-light" style="background: #ffffff;"><div class="label"><span class="role">background</span><span class="hex">#ffffff</span></div></div>
+    <div class="swatch is-light" style="background: #f5f5f5;"><div class="label"><span class="role">surface</span><span class="hex">#f5f5f5</span></div></div>
+    <div class="swatch is-dark" style="background: #000000;"><div class="label"><span class="role">text</span><span class="hex">#000000</span></div></div>
+    <div class="swatch is-dark" style="background: #212428;"><div class="label"><span class="role">text-2</span><span class="hex">#212428</span></div></div>
+    <div class="swatch is-dark" style="background: #121212;"><div class="label"><span class="role">surface-alt</span><span class="hex">#121212</span></div></div>
+    <div class="swatch is-dark" style="background: #500778;"><div class="label"><span class="role">primary (eggplant)</span><span class="hex">#500778</span></div></div>
+    <div class="swatch is-light" style="background: #eaeaea;"><div class="label"><span class="role">border</span><span class="hex">#eaeaea</span></div></div>
+    <div class="swatch is-dark" style="background: rgba(23,73,77,0.85);"><div class="label"><span class="role">card-shadow tint</span><span class="hex">forest-green</span></div></div>
+  </div>
+  <p class="cite">Source: <code>_brand-extraction.json § palette</code></p>
+
+  <h2>Typography</h2>
+  <p>Ridgeway Sans (a humanist sans drawn for the brand) carries the entire system at three weights — 400, 500, 700. The wordmark is a separate custom historical letterform.</p>
+  <div class="typeblock">
+    <div class="specimen-1">Outlast the Winter</div>
+    <div class="specimen-2" style="margin-top: 16px;">Stay Out, Stay Dry.</div>
+    <div class="specimen-3" style="margin-top: 16px;">We support grassroots activism.</div>
+    <div class="specimen-4" style="margin-top: 16px; max-width: 540px;">High-performance, neoprene-free wetsuits that leave no excuse when the water's cold and the waves are cooking.</div>
+  </div>
+  <table>
+    <thead><tr><th>Role</th><th>Family</th><th>Weights</th><th>Sizes seen</th></tr></thead>
+    <tbody>
+      <tr><td>Heading</td><td>Ridgeway Sans</td><td>400 / 500 / 700</td><td>64 · 40 · 30 · 24 · 18</td></tr>
+      <tr><td>Body</td><td>Ridgeway Sans</td><td>400 / 500</td><td>16 · 14 · 18</td></tr>
+      <tr><td>Wordmark</td><td>Custom (lowercase serif-cut)</td><td>—</td><td>Header lockup</td></tr>
+    </tbody>
+  </table>
+  <p class="cite">Source: <code>_brand-extraction.json § type</code></p>
+
+  <h2>Motifs</h2>
+  <p>Two radius systems live side by side: 8px squared-off photographic tiles and 36px pill CTAs. This dual-radius pattern is one of the brand's defining visual moves.</p>
+  <div class="grid-3">
+    <div>
+      <h3>Pill CTA · 36px</h3>
+      <span class="pill light">Explore</span>&nbsp;&nbsp;<span class="pill dark">Shop</span>
+      <p class="cite">Used over photographic heroes and tile labels. Solid white pill is the primary; solid black pill is the secondary.</p>
+    </div>
+    <div>
+      <h3>Card · 8px</h3>
+      <div style="background: var(--surface); border-radius: 8px; aspect-ratio: 4/3; box-shadow: var(--shadow-card);"></div>
+      <p class="cite">Activity and category tiles. Note the forest-green-tinted shadow.</p>
+    </div>
+    <div>
+      <h3>Input · 0px hard edge</h3>
+      <div style="border: 1px solid #000; padding: 10px 12px; font-size: 14px;">Search for products...</div>
+      <p class="cite">Hard 1px black border, no fill, no rounded corners. Utilitarian — deliberate counterpoint to the soft pills.</p>
+    </div>
+  </div>
+
+  <h2>System components</h2>
+  <table>
+    <thead><tr><th>Block</th><th>Kind</th><th>What it carries</th></tr></thead>
+    <tbody>
+      <tr><td>utility-ribbon</td><td>header</td><td>Roaring Journals · Activism · Business Unusual + announcement string. Eggplant. Site-wide.</td></tr>
+      <tr><td>primary-header</td><td>header</td><td>Centred wordmark, 5-item primary nav (Men/Women/Kids/Packs &amp; Gear/Sports), search/account/wishlist/cart icons.</td></tr>
+      <tr><td>full-bleed-photo-hero</td><td>region</td><td>Single full-bleed photograph, white headline, white pill CTA, no scrim.</td></tr>
+      <tr><td>activity-tile-grid</td><td>region</td><td>6-up photographic tiles (Trail Running / Surf / Snow / Climbing / Mountain Biking / Fly Fishing).</td></tr>
+      <tr><td>category-tile-grid</td><td>region</td><td>6-up product-category tiles (Jackets / Fleece / Packs &amp; Gear / T-Shirts / Yulex Wetsuits / Workwear).</td></tr>
+      <tr><td>secondary-photo-hero</td><td>region</td><td>Stay Out Stay Dry · Life's in the Bag — break up the tile grids.</td></tr>
+      <tr><td>values-row</td><td>cta-band</td><td>5-column row of brand pillars + read-more links.</td></tr>
+      <tr><td>mega-footer</td><td>footer</td><td>Black ground, white type, Subscribe + Need Help + More Info.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Values row</h2>
+  <p>Five short declarative pillars sit above the footer. Plainspoken, no qualifiers. This block is one of the brand's most recognisable surfaces.</p>
+  <div class="pillars">
+    <div><h4>We guarantee everything we make.</h4>View Ironclad Guarantee</div>
+    <div><h4>We take responsibility for our impact.</h4>Explore Our Footprint</div>
+    <div><h4>We support grassroots activism.</h4>Visit Activism</div>
+    <div><h4>We keep you going.</h4>Visit Worn Wear</div>
+    <div><h4>We give our profits to the planet.</h4>Read Our Commitment</div>
+  </div>
+
+  <h2>Tensions surfaced</h2>
+
+  <div class="tension">
+    <h3>T-1 · Hero text on photography without contrast scrim</h3>
+    <p>The hero CTA is a white pill set on a photographic background; the headline is white type sitting directly over the image. Readability is photo-dependent — when the photo is light or contrast-low, the hero loses force. The pill CTA over imagery is fine; the unscrimmed white headline isn't always.</p>
+  </div>
+
+  <div class="tension">
+    <h3>T-2 · Type scale is ad-hoc, not modular</h3>
+    <p>Captured heading sizes (64, 40, 30, 24, 18) follow no consistent ratio (1.60, 1.33, 1.25, 1.33). The home reads orderly because Ridgeway is doing the heavy lifting, but the underlying scale is opportunistic. A small refinement here would tighten visual rhythm without changing the brand's character.</p>
+  </div>
+
+  <div class="tension">
+    <h3>T-3 · Empty design-token layer</h3>
+    <p>The site ships zero CSS custom properties at <code>:root</code>. Colour, type, spacing, radii are declared in stylesheets but not exposed as tokens. For a brand at Patagonia's scale this is friction — a redesign should ship a token contract from day one.</p>
+  </div>
+
+  <div class="tension">
+    <h3>T-4 · 28 visible CTA labels, only one verb</h3>
+    <p>The home page surfaces 28 button-shaped CTAs above the fold, of which 14 are labelled "Explore" verbatim. Verb compression is a brand voice signal (Patagonia is comfortable repeating words), but the practical effect is that the page invites clicks without distinguishing between them. The redesign can keep the plain register and add lightweight differentiation (object-of-the-CTA, eyebrow label) without going floral.</p>
+  </div>
+
+  <div class="tension">
+    <h3>T-5 · Eggplant ribbon does heavy political lifting on a single thin band</h3>
+    <p>The activism / journalism / Business-Unusual cross-promo lives entirely in a 12px-tall band of eggplant at the very top of the page. Brand-wise this is the most distinctive surface; design-wise it's the smallest. There is room to elevate the activist content (which the brand cares about most) without pulling it into the commerce nav.</p>
+  </div>
+
+  <h2>What to keep, what to refine</h2>
+  <table>
+    <thead><tr><th>Element</th><th>Stance for the redesign</th></tr></thead>
+    <tbody>
+      <tr><td>Eggplant utility ribbon at the very top</td><td><strong>Keep verbatim.</strong> Brand-defining. Never soften, never relocate to footer.</td></tr>
+      <tr><td>Centred Patagonia wordmark in the header</td><td><strong>Keep.</strong> Wordmark is a 50-year asset; centring is the brand's masthead.</td></tr>
+      <tr><td>Full-bleed photographic hero</td><td><strong>Keep.</strong> Photography is the brand's emotional engine.</td></tr>
+      <tr><td>Six-up dense activity + category tile grids</td><td><strong>Keep dense.</strong> Density is the gear-page register; do not editorialise into 3-up airy.</td></tr>
+      <tr><td>Pill CTAs over squared photographic tiles (dual-radius)</td><td><strong>Keep.</strong> Signature move.</td></tr>
+      <tr><td>Five-column values row</td><td><strong>Keep, possibly elevate.</strong> Brand pillars are a load-bearing surface.</td></tr>
+      <tr><td>Black mega-footer</td><td><strong>Keep.</strong> Anchors the page weight.</td></tr>
+      <tr><td>Hero white headline without scrim</td><td><strong>Refine.</strong> Add a subtle gradient scrim or float a tiny ground panel under the type.</td></tr>
+      <tr><td>Type size scale</td><td><strong>Refine.</strong> Snap to a single modular ratio (1.25 or 1.333).</td></tr>
+      <tr><td>Empty design tokens</td><td><strong>Add.</strong> Ship a token contract.</td></tr>
+      <tr><td>"Explore"-only CTA verb on every tile</td><td><strong>Refine lightly.</strong> Add an eyebrow or object label without going marketing-flowery.</td></tr>
+    </tbody>
+  </table>
+
+</div>
+</body>
+</html>

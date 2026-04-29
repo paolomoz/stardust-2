@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 2,
+  "slug": "onemedical",
+  "title": "One Medical",
+  "tagline": "Jade + melon brand identity executed as a 2020 template. Variants: faithful + improvements, voice-led conditions browser, photography-led editorial.",
+
+  "source": {
+    "url": "https://www.onemedical.com/",
+    "register": "brand",
+    "category": "consumer healthcare · membership primary care",
+    "extractedAt": "2026-04-28"
+  },
+
+  "direction": {
+    "phrase": "Brand-faithful refresh of the OneMedical home for presales. Three variants: A faithful + improvements, B new direction 1, C new direction 2.",
+    "movements": [
+      "density: airy → balanced 56px (refused editorial-airy by brief)",
+      "distinctiveness: familiar template → distinctive (brand identity surfaced)",
+      "type-scale: ad-hoc → modular ladder",
+      "CTA-monotony: \"Get started\" everywhere → action-specific verbs"
+    ],
+    "seed": {
+      "input": "OneMedical|2026-04-28",
+      "decade": "2025-now",
+      "craft": "consumer healthcare",
+      "register": "brand",
+      "groundFamily": "cream",
+      "pickedBy": "inherited (Mode A)"
+    },
+    "fontDeck": {
+      "name": "brand-inherited",
+      "value": "GT Super Display + Ginto",
+      "pickedBy": "user-constraint"
+    },
+    "palette": {
+      "name": "OneMedical brand-pinned",
+      "source": "inherited from stardust/current/_brand-extraction.json",
+      "anchor": "#1a4938",
+      "pickedBy": "user-constraint",
+      "brandFaithfulInversions": [
+        "jade + melon palette retained",
+        "cream page-ground retained",
+        "pill CTAs retained",
+        "rotating-services h2 signature retained",
+        "hex format retained"
+      ]
+    },
+    "antiToolbox": { "hits": 0, "justified": 0 }
+  },
+
+  "originalCritique": "OneMedical's brand identity is unusually distinctive for healthcare — jade + melon palette, GT Super Display, the rotating-services h2 (\"Get care today for that weird rash…\"). But the home is a 2020-template execution: ad-hoc type scale, airy 96px section padding, eight redundant \"Get started\" CTAs, photography under-treated as supporting illustration. <strong>The brand is unmistakable; the page hides it.</strong>",
+
+  "variants": [
+    {
+      "id": "A",
+      "name": "Faithful + improvements",
+      "dominantDimension": "tokens",
+      "thesis": "Same IA, same composition, same primary section sequence as captured. Apply the five improvements (modular scale, balanced 56px density, single CTA per band, photography upgraded to lead the cards, hero contrast support) exactly — no extras.",
+      "fix": "Same IA, same composition, same primary section sequence. <strong>Apply five improvements exactly — no extras.</strong> Modular type scale; balanced 56px density (no editorial airiness); one priority CTA per band instead of \"Get started\" eight times; photography upgraded to lead the cards; hero gets a contrast scrim. Brand team reaction target: \"yes, that's us, with the obvious fixes.\"",
+      "proposedFile": "proposed-A.html",
+      "isPrimary": true
+    },
+    {
+      "id": "B",
+      "name": "Encyclopedic-but-human",
+      "dominantDimension": "voice",
+      "thesis": "Lean into the rotating-services h2. Conditions list rises into hero context and becomes a navigable browse surface; hero splits into rotator-left + photo-right; new \"browse by what you need\" section presents conditions as filterable category chips. The brand's voice does more work.",
+      "fix": "<strong>Lean into the rotating-services h2.</strong> The conditions list (\"high cholesterol\" → \"that weird rash\") rises into hero context AND becomes a navigable browse surface. Hero splits: large rotator left, photograph anchored right. A new \"browse by what you need\" section presents conditions as filterable category chips. The brand's voice does more work; the photographic catalog steps back.",
+      "proposedFile": "proposed-B.html"
+    },
+    {
+      "id": "C",
+      "name": "Photography-led",
+      "dominantDimension": "craft",
+      "thesis": "Photography leads, icon-grid steps back. The captured photographs (Meditation, Exam Room, Pharmacy, App-on-phone) become the page's hierarchy. Conditions list and rotating h2 are kept as a quieter mid-page anchor.",
+      "fix": "<strong>Photography leads.</strong> OneMedical's photography is a brand asset most consumer healthcare sites don't have — Meditation, Exam Room, Pharmacy, App-on-phone, Video-with-doctor. They're warm, naturally lit, editorial-grade. C makes them the page's hierarchy: full-bleed where the icon-grid was, eight near-identical cards collapsed to three composed moments. The conditions list stays as a quieter mid-page anchor — the brand's signature isn't dropped, just no longer leading.",
+      "proposedFile": "proposed-C.html"
+    }
+  ],
+
+  "createdAt": "2026-04-28",
+  "stardustVersion": "0.2.0",
+  "submittedBy": "paolomoz",
+  "license": "Apache-2.0",
+  "brandReview": "brand-review.html",
+  "thumbnail": "logo.png"
+}

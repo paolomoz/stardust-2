@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stardust — sample</title>
+<meta name="description" content="A stardust redesign sample. Original critique, three variant theses, full-bleed prototype preview.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Stardust — showcase">
+<meta property="og:description" content="A stardust redesign sample. Original critique, variant theses, full-bleed prototype preview.">
+<meta property="og:image" content="https://paolomoz.github.io/stardust-2/og-image.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Stardust — showcase">
+<meta name="twitter:description" content="A stardust redesign sample. Original critique, variant theses, full-bleed prototype preview.">
+<meta name="twitter:image" content="https://paolomoz.github.io/stardust-2/og-image.jpg">
+<style>
+  :root {
+    --ink: #0a1024;
+    --ink-deep: #060a14;
+    --ink-soft: #141b3a;
+    --dust: #f5f0e6;
+    --dust-72: rgba(245,240,230,0.72);
+    --dust-50: rgba(245,240,230,0.5);
+    --dust-30: rgba(245,240,230,0.3);
+    --dust-15: rgba(245,240,230,0.15);
+    --dust-08: rgba(245,240,230,0.08);
+    --amber: #e8b95e;
+    --amber-light: #ffd98a;
+    --amber-deep: #c9822d;
+    --bad: #ef6b6b;
+    --warn: #f4b65b;
+    --ok: #87d29a;
+
+    --display: "SF Pro Display", Inter, system-ui, sans-serif;
+    --text:    "SF Pro Text", Inter, system-ui, sans-serif;
+    --mono:    "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+
+    --pad: clamp(16px, 2vw, 28px);
+    --header-h: 52px;
+    --side-w: 360px;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--ink-deep);
+    color: var(--dust);
+    font: 14px/1.5 var(--text);
+    font-feature-settings: "ss01", "ss02";
+    overflow: hidden;
+  }
+  ::selection { background: var(--amber); color: var(--ink); }
+  a { color: inherit; }
+  /* HTML [hidden] must beat author display:flex/etc — otherwise hidden overlays still capture pointer/wheel events. */
+  [hidden] { display: none !important; }
+
+  /* --- HEADER ---------------------------------------------------- */
+  header.chrome {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 30;
+    background: rgba(6,10,20,0.86);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--dust-08);
+    height: var(--header-h);
+    display: flex; align-items: center;
+    padding: 0 var(--pad);
+  }
+  header .row { display: flex; align-items: center; gap: 14px; width: 100%; }
+  .lockup { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+  .lockup .mark {
+    width: 26px; height: 26px; border-radius: 5px;
+    background: linear-gradient(180deg, #151e42 0%, #08101f 100%);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .lockup .mark svg { width: 26px; height: 26px; display: block; }
+  .lockup .word {
+    font-family: var(--display);
+    font-weight: 600; font-size: 16px; letter-spacing: -0.025em;
+    color: var(--dust);
+  }
+  .crumb {
+    color: var(--dust-50);
+    font: 11px/1 var(--mono);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .crumb a { color: var(--dust-50); text-decoration: none; }
+  .crumb a:hover { color: var(--amber); }
+  .crumb .sep { color: var(--dust-30); padding: 0 8px; }
+  .crumb .here { color: var(--dust); }
+  header .actions { margin-left: auto; display: flex; gap: 14px; align-items: center; }
+  header .actions a, header .actions button {
+    color: var(--dust-50); text-decoration: none;
+    font: 11px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase;
+    background: transparent; border: 0; padding: 0; cursor: pointer;
+  }
+  header .actions a:hover, header .actions button:hover { color: var(--amber); }
+
+  /* toast */
+  #toast {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--amber); color: var(--ink);
+    padding: 10px 18px; border-radius: 8px;
+    font: 500 12px/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+    opacity: 0; pointer-events: none;
+    transition: opacity 200ms, transform 200ms;
+    z-index: 100;
+  }
+  #toast.shown { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* --- STAGE (full-bleed preview area) --------------------------- */
+  /* Desktop: iframe fills the entire viewport — header + sidekick
+     overlay it. Tablet/mobile: stardust ground shows through, device
+     is centered with margin to clear the header. */
+  .stage {
+    position: fixed;
+    inset: 0;
+    overflow: auto;
+    background: var(--ink-deep);
+    text-align: center;
+  }
+  .device {
+    background: var(--dust);
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: top;
+    transition: width 280ms cubic-bezier(0.25,1,0.5,1),
+                height 280ms cubic-bezier(0.25,1,0.5,1),
+                border-radius 280ms,
+                margin 280ms;
+  }
+  .device.desktop {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    border-radius: 0;
+    border: 0;
+    box-shadow: none;
+    display: block;
+  }
+  .device.tablet {
+    width: 768px;
+    height: calc(100vh - var(--header-h) - 48px);
+    max-height: 1024px;
+    margin: var(--header-h) auto 24px;
+    border-radius: 22px;
+    border: 8px solid #0e1426;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px var(--dust-15);
+  }
+  .device.mobile {
+    width: 390px;
+    height: calc(100vh - var(--header-h) - 48px);
+    max-height: 844px;
+    margin: var(--header-h) auto 24px;
+    border-radius: 36px;
+    border: 10px solid #0e1426;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px var(--dust-15);
+  }
+  .device iframe {
+    width: 100%; height: 100%; border: 0;
+    background: var(--dust);
+    display: block;
+  }
+
+  /* --- SIDEKICK -------------------------------------------------- */
+  aside.sidekick {
+    position: fixed;
+    top: calc(var(--header-h) + 16px);
+    right: 16px;
+    bottom: 16px;
+    width: var(--side-w);
+    max-width: calc(100vw - 32px);
+    background: rgba(20,27,58,0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--dust-15);
+    border-radius: 14px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    z-index: 20;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    transition: width 240ms cubic-bezier(0.25,1,0.5,1);
+  }
+  aside.sidekick.collapsed { width: 56px; }
+  aside.sidekick.collapsed .sk-body,
+  aside.sidekick.collapsed .sk-footer { display: none; }
+  aside.sidekick.collapsed .sk-head .sk-title,
+  aside.sidekick.collapsed .sk-head .sk-source { display: none; }
+  aside.sidekick.collapsed .sk-head { padding: 12px 8px; }
+  aside.sidekick.collapsed .sk-toggle { transform: rotate(180deg); }
+
+  .sk-head {
+    padding: 16px 18px 14px;
+    border-bottom: 1px solid var(--dust-08);
+    display: flex; gap: 10px; align-items: flex-start;
+    flex-shrink: 0;
+  }
+  .sk-head .sk-title h2 {
+    font-family: var(--display);
+    font-weight: 600; font-size: 18px;
+    letter-spacing: -0.01em;
+    margin: 0 0 4px;
+  }
+  .sk-head .sk-title .reg {
+    font: 500 10px/1 var(--mono);
+    letter-spacing: 0.16em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .sk-head .sk-source {
+    margin-top: 6px;
+    font: 12px/1.4 var(--mono);
+    color: var(--dust-50);
+  }
+  .sk-head .sk-source a {
+    color: var(--dust-72); text-decoration: none;
+    border-bottom: 1px dashed var(--dust-15);
+  }
+  .sk-head .sk-source a:hover { color: var(--amber); border-bottom-color: var(--amber); }
+
+  .sk-toggle {
+    margin-left: auto; flex-shrink: 0;
+    background: transparent; border: 1px solid var(--dust-15);
+    color: var(--dust-50);
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 240ms, color 150ms;
+  }
+  .sk-toggle:hover { color: var(--amber); border-color: var(--amber); }
+
+  .sk-body {
+    flex: 1; min-height: 0;
+    overflow: auto;
+    padding: 16px 18px 8px;
+    display: flex; flex-direction: column;
+    gap: 22px;
+  }
+  .sk-body::-webkit-scrollbar { width: 8px; }
+  .sk-body::-webkit-scrollbar-thumb { background: var(--dust-08); border-radius: 4px; }
+  .sk-body::-webkit-scrollbar-thumb:hover { background: var(--dust-15); }
+
+  .sk-section h3 {
+    font: 500 10px/1 var(--mono);
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    margin: 0 0 10px;
+    text-transform: uppercase;
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  .sk-section h3 .num { color: var(--dust-30); font-weight: 500; }
+
+  /* mode toggle (Prototypes / Brand review) */
+  .modesw {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--ink);
+    border: 1px solid var(--dust-15);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .modesw button {
+    background: transparent; border: 0;
+    color: var(--dust-72);
+    padding: 8px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    font: 500 11px/1 var(--mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: all 150ms;
+  }
+  .modesw button:hover { color: var(--dust); }
+  .modesw button.on { background: var(--amber); color: var(--ink); }
+
+  /* variant switcher */
+  .vsw {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .vsw.one  { grid-template-columns: 1fr; }
+  .vsw.two  { grid-template-columns: 1fr 1fr; }
+  .vsw button {
+    background: var(--ink);
+    border: 1px solid var(--dust-15);
+    color: var(--dust-72);
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 150ms;
+  }
+  .vsw button:hover { border-color: var(--dust-30); color: var(--dust); }
+  .vsw button.on {
+    background: var(--amber);
+    color: var(--ink);
+    border-color: var(--amber);
+  }
+  .vsw button .id {
+    font: 600 13px/1 var(--mono);
+    letter-spacing: 0.06em;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .vsw button .nm {
+    font: 500 10px/1.2 var(--mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    display: block;
+  }
+
+  /* concept text */
+  .concept { font-size: 13px; line-height: 1.55; }
+  .concept .pair {
+    margin-bottom: 14px; padding-bottom: 14px;
+    border-bottom: 1px dashed var(--dust-08);
+  }
+  .concept .pair:last-child { border-bottom: 0; padding-bottom: 0; margin-bottom: 0; }
+  .concept .pair .lbl {
+    font: 500 10px/1 var(--mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .concept .pair.broken .lbl { color: var(--bad); }
+  .concept .pair.fixed  .lbl { color: var(--ok); }
+  .concept .pair p { margin: 0; color: var(--dust-72); }
+  .concept .pair p strong { color: var(--dust); font-weight: 600; }
+
+  /* footer (device switch) */
+  .sk-footer {
+    border-top: 1px solid var(--dust-08);
+    padding: 12px 18px;
+    display: flex; align-items: center; gap: 10px;
+    flex-shrink: 0;
+    background: rgba(10,16,36,0.5);
+  }
+  .sk-footer .lbl {
+    font: 500 10px/1 var(--mono);
+    letter-spacing: 0.16em;
+    color: var(--dust-30);
+    text-transform: uppercase;
+  }
+  .dvs {
+    margin-left: auto;
+    display: inline-flex;
+    background: var(--ink);
+    border: 1px solid var(--dust-15);
+    border-radius: 999px;
+    padding: 3px;
+  }
+  .dvs button {
+    background: transparent; border: 0;
+    color: var(--dust-72);
+    width: 36px; height: 28px;
+    border-radius: 999px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background 120ms;
+  }
+  .dvs button:hover { color: var(--dust); }
+  .dvs button.on { background: var(--amber); color: var(--ink); }
+  .dvs button svg { width: 16px; height: 16px; }
+
+  /* error pane */
+  .err {
+    position: fixed; inset: var(--header-h) 0 0 0;
+    display: flex; align-items: center; justify-content: center;
+    padding: 32px;
+    z-index: 5;
+  }
+  .err-card {
+    max-width: 540px;
+    background: var(--ink-soft);
+    border: 1px solid var(--bad);
+    border-left-width: 3px;
+    border-radius: 14px;
+    padding: 28px 32px;
+  }
+  .err-card h3 {
+    color: var(--bad);
+    font-family: var(--display);
+    font-size: 18px;
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  .err-card p { color: var(--dust-72); margin: 0 0 8px; font-size: 14px; }
+  .err-card code { font-family: var(--mono); font-size: 12px; color: var(--amber); }
+
+  @media (max-width: 720px) {
+    :root { --side-w: 88vw; }
+    .lockup .word { display: none; }
+    aside.sidekick.collapsed { width: 48px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="chrome">
+  <div class="row">
+    <a href="./index.html" class="lockup" aria-label="stardust showcase home">
+      <span class="mark">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <g fill="#e8b95e">
+            <rect x="92" y="26" width="16" height="16"/>
+            <rect x="92" y="46" width="16" height="16" opacity="0.7"/>
+            <rect x="92" y="66" width="16" height="16" opacity="0.5"/>
+            <rect x="92" y="118" width="16" height="16" opacity="0.5"/>
+            <rect x="92" y="138" width="16" height="16" opacity="0.7"/>
+            <rect x="92" y="158" width="16" height="16"/>
+            <rect x="26" y="92" width="16" height="16"/>
+            <rect x="46" y="92" width="16" height="16" opacity="0.7"/>
+            <rect x="66" y="92" width="16" height="16" opacity="0.5"/>
+            <rect x="118" y="92" width="16" height="16" opacity="0.5"/>
+            <rect x="138" y="92" width="16" height="16" opacity="0.7"/>
+            <rect x="158" y="92" width="16" height="16"/>
+          </g>
+          <rect x="85" y="85" width="30" height="30" fill="#ffd98a"/>
+        </svg>
+      </span>
+      <span class="word">stardust</span>
+    </a>
+    <span class="crumb">
+      <span class="sep">/</span><a href="./index.html">showcase</a><span class="sep">/</span><span class="here" id="brand-crumb">—</span>
+    </span>
+    <span class="actions">
+      <a href="#" id="open-source" target="_blank" rel="noopener" hidden>SOURCE ↗</a>
+      <a href="#" id="open-direction" target="_blank" rel="noopener" hidden>DIRECTION ↗</a>
+      <button type="button" id="copy-link" title="Copy permalink to this variant">COPY LINK ⎘</button>
+    </span>
+  </div>
+</header>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<main class="stage" id="stage" hidden>
+  <div class="device desktop" id="device">
+    <iframe id="preview" title="Prototype preview"></iframe>
+  </div>
+</main>
+
+<aside class="sidekick" id="sidekick" aria-label="Sample details" hidden>
+  <div class="sk-head">
+    <div class="sk-title">
+      <span class="reg" id="sk-reg">—</span>
+      <h2 id="sk-name">Loading…</h2>
+      <p class="sk-source" id="sk-source"></p>
+    </div>
+    <button class="sk-toggle" id="sk-toggle" aria-label="Collapse sidekick">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6"/><path d="M14 6l-6 6 6 6"/></svg>
+    </button>
+  </div>
+
+  <div class="sk-body">
+
+    <section class="sk-section" id="sk-mode" hidden>
+      <div class="modesw" id="modesw" role="tablist" aria-label="View mode">
+        <button class="on" data-mode="prototype">Prototypes</button>
+        <button data-mode="review">Brand review</button>
+      </div>
+    </section>
+
+    <section class="sk-section" id="sk-variants">
+      <h3><span class="num">01</span> Variants</h3>
+      <div class="vsw" id="vsw"></div>
+    </section>
+
+    <section class="sk-section" id="sk-concept">
+      <h3><span class="num">02</span> What's broken · how it's fixed</h3>
+      <div class="concept" id="concept"></div>
+    </section>
+
+  </div>
+
+  <div class="sk-footer">
+    <span class="lbl">Device</span>
+    <span class="dvs" id="dvs">
+      <button class="on" data-device="desktop" aria-label="Desktop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 22h8"/><path d="M12 18v4"/></svg>
+      </button>
+      <button data-device="tablet" aria-label="Tablet">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M11 18h2"/></svg>
+      </button>
+      <button data-device="mobile" aria-label="Mobile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg>
+      </button>
+    </span>
+  </div>
+</aside>
+
+<div class="err" id="err" hidden></div>
+
+<script>
+(function () {
+  const params = new URLSearchParams(location.search);
+  const slug = params.get('slug');
+  const errEl = document.getElementById('err');
+
+  function escape(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+  // Allow <strong>...</strong> through; escape everything else.
+  function richEscape(s) {
+    if (s == null) return '';
+    const placeholderOpen = 'STRONG_OPEN';
+    const placeholderClose = 'STRONG_CLOSE';
+    const swapped = String(s)
+      .replace(/<strong>/g, placeholderOpen)
+      .replace(/<\/strong>/g, placeholderClose);
+    return escape(swapped)
+      .replace(new RegExp(placeholderOpen, 'g'), '<strong>')
+      .replace(new RegExp(placeholderClose, 'g'), '</strong>');
+  }
+  function shortenUrl(u) {
+    try { const url = new URL(u); return url.host + (url.pathname === '/' ? '' : url.pathname); }
+    catch { return u; }
+  }
+  function showError(title, body) {
+    errEl.hidden = false;
+    errEl.innerHTML = `<div class="err-card"><h3>${escape(title)}</h3><p>${body}</p></div>`;
+  }
+
+  if (!slug || !/^[a-z0-9-]+$/.test(slug)) {
+    showError('Missing or invalid sample slug.', 'Open a sample from the showcase, or visit <code>brand.html?slug=&lt;slug&gt;</code> with a real slug.');
+    return;
+  }
+
+  fetch(`./${encodeURIComponent(slug)}/meta.json`, { cache: 'no-store' })
+    .then(r => { if (!r.ok) throw new Error('meta.json HTTP ' + r.status); return r.json(); })
+    .then(meta => {
+      try { init(meta); }
+      catch (initErr) {
+        console.error(initErr);
+        showError('Could not render this sample.', `Loaded <code>${escape(slug)}/meta.json</code> but rendering failed — ${escape(initErr.message)}.`);
+      }
+    })
+    .catch(err => {
+      showError('Could not load this sample.', `Failed to fetch <code>${escape(slug)}/meta.json</code> — ${escape(err.message)}.`);
+    });
+
+  function init(meta) {
+    document.title = `Stardust — ${meta.title || slug}`;
+    document.getElementById('stage').hidden = false;
+    document.getElementById('sidekick').hidden = false;
+
+    // Header crumb + actions
+    document.getElementById('brand-crumb').textContent = slug;
+    if (meta.source && meta.source.url) {
+      const a = document.getElementById('open-source');
+      a.href = meta.source.url; a.hidden = false;
+    }
+    const dirLink = document.getElementById('open-direction');
+    dirLink.href = `${encodeURIComponent(slug)}/direction.md`;
+    dirLink.hidden = false;
+
+    // Sidekick head
+    const reg = (meta.source && meta.source.category) || (meta.source && meta.source.register) || '';
+    document.getElementById('sk-reg').textContent = reg;
+    document.getElementById('sk-name').textContent = meta.title || slug;
+    if (meta.source && meta.source.url) {
+      document.getElementById('sk-source').innerHTML =
+        `<a href="${escape(meta.source.url)}" target="_blank" rel="noopener">${escape(shortenUrl(meta.source.url))} ↗</a>`;
+    }
+
+    // Variants
+    const variants = Array.isArray(meta.variants) ? meta.variants : [];
+    if (variants.length === 0) {
+      showError('No variants in this sample.', 'The sample <code>meta.json</code> declares no variants.');
+      return;
+    }
+    const vsw = document.getElementById('vsw');
+    if (variants.length === 1) vsw.classList.add('one');
+    else if (variants.length === 2) vsw.classList.add('two');
+    vsw.innerHTML = '';
+    variants.forEach((v, i) => {
+      const btn = document.createElement('button');
+      btn.dataset.variant = v.id;
+      btn.dataset.file = `${slug}/${v.proposedFile}`;
+      btn.dataset.idx = i;
+      if (v.isPrimary) btn.classList.add('on');
+      btn.innerHTML = `<span class="id">${escape(v.id)}</span><span class="nm">${escape(v.name || v.dominantDimension || '')}</span>`;
+      btn.addEventListener('click', () => activate(i));
+      vsw.append(btn);
+    });
+
+    // Default to primary, else first; permalinks (location.hash) override.
+    const primaryIdx = Math.max(0, variants.findIndex(v => v.isPrimary));
+    let activeIdx = primaryIdx === -1 ? 0 : primaryIdx;
+    let mode = 'prototype';
+
+    function applyHash() {
+      const h = location.hash.slice(1);
+      if (h === 'review' && meta.brandReview) {
+        mode = 'review';
+      } else if (h) {
+        const i = variants.findIndex(v => v.id === h);
+        if (i >= 0) { activeIdx = i; mode = 'prototype'; }
+      }
+    }
+    applyHash();
+
+    function syncHash() {
+      const hash = mode === 'review' ? 'review' : variants[activeIdx].id;
+      const url = `${location.pathname}${location.search}#${hash}`;
+      if (location.pathname + location.search + location.hash !== url) {
+        history.replaceState(null, '', url);
+      }
+    }
+
+    function syncTitle() {
+      if (mode === 'review') {
+        document.title = `Stardust — ${meta.title || slug} · Brand review`;
+      } else {
+        const v = variants[activeIdx];
+        document.title = `Stardust — ${meta.title || slug} · Variant ${v.id}${v.name ? ' · ' + v.name : ''}`;
+      }
+    }
+
+    if (mode === 'review') applyMode();
+    else activate(activeIdx);
+
+    // Brand-review toggle (only when meta.brandReview is set)
+    if (meta.brandReview) {
+      document.getElementById('sk-mode').hidden = false;
+      document.querySelectorAll('#modesw button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          mode = btn.dataset.mode;
+          applyMode();
+        });
+      });
+    }
+
+    // React to back/forward + manually pasted hash
+    window.addEventListener('hashchange', () => {
+      const wasMode = mode;
+      const wasIdx = activeIdx;
+      applyHash();
+      if (mode !== wasMode || activeIdx !== wasIdx) {
+        if (mode === 'review') applyMode();
+        else if (wasMode === 'review') applyMode();
+        else activate(activeIdx);
+      }
+    });
+
+    function applyMode() {
+      const preview = document.getElementById('preview');
+      const sectVariants = document.getElementById('sk-variants');
+      const sectConcept = document.getElementById('sk-concept');
+      document.querySelectorAll('#modesw button').forEach(b =>
+        b.classList.toggle('on', b.dataset.mode === mode));
+      if (mode === 'review' && meta.brandReview) {
+        preview.src = `${slug}/${meta.brandReview}`;
+        preview.title = `${meta.title || slug} — Brand review`;
+        sectVariants.hidden = true;
+        sectConcept.hidden = true;
+      } else {
+        sectVariants.hidden = false;
+        sectConcept.hidden = false;
+        activate(activeIdx);
+      }
+      syncHash();
+      syncTitle();
+    }
+
+    function activate(i) {
+      activeIdx = i;
+      const v = variants[i];
+      [...vsw.children].forEach((b, j) => b.classList.toggle('on', j === i));
+      // load preview only when in prototype mode
+      if (mode === 'prototype') {
+        const preview = document.getElementById('preview');
+        const file = `${slug}/${v.proposedFile}`;
+        preview.src = file;
+        preview.title = `${meta.title || slug} — Variant ${v.id} preview`;
+      }
+      // render concept text
+      const broken = (meta.originalCritique || '').trim();
+      const fix = (v.fix || v.thesis || '').trim();
+      const concept = document.getElementById('concept');
+      concept.innerHTML = '';
+      if (broken) {
+        concept.insertAdjacentHTML('beforeend',
+          `<div class="pair broken"><span class="lbl">— Original</span><p>${richEscape(broken)}</p></div>`);
+      }
+      if (fix) {
+        const lbl = `+ Variant ${escape(v.id)} · ${escape(v.name || v.dominantDimension || 'proposed')}`;
+        concept.insertAdjacentHTML('beforeend',
+          `<div class="pair fixed"><span class="lbl">${lbl}</span><p>${richEscape(fix)}</p></div>`);
+      }
+      syncHash();
+      syncTitle();
+    }
+
+    // Device switch
+    const device = document.getElementById('device');
+    document.querySelectorAll('#dvs button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#dvs button').forEach(b => b.classList.remove('on'));
+        btn.classList.add('on');
+        device.className = `device ${btn.dataset.device}`;
+      });
+    });
+
+    // Sidekick collapse
+    const sidekick = document.getElementById('sidekick');
+    document.getElementById('sk-toggle').addEventListener('click', () => sidekick.classList.toggle('collapsed'));
+
+    // Copy permalink
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('shown');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('shown'), 1600);
+    }
+    document.getElementById('copy-link').addEventListener('click', () => {
+      const url = location.href;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(
+          () => showToast('Link copied'),
+          () => showToast(url)
+        );
+      } else {
+        showToast(url);
+      }
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

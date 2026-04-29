@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 2,
+  "slug": "vanguard",
+  "title": "Vanguard",
+  "tagline": "Trustworthy plainspoken voice, but the home is a hero rotator + redundant CTA strips. Variants restore single-message hero and a goals-first IA.",
+
+  "source": {
+    "url": "https://investor.vanguard.com/",
+    "register": "brand",
+    "category": "financial services · retail investor",
+    "extractedAt": "2026-04-28"
+  },
+
+  "direction": {
+    "phrase": "Redesign this home page for presales (brand-faithful Mode A; three variants A/B/C).",
+    "movements": [
+      "hero: rotator → single-message hero",
+      "hero-contrast: text-on-photo → scrim guaranteed",
+      "photo-radius: 0px in 32px card → 24px / 32px aligned",
+      "type-scale: ad-hoc 1.22 → modular 1.25",
+      "ia (variant B): audience-first → goals-first"
+    ],
+    "seed": {
+      "input": "Vanguard|2026-04-28",
+      "decade": "2025-now",
+      "craft": "institutional-modern · public-radio-sponsor",
+      "register": "trusted-by-default · plainspoken · coaching-warm",
+      "groundFamily": "stark-white",
+      "pickedBy": "inherited (Mode A)"
+    },
+    "fontDeck": {
+      "name": "brand-inherited",
+      "value": "FF Mark (canonical); Mona Sans / Inter Tight as license-free stand-in",
+      "pickedBy": "user-constraint"
+    },
+    "palette": {
+      "name": "Vanguard brand-pinned + one additive",
+      "source": "inherited from stardust/current/_brand-extraction.json + --blush-deep #FFD7D7 (variant C only)",
+      "anchor": "#96151d",
+      "pickedBy": "user-constraint",
+      "brandFaithfulInversions": [
+        "pure-white retention",
+        "hex format retention",
+        "warm-imperative voice retained"
+      ]
+    },
+    "antiToolbox": { "hits": 0, "justified": 0 }
+  },
+
+  "originalCritique": "The voice is genuinely good — plainspoken, warm-imperative, trusted. The composition undermines it: a hero rotator dilutes any single message, photo-radii (0px) sit inside card-radii (32px) so the photo always looks pasted-in, and the home repeats the same CTA-strip three times. Type scale is ad-hoc at ~1.22. <strong>The page contradicts the voice — it tells you to stay calm by shouting four offers at once.</strong>",
+
+  "variants": [
+    {
+      "id": "A",
+      "name": "Conservative refresh",
+      "dominantDimension": "tokens",
+      "thesis": "Same IA. Single-message hero replaces the rotator. Photo-radius aligns to card-radius. Modular 1.25 ladder. Redundant CTA strips collapse to one.",
+      "fix": "Same IA. <strong>Single-message hero replaces the rotator</strong> — one promise, one image, one CTA. Photo-radius aligns to card-radius (24px in 32px). Modular 1.25 ladder. Redundant CTA strips collapse to one anchored utility shelf. The voice and the composition finally agree.",
+      "proposedFile": "proposed-A.html",
+      "isPrimary": true
+    },
+    {
+      "id": "B",
+      "name": "Compositional shift",
+      "dominantDimension": "ia",
+      "thesis": "Same palette, same type. Goals-first IA (Retire · Save for college · Build wealth · Manage day-to-day) replaces audience-first navigation. Coaching-warm voice gets a structure that matches it.",
+      "fix": "Same palette, same type. <strong>Goals-first IA</strong> (Retire · Save for college · Build wealth · Manage day-to-day) replaces audience-first navigation. The coaching-warm voice gets a structure that matches it — \"what are you trying to do?\" before \"who are you?\". Audience entry-points recede to secondary nav.",
+      "proposedFile": "proposed-B.html"
+    },
+    {
+      "id": "C",
+      "name": "Bold direction",
+      "dominantDimension": "palette",
+      "thesis": "Push one element: a blush-band motif as a primary section ground (additive token --blush-deep #FFD7D7, derived from the captured palette). Type pushed to the next 1.25 step on the hero.",
+      "fix": "<strong>Push one element.</strong> A blush-band motif becomes a primary section ground — additive token --blush-deep #FFD7D7, derived not invented, same hue family as captured. Hero type pushed to the next 1.25 step. The brand's quietly-warm voice finally has a colour that warms with it.",
+      "proposedFile": "proposed-C.html"
+    }
+  ],
+
+  "createdAt": "2026-04-28",
+  "stardustVersion": "0.2.0",
+  "submittedBy": "paolomoz",
+  "license": "Apache-2.0",
+  "thumbnail": "logo.png"
+}

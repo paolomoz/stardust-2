@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy:        stardust:prototype (Tier 3 / V15)
+  writtenAt:        2026-04-28T17:20:00Z
+  variant:
+    tier: 3
+    id: V15
+    slug: impact-led
+    dominantMove: motif (numbers above the fold)
+    thesis: "The most credibility-bearing numbers TRH has — 1,550+ housed, 60% case-managed, 3,491 assisted — lead the page. They are the hero. Programs frame the stats; stories anchor below; the 211 panel docks beside the stat row, above the fold."
+    densityTier: balanced (sectionPadding.desktop = 56px)
+    register: quantitative-civic
+    capturedTraitAmplified: "TRH's three real, source-verified IMPACT statistics, formatted as soft prose on the captured site. The variant pulls them to display scale — the numerals are the design."
+  IAPriority:
+    - 211 panel docked into the hero stat band, above-fold
+  unsourcedContent: []
+  stardustVersion: 0.2.0
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#005560">
+<title>The Road Home — 1,550+. 60%. 3,491. (V15 · Impact-Led)</title>
+<style>
+  @font-face { font-family:'DINNextLTPro'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/dinnextltpro/DINNextLTPro-Regular.woff2') format('woff2'); font-weight:400; font-display:swap }
+  @font-face { font-family:'DINNextLTPro'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/dinnextltpro/DINNextLTPro-Bold.woff2') format('woff2'); font-weight:700; font-display:swap }
+  @font-face { font-family:'DINNextLTPro'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/dinnextltpro/DINNextLTPro-Black.woff2') format('woff2'); font-weight:900; font-display:swap }
+  @font-face { font-family:'HarmoniaSans'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/harmoniasans/HarmoniaSansProRegular.woff2') format('woff2'); font-weight:400; font-display:swap }
+  @font-face { font-family:'HarmoniaSans'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/harmoniasans/HarmoniaSansProSemiBd.woff2') format('woff2'); font-weight:500; font-display:swap }
+
+  :root{
+    --civic-teal:#008192; --deep-teal:#005560; --teal-mid:#006A77; --teal-shadow:#105560;
+    --lavender:#8F77AD; --pale-lavender:#C8BCD6; --aubergine:#604A7B;
+    --slate:#67696A; --pale-teal-gray:#E9EEEF; --soft-gray:#CECFD0;
+    --white:#FFFFFF; --crimson:#DC323D;
+    --bg:#FFFFFF; --ink:#0E1517;
+    --display:'DINNextLTPro', ui-sans-serif, sans-serif;
+    --body:'HarmoniaSans', ui-sans-serif, sans-serif;
+    --sp-d:56px; --sp-t:40px; --sp-m:28px;
+    --container:1280px;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:var(--body);color:var(--ink);background:var(--bg);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--deep-teal);text-decoration:none}
+  a:hover{color:var(--civic-teal);text-decoration:underline;text-underline-offset:3px}
+  img{max-width:100%;display:block}
+  h1,h2,h3{font-family:var(--display);margin:0;color:var(--ink)}
+  .container{max-width:var(--container);margin:0 auto;padding:0 28px}
+  .skip{position:absolute;left:-9999px;top:8px;background:var(--crimson);color:#fff;padding:10px 14px;border-radius:4px;font-weight:700;z-index:99}
+  .skip:focus-visible{left:8px}
+
+  header.site{padding:14px 0;border-bottom:1px solid var(--soft-gray);background:var(--white)}
+  header.site .row{display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .wm{font-family:var(--display);font-weight:900;color:var(--ink);font-size:20px;letter-spacing:0.04em;text-transform:uppercase}
+  nav.i ul{list-style:none;padding:0;margin:0;display:flex;gap:22px;font-family:var(--display);text-transform:uppercase;letter-spacing:0.08em;font-size:13px;font-weight:500;align-items:center}
+  nav.i a{color:var(--ink)}
+  nav.i a.donate{background:var(--crimson);color:#fff;padding:9px 16px;border-radius:4px;font-weight:700}
+
+  /* Hero IS the impact band */
+  section.lead{padding:var(--sp-d) 0 var(--sp-d);background:var(--bg);border-bottom:4px solid var(--ink)}
+  .lead-grid{display:grid;grid-template-columns: 2fr 1fr;gap:36px;align-items:start}
+  .stats-stack{display:flex;flex-direction:column;gap:10px}
+  .stat-row{display:grid;grid-template-columns: auto 1fr;gap:24px;align-items:baseline;padding:14px 0;border-bottom:2px solid var(--ink)}
+  .stat-row:last-child{border-bottom:none}
+  .stat-row .num{font-family:var(--display);font-weight:900;color:var(--deep-teal);font-size:clamp(80px,11vw,200px);line-height:0.85;letter-spacing:-0.018em}
+  .stat-row .num em{font-style:normal;color:var(--civic-teal);font-weight:300;font-size:0.4em;vertical-align:0.5em;margin-left:2px}
+  .stat-row.alt .num{color:var(--aubergine)}
+  .stat-row.alt .num em{color:var(--lavender)}
+  .stat-row.last .num{color:var(--ink)}
+  .stat-row.last .num em{color:var(--civic-teal)}
+  .stat-row .meta{padding-bottom:18px}
+  .stat-row .lbl{font-family:var(--body);font-size:18px;color:var(--ink);max-width:36ch;line-height:1.45;font-weight:400}
+  .stat-row .lbl strong{font-family:var(--display);font-weight:700;color:var(--deep-teal);letter-spacing:0;font-size:1em}
+  .stat-row .src{font-size:12px;color:var(--slate);font-style:italic;margin-top:6px}
+
+  .lead-side{display:flex;flex-direction:column;gap:18px;position:sticky;top:24px}
+  .brand-frame{padding:18px 0;border-top:2px solid var(--ink);border-bottom:1px solid var(--soft-gray)}
+  .brand-frame h1{font-family:var(--display);font-weight:900;color:var(--ink);font-size:32px;line-height:1;letter-spacing:-0.005em}
+  .brand-frame h1 .pause{color:var(--civic-teal)}
+  .brand-frame p{margin:10px 0 0;font-size:15px;color:var(--ink);line-height:1.55}
+  .brand-frame .anniv{display:inline-block;margin-top:12px;font-family:var(--display);text-transform:uppercase;letter-spacing:0.18em;font-size:11px;color:var(--lavender);border:1px solid var(--lavender);padding:4px 8px}
+
+  /* 211 inside the side rail */
+  #help{background:var(--ink);color:#fff;padding:18px 18px 16px;border-top:4px solid var(--crimson);border-radius:4px}
+  #help h2{font-family:var(--display);text-transform:uppercase;letter-spacing:0.16em;color:#fff;font-size:13px;font-weight:900;margin-bottom:12px}
+  #help h2::before{content:"●  ";color:var(--crimson)}
+  #help .row{padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.18);display:flex;flex-direction:column;gap:2px}
+  #help .row:last-child{border-bottom:none;padding-bottom:0}
+  #help .ctx{font-size:12px;color:rgba(255,255,255,0.78);line-height:1.4}
+  #help a.tel{font-family:var(--display);font-weight:900;color:#fff;font-size:20px;letter-spacing:0;text-decoration:none}
+  #help a.tel:hover{color:var(--pale-lavender)}
+
+  /* Programs framed below */
+  section.programs{padding:var(--sp-d) 0;background:var(--pale-teal-gray)}
+  .ph{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px;gap:24px;flex-wrap:wrap}
+  .ph h2{font-family:var(--display);text-transform:uppercase;letter-spacing:0.18em;color:var(--ink);font-size:13px;font-weight:900}
+  .ph p{margin:0;color:var(--slate);font-size:14px;max-width:48ch}
+  .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .pillar{background:#fff;padding:24px;border-left:4px solid var(--civic-teal);display:flex;flex-direction:column;gap:8px}
+  .pillar img{width:42px;height:42px;margin-bottom:8px}
+  .pillar h3{font-family:var(--display);text-transform:uppercase;letter-spacing:0.04em;font-size:18px;color:var(--ink)}
+  .pillar p{margin:0;color:var(--slate);font-size:14px;line-height:1.5}
+
+  /* Stories anchor */
+  section.stories{padding:var(--sp-d) 0;background:var(--ink);color:#fff}
+  section.stories .head{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin-bottom:24px;flex-wrap:wrap}
+  section.stories h2{font-family:var(--display);text-transform:uppercase;letter-spacing:0.18em;color:#fff;font-size:13px;font-weight:900}
+  section.stories .head a{color:var(--pale-lavender);font-family:var(--display);text-transform:uppercase;letter-spacing:0.08em;font-size:13px;font-weight:500}
+  .sgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+  .pp{display:flex;flex-direction:column;gap:8px}
+  .pp img{aspect-ratio:1/1.2;object-fit:cover}
+  .pp .name{font-family:var(--display);font-weight:700;color:#fff;font-size:16px;letter-spacing:0.02em;text-transform:uppercase}
+  .pp .cap{color:rgba(255,255,255,0.72);font-size:13px;line-height:1.45}
+
+  footer.site{padding:32px 0 22px;background:var(--deep-teal);color:rgba(255,255,255,0.78);font-size:14px}
+  footer.site .row{display:flex;justify-content:space-between;gap:24px;align-items:baseline;flex-wrap:wrap}
+  footer.site a{color:#fff}
+  footer.site .links{display:flex;gap:22px;font-family:var(--display);text-transform:uppercase;letter-spacing:0.08em;font-size:12px}
+  footer.site .meta{font-size:12px;color:rgba(255,255,255,0.6);margin-top:14px;padding-top:12px;border-top:1px dotted rgba(255,255,255,0.2);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  @media (max-width:960px){
+    .lead-grid{grid-template-columns:1fr}
+    .lead-side{position:static}
+    .pgrid,.sgrid{grid-template-columns:1fr}
+    .sgrid{grid-template-columns:repeat(3,1fr)}
+  }
+  @media (max-width:560px){.sgrid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#help">Skip to immediate help</a>
+
+<header class="site">
+  <div class="container row">
+    <span class="wm">The Road Home · 1923</span>
+    <nav class="i" aria-label="Primary"><ul>
+      <li><a href="/get-help/">Get Help</a></li>
+      <li><a href="/give-main/">Give</a></li>
+      <li><a href="/get-involved/">Get Involved</a></li>
+      <li><a href="/about-us/">About</a></li>
+      <li><a class="donate" href="/give-main/">Donate</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<section class="lead" data-section-role="impact" data-section-pos="1">
+  <div class="container lead-grid">
+    <div class="stats-stack">
+      <div class="stat-row">
+        <div class="num">1,550<em>+</em></div>
+        <div class="meta">
+          <div class="lbl"><strong>People in housing</strong> in the community on any given night. Not in shelter — in housing.</div>
+          <div class="src">— TRH IMPACT, 2024 reporting</div>
+        </div>
+      </div>
+      <div class="stat-row alt">
+        <div class="num">60<em>%</em></div>
+        <div class="meta">
+          <div class="lbl"><strong>Receive case management</strong> at some point during their shelter stay.</div>
+          <div class="src">— TRH IMPACT, 2024 reporting</div>
+        </div>
+      </div>
+      <div class="stat-row last">
+        <div class="num">3,491</div>
+        <div class="meta">
+          <div class="lbl"><strong>Assisted last year</strong> with employment and housing-related services.</div>
+          <div class="src">— TRH IMPACT, 2024 reporting</div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="lead-side">
+      <div class="brand-frame">
+        <h1>Refuge<span class="pause">.</span> Resources<span class="pause">.</span> Relief<span class="pause">.</span></h1>
+        <p>The Road Home provides emergency shelter, supportive services, and housing assistance that help individuals and families step out of homelessness in Salt Lake County and along the Wasatch Front.</p>
+        <span class="anniv">100 YEARS · 1923–2026</span>
+      </div>
+      <div id="help" data-section-role="immediate-help">
+        <h2>Need help right now</h2>
+        <div class="row"><span class="ctx">Looking for shelter tonight</span><a class="tel" href="tel:8019909999">801·990·9999</a></div>
+        <div class="row"><span class="ctx">Housing crisis</span><a class="tel" href="tel:8013592444">801·359·2444</a></div>
+        <div class="row"><span class="ctx">Other needs</span><a class="tel" href="tel:211">2·1·1</a></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="programs" data-section-role="program-pillars" data-section-pos="2">
+  <div class="container">
+    <div class="ph"><h2>Where the numbers come from · three programs</h2><p>The numbers above describe the work; these are the practices that produce them.</p></div>
+    <div class="pgrid">
+      <div class="pillar"><img alt="" src="https://theroadhome.org/wp-content/uploads/2020/11/TheRoadHome_IconsArtboard-152.svg"><h3>Emergency Shelter</h3><p>A safe place to sleep, tonight, every night. Open intake. Connection to services from day one.</p></div>
+      <div class="pillar"><img alt="" src="https://theroadhome.org/wp-content/uploads/2020/11/TheRoadHome_IconsArtboard-153.svg"><h3>Supportive Services</h3><p>Case management, employment, mental and physical health navigation while a person is sheltered.</p></div>
+      <div class="pillar"><img alt="" src="https://theroadhome.org/wp-content/uploads/2020/11/TheRoadHome_IconsArtboard-154.svg"><h3>Housing Assistance</h3><p>Rapid re-housing, supportive housing, and the patient navigation that holds.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="stories" data-section-role="stories" data-section-pos="3">
+  <div class="container">
+    <div class="head"><h2>Six of the people behind the numbers</h2><a href="/about-us/news/">All stories →</a></div>
+    <div class="sgrid">
+      <article class="pp"><img alt="Cole" src="https://theroadhome.org/wp-content/uploads/2021/01/Cole_Canva-Stock-Photo_BW.jpg"><div class="name">Cole</div><div class="cap">Years in shelter; supportive housing.</div></article>
+      <article class="pp"><img alt="Jay" src="https://theroadhome.org/wp-content/uploads/2021/01/Jay_Canva-Stock-Photo_BW.jpg"><div class="name">Jay</div><div class="cap">Found employment via TRH.</div></article>
+      <article class="pp"><img alt="Sue" src="https://theroadhome.org/wp-content/uploads/2021/01/Sue_Canva-Stock-Photo_BW.jpg"><div class="name">Sue</div><div class="cap">Re-housed with family.</div></article>
+      <article class="pp"><img alt="Jordan" src="https://theroadhome.org/wp-content/uploads/2021/01/Jordan_Canva-Stock-Photo_BW.jpg"><div class="name">Jordan</div><div class="cap">Case management.</div></article>
+      <article class="pp"><img alt="Ray" src="https://theroadhome.org/wp-content/uploads/2021/01/Ray_Canva-Stock-Photo_BW.jpg"><div class="name">Ray</div><div class="cap">Palmer Court.</div></article>
+      <article class="pp"><img alt="Randall" src="https://theroadhome.org/wp-content/uploads/2021/01/Randall_Canva-Stock-Photo_BW.jpg"><div class="name">Randall</div><div class="cap">Rapid re-housing.</div></article>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="container">
+    <div class="row">
+      <div class="links"><a href="/get-help/">Get Help</a><a href="/give-main/">Give</a><a href="/get-involved/">Get Involved</a><a href="/about-us/">About</a></div>
+      <div>1415 S Main Street, Salt Lake City, UT 84115 · 801.359.4142</div>
+    </div>
+    <div class="meta">
+      <span>© 2026 The Road Home · Founded 1923 · Four-star Charity Navigator rated</span>
+      <span>Numbers verbatim from TRH IMPACT 2024 reporting.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

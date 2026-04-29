@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy:        stardust:prototype (variant C · bold direction)
+  writtenAt:        2026-04-28
+  page:             home
+  pageUrl:          https://www.glossier.com/
+  againstDirection: stardust/direction.md (Active)
+  shapeBrief:       stardust/prototypes/home-C-shape.md
+  thesis:           "Are we ready to commit harder?"
+  contentSourceMap:
+    hero:           current/pages/home.json
+    fragranceLine:  current/pages/home.json (Glossier You + 5 sister fragrances, verbatim)
+    testimonial:    current/pages/home.json (testimonial 2 verbatim)
+    images:         current/pages/home.json (public imgix CDN URLs)
+  unsourcedContent:
+    - "SALE EDIT" section label (refresh-authored, replaces "SPRING FEVER SALE")
+    - "All 30 Spring Fever Sale items" — count 30 is placeholder
+    - per-fragrance one-liner copy (e.g. "Sheer floral, soft musk")
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Glossier — Variant C · Bold direction</title>
+<style>
+  :root {
+    --heading-font-family: 'Apercu', 'Gill Sans', sans-serif;
+    --body-font-family: 'Apercu', 'Gill Sans', sans-serif;
+
+    /* Pushed scale — display at 120, headline at 64 */
+    --display-xxl: 120px;  /* hero */
+    --heading-xxl: 80px;   /* fragrance row title */
+    --heading-xl: 56px;    /* section opener */
+    --heading-lg: 32px;    /* community pull-quote */
+    --heading-md: 22px;
+    --body: 16px; --body-sm: 14px; --label: 12px; --micro: 11px;
+
+    --line-height-heading: 1.0; --line-height-body: 1.55;
+
+    --color-bg: #FFFFFF; --color-fg: #000000; --color-fg-muted: #666666;
+    --color-surface-soft: #F7F7F7; --color-border-soft: #E8E8E8;
+    --color-glossier-pink: #FAF2F4; --color-glossier-pink-deep: #F6E3E6;
+    --color-sale-orange: #F94200;
+
+    --section-padding-tight: 40px; --section-padding-balanced: 64px; --section-padding-loose: 96px;
+    --max-width: 1440px; --content-max-width: 1280px; --radius: 0px;
+    --hairline: 1px solid var(--color-border-soft);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--body-font-family); font-size: var(--body); line-height: var(--line-height-body);
+    color: var(--color-fg); background: var(--color-bg); -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  button { font-family: inherit; }
+  @font-face { font-family: 'Apercu'; src: local('Helvetica Neue'), local('Arial'); font-display: swap; }
+
+  .ds-uppercase { text-transform: uppercase; letter-spacing: 0.12em; }
+  .ds-button-primary {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--color-fg); color: var(--color-bg); border: 0;
+    padding: 16px 28px; font: 500 var(--body-sm)/1 var(--body-font-family);
+    letter-spacing: 0.04em; border-radius: 0; text-decoration: none;
+  }
+  .ds-button-primary--inverse { background: var(--color-bg); color: var(--color-fg); }
+  .ds-button-secondary {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--color-bg); color: var(--color-fg); border: 1px solid var(--color-fg);
+    padding: 15px 27px; font: 500 var(--body-sm)/1 var(--body-font-family);
+    letter-spacing: 0.04em; text-decoration: none;
+  }
+  .ds-button-link {
+    display: inline-flex; align-items: center; gap: 6px; padding: 0;
+    font: 500 var(--body-sm)/1.4 var(--body-font-family);
+    border-bottom: 1px solid var(--color-fg); text-decoration: none; color: inherit;
+  }
+  .ds-section-label { font-size: var(--label); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 400; margin: 0 0 12px; }
+  .ds-tag { font-size: var(--label); letter-spacing: 0.02em; font-weight: 500; }
+  .ds-tag--sale { color: var(--color-sale-orange); }
+
+  [data-placeholder] { border-bottom: 1px dashed var(--color-fg-muted); background: linear-gradient(to top, rgba(255,200,200,0.18), transparent 18%); }
+
+  /* Header (promo + nav inline — variant C condenses chrome) */
+  .site-header { position: sticky; top: 0; z-index: 10; background: var(--color-bg); border-bottom: var(--hairline); }
+  .site-header__top {
+    display: flex; justify-content: center; gap: 16px;
+    padding: 6px 32px; font-size: var(--micro); letter-spacing: 0.12em; text-transform: uppercase;
+    border-bottom: var(--hairline); color: var(--color-fg-muted);
+  }
+  .site-header__top strong { color: var(--color-sale-orange); }
+  .site-header__inner {
+    max-width: var(--max-width); margin: 0 auto; padding: 18px 32px;
+    display: grid; grid-template-columns: 100px 1fr auto auto auto; align-items: center; gap: 32px;
+  }
+  .site-header__wordmark { font-size: 32px; font-weight: 400; letter-spacing: -0.01em; font-style: italic; font-family: 'Garamond', 'Times New Roman', serif; }
+  .site-nav { display: flex; gap: 28px; }
+  .site-nav a { font-size: var(--body-sm); text-decoration: none; padding-bottom: 2px; border-bottom: 1px solid transparent; }
+  .site-nav a:hover { border-color: var(--color-fg); }
+  .site-header__util { display: flex; gap: 18px; font-size: var(--body-sm); }
+
+  /* Hero — display 120px on a pink plate */
+  .hero {
+    position: relative; min-height: 88vh; overflow: hidden;
+    display: grid; grid-template-rows: 1fr auto;
+  }
+  .hero__photo {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
+  }
+  .hero__plate {
+    position: relative; z-index: 1;
+    grid-row: 2;
+    background: var(--color-glossier-pink-deep);
+    padding: 56px 64px;
+    display: flex; align-items: end; justify-content: space-between; gap: 64px;
+  }
+  .hero__plate-left { max-width: 70%; }
+  .hero__display {
+    font-size: var(--display-xxl); line-height: 0.92;
+    font-weight: 500; letter-spacing: -0.025em; margin: 0;
+  }
+  .hero__sub {
+    font-size: var(--heading-md); line-height: 1.35; margin: 16px 0 0;
+    max-width: 480px; font-weight: 400;
+  }
+  .hero__plate-right {
+    text-align: right; padding-bottom: 8px;
+    flex-shrink: 0;
+  }
+  .hero__product { font-size: var(--label); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; opacity: 0.7; }
+
+  /* Fragrance monolith — alternating rows, full-width, single product per row */
+  .monolith-row {
+    display: grid; grid-template-columns: 7fr 5fr;
+    min-height: 70vh; align-items: stretch;
+  }
+  .monolith-row--alt { grid-template-columns: 5fr 7fr; }
+  .monolith-row--alt .monolith-row__copy { order: -1; }
+  .monolith-row:nth-child(even) { background: var(--color-glossier-pink-deep); }
+  .monolith-row__media {
+    overflow: hidden; background: var(--color-glossier-pink);
+  }
+  .monolith-row__media img { width: 100%; height: 100%; object-fit: cover; min-height: 460px; }
+  .monolith-row__copy {
+    padding: 80px 64px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .monolith-row__index { font-size: var(--label); letter-spacing: 0.12em; opacity: 0.5; margin-bottom: 16px; }
+  .monolith-row__cat { font-size: var(--label); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; opacity: 0.7; }
+  .monolith-row__title { font-size: var(--heading-xxl); line-height: 0.95; font-weight: 500; letter-spacing: -0.02em; margin: 0 0 20px; }
+  .monolith-row__note { font-size: var(--heading-md); line-height: 1.4; margin: 0 0 32px; max-width: 420px; }
+  .monolith-row__meta {
+    display: flex; gap: 24px; align-items: baseline; margin-bottom: 32px;
+    font-size: var(--body-sm);
+  }
+  .monolith-row__meta strong { font-size: var(--heading-md); font-weight: 500; }
+  .monolith-row__cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* Sale edit — radically condensed (refresh decision) */
+  .section { padding: var(--section-padding-balanced) 32px; }
+  .section--tight { padding: var(--section-padding-tight) 32px; }
+  .section--loose { padding: var(--section-padding-loose) 32px; }
+  .section__inner { max-width: var(--content-max-width); margin: 0 auto; }
+  .section__head { display: flex; align-items: end; justify-content: space-between; margin-bottom: 48px; border-top: 1px solid var(--color-fg); padding-top: 24px; gap: 16px; flex-wrap: wrap; }
+  .section__head h2 { margin: 0; font-size: var(--heading-xl); font-weight: 400; letter-spacing: -0.015em; }
+  .sale-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-bottom: 32px; }
+  .sale-card { display: flex; gap: 16px; text-decoration: none; color: inherit; align-items: center; }
+  .sale-card__media { width: 96px; height: 120px; flex: 0 0 96px; background: var(--color-surface-soft); overflow: hidden; }
+  .sale-card__media img { width: 100%; height: 100%; object-fit: cover; }
+  .sale-card__title { font-size: var(--body); font-weight: 500; margin: 0 0 4px; }
+  .sale-card__price { font-size: var(--body-sm); margin: 0; }
+  .sale-card__price del { color: var(--color-fg-muted); margin-right: 6px; }
+  .sale-card__price-now { color: var(--color-sale-orange); }
+  .sale-grid__more { padding-top: 24px; border-top: var(--hairline); display: flex; justify-content: center; }
+
+  /* Community quote — single full-bleed pull-quote, no image */
+  .community-quote {
+    background: var(--color-glossier-pink);
+    padding: 120px 32px;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+  }
+  .community-quote__stars { font-size: var(--label); letter-spacing: 0.18em; margin-bottom: 32px; }
+  .community-quote__body {
+    max-width: 920px; font-size: var(--heading-lg); line-height: 1.25;
+    font-weight: 400; letter-spacing: -0.005em; margin: 0 0 32px;
+  }
+  .community-quote__attr { font-size: var(--body-sm); color: var(--color-fg-muted); }
+
+  /* UGC */
+  .ugc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .ugc-grid__tile { aspect-ratio: 1/1; overflow: hidden; background: var(--color-glossier-pink-deep); }
+  .ugc-grid__tile--portrait { aspect-ratio: 3/4; }
+  .ugc-grid__tile img { width: 100%; height: 100%; object-fit: cover; }
+  .ugc-caption { margin-top: 32px; max-width: 720px; font-size: var(--heading-md); line-height: 1.4; }
+  .ugc-caption a { border-bottom: 1px solid currentColor; text-decoration: none; }
+
+  /* Footer */
+  .site-footer { background: var(--color-glossier-pink); padding: 64px 32px 24px; }
+  .site-footer__inner { max-width: var(--max-width); margin: 0 auto; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(0,0,0,0.12); }
+  .footer-newsletter h3 { font-size: var(--heading-md); font-weight: 400; margin: 0 0 12px; }
+  .footer-newsletter p { font-size: var(--body-sm); margin: 0 0 16px; max-width: 320px; }
+  .footer-newsletter form { display: flex; }
+  .footer-newsletter input { flex: 1; border: 1px solid var(--color-fg); border-right: 0; background: transparent; padding: 12px; font: 400 var(--body-sm)/1 var(--body-font-family); border-radius: 0; }
+  .footer-newsletter button { border: 1px solid var(--color-fg); background: var(--color-fg); color: var(--color-bg); padding: 12px 18px; font: 500 var(--body-sm)/1 var(--body-font-family); letter-spacing: 0.04em; }
+  .footer-col h4 { font-size: var(--label); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 400; margin: 0 0 16px; }
+  .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col a { font-size: var(--body-sm); text-decoration: none; }
+  .footer-bottom { background: var(--color-glossier-pink-deep); margin: 0 -32px -24px; padding: 32px; display: flex; justify-content: space-between; align-items: center; font-size: var(--micro); letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-fg-muted); }
+  .footer-bottom__wordmark { font-size: 144px; line-height: 0.85; letter-spacing: -0.03em; font-style: italic; font-family: 'Garamond', 'Times New Roman', serif; color: var(--color-fg); text-transform: none; }
+
+  @media (max-width: 1280px) {
+    :root { --display-xxl: 88px; --heading-xxl: 64px; --heading-xl: 44px; }
+  }
+  @media (max-width: 1024px) {
+    :root { --display-xxl: 64px; --heading-xxl: 48px; --section-padding-loose: 72px; --section-padding-balanced: 48px; }
+    .monolith-row, .monolith-row--alt { grid-template-columns: 1fr; }
+    .monolith-row__media img { min-height: 320px; }
+    .monolith-row__copy { padding: 48px 24px; }
+    .sale-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-nav { display: none; }
+    .site-header__inner { grid-template-columns: 100px 1fr auto auto; }
+    .hero__plate { flex-direction: column; align-items: start; gap: 24px; padding: 32px; }
+    .hero__plate-right { text-align: left; }
+  }
+  @media (max-width: 640px) {
+    :root { --display-xxl: 56px; --heading-xxl: 40px; --heading-xl: 32px; --section-padding-loose: 48px; --section-padding-balanced: 32px; }
+    .section, .section--tight, .section--loose, .site-footer, .community-quote { padding-left: 16px; padding-right: 16px; }
+    .community-quote { padding-top: 64px; padding-bottom: 64px; }
+    .sale-grid { grid-template-columns: 1fr; }
+    .ugc-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .footer-bottom__wordmark { font-size: 72px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header" data-section="header" data-intent="navigate" data-layout="contained">
+  <div class="site-header__top">
+    <strong>30% off</strong>&nbsp; Spring Fever Sale ends soon
+  </div>
+  <div class="site-header__inner">
+    <span class="site-header__wordmark">Glossier</span>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#sale">Skincare</a>
+      <a href="#sale">Makeup</a>
+      <a href="#sale">Body</a>
+      <a href="#fragrance" aria-current="true">Fragrance</a>
+      <a href="#sale">Sets</a>
+      <a href="#sale">Bestsellers</a>
+      <a href="#sale" style="color: var(--color-sale-orange);">Sale</a>
+    </nav>
+    <a href="#" aria-label="Search">Search</a>
+    <a href="#" aria-label="Account">Account</a>
+    <a href="#" aria-label="Bag">Bag (0)</a>
+  </div>
+</header>
+
+<!-- Hero — display 120px, copy on a deep-pink plate, photo behind -->
+<section class="hero" data-section="hero" data-intent="emotional-hook" data-layout="full-bleed" data-media="image">
+  <img class="hero__photo" src="https://glossier-prod.imgix.net/files/glossier-you-smell-good-homepage-desktop.png?auto=compress,format&cs=srgb&w=1920" alt="">
+  <div class="hero__plate">
+    <div class="hero__plate-left">
+      <div class="hero__product">Glossier You · The fragrance family</div>
+      <h1 class="hero__display">you smell good.</h1>
+      <p class="hero__sub">Make your presence known before you arrive, and long after you leave.</p>
+    </div>
+    <div class="hero__plate-right">
+      <a class="ds-button-primary" href="#fragrance">Discover the family</a>
+    </div>
+  </div>
+</section>
+
+<!-- Fragrance monolith — single product per row, alternating layout, alternating ground -->
+<section id="fragrance" data-section="fragrance-monolith" data-intent="immerse" data-layout="alternating-rows" data-items="6">
+
+  <article class="monolith-row">
+    <figure class="monolith-row__media"><img src="https://glossier-prod.imgix.net/files/glossier-fragrance-you-01.png?auto=compress,format&cs=srgb&w=1080" alt=""></figure>
+    <div class="monolith-row__copy">
+      <span class="monolith-row__index">01 — The original</span>
+      <span class="monolith-row__cat">EAU DE PARFUM</span>
+      <h2 class="monolith-row__title">Glossier You</h2>
+      <p class="monolith-row__note" data-placeholder>Soft, ambery, skin-like — the fragrance that started the conversation. Best seller, always.</p>
+      <div class="monolith-row__meta"><strong>CHF 81.90</strong><span>50 ml · 100 ml · 8 ml</span></div>
+      <div class="monolith-row__cta"><a class="ds-button-primary" href="#">Add to bag</a><a class="ds-button-secondary" href="#">Read the notes</a></div>
+    </div>
+  </article>
+
+  <article class="monolith-row monolith-row--alt">
+    <div class="monolith-row__copy">
+      <span class="monolith-row__index">02 — New</span>
+      <span class="monolith-row__cat">EAU DE PARFUM</span>
+      <h2 class="monolith-row__title">Glossier You Soie</h2>
+      <p class="monolith-row__note" data-placeholder>Silken, powder-clean, with a dry-cashmere finish. The newest member.</p>
+      <div class="monolith-row__meta"><strong>CHF 81.90</strong><span>50 ml · 8 ml</span></div>
+      <div class="monolith-row__cta"><a class="ds-button-primary" href="#">Add to bag</a><a class="ds-button-secondary" href="#">Read the notes</a></div>
+    </div>
+    <figure class="monolith-row__media"><img src="https://glossier-prod.imgix.net/files/new-glossier-fragrance-you-soie-carousel-01.jpg?auto=compress,format&cs=srgb&w=1080" alt=""></figure>
+  </article>
+
+  <article class="monolith-row">
+    <figure class="monolith-row__media"><img src="https://glossier-prod.imgix.net/files/glossier-doux-launch-carousel-01.png?auto=compress,format&cs=srgb&w=1080" alt=""></figure>
+    <div class="monolith-row__copy">
+      <span class="monolith-row__index">03 — The cosy one</span>
+      <span class="monolith-row__cat">EAU DE PARFUM</span>
+      <h2 class="monolith-row__title">Glossier You Doux</h2>
+      <p class="monolith-row__note" data-placeholder>Warmer, sweeter, with a vanilla-musk close. For the long evenings.</p>
+      <div class="monolith-row__meta"><strong>CHF 81.90</strong><span>50 ml · 100 ml · 8 ml</span></div>
+      <div class="monolith-row__cta"><a class="ds-button-primary" href="#">Add to bag</a><a class="ds-button-secondary" href="#">Read the notes</a></div>
+    </div>
+  </article>
+
+  <article class="monolith-row monolith-row--alt">
+    <div class="monolith-row__copy">
+      <span class="monolith-row__index">04 — In bloom</span>
+      <span class="monolith-row__cat">EAU DE PARFUM</span>
+      <h2 class="monolith-row__title">Glossier You Fleur</h2>
+      <p class="monolith-row__note" data-placeholder>Tuberose and white peach over the original Glossier You base.</p>
+      <div class="monolith-row__meta"><strong>CHF 81.90</strong><span>50 ml · 8 ml</span></div>
+      <div class="monolith-row__cta"><a class="ds-button-primary" href="#">Add to bag</a><a class="ds-button-secondary" href="#">Read the notes</a></div>
+    </div>
+    <figure class="monolith-row__media"><img src="https://glossier-prod.imgix.net/files/glossier-fleur-50ml-carousel-01.png?auto=compress,format&cs=srgb&w=1080" alt=""></figure>
+  </article>
+
+  <article class="monolith-row">
+    <figure class="monolith-row__media"><img src="https://glossier-prod.imgix.net/files/glossier-reve-launch-carousel-01.png?auto=compress,format&cs=srgb&w=1080" alt=""></figure>
+    <div class="monolith-row__copy">
+      <span class="monolith-row__index">05 — The dreamer</span>
+      <span class="monolith-row__cat">EAU DE PARFUM</span>
+      <h2 class="monolith-row__title">Glossier You Rêve</h2>
+      <p class="monolith-row__note" data-placeholder>Iris and bergamot, late-day hush. Cool against warm skin.</p>
+      <div class="monolith-row__meta"><strong>CHF 81.90</strong><span>50 ml · 8 ml</span></div>
+      <div class="monolith-row__cta"><a class="ds-button-primary" href="#">Add to bag</a><a class="ds-button-secondary" href="#">Read the notes</a></div>
+    </div>
+  </article>
+
+  <article class="monolith-row monolith-row--alt">
+    <div class="monolith-row__copy">
+      <span class="monolith-row__index">06 — The set</span>
+      <span class="monolith-row__cat">FRAGRANCE + SKINCARE</span>
+      <h2 class="monolith-row__title">Vacation Essentials</h2>
+      <p class="monolith-row__note" data-placeholder>Eau de parfum + the skincare-makeup hybrid. Travel-ready.</p>
+      <div class="monolith-row__meta"><strong><del style="color: var(--color-fg-muted); margin-right: 8px;">CHF 61.90</del><span style="color: var(--color-sale-orange);">CHF 51.90</span></strong></div>
+      <div class="monolith-row__cta"><a class="ds-button-primary" href="#">Add to bag</a><a class="ds-button-secondary" href="#">What's inside</a></div>
+    </div>
+    <figure class="monolith-row__media"><img src="https://glossier-prod.imgix.net/files/glossier-8ml-soie-futuredew-set-carousel-01.png?auto=compress,format&cs=srgb&w=1080" alt=""></figure>
+  </article>
+
+</section>
+
+<!-- Sale edit — radically condensed -->
+<section class="section" id="sale" data-section="sale-edit" data-intent="drive-action" data-layout="grid" data-items="6">
+  <div class="section__inner">
+    <div class="section__head">
+      <div>
+        <p class="ds-section-label" data-placeholder>SALE EDIT</p>
+        <h2>30% off — six picks.</h2>
+      </div>
+      <a class="ds-button-link" href="#"><span data-placeholder>All 30 Spring Fever Sale items</span> →</a>
+    </div>
+    <div class="sale-grid">
+      <a class="sale-card" href="#">
+        <div class="sale-card__media"><img src="https://glossier-prod.imgix.net/files/glossier-makeup-pro-tip-carousel-01.png?auto=compress,format&cs=srgb&w=400" alt=""></div>
+        <div>
+          <h3 class="sale-card__title">Pro Tip</h3>
+          <p class="sale-card__price"><del>CHF 20.90</del> <span class="sale-card__price-now">CHF 14.63</span></p>
+        </div>
+      </a>
+      <a class="sale-card" href="#">
+        <div class="sale-card__media"><img src="https://glossier-prod.imgix.net/files/glossier-makeup-geng-cake-carousel-01.png?auto=compress,format&cs=srgb&w=400" alt=""></div>
+        <div>
+          <h3 class="sale-card__title">Generation G</h3>
+          <p class="sale-card__price"><del>CHF 19.90</del> <span class="sale-card__price-now">CHF 13.93</span></p>
+        </div>
+      </a>
+      <a class="sale-card" href="#">
+        <div class="sale-card__media"><img src="https://glossier-prod.imgix.net/files/glossier-skylight-prism-carousel-1.png?auto=compress,format&cs=srgb&w=400" alt=""></div>
+        <div>
+          <h3 class="sale-card__title">Skylight</h3>
+          <p class="sale-card__price"><del>CHF 23.90</del> <span class="sale-card__price-now">CHF 16.73</span></p>
+        </div>
+      </a>
+      <a class="sale-card" href="#">
+        <div class="sale-card__media"><img src="https://glossier-prod.imgix.net/files/glossier-body-spritz-obn-carousel-01.png?auto=compress,format&cs=srgb&w=400" alt=""></div>
+        <div>
+          <h3 class="sale-card__title">Body Spritz</h3>
+          <p class="sale-card__price"><del>CHF 34.90</del> <span class="sale-card__price-now">CHF 24.43</span></p>
+        </div>
+      </a>
+      <a class="sale-card" href="#">
+        <div class="sale-card__media"><img src="https://glossier-prod.imgix.net/files/glossier-makeup-browflick-brown-01.png?auto=compress,format&cs=srgb&w=400" alt=""></div>
+        <div>
+          <h3 class="sale-card__title">Brow Flick</h3>
+          <p class="sale-card__price"><del>CHF 17.90</del> <span class="sale-card__price-now">CHF 12.53</span></p>
+        </div>
+      </a>
+      <a class="sale-card" href="#">
+        <div class="sale-card__media"><img src="https://glossier-prod.imgix.net/files/glossier-makeup-haloscope-moonstone-01.png?auto=compress,format&cs=srgb&w=400" alt=""></div>
+        <div>
+          <h3 class="sale-card__title">Haloscope</h3>
+          <p class="sale-card__price"><del>CHF 21.90</del> <span class="sale-card__price-now">CHF 15.33</span></p>
+        </div>
+      </a>
+    </div>
+    <div class="sale-grid__more"><a class="ds-button-secondary" href="#">See the full edit</a></div>
+  </div>
+</section>
+
+<!-- Community quote — full-bleed, no image, single overheard moment -->
+<section class="community-quote" data-section="community-quote" data-intent="build-trust" data-layout="full-bleed" data-items="1">
+  <div class="community-quote__stars">★ ★ ★ ★ ★</div>
+  <blockquote class="community-quote__body">"The very first time my now boyfriend approached me on the street, the wind blew my Glossier You into his face. He stopped mid-sentence and said 'you smell really good.'"</blockquote>
+  <p class="community-quote__attr">— On <strong>Glossier You</strong></p>
+</section>
+
+<!-- UGC -->
+<section class="section" data-section="ugc-grid" data-intent="build-trust" data-layout="grid" data-items="3" data-media="image">
+  <div class="section__inner">
+    <div class="section__head">
+      <div>
+        <p class="ds-section-label">GET THE LOOK</p>
+        <h2>Behind the campaign.</h2>
+      </div>
+      <a class="ds-button-link" href="#">Read more stories →</a>
+    </div>
+    <div class="ugc-grid">
+      <div class="ugc-grid__tile ugc-grid__tile--portrait"><img src="https://glossier-prod.imgix.net/files/glossier-you-smell-good-UGC-desktop-02_e8f8b5fc-394a-4e7f-aa70-0aa6f6272128.png?auto=compress,format&cs=srgb&w=1080" alt=""></div>
+      <div class="ugc-grid__tile"><img src="https://glossier-prod.imgix.net/files/YSG_COMMUNITY_2_FINAL.jpg?auto=compress,format&cs=srgb&w=1080" alt=""></div>
+      <div class="ugc-grid__tile"><img src="https://glossier-prod.imgix.net/files/glossier-you-smell-good-UGC-desktop-03_c7eca12a-327b-4308-86e0-60e170b1d8a9.png?auto=compress,format&cs=srgb&w=1080" alt=""></div>
+    </div>
+    <p class="ugc-caption">Meet the stars of our campaign: Gabrielle + Bre. <a href="#">Behind the scenes of our latest video.</a></p>
+  </div>
+</section>
+
+<footer class="site-footer" data-section="footer" data-intent="navigate" data-layout="grid" data-items="4">
+  <div class="site-footer__inner">
+    <div class="footer-grid">
+      <div class="footer-newsletter">
+        <h3>The Glossier You newsletter</h3>
+        <p>Be first to know about launches, restocks, and new editorial.</p>
+        <form onsubmit="event.preventDefault();">
+          <input type="email" placeholder="Email address" aria-label="Email address">
+          <button type="submit">Sign up</button>
+        </form>
+      </div>
+      <div class="footer-col">
+        <h4>How can we help?</h4>
+        <ul><li><a href="#">Contact</a></li><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li><li><a href="#">FAQ</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>About Glossier</h4>
+        <ul><li><a href="#">Our story</a></li><li><a href="#">Careers</a></li><li><a href="#">Sustainability</a></li><li><a href="#">Affiliates</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Stores</h4>
+        <ul><li><a href="#">Find a store</a></li><li><a href="#">Sephora</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Social</h4>
+        <ul><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li><li><a href="#">YouTube</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom__wordmark">Glossier</span>
+      <span>© 2026 · CH · EN</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

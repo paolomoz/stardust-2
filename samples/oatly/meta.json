@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 2,
+  "slug": "oatly",
+  "title": "Oatly",
+  "tagline": "Irreverent, scrappy, loud — and the home page is captured at ~20px section padding with zero product photography. Variants test compositional rest and a singular pastel band, brand-tight.",
+
+  "source": {
+    "url": "https://www.oatly.com",
+    "register": "brand",
+    "category": "CPG · plant-milk · brand-led commerce",
+    "extractedAt": "2026-04-28"
+  },
+
+  "direction": {
+    "phrase": "Mode A brand-faithful presales redesign of oatly.com homepage. Pin palette and typography. Three differentiated variants.",
+    "movements": [
+      "density: ~20px sections → packed brand-tight (~48px) for presales surface",
+      "variant differentiation: distinct compositional theses (no reskins)",
+      "F-002 placeholders: required (captured zero product photography)"
+    ],
+    "seed": {
+      "input": "Oatly|2026-04-28",
+      "decade": "2025-now",
+      "craft": "irreverent paper-and-marker",
+      "register": "brand",
+      "groundFamily": "cream (#fdcf85 family, brand-faithful)",
+      "pickedBy": "inherited (Mode A)"
+    },
+    "fontDeck": {
+      "name": "brand-inherited",
+      "value": "Oatly's seven custom typefaces, fluid clamp scale",
+      "pickedBy": "user-constraint"
+    },
+    "palette": {
+      "name": "Oatly brand-pinned",
+      "source": "inherited from stardust/current/_brand-extraction.json",
+      "anchor": "#fdcf85",
+      "pickedBy": "user-constraint",
+      "brandFaithfulInversions": [
+        "pure-black #000 retained",
+        "cream #fdcf85 retained",
+        "0px corners retained (sharp)",
+        "italic-serif hero claim retained",
+        "grid-paper background retained",
+        "hex format retained"
+      ]
+    },
+    "antiToolbox": { "hits": 0, "justified": 0 }
+  },
+
+  "originalCritique": "The brand surface is genuinely unmistakable — italic-serif claims, grid-paper, sharp 0px corners, irreverent voice. But the captured home runs at ~20px section padding (very tight); the page lacks a single content moment that earns rest. Worse, the homepage captures <strong>zero product photography</strong> — every image is brand-system, og fallback, or hand-drawn icon. The page is loud but never composed.",
+
+  "variants": [
+    {
+      "id": "A",
+      "name": "Conservative refresh",
+      "dominantDimension": "tokens",
+      "thesis": "Same IA, packed brand-tight at ~48px instead of ~20px. The grid-paper, italic-serif claims, sharp corners, and hand-drawn motifs survive verbatim — the page just gets enough air to read.",
+      "fix": "Same IA, packed brand-tight at ~48px instead of ~20px. <strong>The grid-paper, italic-serif claims, sharp corners, and hand-drawn motifs survive verbatim</strong> — the page just gets enough air for the voice to land. Each section finally has a single moment instead of four shouting at once.",
+      "proposedFile": "proposed-A.html",
+      "isPrimary": true
+    },
+    {
+      "id": "B",
+      "name": "Compositional shift",
+      "dominantDimension": "ia",
+      "thesis": "Same palette, same type. Different homepage thesis: open with one italic-serif claim full-bleed, no nav, no card grid. The voice is the page; the product range follows.",
+      "fix": "Same palette, same type. <strong>Different homepage thesis:</strong> the page opens with one italic-serif claim full-bleed — no nav, no card grid, no rolling promo. The voice IS the page. The product range follows below the fold as a single composed strip, not a wall of SKUs. The brand always wrote like this; finally the home composes like this.",
+      "proposedFile": "proposed-B.html"
+    },
+    {
+      "id": "C",
+      "name": "Bold direction",
+      "dominantDimension": "palette",
+      "thesis": "Push one pastel further: a singular drenched-pastel band carries the hero (cream-yellow #fdcf85 or one of the seven brand pastels). Brand-tight density holds elsewhere.",
+      "fix": "<strong>Push one pastel further.</strong> A singular drenched-pastel band carries the hero — cream-yellow #fdcf85 or one of the seven brand pastels — at full saturation, not as background. Brand-tight density holds elsewhere; the grid-paper recedes to a single section. The pastel finally has the weight the brand has been distributing thinly across cards.",
+      "proposedFile": "proposed-C.html"
+    }
+  ],
+
+  "createdAt": "2026-04-28",
+  "stardustVersion": "0.2.0",
+  "submittedBy": "paolomoz",
+  "license": "Apache-2.0",
+  "thumbnail": "logo.png"
+}

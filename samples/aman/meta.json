@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 2,
+  "slug": "aman",
+  "title": "Aman",
+  "tagline": "Atmospheric photography, composed restraint. Refresh tightens scale and section padding without breaking the soulful tone.",
+
+  "source": {
+    "url": "https://www.aman.com/",
+    "register": "brand",
+    "category": "luxury hospitality",
+    "extractedAt": "2026-04-28"
+  },
+
+  "direction": {
+    "phrase": "Brand-faithful refresh of aman.com home for presales — three variants with distinct compositional theses.",
+    "movements": [
+      "tokens: calibration only (no axis movement)",
+      "scale: tightened to modular ratio inside captured pixel range",
+      "motif precision: sharpened",
+      "section padding: 64–80px desktop (balanced, not 96+)"
+    ],
+    "seed": {
+      "input": "Aman|2026-04-28",
+      "decade": "2025-now",
+      "craft": "Photogram",
+      "register": "Travel agency brochure",
+      "groundFamily": "cream (#F3EEE7, brand-faithful override)",
+      "pickedBy": "rolled (decade/craft/register), brand override (ground)"
+    },
+    "fontDeck": {
+      "name": "brand-inherited",
+      "value": "Lyon (display) + Whitney SSm (text)",
+      "pickedBy": "user-constraint"
+    },
+    "palette": {
+      "name": "Aman brand-pinned",
+      "source": "inherited from stardust/current/_brand-extraction.json",
+      "anchor": "#cdb98c",
+      "pickedBy": "user-constraint",
+      "brandFaithfulInversions": [
+        "cream #F3EEE7 page-ground retained",
+        "hex format retained"
+      ]
+    },
+    "antiToolbox": { "hits": 0, "justified": 0 }
+  },
+
+  "originalCritique": "The live site is already exceptional in tone, but it carries a few token-level weaknesses that compound: scale isn't modular, photo-radius and card-radius mismatch, section padding inflates beyond the brand's actual register. <strong>The composition is calibrated; the system underneath isn't.</strong> The result is a homepage that feels right-but-tired — the kind of fatigue brand teams describe after 2–5 years untouched.",
+
+  "variants": [
+    {
+      "id": "A",
+      "name": "Conservative refresh",
+      "dominantDimension": "tokens",
+      "thesis": "Same IA, same section order. Refined scale (modular), aligned radii, balanced section padding (64–80px), motif precision. The system the brand always had behind the composition.",
+      "fix": "Same IA, same section order. <strong>Token system rebuilt under the captured composition:</strong> scale snaps to a modular ratio in the brand's existing pixel range; photo and card radii align; section padding balances at 64–80px desktop. The brand's existing motifs — golden-hour tonality, atmospheric portraiture, single-people-in-environments — finally have a system that doesn't argue with them.",
+      "proposedFile": "proposed-A.html",
+      "isPrimary": true
+    },
+    {
+      "id": "B",
+      "name": "Compositional shift",
+      "dominantDimension": "register",
+      "thesis": "\"Travel agency brochure\" — the captured destinations IA reorganises around a single composed itinerary moment. Same palette, type, photography. Different homepage thesis.",
+      "fix": "Same palette, type, photography. <strong>Different homepage thesis:</strong> a single composed itinerary moment leads, not the destination grid. The captured \"destinations\" IA recedes to a secondary surface. The brochure register lets one place be hero — water at dawn, the architectural interior at dusk — and the rest of the page is footnote, not menu.",
+      "proposedFile": "proposed-B.html"
+    },
+    {
+      "id": "C",
+      "name": "Bold direction",
+      "dominantDimension": "craft",
+      "thesis": "Photogram-craft pushed: full-bleed photographic moments, captured cream as the sole non-photo surface, type set in the photographic register (hairline display, generous tracking).",
+      "fix": "<strong>Photogram-craft pushed.</strong> Full-bleed photographic moments replace card-bordered tiles. Captured cream is the sole non-photo surface; everything else is image. Display type sets in the photographic register — hairline weights, generous tracking — and Whitney SSm carries body, restrained. The page reads as photography first, copy second.",
+      "proposedFile": "proposed-C.html"
+    },
+    {
+      "id": "D",
+      "name": "v2 · Faithful refresh",
+      "dominantDimension": "tokens",
+      "thesis": "Apply the five identified improvements: hierarchy of scale (hero h2 from 31px to display), uncrop the experience photography from 326px squares, eight \"Discover more\" CTAs become action-specific verbs, hero gets contrast support, repetitive card composition gets rhythm changes.",
+      "fix": "<strong>Apply five identified improvements exactly.</strong> Hero h2 lifts from 31px (only ~2.2× body) to a real display moment. Resort photography uncrops from 326×326 thumbnails. Eight repeating \"Discover more\" CTAs become action-specific verbs. Hero gets contrast support so the headline doesn't drop below WCAG AA on bright frames. The eight near-identical card compositions get rhythm — breakaways, scale changes, rest.",
+      "proposedFile": "proposed-D.html"
+    },
+    {
+      "id": "E",
+      "name": "v2 · Place-led",
+      "dominantDimension": "ia",
+      "thesis": "The brand IS the named index of places. New \"36 places, 20 countries\" typographic strip after the hero; hotels-feature becomes a single full-bleed image; experience eyebrows become places (Java, Argolid, NY) instead of categories; world-of-aman becomes a horizontal-scroll filmstrip.",
+      "fix": "<strong>The brand IS the named index of places.</strong> A new \"36 places, 20 countries\" typographic strip lands after the hero. Hotels-feature collapses to a single full-bleed image instead of an asymmetric pair. Experience eyebrows shift from categories (Coastal, Nature, City) to places (Java, Argolid, NY). The world-of-aman becomes a horizontal-scroll filmstrip. The page reads as a place-index first, a service taxonomy second.",
+      "proposedFile": "proposed-E.html"
+    },
+    {
+      "id": "F",
+      "name": "v2 · Story-led",
+      "dominantDimension": "register",
+      "thesis": "The home as chaptered editorial. Three long-form story spreads replace the categorical experiences grid; hotels-feature folds into Chapter 01; world-of-aman shrinks to a single inline strip; place-index demoted to compact roll-call near the footer. Vocabulary register: \"Chapter / Read the chapter.\"",
+      "fix": "<strong>The home as chaptered editorial.</strong> Three long-form story spreads (alternating left/right composition) replace the 5-up experiences grid. Hotels-feature folds into Chapter 01. World-of-aman shrinks to a single inline strip; the place-index becomes a compact roll-call near the footer. Vocabulary shifts to \"Chapter / Read the chapter.\" Aman publishes editorial under /stories/* — the home finally composes like that.",
+      "proposedFile": "proposed-F.html"
+    }
+  ],
+
+  "createdAt": "2026-04-28",
+  "stardustVersion": "0.2.0",
+  "submittedBy": "paolomoz",
+  "license": "Apache-2.0",
+  "thumbnail": "logo.png"
+}

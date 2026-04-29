@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy:        stardust:prototype (Tier 4 / V17)
+  writtenAt:        2026-04-28T17:28:00Z
+  variant:
+    tier: 4
+    id: V17
+    slug: quieter-distill
+    dominantMove: $impeccable quieter + $impeccable distill
+    thesis: "Minimalism with conscience. Three sections total. Photography dominant. Copy reduced to load-bearing only — the mission line, the three numbers, the three phone numbers, the six names. Nothing else. The captured trait this amplifies is the institutional restraint TRH already projects in its non-marketing surfaces."
+    densityTier: balanced (sectionPadding.desktop = 64px — the upper bound; quietness here comes from line-rhythm and type, not extra airy)
+    register: minimal-civic
+    capturedTraitAmplified: "The dignified restraint of TRH's About-Us copy and its core-values list — language already pared back, here translated into a layout pared back."
+  IAPriority:
+    - 211 panel as a typographic strip beneath the mission line, above-fold
+  unsourcedContent: []
+  stardustVersion: 0.2.0
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#005560">
+<title>The Road Home. (V17 · Quieter + Distill)</title>
+<style>
+  @font-face { font-family:'DINNextLTPro'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/dinnextltpro/DINNextLTPro-Light.woff2') format('woff2'); font-weight:300; font-display:swap }
+  @font-face { font-family:'DINNextLTPro'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/dinnextltpro/DINNextLTPro-Regular.woff2') format('woff2'); font-weight:400; font-display:swap }
+  @font-face { font-family:'DINNextLTPro'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/dinnextltpro/DINNextLTPro-Bold.woff2') format('woff2'); font-weight:700; font-display:swap }
+  @font-face { font-family:'HarmoniaSans'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/harmoniasans/HarmoniaSansProLight.woff2') format('woff2'); font-weight:300; font-display:swap }
+  @font-face { font-family:'HarmoniaSans'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/harmoniasans/HarmoniaSansProRegular.woff2') format('woff2'); font-weight:400; font-display:swap }
+  @font-face { font-family:'HarmoniaSans'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/harmoniasans/HarmoniaSansPro-Italic.woff2') format('woff2'); font-weight:400; font-style:italic; font-display:swap }
+
+  :root{
+    --civic-teal:#008192; --deep-teal:#005560;
+    --lavender:#8F77AD; --pale-lavender:#C8BCD6;
+    --slate:#67696A; --pale-teal-gray:#E9EEEF; --soft-gray:#CECFD0;
+    --white:#FFFFFF; --crimson:#DC323D;
+    --bg:#F5F3EE; --paper:#FAF8F2; --ink:#0F1517;
+    --display:'DINNextLTPro', ui-sans-serif, sans-serif;
+    --body:'HarmoniaSans', ui-sans-serif, sans-serif;
+    --sp-d:64px; --sp-t:48px; --sp-m:32px;
+    --container:1180px;
+    --col:640px;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:var(--body);color:var(--ink);background:var(--bg);font-size:18px;line-height:1.7;font-weight:300;-webkit-font-smoothing:antialiased}
+  a{color:var(--deep-teal);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+  a:hover{color:var(--civic-teal)}
+  img{max-width:100%;display:block}
+  h1,h2{font-family:var(--display);margin:0;color:var(--ink);font-weight:300}
+  .container{max-width:var(--container);margin:0 auto;padding:0 28px}
+  .col{max-width:var(--col);margin:0 auto;padding:0 28px}
+  .skip{position:absolute;left:-9999px;top:8px;background:var(--deep-teal);color:#fff;padding:10px 14px;font-weight:500;z-index:99}
+  .skip:focus-visible{left:8px}
+
+  /* Section 1: Mission + 211 inline */
+  section.first{padding:var(--sp-d) 0}
+  .nameplate{display:flex;align-items:baseline;justify-content:space-between;gap:18px;border-bottom:1px solid var(--soft-gray);padding-bottom:14px;margin-bottom:32px;flex-wrap:wrap}
+  .wm{font-family:var(--display);font-weight:700;color:var(--deep-teal);font-size:18px;letter-spacing:0.04em;text-transform:uppercase}
+  .wm em{font-family:var(--body);font-style:italic;font-weight:300;color:var(--slate);font-size:13px;letter-spacing:0;margin-left:14px;text-transform:none}
+  .nameplate .meta{font-family:var(--body);font-style:italic;color:var(--slate);font-size:13px}
+
+  section.first h1{font-family:var(--display);font-weight:300;font-size:clamp(40px,5vw,72px);line-height:1.04;letter-spacing:-0.005em;color:var(--ink);max-width:18ch;text-wrap:balance;margin-bottom:24px}
+  section.first h1 strong{font-weight:700;color:var(--deep-teal)}
+
+  aside#help{margin-top:24px;padding:20px 0;border-top:1px solid var(--soft-gray);border-bottom:1px solid var(--soft-gray);display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:baseline}
+  aside#help h2{font-family:var(--display);text-transform:uppercase;letter-spacing:0.18em;color:var(--crimson);font-size:12px;font-weight:700}
+  aside#help h2::before{content:"●  ";letter-spacing:0}
+  .help-list{display:flex;flex-direction:column;gap:8px}
+  .help-list .row{display:grid;grid-template-columns: 1fr auto;gap:18px;align-items:baseline;padding:6px 0;border-bottom:1px dotted var(--soft-gray);font-size:14px}
+  .help-list .row:last-child{border-bottom:none}
+  .help-list .ctx{color:var(--slate);font-style:italic;line-height:1.4}
+  .help-list a.tel{font-family:var(--display);font-weight:700;color:var(--deep-teal);font-size:18px;letter-spacing:0;text-decoration:none}
+
+  /* Section 2: Photography dominant */
+  section.dominant{padding:0;background:var(--ink);color:#fff;position:relative}
+  .dominant-grid{display:grid;grid-template-columns: 1fr 1fr;align-items:stretch;min-height:480px}
+  .dominant-img{background:#0a0e10 center/cover no-repeat;min-height:380px}
+  .dominant-img.ray{background-image:url('https://theroadhome.org/wp-content/uploads/2021/01/Ray_Canva-Stock-Photo_BW.jpg')}
+  .dominant-text{padding:48px;display:flex;flex-direction:column;justify-content:center;gap:14px}
+  .dominant-text .eyebrow{font-family:var(--display);text-transform:uppercase;letter-spacing:0.18em;color:var(--pale-lavender);font-size:12px;font-weight:700}
+  .dominant-text h2{font-family:var(--display);font-weight:300;color:#fff;font-size:clamp(34px,4vw,52px);line-height:1.05;letter-spacing:-0.005em;max-width:14ch}
+  .dominant-text h2 strong{font-weight:700;color:#fff}
+  .dominant-text p{margin:0;color:rgba(255,255,255,0.86);font-size:17px;line-height:1.6;max-width:38em}
+  .dominant-text p strong{font-family:var(--display);font-weight:700;color:#fff}
+  .dominant-text .three-numbers{margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.18)}
+  .dominant-text .three-numbers .num{font-family:var(--display);font-weight:300;color:#fff;font-size:36px;line-height:1;letter-spacing:-0.005em}
+  .dominant-text .three-numbers .num em{font-style:normal;color:var(--pale-lavender);font-weight:300}
+  .dominant-text .three-numbers .lbl{font-size:11px;color:rgba(255,255,255,0.78);font-style:italic;margin-top:6px;line-height:1.45}
+
+  /* Section 3: Six names + footer fused */
+  section.last{padding:var(--sp-d) 0;background:var(--paper)}
+  .ngrid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-bottom:32px}
+  .pp{display:flex;flex-direction:column;gap:6px}
+  .pp img{aspect-ratio:1/1.2;object-fit:cover;filter:contrast(0.96)}
+  .pp .name{font-family:var(--body);font-style:italic;font-size:14px;color:var(--slate);text-align:center}
+  .pp .name::before{content:"— "}
+  .footer-row{display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding-top:18px;border-top:1px solid var(--soft-gray);font-size:13px;color:var(--slate);flex-wrap:wrap}
+  .footer-row a{color:var(--ink);text-decoration:none}
+  .footer-row a:hover{text-decoration:underline;text-underline-offset:3px;color:var(--deep-teal)}
+  .footer-row .links{display:flex;gap:18px;font-family:var(--display);text-transform:uppercase;letter-spacing:0.08em;font-size:12px;font-weight:500}
+
+  @media (max-width:960px){
+    aside#help{grid-template-columns:1fr;gap:14px}
+    .dominant-grid{grid-template-columns:1fr}
+    .dominant-img{min-height:280px}
+    .dominant-text{padding:32px 28px}
+    .ngrid{grid-template-columns:repeat(3,1fr)}
+  }
+  @media (max-width:560px){
+    .ngrid{grid-template-columns:repeat(2,1fr)}
+    .dominant-text .three-numbers{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#help">Skip to immediate help</a>
+
+<section class="first" data-section-role="hero" data-section-pos="1">
+  <div class="container">
+    <div class="nameplate">
+      <span class="wm">The Road Home<em>Salt Lake City — since 1923</em></span>
+      <span class="meta">A private nonprofit. Founded 1923. Centennial 2023.</span>
+    </div>
+
+    <h1>Refuge. Resources. Relief.<br><strong>To help people step out of homelessness, and back home.</strong></h1>
+
+    <aside id="help" data-section-role="immediate-help">
+      <h2>Help right now</h2>
+      <div class="help-list">
+        <div class="row"><span class="ctx">Looking for shelter tonight</span><a class="tel" href="tel:8019909999">801·990·9999</a></div>
+        <div class="row"><span class="ctx">Experiencing a housing crisis</span><a class="tel" href="tel:8013592444">801·359·2444</a></div>
+        <div class="row"><span class="ctx">Other needs (utilities, employment, transportation)</span><a class="tel" href="tel:211">2·1·1</a></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="dominant" data-section-role="stories" data-section-pos="2">
+  <div class="dominant-grid">
+    <div class="dominant-img ray" role="img" aria-label="A B&W portrait drawn from The Road Home's housing-stories archive."></div>
+    <div class="dominant-text">
+      <span class="eyebrow">Housing stories · the year, in figures</span>
+      <h2>One <strong>method</strong>, one hundred years.</h2>
+      <p>Emergency shelter, supportive services, and housing assistance. <strong>Housing-first</strong>, <strong>progressive engagement</strong>, <strong>rapid re-housing</strong>, <strong>housing navigation</strong>. The same practices, in the same town, since 1923.</p>
+      <div class="three-numbers">
+        <div><div class="num">1,550<em>+</em></div><div class="lbl">in housing on any given night</div></div>
+        <div><div class="num">60<em>%</em></div><div class="lbl">case-managed during shelter</div></div>
+        <div><div class="num">3,491</div><div class="lbl">assisted last year</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="last" data-section-role="footer-fused" data-section-pos="3">
+  <div class="container">
+    <div class="ngrid">
+      <article class="pp"><img alt="Cole" src="https://theroadhome.org/wp-content/uploads/2021/01/Cole_Canva-Stock-Photo_BW.jpg"><div class="name">Cole</div></article>
+      <article class="pp"><img alt="Jay" src="https://theroadhome.org/wp-content/uploads/2021/01/Jay_Canva-Stock-Photo_BW.jpg"><div class="name">Jay</div></article>
+      <article class="pp"><img alt="Sue" src="https://theroadhome.org/wp-content/uploads/2021/01/Sue_Canva-Stock-Photo_BW.jpg"><div class="name">Sue</div></article>
+      <article class="pp"><img alt="Jordan" src="https://theroadhome.org/wp-content/uploads/2021/01/Jordan_Canva-Stock-Photo_BW.jpg"><div class="name">Jordan</div></article>
+      <article class="pp"><img alt="Ray" src="https://theroadhome.org/wp-content/uploads/2021/01/Ray_Canva-Stock-Photo_BW.jpg"><div class="name">Ray</div></article>
+      <article class="pp"><img alt="Randall" src="https://theroadhome.org/wp-content/uploads/2021/01/Randall_Canva-Stock-Photo_BW.jpg"><div class="name">Randall</div></article>
+    </div>
+    <div class="footer-row">
+      <div class="links"><a href="/get-help/">Get Help</a><a href="/give-main/">Give</a><a href="/get-involved/">Volunteer</a><a href="/about-us/">About</a><a href="/give-main/">Donate</a></div>
+      <span>1415 S Main Street, Salt Lake City, UT 84115 · 801.359.4142 · © 2026 · Four-star Charity Navigator rated</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

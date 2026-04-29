@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy:        stardust:prototype (Tier 1 / V02)
+  writtenAt:        2026-04-28T16:42:00Z
+  variant:
+    tier: 1
+    id: V02
+    slug: distill
+    dominantMove: $impeccable distill
+    thesis: "Half the sections, twice the clarity. Mission-forward by reduction. Five sections collapse to three (hero+211, impact+pillars merged, stories) plus footer; nothing else."
+    densityTier: balanced (sectionPadding.desktop = 48px)
+    register: spare-institutional
+  IAPriority:
+    - 211 panel as a typographic strip directly under the hero, sharing the above-fold band
+  unsourcedContent: []
+  stardustVersion: 0.2.0
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#008192">
+<title>The Road Home — Refuge. Resources. Relief. (V02 · Distill)</title>
+<style>
+  @font-face { font-family:'DINNextLTPro'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/dinnextltpro/DINNextLTPro-Light.woff2') format('woff2'); font-weight:300; font-display:swap }
+  @font-face { font-family:'DINNextLTPro'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/dinnextltpro/DINNextLTPro-Regular.woff2') format('woff2'); font-weight:400; font-display:swap }
+  @font-face { font-family:'DINNextLTPro'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/dinnextltpro/DINNextLTPro-Bold.woff2') format('woff2'); font-weight:700; font-display:swap }
+  @font-face { font-family:'DINNextLTPro'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/dinnextltpro/DINNextLTPro-Black.woff2') format('woff2'); font-weight:900; font-display:swap }
+  @font-face { font-family:'HarmoniaSans'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/harmoniasans/HarmoniaSansProRegular.woff2') format('woff2'); font-weight:400; font-display:swap }
+  @font-face { font-family:'HarmoniaSans'; src:url('https://theroadhome.org/wp-content/themes/theroadhome/assets/fonts/harmoniasans/HarmoniaSansProSemiBd.woff2') format('woff2'); font-weight:500; font-display:swap }
+
+  :root{
+    --civic-teal:#008192; --deep-teal:#005560; --teal-mid:#006A77; --teal-shadow:#105560;
+    --lavender:#8F77AD; --aubergine:#604A7B; --pale-lavender:#C8BCD6;
+    --slate:#67696A; --pale-teal-gray:#E9EEEF; --soft-gray:#CECFD0;
+    --white:#FFFFFF; --crimson:#DC323D;
+    --bg:#FAFBFB; --ink:#101618;
+    --display:'DINNextLTPro', ui-sans-serif, sans-serif;
+    --body:'HarmoniaSans', ui-sans-serif, sans-serif;
+    --sp-d:48px; --sp-t:36px; --sp-m:28px;
+    --container:1100px;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:var(--body);color:var(--ink);background:var(--bg);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--civic-teal);text-decoration:none}
+  a:hover{text-decoration:underline;text-underline-offset:3px}
+  img{max-width:100%;display:block}
+  h1,h2,h3{font-family:var(--display);margin:0;color:var(--ink)}
+  .container{max-width:var(--container);margin:0 auto;padding:0 32px}
+
+  .skip{position:absolute;left:-9999px;top:8px;background:var(--crimson);color:#fff;padding:10px 14px;border-radius:4px;font-weight:700;z-index:99}
+  .skip:focus-visible{left:8px}
+
+  /* Header — distilled to wordmark + the help-line and the donate button. Nothing else lives at the top. */
+  header.site{padding:18px 0;border-bottom:1px solid var(--soft-gray);background:var(--white)}
+  header.site .row{display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .wordmark{font-family:var(--display);font-weight:900;font-size:18px;color:var(--deep-teal);letter-spacing:0.04em;text-transform:uppercase}
+  .wordmark::after{content:" · 100 yrs";color:var(--lavender);font-weight:300;letter-spacing:0.16em;font-size:12px}
+  .top-actions{display:flex;align-items:center;gap:24px;font-family:var(--display);text-transform:uppercase;letter-spacing:0.08em;font-size:13px}
+  .top-actions a{color:var(--ink)}
+  .top-actions .help-line{color:var(--crimson);font-weight:700}
+  .top-actions .help-line::before{content:"●";margin-right:8px;color:var(--crimson)}
+  .top-actions .donate{background:var(--civic-teal);color:#fff;padding:10px 18px;border-radius:4px;font-weight:700}
+  .top-actions .donate:hover{background:var(--deep-teal);text-decoration:none}
+
+  /* Hero + 211 stacked above the fold */
+  .above-fold{padding:var(--sp-d) 0;background:var(--bg)}
+  .lede-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:end}
+  .lede h1{font-family:var(--display);font-weight:900;color:var(--deep-teal);font-size:clamp(56px,7vw,96px);line-height:0.95;letter-spacing:-0.012em;margin:0 0 18px}
+  .lede h1 .pause{color:var(--civic-teal)}
+  .lede p{font-size:20px;max-width:42ch;color:var(--ink);margin:0;line-height:1.5}
+
+  /* The 211 panel as typographic strip — no chrome, no card. The number IS the design. */
+  .help-strip{border-top:2px solid var(--deep-teal);padding-top:18px;display:flex;flex-direction:column;gap:14px}
+  .help-strip .row{display:grid;grid-template-columns: 1fr auto;gap:18px;align-items:baseline;padding:6px 0;border-bottom:1px dotted var(--soft-gray)}
+  .help-strip .row:last-child{border-bottom:none}
+  .help-strip .trigger{font-family:var(--body);font-weight:500;color:var(--ink);font-size:15px;line-height:1.4}
+  .help-strip a.tel{font-family:var(--display);font-weight:900;color:var(--deep-teal);font-size:24px;letter-spacing:0.01em;white-space:nowrap}
+  .help-strip a.tel:hover{color:var(--civic-teal);text-decoration:none}
+  .help-strip h2{font-family:var(--display);text-transform:uppercase;letter-spacing:0.16em;color:var(--crimson);font-size:13px;font-weight:700;margin:0}
+  .help-strip h2::before{content:"●  ";letter-spacing:0;}
+
+  /* Impact + program pillars merged into a single quantitative band */
+  section.proof{padding:var(--sp-d) 0;background:var(--white);border-top:1px solid var(--soft-gray);border-bottom:1px solid var(--soft-gray)}
+  .proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;align-items:start}
+  .stat .num{font-family:var(--display);font-weight:900;color:var(--deep-teal);font-size:clamp(48px,5vw,68px);line-height:1;letter-spacing:-0.01em}
+  .stat .num em{font-style:normal;color:var(--civic-teal);margin-left:2px}
+  .stat .label{margin-top:14px;color:var(--slate);font-size:14px;line-height:1.5;max-width:34ch}
+  .stat .label strong{color:var(--ink);font-weight:500}
+
+  /* Stories — six portraits, names only, in a single horizontal band. The captioning the variant V01 added is removed here on purpose: distill leaves the portrait + name with the same care a museum label gets. */
+  section.stories{padding:var(--sp-d) 0}
+  section.stories .head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px;gap:16px}
+  section.stories h2{font-family:var(--display);text-transform:uppercase;letter-spacing:0.16em;color:var(--ink);font-size:13px;font-weight:700}
+  section.stories .head a{font-family:var(--display);text-transform:uppercase;letter-spacing:0.08em;font-size:13px;color:var(--civic-teal);font-weight:500}
+  .portrait-row{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+  .portrait{display:flex;flex-direction:column;gap:8px}
+  .portrait img{aspect-ratio:1/1.25;object-fit:cover;border-radius:0}
+  .portrait .name{font-family:var(--display);font-weight:700;color:var(--ink);font-size:16px;letter-spacing:0.02em}
+  .portrait .name::before{content:"— ";color:var(--soft-gray)}
+
+  footer.site{padding:36px 0 24px;border-top:1px solid var(--soft-gray);font-size:14px;color:var(--slate)}
+  footer.site .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  footer.site a{color:var(--slate)}
+  footer.site .links a{margin-right:18px}
+  footer.site .meta{font-size:12px;color:var(--soft-gray);margin-top:18px;border-top:1px dotted var(--soft-gray);padding-top:16px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer.site .meta strong{color:var(--slate)}
+
+  @media (max-width:900px){
+    .lede-grid,.proof-grid{grid-template-columns:1fr}
+    .portrait-row{grid-template-columns:repeat(3,1fr)}
+  }
+  @media (max-width:560px){
+    .portrait-row{grid-template-columns:repeat(2,1fr)}
+    .lede h1{font-size:44px}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#help">Skip to immediate help</a>
+
+<header class="site">
+  <div class="container row">
+    <span class="wordmark">The Road Home</span>
+    <div class="top-actions">
+      <a class="help-line" href="#help">Help line</a>
+      <a href="/about-us/">About</a>
+      <a class="donate" href="/give-main/">Donate</a>
+    </div>
+  </div>
+</header>
+
+<section class="above-fold" data-section-role="hero" data-section-pos="1">
+  <div class="container lede-grid">
+    <div class="lede">
+      <h1>Refuge<span class="pause">.</span><br>Resources<span class="pause">.</span><br>Relief<span class="pause">.</span></h1>
+      <p>Emergency shelter, supportive services, and housing assistance, for individuals and families stepping out of homelessness in Salt Lake County and along the Wasatch Front.</p>
+    </div>
+    <aside id="help" class="help-strip" aria-label="Immediate help">
+      <h2>Need help right now</h2>
+      <div class="row"><span class="trigger">Looking for shelter tonight</span><a class="tel" href="tel:8019909999">801·990·9999</a></div>
+      <div class="row"><span class="trigger">Housing crisis</span><a class="tel" href="tel:8013592444">801·359·2444</a></div>
+      <div class="row"><span class="trigger">Other needs</span><a class="tel" href="tel:211">2·1·1</a></div>
+    </aside>
+  </div>
+</section>
+
+<section class="proof" data-section-role="impact" data-section-pos="2">
+  <div class="container proof-grid">
+    <div class="stat"><div class="num">1,550<em>+</em></div><div class="label"><strong>People in housing</strong> in the community on any given night.</div></div>
+    <div class="stat"><div class="num">60<em>%</em></div><div class="label"><strong>Receive case management</strong> during their shelter stay.</div></div>
+    <div class="stat"><div class="num">3,491</div><div class="label"><strong>Assisted with employment and housing</strong> in the last reporting year.</div></div>
+  </div>
+</section>
+
+<section class="stories" data-section-role="stories" data-section-pos="3">
+  <div class="container">
+    <div class="head"><h2>Housing Stories</h2><a href="/about-us/news/">All stories →</a></div>
+    <div class="portrait-row">
+      <article class="portrait"><img alt="Cole" src="https://theroadhome.org/wp-content/uploads/2021/01/Cole_Canva-Stock-Photo_BW.jpg"><div class="name">Cole</div></article>
+      <article class="portrait"><img alt="Jay" src="https://theroadhome.org/wp-content/uploads/2021/01/Jay_Canva-Stock-Photo_BW.jpg"><div class="name">Jay</div></article>
+      <article class="portrait"><img alt="Sue" src="https://theroadhome.org/wp-content/uploads/2021/01/Sue_Canva-Stock-Photo_BW.jpg"><div class="name">Sue</div></article>
+      <article class="portrait"><img alt="Jordan" src="https://theroadhome.org/wp-content/uploads/2021/01/Jordan_Canva-Stock-Photo_BW.jpg"><div class="name">Jordan</div></article>
+      <article class="portrait"><img alt="Ray" src="https://theroadhome.org/wp-content/uploads/2021/01/Ray_Canva-Stock-Photo_BW.jpg"><div class="name">Ray</div></article>
+      <article class="portrait"><img alt="Randall" src="https://theroadhome.org/wp-content/uploads/2021/01/Randall_Canva-Stock-Photo_BW.jpg"><div class="name">Randall</div></article>
+    </div>
+  </div>
+</section>
+
+<footer class="site" data-section-role="footer" data-section-pos="4">
+  <div class="container">
+    <div class="row">
+      <div class="links">
+        <a href="/get-help/">Get Help</a>
+        <a href="/give-main/">Give</a>
+        <a href="/get-involved/">Get Involved</a>
+        <a href="/about-us/">About</a>
+      </div>
+      <div>1415 S Main Street, Salt Lake City, UT 84115 · 801.359.4142</div>
+    </div>
+    <div class="meta">
+      <span><strong>Founded 1923.</strong> A private nonprofit serving Salt Lake County and the Wasatch Front.</span>
+      <span>© 2026 The Road Home · Four-star charity</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

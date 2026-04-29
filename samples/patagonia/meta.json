@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 2,
+  "slug": "patagonia",
+  "title": "Patagonia",
+  "tagline": "Activist plainspoken, photographic density. Refresh tightens commerce-density to balanced and fixes a single-CTA-verb fatigue without softening the voice.",
+
+  "source": {
+    "url": "https://www.patagonia.com/",
+    "register": "brand",
+    "category": "outdoor apparel · activist commerce",
+    "extractedAt": "2026-04-28"
+  },
+
+  "direction": {
+    "phrase": "Brand-faithful Mode A presales refresh. Palette and typography pinned. Three variants: A conservative, B compositional, C bold.",
+    "movements": [
+      "density: dense (commerce) → balanced (refined commerce, 64/48/32)",
+      "hero-contrast: text-on-photo → scrim guaranteed",
+      "type-scale: ad-hoc → modular ladder anchored to captured Ridgeway sizes",
+      "single-CTA-verb fatigue: \"Shop\" everywhere → action-specific verbs"
+    ],
+    "seed": {
+      "input": "Patagonia|2026-04-28",
+      "decade": "2025-now",
+      "craft": "documentary-photographic",
+      "register": "brand",
+      "groundFamily": "stark-white",
+      "pickedBy": "inherited (Mode A)"
+    },
+    "fontDeck": {
+      "name": "brand-inherited",
+      "value": "Ridgeway Sans single-family",
+      "pickedBy": "user-constraint"
+    },
+    "palette": {
+      "name": "Patagonia brand-pinned",
+      "source": "inherited from stardust/current/_brand-extraction.json",
+      "anchor": "#500778",
+      "pickedBy": "user-constraint",
+      "brandFaithfulInversions": [
+        "pure-black #000 retained (text at scale)",
+        "pure-white #ffffff retained",
+        "eggplant utility ribbon retained",
+        "hex format retained"
+      ]
+    },
+    "antiToolbox": { "hits": 0, "justified": 0 }
+  },
+
+  "originalCritique": "The brand voice is one of the strongest in the category — plainspoken, declarative, activist — and the photography is genuinely documentary, not catalog. The composition lets it down: hero text floats on photos without scrim, the type scale is ad-hoc, and \"Shop\" repeats as the verb on every CTA so action collapses into one undifferentiated motion. <strong>The page makes activist photography read like seasonal merch.</strong>",
+
+  "variants": [
+    {
+      "id": "A",
+      "name": "Conservative refresh",
+      "dominantDimension": "tokens",
+      "thesis": "Same IA, same section order, every token refined. Balanced 64/48/32 density. Modular ladder anchored to captured Ridgeway sizes. Hero scrim. Action-specific CTA verbs.",
+      "fix": "Same IA, same section order. <strong>Every token refined under the captured composition.</strong> Balanced 64/48/32 density (tighter than editorial defaults — the brand's actual register). Modular ladder anchored to the captured Ridgeway sizes. Hero scrim guaranteed. \"Shop\" replaced by action-specific verbs (Read · Repair · Trade in · Donate · Shop). The voice and the page finally agree.",
+      "proposedFile": "proposed-A.html",
+      "isPrimary": true
+    },
+    {
+      "id": "B",
+      "name": "Compositional shift",
+      "dominantDimension": "ia",
+      "thesis": "Same palette, type, photography. Different homepage thesis: open with a single activist story (a film, an essay, a campaign), commerce follows below the fold. The brand's stated priority finally read as the page's priority.",
+      "fix": "Same palette, type, photography. <strong>Different homepage thesis:</strong> the page opens with a single activist story — a film, an essay, a campaign — full-bleed, declarative copy, no SKU. Commerce follows below the fold as supporting surface, not primary. The brand says it's an activist company; the home finally lets activism go first.",
+      "proposedFile": "proposed-B.html"
+    },
+    {
+      "id": "C",
+      "name": "Bold direction",
+      "dominantDimension": "palette",
+      "thesis": "Push the eggplant. The captured #500778 utility ribbon becomes a primary section ground for one band — a manifesto moment in the brand's signature color. Everything else stays restrained.",
+      "fix": "<strong>Push the eggplant.</strong> The captured #500778 utility ribbon becomes a primary section ground for one band — a manifesto moment in the brand's signature color. The rest of the page stays restrained: same Ridgeway, same documentary photography, same commerce density. The eggplant finally carries something other than \"member sign-in\".",
+      "proposedFile": "proposed-C.html"
+    }
+  ],
+
+  "createdAt": "2026-04-28",
+  "stardustVersion": "0.2.0",
+  "submittedBy": "paolomoz",
+  "license": "Apache-2.0",
+  "brandReview": "brand-review.html",
+  "thumbnail": "logo.png"
+}

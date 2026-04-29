@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 2,
+  "slug": "lemonade",
+  "title": "Lemonade",
+  "tagline": "Custom illustration vocabulary cropped small; rainbow palette dormant in 164 CSS vars. Variants: faithful, illustration-led, rainbow-as-IA.",
+
+  "source": {
+    "url": "https://www.lemonade.com/",
+    "register": "brand",
+    "category": "consumer insurance · DTC commerce",
+    "extractedAt": "2026-04-28"
+  },
+
+  "direction": {
+    "phrase": "Brand-faithful refresh. Mode A: palette + typography pinned. Three variants: A faithful + improvements, B + C new directions. Density 56/40 desktop/mobile (refused airy).",
+    "movements": [
+      "density: pinned 56/40 (refused editorial-airy)",
+      "distinctiveness: familiar → distinctive (execution-only)",
+      "illustration: cropped small → section-defining structure (B)",
+      "rainbow palette: dormant (85% mono) → IA wayfinding (C)"
+    ],
+    "seed": {
+      "input": "Lemonade|2026-04-28",
+      "decade": "2025-now",
+      "craft": "consumer DTC brand",
+      "register": "brand",
+      "groundFamily": "stark-white",
+      "pickedBy": "inherited (Mode A)"
+    },
+    "fontDeck": {
+      "name": "brand-inherited",
+      "value": "Lemonade Sans (custom)",
+      "pickedBy": "user-constraint"
+    },
+    "palette": {
+      "name": "Lemonade brand-pinned (164 CSS vars, 15+ rainbow)",
+      "source": "inherited from stardust/current/_brand-extraction.json",
+      "anchor": "#fb4570",
+      "pickedBy": "user-constraint",
+      "brandFaithfulInversions": [
+        "pink #fb4570 retained as anchor",
+        "rainbow palette retained (salomie, algae, boston, eucalyptus, cupid, lavender…)",
+        "playful + confident voice retained",
+        "hex format retained"
+      ]
+    },
+    "antiToolbox": { "hits": 0, "justified": 0 }
+  },
+
+  "originalCritique": "Lemonade ships an extraordinary brand system — 164 named CSS custom properties, a 15+ color rainbow palette, and a custom illustration vocabulary (line-art houses, pets, cars, people, pizza, app sketch) that is as distinctive as anything in DTC. The home renders ~85% monochrome with most illustrations cropped small. <strong>The brand has the most defensible, least-templatable assets on this page — and the page barely uses them.</strong>",
+
+  "variants": [
+    {
+      "id": "A",
+      "name": "Faithful + improvements",
+      "dominantDimension": "tokens",
+      "thesis": "Same IA, same composition. Apply five improvements exactly: modular scale, balanced 56px density, single CTA per band, illustrations sized up, hero contrast support. No extras, no creative reach.",
+      "fix": "Same IA, same composition, same primary section sequence. <strong>Apply five identified improvements exactly.</strong> Modular scale; balanced 56/40 density (no editorial airiness); single priority CTA per band; illustrations sized up to give the brand's most defensible asset some weight; hero scrim. Brand team reaction target: \"yes, that's us, with the obvious fixes.\"",
+      "proposedFile": "proposed-A.html",
+      "isPrimary": true
+    },
+    {
+      "id": "B",
+      "name": "Illustrated character",
+      "dominantDimension": "craft",
+      "thesis": "Lean into the illustration vocabulary. The line-art houses, pets, cars, people become section-defining structure — every section anchored by a single large illustrated moment instead of a thumbnail support cast.",
+      "fix": "<strong>Lean into the illustration vocabulary.</strong> The captured site has line-art houses, pets, cars, people, pizza, an app sketch — the brand's most defensible, least-templatable asset — and crops most of them small. B amplifies the illustration to section-defining structure. Every section gets one large illustrated moment as anchor, not a thumbnail support cast. The brand becomes visible in the only way it can't be templated.",
+      "proposedFile": "proposed-B.html"
+    },
+    {
+      "id": "C",
+      "name": "Rainbow as IA",
+      "dominantDimension": "palette",
+      "thesis": "Surface the latent rainbow palette as the structural device for product distinction. The 15+ colors become wayfinding for the 5 product taxonomy (Home, Pet, Car, Life, Renters) — turning palette into IA.",
+      "fix": "<strong>Surface the latent rainbow palette as IA.</strong> Lemonade ships 164 CSS custom properties; 15+ define a rainbow secondary palette (salomie, algae, boston, eucalyptus, cupid, lavender). The captured home renders ~85% monochrome — the rainbow is dormant. C surfaces it as the structural device for product distinction: each of the 5 products gets a hue, the palette becomes wayfinding, the brand finally uses what it shipped.",
+      "proposedFile": "proposed-C.html"
+    }
+  ],
+
+  "createdAt": "2026-04-28",
+  "stardustVersion": "0.2.0",
+  "submittedBy": "paolomoz",
+  "license": "Apache-2.0",
+  "brandReview": "brand-review.html",
+  "thumbnail": "logo.png"
+}

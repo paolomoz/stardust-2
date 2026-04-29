@@ -1,0 +1,249 @@
+{
+  "schemaVersion": 2,
+  "slug": "theroadhome",
+  "title": "The Road Home",
+  "tagline": "WordPress-charity-default with weak hierarchy and a centennial story it never tells. Variants make the institution visible without rebranding it.",
+
+  "source": {
+    "url": "https://theroadhome.org/",
+    "register": "brand",
+    "category": "nonprofit · housing services · centennial",
+    "extractedAt": "2026-04-28"
+  },
+
+  "direction": {
+    "phrase": "Brand-faithful Mode A — palette and typography pinned to captured surface. Presales tool. Refresh, not rebrand.",
+    "movements": [
+      "type-scale: ad-hoc → modular major-third 1.25",
+      "section-padding: 96+ rejected → 48–64px stamped",
+      "hero-contrast: text-over-photo → guaranteed scrim",
+      "banner-color semantic: ambiguous → explicit (centennial-red reserved to TRH-100)"
+    ],
+    "seed": {
+      "input": "The Road Home|2026-04-28",
+      "decade": "1930s",
+      "craft": "Plaster cast",
+      "register": "Tabloid",
+      "groundFamily": "stark-white (overridden from monochrome-tint, brand-faithful)",
+      "pickedBy": "deterministic (md5)"
+    },
+    "fontDeck": {
+      "name": "brand-inherited",
+      "value": "HarmoniaSans + DIN Next LT Pro",
+      "pickedBy": "user-constraint"
+    },
+    "palette": {
+      "name": "TRH brand-pinned",
+      "source": "inherited from stardust/current/_brand-extraction.json",
+      "anchor": "#163a48",
+      "pickedBy": "user-constraint",
+      "brandFaithfulInversions": [
+        "pure-white #ffffff retained",
+        "pure-black #000000 retained",
+        "hex format retained",
+        "0px corners retained",
+        "ALL CAPS headings retained",
+        "BW portrait treatment retained",
+        "centennial-red reserved to TRH-100 lockup"
+      ]
+    },
+    "antiToolbox": { "hits": 0, "justified": 0 }
+  },
+
+  "originalCritique": "WordPress-charity-default treatment on top of a strong civic brand. The hero text floats over a photo with no scrim; the IA collides (three-doors lockup repeats inside the body); CTAs fragment; type scale is ad-hoc; two banner colors mean two different things. <strong>The page reads like a template — the institution and the centennial it carries are nowhere visible.</strong>",
+
+  "variants": [
+    {
+      "id": "A",
+      "name": "Conservative refresh",
+      "dominantDimension": "tokens",
+      "thesis": "All seed dimensions recede; brand mannerism dominates verbatim. Hero gains a scrim, type ladders to 1.25, the three-doors IA is preserved verbatim. Lowest-risk option.",
+      "fix": "All seed dimensions recede; brand mannerism dominates verbatim. The hero earns a scrim. Type snaps to a 1.25 modular ladder. The three-doors IA is preserved verbatim — but each door gets its own pill CTA instead of the fragmented collection the live site has. <strong>The lowest-risk refresh — the customer's design team will recognise every move as theirs.</strong>",
+      "proposedFile": "proposed-A.html",
+      "isPrimary": true
+    },
+    {
+      "id": "B",
+      "name": "Compositional shift",
+      "dominantDimension": "ia",
+      "thesis": "Tabloid IA logic — front-page priority, classified-section logic, \"above the fold\" hierarchy — reorganises the page. Same palette and type; different IA.",
+      "fix": "Same palette, same type. <strong>Tabloid IA logic</strong> — front-page priority, classified-section logic, \"above the fold\" hierarchy — reorganises the home. The three-doors lockup becomes a single front-page index; the centennial story moves above the donor band; each audience gets one declarative ALL-CAPS headline instead of a four-up tile cluster.",
+      "proposedFile": "proposed-B.html"
+    },
+    {
+      "id": "C",
+      "name": "Bold direction",
+      "dominantDimension": "decade",
+      "thesis": "1930s civic-monumental + Plaster-cast solidity push display type and surface treatment further. Larger 1930s-civic-poster scale on the hero; flat-banner monumental treatment for sections.",
+      "fix": "<strong>1930s civic-monumental + Plaster-cast solidity</strong> push display type and surface treatment further. Hero scale jumps to civic-poster proportions; section markers become flat-banner monumental treatments — the brand's existing ALL-CAPS headlines and saturated road-deep colour finally have weight to carry. Same palette, same type, more commitment.",
+      "proposedFile": "proposed-C.html"
+    },
+    {
+      "id": "V01",
+      "name": "v2 · T1 · Polish",
+      "dominantDimension": "tokens",
+      "thesis": "T1 faithful refinement. All five home-improvements applied with extreme care; nothing else moved. The brand-team's preferred safe-baseline.",
+      "fix": "<strong>The most refined version of the current site.</strong> All five home-improvements applied with extreme care — and nothing else moved. The 211 panel rises above the fold; impact stats become quantitative anchors; CTAs gain action-specific verbs; the centennial signal surfaces as a trust anchor; flat hierarchy gets typeset corrections. Brand mannerism survives verbatim. The brand-team's preferred safe-baseline.",
+      "proposedFile": "proposed-V01.html"
+    },
+    {
+      "id": "V02",
+      "name": "v2 · T1 · Distill",
+      "dominantDimension": "ia",
+      "thesis": "Half the sections, twice the clarity. Mission-forward by reduction. Five sections collapse to three (hero+211, impact+pillars merged, stories) plus footer.",
+      "fix": "<strong>Half the sections, twice the clarity.</strong> Mission-forward by reduction. Five captured sections collapse to three: hero+211 merged into one above-fold band, impact+pillars merged into one credibility band, stories. The flat hierarchy is solved by removing what didn't earn space — not by re-typesetting it.",
+      "proposedFile": "proposed-V02.html"
+    },
+    {
+      "id": "V03",
+      "name": "v2 · T1 · Quieter polish",
+      "dominantDimension": "register",
+      "thesis": "NYT-public-service register, dignified-institutional. Library-quiet rhythm, single-column flows, pale teal-tinted parchment ground, photography captioned not cropped.",
+      "fix": "<strong>NYT-public-service register, dignified-institutional.</strong> Library-quiet rhythm. Single-column flows. Pale teal-tinted parchment ground (still inside the captured palette). Photography captioned, not cropped. The brand's existing tone moves one notch toward institutional gravitas without becoming editorial.",
+      "proposedFile": "proposed-V03.html"
+    },
+    {
+      "id": "V04",
+      "name": "v2 · T1 · Typeset",
+      "dominantDimension": "typography",
+      "thesis": "Type is the design driver. Hero is a typeset poster: REFUGE / RESOURCES / RELIEF stacked at display scale with deliberate optical kerning. The 211 panel sits below as a typographic frieze.",
+      "fix": "<strong>Type is the design driver.</strong> Hero becomes a typeset poster: REFUGE / RESOURCES / RELIEF stacked at display scale with deliberate optical kerning. The 211 panel sits below as a typographic frieze. The brand's existing all-caps signature finally has the scale to do the work it implies.",
+      "proposedFile": "proposed-V04.html"
+    },
+    {
+      "id": "V05",
+      "name": "v2 · T1 · Layout",
+      "dominantDimension": "ia",
+      "thesis": "Same content; fundamentally different composition. A 12-column asymmetric grid with a left-edge centennial spine, the hero on cols 1-7, the 211 panel anchored right.",
+      "fix": "<strong>Same content; fundamentally different composition.</strong> A 12-column asymmetric grid with a left-edge centennial spine. Hero spans cols 1-7; the 211 panel anchors right. Impact stats sit in a numerical strip beneath the hero. The page reads as designed, not laid out.",
+      "proposedFile": "proposed-V05.html"
+    },
+    {
+      "id": "V06",
+      "name": "v2 · T2 · Bolder",
+      "dominantDimension": "expressive",
+      "thesis": "Confident-institutional moved one notch toward expressive. Larger type, deeper colour confidence, full-bleed photography moments. The brand's existing trait amplified, not replaced.",
+      "fix": "<strong>Confident-institutional moved one notch toward expressive.</strong> Larger type. Deeper colour confidence (saturated road-deep extends to one full-bleed band). Photography earns full-bleed moments instead of card-cropped tiles. The brand's existing trait is amplified — louder is the point — without becoming editorial-airy.",
+      "proposedFile": "proposed-V06.html"
+    },
+    {
+      "id": "V07",
+      "name": "v2 · T2 · Quieter",
+      "dominantDimension": "expressive",
+      "thesis": "Almost meditative. Library-quiet rhythm. Single-column body running the page; photography full-bleed and captioned. The brand's gravitas amplified through restraint.",
+      "fix": "<strong>Almost meditative. Library-quiet rhythm.</strong> A single-column body runs the page. Photography is full-bleed and captioned, not gridded. The brand's gravitas amplifies through restraint — the four-star nonprofit becomes harder to scroll past because the page asks you to slow down.",
+      "proposedFile": "proposed-V07.html"
+    },
+    {
+      "id": "V08",
+      "name": "v2 · T2 · Delight",
+      "dominantDimension": "motion",
+      "thesis": "Small joys, never glib, never twee. A hand-drawn ink underline under HOME in the hero. Story cards lift gently on hover and reveal one warm composite-portrait detail.",
+      "fix": "<strong>Small joys, never glib, never twee.</strong> A hand-drawn ink underline under HOME in the hero. Story cards lift gently on hover and reveal one warm composite-portrait detail. The brand's empathetic register finally has motion that matches it — institutional warmth without becoming casual.",
+      "proposedFile": "proposed-V08.html"
+    },
+    {
+      "id": "V09",
+      "name": "v2 · T2 · Adapt",
+      "dominantDimension": "ia",
+      "thesis": "Layout responds to content type. The 211 panel is a phone-card affordance with tap-to-call rows. Program pillars become a disclosure chooser. Each section composes itself per its content shape.",
+      "fix": "<strong>Layout responds to content type.</strong> The 211 panel renders as a phone-card affordance with tap-to-call rows. Program pillars become a disclosure chooser (details on demand). Each section composes itself per its content shape — the page stops being a stack of identical bands and starts being a tool.",
+      "proposedFile": "proposed-V09.html"
+    },
+    {
+      "id": "V10",
+      "name": "v2 · T2 · Colorize",
+      "dominantDimension": "palette",
+      "thesis": "Civic Teal deployed as a system, not an accent. No new hues — every variant uses the captured palette, but V10 commits to a captured colour per section.",
+      "fix": "<strong>Civic Teal deployed as a system, not an accent.</strong> No new hues — every section commits to a captured colour as ground (road-deep, road-mid, shelter-grey, parchment). The captured palette finally reads as a system instead of a single accent on a stark-white page.",
+      "proposedFile": "proposed-V10.html"
+    },
+    {
+      "id": "V11",
+      "name": "v2 · T3 · Memoir-led",
+      "dominantDimension": "register",
+      "thesis": "Hero leads with a single full-bleed portrait — Ray, drawn from the captured archive — accompanied by a long-form composite-character paragraph. The strongest narrative asset on the page finally tells a story.",
+      "fix": "<strong>Hero leads with a single full-bleed portrait.</strong> Ray, drawn from the captured archive, accompanied by a long-form composite-character paragraph. The captured \"Housing Stories\" — six B&W stock portraits with first-name labels and no story copy — collapse to one composed memoir. The strongest narrative asset on the page finally tells a story.",
+      "proposedFile": "proposed-V11.html"
+    },
+    {
+      "id": "V12",
+      "name": "v2 · T3 · Service-led",
+      "dominantDimension": "ia",
+      "thesis": "211 emergency contact and a \"Find help\" router occupy the entire above-fold band. Brand storytelling, programs, and impact surface below. Closer to a Government services page than a charity homepage.",
+      "fix": "<strong>211 emergency contact and a \"Find help\" router occupy the entire above-fold band.</strong> Brand storytelling, programs, and impact surface below. The page reads closer to a government services page than a charity homepage — the IA-priority finally matches the mission. A person in crisis arriving at the site doesn't scroll past the donate ask first.",
+      "proposedFile": "proposed-V12.html"
+    },
+    {
+      "id": "V13",
+      "name": "v2 · T3 · Documentary",
+      "dominantDimension": "craft",
+      "thesis": "Photo-essay register. The captured B&W portraits are treated with a duotone-teal overlay (deep-teal shadows, paper-cream highlights) and given the page's hierarchy.",
+      "fix": "<strong>Photo-essay register.</strong> The captured B&W portraits are treated with a duotone-teal overlay (deep-teal shadows, paper-cream highlights) — staying inside the brand palette while gaining a register the brand has earned. The portraits get the page's hierarchy; copy and CTAs become caption.",
+      "proposedFile": "proposed-V13.html"
+    },
+    {
+      "id": "V14",
+      "name": "v2 · T3 · Centennial",
+      "dominantDimension": "decade",
+      "thesis": "A century of unbroken civic service is the most asymmetric institutional asset TRH has. The variant elevates it: hero is a timeline running 1923 → 2026, anchored by the centennial mark.",
+      "fix": "<strong>A century of unbroken civic service is the most asymmetric institutional asset TRH has.</strong> V14 elevates it: hero becomes a timeline running 1923 → 2026, anchored by the centennial mark currently buried in the header chrome. The page's primary trust signal becomes temporal — \"100 years of doing this\" — instead of typographic.",
+      "proposedFile": "proposed-V14.html"
+    },
+    {
+      "id": "V15",
+      "name": "v2 · T3 · Impact-led",
+      "dominantDimension": "data",
+      "thesis": "The most credibility-bearing numbers TRH has — 1,550+ housed, 60% case-managed, 3,491 assisted — lead the page. They are the hero. Programs frame them.",
+      "fix": "<strong>The most credibility-bearing numbers TRH has lead the page.</strong> 1,550+ in housing, 60% case-managed, 3,491 services rendered. They are the hero. Programs frame them. The four-star charity's strongest trust signal renders with the typographic weight it deserves — not as a sentence inside a paragraph block.",
+      "proposedFile": "proposed-V15.html"
+    },
+    {
+      "id": "V16",
+      "name": "v2 · T4 · Bolder + Typeset",
+      "dominantDimension": "typography",
+      "thesis": "Type-driven loud. A poster-scale display moment in the hero that fills the viewport with a single typeset wordmark. Restraint everywhere else.",
+      "fix": "<strong>Type-driven loud.</strong> A poster-scale display moment in the hero fills the viewport with a single typeset wordmark — REFUGE, set in the brand's all-caps signature at civic-poster proportions. Restraint everywhere else: small body, single-column, captured palette held tight. The brand commits once, then steps back.",
+      "proposedFile": "proposed-V16.html"
+    },
+    {
+      "id": "V17",
+      "name": "v2 · T4 · Quieter + Distill",
+      "dominantDimension": "ia",
+      "thesis": "Minimalism with conscience. Three sections total. Photography dominant. Copy reduced to load-bearing only — the mission line, the three numbers, the call to act.",
+      "fix": "<strong>Minimalism with conscience.</strong> Three sections total. Photography dominant. Copy reduced to load-bearing only — the mission line, the three numbers, the call to act. The page reads as a four-star institution that has nothing to prove and doesn't try.",
+      "proposedFile": "proposed-V17.html"
+    },
+    {
+      "id": "V18",
+      "name": "v2 · T4 · Animate + Delight",
+      "dominantDimension": "motion",
+      "thesis": "Kinetic small joys. The hero tagline reveals word-by-word with a typed-in cadence. The pulse on the help-line indicator gently breathes. Story cards lift on hover.",
+      "fix": "<strong>Kinetic small joys.</strong> The hero tagline reveals word-by-word with a typed-in cadence. The help-line pulse gently breathes. Story cards lift on hover and reveal a composite-portrait detail. The brand's empathetic warmth gains motion that's institutional, never twee.",
+      "proposedFile": "proposed-V18.html"
+    },
+    {
+      "id": "V19",
+      "name": "v2 · T4 · Overdrive + Colorize",
+      "dominantDimension": "palette",
+      "thesis": "What if TRH committed fully. Maximum craft. The captured palette deployed as system across alternating section grounds. A scroll-tinted gradient fade between sections.",
+      "fix": "<strong>What if TRH committed fully.</strong> Maximum craft. The captured palette deploys as system across alternating section grounds. A scroll-tinted gradient fade between sections. Type at maximum scale. The most distinctive variant — answers \"are we ready to be more distinctive?\" with yes.",
+      "proposedFile": "proposed-V19.html"
+    },
+    {
+      "id": "V20",
+      "name": "v2 · T4 · Adapt + Layout",
+      "dominantDimension": "ia",
+      "thesis": "Each section composes itself per its content shape. The 211 panel renders as a phone-keypad affordance. The program list renders as a chooser. Layout follows function.",
+      "fix": "<strong>Each section composes itself per its content shape.</strong> The 211 panel renders as a phone-keypad affordance. The program list renders as a chooser (segmented control). The impact strip becomes a quantitative dashboard. The home stops being a stack of identical bands and becomes a tool that knows what each section is for.",
+      "proposedFile": "proposed-V20.html"
+    }
+  ],
+
+  "createdAt": "2026-04-28",
+  "stardustVersion": "0.2.0",
+  "submittedBy": "paolomoz",
+  "license": "Apache-2.0",
+  "brandReview": "brand-review.html",
+  "thumbnail": "logo.png"
+}

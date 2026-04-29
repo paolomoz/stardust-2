@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="provenance" content='{"writtenBy":"stardust:prototype","variant":"A-editorial-sky","writtenAt":"2026-04-27T22:12:00Z","reworkedAt":"2026-04-28T08:40:00Z","againstDirection":"stardust/direction.md","mode":"brand-faithful","tokens":"DESIGN.json","content":"current/pages/home.json","critique":[{"at":"2026-04-28T08:25:00Z","detector":"impeccable-cli","findings":0},{"at":"2026-04-28T08:25:00Z","detector":"llm-design-review","heuristics":"28/40","p0":1,"p1":2}],"reworkLog":["hero swapped from category-reflex sky to destination-as-arrival (LA on-the-road)","booking widget converted to real button-based input controls with chevron + aria-haspopup","help section collapsed from 4-up filler to a 2-anchor editorial fold","rewards fold strengthened with member-led copy and points-value moment","header CTA split: Sign in (ghost) + Book (primary) — was just Check-in","editorial pull-quote attribution clarified as voice-sample synthesis"],"unsourcedContent":["pull-quote phrasing (composed from voice samples, attributed in-band)","destination subtitles (editorial copy, illustrative)","cabin body copy (synthesized from cabin descriptions)"]}'>
+<title>Virgin Atlantic — Take off to the UK and beyond</title>
+<style>
+:root {
+  --bg: #faf6ee;
+  --bg-card: #ffffff;
+  --ink: #030c16;
+  --ink-soft: #444a52;
+  --primary: #da0530;
+  --primary-hover: #f92b47;
+  --primary-deep: #a70d2e;
+  --secondary: #4f145b;
+  --champagne: #bda05d;
+  --line: #d7d8da;
+  --caption: #676d73;
+  --radius-card: 16px;
+  --radius-pill: 999px;
+  --pad-section: 96px;
+  --pad-section-md: 72px;
+  --pad-section-sm: 48px;
+  --max: 1240px;
+  --gutter: 32px;
+  --font-head: "Gotham","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-body: "Gotham","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --ratio: 1.333;
+  --t-12: 12px;
+  --t-14: 14px;
+  --t-16: 16px;
+  --t-21: 21px;
+  --t-28: 28px;
+  --t-37: 37px;
+  --t-49: 49px;
+  --t-66: 66px;
+  --t-88: 88px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--t-16);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+
+/* Header */
+.va-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(250,246,238,0.92);
+  backdrop-filter: saturate(140%) blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.va-header__inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.va-logo { font-family: var(--font-head); font-weight: 500; letter-spacing: -0.02em; font-size: var(--t-21); color: var(--primary); text-decoration: none; }
+.va-logo b { color: var(--ink); font-weight: 500; }
+.va-nav { display: flex; gap: 28px; }
+.va-nav a { font-size: var(--t-14); text-decoration: none; color: var(--ink); padding: 8px 0; border-bottom: 1.5px solid transparent; }
+.va-nav a:hover { border-bottom-color: var(--primary); }
+.va-utility { display: flex; gap: 18px; align-items: center; font-size: var(--t-14); }
+.va-utility a { text-decoration: none; color: var(--caption); }
+.va-utility a:hover { color: var(--ink); }
+.va-utility .va-utility__signin { color: var(--ink); border-bottom: 1.5px solid transparent; padding-bottom: 2px; }
+.va-utility .va-utility__signin:hover { border-bottom-color: var(--primary); }
+.va-utility .btn { padding: 10px 20px; font-size: var(--t-14); }
+@media (max-width: 900px) { .va-nav { display: none; } .va-utility a:not(:last-child) { display: none; } }
+
+/* Buttons */
+.btn { font-family: var(--font-head); font-weight: 500; font-size: var(--t-14); letter-spacing: 0.02em; padding: 14px 28px; border-radius: var(--radius-pill); border: 0; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: transform .15s ease, background .15s ease; }
+.btn--primary { background: var(--primary); color: #fff; }
+.btn--primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
+.btn--ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+.btn--ghost:hover { background: var(--ink); color: #fff; }
+
+/* Hero — editorial: one image, one sentence */
+.hero {
+  position: relative;
+  min-height: 84vh;
+  display: grid;
+  align-items: end;
+  padding: var(--pad-section) 0 var(--pad-section);
+  overflow: hidden;
+}
+.hero__media {
+  position: absolute; inset: 0;
+  background-image: url("https://vaabrowse.virginatlantic.com/content/dam/vhols/hp/content-card-images/Lady-in-car-LA.jpg");
+  background-size: cover;
+  background-position: center 40%;
+  filter: saturate(0.95);
+}
+.hero__veil {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(3,12,22,0.18) 0%, rgba(3,12,22,0) 30%, rgba(250,246,238,0.55) 75%, rgba(250,246,238,0.96) 100%);
+}
+.hero__inner { position: relative; padding-bottom: 24px; }
+.hero__eyebrow { font-size: var(--t-12); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); font-weight: 500; opacity: 0.85; margin-bottom: 28px; display: inline-flex; align-items: center; gap: 12px; }
+.hero__eyebrow::before { content: ""; width: 36px; height: 1.5px; background: var(--primary); display: inline-block; }
+.hero__title {
+  font-family: var(--font-head);
+  font-weight: 300;
+  font-size: clamp(48px, 8vw, var(--t-88));
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin: 0 0 28px 0;
+  max-width: 14ch;
+}
+.hero__title em { font-style: normal; color: var(--primary); }
+.hero__title .accent { color: var(--primary); }
+.section-title .accent { color: var(--primary); }
+.hero__lede {
+  font-size: var(--t-21);
+  line-height: 1.5;
+  max-width: 52ch;
+  color: var(--ink);
+  margin: 0 0 36px 0;
+  font-weight: 400;
+}
+.hero__cta { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* Booking — subordinate, lives below the hero in a quiet rail */
+.booking {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: 28px;
+  margin-top: -72px;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 2;
+  border: 1px solid var(--line);
+}
+.booking__title { font-size: var(--t-14); letter-spacing: 0.16em; text-transform: uppercase; color: var(--caption); margin: 0 0 16px 0; font-weight: 500; }
+.booking__grid { display: grid; grid-template-columns: 1.2fr 1.2fr 1fr 1fr 1fr auto; gap: 0; align-items: stretch; }
+.booking__field {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 10px 16px;
+  border-right: 1px solid var(--line);
+}
+.booking__field:last-of-type { border-right: 0; }
+.booking__field label { font-size: var(--t-12); letter-spacing: 0.08em; text-transform: uppercase; color: var(--caption); font-weight: 500; }
+.booking__field .v { font-size: var(--t-16); color: var(--ink); font-weight: 500; }
+.booking__cta { display: flex; align-items: center; padding-left: 16px; }
+@media (max-width: 900px) {
+  .booking__grid { grid-template-columns: 1fr 1fr; }
+  .booking__field { border-right: 0; border-bottom: 1px solid var(--line); padding: 12px 0; }
+  .booking__cta { padding: 16px 0 0 0; grid-column: 1/-1; }
+  .booking { margin-top: -28px; }
+}
+
+/* Section base */
+section { padding: var(--pad-section) 0; }
+.eyebrow { font-size: var(--t-12); letter-spacing: 0.18em; text-transform: uppercase; color: var(--primary); font-weight: 500; margin-bottom: 16px; display: inline-flex; align-items: center; gap: 12px; }
+.eyebrow::before { content: ""; width: 36px; height: 1.5px; background: var(--primary); display: inline-block; }
+.section-title { font-family: var(--font-head); font-weight: 300; font-size: clamp(36px, 5vw, var(--t-66)); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 20px 0; max-width: 22ch; }
+.section-lede { font-size: var(--t-21); line-height: 1.55; color: var(--ink-soft); max-width: 60ch; margin: 0 0 56px 0; }
+
+/* Editorial destinations — one big anchor + 5 smaller */
+.editorial-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 24px; margin-bottom: 24px; }
+.dest {
+  position: relative; border-radius: var(--radius-card); overflow: hidden;
+  display: flex; align-items: flex-end;
+  background: #ddd;
+  aspect-ratio: 4/5;
+  isolation: isolate;
+}
+.dest--lead { aspect-ratio: 5/6; }
+.dest__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+.dest:hover .dest__img { transform: scale(1.04); }
+.dest__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(3,12,22,0) 30%, rgba(3,12,22,0.78) 100%); }
+.dest__caption { position: relative; padding: 28px; color: #fff; width: 100%; }
+.dest__city { font-family: var(--font-head); font-weight: 300; font-size: clamp(28px, 3.6vw, var(--t-49)); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 6px 0; }
+.dest__sub { font-size: var(--t-14); opacity: 0.9; }
+.dest--lead .dest__city { font-size: clamp(36px, 4.4vw, var(--t-66)); }
+.dest__row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.dest__rail { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; margin-top: 24px; }
+@media (max-width: 900px) {
+  .editorial-grid { grid-template-columns: 1fr; }
+  .dest__row { grid-template-columns: 1fr; }
+  .dest__rail { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Pull quote — editorial signature */
+.pull {
+  padding: var(--pad-section) 0;
+  background: linear-gradient(180deg, var(--bg) 0%, #fff 100%);
+}
+.pull__inner { max-width: 920px; }
+.pull__mark { font-family: var(--font-head); font-weight: 300; font-size: var(--t-88); line-height: 0.7; color: var(--primary); margin-bottom: 4px; }
+.pull__text { font-family: var(--font-head); font-weight: 300; font-size: clamp(28px, 3.4vw, var(--t-49)); line-height: 1.18; letter-spacing: -0.015em; color: var(--ink); margin: 0 0 28px 0; }
+.pull__cite { font-size: var(--t-14); color: var(--caption); letter-spacing: 0.06em; }
+
+/* Cabins — editorial split */
+.cabin { background: #fff; }
+.cabin__row { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; padding: 64px 0; border-top: 1px solid var(--line); }
+.cabin__row:first-child { border-top: 0; padding-top: 0; }
+.cabin__row--reverse .cabin__media { order: 2; }
+.cabin__media { aspect-ratio: 4/3; border-radius: var(--radius-card); overflow: hidden; }
+.cabin__media img { width: 100%; height: 100%; object-fit: cover; }
+.cabin__name { font-family: var(--font-head); font-weight: 500; font-size: var(--t-12); letter-spacing: 0.18em; text-transform: uppercase; color: var(--champagne); margin: 0 0 14px 0; }
+.cabin__title { font-family: var(--font-head); font-weight: 300; font-size: clamp(32px, 4vw, var(--t-49)); line-height: 1.08; letter-spacing: -0.02em; margin: 0 0 18px 0; }
+.cabin__body { font-size: var(--t-16); line-height: 1.65; color: var(--ink-soft); margin: 0 0 24px 0; max-width: 48ch; }
+@media (max-width: 900px) {
+  .cabin__row { grid-template-columns: 1fr; gap: 24px; }
+  .cabin__row--reverse .cabin__media { order: 0; }
+}
+
+/* Rewards band — quiet, on cream */
+.rewards { background: var(--bg); }
+.rewards__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.rewards__title { font-family: var(--font-head); font-weight: 300; font-size: clamp(32px, 4vw, var(--t-49)); line-height: 1.08; letter-spacing: -0.02em; margin: 0 0 18px 0; }
+.rewards__body { color: var(--ink-soft); font-size: var(--t-16); line-height: 1.65; max-width: 48ch; margin-bottom: 24px; }
+.rewards__visual { aspect-ratio: 16/12; border-radius: var(--radius-card); overflow: hidden; }
+.rewards__visual img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 900px) { .rewards__inner { grid-template-columns: 1fr; } }
+
+/* Help — 2-anchor editorial fold */
+.help { background: #fff; }
+.help__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.help__card { padding: 48px 0 0 0; border-top: 2px solid var(--ink); display: flex; flex-direction: column; gap: 16px; }
+.help__num { font-family: var(--font-head); font-weight: 500; font-size: var(--t-14); letter-spacing: 0.16em; color: var(--primary); }
+.help__h { font-size: var(--t-28); font-weight: 500; line-height: 1.18; letter-spacing: -0.01em; margin: 0; max-width: 22ch; }
+.help__b { font-size: var(--t-16); color: var(--ink-soft); line-height: 1.6; flex: 1; max-width: 44ch; }
+.help__list { list-style: none; padding: 0; margin: 0 0 16px 0; display: flex; flex-direction: column; gap: 10px; }
+.help__list li { display: flex; gap: 12px; font-size: var(--t-14); color: var(--ink); }
+.help__list li::before { content: "→"; color: var(--primary); flex-shrink: 0; }
+.help__list a { color: var(--ink); text-decoration: none; border-bottom: 1.5px solid var(--line); padding-bottom: 1px; }
+.help__list a:hover { border-bottom-color: var(--primary); }
+.help__link { font-size: var(--t-14); font-weight: 500; color: var(--ink); text-decoration: none; border-bottom: 1.5px solid var(--primary); align-self: flex-start; padding-bottom: 2px; }
+@media (max-width: 900px) { .help__grid { grid-template-columns: 1fr; gap: 36px; } }
+
+/* Footer */
+.footer { background: var(--ink); color: #cfd5dc; padding: var(--pad-section-md) 0 36px; }
+.footer__top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; gap: 36px; padding-bottom: 56px; border-bottom: 1px solid #1a2330; }
+.footer__brand .va-logo { color: #fff; }
+.footer__brand .va-logo b { color: var(--primary); }
+.footer__brand p { color: #8993a0; font-size: var(--t-14); margin: 16px 0 24px 0; max-width: 36ch; }
+.footer__col h6 { font-size: var(--t-12); letter-spacing: 0.16em; text-transform: uppercase; color: #fff; margin: 0 0 16px 0; }
+.footer__col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.footer__col a { color: #cfd5dc; text-decoration: none; font-size: var(--t-14); }
+.footer__col a:hover { color: #fff; }
+.footer__legal { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding-top: 28px; font-size: var(--t-12); color: #8993a0; }
+.footer__legal ul { list-style: none; display: flex; gap: 18px; padding: 0; margin: 0; flex-wrap: wrap; }
+.footer__legal a { color: #8993a0; text-decoration: none; }
+@media (max-width: 900px) { .footer__top { grid-template-columns: 1fr 1fr; } }
+
+/* Booking field as real interactive control */
+.booking__field--btnish { background: transparent; border: 0; cursor: pointer; font-family: inherit; color: inherit; text-align: left; width: 100%; }
+.booking__field--btnish:hover { background: var(--bg); }
+.booking__field--btnish:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
+.booking__row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.booking__chev { font-size: 11px; color: var(--caption); flex-shrink: 0; }
+
+/* Placeholder signature — illustrative copy treatment */
+[data-placeholder] { position: relative; }
+.pull__cite[data-placeholder]::after {
+  content: "voice-sample synthesis";
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--caption);
+  margin-top: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dest__img { transition: none !important; }
+  .btn { transition: none !important; }
+}
+</style>
+</head>
+<body data-variant="A-editorial-sky" data-stardust-prototype="home">
+
+<header class="va-header" data-section="header" data-section-kind="navigation">
+  <div class="wrap va-header__inner">
+    <a class="va-logo" href="#"><b>virgin</b> atlantic</a>
+    <nav class="va-nav" aria-label="Primary">
+      <a href="#destinations">Destinations</a>
+      <a href="#deals">Deals</a>
+      <a href="#cabins">Flying with us</a>
+      <a href="#upgrades">Upgrades &amp; extras</a>
+      <a href="#rewards">Flying Club</a>
+    </nav>
+    <div class="va-utility">
+      <a href="#help">Help</a>
+      <a href="#status">Flight status</a>
+      <a href="#" class="va-utility__signin">Sign in</a>
+      <a class="btn btn--primary" href="#booking">Book a flight</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" data-section="hero" data-section-kind="hero" aria-label="Hero">
+    <div class="hero__media" role="img" aria-label="A Virgin Atlantic aircraft above a soft cloudscape"></div>
+    <div class="hero__veil"></div>
+    <div class="wrap hero__inner">
+      <div class="hero__eyebrow">A long-haul invitation</div>
+      <h1 class="hero__title">Take off to <span class="accent">the&nbsp;UK</span><br>and beyond.</h1>
+      <p class="hero__lede">Book your 2026 travel today, with one airline that still treats the journey as part of the holiday.</p>
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="#booking">Find your flight</a>
+        <a class="btn btn--ghost" href="#destinations">See destinations</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <form class="booking" id="booking" data-section="booking" data-section-kind="form" aria-label="Search flights">
+      <p class="booking__title">Search flights</p>
+      <div class="booking__grid">
+        <button type="button" class="booking__field booking__field--btnish" aria-haspopup="dialog">
+          <label>Flying from</label>
+          <span class="booking__row"><span class="v">London Heathrow (LHR)</span><span class="booking__chev">▾</span></span>
+        </button>
+        <button type="button" class="booking__field booking__field--btnish" aria-haspopup="dialog">
+          <label>Flying to</label>
+          <span class="booking__row"><span class="v">New York JFK (JFK)</span><span class="booking__chev">▾</span></span>
+        </button>
+        <button type="button" class="booking__field booking__field--btnish" aria-haspopup="listbox">
+          <label>Journey</label>
+          <span class="booking__row"><span class="v">Round trip</span><span class="booking__chev">▾</span></span>
+        </button>
+        <button type="button" class="booking__field booking__field--btnish" aria-haspopup="dialog">
+          <label>When</label>
+          <span class="booking__row"><span class="v">Apr 2026 — May 2026</span><span class="booking__chev">▾</span></span>
+        </button>
+        <button type="button" class="booking__field booking__field--btnish" aria-haspopup="dialog">
+          <label>Who's going?</label>
+          <span class="booking__row"><span class="v">2 adults</span><span class="booking__chev">▾</span></span>
+        </button>
+        <div class="booking__cta">
+          <button class="btn btn--primary" type="submit">Search flights</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <section id="destinations" data-section="destinations" data-section-kind="gallery" aria-label="Destinations">
+    <div class="wrap">
+      <span class="eyebrow">So, where next?</span>
+      <h2 class="section-title">Six cities, one&nbsp;airline that still loves arriving at&nbsp;the&nbsp;edge of&nbsp;something.</h2>
+      <p class="section-lede">Our 2026 network — chosen for the reason people actually book a long-haul flight.</p>
+
+      <div class="editorial-grid">
+        <a class="dest dest--lead" href="#">
+          <img class="dest__img" src="https://flywith.virginatlantic.com/content/dam/vaa-home/headers/vaa/featured-london.jpg" alt="London">
+          <div class="dest__shade"></div>
+          <div class="dest__caption">
+            <h3 class="dest__city">London</h3>
+            <span class="dest__sub">Heathrow — daily, from twelve cities.</span>
+          </div>
+        </a>
+        <div class="dest__row">
+          <a class="dest" href="#">
+            <img class="dest__img" src="https://flywith.virginatlantic.com/content/dam/vaa-home/headers/vaa/featured-edinburgh.jpg" alt="Edinburgh">
+            <div class="dest__shade"></div>
+            <div class="dest__caption"><h3 class="dest__city">Edinburgh</h3><span class="dest__sub">Quietly the best summer in Europe.</span></div>
+          </a>
+          <a class="dest" href="#">
+            <img class="dest__img" src="https://flywith.virginatlantic.com/content/dam/vaa-home/headers/vaa/featured-manchester.jpg" alt="Manchester">
+            <div class="dest__shade"></div>
+            <div class="dest__caption"><h3 class="dest__city">Manchester</h3><span class="dest__sub">North-of-England, on the doorstep.</span></div>
+          </a>
+        </div>
+      </div>
+      <div class="dest__rail">
+        <a class="dest" href="#">
+          <img class="dest__img" src="https://flywith.virginatlantic.com/content/dam/vaa-home/headers/vaa/featured-dubai.jpg" alt="Dubai">
+          <div class="dest__shade"></div>
+          <div class="dest__caption"><h3 class="dest__city">Dubai</h3></div>
+        </a>
+        <a class="dest" href="#">
+          <img class="dest__img" src="https://flywith.virginatlantic.com/content/dam/vaa-home/headers/vaa/featured-delhi.jpg" alt="Delhi">
+          <div class="dest__shade"></div>
+          <div class="dest__caption"><h3 class="dest__city">Delhi</h3></div>
+        </a>
+        <a class="dest" href="#">
+          <img class="dest__img" src="https://flywith.virginatlantic.com/content/dam/vaa-home/headers/vaa/featured-lagos.jpg" alt="Lagos">
+          <div class="dest__shade"></div>
+          <div class="dest__caption"><h3 class="dest__city">Lagos</h3></div>
+        </a>
+        <a class="dest" href="#">
+          <img class="dest__img" src="https://vaabrowse.virginatlantic.com/content/dam/vaa-home/hp/content-cards/Barbados.jpg" alt="Barbados">
+          <div class="dest__shade"></div>
+          <div class="dest__caption"><h3 class="dest__city">Barbados</h3></div>
+        </a>
+        <a class="dest" href="#">
+          <img class="dest__img" src="https://vaabrowse.virginatlantic.com/content/dam/vhols/hp/content-card-images/Lady-in-car-LA.jpg" alt="Los Angeles">
+          <div class="dest__shade"></div>
+          <div class="dest__caption"><h3 class="dest__city">Los Angeles</h3></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="pull" data-section="editorial-pullquote" data-section-kind="callout" aria-label="Brand statement">
+    <div class="wrap pull__inner">
+      <div class="pull__mark">&ldquo;</div>
+      <blockquote class="pull__text">Most airlines are a means of arriving somewhere. Forty&#8209;odd years in, we&rsquo;re still trying to make Virgin Atlantic the part of the holiday you remember.</blockquote>
+      <div class="pull__cite" data-placeholder>— Composed for the redesign from voice samples on virginatlantic.com</div>
+    </div>
+  </section>
+
+  <section id="cabins" class="cabin" data-section="cabins" data-section-kind="showcase" aria-label="Cabins">
+    <div class="wrap">
+      <span class="eyebrow">Fly in style, in any seat</span>
+      <h2 class="section-title">Three cabins, three different reasons to&nbsp;close the laptop.</h2>
+
+      <div class="cabin__row">
+        <div class="cabin__media"><img src="https://vaabrowse.virginatlantic.com/content/dam/experience/cabins/upper-class-yellow-jumper-1024x768.jpg" alt="Upper Class"></div>
+        <div>
+          <p class="cabin__name">Upper Class</p>
+          <h3 class="cabin__title">A private suite, a glass of something, and a door that closes.</h3>
+          <p class="cabin__body">Suite-style seats, the Clubhouse, and the bit of long-haul that quietly does most of the work. Available across our transatlantic, Caribbean, and Indian routes.</p>
+          <a class="btn btn--ghost" href="#">Explore Upper Class</a>
+        </div>
+      </div>
+
+      <div class="cabin__row cabin__row--reverse">
+        <div class="cabin__media"><img src="https://vaabrowse.virginatlantic.com/content/dam/experience/cabins/TOL297_WH_VA_250218_VA_Experience_10308_RGB.jpg" alt="Premium"></div>
+        <div>
+          <p class="cabin__name">Premium</p>
+          <h3 class="cabin__title">More room, a little&nbsp;more&nbsp;ceremony, a&nbsp;quieter cabin.</h3>
+          <p class="cabin__body">A wider seat, a better recline, and a meal worth eating. The most-loved upgrade we sell.</p>
+          <a class="btn btn--ghost" href="#">Explore Premium</a>
+        </div>
+      </div>
+
+      <div class="cabin__row">
+        <div class="cabin__media"><img src="https://vaabrowse.virginatlantic.com/content/dam/experience/cabins/flying-kids-economy-cabin-vaa.jpg" alt="Economy"></div>
+        <div>
+          <p class="cabin__name">Economy</p>
+          <h3 class="cabin__title">The Economy cabin, made&nbsp;considerably less&nbsp;Economy.</h3>
+          <p class="cabin__body">In-seat entertainment, friendlier crews, and the kind of small details we hope people notice without us having to point.</p>
+          <a class="btn btn--ghost" href="#">Explore Economy</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="rewards" id="rewards" data-section="rewards" data-section-kind="promo" aria-label="Reward Seats">
+    <div class="wrap rewards__inner">
+      <div>
+        <span class="eyebrow">Search for Reward Seats</span>
+        <h2 class="rewards__title">Spend Virgin Points on the seats you actually want.</h2>
+        <p class="rewards__body">Flying Club shows real availability across every cabin, twelve months ahead — no point inflation, no calendar guessing.</p>
+        <p class="rewards__body" style="margin-top:8px"><span data-placeholder>LHR → JFK Premium · from 30,000 pts + £232</span></p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:8px">
+          <a class="btn btn--primary" href="#">Open the reward map</a>
+          <a class="btn btn--ghost" href="#">Sign in to Flying&nbsp;Club</a>
+        </div>
+      </div>
+      <div class="rewards__visual">
+        <img src="https://vaabrowse.virginatlantic.com/content/dam/vaa-home/hp/content-cards/clubhouse-spa-image.jpg" alt="The Clubhouse spa">
+      </div>
+    </div>
+  </section>
+
+  <section class="help" id="help" data-section="help" data-section-kind="anchor-pair" aria-label="Flying with us">
+    <div class="wrap">
+      <span class="eyebrow">Flying with us</span>
+      <h2 class="section-title">Two anchors, before&nbsp;you&nbsp;need&nbsp;them.</h2>
+      <div class="help__grid">
+        <article class="help__card">
+          <span class="help__num">01 · Before you fly</span>
+          <h3 class="help__h">Everything you need to know before you go.</h3>
+          <p class="help__b">Visas, vaccinations, check-in windows, and how baggage rules work in your cabin — short answers, the right way around.</p>
+          <ul class="help__list">
+            <li><a href="#">Pre-travel advice</a></li>
+            <li><a href="#">Baggage rules</a></li>
+            <li><a href="#">Accessible travel</a></li>
+          </ul>
+        </article>
+        <article class="help__card">
+          <span class="help__num">02 · If something changes</span>
+          <h3 class="help__h">What to do if your flight is cancelled, delayed or disrupted.</h3>
+          <p class="help__b">Real-time status, rebooking options, and EU 261 / DOT compensation eligibility — calculated for your specific flight, not the small print.</p>
+          <ul class="help__list">
+            <li><a href="#">Flight status</a></li>
+            <li><a href="#">Manage my trip</a></li>
+            <li><a href="#">Help centre</a></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" data-section="footer" data-section-kind="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a class="va-logo" href="#"><b>virgin</b> atlantic</a>
+        <p>Forty years of long-haul, premium-with-personality. Based at LHR &amp; MAN.</p>
+      </div>
+      <div class="footer__col">
+        <h6>Where we fly</h6>
+        <ul>
+          <li><a href="#">Destinations</a></li>
+          <li><a href="#">Experience</a></li>
+          <li><a href="#">Deals</a></li>
+          <li><a href="#">Flying Club</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h6>About</h6>
+        <ul>
+          <li><a href="#">Our story</a></li>
+          <li><a href="#">Force for good</a></li>
+          <li><a href="#">Media centre</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h6>Support</h6>
+        <ul>
+          <li><a href="#">Help centre</a></li>
+          <li><a href="#">Baggage</a></li>
+          <li><a href="#">Accessible travel</a></li>
+          <li><a href="#">Flight disruption</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h6>More</h6>
+        <ul>
+          <li><a href="#">Business travel</a></li>
+          <li><a href="#">Cargo</a></li>
+          <li><a href="#">Travel trade</a></li>
+          <li><a href="#">SkyTeam</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <span>© 2026 Virgin Atlantic Airways</span>
+      <ul>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Accessibility</a></li>
+        <li><a href="#">Cookies</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

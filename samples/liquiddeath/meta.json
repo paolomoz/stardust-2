@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 2,
+  "slug": "liquiddeath",
+  "title": "Liquid Death",
+  "tagline": "B&W chrome + neon-only-in-photography. Variants test display-scale typography, catalog-amplified IA, and manifesto-as-spine commerce.",
+
+  "source": {
+    "url": "https://liquiddeath.com/",
+    "register": "brand",
+    "category": "CPG · canned water · horror-comedy commerce",
+    "extractedAt": "2026-04-28"
+  },
+
+  "direction": {
+    "phrase": "Brand-faithful Mode A. Palette pinned (B&W chrome; neon stays inside captured product photography). Typography pinned (Acumin Pro / Acumin Pro Condensed). Density commercial-dense. IA-priority preserves product grid above the fold + SHOP verbs as primary.",
+    "movements": [
+      "display-scale: ad-hoc → 1.333 modular, D1 at 120-180px desktop",
+      "manifesto: body-copy on thumbnail bg → D1/D2 invert-bg full-bleed",
+      "photography: thumbnail-cropped campaigns → uncropped full-bleed",
+      "density: stamped balanced (commercial-dense, ≤64px ≥40px)"
+    ],
+    "seed": {
+      "input": "Liquid Death|2026-04-28",
+      "decade": "2025-now",
+      "craft": "horror-comedy CPG",
+      "register": "brand-led commerce + editorial campaign overlay",
+      "groundFamily": "stark-white (#ffffff)",
+      "pickedBy": "inherited (Mode A)"
+    },
+    "fontDeck": {
+      "name": "brand-inherited",
+      "value": "Acumin Pro + Acumin Pro Condensed",
+      "pickedBy": "user-constraint"
+    },
+    "palette": {
+      "name": "Liquid Death brand-pinned",
+      "source": "inherited from stardust/current/_brand-extraction.json",
+      "anchor": "#000000",
+      "pickedBy": "user-constraint",
+      "brandFaithfulInversions": [
+        "pure-black #000 retained as ink",
+        "pure-white #ffffff retained as surface",
+        "neon accents stay inside product photography only",
+        "condensed-bold caps display retained",
+        "hex format retained"
+      ]
+    },
+    "antiToolbox": { "hits": 0, "justified": 0 }
+  },
+
+  "originalCritique": "The brand is unmistakable — B&W chrome, condensed-bold caps, horror-comedy voice, campaign photography (Pop-Tarts, Country Club, Death Peddlers, Tony Hawk). But the home undercuts every asset: display type runs at ad-hoc body sizes, the anti-plastic manifesto sits at body-copy scale on a thumbnail background image, and uncropped campaign photographs are reduced to thumbnails between catalog rows. <strong>The load-bearing visual move is condensed-bold caps; the page never lets it work at full size.</strong>",
+
+  "variants": [
+    {
+      "id": "A",
+      "name": "Faithful + improvements",
+      "dominantDimension": "tokens",
+      "thesis": "Same IA: product grid above the fold, SHOP verbs primary. Apply identified improvements: 1.333 modular scale, D1 at 120-180px on hero, manifesto promoted to display type on invert-bg, campaign photography uncropped.",
+      "fix": "Same IA — product grid above the fold, SHOP verbs primary. <strong>Apply identified improvements.</strong> Display scale locks at 1.333 modular and D1 hits 120-180px on the hero so the brand's load-bearing condensed-bold caps finally work at full size. The anti-plastic manifesto promotes from body copy to D1/D2 display on invert-bg, full-bleed. Campaign photography (Pop-Tarts, Country Club, Tony Hawk) uncrops.",
+      "proposedFile": "proposed-A.html",
+      "isPrimary": true
+    },
+    {
+      "id": "B",
+      "name": "Catalog amplified",
+      "dominantDimension": "ia",
+      "thesis": "The cans ARE the brand. Doubles down on catalog density: typography is the hero, the cans are the dominant photo, editorial campaign images stitch BETWEEN catalog rows rather than ABOVE them. \"Says the quiet part loud.\"",
+      "fix": "<strong>The cans ARE the brand.</strong> The captured site already has the catalog (18+ SKUs) as the dominant block — B doubles down. Typography is the hero, the cans are the dominant photo, editorial campaign images stitch BETWEEN catalog rows rather than above them. The page reads as a catalog with attitude, not attitude with a catalog underneath.",
+      "proposedFile": "proposed-B.html"
+    },
+    {
+      "id": "C",
+      "name": "Manifesto-first",
+      "dominantDimension": "voice",
+      "thesis": "The brand stance becomes the spine; commerce becomes the evidence. The anti-plastic manifesto opens the page at full display scale; campaign photography earns its full pixels; product grid moves below the manifesto and editorial.",
+      "fix": "<strong>The brand stance becomes the spine; commerce becomes the evidence.</strong> The anti-plastic manifesto opens the page at full display scale on invert-bg. Campaign photography earns its full pixels — Tony Hawk uncropped, Death Peddlers full-bleed. The product grid moves below the manifesto and editorial. The page reads as a manifesto with a store attached, which is how the brand actually positions itself.",
+      "proposedFile": "proposed-C.html"
+    }
+  ],
+
+  "createdAt": "2026-04-28",
+  "stardustVersion": "0.2.0",
+  "submittedBy": "paolomoz",
+  "license": "Apache-2.0",
+  "thumbnail": "logo.png"
+}

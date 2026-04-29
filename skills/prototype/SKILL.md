@@ -45,6 +45,15 @@ is delegated to `$impeccable craft` and `$impeccable live`.
   data-attributes contract failure, or impeccable hard-rule
   violations. P0/P1 critique findings warn but don't refuse.
   The showcase publishes via GitHub Pages on merge.
+- `--prep` — optional. Run in **migrate-prep mode**: fill page-type
+  gaps (prototype one representative archetype per type) and, on
+  approval, write canon back to `stardust/canon/` and
+  `DESIGN.json.extensions.canon`. See § Prep mode below and
+  `reference/canon-extraction.md`. Typically invoked via the
+  `prepare-migration` orchestrator.
+- `--canon-from <slug>` — optional. Override the default canon-
+  author (which is the first approved prototype, typically `home`).
+  Used when a different page should establish the design canon.
 
 ## Setup
 
@@ -472,12 +481,109 @@ Per `state-machine.md`: stardust does not lock. Two concurrent
 `prototype` runs on different slugs are safe. Two on the same slug
 are last-write-wins; warn the user if they explicitly try.
 
+## Prep mode (--prep)
+
+When invoked with `--prep`, prototype runs an extended pass that
+fills page-type gaps and writes canon. Discovery-mode runs are
+unchanged: per-slug shape brief, render via `$impeccable craft`,
+viewer, iterate, approve.
+
+`--prep` adds three things on top of the standard procedure:
+
+### 1. Fill page-type gaps
+
+Identify every page type in `state.json.pages[].type` that
+doesn't yet have an approved archetype. For each gap, prototype
+one representative page (the user picks which slug, or the first
+page of that type by default):
+
+- `article`-typed pages with no approved article: prototype one
+- `listing`-typed pages with no approved listing: prototype one
+- `program`, `form`, `static` — same pattern
+- `landing` — the home; prototyped first if not already done
+- `unique`-typed pages — these don't get archetypes; they're
+  rendered as one-offs at migrate time
+
+The user picks one variant per type. Subsequent pages of the
+same type are migrated by forking that approval (Path A′ in
+`skills/migrate/SKILL.md`).
+
+### 2. Canon write-back on first approval
+
+The first prototype approved (default the home; override with
+`--canon-from <slug>`) becomes the **canon-author**. On
+approval, extract canon and write back per
+`reference/canon-extraction.md`:
+
+1. Chrome HTML → `stardust/canon/header.html`,
+   `stardust/canon/footer.html`, optional regions.
+2. Compound CSS → `stardust/canon/canon.css`.
+3. Pinned tokens → `DESIGN.json.extensions.canon.pinned`.
+4. Module canonical renderings →
+   `stardust/canon/modules/<id>.html`.
+5. Compositional moves (LLM-authored, 3–7 lines) →
+   `DESIGN.json.extensions.canon.compositionalMoves`.
+
+Reference all extracted files via `{ path, sha }` in
+`DESIGN.json.extensions.canon.files`. Each canon file carries a
+`stardust:canon` provenance comment naming source slug, source
+prototype, and region.
+
+### 3. Canon write-back on subsequent approvals
+
+For non-canon-author template approvals (article, listing, etc.),
+canon-extraction runs in **diff mode** per
+`reference/canon-extraction.md` § Conflict resolution:
+
+- **Net-new items** (a module not yet in canon, a new compound
+  CSS class, a new compositional move) → append to canon
+  additively. Add a history entry naming what was added.
+- **Match canon byte-for-byte** → no-op.
+- **Conflict with canon** → default is **log as deviation**:
+  the migrated/prototyped page carries the deviation inline
+  marked with `data-deviation="<reason>"`, and the page's
+  `migrationDecisions[]` records a `canon-deviation` entry.
+  Canon stays unchanged.
+
+Override the default per-conflict via the prep summary if the
+user wants to promote the new variant to canon (which stale-flags
+downstream pages that consumed the changed item) or reject and
+re-iterate the prototype. Without an explicit override, the
+conflict logs as deviation and approval proceeds.
+
+### Prep summary
+
+```
+prototype --prep complete
+=========================
+
+Approved archetypes:
+  landing   home (V01 Polish)            canon-author
+  article   news/post-housing-summit
+  listing   news (the index)
+  program   programs/shelter
+  form      donate
+  static    about
+
+Canon: stardust/canon/ + DESIGN.json.extensions.canon
+  Sources:  home → article (1 deviation logged), listing (clean),
+            program (1 deviation logged), form (clean), static (clean)
+  Modules:  8 confirmed; canonical renderings written
+  Pinned:   sectionPadding, densityTier, typeScale set
+
+Next: $stardust migrate  (apply canon to every page in inventory)
+```
+
+Default mode is unchanged.
+
 ## References
 
 - `reference/page-shape-brief.md` — per-page compositional brief
   format (Phase 1 output, craft input). Page-level deployment
   decisions live here; site-level system decisions live in
   DESIGN.md.
+- `reference/canon-extraction.md` — the five-step canon-extraction
+  procedure performed on prototype approval in `--prep` mode.
 - `reference/before-after-shell.md` — viewer + proposed file
   schemas and required structure.
 - `reference/publish-sample.md` — `--publish-sample` sub-flow:

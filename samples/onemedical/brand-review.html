@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+  _provenance:
+    writtenBy: stardust:extract
+    writtenAt: 2026-04-28T16:11:35Z
+    readArtifacts:
+      - stardust/current/_brand-extraction.json
+      - stardust/current/pages/home.json
+    stardustVersion: 0.2.0
+    note: Self-contained current-state brand review for OneMedical home. Rendered in the brand's own captured colors and a serif/sans pairing that approximates GT Super Display + Ginto using web-safe fallbacks (no external fonts loaded — viewer renders with system serif + system sans, but the brand's color and motif language is preserved).
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OneMedical — current brand review</title>
+<style>
+  :root {
+    --page-bg: #ffffff;
+    --alt-bg: #f3eee5;
+    --jade: #005450;
+    --deep-jade: #004d49;
+    --emerald: #068466;
+    --melon: #ffc776;
+    --hero-blue: #0578ff;
+    --ink: #004d49;
+    --ink-muted: #3a4a48;
+    --rule: rgba(0,77,73,0.16);
+
+    --serif: "Times New Roman", "Hoefler Text", Georgia, serif;
+    --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--page-bg);
+    line-height: 1.5;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 1180px; margin: 0 auto; padding: 56px 32px 96px; }
+  header.hdr { padding: 64px 32px 16px; max-width: 1180px; margin: 0 auto; border-bottom: 1px solid var(--rule); }
+  header.hdr .eyebrow { font-size: 12px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--emerald); font-weight: 600; }
+  header.hdr h1 { font-family: var(--serif); font-weight: 500; font-size: 48px; line-height: 1.05; margin: 8px 0 12px; color: var(--ink); }
+  header.hdr p { color: var(--ink-muted); margin: 0; max-width: 720px; }
+
+  .coverage { display: flex; gap: 24px; flex-wrap: wrap; margin: 24px 0 0; }
+  .coverage .pill {
+    display: inline-block; border: 1px solid var(--rule); border-radius: 36px; padding: 8px 16px;
+    font-size: 13px; color: var(--ink-muted); background: var(--page-bg);
+  }
+  .coverage .pill strong { color: var(--ink); font-weight: 600; }
+
+  section.block { padding: 48px 0 16px; border-bottom: 1px solid var(--rule); }
+  section.block h2 { font-family: var(--serif); font-weight: 600; font-size: 32px; line-height: 1.1; margin: 0 0 4px; color: var(--ink); }
+  section.block .meta { font-size: 13px; color: var(--ink-muted); margin: 0 0 24px; }
+  section.block .meta code { background: var(--alt-bg); color: var(--ink); padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+
+  .palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+  .swatch { border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+  .swatch .top { aspect-ratio: 4/3; }
+  .swatch .body { padding: 12px 14px; }
+  .swatch .name { font-weight: 600; font-size: 14px; color: var(--ink); }
+  .swatch .hex { font-family: ui-monospace, "SFMono-Regular", monospace; font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+  .swatch .role { font-size: 12px; color: var(--ink-muted); margin-top: 6px; line-height: 1.4; }
+
+  .type-row { display: grid; grid-template-columns: 220px 1fr; gap: 32px; padding: 16px 0; border-top: 1px dashed var(--rule); }
+  .type-row:first-of-type { border-top: 0; }
+  .type-row .label { font-size: 12px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 1.4px; font-weight: 600; }
+  .type-row .label small { display: block; text-transform: none; letter-spacing: 0; color: var(--ink-muted); margin-top: 4px; font-weight: 400; }
+  .display-h1 { font-family: var(--serif); font-weight: 500; font-size: 64px; line-height: 1; color: var(--hero-blue); margin: 0; }
+  .display-h2-rotating { font-family: var(--serif); font-weight: 600; font-size: 80px; line-height: 1.05; color: var(--deep-jade); margin: 0; }
+  .display-h2-section { font-family: var(--serif); font-weight: 600; font-size: 56px; line-height: 1.05; color: var(--deep-jade); margin: 0; }
+  .display-h3-card { font-family: var(--serif); font-weight: 500; font-size: 28px; line-height: 1.25; color: var(--deep-jade); margin: 0; }
+  .display-h3-callout { font-family: var(--serif); font-weight: 600; font-size: 40px; line-height: 1.25; color: white; background: var(--jade); padding: 16px 24px; display: inline-block; }
+  .body-eyebrow { font-family: var(--sans); font-weight: 600; font-size: 14px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--emerald); margin: 0; }
+  .body-feature { font-family: var(--sans); font-weight: 200; font-size: 18px; line-height: 1.7; color: var(--deep-jade); margin: 0; max-width: 540px; }
+
+  .ctas { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .btn-primary { background: var(--jade); color: #fff; border: 0; border-radius: 36px; padding: 16px 40px; font-family: var(--sans); font-weight: 600; font-size: 15px; cursor: default; }
+  .btn-melon { background: var(--melon); color: var(--deep-jade); border: 0; border-radius: 36px; padding: 16px 40px; font-family: var(--sans); font-weight: 600; font-size: 15px; cursor: default; }
+  .btn-ghost { background: transparent; color: var(--deep-jade); border: 0; padding: 0; font-family: var(--sans); font-weight: 600; font-size: 14px; text-decoration: underline; }
+
+  .ia-list { list-style: none; padding: 0; margin: 0; counter-reset: ia; }
+  .ia-list li {
+    counter-increment: ia;
+    display: grid; grid-template-columns: 32px 1fr; gap: 12px;
+    padding: 12px 0; border-bottom: 1px dashed var(--rule);
+    font-size: 15px;
+  }
+  .ia-list li::before { content: counter(ia, decimal-leading-zero); font-family: var(--serif); font-size: 18px; color: var(--emerald); font-weight: 500; }
+  .ia-list li code { background: var(--alt-bg); padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+  .ia-list .role { font-weight: 600; color: var(--ink); }
+  .ia-list .desc { color: var(--ink-muted); font-size: 13px; margin-top: 2px; }
+
+  .tensions { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .tension {
+    border: 1px solid var(--rule); border-left: 4px solid var(--melon);
+    padding: 16px 20px; border-radius: 0 4px 4px 0; background: #fffaf0;
+  }
+  .tension .lvl { font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; font-weight: 600; color: #b06400; }
+  .tension h3 { font-family: var(--serif); font-weight: 600; font-size: 20px; line-height: 1.3; margin: 4px 0 6px; color: var(--ink); }
+  .tension p { margin: 0; color: var(--ink-muted); font-size: 14px; }
+  .tension code { background: rgba(0,77,73,0.08); padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .gallery figure { margin: 0; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; background: var(--alt-bg); }
+  .gallery img { display: block; width: 100%; height: 160px; object-fit: cover; }
+  .gallery figcaption { font-size: 11px; color: var(--ink-muted); padding: 6px 10px; }
+
+  footer.ftr { max-width: 1180px; margin: 32px auto 64px; padding: 0 32px; color: var(--ink-muted); font-size: 13px; }
+  footer.ftr code { background: var(--alt-bg); padding: 1px 6px; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="eyebrow">Stardust · Current-state brand review</div>
+  <h1>OneMedical · home</h1>
+  <p>Descriptive snapshot of the existing home page (<code>https://www.onemedical.com/</code>), rendered in the brand's own captured colors and a serif/sans pairing as a system fallback for GT Super Display + Ginto. This file is the eyeball-able verification surface — open it before running <code>$stardust direct</code>.</p>
+  <div class="coverage">
+    <span class="pill"><strong>1 / 1</strong> page extracted (<code>--single</code>)</span>
+    <span class="pill"><strong>20</strong> headings · <strong>8</strong> CTAs · <strong>5</strong> images · <strong>10</strong> css backgrounds</span>
+    <span class="pill">register: <strong>brand</strong></span>
+    <span class="pill">tokens at <code>:root</code>: <strong>0</strong> (no design tokens defined)</span>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <h2>Palette</h2>
+    <p class="meta">Source: <code>_brand-extraction.json § palette</code> — 8 distinct colors observed; jade dominates the CTA + headline surfaces, melon is the only warm accent, hero-blue appears once (h1 only).</p>
+    <div class="palette">
+      <div class="swatch"><div class="top" style="background:#ffffff;border-bottom:1px solid var(--rule)"></div><div class="body"><div class="name">page-bg</div><div class="hex">#FFFFFF</div><div class="role">Dominant page background</div></div></div>
+      <div class="swatch"><div class="top" style="background:#f3eee5"></div><div class="body"><div class="name">alt-section-bg</div><div class="hex">#F3EEE5</div><div class="role">Cream alt-section (rotating-services band)</div></div></div>
+      <div class="swatch"><div class="top" style="background:#005450"></div><div class="body"><div class="name">jade</div><div class="hex">#005450</div><div class="role">Primary CTA fill, footer callout</div></div></div>
+      <div class="swatch"><div class="top" style="background:#004d49"></div><div class="body"><div class="name">deep-jade</div><div class="hex">#004D49</div><div class="role">All h2 / h3 body text</div></div></div>
+      <div class="swatch"><div class="top" style="background:#068466"></div><div class="body"><div class="name">emerald</div><div class="hex">#068466</div><div class="role">Uppercase eyebrow labels</div></div></div>
+      <div class="swatch"><div class="top" style="background:#ffc776"></div><div class="body"><div class="name">melon</div><div class="hex">#FFC776</div><div class="role">Secondary CTA fill</div></div></div>
+      <div class="swatch"><div class="top" style="background:#0578ff"></div><div class="body"><div class="name">hero-blue</div><div class="hex">#0578FF</div><div class="role">Hero h1 only — one-time use</div></div></div>
+      <div class="swatch"><div class="top" style="background:#3a4a48"></div><div class="body"><div class="name">ink-muted</div><div class="hex">#3A4A48</div><div class="role">Body paragraphs (inferred)</div></div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Typography</h2>
+    <p class="meta">Source: <code>_brand-extraction.json § type</code> · Heading: GT Super Display (serif, 500/600). Body: Ginto (sans, 200/600). Scale audit: <strong>ad-hoc</strong> — display sizes 32 / 48 / 72 / 88 don't follow a single modular ratio.</p>
+    <div class="type-row">
+      <div class="label">H1 hero<small>72px / 72 / 500 · color: hero-blue</small></div>
+      <div><h1 class="display-h1">Comprehensive healthcare just got less painful</h1></div>
+    </div>
+    <div class="type-row">
+      <div class="label">H2 rotating<small>88px / 94 / 600 · color: deep-jade · largest type on page</small></div>
+      <div><h2 class="display-h2-rotating">Get care today for <em style="font-style:italic">sleep&nbsp;issues</em></h2></div>
+    </div>
+    <div class="type-row">
+      <div class="label">H2 section<small>72px / 72 / 600 · color: deep-jade · 5 occurrences</small></div>
+      <div><h2 class="display-h2-section">Fall in love with your doctor's office</h2></div>
+    </div>
+    <div class="type-row">
+      <div class="label">H3 card<small>32px / 40 / 500 · color: deep-jade</small></div>
+      <div><h3 class="display-h3-card">Care for your mental health</h3></div>
+    </div>
+    <div class="type-row">
+      <div class="label">H3 callout<small>48px / 60 / 600 · color: white on jade gradient</small></div>
+      <div><h3 class="display-h3-callout">Membership costs only $99/year.</h3></div>
+    </div>
+    <div class="type-row">
+      <div class="label">Eyebrow<small>14px / 24 / 600 · uppercase · 1.4px tracking · emerald</small></div>
+      <div><p class="body-eyebrow">Mental health</p></div>
+    </div>
+    <div class="type-row">
+      <div class="label">Feature item<small>18px / 31 / 200 · deep-jade · light weight</small></div>
+      <div><p class="body-feature">Same/next-day appointments, in person or over video, that start on time. Longer appointments so you don't feel rushed. Drop-in lab services at our offices to save you extra trips.</p></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Components</h2>
+    <p class="meta">Source: <code>_brand-extraction.json § motifs</code>, <code>pages/home.json § ctas</code>. The 36px pill is the most consistent component shape on the page; cards otherwise have square corners and no shadow.</p>
+    <div class="ctas">
+      <button class="btn-primary">Get Started</button>
+      <button class="btn-melon">Join now</button>
+      <button class="btn-ghost">Learn more →</button>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>IA — section sequence</h2>
+    <p class="meta">Source: <code>pages/home.json § landmarks.children</code>. The conversion path repeats five times; the 'For Business' track folds into the consumer track via the employer-logo strip.</p>
+    <ol class="ia-list">
+      <li><div><span class="role">Header (absolute over hero)</span><div class="desc">Locations · For You · For Business · Log in · <strong>Sign up (pill)</strong></div></div></li>
+      <li><div><span class="role">Hero</span><div class="desc">"Comprehensive healthcare just got less painful" · Amazon Prime $99/year tie-in · Get Started CTA · photographic background (woman + phone)</div></div></li>
+      <li><div><span class="role">3-col preview cards</span><div class="desc">Mental Health · Annual Wellness · Amazon Pharmacy — eyebrow + h3 + photo, square corners, no shadow</div></div></li>
+      <li><div><span class="role">Rotating-services h2</span><div class="desc">"Get care today for [40+ conditions, animated]" — signature pattern</div></div></li>
+      <li><div><span class="role">Icon grid 2×3</span><div class="desc">"Fall in love with your doctor's office" + 6 reasons (same-day, longer, drop-in lab, etc.)</div></div></li>
+      <li><div><span class="role">App services block</span><div class="desc">"With the One Medical app you can:" + phone screenshot, light-weight feature list</div></div></li>
+      <li><div><span class="role">Membership $99/year callout</span><div class="desc">Gradient jade band · h3 white · Join Now (melon)</div></div></li>
+      <li><div><span class="role">Video block</span><div class="desc">"See what makes One Medical different" — Wistia video on cream background</div></div></li>
+      <li><div><span class="role">Employer logo strip</span><div class="desc">"We're an employee benefit at 11,600+ companies" + Airbnb / Allbirds / Nasdaq logos</div></div></li>
+      <li><div><span class="role">Sign up footer callout</span><div class="desc">Full-bleed jade · h2 white · Join Now (melon)</div></div></li>
+      <li><div><span class="role">Footer</span><div class="desc">Location selector + footer__links + footer__social + subfooter (©2026 1Life Healthcare, Inc.)</div></div></li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <h2>Photography</h2>
+    <p class="meta">Source: <code>pages/home.json § media.images</code> + <code>media.cssBackgrounds</code> · 14 distinct images observed; warm-natural-light register; person-led, not product-led.</p>
+    <div class="gallery">
+      <figure><img src="assets/media/OM-homepage-hero-transparent-bg-DESKTOP_nKkownV.original-0b89d732.png" alt="Hero"><figcaption>Hero (woman + phone)</figcaption></figure>
+      <figure><img src="assets/media/OM_Meditation_0697.original-dc6d8df9.jpg" alt="Mental Health card"><figcaption>3-col card · Mental Health</figcaption></figure>
+      <figure><img src="assets/media/OM_ExamRoom4_2843.original-794a3045.jpg" alt="Annual physical"><figcaption>3-col card · Annual physical</figcaption></figure>
+      <figure><img src="assets/media/OM-homepage-AMZ-Pharmacy-thumbnail_4eS3ecY.original-a6a96297.png" alt="Amazon Pharmacy"><figcaption>3-col card · Amazon Pharmacy</figcaption></figure>
+      <figure><img src="assets/media/OM-homepage-block-media-right_1.width-1440-9925f8cf.png" alt="App phone"><figcaption>App services block</figcaption></figure>
+      <figure><img src="assets/media/61c9e8cb173b73762f255f630040c7a4-c47f9ebf.webp" alt="Video poster"><figcaption>Video block · poster</figcaption></figure>
+      <figure><img src="assets/media/bookonline_1_aGc4xkt.width-734-edc7d745.png" alt="Icon"><figcaption>Icon-grid · book online</figcaption></figure>
+      <figure><img src="assets/media/sofa-conversation_1.width-734-65156b81.png" alt="Icon"><figcaption>Icon-grid · longer appointments</figcaption></figure>
+      <figure><img src="assets/media/Group_163.width-734-97d4563a.png" alt="Icon"><figcaption>Icon-grid · drop-in lab</figcaption></figure>
+      <figure><img src="assets/media/HomepageServicesRTB_Image_221018_1.width-734-3764f000.png" alt="Icon"><figcaption>Icon-grid · services breadth</figcaption></figure>
+      <figure><img src="assets/media/usa_illo_gQAtRvn.width-734-a61129b7.png" alt="Icon"><figcaption>Icon-grid · US locations</figcaption></figure>
+      <figure><img src="assets/media/exceptionalproviders2.width-734-be516d2a.png" alt="Icon"><figcaption>Icon-grid · providers</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Tensions</h2>
+    <p class="meta">Mechanical detector output · 5 tensions surfaced. Each is a candidate weakness for the redesign brief — they feed <code>stardust/prototypes/home-improvements.md</code>.</p>
+    <div class="tensions">
+
+      <div class="tension">
+        <div class="lvl">P1 · Contrast / hero</div>
+        <h3>Hero h1 sits on photography without a contrast scrim</h3>
+        <p>The h1 (<code>#0578ff</code>) renders over a photographic background of an arm + phone. Across the photograph the contrast varies; large portions of the headline reach the photo's mid-tone band where AA contrast is borderline. There is no scrim or backdrop blur. <strong>Fix candidate:</strong> add a low-opacity gradient scrim or move the headline onto a flat alt-section background.</p>
+      </div>
+
+      <div class="tension">
+        <div class="lvl">P1 · IA / redundancy</div>
+        <h3>Five separate "Sign up / Get Started / Join now" CTAs</h3>
+        <p>The conversion path is repeated in five distinct bands (header, hero, mid-page callout, employer-strip, footer-callout). The repetition is intentional but reads as anxious — the same offer appears too many times without earning it through new context. <strong>Fix candidate:</strong> consolidate to 3 strategic reprises with distinct framings (try, buy, gift / employer / member).</p>
+      </div>
+
+      <div class="tension">
+        <div class="lvl">P2 · System / tokens</div>
+        <h3>Zero CSS custom properties at <code>:root</code></h3>
+        <p>The site ships no design tokens — colors and spacing are baked into stylesheet rules. This forces every section to redeclare values; small palette changes require sweeping CSS edits. <strong>Fix candidate:</strong> introduce a token contract (the redesign will produce a <code>:root</code> block per stardust's token-contract.md).</p>
+      </div>
+
+      <div class="tension">
+        <div class="lvl">P2 · Type / scale</div>
+        <h3>Display sizes 32 / 48 / 72 / 88 don't form a modular ratio</h3>
+        <p>The site uses an <strong>ad-hoc</strong> type scale — ratios 1.5 / 1.83 / 2.25 between display sizes mean the headline rhythm is uneven. The 88px rotating-services h2 dwarfs the 72px section h2s by a barely-distinguishable margin, and the 48px callout sits awkwardly between 32 and 72. <strong>Fix candidate:</strong> tighten to a 1.25 or 1.333 ratio with no more than 4 display sizes.</p>
+      </div>
+
+      <div class="tension">
+        <div class="lvl">P3 · Photography / sizing</div>
+        <h3>The 3-col preview cards crop the photographs to thumbnail-size</h3>
+        <p>OneMedical owns excellent photography (the Meditation, Exam Room, and Pharmacy shots are warm and editorial), but the 3-col grid renders each photo at ~33% width with limited vertical real estate. The product is reduced where its strongest brand asset could lead. <strong>Fix candidate:</strong> let one card go full-width / full-bleed on at least one breakpoint, or upgrade the 3-col card to use 5/3 split (photo dominant).</p>
+      </div>
+
+      <div class="tension">
+        <div class="lvl">P3 · Header / accessibility</div>
+        <h3>Header is absolute-positioned over a photographic hero</h3>
+        <p>The white header sits over the photographic hero; nav buttons inherit dark-jade text on light backgrounds when scrolled, but the initial state has a partial-transparency band where focus order and contrast are both borderline. <strong>Fix candidate:</strong> commit to a solid header or add a contrast-aware ground (frosted band or contrast-aware text).</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="ftr">
+  Generated by <code>stardust:extract</code> on 2026-04-28. Sources cited inline. Open the proposed prototypes via <code>stardust/prototypes/home.html</code> after running <code>$stardust direct</code> and <code>$stardust prototype</code>.
+</footer>
+
+</body>
+</html>
