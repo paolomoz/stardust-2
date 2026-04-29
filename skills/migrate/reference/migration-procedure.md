@@ -184,7 +184,8 @@ the failure with the specific rule violated and a suggested fix.
   pagePath:         migrated/index.html
   renderBranch:     A | A' | B
   template:         article                                       (Path A' only)
-  archetypeSource:  stardust/prototypes/news__post-housing-summit-proposed.html (Path A' only)
+  archetypePath:    stardust/prototypes/news__post-housing-summit-proposed.html (Path A' only)
+  archetypeSha:     <short>                                                     (Path A' only)
   sourceProposed:   stardust/prototypes/home-proposed.html        (Path A only)
   sourceCurrent:    stardust/current/pages/home.json
   againstDirection: stardust/direction.md (Active 2026-04-25T15:42:00Z)
@@ -209,8 +210,9 @@ checked:
 - If the migrated `index.html` exists AND its provenance shas
   match the current values for `designMd`, `designJson`,
   `sourceCurrent`, `sourceProposed` (Path A), `canonShas`, and
-  `archetypeSource` (Path A′) → **skip the page** and report
-  `unchanged`.
+  `archetypeSha` (Path A′) → **skip the page** and report
+  `unchanged`. The archetype is recorded as both `archetypePath`
+  (for traceability) and `archetypeSha` (for skip detection).
 - Otherwise re-render.
 
 This makes mass re-runs cheap. Common cases that trigger

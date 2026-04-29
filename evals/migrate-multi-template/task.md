@@ -129,9 +129,12 @@ The `stardust:migrate` skill is invoked. It:
 
 18. canon CSS sha changed → all 25 pages re-render (canon
     affects every page).
-19. Stale-flagging cascade per `state-machine.md` § Stale
-    flagging — every migrated page is flagged stale, then
-    re-migrated automatically because canon shas don't match.
+19. **No stale-flagging is triggered.** Stale-flagging fires
+    only when an underlying skill (`prototype --prep` approval,
+    `extract --prep` module-catalog update, `direct --re-direct`)
+    commits a content-aware change. A manual edit to `canon.css`
+    doesn't run any of those skills — migrate detects the change
+    purely through sha-mismatch in the idempotent-skip check.
 20. Summary surfaces canon-driven cause:
     `Re-rendered: canon.css sha changed (1k2l3m → 9m8n7o)`.
 
@@ -182,8 +185,12 @@ the module catalog. After `$stardust migrate`:
 
 ## User prompt (run 7 — color-reservation violation)
 
-A migrated `legal/privacy` page contains an inline style using
-`color: #DC323D` outside the `trh-100-lockup` module. The page
+The `static`-typed archetype that `legal/privacy` would fork
+from contains a `.footnote-callout` element with inline
+`style="color: #DC323D"` (centennial-red, reserved to the
+`trh-100-lockup` module). When `legal/privacy` renders via
+Path A' and inherits that section, the rendered output carries
+the violating color outside the reserved context. The page
 fails validation per
 `DESIGN.json.extensions.colorReservations[]`.
 
@@ -231,6 +238,55 @@ archetype has no video slot. After `$stardust migrate`:
     ```
 33. Run summary surfaces the adaptation with a one-line "why".
 
+## User prompt (run 9 — canonical strategy: deployUrl unset)
+
+`state.json.site.deployUrl` is `null`. Run `$stardust migrate`.
+
+## Expected behavior (run 9)
+
+34. Each migrated page's `<link rel="canonical">` preserves the
+    canonical from `current/pages/<slug>.json § metadata.canonical`
+    verbatim (typically pointing back to the live origin). For
+    presales/staging contexts where the migrated tree isn't
+    deployed, this attributes search-engine signals back to the
+    live site correctly.
+35. Run summary makes no special mention of canonical strategy
+    (the default-preserve behavior is silent).
+
+## User prompt (run 10 — canonical strategy: deployUrl set)
+
+User edits `state.json.site.deployUrl` to
+`"https://migrated.example.com"`. Run `$stardust migrate`.
+
+## Expected behavior (run 10)
+
+36. All 25 pages re-render (state.json change invalidates the
+    canonical-derived metadata; migrate recomputes per page).
+37. Each migrated page's canonical is rewritten to
+    `https://migrated.example.com/<slug-path>/`. Home is
+    `https://migrated.example.com/`.
+38. Run summary surfaces the deployUrl-driven re-render cause.
+
+## User prompt (run 11 — brand-faithful inversion negative case)
+
+The user edits `direction.md` to remove `#FFFFFF` from the
+`brand_faithful_inversions[]` list while leaving `canon.css`
+unchanged (canon.css still uses `#FFFFFF` as the page ground).
+Run `$stardust migrate`.
+
+## Expected behavior (run 11)
+
+39. With `#FFFFFF` no longer declared as inverted, the impeccable
+    "no pure black/white" hard rule applies to every migrated
+    page (canon CSS rules using `#FFFFFF` are now in violation).
+40. Migrate refuses every affected page and records each
+    failure in `state.json.lastRun.failures[]` with
+    `kind: "hard-rule-violation"`, the rule name, and the
+    offending token/value.
+41. Run summary surfaces the failures with a remediation hint
+    (re-add the inversion to direction.md, or re-iterate the
+    canon-author prototype to move off pure white).
+
 ## What this eval covers
 
 | Behavior                                              | Run | Branch |
@@ -248,6 +304,9 @@ archetype has no video slot. After `$stardust migrate`:
 | DESIGN-driven re-render (sha change cascade)          | 3   | all    |
 | Canon-driven re-render (sha change cascade)           | 4   | all    |
 | Broken-link reporting on missing slugs                | 5   | all    |
-| Bespoke slot promotion threshold (3 instances)        | 6   | A′     |
-| Color-reservation enforcement                         | 7   | all    |
-| Template adaptation (extra content → overflow region) | 8   | A′     |
+| Bespoke slot promotion threshold (3 instances)        | 6     | A′     |
+| Color-reservation enforcement                         | 7     | all    |
+| Template adaptation (extra content → overflow region) | 8     | A′     |
+| Canonical strategy (deployUrl unset → preserve)       | 9     | all    |
+| Canonical strategy (deployUrl set → rewrite)          | 10    | all    |
+| Brand-faithful inversion negative (rule restored)     | 11    | all    |
