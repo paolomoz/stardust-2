@@ -215,6 +215,31 @@ outline (`pages/<slug>.json` § Headings) most often. If only one
 family is in use, set both `headingFamily` and `bodyFamily` to it
 with disjoint weights.
 
+### Type-size aggregation
+
+Per-level heading sizes are picked by **weighted score**, not
+mode-of-frequency:
+
+`score = pixelSize × (fontWeight / 400) × √count`
+
+For each heading level present in the crawl, group captured headings
+by `(fontSize, fontWeight)` tuple, compute the score per group, and
+emit the top-scoring group's `fontSize` and `fontWeight` as that
+level's representative.
+
+Rationale: WordPress / SEO-plugin patterns ship hidden semantic H1s
+on every page (e.g. `position: absolute; clip: rect(0 0 0 0)`).
+Mode-of-size lets 20 hidden 18px H1s outweigh 2 visible 60px hero H1s
+by raw count. The pixel-and-weight scoring biases toward the
+visually-dominant variant — the display H1 is large *and* heavy *and*
+repeated visibly across the site, so it always outranks accessibility
+scaffolding under this rule.
+
+This rule applies to per-level size selection in
+`type.headingFamily.sizes[]`. Mode-of-frequency continues to apply
+to motif aggregation (border-radius, shadow) per the rules in
+§ Aggregation scope.
+
 ### Modular-scale audit
 
 After heading sizes are collected, compute the ratio between every

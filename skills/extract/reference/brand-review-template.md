@@ -305,6 +305,26 @@ the site.
   values come from `_brand-extraction.json`. Never inject brand-external
   tokens (no AI-default cyan/purple, no `#7B997C` greens, no
   `#faf9f6`-family creams unless extracted).
+- **Bare-stack fallback augmentation.** If the captured
+  `type.headingFamily.stack` or `type.bodyFamily.stack` is a single
+  family with no generic terminator (`sans-serif`, `serif`, or
+  `monospace`), the renderer must append a system fallback chain
+  before assigning to `--display` / `--body`. Use:
+
+  `<captured>, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  "Helvetica Neue", Arial, sans-serif`
+
+  for sans families (default), or the equivalent serif chain when
+  the captured family is a known serif. Without this, sites that
+  declare `font-family: 'BrandFont'` bare (no `@font-face`, no
+  fallback — common on legacy CMS themes that assume the brand
+  font is system-installed via Adobe / Office) cause the review
+  to fall through to the browser-default serif on machines without
+  the brand font, which misrepresents what most visitors see on
+  the live site.
+
+  When the captured stack already includes a generic terminator,
+  pass through unchanged.
 - **Color resolution.** The review's `--primary` is the most-frequent
   *saturated* palette color (skip pure black/white and pale tints —
   saturation = max-min channel difference > 30 and max < 240). The
