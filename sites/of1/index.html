@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy: stardust:migrate
+  writtenAt: 2026-04-29T21:30:00Z
+  renderPath: A (approved-from-prototype)
+  page: home
+  pageUrl: https://of1.live/
+  source: stardust/prototypes/home-proposed.html
+  designMd: DESIGN.md
+  designJson: DESIGN.json
+  canon:
+    - stardust/canon/canon.css
+    - stardust/canon/header.html
+    - stardust/canon/footer.html
+    - stardust/canon/modules/register-interest.html
+  unsourcedContent:
+    - "section[data-section=demo-video] poster — constructed cream demo block; not from a captured poster image"
+  stardustVersion: 0.3.0
+-->
+<!-- stardust:publication
+  publishedTo: https://paolomoz.github.io/stardust-2/sites/of1/
+  publishedAt: 2026-04-29T22:30:00Z
+  basePath: /stardust-2/sites/of1/
+  notes: |
+    Path-adjusted from stardust/migrated/index.html for GitHub Pages
+    deployment under /stardust-2/sites/of1/. Local migrated files unchanged.
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audience of ONE — of1</title>
+<meta name="description" content="of1 makes every visitor a market of one. Real-time website personalization that adapts to each person in 2.5 seconds, no segments, no compromises.">
+<meta name="theme-color" content="#1C1917">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/of1/">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="./assets/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://paolomoz.github.io/stardust-2/sites/of1/">
+<meta property="og:title" content="Audience of ONE — of1">
+<meta property="og:description" content="The end of audiences. The beginning of everyone.">
+<meta property="og:image" content="https://paolomoz.github.io/stardust-2/sites/of1/og-image.png">
+<meta property="og:site_name" content="of1">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Audience of ONE — of1","url":"https://paolomoz.github.io/stardust-2/sites/of1/","description":"of1 makes every visitor a market of one. Real-time website personalization that adapts to each person in 2.5 seconds, no segments, no compromises.","inLanguage":"en-US","isPartOf":{"@type":"WebSite","name":"of1","url":"https://paolomoz.github.io/stardust-2/sites/of1"},"about":{"@type":"Organization","name":"of1 (Audience of ONE)","url":"https://paolomoz.github.io/stardust-2/sites/of1","logo":"https://paolomoz.github.io/stardust-2/sites/of1/favicon.svg","parentOrganization":{"@type":"Organization","name":"Adobe Experience Manager team","parentOrganization":{"@type":"Organization","name":"Adobe Inc.","url":"https://www.adobe.com"}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Colors */
+    --color-bg: #1C1917;
+    --color-fg: #F5F0E8;
+    --color-emphasis: #FF3D00;     /* orange — CTAs + inline italic emphasis */
+    --color-numerals: #1A1AFF;     /* blue — manifesto numerals + chapter numerals */
+    --color-eyebrow: #00E5A0;      /* mint — uppercase mono section labels */
+    --color-fg-dim: #A8A39A;
+    --color-fg-muted: #959189;
+    --color-fg-faint: #252220;
+    --color-border-hairline: #2C2926;
+    --color-border-cream: #d9d2c5; /* hairline on cream surfaces */
+
+    /* Typography — perfect-fifth modular scale, 1.5x */
+    --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --font-body: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+
+    --size-display: clamp(64px, 9vw, 128px);
+    --size-display-lg: clamp(72px, 10vw, 144px);
+    --size-headline: clamp(40px, 5vw, 72px);
+    --size-title: clamp(28px, 3.2vw, 42px);
+    --size-subtitle: clamp(20px, 2.2vw, 28px);
+    --size-body: clamp(15px, 1.2vw, 17px);
+    --size-eyebrow: 0.7rem;
+    --size-footnote: 0.75rem;
+    --size-button: 0.75rem;
+
+    --line-display: 0.95;
+    --line-headline: 1.05;
+    --line-title: 1.15;
+    --line-body: 1.8;
+
+    --tracking-eyebrow: 0.35em;
+    --tracking-button: 0.15em;
+
+    /* Rounded */
+    --radius-pill: 100px;
+    --radius-hairline: 2px;
+
+    /* Spacing */
+    --space-xxs: 4px;
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 48px;
+    --space-xl: 96px;
+    --section-pad: 96px;
+    --section-pad-tablet: 72px;
+    --section-pad-mobile: 48px;
+    --container-max: 1200px;
+    --prose-max: 65ch;
+
+    /* Motion */
+    --ease-ink: cubic-bezier(0.6, 0, 0.4, 1);
+    --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+    --duration-fast: 120ms;
+    --duration-medium: 320ms;
+    --duration-reveal: 1200ms;
+    --duration-pulse: 6000ms;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { background: var(--color-bg); }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-body);
+    font-size: var(--size-body);
+    line-height: var(--line-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--color-emphasis); color: var(--color-bg); }
+
+  /* Container */
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+  }
+  @media (max-width: 1023px) {
+    .container { padding: 0 24px; }
+  }
+  @media (max-width: 639px) {
+    .container { padding: 0 20px; }
+  }
+
+  /* Section base */
+  section, footer {
+    padding-block: var(--section-pad);
+  }
+  @media (max-width: 1023px) {
+    section, footer { padding-block: var(--section-pad-tablet); }
+  }
+  @media (max-width: 639px) {
+    section, footer { padding-block: var(--section-pad-mobile); }
+  }
+
+  /* Typography */
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    margin: 0;
+    color: var(--color-fg);
+  }
+  h1 { font-size: var(--size-display); line-height: var(--line-display); letter-spacing: -0.005em; }
+  h2 { font-size: var(--size-headline); line-height: var(--line-headline); letter-spacing: -0.005em; }
+  h3 { font-size: var(--size-title); line-height: var(--line-title); }
+
+  p { margin: 0; }
+  p + p { margin-top: 1em; }
+
+  /* Italic-orange emphasis — the brand's voice device */
+  .emph {
+    font-style: italic;
+    color: var(--color-emphasis);
+    font-weight: inherit;
+  }
+  /* Mono-orange ONE treatment — the typographic moment */
+  .one-mark {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--color-emphasis);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* Eyebrow utility */
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--size-eyebrow);
+    font-weight: 500;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-eyebrow);
+    display: inline-block;
+  }
+  .eyebrow.is-on-cream { color: var(--color-emphasis); } /* on cream surface — switch to deepened orange handled below */
+  .eyebrow.is-dim { color: var(--color-fg-dim); }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-body);
+    font-size: var(--size-button);
+    font-weight: 600;
+    letter-spacing: var(--tracking-button);
+    text-transform: uppercase;
+    border-radius: var(--radius-pill);
+    padding: 12px 26px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: letter-spacing var(--duration-fast) var(--ease-soft), background var(--duration-fast) var(--ease-soft);
+    white-space: nowrap;
+  }
+  .btn:hover { letter-spacing: 0.18em; }
+  .btn-primary {
+    background: var(--color-emphasis);
+    color: var(--color-bg);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-fg);
+    border-color: var(--color-border-hairline);
+  }
+  .btn-secondary:hover { background: rgba(245, 240, 232, 0.04); }
+  .btn-on-cream { color: var(--color-bg); }
+  .btn-secondary.btn-on-cream {
+    color: var(--color-bg);
+    border-color: rgba(28, 25, 23, 0.2);
+  }
+  .btn-secondary.btn-on-cream:hover { background: rgba(28, 25, 23, 0.04); }
+
+  .btn-large {
+    padding: 16px 36px;
+    font-size: 0.8rem;
+  }
+
+  /* Text-link */
+  .text-link {
+    font-family: var(--font-body);
+    font-size: var(--size-body);
+    color: var(--color-fg);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--duration-fast) var(--ease-soft);
+  }
+  .text-link:hover { border-bottom-color: currentColor; }
+
+  /* === Header === */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 14px 32px;
+    background: rgba(28, 25, 23, 0.92);
+    border-bottom: 1px solid var(--color-border-hairline);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .site-header .wordmark {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--color-fg);
+  }
+  .site-header nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .site-header nav a {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: var(--tracking-button);
+    text-transform: uppercase;
+    color: var(--color-fg);
+    padding: 6px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--duration-fast) var(--ease-soft);
+  }
+  .site-header nav a .num {
+    color: var(--color-numerals);
+    margin-right: 2px;
+  }
+  .site-header nav a:hover { border-bottom-color: currentColor; }
+  .site-header nav a[aria-current="page"] { border-bottom-color: var(--color-fg); }
+  .site-header .btn {
+    padding: 8px 18px;
+    font-size: 11px;
+  }
+  @media (max-width: 1023px) {
+    .site-header { padding: 12px 24px; }
+    .site-header nav { gap: 20px; }
+    .site-header nav .nav-secondary { display: none; }
+  }
+
+  /* === Hero === */
+  .hero {
+    padding-block: calc(var(--section-pad) * 1.4) calc(var(--section-pad) * 1.1);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  /* Ghost ONE backdrop letters — the load-bearing identity move */
+  .hero-ghost {
+    position: absolute;
+    top: 50%;
+    right: -3%;
+    transform: translateY(-44%);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(280px, 48vw, 720px);
+    line-height: 0.78;
+    color: rgba(245, 240, 232, 0.045);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    letter-spacing: -0.06em;
+    white-space: nowrap;
+  }
+  .hero .container { position: relative; z-index: 1; }
+  .hero-eyebrow {
+    color: var(--color-eyebrow);
+    margin-bottom: 36px;
+    animation: eyebrow-breathe var(--duration-reveal) var(--ease-soft) both;
+  }
+  @keyframes eyebrow-breathe {
+    0%   { letter-spacing: 0.25em; opacity: 0; }
+    20%  { opacity: 1; }
+    100% { letter-spacing: 0.35em; opacity: 1; }
+  }
+  .hero h1 {
+    font-size: var(--size-display-lg);
+    max-width: 19ch;
+    margin-bottom: 48px;
+    /* Ink-pen reveal — pure CSS animation, runs on first paint, no JS dependency */
+    animation: hero-h1-ink-reveal 1.4s var(--ease-ink) 200ms both;
+  }
+  @keyframes hero-h1-ink-reveal {
+    from { clip-path: inset(0 100% 0 0); }
+    to   { clip-path: inset(0 0 0 0); }
+  }
+  .hero h1.is-revealed { clip-path: inset(0 0 0 0); }
+  .hero-prose {
+    color: var(--color-fg-dim);
+    margin-bottom: 56px;
+    font-size: var(--size-body);
+  }
+  .hero-prose p { max-width: var(--prose-max); }
+  .hero-prose .emph-strong {
+    color: var(--color-fg);
+    font-weight: 600;
+  }
+  .hero-cta-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* === Manifesto triplet === */
+  .manifesto-triplet {
+    border-block: 1px solid var(--color-border-hairline);
+  }
+  .manifesto-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  .manifesto-card {
+    padding: 8px 36px 8px 0;
+    border-right: 1px solid var(--color-border-hairline);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 36px;
+    align-items: baseline;
+  }
+  .manifesto-card:last-child { border-right: none; padding-right: 0; }
+  .manifesto-card:first-child + .manifesto-card { padding-left: 36px; padding-right: 36px; }
+  .manifesto-card:last-child { padding-left: 36px; }
+  .manifesto-numeral {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--color-numerals);
+  }
+  .manifesto-statement {
+    font-family: var(--font-display);
+    font-size: var(--size-subtitle);
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--color-fg);
+  }
+  @media (max-width: 1023px) {
+    .manifesto-grid { grid-template-columns: 1fr; gap: 0; }
+    .manifesto-card {
+      border-right: none;
+      border-bottom: 1px solid var(--color-border-hairline);
+      padding: 36px 0;
+      grid-template-columns: 64px 1fr;
+      gap: 24px;
+    }
+    .manifesto-card:first-child { padding-top: 8px; }
+    .manifesto-card:last-child { border-bottom: none; padding-bottom: 0; }
+    .manifesto-card:first-child + .manifesto-card { padding-left: 0; padding-right: 0; }
+    .manifesto-numeral { font-size: 40px; }
+  }
+
+  /* === Cream-surface block (pull-quote + demo) === */
+  .cream-block {
+    background: var(--color-fg);
+    color: var(--color-bg);
+  }
+  .cream-block h2, .cream-block h3 { color: var(--color-bg); }
+  .cream-block .eyebrow { color: #A82800; }
+  .cream-block .emph { color: var(--color-emphasis); }
+  .cream-block .prose-mid {
+    color: #4A4744;
+  }
+
+  /* Pull-quote */
+  .pull-quote-anchor { text-align: center; padding-top: calc(var(--section-pad) * 1.2); padding-bottom: var(--space-lg); }
+  .pull-quote-anchor blockquote {
+    margin: 0 auto;
+    max-width: 22ch;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: var(--size-headline);
+    line-height: 1.15;
+    color: var(--color-bg);
+  }
+  .pull-quote-anchor blockquote .emph {
+    color: var(--color-emphasis);
+    font-style: italic;
+  }
+
+  /* Demo video block */
+  .demo-block {
+    padding-top: 0;
+    padding-bottom: calc(var(--section-pad) * 1.2);
+    text-align: center;
+  }
+  .demo-frame {
+    max-width: 920px;
+    margin: 0 auto var(--space-lg);
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--color-border-cream);
+    /* Pill is the only non-zero radius; demo frame is flush */
+    border-radius: 0;
+    /* Flat warm-cream — gradients are forbidden */
+    background: #ebe5d6;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+  }
+  .demo-frame .demo-overlay-headline {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 48px 56px;
+    /* Flat scrim — gradients are forbidden */
+    background: rgba(28, 25, 23, 0.04);
+  }
+  .demo-frame .demo-overlay-headline .demo-eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--size-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-emphasis);
+    margin-bottom: 12px;
+  }
+  .demo-frame .demo-overlay-headline .demo-strike {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 44px);
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--color-bg);
+  }
+  .demo-frame .demo-overlay-headline .demo-strike .struck {
+    text-decoration: line-through;
+    color: rgba(28, 25, 23, 0.35);
+    font-style: italic;
+    margin-right: 0.4em;
+  }
+  .demo-frame .demo-overlay-headline .demo-strike .arrow {
+    color: var(--color-emphasis);
+    font-style: italic;
+    margin: 0 0.25em;
+  }
+  .demo-frame .demo-overlay-headline .demo-sub {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: rgba(28, 25, 23, 0.55);
+    margin-top: 12px;
+  }
+  .demo-frame .demo-play {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: rgba(28, 25, 23, 0.85);
+    color: var(--color-fg);
+    border-radius: var(--radius-pill);
+    padding: 8px 14px;
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-button);
+    text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .demo-frame .demo-play::before {
+    content: "";
+    display: inline-block;
+    width: 0; height: 0;
+    border-left: 6px solid currentColor;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+  .demo-caption {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: #4A4744;
+    margin-bottom: 32px;
+  }
+  .demo-caption .emph { color: var(--color-emphasis); font-style: italic; }
+  @media (max-width: 639px) {
+    .demo-frame .demo-overlay-headline { padding: 32px 28px; }
+  }
+
+  /* === Why-tease === */
+  .why-tease .container { max-width: 920px; }
+  .why-tease .eyebrow { margin-bottom: 36px; }
+  .why-tease .eyebrow .num { color: var(--color-numerals); margin-right: 6px; }
+  .why-tease h2 {
+    max-width: 22ch;
+    margin-bottom: 36px;
+  }
+  .why-tease-prose {
+    color: var(--color-fg-dim);
+    margin-bottom: 28px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 240ms var(--ease-soft), transform 240ms var(--ease-soft);
+  }
+  .why-tease-prose.is-revealed { opacity: 1; transform: translateY(0); }
+  .why-tease-prose:nth-of-type(2) { transition-delay: 0ms; }
+  .why-tease-prose:nth-of-type(3) { transition-delay: 80ms; }
+  .why-tease-prose:nth-of-type(4) { transition-delay: 160ms; }
+
+  /* === Early-access (inverted surface) === */
+  .early-access h2 {
+    max-width: 22ch;
+    margin-bottom: 28px;
+  }
+  .early-access .eyebrow { margin-bottom: 32px; }
+  .early-access-prose {
+    font-family: var(--font-body);
+    color: #4A4744;
+    max-width: var(--prose-max);
+    margin-bottom: 48px;
+  }
+
+  /* === Press quotes — with brand-preserving 1px orange left rule === */
+  .press-quotes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+  .press-quote-card {
+    border-left: 1px solid var(--color-emphasis);
+    padding: 8px 0 8px 24px;
+  }
+  .press-quote-text {
+    font-family: var(--font-display);
+    font-size: var(--size-subtitle);
+    font-style: italic;
+    line-height: 1.3;
+    color: var(--color-fg);
+    margin-bottom: 24px;
+  }
+  .press-quote-attribution {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-fg);
+    margin-bottom: 8px;
+  }
+  .press-quote-source {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: var(--tracking-button);
+    text-transform: uppercase;
+    color: var(--color-eyebrow);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--duration-fast) var(--ease-soft);
+  }
+  .press-quote-source:hover { border-bottom-color: currentColor; }
+  @media (max-width: 1023px) {
+    .press-quotes-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  /* === Closing statement === */
+  .closing-statement {
+    text-align: center;
+    padding-block: calc(var(--section-pad) * 1.2);
+  }
+  .closing-statement h2 {
+    font-size: var(--size-display);
+    line-height: var(--line-display);
+    margin-bottom: 28px;
+  }
+  .closing-statement h2 .one-personal {
+    font-style: italic;
+    color: var(--color-eyebrow);
+  }
+  .closing-statement-sub {
+    color: var(--color-fg-dim);
+    max-width: 36ch;
+    margin: 0 auto 48px;
+    font-family: var(--font-body);
+    font-size: var(--size-body);
+  }
+
+  /* === Register interest === */
+  .register-interest {
+    border-top: 1px solid var(--color-border-hairline);
+    padding-block: var(--section-pad);
+  }
+  .register-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+    align-items: start;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .register-grid .lede .eyebrow { margin-bottom: 24px; }
+  .register-grid .lede h3 {
+    font-size: var(--size-title);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .register-grid .lede p {
+    color: var(--color-fg-dim);
+    font-family: var(--font-body);
+    font-size: var(--size-body);
+  }
+  .register-form { display: grid; gap: 16px; }
+  .register-form label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--size-eyebrow);
+    font-weight: 500;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-fg-dim);
+    margin-bottom: 6px;
+  }
+  .register-form input,
+  .register-form textarea {
+    width: 100%;
+    background: var(--color-fg-faint);
+    color: var(--color-fg);
+    border: 1px solid transparent;
+    border-radius: var(--radius-hairline);
+    padding: 12px 14px;
+    font-family: var(--font-body);
+    font-size: var(--size-body);
+    line-height: 1.6;
+    transition: border-color var(--duration-fast) var(--ease-soft);
+  }
+  .register-form input:focus,
+  .register-form textarea:focus {
+    outline: none;
+    border-color: var(--color-border-hairline);
+  }
+  .register-form textarea { resize: vertical; min-height: 96px; }
+  .register-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
+  .register-form-actions .send-link {
+    font-family: var(--font-body);
+    font-size: var(--size-body);
+    color: var(--color-emphasis);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--duration-fast) var(--ease-soft);
+  }
+  .register-form-actions .send-link:hover { border-bottom-color: currentColor; }
+  @media (max-width: 1023px) {
+    .register-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  /* === Footer === */
+  .site-footer {
+    padding-block: 48px;
+    border-top: 1px solid var(--color-border-hairline);
+  }
+  .site-footer .footer-line {
+    font-family: var(--font-body);
+    font-size: var(--size-eyebrow);
+    color: var(--color-fg-muted);
+    text-align: center;
+    letter-spacing: 0.04em;
+  }
+
+  /* === Reduced motion === */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .hero-eyebrow { letter-spacing: 0.35em; opacity: 1; animation: none; }
+    .hero h1 { animation: none; clip-path: inset(0 0 0 0); }
+    .why-tease-prose { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header data-section="header" data-intent="navigate" data-layout="sticky-bar" class="site-header">
+  <a href="./" class="wordmark" aria-label="of1 home">of1</a>
+  <nav aria-label="primary">
+    <a href="./" aria-current="page">Home</a>
+    <a href="./why.html" class="nav-secondary"><span class="num">01 ·</span> Why now</a>
+    <a href="./how-it-works.html" class="nav-secondary"><span class="num">02 ·</span> How it works</a>
+    <a href="https://arco.coffee/" class="btn btn-primary" target="_blank" rel="noopener">See it live</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <section data-section="hero" data-intent="declare" data-layout="type-only-with-ghost" class="hero">
+    <div class="hero-ghost" aria-hidden="true">ONE</div>
+    <div class="container">
+      <span class="eyebrow hero-eyebrow">Audience of ONE</span>
+      <h1 id="hero-h1" data-reveal="ink-pen">The end of <span class="emph">audiences.</span> The beginning of every<span class="one-mark">ONE</span>.</h1>
+      <div class="hero-prose">
+        <p>For decades, marketing meant shouting at <span class="emph">segments</span>. Categories. Cohorts. of1 makes every person a <span class="emph">market of one</span>.</p>
+        <p><span class="emph-strong">The marketing nirvana is real,</span> and it&rsquo;s simpler than you think.</p>
+      </div>
+      <div class="hero-cta-row">
+        <a href="#demo" class="btn btn-secondary">Watch demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Manifesto triplet -->
+  <section data-section="manifesto-triplet" data-intent="argue" data-layout="grid-3" data-items="3" class="manifesto-triplet">
+    <div class="container">
+      <div class="manifesto-grid">
+        <article class="manifesto-card">
+          <span class="manifesto-numeral" aria-hidden="true">01</span>
+          <p class="manifesto-statement">Segments are <span class="emph">a confession</span> that you don&rsquo;t know your customer well enough.</p>
+        </article>
+        <article class="manifesto-card">
+          <span class="manifesto-numeral" aria-hidden="true">02</span>
+          <p class="manifesto-statement">It&rsquo;s not a feature. It&rsquo;s the <span class="emph">absence of compromise.</span></p>
+        </article>
+        <article class="manifesto-card">
+          <span class="manifesto-numeral" aria-hidden="true">03</span>
+          <p class="manifesto-statement">The best technology <span class="emph">disappears</span> behind the experience it creates.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pull quote + demo (cream-inverted block) -->
+  <div class="cream-block" id="demo">
+    <section data-section="pull-quote-anchor" data-intent="anchor" data-layout="centered-serif" class="pull-quote-anchor">
+      <div class="container">
+        <blockquote>&ldquo;We made your website <span class="emph">pay attention</span>, so every visitor finds exactly what they came for, as if it had always been there.&rdquo;</blockquote>
+      </div>
+    </section>
+    <section data-section="demo-video" data-intent="prove" data-layout="frame-on-cream" class="demo-block">
+      <div class="container">
+        <figure class="demo-frame" role="img" aria-label="Live demo: of1 personalizing arco.coffee in real time">
+          <div class="demo-overlay-headline">
+            <span class="demo-eyebrow">Live demo · Arco coffee</span>
+            <p class="demo-strike">
+              <span class="struck">audiences</span>
+              <span class="arrow">→</span>
+              <span style="font-family: var(--font-body); font-weight: 700; font-style: italic; color: var(--color-emphasis); letter-spacing: -0.02em;">of1</span>
+            </p>
+            <p class="demo-sub">Watch the homepage rewrite itself in 2.5 seconds for a synthetic visitor.</p>
+          </div>
+          <a href="https://arco.coffee/" target="_blank" rel="noopener" class="demo-play">Play</a>
+        </figure>
+        <p class="demo-caption">The demo runs against <span class="emph">arco.coffee</span> — a real production site using of1.</p>
+        <a href="https://arco.coffee/" class="btn btn-primary btn-large btn-on-cream" target="_blank" rel="noopener">See it live</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Why tease -->
+  <section data-section="why-tease" data-intent="cross-link" data-layout="left-narrow" class="why-tease">
+    <div class="container">
+      <span class="eyebrow"><span class="num">01 ·</span> Why now</span>
+      <h2>Your visitors already know what <span class="emph">relevance</span> feels like.</h2>
+      <p class="why-tease-prose" data-reveal="fade-up">Every day, they use tools that remember them, that know their preferences, their history, their intent. Tools that respond accordingly.</p>
+      <p class="why-tease-prose" data-reveal="fade-up">Then they arrive on your website. Same page as everyone else.</p>
+      <p class="why-tease-prose" data-reveal="fade-up">That gap has a name. It&rsquo;s called <span class="emph">a confession.</span></p>
+      <a href="./why.html" class="text-link">Read the full chapter &rarr;</a>
+    </div>
+  </section>
+
+  <!-- Early access (inverted) -->
+  <section data-section="early-access" data-intent="qualify" data-layout="inverted-surface" class="cream-block early-access">
+    <div class="container">
+      <span class="eyebrow">Early access</span>
+      <h2>Built for the brands that already know <span class="emph">segments aren&rsquo;t enough.</span></h2>
+      <p class="early-access-prose">Invite-only. Enterprise-grade. Already live in production.</p>
+      <a href="#register" class="btn btn-primary btn-on-cream">Register interest</a>
+    </div>
+  </section>
+
+  <!-- Press quotes -->
+  <section data-section="press-quotes" data-intent="endorse" data-layout="grid-2" data-items="2" class="press-quotes">
+    <div class="container">
+      <div class="press-quotes-grid">
+        <article class="press-quote-card">
+          <p class="press-quote-text">&ldquo;Audience of one stuff is so wild. That&rsquo;s going to <span class="emph">change how companies market to people.</span>&rdquo;</p>
+          <p class="press-quote-attribution">Hank Thobe, CMO, Arbory Digital Group</p>
+          <a href="https://youtube.com/shorts/aF8XJHfynF8" target="_blank" rel="noopener" class="press-quote-source">Adobe Summit 2026</a>
+        </article>
+        <article class="press-quote-card">
+          <p class="press-quote-text">&ldquo;AI can finally deliver on web personalization&rsquo;s <span class="emph">broken promise.</span>&rdquo;</p>
+          <p class="press-quote-attribution">Ken Yeung</p>
+          <a href="https://theaieconomy.substack.com/p/adobe-project-page-turner-ai-web-personalization" target="_blank" rel="noopener" class="press-quote-source">The AI Economy</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing statement -->
+  <section data-section="closing-statement" data-intent="declare" data-layout="type-only-centered" class="closing-statement" id="closing">
+    <div class="container">
+      <h2>Your audience is <span class="one-personal">one</span>.</h2>
+      <p class="closing-statement-sub">Join the brands building the future of relevant experiences.</p>
+      <a href="https://arco.coffee/" class="btn btn-primary btn-large" target="_blank" rel="noopener">See it live</a>
+    </div>
+  </section>
+
+  <!-- Register interest -->
+  <section data-section="register-interest" data-intent="capture" data-layout="form-block" class="register-interest" id="register">
+    <div class="container">
+      <div class="register-grid">
+        <div class="lede">
+          <span class="eyebrow">Or, register your interest</span>
+          <h3>We&rsquo;ll be in touch.</h3>
+          <p>Tell us about the website you want to make <span class="emph">pay attention</span>. Invite-only access opens in waves.</p>
+        </div>
+        <form class="register-form" action="mailto:hello@of1.live" method="post" enctype="text/plain" novalidate>
+          <div>
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@company.com" required>
+          </div>
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us about your use case, website, or what problem you&rsquo;re trying to solve."></textarea>
+          </div>
+          <div class="register-form-actions">
+            <button type="submit" class="send-link">Send &rarr;</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer data-section="footer" data-intent="attribute" data-layout="single-line" class="site-footer">
+  <div class="container">
+    <p class="footer-line">Audience of ONE &middot; of1.live &middot; From the Adobe Experience Manager team, early-stage technology &middot; &copy; 2026 Adobe.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  if (typeof window === 'undefined') return;
+  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    document.querySelectorAll('[data-reveal]').forEach(function(el){ el.classList.add('is-revealed'); });
+    return;
+  }
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('[data-reveal]').forEach(function(el){ el.classList.add('is-revealed'); });
+    return;
+  }
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.35, rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('[data-reveal]').forEach(function(el){ observer.observe(el); });
+})();
+</script>
+
+</body>
+</html>

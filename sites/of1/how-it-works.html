@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy: stardust:migrate
+  writtenAt: 2026-04-29T21:30:00Z
+  renderPath: A' (template-applied — forked from why archetype)
+  page: how-it-works
+  pageUrl: https://of1.live/how-it-works.html
+  source: forked from stardust/prototypes/why-proposed.html (archetype for type=static)
+  contentSource: stardust/current/pages/how-it-works.json
+  designMd: DESIGN.md
+  designJson: DESIGN.json
+  canon:
+    - stardust/canon/canon.css
+    - stardust/canon/header.html
+    - stardust/canon/footer.html
+    - stardust/canon/modules/register-interest.html
+    - stardust/canon/modules/chapter-hero.html
+    - stardust/canon/modules/pull-quote-block.html
+  unsourcedContent: []
+  pathANote: |
+    Path A' fork: archetype CSS + chrome inherited verbatim from why; body content
+    swapped from how-it-works.json. Captured page included two visualization blocks
+    (acme.com mock + 2.5s pipeline diagram) which were dropped — they're decorative
+    and the archetype is type-only. The textual argument is preserved in full.
+  stardustVersion: 0.3.0
+-->
+<!-- stardust:publication
+  publishedTo: https://paolomoz.github.io/stardust-2/sites/of1/how-it-works.html
+  publishedAt: 2026-04-29T22:30:00Z
+  basePath: /stardust-2/sites/of1/
+  notes: |
+    Path-adjusted from stardust/migrated/how-it-works.html for GitHub Pages
+    deployment under /stardust-2/sites/of1/. Local migrated files unchanged.
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How it works — of1</title>
+<meta name="description" content="How of1 transforms your website into a one-to-one experience: three breakthroughs, 2.5 seconds, zero compromise.">
+<meta name="theme-color" content="#1C1917">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/of1/how-it-works.html">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="./assets/icon-512.png">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://paolomoz.github.io/stardust-2/sites/of1/how-it-works.html">
+<meta property="og:title" content="How it works — of1 · Chapter 02">
+<meta property="og:description" content="Three breakthroughs, 2.5 seconds, zero compromise. The mechanism behind real-time website personalization.">
+<meta property="og:image" content="https://paolomoz.github.io/stardust-2/sites/of1/og-image.png">
+<meta property="og:site_name" content="of1">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"The era of audiences is ending. Here's what comes next.","description":"How of1 transforms your website into a one-to-one experience: three breakthroughs, 2.5 seconds, zero compromise.","url":"https://paolomoz.github.io/stardust-2/sites/of1/how-it-works.html","inLanguage":"en-US","isPartOf":{"@type":"WebSite","name":"of1","url":"https://paolomoz.github.io/stardust-2/sites/of1"},"author":{"@type":"Organization","name":"of1 (Audience of ONE)","url":"https://paolomoz.github.io/stardust-2/sites/of1"},"publisher":{"@type":"Organization","name":"of1 (Audience of ONE)","url":"https://paolomoz.github.io/stardust-2/sites/of1","logo":{"@type":"ImageObject","url":"https://paolomoz.github.io/stardust-2/sites/of1/favicon.svg"}},"articleSection":"How it works","position":2}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* === Canon (inlined from stardust/canon/canon.css) === */
+  :root {
+    --color-bg: #1C1917;
+    --color-fg: #F5F0E8;
+    --color-emphasis: #FF3D00;
+    --color-numerals: #1A1AFF;
+    --color-eyebrow: #00E5A0;
+    --color-fg-dim: #A8A39A;
+    --color-fg-muted: #959189;
+    --color-fg-faint: #252220;
+    --color-border-hairline: #2C2926;
+    --color-border-cream: #d9d2c5;
+
+    --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --font-body: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    --size-display: clamp(64px, 9vw, 128px);
+    --size-display-lg: clamp(72px, 10vw, 144px);
+    --size-headline: clamp(40px, 5vw, 72px);
+    --size-title: clamp(28px, 3.2vw, 42px);
+    --size-subtitle: clamp(20px, 2.2vw, 28px);
+    --size-body: clamp(15px, 1.2vw, 17px);
+    --size-eyebrow: 0.7rem;
+    --size-button: 0.75rem;
+
+    --line-display: 0.98;
+    --line-headline: 1.05;
+    --line-title: 1.15;
+    --line-body: 1.8;
+
+    --tracking-eyebrow: 0.35em;
+    --tracking-button: 0.15em;
+
+    --radius-pill: 100px;
+    --radius-hairline: 2px;
+
+    --space-md: 24px;
+    --space-lg: 48px;
+    --space-xl: 96px;
+    --section-pad: 96px;
+    --section-pad-tablet: 72px;
+    --section-pad-mobile: 48px;
+    --container-max: 1200px;
+    --prose-max: 65ch;
+
+    --ease-ink: cubic-bezier(0.6, 0, 0.4, 1);
+    --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+    --duration-fast: 120ms;
+    --duration-reveal: 1200ms;
+    --duration-pulse: 6000ms;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { background: var(--color-bg); }
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-body);
+    font-size: var(--size-body);
+    line-height: var(--line-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--color-emphasis); color: var(--color-bg); }
+  .container { max-width: var(--container-max); margin: 0 auto; padding: 0 32px; position: relative; }
+  @media (max-width: 1023px) { .container { padding: 0 24px; } }
+  @media (max-width: 639px)  { .container { padding: 0 20px; } }
+  section, footer { padding-block: var(--section-pad); }
+  @media (max-width: 1023px) { section, footer { padding-block: var(--section-pad-tablet); } }
+  @media (max-width: 639px)  { section, footer { padding-block: var(--section-pad-mobile); } }
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; margin: 0; color: var(--color-fg); }
+  h1 { font-size: var(--size-display); line-height: var(--line-display); letter-spacing: -0.005em; }
+  h2 { font-size: var(--size-headline); line-height: var(--line-headline); letter-spacing: -0.005em; }
+  h3 { font-size: var(--size-title); line-height: var(--line-title); }
+  p { margin: 0; }
+  p + p { margin-top: 1em; }
+  em { font-style: italic; }
+  a { color: inherit; text-decoration: none; }
+  .emph { font-style: italic; color: var(--color-emphasis); font-weight: inherit; }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--size-eyebrow);
+    font-weight: 500;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-eyebrow);
+    display: inline-block;
+  }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--font-body); font-size: var(--size-button); font-weight: 600;
+    letter-spacing: var(--tracking-button); text-transform: uppercase;
+    border-radius: var(--radius-pill); padding: 12px 26px;
+    border: 1px solid transparent; cursor: pointer;
+    transition: letter-spacing var(--duration-fast) var(--ease-soft), background var(--duration-fast) var(--ease-soft);
+    white-space: nowrap;
+  }
+  .btn:hover { letter-spacing: 0.18em; }
+  .btn-primary { background: var(--color-emphasis); color: var(--color-bg); }
+  .btn-secondary { background: transparent; color: var(--color-fg); border-color: var(--color-border-hairline); }
+  .btn-secondary:hover { background: rgba(245, 240, 232, 0.04); }
+  .btn-large { padding: 16px 36px; font-size: 0.8rem; }
+  .text-link {
+    font-family: var(--font-body); font-size: var(--size-body); color: var(--color-fg);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--duration-fast) var(--ease-soft);
+  }
+  .text-link:hover { border-bottom-color: currentColor; }
+
+  /* Site header (canon) */
+  .site-header { position: sticky; top: 0; z-index: 100; padding: 14px 32px; background: rgba(28, 25, 23, 0.92); border-bottom: 1px solid var(--color-border-hairline); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .site-header .wordmark { font-family: var(--font-body); font-size: 14px; font-weight: 600; letter-spacing: 0.02em; color: var(--color-fg); }
+  .site-header nav { display: flex; align-items: center; gap: 28px; }
+  .site-header nav a { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: var(--tracking-button); text-transform: uppercase; color: var(--color-fg); padding: 6px 0; border-bottom: 1px solid transparent; transition: border-color var(--duration-fast) var(--ease-soft); display: inline-flex; align-items: center; gap: 6px; }
+  .site-header nav a .num { color: var(--color-numerals); margin-right: 2px; }
+  .site-header nav a:hover { border-bottom-color: currentColor; }
+  .site-header nav a[aria-current="page"] { border-bottom-color: var(--color-fg); }
+  .site-header nav a[aria-current="page"]::before {
+    content: "";
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--color-eyebrow);
+    display: inline-block;
+    animation: dot-pulse var(--duration-pulse) ease-in-out infinite;
+  }
+  .site-header .btn { padding: 8px 18px; font-size: 11px; }
+  @media (max-width: 1023px) {
+    .site-header { padding: 12px 24px; }
+    .site-header nav { gap: 20px; }
+    .site-header nav .nav-secondary { display: none; }
+  }
+  @keyframes dot-pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+  /* Site footer (canon) */
+  .site-footer { padding-block: 48px; border-top: 1px solid var(--color-border-hairline); }
+  .site-footer .footer-line { font-family: var(--font-body); font-size: var(--size-eyebrow); color: var(--color-fg-muted); text-align: center; letter-spacing: 0.04em; }
+
+  /* Register-interest (canon) */
+  .register-interest { border-top: 1px solid var(--color-border-hairline); padding-block: var(--section-pad); }
+  .register-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: start; max-width: 960px; margin: 0 auto; }
+  .register-grid .lede .eyebrow { margin-bottom: 24px; }
+  .register-grid .lede h3 { font-size: var(--size-title); line-height: 1.15; margin-bottom: 16px; }
+  .register-grid .lede p { color: var(--color-fg-dim); font-family: var(--font-body); font-size: var(--size-body); }
+  .register-form { display: grid; gap: 16px; }
+  .register-form label { display: block; font-family: var(--font-body); font-size: var(--size-eyebrow); font-weight: 500; letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--color-fg-dim); margin-bottom: 6px; }
+  .register-form input, .register-form textarea { width: 100%; background: var(--color-fg-faint); color: var(--color-fg); border: 1px solid transparent; border-radius: var(--radius-hairline); padding: 12px 14px; font-family: var(--font-body); font-size: var(--size-body); line-height: 1.6; transition: border-color var(--duration-fast) var(--ease-soft); }
+  .register-form input:focus, .register-form textarea:focus { outline: none; border-color: var(--color-border-hairline); }
+  .register-form textarea { resize: vertical; min-height: 96px; }
+  .register-form-actions { display: flex; justify-content: flex-end; margin-top: 8px; }
+  .register-form-actions .send-link { font-family: var(--font-body); font-size: var(--size-body); color: var(--color-emphasis); background: none; border: none; cursor: pointer; padding: 8px 0; border-bottom: 1px solid transparent; transition: border-color var(--duration-fast) var(--ease-soft); }
+  .register-form-actions .send-link:hover { border-bottom-color: currentColor; }
+  @media (max-width: 1023px) { .register-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+  /* === Page-specific (chapter page) === */
+
+  /* Chapter hero */
+  .chapter-hero {
+    padding-block: calc(var(--section-pad) * 0.6) calc(var(--section-pad) * 0.7);
+  }
+  .chapter-hero .container { max-width: 960px; }
+  .chapter-mark {
+    color: var(--color-eyebrow);
+    margin-bottom: 36px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    animation: eyebrow-breathe var(--duration-reveal) var(--ease-soft) both;
+  }
+  .chapter-mark .num { color: var(--color-numerals); font-weight: 600; }
+  .chapter-mark .dot-live {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--color-eyebrow);
+    display: inline-block;
+    animation: dot-pulse var(--duration-pulse) ease-in-out infinite;
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+  @keyframes eyebrow-breathe {
+    0%   { letter-spacing: 0.25em; opacity: 0; }
+    20%  { opacity: 1; }
+    100% { letter-spacing: 0.35em; opacity: 1; }
+  }
+  .chapter-hero h1 {
+    font-size: clamp(40px, 5.5vw, 80px);
+    line-height: 1.08;
+    max-width: 28ch;
+    margin-bottom: 32px;
+    animation: chapter-h1-reveal 1.4s var(--ease-ink) 200ms both;
+  }
+  @keyframes chapter-h1-reveal {
+    from { clip-path: inset(0 100% 0 0); }
+    to   { clip-path: inset(0 0 0 0); }
+  }
+  .chapter-hero-prose {
+    color: var(--color-fg-dim);
+    max-width: var(--prose-max);
+    font-size: 1.05rem;
+  }
+
+  /* Body — long-form prose */
+  .chapter-body { padding-block: calc(var(--section-pad) * 0.7); }
+  .chapter-body .container { max-width: 960px; }
+  .chapter-body h2 {
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-lg);
+    max-width: 22ch;
+  }
+  .chapter-body h2:first-child { margin-top: 0; }
+  .chapter-body p {
+    color: var(--color-fg-dim);
+    margin-bottom: 1.2em;
+    max-width: var(--prose-max);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 240ms var(--ease-soft), transform 240ms var(--ease-soft);
+  }
+  .chapter-body p.is-revealed { opacity: 1; transform: translateY(0); }
+  .chapter-body p strong { color: var(--color-fg); font-weight: 600; }
+  /* Numbered H2s — Three breakthroughs / Three stages — blue ordinal prefix */
+  .chapter-body h2 .num { color: var(--color-numerals); font-weight: 700; margin-right: 8px; font-style: normal; font-family: var(--font-body); font-size: 0.7em; vertical-align: 0.15em; letter-spacing: 0.02em; }
+  /* Two-modes block: EXPLICIT / IMPLICIT */
+  .modes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: var(--space-lg); }
+  .modes-grid h3 { font-family: var(--font-body); font-size: var(--size-eyebrow); font-weight: 600; letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--color-eyebrow); margin-bottom: 16px; }
+  .modes-grid p { margin-bottom: 0; }
+  @media (max-width: 1023px) { .modes-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+  /* Pull-quote — cream-block inverted */
+  .pull-quote-block {
+    background: var(--color-fg);
+    color: var(--color-bg);
+    padding-block: calc(var(--section-pad) * 1.1);
+    text-align: center;
+  }
+  .pull-quote-block blockquote {
+    margin: 0 auto;
+    max-width: 26ch;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: var(--size-headline);
+    line-height: 1.18;
+    color: var(--color-bg);
+  }
+  .pull-quote-block blockquote .emph {
+    color: var(--color-emphasis);
+    font-style: italic;
+  }
+  @media (max-width: 1023px) {
+    .pull-quote-block blockquote { max-width: 22ch; font-size: var(--size-title); }
+  }
+
+  /* Closing CTA row */
+  .closing-cta {
+    text-align: left;
+    padding-block: calc(var(--section-pad) * 0.9);
+  }
+  .closing-cta .container { max-width: 960px; }
+  .closing-cta-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* === Reduced motion === */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .chapter-mark { letter-spacing: 0.35em; opacity: 1; animation: none; }
+    .chapter-hero h1 { animation: none; clip-path: inset(0 0 0 0); }
+    .chapter-body p { opacity: 1; transform: none; }
+    .site-header nav a[aria-current="page"]::before, .chapter-mark .dot-live { animation: none; opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- header (canon) -->
+<header data-section="header" data-intent="navigate" data-layout="sticky-bar" class="site-header">
+  <a href="./" class="wordmark" aria-label="of1 home">of1</a>
+  <nav aria-label="primary">
+    <a href="./">Home</a>
+    <a href="./why.html" class="nav-secondary"><span class="num">01 ·</span> Why now</a>
+    <a href="./how-it-works.html" class="nav-secondary" aria-current="page"><span class="num">02 ·</span> How it works</a>
+    <a href="https://arco.coffee/" class="btn btn-primary" target="_blank" rel="noopener">See it live</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Chapter hero -->
+  <section data-section="chapter-hero" data-intent="open-chapter" data-layout="left-anchored" data-chapter="02" class="chapter-hero">
+    <div class="container">
+      <span class="eyebrow chapter-mark"><span class="num">02</span> / <span class="num">02</span><span class="dot-live"></span> · How it works</span>
+      <h1>The era of audiences is <span class="emph">ending.</span> Here&rsquo;s what comes next.</h1>
+      <p class="chapter-hero-prose">For twenty years, the web has worked backwards. We build pages for everyone and hope the right people find them. We sort visitors into <span class="emph">segments</span> and call it understanding. We&rsquo;ve been confessing, to every visitor, on every page, that we don&rsquo;t know them well enough.</p>
+    </div>
+  </section>
+
+  <!-- Body — what if your website could listen -->
+  <section data-section="body" data-intent="argue" data-layout="long-form-prose" class="chapter-body">
+    <div class="container">
+
+      <h2 id="listen">What if your website could <span class="emph">listen.</span></h2>
+      <p data-reveal="fade-up">Imagine a website that doesn&rsquo;t serve the same page to every visitor. Not a chatbot bolted on the corner. Not a recommendation widget at the bottom. The page itself, every headline, every case study, every call to action, considered for this person, at this moment.</p>
+      <p data-reveal="fade-up">The page your visitor sees isn&rsquo;t the page you published. It&rsquo;s the page they <span class="emph">needed.</span> And it arrives as if it had always been there.</p>
+
+    </div>
+  </section>
+
+  <!-- Pull-quote 1 -->
+  <section data-section="pull-quote" data-intent="anchor" data-layout="centered-serif-on-cream" class="pull-quote-block">
+    <div class="container">
+      <blockquote>&ldquo;Not a chatbot. Not a recommendation engine. <span class="emph">A website, that happens to be yours.</span>&rdquo;</blockquote>
+    </div>
+  </section>
+
+  <!-- Three breakthroughs -->
+  <section data-section="body" data-intent="argue" data-layout="long-form-prose" class="chapter-body">
+    <div class="container">
+      <p data-reveal="fade-up">This isn&rsquo;t science fiction. <strong>Three things changed, all at once,</strong> and they changed everything.</p>
+
+      <h2 id="breakthrough-01"><span class="num">01</span>Inference moved to the <span class="emph">edge.</span></h2>
+      <p data-reveal="fade-up">AI that runs in milliseconds at the CDN layer, not in a distant data center. Speed isn&rsquo;t a feature, it&rsquo;s the reason visitors don&rsquo;t notice.</p>
+
+      <h2 id="breakthrough-02"><span class="num">02</span>Models got fast enough to <span class="emph">disappear.</span></h2>
+      <p data-reveal="fade-up">A year ago this would have taken seconds. Now it happens before the page renders. The gap between &ldquo;authored&rdquo; and &ldquo;generated&rdquo; closed.</p>
+
+      <h2 id="breakthrough-03"><span class="num">03</span>AI learned to stay <span class="emph">on-brand.</span></h2>
+      <p data-reveal="fade-up">Models can now compose content that respects your voice, your design system, your guardrails. Not generic, <span class="emph">yours.</span></p>
+
+      <h2 id="invisible">Your visitor doesn&rsquo;t know. <span class="emph">That&rsquo;s the point.</span></h2>
+      <p data-reveal="fade-up">The visitor arrives. The page makes sense to them. Not because they navigated perfectly, because the page already considered who they are. <strong>Less cognitive work. Relevant from the first interaction. Answers the question they actually have.</strong></p>
+      <p data-reveal="fade-up">They don&rsquo;t feel targeted. They feel <span class="emph">understood.</span> There&rsquo;s a difference, and your visitors know it instantly.</p>
+      <p data-reveal="fade-up">If they look for the seams, they can find them. The page doesn&rsquo;t hide what it is. It just doesn&rsquo;t advertise it.</p>
+
+    </div>
+  </section>
+
+  <!-- Pull-quote 2 -->
+  <section data-section="pull-quote" data-intent="anchor" data-layout="centered-serif-on-cream" class="pull-quote-block">
+    <div class="container">
+      <blockquote>&ldquo;Most AI wants you to know it&rsquo;s there. <span class="emph">Ours wants you to forget.</span>&rdquo;</blockquote>
+    </div>
+  </section>
+
+  <!-- Three stages -->
+  <section data-section="body" data-intent="argue" data-layout="long-form-prose" class="chapter-body">
+    <div class="container">
+
+      <h2 id="stages-anchor">Three stages. <span class="emph">2.5 seconds.</span></h2>
+
+      <h2 id="stage-01"><span class="num">01</span><span class="emph">Understand.</span></h2>
+      <p data-reveal="fade-up">The system reads the visitor, not by tracking, but by listening. What they searched for, where they came from, what time it is. A portrait drawn in seconds.</p>
+
+      <h2 id="stage-02"><span class="num">02</span><span class="emph">Reason.</span></h2>
+      <p data-reveal="fade-up">Given what it knows, the system decides what to change. Not everything. Small shifts: a different headline, a reordered section, a case study swapped for one in their industry.</p>
+
+      <h2 id="stage-03"><span class="num">03</span><span class="emph">Compose.</span></h2>
+      <p data-reveal="fade-up">The page renders. 72 composable blocks. Every element considered. The visitor sees a website, that happens to be theirs.</p>
+
+      <h2 id="modes">Two modes. <span class="emph">One pipeline.</span></h2>
+      <div class="modes-grid">
+        <div data-reveal="fade-up">
+          <h3>Explicit</h3>
+          <p>The visitor asks. They type a question, express an intent. The page recomposes around their request. Like search, but instead of ten blue links, they get a whole page.</p>
+        </div>
+        <div data-reveal="fade-up">
+          <h3>Implicit</h3>
+          <p>The site notices. No typing required. Behavioral signals, referral context, time of day. The page shifts, subtly, invisibly, to meet them where they are.</p>
+        </div>
+      </div>
+      <p data-reveal="fade-up" style="margin-top: var(--space-lg);">Both modes share the same pipeline. The difference is who starts the conversation.</p>
+
+      <h2 id="one-button">One button. <span class="emph">Your entire site.</span></h2>
+      <p data-reveal="fade-up">Not a widget you embed. Not a recommendation engine bolted on. of1 works across your whole site, every page, every section. Enable it, and every visitor&rsquo;s experience improves.</p>
+      <p data-reveal="fade-up"><strong>No rules to write. No segments to define. No content matrix to maintain.</strong> The marketer&rsquo;s work is already done, the content is already on the site. of1 just decides which parts of it matter most to each person.</p>
+
+      <h2 id="ship-or-die">2.5 seconds. <span class="emph">Or it doesn&rsquo;t ship.</span></h2>
+      <p data-reveal="fade-up">Speed is not a feature of of1. It&rsquo;s a constraint that shapes everything. If the page takes longer than 2.5 seconds to render, the visitor notices. And if they notice, the technology isn&rsquo;t invisible, it&rsquo;s in the way.</p>
+      <p data-reveal="fade-up">Edge inference, pre-rendered fragments, parallel composition, the engineering exists in service of one rule: under two and a half seconds, every time, or the page falls back to its authored form.</p>
+
+      <h2 id="closing">The web was never meant to be <span class="emph">one-size-fits-all.</span></h2>
+      <p data-reveal="fade-up">It just took us twenty years to build the technology that lets it stop being.</p>
+
+    </div>
+  </section>
+
+  <!-- Closing CTA row -->
+  <section data-section="closing-cta" data-intent="convert" data-layout="dual-pill-row" class="closing-cta">
+    <div class="container">
+      <div class="closing-cta-row">
+        <a href="#register" class="btn btn-primary btn-large">Register interest</a>
+        <a href="https://arco.coffee/" target="_blank" rel="noopener" class="btn btn-secondary btn-large">See it live &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- register-interest (canon module) -->
+  <section data-section="register-interest" data-intent="capture" data-layout="form-block" class="register-interest" id="register">
+    <div class="container">
+      <div class="register-grid">
+        <div class="lede">
+          <span class="eyebrow">Or, register your interest</span>
+          <h3>We&rsquo;ll be in touch.</h3>
+          <p>Tell us about the website you want to make <span class="emph">pay attention</span>. Invite-only access opens in waves.</p>
+        </div>
+        <form class="register-form" action="mailto:hello@of1.live" method="post" enctype="text/plain" novalidate>
+          <div>
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@company.com" required>
+          </div>
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us about your use case, website, or what problem you&rsquo;re trying to solve."></textarea>
+          </div>
+          <div class="register-form-actions">
+            <button type="submit" class="send-link">Send &rarr;</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- footer (canon) -->
+<footer data-section="footer" data-intent="attribute" data-layout="single-line" class="site-footer">
+  <div class="container">
+    <p class="footer-line">Audience of ONE &middot; of1.live &middot; From the Adobe Experience Manager team, early-stage technology &middot; &copy; 2026 Adobe.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  if (typeof window === 'undefined') return;
+  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced || !('IntersectionObserver' in window)) {
+    document.querySelectorAll('[data-reveal]').forEach(function(el){ el.classList.add('is-revealed'); });
+    return;
+  }
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('[data-reveal]').forEach(function(el){ observer.observe(el); });
+})();
+</script>
+
+</body>
+</html>

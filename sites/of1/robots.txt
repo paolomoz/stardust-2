@@ -1,0 +1,4 @@
+# of1.live preview at https://paolomoz.github.io/stardust-2/sites/of1/
+User-agent: *
+# This is a sample/preview deployment, not the production of1.live.
+Disallow: /
