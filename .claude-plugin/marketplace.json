@@ -1,0 +1,25 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "stardust",
+  "owner": {
+    "name": "Adobe"
+  },
+  "metadata": {
+    "description": "Redesign an existing website to make it better. Built on top of impeccable."
+  },
+  "plugins": [
+    {
+      "name": "stardust",
+      "source": "./",
+      "description": "Redesign an existing website to make it better. Higher-level guided flow on top of impeccable.",
+      "version": "0.3.0",
+      "author": {
+        "name": "Adobe"
+      },
+      "license": "Apache-2.0",
+      "category": "design",
+      "homepage": "https://github.com/adobe/skills",
+      "tags": ["design", "redesign", "frontend", "skills", "impeccable"]
+    }
+  ]
+}
