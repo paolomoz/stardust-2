@@ -1,0 +1,266 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.870Z
+  page:             developer-indexing
+  pageUrl:          https://www.aem.live/developer/indexing
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Indexing</title>
+  <meta name="description" content="Adobe Experience Manager offers a way to keep an index of all the published pages in a particular section of your website. This is commonly ...">
+  <meta property="og:title" content="Indexing">
+  <meta property="og:description" content="Adobe Experience Manager offers a way to keep an index of all the published pages in a particular section of your website. This is commonly ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/indexing/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#setting-up-an-initial-query-index">Setting Up an Initial Query Index</a></li>
+<li class="l-2"><a href="#setting-up-properties-to-be-added-to-the-index">Setting Up Properties to be Added to the Index</a></li>
+<li class="l-2"><a href="#activate-your-index">Activate Your Index</a></li>
+<li class="l-2"><a href="#checking-your-index">Checking Your Index</a></li>
+<li class="l-2"><a href="#debugging-your-index-configuration">Debugging Your Index Configuration</a></li>
+<li class="l-2"><a href="#setting-up-more-index-configurations">Setting Up More Index Configurations</a></li>
+<li class="l-2"><a href="#special-scenarios-for-robots">Special Scenarios for Robots</a></li>
+<li class="l-3"><a href="#recommendations">Recommendations</a></li>
+<li class="l-3"><a href="#enforcing-noindex-configuration-with-custom-index-definitions">Enforcing “noindex” configuration with custom index definitions</a></li>
+<li class="l-3"><a href="#forms">Forms</a></li>
+<li class="l-3"><a href="#keeping-it-100">Keeping it 100</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Indexing</h1>
+          <p class="lede">Adobe Experience Manager offers a way to keep an index of all the published pages in a particular section of your website. This is commonly ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_154896ddb0d10ee236adc3592217d30238ede804c.jpeg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_154896ddb0d10ee236adc3592217d30238ede804c.jpeg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="./media_154896ddb0d10ee236adc3592217d30238ede804c.jpeg?width=2000&amp;format=jpeg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_154896ddb0d10ee236adc3592217d30238ede804c.jpeg?width=750&amp;format=jpeg&amp;optimize=medium" width="1103" height="828">
+          </picture>
+        </p>
+        
+        <p>Adobe Experience Manager offers a way to keep an index of all the published pages in a particular section of your website. This is commonly used to build lists, feeds, and enable search and filtering use cases for your pages or content fragments.</p>
+        <p>AEM keeps this index in a spreadsheet and offers access to it using JSON. Please see the document <a href="../spreadsheets/index.html">Spreadsheets and JSON</a> for more information.</p>
+        <p>We will introduce the concept of creating a query index by previewing an Excel workbook or Google spreadsheet first. Note, that if you already have a custom query definition in a file called <code>helix-query.yaml</code> in your GitHub repository, it is no longer possible to create indexes that way. Every new index will have to be manually added to that <code>helix-query.yaml</code>.</p>
+        <h2 id="setting-up-an-initial-query-index">Setting Up an Initial Query Index</h2>
+        <p>In this section we’ll create a query index in the root folder that will index all documents in your backend.</p>
+        <ol>
+          <li>After setting up your <code>fstab.yaml</code> with a mountpoint that points into your SharePoint site or Google Drive, go to the root folder.</li>
+          <li>Depending on your backend, create either a workbook named <code>query-index.xlsx</code> for SharePoint or a spreadsheet named <code>query-index</code> for Google Drive.</li>
+          <li>In that spreadsheet or workbook, create a sheet named <code>raw_index</code>.</li>
+        </ol>
+        <h2 id="setting-up-properties-to-be-added-to-the-index">Setting Up Properties to be Added to the Index</h2>
+        <ol>
+          <li>In your <code>query-index</code> document, add a header line and in the first column add <code>path</code> as the header name.</li>
+          <li>In the following columns of the header line, add all other properties you need extracted from the rendered HTML page.</li>
+        </ol>
+        <p>In the following example in Google Drive, the extracted fields are <code>title</code>, <code>image</code>, <code>description</code>, and <code>lastModified</code>.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_10b8811f4b7a024f7fe26a86ee8fd1a79ae54285a.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_10b8811f4b7a024f7fe26a86ee8fd1a79ae54285a.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_10b8811f4b7a024f7fe26a86ee8fd1a79ae54285a.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_10b8811f4b7a024f7fe26a86ee8fd1a79ae54285a.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1308">
+          </picture>
+        </p>
+        <p><br>Pages are indexed when they are published. To remove pages from index, they have to be unpublished.</p>
+        <p>For simple scenarios without custom index definition, pages that have <code>robots</code> metadata property set to <code>noindex</code> will automatically be omitted from indexing by AEM. (There are a few special scenarios here, for more details see the section <a href="#special-scenarios-for-robots">Special Scenarios for Robots</a>).</p>
+        <p><br>The following table summarizes the properties that are available and from where in the HTML page they’re extracted.</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>author</code></td>
+                    <td>Returns the content of the meta tag named <code>author</code> in the <code>head</code> element.</td>
+                  </tr>
+                  <tr>
+                    <td><code>title</code></td>
+                    <td>Returns the content of the <code>og:title</code> meta property in the <code>head</code> element.</td>
+                  </tr>
+                  <tr>
+                    <td><code>date</code></td>
+                    <td>Returns the content of the meta tag named <code>publication-date</code> in the <code>head</code> element.</td>
+                  </tr>
+                  <tr>
+                    <td><code>image</code></td>
+                    <td>Returns the content of the <code>og:image</code> meta property in the <code>head</code> element.</td>
+                  </tr>
+                  <tr>
+                    <td><code>category</code></td>
+                    <td>Returns the content of the meta tag named <code>category</code> in the <code>head</code> element.</td>
+                  </tr>
+                  <tr>
+                    <td><code>tags</code></td>
+                    <td>
+                      <p>Returns the content of the meta tag named <code>article:tag</code> in the <code>head</code> element as an array.</p>
+                      <p>See the document <a href="https://www.hlx.live/developer/spreadsheets#arrays">Spreadsheets and JSON</a> for more information on array-handling.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>description</code></td>
+                    <td>Returns the content of the meta tag named <code>description</code> in the <code>head</code> element.</td>
+                  </tr>
+                  <tr>
+                    <td><code>robots</code></td>
+                    <td>Returns the content of the meta tag named <code>robots</code> in the <code>head</code> element.</td>
+                  </tr>
+                  <tr>
+                    <td><code>lastModified</code></td>
+                    <td>Returns the value of the <code>Last-Modified</code> response header for the document.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p>For every other header added, the indexer will try to find a meta tag with a corresponding name.</p>
+        <h2 id="activate-your-index">Activate Your Index</h2>
+        <p>To activate your index, preview the spreadsheet using the sidekick. This will create an index configuration.</p>
+        <h2 id="checking-your-index">Checking Your Index</h2>
+        <p>The Admin Service has an API endpoint where you can check the index representation of your page. Given your GitHub owner, repository, branch and owner, and a resource path to a page, its endpoint is:</p>
+        <p><code>https://admin.hlx.page/index/&lt;owner&gt;/&lt;repo&gt;/&lt;branch&gt;/&lt;path&gt;</code></p>
+        <p>You should get a JSON response where the data node contains the index representation of the page.</p>
+        <h2 id="debugging-your-index-configuration">Debugging Your Index Configuration</h2>
+        <p>The AEM CLI has a feature where it will print the index record whenever you change your query configuration, which assists in finding the correct CSS selectors:</p>
+        <p><code>$ aem up --print-index</code></p>
+        <p>Please see the <a href="https://github.com/adobe/helix-cli">AEM CLI GitHub documentation</a> for more information and watch this <a href="./media_15501e6b07101255cb6ef99077f218666809ec354.mp4">video</a> to learn more about this feature.</p>
+        <h2 id="setting-up-more-index-configurations">Setting Up More Index Configurations</h2>
+        <p>You can define your own custom index configurations by creating your own <code>helix-query.yaml. </code>This allows you to have more than one index configuration in the same <code>helix-query.yaml</code>, where parts of your sites are indexed into different Excel workbooks or Google spreadsheets. See the document <a href="https://www.hlx.live/docs/indexing-reference">Indexing reference</a> for more information.</p>
+        <h2 id="special-scenarios-for-robots">Special Scenarios for Robots</h2>
+        <p>There are a few nuances on how pages get indexed by AEM in conjunction with indexing setup for your site. Let’s look at them:</p>
+        <p>In the following 2 situations, setting <code>robots</code> to <code>noindex</code> on the page metadata would <strong>not</strong> prevent it from being indexed by AEM:</p>
+        <ul>
+          <li>You have added a <code>robots</code> column in <code>query-index.xlsx</code></li>
+          <li>You have a <code>helix-query.yaml</code> in your Github repository i.e. you have defined a <strong>custom index definition.</strong></li>
+        </ul>
+        <h3 id="recommendations">Recommendations</h3>
+        <ol>
+          <li><strong>If you do not have a custom index definition</strong>, it is recommended to <strong>not</strong> add a <code>robots</code> column to your index sheet unless you have a requirement for doing so.<br>Adding <code>robots</code> column to your index sheet would cause a page to be indexed by AEM even though it may have <code>robots</code> metadata set to <code>noindex.</code></li>
+          <li><strong>If you do have a custom index definition</strong>, pages would get indexed by AEM irrespective of setting <code>robots</code> to <code>noindex</code> on the page metadata. If you want to prevent this from happening, you can use spreadsheet filters to omit pages from index that have <code>robots</code> metadata set to<code> noindex</code>. For more details, see the section titled "<a href="#enforcing-noindex-configuration-with-custom-index-definitions">Enforcing</a> <code>noindex</code> <a href="#enforcing-noindex-configuration-with-custom-index-definitions">configuration with custom index definitions</a>" below.</li>
+        </ol>
+        <h3 id="enforcing-noindex-configuration-with-custom-index-definitions">Enforcing “noindex” configuration with custom index definitions</h3>
+        <p>If you have defined your own custom index definitions in<code> helix-query.yaml</code>, setting the <code>robots</code> property to <code>noindex</code> is not effective in preventing the pages from getting indexed. In order to enforce<code> noindex </code>configuration is such situations, do the following:</p>
+        <ol>
+          <li>Create a sheet named “<code>helix-default</code>” in your<code> query-index.xlsx</code> . After this, your <code>query-index.xlsx</code> spreadsheet should have 2 sheets <code>“raw_index</code>” and <code>“helix-default</code>”. The <code>“raw_index</code>” sheet is there to have all the raw indexed data.</li>
+          <li>Modify your custom <code>helix-query.yaml</code> (it must be in your project’s Github repository) and add the <code>robots</code> property so that it gets indexed.</li>
+          <li>Now set up your <code>“helix-default</code>” sheet in the <code>query-index.xlsx</code> spreadsheet to get automatically filled up using Excel formula which ensures that all the rows in <code>raw_index</code> which have<code> robots</code> property set as<code> noindex</code>, do not get copied over to the <code>helix-default</code> sheet. This can be done by using an Excel formula like this <code>=FILTER(Table1,NOT(Table1[robots]="noindex"))</code></li>
+          <li>Now your helix-default sheet has only the rows from<code> raw_index</code> that do not have<code> robots</code> property set to<code> noindex</code>.</li>
+          <li>Ensure that you publish the pages that you want to get indexed.</li>
+          <li>Now if you fetch the index as usual like:<code> https://&lt;branch&gt;--&lt;repo&gt;-&lt;org&gt;.hlx.page/query-index.json</code>, you’d only get data from<code> helix-default</code> sheet i.e. entries that are not explicitly prevented from getting indexed through the <code>robot </code>property set as<code> noindex</code>.</li>
+        </ol>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="forms"><a href="../forms/index.html">Forms</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="keeping-it-100"><a href="../keeping-it-100/index.html">Keeping it 100</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

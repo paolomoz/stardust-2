@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.082Z
+  page:             docs-china
+  pageUrl:          https://www.aem.live/docs/china
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>China FAQ</title>
+  <meta name="description" content="Serving content with Edge Delivery Services in Adobe Experience Manager in China">
+  <meta property="og:title" content="China FAQ">
+  <meta property="og:description" content="Serving content with Edge Delivery Services in Adobe Experience Manager in China">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/china/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#can-i-serve-visitors-in-china-with-edge-delivery-services">Can I serve visitors in China with Edge Delivery Services?</a></li>
+<li class="l-2"><a href="#can-content-be-authored-and-published-from-china">Can content be authored and published from China?</a></li>
+<li class="l-2"><a href="#how-is-the-developer-experience-from-china">How is the developer experience from China?</a></li>
+<li class="l-2"><a href="#is-aem-hosting-available-in-china">Is AEM Hosting available in China?</a></li>
+<li class="l-3"><a href="#global-availability">Global Availability</a></li>
+<li class="l-3"><a href="#security">Security</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>China FAQ</h1>
+          <p class="lede">Serving content with Edge Delivery Services in Adobe Experience Manager in China</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1d314c26bd463af084680aa51525ee16b785408cb.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d314c26bd463af084680aa51525ee16b785408cb.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1d314c26bd463af084680aa51525ee16b785408cb.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d314c26bd463af084680aa51525ee16b785408cb.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Delivering content in China requires following the relevant laws and regulations in China. The FAQ is not intended as legal or regulatory advice of the laws and regulations. We encourage you to seek independent legal advice on your legal and regulatory obligations for your operations in China.</p>
+        <h2 id="can-i-serve-visitors-in-china-with-edge-delivery-services">Can I serve visitors in China with Edge Delivery Services?</h2>
+        <p><strong>Edge Delivery Services in Adobe Experience Manager requires a customer-managed Content Delivery Network (BYOCDN) to serve content to visitors in China</strong></p>
+        <p>Adobe Experience Manager Edge Delivery Services is using two redundant global content delivery networks (CDNs) to deliver experiences across the world. However, certain regions require using a local CDN to serve the content within that region.</p>
+        <p>To account for this, customers should use customer-managed CDN (BYOCDN) in China to serve visitors from China. CDN operators in China require customers to provide an Internet Content Provider (ICP) license or ICP recordal.</p>
+        <h2 id="can-content-be-authored-and-published-from-china">Can content be authored and published from China?</h2>
+        <p><strong>Authoring content from China is possible with limitations and not fully supported by Adobe.</strong></p>
+        <p>In order to use document-based editing from within China, three things must be accessible to the author:</p>
+        <ol>
+          <li>The document source – note that Google Docs, Sheets, and Drive are not available in China</li>
+          <li>The API for previewing and publishing content on admin.hlx.page – this API is typically available from within China, but often has increased latency</li>
+          <li>The preview URLs on <code>aem.page</code> – this host is available most of the time, but disruptions have been observed</li>
+        </ol>
+        <h2 id="how-is-the-developer-experience-from-china">How is the developer experience from China?</h2>
+        <p><strong>Edge Delivery Services consume source code from GitHub.</strong> Developers collaborating through GitHub from China may experience network latency which is out of Adobe’s control.</p>
+        <h2 id="is-aem-hosting-available-in-china">Is AEM Hosting available in China?</h2>
+        <p><strong>Edge Delivery Services in Adobe Experience Manager are currently operated outside of China.</strong> For customers that require all AEM servers to be hosted in China due to various reasons including, but not limited to, compliance such as Multi-Level Protection Scheme (MLPS), data residency, Baidu SEO, etc. <a href="https://business.adobe.com/products/experience-manager/managed-services.html">Adobe Managed Services for Adobe Experience Manager</a> are available in China.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="global-availability"><a href="../global/index.html">Global Availability</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="security"><a href="../security/index.html">Security</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

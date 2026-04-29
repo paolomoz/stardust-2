@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.153Z
+  page:             developer-anatomy-of-a-project
+  pageUrl:          https://www.aem.live/developer/anatomy-of-a-project
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>The Anatomy of a Project</title>
+  <meta name="description" content="This document describes what a typical project looks like from a code standpoint. Before reading this document, please familiarize yourself with the Developer Tutorial.">
+  <meta property="og:title" content="The Anatomy of a Project">
+  <meta property="og:description" content="This document describes what a typical project looks like from a code standpoint. Before reading this document, please familiarize yourself with the Developer Tutorial.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/anatomy-of-a-project/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#code-git-and-github">Code: Git and GitHub</a></li>
+<li class="l-3"><a href="#the-entry-point-headhtml">The Entry Point: head.html</a></li>
+<li class="l-3"><a href="#not-found-404html">Not Found: 404.html</a></li>
+<li class="l-3"><a href="#dont-serve-hlxignore">Don’t Serve: .hlxignore</a></li>
+<li class="l-2"><a href="#configuration">Configuration</a></li>
+<li class="l-3"><a href="#the-content-connection">The Content Connection</a></li>
+<li class="l-3"><a href="#tame-the-bots-robotstxt">Tame the Bots: robots.txt</a></li>
+<li class="l-3"><a href="#query-and-indexing">Query and Indexing</a></li>
+<li class="l-3"><a href="#automate-your-sitemap">Automate Your Sitemap</a></li>
+<li class="l-2"><a href="#commonly-used-file-and-folder-structure">Commonly Used File and Folder Structure</a></li>
+<li class="l-3"><a href="#scripts-and-styles">Scripts and Styles</a></li>
+<li class="l-3"><a href="#blocks">Blocks</a></li>
+<li class="l-3"><a href="#icons">Icons</a></li>
+<li class="l-3"><a href="#developer-tutorial">Developer Tutorial</a></li>
+<li class="l-3"><a href="#block-collection">Block Collection</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>The Anatomy of a Project</h1>
+          <p class="lede">This document describes what a typical project looks like from a code standpoint. Before reading this document, please familiarize yourself with the Developer Tutorial.</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_171dcad9eaf01460de252ac09cca2012914990ecf.jpg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_171dcad9eaf01460de252ac09cca2012914990ecf.jpg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="./media_171dcad9eaf01460de252ac09cca2012914990ecf.jpg?width=2000&amp;format=jpg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_171dcad9eaf01460de252ac09cca2012914990ecf.jpg?width=750&amp;format=jpg&amp;optimize=medium" width="1201" height="676">
+          </picture>
+        </p>
+        
+        <p>This document describes what a typical project looks like from a code standpoint. Before reading this document, please familiarize yourself with the <a href="../tutorial/index.html">Developer Tutorial</a>.</p>
+        <h2 id="code-git-and-github">Code: Git and GitHub</h2>
+        <p>One of our defining philosophies is that it is easiest to allow users to work with the tools that they are familiar with. The overwhelming majority of developers manage their code in systems based on Git, so it only makes sense to allow developers to work with Git to manage and deploy their code.</p>
+        <p>We are using a buildless approach that runs directly from your GitHub repo. After installing the AEM GitHub bot on your repo, websites are automatically created for each of your branches for content preview on <code>https://&lt;branch&gt;--&lt;repo&gt;--&lt;owner&gt;.aem.page/</code> and the production site on <code>https://&lt;branch&gt;--&lt;repo&gt;--&lt;owner&gt;.aem.live/</code> for published content.</p>
+        <p>Every resource that you put into your GitHub repo is available on your website, so a file in your GitHub repo on the main branch in <code>/scripts/scripts.js</code> will be available on <code>https://main--&lt;repo&gt;--&lt;owner&gt;.aem.page/scripts/scripts.js</code><br>This should be very intuitive. There are few “special” files that Adobe Experience Manager uses to connect the content into your website.</p>
+        <p>If you wish to use a git host other than GitHub, see <a href="../byo-git/index.html">Bring your own git</a>.</p>
+        <p>We strongly recommend that repos are kept public on GitHub, to foster the community. For a public facing website there really is no need to keep the code hidden, as it is being served to the browsers of your website.</p>
+        <p><strong>Important notes</strong>:</p>
+        <ul>
+          <li>The combination <code>&lt;branch&gt;--&lt;repo&gt;--&lt;owner&gt;</code> must not exceed 63 characters (including the hyphens/dashes). This is a <a href="https://en.wikipedia.org/wiki/Fully_qualified_domain_name">subdomain name constraint</a>.</li>
+          <li><code>branch</code>, <code>repo</code> and <code>owner</code> cannot contain <code>--</code>.</li>
+        </ul>
+        <h3 id="the-entry-point-headhtml">The Entry Point: head.html</h3>
+        <p>The <code>head.html</code> file is the most important extension point to influence the markup of the content. The easiest way to think of it is that this file is injected on the server side as part of the <code>&lt;head&gt;</code> HTML tag and is combined with the metadata coming from the content.</p>
+        <p>The <code>head.html</code> should remain largely unchanged from the boilerplate and there are only very few legitimate reasons in a regular project to make changes. Those include remapping your project to a different base URL for the purposes of exposing your project in a different folder than the root folder of your domain on your CDN or to support legacy browsers which usually require scripts that are not loaded as modules.</p>
+        <p>Adding marketing technology like Adobe Web SDK, Google Tag Manager or other 3rd party scripts to your <code>head.html</code> file is strongly advised against due to performance impacts. Adding inline scripts or styles to <code>head.html</code> is also not advisable for performance and code management reasons, see the section <a href="https://www.hlx.live/developer/anatomy-of-a-helix-project#scripts-and-styles">Scripts and Styles</a> below for more information about handling scripts and styles.</p>
+        <p>Please see the following examples.</p>
+        <ul>
+          <li><a href="https://github.com/adobe/helix-project-boilerplate/blob/main/head.html">https://github.com/adobe/helix-project-boilerplate/blob/main/head.html</a></li>
+          <li><a href="https://github.com/adobe/express-website/blob/main/head.html">https://github.com/adobe/express-website/blob/main/head.html</a></li>
+          <li><a href="https://github.com/adobe/business-website/blob/main/head.html">https://github.com/adobe/business-website/blob/main/head.html</a></li>
+        </ul>
+        <h3 id="not-found-404html">Not Found: 404.html</h3>
+        <p>To create a custom <code>404</code> response, place a <code>404.html</code> file into the root of your github repository. This will be served on any URL that doesn’t map to an existing resource in either content or code, and replaces the body of the out of the box minimalist <code>404</code> response.</p>
+        <p><br>The <code>404</code> can mimic the markup of an existing page including your code for the site, with navigation footers etc., or it can have a completely different appearance.</p>
+        <p>Please see <a href="../../docs/error-pages/index.html">Error Pages</a> for more info and the following examples.</p>
+        <ul>
+          <li><a href="https://github.com/adobe/design-website/blob/main/404.html">https://github.com/adobe/design-website/blob/main/404.html</a> <a href="https://adobe.design/doesntexist">See in Action</a></li>
+          <li><a href="https://github.com/adobecom/blog/blob/main/404.html">https://github.com/adobecom/blog/blob/main/404.html</a> <a href="https://blog.adobe.com/doesntexist">See in Action</a></li>
+        </ul>
+        <h3 id="dont-serve-hlxignore">Don’t Serve: .hlxignore</h3>
+        <p>There are some files in your repo that should not be served from your website, either because you would like to keep them private or they are not relevant to the delivery of the website (e.g. tests, build tools, build artifacts, etc.) and don’t need to be observed by the AEM bot. You can add those to a <code>.hlxignore</code> file in the same format as the well-known <code>.gitignore</code> file.</p>
+        <p>Please see the following example.</p>
+        <ul>
+          <li><a href="https://github.com/adobe/helix-website/blob/main/.hlxignore">https://github.com/adobe/helix-website/blob/main/.hlxignore</a></li>
+        </ul>
+        <h2 id="configuration">Configuration</h2>
+        <p>Configuration of your site is managed exclusively via the <a href="../../docs/config-service-setup/index.html">Configuration service</a>. This section covers the most important configurations you need to know about for your site.</p>
+        <h3 id="the-content-connection">The Content Connection</h3>
+        <p>The content configuration defines the connection between your site and its content source, telling us where to get content from when pages are previewed.</p>
+        <p>Document Authoring, AEM Authoring, Sharepoint, and Google Drive are all natively supported, with additional sources possible via <a href="../byom/index.html">Bring Your Own Markup</a></p>
+        <p>See the <a href="../../docs/admin.html/index.html#schema/ContentConfig" data-broken-link="true">Content Config API</a> documentation for more information on how to set this up.</p>
+        <h3 id="tame-the-bots-robotstxt">Tame the Bots: robots.txt</h3>
+        <p>A <code>robots.txt</code> file is generally a regular file that is served as you would expect on your production website on your own domain. To protect your preview and origin site from being indexed, your <code>.page</code> and <code>.live</code> sites will serve a <code>robots.txt</code> file that disallows all robots instead of the <code>robots.txt</code> file from your repo.</p>
+        <p>The content of your robots.txt is configured with the <a href="../../docs/admin.html/index.html#schema/RobotsConfig" data-broken-link="true">Robots Config API</a>.</p>
+        <h3 id="query-and-indexing">Query and Indexing</h3>
+        <p>There is a flexible indexing facility that lets you keep track of all of your content pages conveniently as a spreadsheet or json. This facility is often used to show lists or feeds of pages as well as to filter and sort content on a website.</p>
+        <p>For sites with google drive or sharepoint content sources, no special configuration is required beyond creating and publishing specially named spreadsheets. For more advanced indexing, or for sites using a BYOM source, you can use the <a href="../../docs/admin.html/index.html#tag/indexConfig" data-broken-link="true">Index Config API</a> to define indices.</p>
+        <p>See the document <a href="https://www.hlx.live/developer/indexing">Indexing</a> for more information.</p>
+        <h3 id="automate-your-sitemap">Automate Your Sitemap</h3>
+        <p>Complex sitemaps can automatically be created for you whenever authors publish new content, including flexible <code>hreflang</code> mappings where needed. This functionality is usually based on the indexing facility.<br>See the document <a href="../sitemap/index.html">Sitemaps</a> for sitemap configuration options.</p>
+        <h2 id="commonly-used-file-and-folder-structure">Commonly Used File and Folder Structure</h2>
+        <p>Beyond the files treated as special or configuration files, there is a commonly-used structure that is expressed in the <a href="https://github.com/adobe/helix-project-boilerplate">Boilerplate repo</a>.</p>
+        <p>The common folders below are usually in the root directory of a project repo, but in cases where only a portion of a website is handled by AEM, they are often moved to a subfolder to reflect the mapping of the route of the origin in a CDN.</p>
+        <p>This means that in a case where for example only <code>/en/blog/</code> is initially mapped to AEM from the CDN, all the folder structures below (eg. <code>/scripts</code>, <code>/styles</code>, <code>/blocks</code> etc.) are moved into a the <code>/en/blog/</code> folder in GitHub to keep the CDN mapping as simple as possible.</p>
+        <p>With a simple adjustment of the reference to <code>scripts.js</code> and <code>styles.css</code> in <code>head.html</code> (see above) it is possible to indicate that all the necessary files are loaded from the respective code base directory. To avoid url rewriting the folder structure is also created the content source (eg. sharepoint or google drive) by having a directory structure of <code>/en/blog/</code>.<br>In many cases as the AEM footprint grows on a site there is a point in time when the code gets moved back to the root folder and the <code>head.html</code> references are adjusted accordingly.</p>
+        <h3 id="scripts-and-styles">Scripts and Styles</h3>
+        <p>By convention in a AEM project, the <code>head.html</code> references <code>styles.css</code>, <code>scripts.js</code>, and <code>aem.js</code> located in <code>/scripts</code> and <code>/styles</code>, as the entry points for the project code.</p>
+        <p><code>scripts.js</code> is where your global custom javascript code lives and is where the block loading code is triggered. <code>styles.css</code> hosts the global styling information for your site, and minimally contains the global layout information that is needed to display the Largest Contentful Paint (LCP).<br><br>As all three files are loaded before the page can be displayed, it is important that they are kept relatively small and executed efficiently.<br><br>Beyond <code>styles.css</code>, a <code>lazy-styles.css</code> file is commonly used, which is loaded after the LCP event, and therefore can contain slower/more CSS information. This could be a good place for fonts or global CSS that is below the fold.</p>
+        <p>In addition to <code>scripts.js</code>, there is the commonly-used <code>delayed.js</code>. This is a catch-all for libraries that need to be loaded on a page but should be kept from interfering with the delivery of the page. This is a good place for code that is outside of the control of your project and usually includes the martech stack and other libraries.</p>
+        <p>Please see the document <a href="https://www.hlx.live/developer/keeping-it-100">Keeping it 100, Web Performance</a> for more information about optimizing your site performance.</p>
+        <h3 id="blocks">Blocks</h3>
+        <p>Most of the project-specific CSS and JavaScript code lives in blocks. Authors create blocks in their documents. Developers then write the corresponding code that styles the blocks with CSS and/or decorates the DOM to take the markup of a block and transform it to the structure that’s needed or convenient for desired styling and functionality.</p>
+        <p><br>The block name is used as both the folder name of a block as well as the filename for the <code>.css</code> and <code>.js</code> files that are loaded by the block loader when a block is used on a page.</p>
+        <p><br>The block name is also used as the CSS class name on the block to allow for intuitive styling. The javascript is loaded as a module (ESM) and exports a default function that is executed as part of the block loading.</p>
+        <p>A simple example is the <a href="https://github.com/adobe/aem-boilerplate/tree/main/blocks/columns">Columns Block</a>. It adds additional classes in JavaScript based on how many columns are in the respective instance created by the author. This allows it to be able to use flexible styling of content that is in two columns vs. three columns.</p>
+        <h3 id="icons">Icons</h3>
+        <p>Most projects have SVG files that are usually added to the <code>/icons</code> folder, and can be referenced with a <code>:&lt;iconname&gt;:</code> notation by authors. By default, icons are inlined into the DOM so they can be styled with CSS, without having to create SVG symbols.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="developer-tutorial"><a href="../tutorial/index.html">Developer Tutorial</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="block-collection"><a href="../block-collection/index.html">Block Collection</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

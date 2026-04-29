@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.065Z
+  page:             docs-setup-byo-cdn-push-invalidation-for-akamai
+  pageUrl:          https://www.aem.live/docs/setup-byo-cdn-push-invalidation-for-akamai
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Setup push invalidation for Akamai</title>
+  <meta name="description" content="Push invalidation automatically purges content on the customer's production CDN (e.g. www.yourdomain.com), whenever an author publishes content changes or a developer pushes code changes to ...">
+  <meta property="og:title" content="Setup push invalidation for Akamai">
+  <meta property="og:description" content="Push invalidation automatically purges content on the customer's production CDN (e.g. www.yourdomain.com), whenever an author publishes content changes or a developer pushes code changes to ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/setup-byo-cdn-push-invalidation-for-akamai/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#setup-push-invalidation-for-akamai">Setup push invalidation for Akamai</a></li>
+<li class="l-3"><a href="#go-to-identity--access-management">Go to Identity &amp; Access Management:</a></li>
+<li class="l-3"><a href="#create-api-client">Create API client:</a></li>
+<li class="l-3"><a href="#special-mention---akamai-edge-control-headers">Special Mention - Akamai Edge-Control Headers</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Setup push invalidation for Akamai</h1>
+          <p class="lede">Push invalidation automatically purges content on the customer's production CDN (e.g. www.yourdomain.com), whenever an author publishes content changes or a developer pushes code changes to ...</p>
+        </header>
+        <div class="content">
+        <h2 id="setup-push-invalidation-for-akamai">Setup push invalidation for Akamai</h2>
+        <p>Push invalidation automatically purges content on the customer's production CDN (e.g. <code>www.yourdomain.com</code>), whenever an author publishes content changes or a developer pushes code changes to the <code>main</code> branch (changes on other branches do <strong>not</strong> trigger push invalidation).</p>
+        <p>Content is purged by url and by cache tag/key.</p>
+        <p>Push invalidation is enabled by setting up the Akamai Fast Purge credentials in the cdn section of the <a href="../config-service-setup/index.html">configuration service</a>.</p>
+        <pre><code>curl --request POST \
+  --url https://admin.hlx.page/config/{org}/sites/{site}/cdn.json \
+  --header 'content-type: application/json' \
+  --data '{
+	"prod": {
+		"host": "{production host}",
+		"type": "akamai",
+		"endpoint": "{akamai host}",
+		"clientSecret": "{client_secret}",
+		"clientToken": "{client_token}",
+		"accessToken": "{access_token}"
+	}
+}'
+</code></pre>
+        <p>Configuration properties:</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td align="center"><strong>key</strong></td>
+                    <td align="center"><strong>value</strong></td>
+                    <td align="center"><strong>comment</strong></td>
+                  </tr>
+                  <tr>
+                    <td><code>host</code></td>
+                    <td><code>&lt;Production Host&gt;</code></td>
+                    <td>Host name of production site, e.g. <code>www.yourdomain.com</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>type</code></td>
+                    <td><code>akamai</code></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><code>endpoint</code></td>
+                    <td><code>&lt;host&gt;</code></td>
+                    <td>
+                      <p>Fast Purge API credentials</p>
+                      <p><code>***.purge.akamaiapis.net</code></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>clientSecret</code></td>
+                    <td><code>&lt;client_secret&gt;</code></td>
+                    <td>Fast Purge API credentials</td>
+                  </tr>
+                  <tr>
+                    <td><code>clientToken</code></td>
+                    <td><code>&lt;client_token&gt;</code></td>
+                    <td>Fast Purge API credentials</td>
+                  </tr>
+                  <tr>
+                    <td><code>accessToken</code></td>
+                    <td><code>&lt;access_token&gt;</code></td>
+                    <td>Fast Purge API credentials</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p>AEM push invalidation uses the <a href="https://techdocs.akamai.com/purge-cache/reference/api">Akamai Fast Purge API</a>, specifically <em>Delete by URL</em> and <em>Delete by cache tag</em>.</p>
+        <p>The Fast Purge API credentials consist of</p>
+        <pre><code>host = akaa-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.luna.akamaiapis.net
+client_token = akab-XXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXX
+client_secret = XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+access_token = akab-XXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXX
+</code></pre>
+        <p>They can be generated by following the instructions at <a href="https://techdocs.akamai.com/developer/docs/create-a-client-with-custom-permissions">Create an API client with custom permissions</a>.</p>
+        <h3 id="go-to-identity--access-management">Go to Identity &amp; Access Management:</h3>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1be270067eac8e593a2e8d42b39929f2f538180bc.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1be270067eac8e593a2e8d42b39929f2f538180bc.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1be270067eac8e593a2e8d42b39929f2f538180bc.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1be270067eac8e593a2e8d42b39929f2f538180bc.png?width=750&amp;format=png&amp;optimize=medium" width="248" height="625">
+          </picture>
+        </p>
+        <h3 id="create-api-client">Create API client:</h3>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1484f72ff562a075f712b9de22aa0e8737b756a88.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1484f72ff562a075f712b9de22aa0e8737b756a88.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1484f72ff562a075f712b9de22aa0e8737b756a88.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1484f72ff562a075f712b9de22aa0e8737b756a88.png?width=750&amp;format=png&amp;optimize=medium" width="1140" height="324">
+          </picture>
+        </p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1ed88087e3a9bf16ac0ee9eaef888d562c60e8e52.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1ed88087e3a9bf16ac0ee9eaef888d562c60e8e52.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1ed88087e3a9bf16ac0ee9eaef888d562c60e8e52.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1ed88087e3a9bf16ac0ee9eaef888d562c60e8e52.png?width=750&amp;format=png&amp;optimize=medium" width="1169" height="505">
+          </picture><br><br>
+          <picture>
+            <source type="image/webp" srcset="./media_1757d3bf3ff23101852fdafa830b27c10da36f403.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1757d3bf3ff23101852fdafa830b27c10da36f403.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1757d3bf3ff23101852fdafa830b27c10da36f403.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1757d3bf3ff23101852fdafa830b27c10da36f403.png?width=750&amp;format=png&amp;optimize=medium" width="1091" height="1083">
+          </picture>
+        </p>
+        <p>Required group/role permissions:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_12e215eeac30ead82a486eb23041927931c6ab087.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_12e215eeac30ead82a486eb23041927931c6ab087.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_12e215eeac30ead82a486eb23041927931c6ab087.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_12e215eeac30ead82a486eb23041927931c6ab087.png?width=750&amp;format=png&amp;optimize=medium" width="907" height="767">
+          </picture>
+        </p>
+        <p>You can validate the credentials with this <a href="https://tools.aem.live/tools/push-invalidation/index.html?type=akamai">tool</a>.</p>
+        <h3 id="special-mention---akamai-edge-control-headers">Special Mention - Akamai Edge-Control Headers</h3>
+        <p>AEM uses a fine tuned, production hardened way to supply caching information that applies to the specific CDN, in conjunction with our reliable push invalidation. This allows us to improve cache efficiency and consistency over traditional TTL based approaches.</p>
+        <p><br>Every CDN vendor supports a way to directly influence how to instruct caching and we are excited to see standardization efforts like "Targeted Cache Control" (TCC) being on the roadmap for Akamai (see: <a href="https://www.akamai.com/blog/news/targeted-cache-control">https://www.akamai.com/blog/news/targeted-cache-control</a>), in the meantime we are using Akamai's long-term supported <code>Edge-Control</code> header.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

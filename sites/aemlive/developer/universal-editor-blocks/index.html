@@ -1,0 +1,551 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.201Z
+  page:             developer-universal-editor-blocks
+  pageUrl:          https://www.aem.live/developer/universal-editor-blocks
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Creating Blocks Instrumented for use with the Universal Editor</title>
+  <meta name="description" content="Learn how to create blocks instrumented for the Universal Editor when using AEM authoring as your content source by adding components, loading component definitions in ...">
+  <meta property="og:title" content="Creating Blocks Instrumented for use with the Universal Editor">
+  <meta property="og:description" content="Learn how to create blocks instrumented for the Universal Editor when using AEM authoring as your content source by adding components, loading component definitions in ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/universal-editor-blocks/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="l-2"><a href="#adding-a-new-block-to-your-project">Adding a New Block to Your Project</a></li>
+<li class="l-3"><a href="#create-block-definition-and-model">Create Block Definition and Model</a></li>
+<li class="l-3"><a href="#create-content-with-the-block">Create content with the block</a></li>
+<li class="l-3"><a href="#style-the-block">Style the block</a></li>
+<li class="l-3"><a href="#block-options">Block options</a></li>
+<li class="l-3"><a href="#preserving-universal-editor-instrumentation-for-dom-mutations">Preserving Universal Editor Instrumentation for DOM Mutations</a></li>
+<li class="l-2"><a href="#using-other-working-branches">Using other working branches</a></li>
+<li class="l-2"><a href="#blocks-for-aem-authoring-and-document-based-authoring">Blocks for AEM authoring and document-based authoring</a></li>
+<li class="l-3"><a href="#approach">Approach</a></li>
+<li class="l-3"><a href="#example">Example</a></li>
+<li class="l-2"><a href="#next-steps">Next steps</a></li>
+<li class="l-3"><a href="#getting-started--universal-editor-developer-tutorial">Getting Started – Universal Editor Developer Tutorial</a></li>
+<li class="l-3"><a href="#content-modeling">Content Modeling</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Creating Blocks Instrumented for use with the Universal Editor</h1>
+          <p class="lede">Learn how to create blocks instrumented for the Universal Editor when using AEM authoring as your content source by adding components, loading component definitions in ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_16452698b3eab5476eb5ac38bcfd3fd4a63756af6.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_16452698b3eab5476eb5ac38bcfd3fd4a63756af6.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_16452698b3eab5476eb5ac38bcfd3fd4a63756af6.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_16452698b3eab5476eb5ac38bcfd3fd4a63756af6.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Learn how to create blocks instrumented for the Universal Editor when using AEM authoring as your content source by adding components, loading component definitions in the Universal Editor, publishing pages, implementing block decoration and styles, bringing the changes to production, and verifying them.</p>
+        <h2 id="prerequisites">Prerequisites</h2>
+        <p>To create your blocks, you will need some existing knowledge of AEM authoring with Edge Delivery Services projects as well as the Universal Editor. You should also already have access to Edge Delivery Services and be familiar with its basics including:</p>
+        <ul>
+          <li>You have access to an <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/programs/introduction-sandbox-programs">AEM Cloud Service sandbox.</a></li>
+          <li>You have completed the <a href="../ue-tutorial/index.html">Getting Started – Universal Editor Developer Tutorial.</a></li>
+        </ul>
+        <h2 id="adding-a-new-block-to-your-project">Adding a New Block to Your Project</h2>
+        <p>Let’s build a block to render a memorable quote on your page.</p>
+        <p>To simplify this example, all changes are made to the <code>main</code> branch of the project repository. Of course for your actual project, you should follow <a href="../../docs/dev-collab-and-good-practices/index.html">development best practices</a> by developing on a different branch and reviewing all changes via pull request before merging to <code>main</code>.</p>
+        <p>Adobe recommends that you develop blocks in a three-phased approach:</p>
+        <ol>
+          <li>Create the definition and model for the block, review it, and bring it to production.</li>
+          <li>Create content with the new block.</li>
+          <li>Implement the decoration and styles for the new block.</li>
+        </ol>
+        <p>The following quote block example follows this approach.</p>
+        <h3 id="create-block-definition-and-model">Create Block Definition and Model</h3>
+        <ol>
+          <li>Clone the GitHub project locally that you created in the <a href="../ue-tutorial/index.html">Getting Started – Universal Editor Developer Tutorial</a> and open it in an editor of your choice.
+            <ul>
+              <li>Microsoft Code is used in this document for illustrative purposes.</li>
+            </ul>
+          </li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1662eeaba449bdf9bc5583263c48d329374243968.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1662eeaba449bdf9bc5583263c48d329374243968.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1662eeaba449bdf9bc5583263c48d329374243968.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1662eeaba449bdf9bc5583263c48d329374243968.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol start="2">
+          <li>Edit the <code>component-definition.json</code> <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/component-definition">file at the root of the project</a> and add the following definition for your new quote block and save the file.</li>
+        </ol>
+        <pre><code>{
+  "title": "Quote",
+  "id": "quote",
+  "plugins": {
+    "xwalk": {
+      "page": {
+        "resourceType": "core/franklin/components/block/v1/block",
+        "template": {
+          "name": "Quote",
+          "model": "quote",
+          "quote": "&lt;p&gt;Think, McFly! Think!&lt;/p&gt;",
+          "author": "Biff Tannen"
+        }
+      }
+    }
+  }
+}
+</code></pre>
+        <ol start="3">
+          <li>Edit the <code>component-models.json</code> file at the root of the project and add the following <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/field-types#model-structure">model definition</a> for your new quote block and save the file.
+            <ul>
+              <li>Please see the document <a href="../component-model-definitions/index.html">Content Modeling for AEM authoring as your content source</a> for more information about what is important to consider when creating content models.</li>
+            </ul>
+          </li>
+        </ol>
+        <pre><code>{
+  "id": "quote",
+  "fields": [
+     {
+       "component": "richtext",
+       "name": "quote",
+       "value": "",
+       "label": "Quote",
+       "valueType": "string"
+     },
+     {
+       "component": "text",
+       "valueType": "string",
+       "name": "author",
+       "label": "Author",
+       "value": ""
+     }
+   ]
+}
+</code></pre>
+        <ol start="4">
+          <li>Edit the <code>component-filters.json</code> <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/filtering">file at the root of the project</a> and add the quote block to the filter definition to allow the block to be added to any section and save the file.</li>
+        </ol>
+        <pre><code>{
+  "id": "section",
+  "components": [
+    "text",
+    "image",
+    "button",
+    "title",
+    "hero",
+    "cards",
+    "columns",
+    "quote"
+   ]
+}
+</code></pre>
+        <ol start="5">
+          <li>Using git, commit these changes to your main branch.
+            <ul>
+              <li>Committing to <code>main</code> is for illustrative purposes only. <a href="../../docs/dev-collab-and-good-practices/index.html">Follow best practices</a> and use a pull request for actual project work.</li>
+            </ul>
+          </li>
+        </ol>
+        <h3 id="create-content-with-the-block">Create content with the block</h3>
+        <p>Now that your basic quote block is defined and committed to the sample project, you can add a quote block to an existing page.</p>
+        <ol>
+          <li>In a browser, sign into AEM as a Cloud Service. <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/sites/authoring/basic-handling">Using the Sites console</a>, navigate to the site that you created in the <a href="../ue-tutorial/index.html">Getting Started – Universal Editor Developer Tutorial</a> and select a page.
+            <ul>
+              <li>In this case, <code>index</code> is used for illustrative purposes.<br>
+                <picture>
+                  <source type="image/webp" srcset="./media_11c4f1ad8cf39266c3559e033a1728140065a0b97.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                  <source type="image/webp" srcset="./media_11c4f1ad8cf39266c3559e033a1728140065a0b97.png?width=750&amp;format=webply&amp;optimize=medium">
+                  <source type="image/png" srcset="./media_11c4f1ad8cf39266c3559e033a1728140065a0b97.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                  <img loading="lazy" alt="" src="./media_11c4f1ad8cf39266c3559e033a1728140065a0b97.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+                </picture>
+              </li>
+            </ul>
+          </li>
+          <li>Tap or click <strong>Edit</strong> in the toolbar of the console and the Universal Editor opens.
+            <ul>
+              <li>In order to load the page, you may need to tap or click <strong>Sign in with Adobe</strong> to authenticate to AEM in the Universal Editor.</li>
+            </ul>
+          </li>
+          <li>In the Universal Editor, select a section. In the properties panel, tap or click the <strong>Add</strong> icon and then select your new <strong>Quote</strong> block from the menu.
+            <ul>
+              <li>The <strong>Add</strong> icon is a plus symbol.</li>
+              <li>You know that you have selected a section if the blue outline of the selected object has a tab labeled <strong>Section</strong>.</li>
+              <li>In this example, tapping or clicking slightly above the <strong>Lorem Ipsum</strong> heading selects a section containing the heading and lorem ipsum text.</li>
+            </ul>
+          </li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1b30bb0092a44fa5b21c671da5c793b2313f183e4.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1b30bb0092a44fa5b21c671da5c793b2313f183e4.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1b30bb0092a44fa5b21c671da5c793b2313f183e4.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1b30bb0092a44fa5b21c671da5c793b2313f183e4.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol start="4">
+          <li>The page is reloaded and the quote block is added to the bottom of the selected section with the default content specified in the <code>component-definitions.json</code> file.
+            <ul>
+              <li>The quote block can be selected and edited as any other block either in-place or in the properties panel.</li>
+              <li>Styling will be applied in a further step.</li>
+            </ul>
+          </li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_113a60c83b6d39f2b19ba2fc190978cf6b9425cd8.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_113a60c83b6d39f2b19ba2fc190978cf6b9425cd8.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_113a60c83b6d39f2b19ba2fc190978cf6b9425cd8.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_113a60c83b6d39f2b19ba2fc190978cf6b9425cd8.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol start="5">
+          <li>Once you are satisfied with the content of your quote, you can publish the page by tapping or clicking the <strong>Publish</strong> button in the toolbar of the Universal Editor.</li>
+          <li>Verify that the content was published by navigating to the published page. The link will be similar to <code>https://&lt;branch&gt;--&lt;repo&gt;--&lt;owner&gt;.aem.page</code></li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1372ca74172b1abce3f19cdd40319e0773f5b313e.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1372ca74172b1abce3f19cdd40319e0773f5b313e.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1372ca74172b1abce3f19cdd40319e0773f5b313e.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1372ca74172b1abce3f19cdd40319e0773f5b313e.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <h3 id="style-the-block">Style the block</h3>
+        <p>Now that you have a working quote block you can apply styling to it.</p>
+        <ol>
+          <li>Return to the editor for your project.</li>
+          <li>Create a <strong>quote</strong> folder under the blocks folder.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1bd71bf6b1f2575f8eacd4fe72913ec77d304988d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1bd71bf6b1f2575f8eacd4fe72913ec77d304988d.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1bd71bf6b1f2575f8eacd4fe72913ec77d304988d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1bd71bf6b1f2575f8eacd4fe72913ec77d304988d.png?width=750&amp;format=png&amp;optimize=medium" width="1159" height="893">
+          </picture>
+        </p>
+        <ol start="3">
+          <li>In the new <code>quote</code> folder, add a <code>quote.js</code> file to implement block decoration by adding the following JavaScript and save the file.</li>
+        </ol>
+        <pre><code>export default function decorate(block) {
+  const [quoteWrapper] = block.children;
+
+  const blockquote = document.createElement('blockquote');
+  blockquote.textContent = quoteWrapper.textContent.trim();
+  quoteWrapper.replaceChildren(blockquote);
+}
+</code></pre>
+        <ol start="4">
+          <li>In the <code>quote</code> folder, add a <code>quote.css</code> file to define the styling for the block by adding the following CSS code and save the file.</li>
+        </ol>
+        <pre><code>.block.quote {
+    background-color: #ccc;
+    padding: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+
+.block.quote blockquote {
+    margin: 16px;
+    text-indent: 0;
+}
+
+.block.quote &gt; div:last-child &gt; div {
+    margin: 0 16px;
+    font-size: small;
+    font-style: italic;
+    position: relative;
+}
+
+.block.quote &gt; div:last-child &gt; div::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    height: 5px;
+    width: 30px;
+    background-color: darkgray;
+}.block.quote {
+    background-color: #ccc;
+    padding: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+
+.block.quote blockquote {
+    margin: 16px;
+    text-indent: 0;
+}
+
+.block.quote &gt; div:last-child &gt; div {
+    margin: 0 16px;
+    font-size: small;
+    font-style: italic;
+    position: relative;
+}
+
+.block.quote &gt; div:last-child &gt; div::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    height: 5px;
+    width: 30px;
+    background-color: darkgray;
+}
+</code></pre>
+        <ol start="5">
+          <li>Using git, commit these changes to your <code>main</code> branch.
+            <ul>
+              <li>Committing to <code>main</code> is for illustrative purposes only. <a href="../../docs/dev-collab-and-good-practices/index.html">Follow best practices</a> and use a pull request for actual project work.</li>
+            </ul>
+          </li>
+          <li>Return to your browser tab of the Universal Editor where you were editing the page of your project and reload the page to view your styled block.</li>
+          <li>See the now styled quote block on the page.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_19c6c2b91930fbf28e7511fd770019e03f2c9126d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_19c6c2b91930fbf28e7511fd770019e03f2c9126d.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_19c6c2b91930fbf28e7511fd770019e03f2c9126d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_19c6c2b91930fbf28e7511fd770019e03f2c9126d.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol start="8">
+          <li>Verify that the changes were pushed to production by navigating to the published page. The link will be similar to <code>https://&lt;branch&gt;--&lt;repo&gt;--&lt;owner&gt;.aem.page</code></li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1f3c5ab7918d6dced785ff6d266b9004f4eaa0acd.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1f3c5ab7918d6dced785ff6d266b9004f4eaa0acd.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1f3c5ab7918d6dced785ff6d266b9004f4eaa0acd.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1f3c5ab7918d6dced785ff6d266b9004f4eaa0acd.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <p>Congratulations! You now have a fully working and styled quote block. You can use this example as a basis for designing your own project-specific blocks.</p>
+        <h3 id="block-options">Block options</h3>
+        <p>If you need a block to look or behave slightly differently based on certain circumstances (but not different enough to become a new block in itself), you can let authors choose from <a href="../markup-sections-blocks/index.html#block-options">block options.</a></p>
+        <p>By adding a <code>classes</code> property to the block, the property is rendered in the table header for simple blocks, or as value list for items in a container block.</p>
+        <pre><code>{
+    "id": "quote",
+    "fields": [
+       {
+         "component": "richtext",
+         "name": "quote",
+         "value": "",
+         "label": "Quote",
+         "valueType": "string"
+       },
+       {
+         "component": "text",
+         "valueType": "string",
+         "name": "author",
+         "label": "Author",
+         "value": ""
+       },
+       {
+        "component": "select",
+        "name": "classes",
+        "value": "",
+        "label": "Background Color",
+        "description": "The quote background color",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Red",
+            "value": "bg-red"
+          },
+          {
+            "name": "Green",
+            "value": "bg-green"
+          },
+          {
+            "name": "Blue",
+            "value": "bg-blue"
+          }
+        ]
+      }
+     ]
+  }
+</code></pre>
+        <h3 id="preserving-universal-editor-instrumentation-for-dom-mutations">Preserving Universal Editor Instrumentation for DOM Mutations</h3>
+        <p>Typically there is no need to change the DOM structure of a block beyond just adding class names or adding additional wrappers. In the exceptional case when you must move pieces of content into a new structure in order to fit the final design or output requirements of the block, special care must be taken to preserve the editing experience.</p>
+        <p>If the original element contains Universal Editor instrumentation attributes (<code>data-aue-*</code>), these attributes must be retained to preserve the in-context editing experience. To do this, use the <code>moveInstrumentation()</code> <a href="https://github.com/adobe-rnd/aem-boilerplate-xwalk/blob/main/scripts/scripts.js#L35-L47">method</a> available in the <code>scripts.js</code> file of the boilerplate.</p>
+        <p>For an example implementation, <a href="https://github.com/adobe-rnd/aem-boilerplate-xwalk/blob/main/blocks/cards/cards.js">refer to cards block.</a> The cards block is a container block where each row of the underlying block table models a single card. The decoration converts this structure into an <code>&lt;ul&gt;</code> with an <code>&lt;li&gt;</code> for each card. To preserve the in-context editing experience it moves the instrumentation from each card’s <code>&lt;div&gt;</code> elements to the newly created <code>&lt;li&gt;</code> element.</p>
+        <h2 id="using-other-working-branches">Using other working branches</h2>
+        <p>This guide had you commit directly to the <code>main</code> branch for simplicity’s sake. For experimentation in a sample repository, this is usually not an issue. For actual project work, you should <a href="../../docs/dev-collab-and-good-practices/index.html">follow development best practices</a> by developing on a different branch and reviewing all changes via pull request before merging to <code>main</code>.</p>
+        <p>When you are not developing on the <code>main</code> branch, you can append <code>?ref=&lt;branch&gt;</code> in the Universal Editor location bar to load the page from your branch. <code>&lt;branch&gt;</code> is the branch name as it would be used for your project’s preview or live URLs, e.g. <code>https://&lt;branch&gt;--&lt;repo&gt;--&lt;owner&gt;.aem.page</code>.</p>
+        <h2 id="blocks-for-aem-authoring-and-document-based-authoring">Blocks for AEM authoring and document-based authoring</h2>
+        <p>On certain projects, you may want to support both AEM authoring as your content source using the Universal Editor as well as document-based authoring. To minimize development time and ensure the same site experience, you can create one set of blocks to support both use cases.</p>
+        <p>To do this, you must use the same content modeling approach for both your AEM authoring setup as well as your document-based authoring setup.</p>
+        <h3 id="approach">Approach</h3>
+        <p>In AEM authoring, you declare a model and provide naming conventions. Data is then rendered in table-like block structures using Edge Delivery in the same way as if the table would have been created manually using document-based authoring.</p>
+        <p>To achieve this, certain assumptions are made such as for a simple block like a teaser that all properties and groups of properties are rendered in 1…n rows with a single column each. For blocks that have 1…n items (such as carousel and cards) the items are appended after these rows with one row each and a column for each property/group of properties.</p>
+        <p>If you follow the same approach for document-based authoring you can reuse your AEM authoring blocks.</p>
+        <h3 id="example">Example</h3>
+        <p>The following example of a teaser block follows the recommended approach and could be used between document-based and AEM authoring.</p>
+        <p>With this data:</p>
+        <pre><code>{
+  "name": "teaser",
+  "model": "teaser",
+  "image": "/content/dam/teaser-background.png",
+  "imageAlt": "A group of people sitting on a stage",
+  "teaserText_subtitle": "Adobe Experience Cloud"
+  "teaserText_title": "Meet the Experts"
+  "teaserText_titleType": "h2"
+  "teaserText_description": "&lt;p&gt;Join us in this ask me everything session...&lt;/p&gt;"
+  "teaserText_cta1": "https://link.to/more-details",
+  "teaserText_cta1Text": "More Details"
+  "teaserText_cta2": "https://link.to/sign-up",
+  "teaserText_cta2Text": "RSVP",
+  "teaserText_cta2Type": "primary"
+}
+</code></pre>
+        <p>You get this markup:</p>
+        <pre><code>&lt;div class="teaser"&gt;
+  &lt;div&gt;
+    &lt;div&gt;
+      &lt;picture&gt;
+        &lt;img src="/content/dam/teaser-background.png" alt="A group of people sitting on a stage"&gt;
+      &lt;/picture&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;div&gt;
+      &lt;p&gt;Adobe Experience Cloud&lt;/p&gt;
+      &lt;h2&gt;Meet the Experts&lt;/h2&gt;
+      &lt;p&gt;Join us in this ask me everything session ...&lt;/p&gt;
+      &lt;p&gt;&lt;a href="https://link.to/more-details"&gt;More Details&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;&lt;a href="https://link.to/sign-up"&gt;RSVP&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+        <p>And it will be turned into this table representation:</p>
+        <pre><code>+-------------------------------------------------+
+| Teaser                                          |
++=================================================+
+| ![A group of people sitting on a stage][image0] |
++-------------------------------------------------+
+| Adobe Experience Cloud                          |
+| ## Meet the Experts                             |
+| Join us in this ask me everything session ...   |
+| [More Details](https://link.to/more-details)    |
+| [RSVP](https://link.to/sign-up)                 |
++-------------------------------------------------+
+</code></pre>
+        <h2 id="next-steps">Next steps</h2>
+        <p>Now that you know how to create blocks, it is essential to understand how to model content in a semantic way to achieve a lean developer experience.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="getting-started--universal-editor-developer-tutorial"><a href="../ue-tutorial/index.html">Getting Started – Universal Editor Developer Tutorial</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="content-modeling"><a href="../component-model-definitions/index.html">Content Modeling</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.189Z
+  page:             developer-ue-tutorial
+  pageUrl:          https://www.aem.live/developer/ue-tutorial
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Setup AEM Sites as a Content Source</title>
+  <meta name="description" content="This tutorial will get you up-and-running with a new Adobe Experience Manager (AEM) project, authored in Universal Editor and publishing to Edge Delivery.">
+  <meta property="og:title" content="Setup AEM Sites as a Content Source">
+  <meta property="og:description" content="This tutorial will get you up-and-running with a new Adobe Experience Manager (AEM) project, authored in Universal Editor and publishing to Edge Delivery.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/ue-tutorial/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#use-the-project-boilerplate-to-create-your-code-repository">Use the project boilerplate to create your code repository</a></li>
+<li class="l-2"><a href="#connect-your-code-to-your-content">Connect your code to your content</a></li>
+<li class="l-2"><a href="#connect-aem-code-sync-bot">Connect AEM Code Sync bot</a></li>
+<li class="l-2"><a href="#create-and-publish-your-site">Create and publish your site</a></li>
+<li class="l-3"><a href="#create-an-aem-site">Create an AEM site</a></li>
+<li class="l-2"><a href="#publishing-your-new-site-to-edge-delivery-services">Publishing Your New Site to Edge Delivery Services</a></li>
+<li class="l-2"><a href="#start-developing-styling-and-functionality">Start developing styling and functionality</a></li>
+<li class="l-3"><a href="#build">Build</a></li>
+<li class="l-3"><a href="#creating-blocks-for-the-universal-editor">Creating Blocks for the Universal Editor</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Setup AEM Sites as a Content Source</h1>
+          <p class="lede">This tutorial will get you up-and-running with a new Adobe Experience Manager (AEM) project, authored in Universal Editor and publishing to Edge Delivery.</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1d00989ba18e942fbddc9bb108add01e153029f22.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d00989ba18e942fbddc9bb108add01e153029f22.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1d00989ba18e942fbddc9bb108add01e153029f22.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d00989ba18e942fbddc9bb108add01e153029f22.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>This tutorial will get you up-and-running with a new Adobe Experience Manager (AEM) project, authored in Universal Editor and publishing to Edge Delivery.</p>
+        <p>You have two ways to get started with the AEM Sites Developer Tutorial. If you want to use your own AEM as a Cloud Service environment (For AEM 6.5+ reach out to us), follow the steps outlined below to get up and running.</p>
+        <p><strong>Alternatively, for an even faster route, you can jump right in using our pre‑built tutorial environment - fully configured and ready to go. Fill out the</strong> <strong><a href="../ue-trial/index.html">form</a></strong> <strong>and get started in seconds.</strong></p>
+        <p>In about thirty minutes, you will have created your own site and be able to create, preview, and publish your own content, styling, and add new blocks.</p>
+        <p>Prerequisites:</p>
+        <ul>
+          <li>You have a GitHub account, and understand Git basics.</li>
+          <li>You have access to an <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/programs/introduction-sandbox-programs">AEM as a Cloud Service environment.</a></li>
+          <li>You understand the basics of HTML, CSS, and JavaScript.</li>
+          <li>You have Node/npm installed for local development.</li>
+        </ul>
+        <p>This tutorial uses macOS, Chrome, and Visual Studio Code as the development environment and the screenshots and instructions reflect that setup. You can use a different operating system, browser, and code editor, but the UI you see and steps you must take may vary accordingly.</p>
+        <p><strong>If you are looking for a headless solution using the Universal Editor,</strong> <strong><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/securbank">check out the SecurBank sample app.</a></strong></p>
+        <p><strong>If you are looking for a Adobe Commerce Storefront and you don’t have access to AEM as a Cloud Service,</strong> <strong><a href="https://da.live/app/adobe-commerce/storefront-tools/tools/site-creator/site-creator">use the Adobe Commerce Site Creator instead</a>.</strong></p>
+        <h2 id="use-the-project-boilerplate-to-create-your-code-repository">Use the project boilerplate to create your code repository</h2>
+        <p>The fastest and easiest way to get started following AEM best practices is to create your repository using the Boilerplate GitHub repository as a template.</p>
+        <p>This tutorial uses the standard AEM project boilerplate, which is the best solution for many projects. However you can also use the Commerce project boilerplate, if your AEM Authoring with Edge Delivery Services project needs to integrate with Adobe Commerce. The steps remain the same.</p>
+        <ol>
+          <li>Navigate to the GitHub page of the boilerplate appropriate for your project.
+            <ul>
+              <li>For most projects: <code>https://github.com/adobe-rnd/aem-boilerplate-xwalk</code></li>
+              <li>For projects that integrate with Adobe Commerce: <code>https://github.com/adobe-rnd/aem-boilerplate-xcom</code></li>
+            </ul>
+          </li>
+          <li>Click on <strong>Use this template</strong> and select <strong>Create a new repository</strong>.
+            <ul>
+              <li>You will need to be signed in to GitHub to see this option.</li>
+            </ul>
+          </li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1709663c1f40119eabd702085d4bd4887d0467cb0.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1709663c1f40119eabd702085d4bd4887d0467cb0.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1709663c1f40119eabd702085d4bd4887d0467cb0.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1709663c1f40119eabd702085d4bd4887d0467cb0.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol start="3">
+          <li>By default, the repository will be assigned to you. Adobe recommends leaving the repository set to <strong>Public</strong>. Provide a repository name and description and click <strong>Create repository</strong>.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_12e3786114f821742d93bfc6554e22d08ec8e488d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_12e3786114f821742d93bfc6554e22d08ec8e488d.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_12e3786114f821742d93bfc6554e22d08ec8e488d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_12e3786114f821742d93bfc6554e22d08ec8e488d.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <h2 id="connect-your-code-to-your-content">Connect your code to your content</h2>
+        <p>Now that you have your GitHub project, you need to link the repository to your AEM authoring instance.</p>
+        <ol>
+          <li>In your new GitHub project, click the <code>fstab.yaml</code> file to open it and then the <strong>Edit this file</strong> icon to edit it.</li>
+          <li>Edit the <code>fstab.yaml</code> file to update the mount point of your project. Replace the default Google Docs URL with the URL of your AEM as a Cloud Service authoring instance and then click <strong>Commit changes…</strong>.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_13ade53f8a906209353a29045e6382fcf40e58ba4.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_13ade53f8a906209353a29045e6382fcf40e58ba4.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_13ade53f8a906209353a29045e6382fcf40e58ba4.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_13ade53f8a906209353a29045e6382fcf40e58ba4.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ul>
+          <li><code>https://&lt;aem-author&gt;/bin/franklin.delivery/&lt;owner&gt;/&lt;repository&gt;/main</code></li>
+          <li>Changing the mount point tells Edge Delivery Services where to find the content of the site.</li>
+          <li>Edge Delivery Services will always reference the <code>fstab.yaml</code> from your <code>main</code> branch.</li>
+        </ul>
+        <ol start="3">
+          <li>Add a commit message as desired and then click <strong>Commit changes</strong>, committing them directly to the <code>main</code> branch.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_111ca0d194fefddf770b3c20d7e625232ab07345f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_111ca0d194fefddf770b3c20d7e625232ab07345f.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_111ca0d194fefddf770b3c20d7e625232ab07345f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_111ca0d194fefddf770b3c20d7e625232ab07345f.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol start="4">
+          <li>Return to the root of your repository and click on <code>paths.json</code> and then the <strong>Edit this file</strong> icon.​​</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_135a280c64dc29df1ffc43f2d8543f24a4e4e2109.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_135a280c64dc29df1ffc43f2d8543f24a4e4e2109.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_135a280c64dc29df1ffc43f2d8543f24a4e4e2109.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_135a280c64dc29df1ffc43f2d8543f24a4e4e2109.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol start="5">
+          <li>The default mapping will use the name of the repository. Update the default mappings as required for your project, for example <code>/content/&lt;site-name&gt;/:/</code> and similar, and click <strong>Commit changes…</strong>.</li>
+        </ol>
+        <ul>
+          <li>Provide your own <code>&lt;site-name&gt;</code>. You will need it in a later step.</li>
+          <li>The mappings tell Edge Delivery Services how to map the content in your AEM repository to the site URL.</li>
+        </ul>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_152abf1d79598447855884d32266bebcdbf48329c.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_152abf1d79598447855884d32266bebcdbf48329c.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_152abf1d79598447855884d32266bebcdbf48329c.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_152abf1d79598447855884d32266bebcdbf48329c.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol start="6">
+          <li>Add a commit message as desired and then click <strong>Commit changes</strong>, committing them directly to the <code>main</code> branch.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1b2f326a3c82fa5b77df568ecaf6e31be99bfddbb.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1b2f326a3c82fa5b77df568ecaf6e31be99bfddbb.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1b2f326a3c82fa5b77df568ecaf6e31be99bfddbb.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1b2f326a3c82fa5b77df568ecaf6e31be99bfddbb.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <h2 id="connect-aem-code-sync-bot">Connect AEM Code Sync bot</h2>
+        <p>The AEM Code Sync bot listens for changes to your code and updates it in the code bus for high availability. You must enable the bot on your new repository.</p>
+        <ol>
+          <li>In a new tab in the same browser, navigate to <code>https://github.com/apps/aem-code-sync</code> and click <strong>Configure</strong>.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1f8ca9451d042b46c4a24f86450d3df9fe085d70c.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1f8ca9451d042b46c4a24f86450d3df9fe085d70c.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1f8ca9451d042b46c4a24f86450d3df9fe085d70c.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1f8ca9451d042b46c4a24f86450d3df9fe085d70c.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol>
+          <li>Click <strong>Configure</strong> for the org where you created your new repository in the previous step.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_18575b32fe7cc4c6076bb66fe4c8f61047df53f64.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_18575b32fe7cc4c6076bb66fe4c8f61047df53f64.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_18575b32fe7cc4c6076bb66fe4c8f61047df53f64.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_18575b32fe7cc4c6076bb66fe4c8f61047df53f64.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol>
+          <li>On the AEM Code Sync GitHub page under <strong>Repository access</strong>, select <strong>Only select repositories</strong>, select the repository that you created in the previous step, and then click <strong>Save</strong>.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1780f49fdc5f651a9e62a405bf7d6e46bf930cfb8.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1780f49fdc5f651a9e62a405bf7d6e46bf930cfb8.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1780f49fdc5f651a9e62a405bf7d6e46bf930cfb8.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1780f49fdc5f651a9e62a405bf7d6e46bf930cfb8.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol>
+          <li>Once AEM Code Sync is installed, you receive a confirmation screen. Return to the browser tab of your new repository.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1f36553df0bead172561c6e83e7046967a0665fae.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1f36553df0bead172561c6e83e7046967a0665fae.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1f36553df0bead172561c6e83e7046967a0665fae.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1f36553df0bead172561c6e83e7046967a0665fae.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <p>You now have your own GitHub repository for developing your own Edge Delivery Services project, based on Adobe’s best-practices boilerplate.</p>
+        <h2 id="create-and-publish-your-site">Create and publish your site</h2>
+        <p>With your GitHub project set up and linked to your AEM instance, you are ready to create and publish a new AEM site using Edge Delivery Services.</p>
+        <h3 id="create-an-aem-site">Create an AEM site</h3>
+        <ol>
+          <li>Download the latest AEM authoring with Edge Delivery Services site template from GitHub appropriate to your project.
+            <ul>
+              <li>For most projects: <code>https://github.com/adobe-rnd/aem-boilerplate-xwalk/releases</code></li>
+              <li>For projects that integrate with Adobe Commerce: <code>https://github.com/adobe-rnd/aem-boilerplate-xcom/releases</code></li>
+            </ul>
+          </li>
+        </ol>
+        <ol start="2">
+          <li>Sign in to your AEM as a Cloud Service authoring instance and navigate to the <strong>Sites</strong> console and click <strong>Create</strong> → <strong>Site from template</strong>.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_144906c6cb4ff3c362f88812dce53d928b4413bda.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_144906c6cb4ff3c362f88812dce53d928b4413bda.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_144906c6cb4ff3c362f88812dce53d928b4413bda.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_144906c6cb4ff3c362f88812dce53d928b4413bda.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol start="3">
+          <li>On the <strong>Select a site template</strong> tab of the create site wizard, click the <strong>Import</strong> button to import a new template.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_118b2705242a1ba542104535c5c4f06b2905d4cb7.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_118b2705242a1ba542104535c5c4f06b2905d4cb7.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_118b2705242a1ba542104535c5c4f06b2905d4cb7.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_118b2705242a1ba542104535c5c4f06b2905d4cb7.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol start="4">
+          <li>Upload the AEM authoring with Edge Delivery Services site template that you downloaded from GitHub.
+            <ul>
+              <li>The template must only be uploaded once. Once uploaded it can be reused to create additional sites.</li>
+            </ul>
+          </li>
+          <li>Once the template is imported, it appears in the wizard. Click to select it and then click <strong>Next</strong>.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1ffce5987fe20423e92056885cb961270715260ff.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1ffce5987fe20423e92056885cb961270715260ff.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1ffce5987fe20423e92056885cb961270715260ff.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1ffce5987fe20423e92056885cb961270715260ff.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol start="6">
+          <li>Provide the following fields and tap or click <strong>Create</strong>.</li>
+        </ol>
+        <ul>
+          <li><strong>Site title</strong> - Add a descriptive title for the site.</li>
+          <li><strong>Site name</strong> - Use the <code>&lt;site-name&gt;</code> that you defined in the previous step.</li>
+          <li><strong>GitHub URL</strong> - Use the URL of the GitHub project you created in the previous step.</li>
+        </ul>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1599f10b7ac5bcced0534774c05e0a6b7a6f8a3a3.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1599f10b7ac5bcced0534774c05e0a6b7a6f8a3a3.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1599f10b7ac5bcced0534774c05e0a6b7a6f8a3a3.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1599f10b7ac5bcced0534774c05e0a6b7a6f8a3a3.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol start="7">
+          <li>AEM confirms the site creation with a dialog. Click <strong>OK</strong> to dismiss.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_136285167fb5279c6dfbc9381ee70ad8f86b95b7d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_136285167fb5279c6dfbc9381ee70ad8f86b95b7d.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_136285167fb5279c6dfbc9381ee70ad8f86b95b7d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_136285167fb5279c6dfbc9381ee70ad8f86b95b7d.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol start="8">
+          <li>On the sites console, navigate to the index.html of the newly-created site and click <strong>Edit</strong> in the toolbar.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1bfcf1c938c110cab971840c06e1cd0b2cb4b66aa.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1bfcf1c938c110cab971840c06e1cd0b2cb4b66aa.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1bfcf1c938c110cab971840c06e1cd0b2cb4b66aa.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1bfcf1c938c110cab971840c06e1cd0b2cb4b66aa.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol start="9">
+          <li>The Universal Editor opens in a new tab. You may need to tap or click <strong>Sign in with Adobe</strong> to authenticate to edit your page.</li>
+        </ol>
+        <p>You can now edit your site using the Universal Editor.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_190db0a9404dbb4f88d32d14f2aaaaf98deb0df9e.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_190db0a9404dbb4f88d32d14f2aaaaf98deb0df9e.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_190db0a9404dbb4f88d32d14f2aaaaf98deb0df9e.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_190db0a9404dbb4f88d32d14f2aaaaf98deb0df9e.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <h2 id="publishing-your-new-site-to-edge-delivery-services">Publishing Your New Site to Edge Delivery Services</h2>
+        <p>Once you are finished editing your new site using the Universal Editor, you can publish your content.</p>
+        <ol>
+          <li>On the sites console, select all of the pages you created for your new site and tap or click <strong>Quick publish</strong> in the toolbar.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_14a53b7305bd929711973a0947931ebc3744c5451.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_14a53b7305bd929711973a0947931ebc3744c5451.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_14a53b7305bd929711973a0947931ebc3744c5451.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_14a53b7305bd929711973a0947931ebc3744c5451.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol start="2">
+          <li>Tap or click <strong>Publish</strong> in the confirmation dialog to start the process.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_144aa4edcf44cd8b7799055f9582f42f67a8327bf.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_144aa4edcf44cd8b7799055f9582f42f67a8327bf.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_144aa4edcf44cd8b7799055f9582f42f67a8327bf.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_144aa4edcf44cd8b7799055f9582f42f67a8327bf.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <ol start="3">
+          <li>Open a new tab in the same browser and navigate to the URL of your new site.
+            <ul>
+              <li><code>https://main--&lt;repository-name&gt;--&lt;owner&gt;.aem.page</code></li>
+            </ul>
+          </li>
+          <li>See your content published.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1eea92724b92bfe99a0ac70f1b9e7877c0958ca13.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1eea92724b92bfe99a0ac70f1b9e7877c0958ca13.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1eea92724b92bfe99a0ac70f1b9e7877c0958ca13.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1eea92724b92bfe99a0ac70f1b9e7877c0958ca13.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <p>Now that you have a working Edge Delivery Services project with AEM authoring, you can begin customizing it by creating and styling your own blocks.</p>
+        <h2 id="start-developing-styling-and-functionality">Start developing styling and functionality</h2>
+        <div class="video">
+          <div>
+            <div><a href="../videos/tutorial-step4.mp4/index.html" data-broken-link="true">https://main--helix-website--adobe.aem.page/developer/videos/tutorial-step4.mp4</a></div>
+          </div>
+        </div>
+        <p>To get started with development, it is easiest to install the AEM Command Line Interface (CLI) and clone your repo locally through using the following.</p>
+        <pre><code>npm install -g @adobe/aem-cli
+git clone https://github.com/&lt;owner&gt;/&lt;repo&gt;
+</code></pre>
+        <p><br><br>From there change into your project folder and start your local development environment using the following.</p>
+        <pre><code>cd &lt;repo&gt;
+aem up
+</code></pre>
+        <p><br><br>This opens <code>http://localhost:3000/</code> and you are ready to make changes.<br>A good place to start is in the <code>blocks</code> folder which is where most of the styling and code lives for a project. Simply make a change in a <code>.css</code> or <code>.js </code>and you should see the changes in your browser immediately.</p>
+        <p>Once you are are ready to push your changes, simply use Git to add, commit, and push and your code to your preview (<code>https://&lt;branch&gt;--&lt;repo&gt;--&lt;owner&gt;.aem.page/</code>) and production (<code>https://&lt;branch&gt;--&lt;repo&gt;--&lt;owner&gt;.aem.live/</code>) sites.</p>
+        <p><strong>That’s it, you made it! Congrats, your first site is up and running. If you need help in the tutorial, please</strong> <strong><a href="https://discord.gg/aem-live">join our Discord channel</a></strong> <strong>or</strong> <strong><a href="../../business/reachout/index.html">get in touch with us.</a></strong></p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="build"><a href="../../docs/index.html#build">Build</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="creating-blocks-for-the-universal-editor"><a href="../universal-editor-blocks/index.html">Creating Blocks for the Universal Editor</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

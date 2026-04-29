@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.239Z
+  page:             docs-aem-embed
+  pageUrl:          https://www.aem.live/docs/aem-embed
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Embedding Content in non-AEM experiences</title>
+  <meta name="description" content="In projects we often see the need to embed content in experiences that are not controlled by AEM. The need for that can arise from ...">
+  <meta property="og:title" content="Embedding Content in non-AEM experiences">
+  <meta property="og:description" content="In projects we often see the need to embed content in experiences that are not controlled by AEM. The need for that can arise from ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/aem-embed/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#using-aem-embed-web-component">Using AEM Embed Web Component</a></li>
+<li class="l-3"><a href="#special-cases-for-header-navigation-and-footer">Special cases for header (navigation) and footer</a></li>
+<li class="l-2"><a href="#making-your-project-embedable">Making your project embedable</a></li>
+<li class="l-3"><a href="#cors">CORS</a></li>
+<li class="l-3"><a href="#css--javascript">CSS &amp; JavaScript</a></li>
+<li class="l-4"><a href="#css-root">CSS :root</a></li>
+<li class="l-4"><a href="#javascript-loadpage-suppression">JavaScript loadPage() suppression</a></li>
+<li class="l-4"><a href="#javascript-headerjs-and-footerjs-changes">JavaScript header.js and footer.js changes</a></li>
+<li class="l-4"><a href="#javascript-setting-windowhlxcodebasepath">JavaScript setting window.hlx.codeBasePath</a></li>
+<li class="l-2"><a href="#using-the-embed-simulator-chrome-extension">Using the Embed Simulator chrome extension</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Embedding Content in non-AEM experiences</h1>
+          <p class="lede">In projects we often see the need to embed content in experiences that are not controlled by AEM. The need for that can arise from ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1f0a20136d57db477c73b7633d273c158825a2056.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1f0a20136d57db477c73b7633d273c158825a2056.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1f0a20136d57db477c73b7633d273c158825a2056.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1f0a20136d57db477c73b7633d273c158825a2056.png?width=750&amp;format=png&amp;optimize=medium" width="1463" height="1097">
+          </picture>
+        </p>
+        
+        <p>In projects we often see the need to embed content in experiences that are not controlled by AEM. The need for that can arise from having an existing app or website that has been built using a web framework, an existing native app or simply the be a part of a migration where certain elements of a page (often the header with the navigation and the footer) need to be shared into legacy environments.</p>
+        <p>There are a number of different approaches to achieve this and we are trying to make it as easy and simple as possible for an existing application or site to consume content managed by AEM. One of the easiest ways to embed content for web and hybrid applications is to use <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components">Web Components</a> which allows via a shadow DOM to isolate the CSS context completely from the containing environment.</p>
+        <p>This approach also allows to separate the development of design and functionality on the content side, and does not require updates or releases to the containing application in case there are changes to design, content or functionality of the embedded content and therefore has material advantages over a traditional headless development approach.</p>
+        <h2 id="using-aem-embed-web-component">Using AEM Embed Web Component</h2>
+        <p>As an application or website that needs to consume content from AEM it is as simple as adding the <a href="https://github.com/adobe/aem-embed">aem-embed</a> web component to the project. Simply add javascript file to your project.</p>
+        <p><a href="https://github.com/adobe/aem-embed/blob/main/scripts/aem-embed.js">https://github.com/adobe/aem-embed/blob/main/scripts/aem-embed.js</a></p>
+        <p>…and include it with a <code>&lt;script&gt;</code> tag or load it as a module, depending what's easiest in your framework.</p>
+        <p>In a plain vanilla web project, it is as simple as adding one line to your <code>&lt;head&gt;</code> or anywhere else before the <code>&lt;aem-embed&gt;</code> tag is used.</p>
+        <pre><code>&lt;script src="/scripts/aem-embed.js" type="module"&gt;&lt;/script&gt;
+</code></pre>
+        <p>Once the <code>aem-embed.js</code> is added to your document you can just use the <code>&lt;aem-embed&gt;</code> tag to reference content from an AEM project via a <code>url=</code> attribute. This includes the referenced content similar to a fragment.</p>
+        <p>See usage examples here for a banner use case here:<br><a href="../../examples/banners.html/index.html" data-broken-link="true">https://main--aem-embed--adobe.aem.page/examples/banners.html</a></p>
+        <h3 id="special-cases-for-header-navigation-and-footer">Special cases for header (navigation) and footer</h3>
+        <p>Since it is common to share a navigation managed by AEM in other experiences on a website there is special support for headers and footers via the <code>type=</code> attributes.</p>
+        <p>See usage examples for <code>header</code> and <code>footer</code> here:<br><a href="../../examples/header.html/index.html" data-broken-link="true">https://main--aem-embed--adobe.aem.page/examples/header.html</a></p>
+        <h2 id="making-your-project-embedable">Making your project embedable</h2>
+        <h3 id="cors">CORS</h3>
+        <p>Depending on the setup it might be necessary to change the CORS headers to allow access from all the consuming origins. An easy way to achieve that is to add a <code>access-control-allow-origin</code> header with the value of <code>*</code> via the <a href="../admin.html/index.html#schema/HeadersConfig" data-broken-link="true">headers in config service</a>.</p>
+        <h3 id="css--javascript">CSS &amp; JavaScript</h3>
+        <p>As web components change the DOM structure of a page, often CSS and JavaScript behavior need to be adjusted a little bit. Please find a list of common adjustments that need to be made to an existing project to be consumable.</p>
+        <p>If you are starting with a new project, it might be easy to just fork <a href="https://github.com/aemsites/embed-example">https://github.com/aemsites/embed-example</a></p>
+        <h4 id="css-root">CSS <code>:root</code></h4>
+        <p>A lot of CSS uses <code>:root</code> especially to define <code>CSS</code> variables. For variables to work as expected adding <code>:host</code> to the CSS selector often is the only thing that's needed.</p>
+        <p><a href="https://github.com/aemsites/embed-example/commit/db0f3f118475b1889801257726eb13765e3f0556">See commit for details</a></p>
+        <h4 id="javascript-loadpage-suppression">JavaScript <code>loadPage()</code> suppression</h4>
+        <p>To make sure that the full page is not loaded in the case of an <code>import</code> happening via an <code>aem-embed</code> we need to suppress full page decoration in that case. This is usually done by replacing the <code>loadPage()</code> line in <code>scripts.js</code> with the following.</p>
+        <pre><code>if (!window.hlx.suppressLoadPage) loadPage(document);
+</code></pre>
+        <p><a href="https://github.com/aemsites/embed-example/commit/1f1c2d15f5fe6fca150091d0e326987cd04f156f">See commit for details</a></p>
+        <h4 id="javascript-headerjs-and-footerjs-changes">JavaScript <code>header.js</code> and <code>footer.js</code> changes</h4>
+        <p>In cases you are planning to embed a <code>header</code> or <code>footer</code> there are potentially some changes to make sure that the <code>header</code> and <code>footer</code> can operate on content that is already in the DOM when they are called. Most <code>header</code> and <code>footer</code> implementations are responsible for loading their own content, and are not aware of content already being available in the DOM when the decoration step is started.</p>
+        <p>See examples for <a href="https://github.com/aemsites/embed-example/blob/main/blocks/header/header.js">header</a> and <a href="https://github.com/aemsites/embed-example/blob/main/blocks/footer/footer.js">footer</a></p>
+        <h4 id="javascript-setting-windowhlxcodebasepath">JavaScript setting <code>window.hlx.codeBasePath</code></h4>
+        <p>If your site uses a <a href="../../developer/change-site-root/index.html">site root path</a>, you will likely need to adjust how this is set in <code>aem.js</code>.</p>
+        <p><a href="https://github.com/adobe/aem-embed/commit/df8833636eb919093f72ace9d6aecb420da1f514#diff-0e7c120a93e71c8d3532a0952c7ca07331340900de8e45b33ff1d1f1eb72b674">See commit for details</a></p>
+        <h2 id="using-the-embed-simulator-chrome-extension">Using the Embed Simulator chrome extension</h2>
+        <p>To make it simple and easy to simulate what the end result on an embed looks like in an existing application or website without having to make any changes to existing application or site, there is a chrome extension available for use <a href="https://chromewebstore.google.com/detail/aem-embed-simulator/fjofhmphcnlkfmooihhdeoanoomohiih">here</a>.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.294Z
+  page:             docs-configuration-templates
+  pageUrl:          https://www.aem.live/docs/configuration-templates
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Configuration templates</title>
+  <meta name="description" content="When using AEM as your content authoring source, you can use the Sites console to easily create and manage your project configuration by using a ...">
+  <meta property="og:title" content="Configuration templates">
+  <meta property="og:description" content="When using AEM as your content authoring source, you can use the Sites console to easily create and manage your project configuration by using a ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/configuration-templates/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="l-2"><a href="#creating-a-configuration">Creating a configuration</a></li>
+<li class="l-2"><a href="#editing-a-configuration">Editing a configuration</a></li>
+<li class="l-3"><a href="#basic">Basic</a></li>
+<li class="l-3"><a href="#access-control">Access Control</a></li>
+<li class="l-3"><a href="#cdn">CDN</a></li>
+<li class="l-3"><a href="#additional-resources">Additional Resources</a></li>
+<li class="l-2"><a href="#configuration-inheritance">Configuration Inheritance</a></li>
+<li class="l-2"><a href="#configuration-templates-and-configuration-spreadsheets">Configuration templates and configuration spreadsheets</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Configuration templates</h1>
+          <p class="lede">When using AEM as your content authoring source, you can use the Sites console to easily create and manage your project configuration by using a ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1e85aed06630489b93102500099a073c2d15f9a46.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1e85aed06630489b93102500099a073c2d15f9a46.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1e85aed06630489b93102500099a073c2d15f9a46.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1e85aed06630489b93102500099a073c2d15f9a46.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>When using AEM as your content authoring source, you can use the Sites console to easily create and manage your project configuration by using a configuration template. By leveraging the powerful features of the Sites console, your configuration can be inherited across sites using Multi-site management (MSM).</p>
+        <h2 id="prerequisites">Prerequisites</h2>
+        <p>You must have already created your Edge Delivery Services project with AEM as your authoring source. <a href="../../developer/ue-tutorial/index.html">Please see the tutorial for more information.</a></p>
+        <h2 id="creating-a-configuration">Creating a configuration</h2>
+        <ol>
+          <li>Sign in to your AEM as a Cloud Service authoring instance, go to the <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/sites/authoring/sites-console/introduction">Sites console</a>, and navigate to the root of the site where you wish to create a configuration. Tap or click <strong>Create</strong> → <strong>Page</strong>.<br>
+            <picture>
+              <source type="image/webp" srcset="./media_16c74f0e086f18ca185ff6d877da1422c4601b875.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+              <source type="image/webp" srcset="./media_16c74f0e086f18ca185ff6d877da1422c4601b875.png?width=750&amp;format=webply&amp;optimize=medium">
+              <source type="image/png" srcset="./media_16c74f0e086f18ca185ff6d877da1422c4601b875.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+              <img loading="lazy" alt="" src="./media_16c74f0e086f18ca185ff6d877da1422c4601b875.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="988">
+            </picture>
+          </li>
+          <li>On the <strong>Template</strong> tab of the create page wizard, tap or click the <strong>Configuration</strong> template to select it and then tap or click <strong>Next</strong>.
+            <ul>
+              <li>Please see the document <a href="../authoring-tabular-data/index.html">Managing tabular data with AEM authoring as your content source</a> for more information about templates.<br>
+                <picture>
+                  <source type="image/webp" srcset="./media_152798f10a7475e2ec27cb8a5d260f40984c5ff3a.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                  <source type="image/webp" srcset="./media_152798f10a7475e2ec27cb8a5d260f40984c5ff3a.png?width=750&amp;format=webply&amp;optimize=medium">
+                  <source type="image/png" srcset="./media_152798f10a7475e2ec27cb8a5d260f40984c5ff3a.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                  <img loading="lazy" alt="" src="./media_152798f10a7475e2ec27cb8a5d260f40984c5ff3a.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="988">
+                </picture>
+              </li>
+            </ul>
+          </li>
+          <li>The <strong>Properties</strong> tab of the wizard allows you to specify a <strong>Title</strong> for the configuration. The default value of <code>Configuration</code> can typically be left as-is. Tap or click <strong>Create</strong>.<br>
+            <picture>
+              <source type="image/webp" srcset="./media_188ed28bbb8b89769015b7a23fc4d20289bbea543.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+              <source type="image/webp" srcset="./media_188ed28bbb8b89769015b7a23fc4d20289bbea543.png?width=750&amp;format=webply&amp;optimize=medium">
+              <source type="image/png" srcset="./media_188ed28bbb8b89769015b7a23fc4d20289bbea543.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+              <img loading="lazy" alt="" src="./media_188ed28bbb8b89769015b7a23fc4d20289bbea543.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="988">
+            </picture>
+          </li>
+          <li>In the <strong>Success</strong> dialog, tap or click <strong>Done</strong>.</li>
+          <li>The configuration is created in the site root.</li>
+        </ol>
+        <h2 id="editing-a-configuration">Editing a configuration</h2>
+        <p>Once you create the configuration from the template, you must edit it to customize your configuration data.</p>
+        <ol>
+          <li>Tap or click the configuration you created to select it and then tap or click <strong>Properties</strong> in the toolbar.
+            <ul>
+              <li>Alternatively you can use the hotkey <code>p</code> once you have selected the configuration.<br>
+                <picture>
+                  <source type="image/webp" srcset="./media_12c5098e04ce18389001a60d3aa3103032a8e6015.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                  <source type="image/webp" srcset="./media_12c5098e04ce18389001a60d3aa3103032a8e6015.png?width=750&amp;format=webply&amp;optimize=medium">
+                  <source type="image/png" srcset="./media_12c5098e04ce18389001a60d3aa3103032a8e6015.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                  <img loading="lazy" alt="" src="./media_12c5098e04ce18389001a60d3aa3103032a8e6015.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="966">
+                </picture>
+              </li>
+            </ul>
+          </li>
+          <li>In the page properties window, you can manage your configuration information across four tabs.
+            <ul>
+              <li><strong>Basic</strong></li>
+              <li><strong>Access Control</strong></li>
+              <li><strong>CDN</strong></li>
+              <li><strong>Metadata</strong></li>
+            </ul>
+          </li>
+          <li>Click or tap <strong>Save &amp; Close</strong> to save your changes or <strong>Cancel</strong> to abort.</li>
+        </ol>
+        <p>Each tab exposes configuration options in a convenient way in the UI. For details about the underlying options, please see the document <a href="../configuration/index.html">Project Configuration.</a></p>
+        <h3 id="basic">Basic</h3>
+        <p>This tab allows you to change the title of the configuration.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_11f7f42493aac853de9cda0a148daf687dfaefb9e.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_11f7f42493aac853de9cda0a148daf687dfaefb9e.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_11f7f42493aac853de9cda0a148daf687dfaefb9e.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_11f7f42493aac853de9cda0a148daf687dfaefb9e.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="988">
+          </picture>
+        </p>
+        <h3 id="access-control">Access Control</h3>
+        <p>This tab allows you to manage access to your project.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1ad7b75201953431d254596fd2aaed022ca00463e.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1ad7b75201953431d254596fd2aaed022ca00463e.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1ad7b75201953431d254596fd2aaed022ca00463e.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1ad7b75201953431d254596fd2aaed022ca00463e.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="988">
+          </picture>
+        </p>
+        <ul>
+          <li><strong>Author Users</strong> - The email glob of the users with the author role
+            <ul>
+              <li>Tap or click <strong>Add</strong> to add a row</li>
+              <li>Tap or click <strong>Remove</strong> to delete a row</li>
+            </ul>
+          </li>
+          <li><strong>Admin Users</strong> - The email glob of the users with the admin role
+            <ul>
+              <li>Tap or click <strong>Add</strong> to add a row</li>
+              <li>Tap or click <strong>Remove</strong> to delete a row</li>
+            </ul>
+          </li>
+        </ul>
+        <p>For more information on roles, please see the document <a href="../authentication-setup-authoring/index.html">Configuring Authentication for Authors.</a></p>
+        <h3 id="cdn">CDN</h3>
+        <p>This tab allows you to select which CDN you use with your project and define its options.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1eb47d754fc44c1c281e954064b9e7b52e5096408.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1eb47d754fc44c1c281e954064b9e7b52e5096408.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1eb47d754fc44c1c281e954064b9e7b52e5096408.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1eb47d754fc44c1c281e954064b9e7b52e5096408.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="988">
+          </picture>
+        </p>
+        <ul>
+          <li><strong>CDN Vendor</strong> - Define which CDN service you will use with your project. Options vary depending on which service you select.
+            <ul>
+              <li><strong><a href="../byo-cdn-adobe-managed/index.html">Adobe Managed CDN</a></strong></li>
+              <li><strong><a href="../byo-cdn-fastly-setup/index.html">Fastly</a></strong></li>
+              <li><strong><a href="../byo-cdn-akamai-setup/index.html">Akamai</a></strong></li>
+              <li><strong><a href="../byo-cdn-cloudflare-worker-setup/index.html">Cloudflare</a></strong></li>
+              <li><strong><a href="../byo-cdn-cloudfront-setup/index.html">Cloudfront</a></strong></li>
+            </ul>
+          </li>
+        </ul>
+        <h3 id="additional-resources">Additional Resources</h3>
+        <p>This tab allows you to define additional metadata resources for your project.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1556a9d804b14969b5344a17ad6cbfbb1d5e24ffe.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1556a9d804b14969b5344a17ad6cbfbb1d5e24ffe.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1556a9d804b14969b5344a17ad6cbfbb1d5e24ffe.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1556a9d804b14969b5344a17ad6cbfbb1d5e24ffe.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="988">
+          </picture>
+        </p>
+        <ul>
+          <li><strong>Additional Metadata</strong> - Provide a path for a metadata sheet
+            <ul>
+              <li>Tap or click <strong>Add</strong> to add a row</li>
+              <li>Tap or click <strong>Remove</strong> to delete a row</li>
+            </ul>
+          </li>
+        </ul>
+        <p>For additional information, please see the document <a href="../bulk-metadata/index.html#additional-metadata">Bulk Metadata</a> for more information.</p>
+        <h2 id="configuration-inheritance">Configuration Inheritance</h2>
+        <p>When using AEM as your authoring source, project configuration templates fully support inheritance.</p>
+        <p>For example, you may have a single API key for your CDN for your organization. However your individual, localized sites would have different host names. You can set the API key in the blueprint, which is rolled out to your localized sites. For each site, you can break inheritance for the host name and set it for each site.</p>
+        <ul>
+          <li>For more information about blueprints, inheritance, and MSM, please see the document <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/sites/administering/reusing-content/msm/overview">Reusing Content: Multi Site Manager and Live Copy</a>.</li>
+          <li>For more information on how to set up MSM for your Edge Delivery Services with AEM authoring project, please see the document <a href="../../developer/repoless-multisite-manager/index.html">Multi site management with AEM authoring as your content source</a>.</li>
+          <li>For more information on breaking and reinstating inheritance in the Sites Console, please see the document <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/sites/authoring/sites-console/edit-page-properties#inheritance">Editing Page Properties.</a></li>
+        </ul>
+        <h2 id="configuration-templates-and-configuration-spreadsheets">Configuration templates and configuration spreadsheets</h2>
+        <p>Configuration templates support a reasonable subset of configurations that are common and possible. There may be edge cases that configuration templates do not cover.</p>
+        <p>If you find that the configuration template does not support your use case you must first delete the configuration you created. You then have two options:</p>
+        <ul>
+          <li><a href="../authoring-tabular-data/index.html">Create a spreadsheet</a> called <code>configuration</code> and manage your settings in that spreadsheet.</li>
+          <li><a href="../config-service-setup/index.html">Activate the Configuration Service</a> and manage your settings using the service.</li>
+        </ul>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

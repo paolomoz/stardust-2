@@ -1,0 +1,249 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.887Z
+  page:             docs-dev-collab-and-good-practices
+  pageUrl:          https://www.aem.live/docs/dev-collab-and-good-practices
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Development Collaboration and Good Practices</title>
+  <meta name="description" content="Working with a large number of development teams across many projects and organizations, we found that it is useful to collect some of our insights. ...">
+  <meta property="og:title" content="Development Collaboration and Good Practices">
+  <meta property="og:description" content="Working with a large number of development teams across many projects and organizations, we found that it is useful to collect some of our insights. ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/dev-collab-and-good-practices/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#github">GitHub</a></li>
+<li class="l-3"><a href="#create-pull-requests">Create pull requests</a></li>
+<li class="l-3"><a href="#pull-request-etiquette">Pull request etiquette</a></li>
+<li class="l-3"><a href="#start-by-talking-to-your-maintainers">Start by talking to your maintainers</a></li>
+<li class="l-3"><a href="#linting">Linting</a></li>
+<li class="l-3"><a href="#pagespeed-insights">PageSpeed Insights</a></li>
+<li class="l-3"><a href="#reviews">Reviews</a></li>
+<li class="l-3"><a href="#shared-branches">Shared branches</a></li>
+<li class="l-3"><a href="#merging-pull-requests-deploying-to-production">Merging pull requests (deploying to production)</a></li>
+<li class="l-3"><a href="#scaled-trunk-based-development">(Scaled) Trunk-based development</a></li>
+<li class="l-3"><a href="#dependency-management">Dependency management</a></li>
+<li class="l-3"><a href="#keep-the-repository-public">Keep the repository public</a></li>
+<li class="l-2"><a href="#css">CSS</a></li>
+<li class="l-3"><a href="#css-selector-block-isolation">CSS selector block isolation</a></li>
+<li class="l-3"><a href="#cascade-in-css">Cascade in CSS</a></li>
+<li class="l-3"><a href="#css-indentation-and-property-order">CSS indentation and property order</a></li>
+<li class="l-3"><a href="#css-selectors-complexity">CSS selectors complexity</a></li>
+<li class="l-3"><a href="#css-naming">CSS naming</a></li>
+<li class="l-3"><a href="#the-important-rule">The !important rule</a></li>
+<li class="l-3"><a href="#leverage-aria-attributes-for-styling">Leverage ARIA attributes for styling</a></li>
+<li class="l-3"><a href="#mobile-first">Mobile first</a></li>
+<li class="l-3"><a href="#breakpoints">Breakpoints</a></li>
+<li class="l-3"><a href="#less-sass-postcss-tailwind-and-friends">Less, Sass, PostCSS, Tailwind and friends.</a></li>
+<li class="l-3"><a href="#modern-css-features">Modern CSS features</a></li>
+<li class="l-2"><a href="#javascript">JavaScript</a></li>
+<li class="l-3"><a href="#frameworks">Frameworks</a></li>
+<li class="l-3"><a href="#build-tool-chain">Build tool chain</a></li>
+<li class="l-3"><a href="#modern-javascript-features">Modern JavaScript features</a></li>
+<li class="l-3"><a href="#loading-3rd-party-libraries">Loading 3rd party libraries</a></li>
+<li class="l-3"><a href="#aem-library-aemjs">AEM library (aem.js)</a></li>
+<li class="l-3"><a href="#head">&lt;head&gt;</a></li>
+<li class="l-3"><a href="#minification">Minification</a></li>
+<li class="l-2"><a href="#content-first">Content first</a></li>
+<li class="l-3"><a href="#start-your-development-with-content">Start your development with content</a></li>
+<li class="l-3"><a href="#use-drafts">Use drafts</a></li>
+<li class="l-3"><a href="#backwards-compatibility-of-new-features">Backwards compatibility of new features</a></li>
+<li class="l-3"><a href="#use-content-for-static-resources">Use content for “static” resources</a></li>
+<li class="l-3"><a href="#use-content-for-stringsliterals">Use content for strings/literals</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Development Collaboration and Good Practices</h1>
+          <p class="lede">Working with a large number of development teams across many projects and organizations, we found that it is useful to collect some of our insights. ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_14b00b877f0e91728c42d63fc1c5d0f28e3e34c71.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_14b00b877f0e91728c42d63fc1c5d0f28e3e34c71.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_14b00b877f0e91728c42d63fc1c5d0f28e3e34c71.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="Adobe Logo Illustration" src="./media_14b00b877f0e91728c42d63fc1c5d0f28e3e34c71.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Working with a large number of development teams across many projects and organizations, we found that it is useful to collect some of our insights. Some of those are related to AEM, but the majority are related to general purpose frontend development or are just general guidelines on how to collaborate in a team of developers.</p>
+        <p>You may read some of those items and think that it is generally understood as common sense amongst developers. We agree, and that’s a great sign that you are ready to work in a collaborative way on AEM projects together with other developers.</p>
+        <p>At this point this is just a collection of lessons learned from our engagements on a growing set of projects.</p>
+        <h2 id="github">GitHub</h2>
+        <h3 id="create-pull-requests">Create pull requests</h3>
+        <p>If you work on a project with multiple developers it is rarely a good idea to push directly to <code>main</code>. When your project is in production code changes that are merged or pushed to <code>main</code> often means that they are released to production. Protecting your <code>main</code> branch is a good mechanism to ensure that people don’t push to <code>main</code> by accident, which is especially advisable with a site that is in production.</p>
+        <h3 id="pull-request-etiquette">Pull request etiquette</h3>
+        <p>If you open a pull request, make sure that you include a URL to a page (or a number of links to pages) on your branch, where the reviewer can see your code in action. If you are updating code of an existing block, make sure to include the link that features the block you are updating as the reviewer may not know where this block is in use to test its functionality.</p>
+        <p>Keep the scope of your Pull Request to what’s in the title/description of the PR.</p>
+        <p>For work still in progress, opening a Draft Pull Request helps prevent wasting people's time with reviewing code still in flux as well as accidental merging.</p>
+        <h3 id="start-by-talking-to-your-maintainers">Start by talking to your maintainers</h3>
+        <p>Especially with the adoption of coding agents, it is more important than ever, that before you create a PR you communicate with the maintainers of the codebase and include them in what you are trying to achieve and what's the best way of doing that. For blocks development that often includes a discussion on content models. No maintainer wants to review a large, "drive-by" AI-slop PR for any portion of the code that has a large blast radius.</p>
+        <h3 id="linting">Linting</h3>
+        <p>The standard boilerplate setup runs the linting tools <code>eslint</code> (airbnb-base) and <code>stylelint</code> for each change in a Pull Request. Do not submit a Pull Request with linting errors for review.</p>
+        <p>Changing the linting configuration is not recommended unless you have a really good reason. Personal preference is not a good reason. Changing linting rules makes it difficult to reuse code from the AEM boilerplate, <a href="../../developer/block-collection/index.html">block collection</a> or other open source AEM projects. Arguing if something is a good reason to change the linting rules is usually a lot more effort than just categorically saying no.</p>
+        <h3 id="pagespeed-insights">PageSpeed Insights</h3>
+        <p>The AEM Code Sync GitHub app runs <a href="https://pagespeed.web.dev/">Google PageSpeed Insights</a> for each change in a pull request to assess the impact on Web Performance, Accessibility, SEO and Best Practices. Do not submit a pull request for review that doesn’t have a green Lighthouse Score for mobile and desktop, <a href="../../developer/keeping-it-100/index.html">ideally 100 for both</a>.</p>
+        <h3 id="reviews">Reviews</h3>
+        <p>It is good practice to have your code reviewed by the maintainer or main developer of the project you are working on. This can be encouraged by setting up branch protection on <code>main</code> to require pull requests with at least 1 approval before any code can be merged. You can still allow project administrators to bypass branch protection settings for emergencies.</p>
+        <h3 id="shared-branches">Shared branches</h3>
+        <p>It is good practice to consider branches for individual Pull Requests as private to the developer who created the branch. Do not just push into other developers’ branches without having been invited to do so. There are situations where people are collaborating on Pull Requests but it should be an explicit agreement.</p>
+        <h3 id="merging-pull-requests-deploying-to-production">Merging pull requests (deploying to production)</h3>
+        <p>Merge your own pull requests only. If the person who opened the Pull Request has the ability to merge their own Pull Request, the author of the code is the ideal person to merge. There are situations where the author specifically states that this can and should be merged by someone else, and in those cases a maintainer (main developer) of the project should feel free to merge a Pull Request.</p>
+        <p>Even if a Pull Request is approved, you should always check with the author of the Pull Request if they are ready to merge.</p>
+        <p>The AEM Code Sync GitHub app will automatically deploy changes merged into the <code>main</code> branch to production.</p>
+        <h3 id="scaled-trunk-based-development">(Scaled) Trunk-based development</h3>
+        <p>For AEM projects with their built-in devops and CI/CD, we recommend following the <a href="https://trunkbaseddevelopment.com/">scaled trunk-based development</a> model. This means you merge small pull requests into production often, but the quality assurance &amp; review efforts are limited to small change sets. Nobody wants to review and test large pull requests, and long-lived branches with lots of changes tend to be difficult (and dangerous) to merge.</p>
+        <h3 id="dependency-management">Dependency management</h3>
+        <p>Make sure your dependencies are kept up to date. Even if you don't add more dependencies, it is good practice to keep the minimal out of the box dependencies (linting) up to date. Feel free to use tools like <a href="https://www.mend.io/renovate/">Renovate</a>.</p>
+        <h3 id="keep-the-repository-public">Keep the repository public</h3>
+        <p>Given that all project code is sent to the client-side and therefore accessible in everyone's browser, we recommend keeping the repository as public. Adobe has a longstanding history in the open-source community and generally advocates for code to be public unless there is a compelling reason to make it private.</p>
+        <p>Maintaining a public repository offers several benefits of open source projects like community code reviews, and developers are able to share knowledge and code, in turn fostering innovation and collaboration. Public repositories also make it quick and easy for Adobe and other developers to create free pull requests to help improve your project and automatic <a href="../../developer/keeping-it-100/index.html">PSI checks</a> (on the feature branches) are provided by Adobe, which are not enabled by default for private repositories.</p>
+        <p>If you still have a strong need to keep your repository private, be aware that certain features are only available in paid plans for private repositories, such as branch protection rules and limited CI/CD minutes. For more details, please see <a href="https://github.com/pricing">GitHub’s pricing page</a>.</p>
+        <h2 id="css">CSS</h2>
+        <h3 id="css-selector-block-isolation">CSS selector block isolation</h3>
+        <p>AEM blocks most often operate as components collaboratively in the same DOM / CSSOM. This means that you should write your CSS selectors in a block <code>.css</code> in a way that isolates your CSS from impacting layout of elements outside your block. The easiest way to do this is by making sure that every CSS selector in the <code>.css</code> of a block only applies to the block.</p>
+        <h3 id="cascade-in-css">Cascade in CSS</h3>
+        <p>Use your CSS classnames wisely. Some CSS classes and variables are used across different blocks, and others are not expected to be used outside your block. Prefixing classes and variables that are private to your block with the block name is good practice. Conversely, if there are CSS classes and CSS context that should be inherited (often those can be authored) those classes and variables should not be prefixed.</p>
+        <h3 id="css-indentation-and-property-order">CSS indentation and property order</h3>
+        <p>Outside of a CSS refactoring PR, don’t change sequencing on properties or the indentation across the CSS files you touch in a functional PR. Every developer has different preferences on sort order of properties or indentation. Make sure the diff that you see in your PR is isolated to the changes you actually want reviewed before submitting it.</p>
+        <h3 id="css-selectors-complexity">CSS selectors complexity</h3>
+        <p>Don’t let your CSS Selectors become complex and unreadable. Often it is better to decorate additional CSS classes/Elements onto your DOM and write readable CSS instead. Complex CSS selectors also often are harder to maintain and more brittle than the equivalents in JS.</p>
+        <h3 id="css-naming">CSS naming</h3>
+        <p>Naming your classes simple and intuitive is helpful for other developers. Avoid namespacing unless it is necessary within the scope of a project. There is often no need to specify the type or the origin (e.g. the name of your design system) of a CSS variable that is to be used across the entire project.</p>
+        <h3 id="the-important-rule">The <code>!important</code> rule</h3>
+        <p><code>!important</code> is reserved for very specific isolated cases. Since in website projects we often control the entire CSS context of a page (or at least the vast majority), it is very unlikely that there <a href="https://css-tricks.com/when-using-important-is-the-right-choice/">is a need to throw the</a> <code>!important</code> <a href="https://css-tricks.com/when-using-important-is-the-right-choice/">hand grenade</a>.</p>
+        <h3 id="leverage-aria-attributes-for-styling">Leverage ARIA attributes for styling</h3>
+        <p>In many situations you will add ARIA Attributes for accessibility. Since those have well defined semantics like <code>expanded</code> or <code>hidden</code> that are understood by all developers, in most cases there is really no need to come up with additional classes in your vocabulary that have unknown semantics.</p>
+        <h3 id="mobile-first">Mobile first</h3>
+        <p>Generally Web projects should be developed “Mobile First”. This means that your CSS without media query should render a mobile site. Add media queries to extend the layout for tablet and desktop.</p>
+        <h3 id="breakpoints">Breakpoints</h3>
+        <p>Generally use <code>600px</code>, <code>900px</code> and <code>1200px</code> as your breakpoints, all <code>min-width</code>. Don’t mix <code>min-width</code> and <code>max-width</code>. Only use different breakpoints in exceptional cases where you have good understanding why that’s needed.</p>
+        <h3 id="less-sass-postcss-tailwind-and-friends">Less, Sass, PostCSS, Tailwind and friends.</h3>
+        <p>If you are working in the context of a bigger organization, make sure that you don’t introduce a dependency to any CSS preprocessor or framework of your personal preference without getting the buy-in from the entire team and organization. As there are a lot of differing personal preferences in this area, it makes code hard to maintain if every project or every block inside a project uses different technologies.<br>The simplest solution is to rely on the growing CSS feature set which is supported by the browsers.</p>
+        <h3 id="modern-css-features">Modern CSS features</h3>
+        <p>Make sure the features you are using are well supported by evergreen browsers. Depending on the features more or less pervasive support may be acceptable.</p>
+        <h2 id="javascript">JavaScript</h2>
+        <h3 id="frameworks">Frameworks</h3>
+        <p>On most web sites, frameworks are overkill for simple layout problems outside of application-like functionality. Frameworks often introduce web performance issues (Lighthouse and Core Web Vitals), particularly if they are in the pathway of the <code>LCP</code> or introduce <code>TBT</code>, while trying to address trivial problems. Keep simple things simple.<br>If you are using Javascript Frameworks make sure that you don’t introduce a dependency to any JS Framework or library of your personal preference without getting the buy-in from the entire team and organization. As there are a lot of personal preferences, it makes code hard to maintain if every project or every block inside a project uses different technologies.<br>The simplest solution is to rely on the growing feature set supported by browsers.</p>
+        <h3 id="build-tool-chain">Build tool chain</h3>
+        <p>Differing build tool chains from project to project make it hard for new developers to be onboarded and often introduce additional complexity. Make sure that you don’t introduce a dependency of your personal preference without getting the buy-in from the entire team and organization.<br>The simplest solution is to keep the entire project build-less.</p>
+        <h3 id="modern-javascript-features">Modern JavaScript features</h3>
+        <p>Make sure the features you are using are well supported by evergreen browsers. Depending on the features more or less pervasive support may be acceptable. While AEM can be used with any browser, <code>aem.js</code> has a dependency on browsers that support dynamic <code>import()</code>. Any feature that is supported by the set of browsers that support dynamic <code>import()</code> should be considered safe. Technically, of course, older browsers (e.g., IE) can be supported by AEM projects, but those require heavy customization.</p>
+        <p>Not all features have the same consequences if a browser doesn’t support them, some may be cosmetic and others may stop the site from working. A common example is “optional chaining”. If a browser doesn’t support “optional chaining”, a single usage can have fatal consequences for the entire page.</p>
+        <h3 id="loading-3rd-party-libraries">Loading 3rd party libraries</h3>
+        <p>Don’t add 3rd party libraries to your <code>&lt;head&gt;</code> via <code>head.html</code> as they will be in the critical path of loading content above the fold and will often be loaded when they are not needed. Add the dependencies where needed via <code>loadScript()</code> to the specific block that has the corresponding requirement.<br>In case of larger 3rd party libraries, you may even want to consider using an <code>IntersectionObserver</code> to make sure you only load them when the block depending on it is actually being scrolled into view.</p>
+        <h3 id="aem-library-aemjs">AEM library (<code>aem.js</code>)</h3>
+        <p>The <a href="https://github.com/adobe/aem-lib">AEM library</a> (usually called <code>aem.js</code> in a boilerplate project) is currently not minified and obfuscated to make debugging easier. We discourage making changes to it on a project basis and instead recommend project specific extensions to be kept outside of the library. We welcome Pull Requests via GitHub, if you would like to propose changes or bug fixes that are universally applicable.</p>
+        <h3 id="head">&lt;head&gt;</h3>
+        <p>The <code>&lt;head&gt;</code> that is delivered from the server as part of the HTML markup should remain minimal and free of marketing technology like Adobe Web SDK, Google Tag Manager or other 3rd party scripts due to performance impacts. Adding inline scripts or styles to <code>&lt;head&gt;</code> is also not advisable for performance and code management reasons.</p>
+        <h3 id="minification">Minification</h3>
+        <p>Even though PSI mentions it as a possible performance optimization: minification of JS and/or CSS does not add any measurable performance benefit – unless you have very large code files, which again is an anti-pattern. In Edge Delivery Services, your code is being delivered to the client in small, compressed servings (block by block), parallelized thanks to HTTP 2. Minifying your code would hardly make a difference here. To see for yourself, you can compare the <a href="https://pagespeed.web.dev/">Lighthouse Score</a> pre/post minification.</p>
+        <p>On the other hand, minification does add project complexity: it introduces a build step which can slow down your site development process, and requires the addition of source maps for client-side debugging.</p>
+        <p>We recommend only going there if there is a measurable performance impact.</p>
+        <h2 id="content-first">Content first</h2>
+        <h3 id="start-your-development-with-content">Start your development with content</h3>
+        <p>Before writing a line of code, create your (sample) content in a Word or Google Doc (or spreadsheet). Make sure that it feels good for authoring and share it with people on your team that have experience supporting authors. It requires support experience to understand what content structures are easy for authors to understand and recreate. Once you have settled on a content structure that contains all elements you need for your block, and have it reviewed you can get started developing your CSS and JS code.</p>
+        <h3 id="use-drafts">Use drafts</h3>
+        <p>The content lifecycle is very different from the code life cycle. If you are proposing changes to an existing content structure in your code or come up with a new block, don’t just make those changes on the page you are working on. Copy the page into your <code>/drafts/&lt;yourname&gt;/</code> folder and make changes there.<br>Once your code changes are merged to <code>main</code> , you can have authors copy or merge your content with the content outside of your <code>/drafts/</code> folder.</p>
+        <h3 id="backwards-compatibility-of-new-features">Backwards compatibility of new features</h3>
+        <p>Especially in production environments it is important to keep your anticipated changes to the content structure backwards compatible with existing content. Ideally, code that is being merged should not have an impact on the website or require refactoring the content. Only when new content is put in place through a preview and publish cycle, the new functionality becomes available. This of course doesn’t apply to things like design changes across the existing content or functional bug fixes.</p>
+        <h3 id="use-content-for-static-resources">Use content for “static” resources</h3>
+        <p>Generally, it is not a good idea to commit binaries into your GitHub repo. Even text-based static resources, for example HTML files or SVGs should only be put into GitHub in exceptional cases. A good reason to add an SVG to your git repo is if it is referenced from code. Don’t commit anything that is related to the content authoring process, or could be a part of an authoring process. There are some exceptions (usually related to legacy and non-browser clients) that require a certain set of fixed resources that cannot be produced and manipulated dynamically by AEM, but in general if you find a large set of static resources (e.g. images, etc.) or an HTML file in a PR it is most likely not a good practice.</p>
+        <h3 id="use-content-for-stringsliterals">Use content for strings/literals</h3>
+        <p>Strings that are displayed to end users and could possibly be translated or changed at some point should always be authorable and sourced from content (eg. <a href="../placeholders/index.html">placeholders</a> or other spreadsheets or documents). If you have a literal string that is displayed as text to the visitor of your website via javascript or css code, it is good practice to replace it with a reference to content.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

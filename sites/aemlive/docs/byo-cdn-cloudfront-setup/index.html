@@ -1,0 +1,397 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.912Z
+  page:             docs-byo-cdn-cloudfront-setup
+  pageUrl:          https://www.aem.live/docs/byo-cdn-cloudfront-setup
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Amazon Web Services (AWS) CloudFront Setup</title>
+  <meta name="description" content="The following screenshots illustrate how to configure AWS CloudFront to deliver content from an AEM origin. Essential settings are marked with a red circle.">
+  <meta property="og:title" content="Amazon Web Services (AWS) CloudFront Setup">
+  <meta property="og:description" content="The following screenshots illustrate how to configure AWS CloudFront to deliver content from an AEM origin. Essential settings are marked with a red circle.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/byo-cdn-cloudfront-setup/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#cache-key-and-origin-requests">Cache key and origin requests</a></li>
+<li class="l-2"><a href="#create-cache-policy">Create cache policy</a></li>
+<li class="l-2"><a href="#create-origin-request-policy">Create origin request policy</a></li>
+<li class="l-3"><a href="#apply-cache-policy-and-origin-request-policy">Apply Cache policy and origin request policy</a></li>
+<li class="l-3"><a href="#create-distribution">Create distribution</a></li>
+<li class="l-2"><a href="#optional-authenticate-origin-requests">Optional: Authenticate Origin Requests</a></li>
+<li class="l-3"><a href="#byo-cdn-setup-overview">BYO CDN Setup Overview</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Amazon Web Services (AWS) CloudFront Setup</h1>
+          <p class="lede">The following screenshots illustrate how to configure AWS CloudFront to deliver content from an AEM origin. Essential settings are marked with a red circle.</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_14f7e30bdfd5f95c1e5fca4e6ca48ccd78ff5d3c1.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_14f7e30bdfd5f95c1e5fca4e6ca48ccd78ff5d3c1.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_14f7e30bdfd5f95c1e5fca4e6ca48ccd78ff5d3c1.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_14f7e30bdfd5f95c1e5fca4e6ca48ccd78ff5d3c1.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>The following screenshots illustrate how to configure <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html">AWS CloudFront</a> to deliver content from an AEM origin. Essential settings are marked with a red circle.</p>
+        <h1 id="create-a-cloudfront-distribution">Create a CloudFront distribution</h1>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1ee71c6e5b66bf11c90e47547750f3f96d0bf6119.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1ee71c6e5b66bf11c90e47547750f3f96d0bf6119.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1ee71c6e5b66bf11c90e47547750f3f96d0bf6119.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1ee71c6e5b66bf11c90e47547750f3f96d0bf6119.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="402">
+          </picture>
+        </p>
+        <h1 id="configure-the-origin">Configure the origin</h1>
+        <p>Use <code>main--sitename--orgname.aem.live</code> as the Origin domain.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1663733816320d1da7157c92e3006166d903937b1.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1663733816320d1da7157c92e3006166d903937b1.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1663733816320d1da7157c92e3006166d903937b1.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1663733816320d1da7157c92e3006166d903937b1.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1142">
+          </picture>
+        </p>
+        <p>Add following custom headers:</p>
+        <ul>
+          <li><code>X-Forwarded-Host</code>: your domain name</li>
+          <li><code>X-BYO-CDN-Type</code>: <code>cloudfront</code></li>
+        </ul>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_143d6e0e11953e93a3959b15fea447d141422442a.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_143d6e0e11953e93a3959b15fea447d141422442a.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_143d6e0e11953e93a3959b15fea447d141422442a.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_143d6e0e11953e93a3959b15fea447d141422442a.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="466">
+          </picture>
+        </p>
+        <p>If you have successfully configured <a href="https://www.hlx.live/docs/setup-byo-cdn-push-invalidation#cloudfront">push invalidation</a> for your project you should also add the following custom header:</p>
+        <ul>
+          <li><code>X-Push-Invalidation</code>: <code>enabled</code></li>
+        </ul>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1e04db0993371f3a666b8770f0f1acb00ba450cf8.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1e04db0993371f3a666b8770f0f1acb00ba450cf8.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1e04db0993371f3a666b8770f0f1acb00ba450cf8.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1e04db0993371f3a666b8770f0f1acb00ba450cf8.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="517">
+          </picture>
+        </p>
+        <h1 id="cache-behavior">Cache behavior</h1>
+        <p>Keep the default settings here.</p>
+        <h3 id="cache-key-and-origin-requests">Cache key and origin requests</h3>
+        <p>Click "create cache policy"</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_16aabcb59056c391c9c8868f5c0eca0ab5a1a0b62.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_16aabcb59056c391c9c8868f5c0eca0ab5a1a0b62.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_16aabcb59056c391c9c8868f5c0eca0ab5a1a0b62.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_16aabcb59056c391c9c8868f5c0eca0ab5a1a0b62.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="474">
+          </picture>
+        </p>
+        <h2 id="create-cache-policy">Create cache policy</h2>
+        <p>Set the <strong>Default TTL</strong> to <code>300</code> seconds.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1a4e7f3e9697855b859413a9d426206bbcfb883d3.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1a4e7f3e9697855b859413a9d426206bbcfb883d3.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1a4e7f3e9697855b859413a9d426206bbcfb883d3.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1a4e7f3e9697855b859413a9d426206bbcfb883d3.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="780">
+          </picture>
+        </p>
+        <p>Under "cache key settings", keep the defaults:</p>
+        <ul>
+          <li>Headers: none</li>
+          <li>Cookies: none</li>
+          <li>Compression support: gzip, brotli</li>
+        </ul>
+        <p>And override the following:</p>
+        <ul>
+          <li>Query Strings: Include the following query strings
+            <ul>
+              <li><code>width</code></li>
+              <li><code>height</code></li>
+              <li><code>format</code></li>
+              <li><code>optimize</code></li>
+              <li><code>limit</code></li>
+              <li><code>offset</code></li>
+              <li><code>sheet</code></li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_16bd3d79fdc49f807ee98cd2be550db17ccdc194b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_16bd3d79fdc49f807ee98cd2be550db17ccdc194b.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_16bd3d79fdc49f807ee98cd2be550db17ccdc194b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_16bd3d79fdc49f807ee98cd2be550db17ccdc194b.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="820">
+          </picture>
+        </p>
+        <p>Close the browser tab and return to the previous screen. On this screen, click "create origin request policy".</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1a54af09ed912da759744d88edd281cc98b0a084b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1a54af09ed912da759744d88edd281cc98b0a084b.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1a54af09ed912da759744d88edd281cc98b0a084b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1a54af09ed912da759744d88edd281cc98b0a084b.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="595">
+          </picture>
+        </p>
+        <h2 id="create-origin-request-policy">Create origin request policy</h2>
+        <p>Keep the default settings:</p>
+        <ul>
+          <li>Headers: none</li>
+          <li>Cookies: none</li>
+        </ul>
+        <p>And override the following:</p>
+        <ul>
+          <li>Query Strings: Include the following query strings
+            <ul>
+              <li><code>width</code></li>
+              <li><code>height</code></li>
+              <li><code>format</code></li>
+              <li><code>optimize</code></li>
+              <li><code>limit</code></li>
+              <li><code>offset</code></li>
+              <li><code>sheet</code></li>
+            </ul>
+          </li>
+        </ul>
+        <p>Then click create and close the tab to return to the previous screen.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1dc10ad96ccebcf11ac50d8bcee2a6f2667c66bea.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1dc10ad96ccebcf11ac50d8bcee2a6f2667c66bea.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1dc10ad96ccebcf11ac50d8bcee2a6f2667c66bea.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1dc10ad96ccebcf11ac50d8bcee2a6f2667c66bea.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1142">
+          </picture>
+        </p>
+        <h3 id="apply-cache-policy-and-origin-request-policy">Apply Cache policy and origin request policy</h3>
+        <p>After returning to the distribution properties, click the reload buttons next to the Cache policy and origin request policy dropdowns, so that the two newly-created policies show up. Next, select the new policies for both Cache policy and origin request policy.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_104c562e342ad7c45973e7c4a48eb57aa5aac7660.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_104c562e342ad7c45973e7c4a48eb57aa5aac7660.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_104c562e342ad7c45973e7c4a48eb57aa5aac7660.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_104c562e342ad7c45973e7c4a48eb57aa5aac7660.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="573">
+          </picture>
+        </p>
+        <h3 id="h-0-"><br></h3>
+        <h3 id="create-distribution">Create distribution</h3>
+        <p>Select whether you want to enable a Web Application Firewall (WAF). Your AEM origin requires no WAF and use of a WAF is neither required nor recommended for AEM origins.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1eb9916977199017606df68e522e0d02d7e17140f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1eb9916977199017606df68e522e0d02d7e17140f.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1eb9916977199017606df68e522e0d02d7e17140f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1eb9916977199017606df68e522e0d02d7e17140f.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="659">
+          </picture>
+        </p>
+        <p>Scroll to the end of the page and click "create distribution". We need to return to the configuration later, so remember the ID of your distribution.<br><br>
+          <picture>
+            <source type="image/webp" srcset="./media_137aa10e0a074d42ba3d859637d8c3e5acfadfa52.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_137aa10e0a074d42ba3d859637d8c3e5acfadfa52.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_137aa10e0a074d42ba3d859637d8c3e5acfadfa52.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_137aa10e0a074d42ba3d859637d8c3e5acfadfa52.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="481">
+          </picture>
+        </p>
+        <h1 id="create-function-to-remove-age-and-x-robots-tag-headers">Create Function to remove Age and X-Robots-Tag headers</h1>
+        <p>In the Cloudfront sidebar, select "Functions" and click "Create function".</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_156ba5b24a935ba93689406655c9f138ad09419dc.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_156ba5b24a935ba93689406655c9f138ad09419dc.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_156ba5b24a935ba93689406655c9f138ad09419dc.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_156ba5b24a935ba93689406655c9f138ad09419dc.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="475">
+          </picture>
+        </p>
+        <p>Enter a name for the function (e.g. <code>stripHeaders</code>), an optional description and click on “Create Function”:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1a33873372fb670db2b79a70914c4f1d42d3b2797.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1a33873372fb670db2b79a70914c4f1d42d3b2797.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1a33873372fb670db2b79a70914c4f1d42d3b2797.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1a33873372fb670db2b79a70914c4f1d42d3b2797.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="859">
+          </picture>
+        </p>
+        <p>Replace the code of the function with the following snippet and click on “Save changes”:</p>
+        <pre><code>function handler(event) {
+    const response = event.response;
+    const request = event.request;
+    const headers = response.headers;
+
+    // Strip age header
+    delete headers['age'];
+
+    // Check if the request URL does not end with '.plain.html'
+    if (!request.uri.endsWith('.plain.html')) {
+        delete headers['x-robots-tag'];
+    }
+
+    return response;
+}
+</code></pre>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_17e25b255095867260e87edfa7a65d836434dbb5d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_17e25b255095867260e87edfa7a65d836434dbb5d.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_17e25b255095867260e87edfa7a65d836434dbb5d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_17e25b255095867260e87edfa7a65d836434dbb5d.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1142">
+          </picture>
+        </p>
+        <p>Select the "Publish" tab and click on “Publish function”:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1321b4859272421b3281d4af12496da5cca324e90.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1321b4859272421b3281d4af12496da5cca324e90.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1321b4859272421b3281d4af12496da5cca324e90.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1321b4859272421b3281d4af12496da5cca324e90.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="395">
+          </picture>
+        </p>
+        <p>Finally, associate the function with your distribution by scrolling down to "Associated distributions" and click "Add association".</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1c53c578753c8aab4f85773b69b3b6852c9d09d0e.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1c53c578753c8aab4f85773b69b3b6852c9d09d0e.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1c53c578753c8aab4f85773b69b3b6852c9d09d0e.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1c53c578753c8aab4f85773b69b3b6852c9d09d0e.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="434">
+          </picture><br>In the following dialog, select:
+        </p>
+        <ul>
+          <li>Distribution: the ID of your new distribution</li>
+          <li>Event type: viewer response</li>
+          <li>Cache behavior: default</li>
+        </ul>
+        <p>Finally, click "add association"</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_107b0fee6ef10e3a657e19f0d3b13a568a10856c8.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_107b0fee6ef10e3a657e19f0d3b13a568a10856c8.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_107b0fee6ef10e3a657e19f0d3b13a568a10856c8.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_107b0fee6ef10e3a657e19f0d3b13a568a10856c8.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1142">
+          </picture>
+        </p>
+        <p>That’s all (more or less). Please test the distribution in a stage environment.</p>
+        <h2 id="optional-authenticate-origin-requests">Optional: Authenticate Origin Requests</h2>
+        <p>If you have enabled <a href="../authentication-setup-site/index.html">token-based Site Authentication</a>, go back to Cloudfront → Distributions → &lt;your distribution&gt; → Origins → &lt;your AEM origin&gt; → Edit</p>
+        <p>Under "Add custom header", select "add header" and create a header <code>Authorization</code> with value <code>token &lt;your-auth-token&gt;</code>. Replace <code>&lt;your-auth-token&gt;</code> with the token value created through <a href="../authentication-setup-site/index.html">token-based Site Authentication</a> (it starts with <code>hlx_</code>) as the header value.<br>
+          <picture>
+            <source type="image/webp" srcset="./media_1d3ad0e13de9847078a4abedc3ccb8f6a6bb098d7.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d3ad0e13de9847078a4abedc3ccb8f6a6bb098d7.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1d3ad0e13de9847078a4abedc3ccb8f6a6bb098d7.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d3ad0e13de9847078a4abedc3ccb8f6a6bb098d7.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="284">
+          </picture>
+        </p>
+        <p>This will ensure that all requests from the AWS Cloudfront CDN to your AEM origin use the correct authorization.</p>
+        <div class="fragment">
+          <div>
+            <div><a href="../setup-byo-cdn-push-invalidation-for-cloudfront/index.html">https://main--helix-website--adobe.aem.page/docs/setup-byo-cdn-push-invalidation-for-cloudfront</a></div>
+          </div>
+        </div>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="byo-cdn-setup-overview"><a href="../byo-cdn-setup/index.html">BYO CDN Setup Overview</a></h3>
+            </div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

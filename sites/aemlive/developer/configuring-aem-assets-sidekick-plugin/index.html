@@ -1,0 +1,361 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.947Z
+  page:             developer-configuring-aem-assets-sidekick-plugin
+  pageUrl:          https://www.aem.live/developer/configuring-aem-assets-sidekick-plugin
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Configuring Adobe Experience Manager Assets Sidekick Plugin</title>
+  <meta name="description" content="Learn how to configure the Adobe Experience Manager Assets Sidekick plugin, so you can use assets from your Experience Manager Assets repository while authoring documents ...">
+  <meta property="og:title" content="Configuring Adobe Experience Manager Assets Sidekick Plugin">
+  <meta property="og:description" content="Learn how to configure the Adobe Experience Manager Assets Sidekick plugin, so you can use assets from your Experience Manager Assets repository while authoring documents ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/configuring-aem-assets-sidekick-plugin/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#configure-your-sidekick">Configure Your Sidekick</a></li>
+<li class="l-3"><a href="#advanced-configurations">Advanced Configurations</a></li>
+<li class="l-4"><a href="#rail-optional">rail (optional)</a></li>
+<li class="l-4"><a href="#extconfigurl-optional">extConfigUrl (optional)</a></li>
+<li class="l-2"><a href="#extension-points">Extension Points</a></li>
+<li class="l-4"><a href="#blockname">blockName</a></li>
+<li class="l-4"><a href="#copymode">copyMode</a></li>
+<li class="l-4"><a href="#blocktemplate">blockTemplate</a></li>
+<li class="l-4"><a href="#filterschema">filterSchema</a></li>
+<li class="l-4"><a href="#assetdomainmapping">assetDomainMapping</a></li>
+<li class="l-2"><a href="#configure-extension-points">Configure Extension Points</a></li>
+<li class="l-3"><a href="#option-1-host-configuration-in-the-same-project">Option 1: Host Configuration in the Same Project</a></li>
+<li class="l-3"><a href="#option-2-host-configuration-externally-and-pass-it-to-the-assets-sidekick-plugin">Option 2: Host Configuration Externally and Pass It to the Assets Sidekick Plugin</a></li>
+<li class="l-3"><a href="#configuration-based-on-page-context">Configuration Based on Page Context</a></li>
+<li class="l-4"><a href="#sample-configuration-for-reference">Sample Configuration for Reference:</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Configuring Adobe Experience Manager Assets Sidekick Plugin</h1>
+          <p class="lede">Learn how to configure the Adobe Experience Manager Assets Sidekick plugin, so you can use assets from your Experience Manager Assets repository while authoring documents ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1cc54f37e3f8f2578803fe1a1a3b92f27612a507c.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1cc54f37e3f8f2578803fe1a1a3b92f27612a507c.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1cc54f37e3f8f2578803fe1a1a3b92f27612a507c.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1cc54f37e3f8f2578803fe1a1a3b92f27612a507c.png?width=750&amp;format=png&amp;optimize=medium" width="1103" height="827">
+          </picture>
+        </p>
+        
+        <p>Learn how to configure the Adobe Experience Manager Assets Sidekick plugin, so you can use assets from your Experience Manager Assets repository while authoring documents in Microsoft Word or Google Docs.</p>
+        <p><strong>Important Note:</strong> For using assets while authoring a page using <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/wysiwyg-authoring/authoring">Universal Editor based WYSIWYG authoring</a>, please refer to Universal <a href="https://developer.adobe.com/uix/docs/extension-manager/extension-developed-by-adobe/configurable-asset-picker/">Editor Custom Asset Picker</a>. The documentation here is specifically for document based authoring experience.</p>
+        <p>For information on the authoring experience while using the Sidekick plugin, please see <a href="../../docs/aem-assets-sidekick-plugin/index.html">Adobe Experience Manager Assets Sidekick Plugin</a>.</p>
+        <p><strong>Note</strong>: Using non-image assets such as Videos and PDF documents is in an Early Adopter program. <a href="../../docs/aem-assets-sidekick-plugin/index.html#using-non-image-assets-such-as-videos-and-pdf-documents">Find more details here</a>.</p>
+        <h2 id="configure-your-sidekick">Configure Your Sidekick</h2>
+        <p>To enable the Assets plugin in your Sidekick, you must create a configuration in your project’s GitHub.</p>
+        <ol>
+          <li>Open your project in GitHub and locate the Sidekick configuration file at <code>tools/sidekick/config.json</code>.
+            <ol>
+              <li>If the file does not yet exist, create it.</li>
+              <li>For more details, please refer to this document on <a href="../../docs/sidekick/index.html#customizing-the-sidekick">extending AEM Sidekick</a>.</li>
+            </ol>
+          </li>
+          <li>In your <code>config.json</code> file, you must add an <code>asset-library</code> section.
+            <ol>
+              <li>You can either add the <code>asset-library</code> section to your existing configuration, or replace your configuration with the example provided.</li>
+              <li>Please note that you should provide a title for the plugin that website authors will understand (“My Assets” in the example).</li>
+            </ol>
+          </li>
+        </ol>
+        <pre><code>{
+    "project": "franklin-asset-selector",
+    "host": "www.mymydomain.prod",
+    "plugins": [
+        {
+            "id": "asset-library",
+            "title": "My Assets",
+            "environments": [
+                "edit"
+            ],
+            "url": "https://experience.adobe.com/solutions/CQ-helix-assets-addon/static-assets/resources/asset-selector.html",
+            "isPalette": true,
+            "includePaths": [
+                "**.docx**"
+            ],
+            "passConfig": true,
+            "paletteRect": "top: 50px; bottom: 10px; right: 10px; left: auto; width:400px; height: calc(100vh - 60px)"
+        }
+    ]
+}
+</code></pre>
+        <ol>
+          <li>Commit the configuration to your project's Github repo.</li>
+          <li>Open up the AEM sidekick in a Microsoft Word or Google Doc project document. You should see the <strong>My Assets</strong> button. The label of the button will depend on your configuration.<br>
+            <picture>
+              <source type="image/webp" srcset="./media_139a71679798ff0c9137525431030d297e583f293.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+              <source type="image/webp" srcset="./media_139a71679798ff0c9137525431030d297e583f293.png?width=750&amp;format=webply&amp;optimize=medium">
+              <source type="image/png" srcset="./media_139a71679798ff0c9137525431030d297e583f293.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+              <img loading="lazy" alt="" src="./media_139a71679798ff0c9137525431030d297e583f293.png?width=750&amp;format=png&amp;optimize=medium" width="826" height="756">
+            </picture>
+          </li>
+        </ol>
+        <h3 id="advanced-configurations">Advanced Configurations</h3>
+        <p>You can optionally customize the Assets Sidekick plugin by specifying query parameters in the asset selector URL in the Sidekick <code>config.json</code> file. The following parameters are supported:</p>
+        <h4 id="rail-optional">rail (optional)</h4>
+        <p>Permissible Values: <code>true/false</code></p>
+        <p>Use this parameter to toggle the rail view of the asset selector. By default, the rail view is used, which is more compact and offers search-only experience. If you set the parameter to <code>?rail=false</code>, a tree view left panel is shown with the repository folder hierarchy allowing users to browse for assets in addition to searching.</p>
+        <pre><code>{
+    "id": "asset-library",
+    "title": "My Assets",
+    "environments": [ "edit" ],
+    "url": "https://experience.adobe.com/solutions/CQ-helix-assets-addon/static-assets/resources/asset-selector.html?rail=false",
+    "isPalette": true,
+    "includePaths": [ "**.docx**" ],
+    "passConfig": true,
+    "paletteRect": "top: 50px; bottom: 10px; right: 10px; left: auto; width:800px; height: calc(100vh - 60px)"
+}
+</code></pre>
+        <p>Please note that the folder hierarchy view occupies additional screen space. To accommodate it, you may have to increase the width of the asset selector panel.</p>
+        <p>The Asset Selector component leverages micro-frontend Asset Selector that is instrumented to integrate with Sidekick. To learn more, please see the <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/assets/manage/asset-selector/overview-asset-selector#:~:text=Micro-Frontend%20Asset%20Selector%20provides,in%20your%20application%20authoring%20experience.">Micro-Frontend Asset Selector documentation.</a></p>
+        <h4 id="extconfigurl-optional">extConfigUrl (optional)</h4>
+        <p>Use this parameter to extend the Assets Sidekick by specifying the complete URL where the <a href="#configuring-the-extension-points">configuration is hosted</a>. This is useful for scenarios where the configuration resides at a different location than the project's domain. To configure <code>extConfigUrl</code>, include it in the sidekick JSON configuration of the extension.</p>
+        <pre><code>	{ 
+  	"id": "asset-library", 
+  	"title": "AEM Assets Library", 
+  	"environments": ["edit"], 
+  	"url": "https://experience.adobe.com/solutions/CQ-helix-assets-addon/static-assets/resources/asset-selector.html?extConfigUrl=https://&lt;your-config-server&gt;/config.json", 
+  	"isPalette": true, 
+  	"includePaths": ["**.docx**"], 
+  	"passConfig": true, 
+  	"paletteRect": "top: 50px; bottom: 10px; right: 10px; left: auto; width:400px; height: calc(100vh - 60px)" 
+	} 
+</code></pre>
+        <p>Ensure that the URL supplied in parameter <code>extConfigUrl</code> , is accessible and that cross-origin resource sharing (CORS) is enabled for the domain <code>experience.adobe.com</code>.</p>
+        <p>If the configuration is hosted on an Edge Delivery Services project, <a href="../../docs/custom-headers/index.html">refer to the documentation</a> for detailed instructions on configuring CORS for hosted configurations.</p>
+        <h2 id="extension-points">Extension Points</h2>
+        <p>You can customize the AEM Assets Sidekick plugin using extension points to meet your custom requirements. These extension points enhance the plugin's functionality and adapt it to your organization's unique demands.</p>
+        <p>This section details the extension points available and provides example configurations. See the following section, <a href="index.html#configure-extension-points">Configure Extension Points</a>, for details on how to implement the extensions.</p>
+        <h4 id="blockname">blockName</h4>
+        <p>This extension point defines the block name for different MIME types.</p>
+        <h5 id="example-configuration-video-type-assets">Example Configuration (Video Type Assets):</h5>
+        <pre><code>{ 
+	"blockName": [ 
+    	{ 
+        	"mimeType": "video/*", 
+        	"value": "Core Embed" 
+    	} 
+	] 
+}  
+</code></pre>
+        <p>This configuration allows users to change the Block Name for Video type assets from default “Embed” to “Core Embed”.<br>
+          <picture>
+            <source type="image/webp" srcset="./media_11763c5ef2b2f48689f46ffafb92fbb1f7941ef92.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_11763c5ef2b2f48689f46ffafb92fbb1f7941ef92.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_11763c5ef2b2f48689f46ffafb92fbb1f7941ef92.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_11763c5ef2b2f48689f46ffafb92fbb1f7941ef92.png?width=750&amp;format=png&amp;optimize=medium" width="657" height="93">
+          </picture>
+        </p>
+        <h4 id="copymode">copyMode</h4>
+        <p>This extension point defines the copy mode for different MIME types.</p>
+        <h5 id="example-configuration-image-type-assets">Example Configuration (Image Type Assets):</h5>
+        <pre><code>{ 
+	"copyMode": [ 
+    	{ 
+        	"mimeType": "image/*", 
+        	"value": "reference" 
+    	} 
+	] 
+} 
+</code></pre>
+        <p>This configuration enables users to pick images from the Assets Selector as a link when pasting it into a Word document.</p>
+        <p>Note: Once the config is enabled, you’d also need to ensure appropriate handling in your site’s front-end code to convert such image links to <code>&lt;picture/&gt;</code> tag with appropriate <code>srcset</code>. <a href="https://github.com/hlxsites/franklin-assets-selector/blob/ext-images/EXTERNAL_IMAGES.md#note-for-site-developers">Find more details here</a><strong>.</strong></p>
+        <h4 id="blocktemplate">blockTemplate</h4>
+        <p>This extension point defines the template structure used for displaying video blocks, allowing flexibility in the structure of the block that gets copied to the Word document to align it with the block structures used in your site authoring.</p>
+        <h5 id="example-configuration-video-type-assets-1">Example Configuration (Video Type Assets):</h5>
+        <p>The following example demonstrates how to configure the <code>blockTemplate</code> for video assets:</p>
+        <pre><code>{ 
+	"blockTemplate": [
+ 	{
+   		"mimeType": "video/*",
+   		"value": "&lt;table border='1' style=\"width:100%\"&gt;\n  &lt;tr&gt;\n        &lt;td style=\"background-color:#2986cc;color:#fff\"&gt;${blockName}&lt;/td&gt;\n      &lt;/tr&gt;\n      &lt;tr&gt;\n        &lt;td&gt;\n        &lt;img src=\"${posterUrl}\" alt=\"${name}\"&gt;\n        &lt;br/&gt;\n        &lt;a href=\"${videoUrl}\"&gt;${name}&lt;/a&gt;\n        &lt;/td&gt;\n      &lt;/tr&gt;   &lt;/table&gt;"
+ 	}
+]
+} 
+</code></pre>
+        <p>This configuration would result in a block like the following example copied to the Word document when the asset is pasted. It has the poster image and the video URL and the block’s header row has been styled.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_124a68f55fe365f861bf39350375f75f75a67450a.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_124a68f55fe365f861bf39350375f75f75a67450a.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_124a68f55fe365f861bf39350375f75f75a67450a.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_124a68f55fe365f861bf39350375f75f75a67450a.png?width=750&amp;format=png&amp;optimize=medium" width="660" height="292">
+          </picture>
+        </p>
+        <h5 id="variables-used">Variables Used:</h5>
+        <ol>
+          <li><code>blockName</code>: Represents the name of the video block</li>
+          <li><code>posterUrl</code>: Contains the URL of the image that serves as the video poster or thumbnail</li>
+          <li><code>name</code>: Denotes the name of the video asset</li>
+          <li><code>videoUrl</code>: Provides the public delivery URL of the video file</li>
+        </ol>
+        <h4 id="filterschema">filterSchema</h4>
+        <p>This extension point allows you to set up custom search filters to make it easier to find and narrow down assets based on its metadata, such as tags, status, type etc.</p>
+        <h5 id="example-configuration-adding-tag-picker-to-rail-filter-schema">Example Configuration (Adding Tag Picker to Rail Filter Schema):</h5>
+        <pre><code>{ 
+	"filterSchema": [ 
+    	{ 
+        	"header": "Assets Tags", 
+        	"groupKey": "AssetTagsGroup", 
+        	"fields": [ 
+            	{ 
+                	"element": "taggroup", 
+                	"name": "property=metadata.application.xcm:keywords.id", 
+                	"columns": 3 
+            	} 
+        	] 
+    	} 
+	] 
+} 
+</code></pre>
+        <p>This configuration allows users to fetch the taxonomy from AEM and pick and apply tags from that AEM taxonomy to filter the assets.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1966bd7cd14f6e012f94507a02b894ce4e768e0f3.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1966bd7cd14f6e012f94507a02b894ce4e768e0f3.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1966bd7cd14f6e012f94507a02b894ce4e768e0f3.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1966bd7cd14f6e012f94507a02b894ce4e768e0f3.png?width=750&amp;format=png&amp;optimize=medium" width="402" height="918">
+          </picture>
+        </p>
+        <p>The name attribute should be changed depending on the repository.</p>
+        <ul>
+          <li>For the delivery repository: <code>property=metadata.application.xcm:keywords.id</code></li>
+          <li>For the authors: <code>property=xcm:keywords.id=</code></li>
+        </ul>
+        <h4 id="assetdomainmapping">assetDomainMapping</h4>
+        <p>This extension point defines domain mappings, allowing domains to be replaced per your configuration. If a domain mapping doesn’t exist, the original delivery URL is retained.</p>
+        <h5 id="example-configuration-asset-domain-mappings">Example Configuration (Asset Domain mappings):</h5>
+        <pre><code>{
+ 	"assetDomainMapping": {
+    	  "delivery-p123111-e1235123.adobeaemcloud.com":"mediapreprod.store.testdomain.com",
+"delivery-p123111-e1235134.adobeaemcloud.com": "media.store.testdomain.com",
+"delivery-p123111-e1235145.adobeaemcloud.com": "mediauat.store.testdomain.com"
+"delivery-p123111-e1235156.adobeaemcloud.com": "mediaqa.store.testdomain.com"
+ 	}
+}
+</code></pre>
+        <p>This configuration replaces any delivery domain with its corresponding CDN-mapped or custom domain.</p>
+        <h2 id="configure-extension-points">Configure Extension Points</h2>
+        <p>Customization of the Assets Sidekick plugin including its extension points is done by the sidekick’s project configuration file. There are two options for defining this configuration file:</p>
+        <h3 id="option-1-host-configuration-in-the-same-project">Option 1: Host Configuration in the Same Project</h3>
+        <p>In this option, the configuration file should be defined at the following path within your Edge Delivery Services project:</p>
+        <p><code>/tools/assets-selector/config.json</code></p>
+        <p>Additionally, ensure that the Assets Sidekick Plugin configuration includes the following parameter set to <code>true</code>:</p>
+        <p><code>passConfig=true</code></p>
+        <p>This configuration is the same as described in the section <a href="index.html#add-configuration-to-your-aem-sidekick">Configure Your Sidekick</a>.</p>
+        <h3 id="option-2-host-configuration-externally-and-pass-it-to-the-assets-sidekick-plugin">Option 2: Host Configuration Externally and Pass It to the Assets Sidekick Plugin</h3>
+        <p>You can host the configuration file at any accessible URL and pass it to the Assets Sidekick plugin. You do this by utilizing the <code>extConfigUrl</code> parameter to specify the URL from which the configuration will be fetched. This configuration is the same as described in the section <a href="index.html#extconfigurl-optional">Advanced Configuration</a>.</p>
+        <h3 id="configuration-based-on-page-context">Configuration Based on Page Context</h3>
+        <p>The configuration can take a page’s URL as a parameter, allowing you to generate the configuration on the fly based on the page’s context. This enables the Assets Selector to use the page context when suggesting relevant assets. By doing so, you can set up configurations dynamically in the Assets Selector based on the context (the page URL) passed to it</p>
+        <p>This is particularly useful for scenarios where you want page authors to be shown only a subset of assets from your assets repository based on the context of the web page they are authoring such as showing locale or region-specific assets based on the locale of the page authored.</p>
+        <p>To implement this, follow these steps:</p>
+        <ol>
+          <li>Ensure the Sidekick configuration has both <code>passReferrer</code> and <code>passConfig</code> flags set to <code>true</code>.</li>
+          <li>Host a configuration that can be served by the following endpoint:</li>
+        </ol>
+        <p><code>https://&lt;your-config-server&gt;/config.json?webPath=&lt;page-path&gt;</code></p>
+        <p>Here, <code>page-path</code> is the URL of the page being edited in the Word or Google Doc document, and the Assets Selector should launch in the context of that <code>page-path</code>. This endpoint should serve the complete configuration. <strong>It is expected that you implement the necessary server side logic at this endpoint to serve the configuration based on the provided context (the</strong> <code>webPath</code><strong>) in the specified format accepted by the asset selector</strong></p>
+        <p>For example, the endpoint can look at the <code>webPath</code> and return a configuration which uses the page’s tags at that <code>webPath</code>, to set the default tags in the Tag Picker filter of the Assets Selector. In this way, the Assets Selector launches with those default tags applied, showing relevant assets based on the page's context.</p>
+        <h4 id="sample-configuration-for-reference">Sample Configuration for Reference:</h4>
+        <p>For more detail and reference configurations, please see <a href="https://github.com/hlxsites/franklin-assets-selector?tab=readme-ov-file#extending-the-assets-selector-capabilities">the readme of the Assets Selector</a> to help you adapt and deploy these configurations in your project based on your use cases and extension requirements.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

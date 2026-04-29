@@ -1,0 +1,327 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.238Z
+  page:             docs-config-service-setup
+  pageUrl:          https://www.aem.live/docs/config-service-setup
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Setting up the configuration service</title>
+  <meta name="description" content="The Configuration Service is used to aggregate and deliver configuration for various consumers in the AEM architecture including: Client, Delivery, HTML Pipeline, and Admin Service. ...">
+  <meta property="og:title" content="Setting up the configuration service">
+  <meta property="og:description" content="The Configuration Service is used to aggregate and deliver configuration for various consumers in the AEM architecture including: Client, Delivery, HTML Pipeline, and Admin Service. ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/config-service-setup/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="l-2"><a href="#create-your-organization">Create your Organization</a></li>
+<li class="l-2"><a href="#add-your-site">Add your Site</a></li>
+<li class="l-2"><a href="#updating-your-site">Updating your Site</a></li>
+<li class="l-4"><a href="#update-access-control">Update Access Control</a></li>
+<li class="l-4"><a href="#update-code-location">Update Code Location</a></li>
+<li class="l-4"><a href="#update-content-location">Update Content Location</a></li>
+<li class="l-4"><a href="#update-production-cdn">Update Production CDN</a></li>
+<li class="l-4"><a href="#update-custom-headers">Update Custom Headers</a></li>
+<li class="l-4"><a href="#update-public-custom-configuration">Update Public Custom Configuration</a></li>
+<li class="l-4"><a href="#update-sidekick-configuration">Update Sidekick Configuration</a></li>
+<li class="l-4"><a href="#update-indexing-configuration">Update Indexing Configuration</a></li>
+<li class="l-4"><a href="#update-sitemap-configuration">Update Sitemap Configuration</a></li>
+<li class="l-4"><a href="#update-robotstxt">Update robots.txt</a></li>
+<li class="l-2"><a href="#remove-unused-configuration-files">Remove unused configuration files</a></li>
+<li class="l-3"><a href="#repoless-sites">Repoless Sites</a></li>
+<li class="l-3"><a href="#configuration-blueprints">Configuration Blueprints</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Setting up the configuration service</h1>
+          <p class="lede">The Configuration Service is used to aggregate and deliver configuration for various consumers in the AEM architecture including: Client, Delivery, HTML Pipeline, and Admin Service. ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_15797f15710852969aba8d27f25800586232b1e1d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_15797f15710852969aba8d27f25800586232b1e1d.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_15797f15710852969aba8d27f25800586232b1e1d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_15797f15710852969aba8d27f25800586232b1e1d.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>The Configuration Service is used to aggregate and deliver configuration for various consumers in the AEM architecture including: Client, Delivery, HTML Pipeline, and Admin Service. It features configuration inheritance from organizations and profiles into sites, that makes it easy to manage large collections of sites, and create new sites with minimal overhead.</p>
+        <p>For most of the common tasks there are simple user interfaces available on <a href="https://tools.aem.live">https://tools.aem.live</a>, but since the configuration service is API first it is also ideal for automation. Most of the tutorial below focussed on the details of the service itself, and how to write automation scripts. If you just need to update (or create) configuration for a site, it is likely that <a href="https://tools.aem.live">https://tools.aem.live</a> is the best option.</p>
+        <p>Configurations stored in the client scope can be consumed from your site or the AEM Sidekick and control functionality and behavior for visitors and authors. All other configurations are internal to the AEM infrastructure and cannot be accessed directly.</p>
+        <p>The configuration is managed using REST calls to the Admin service (<code>admin.hlx.page</code>). See <a href="../admin.html/index.html#tag/orgConfig" data-broken-link="true">AEM Admin API</a> for the full API reference.</p>
+        <p>For existing AEM projects (coming from <code>hlx.live</code>) projects, the configuration service aggregates a valid configuration based on the various sources (<code>fstab.yaml</code>, <code>.helix/config.xlsx</code>, etc). This ensures backward compatibility, but means that some features are not available in this <em>document mode</em> (the traditional, distributed configuration).</p>
+        <p>One of the new features that the configuration service can support is independent code and content definitions per site. A site is a combination of an <code>org</code> name and a <code>site</code> name. This is similar to the GitHub <code>owner</code> and <code>repo</code> tuple, but no longer requires a direct relation to the GitHub repository.</p>
+        <p>For example, a site named <code>website</code> of the org <code>acme</code> could use a code repository <code>acme/boilerplate</code>. The preview URL follows the same scheme, but using <code>site</code> and <code>org</code> instead. In this example: <code>https://main--website--acme.aem.page</code>.</p>
+        <p>.</p>
+        <p>With this new mechanism, it is now possible to have multiple sites that use different content, but use the same code repository. This feature is also known as “<a href="../repoless/index.html">repoless</a>”.</p>
+        <h2 id="prerequisites">Prerequisites</h2>
+        <p>There are some rules and constraints when creating new setups that use the configuration service:</p>
+        <ol>
+          <li>Any <code>aem.live</code> organization needs also to exist as <code>github.com</code> org, and at least one repository needs to be synced using AEM Code Sync. This ensures that the organization namespace is properly claimed by an entity that can also claim an org on <code>github.com</code>. The <code>github.com</code> org can exceptionally be created by Adobe or a trusted implementation partner on the customer’s behalf, but it must have at least one owner from the customer's organization.</li>
+          <li>For projects that want to use multiple sites with the same code repository (repoless), there must be <strong>one</strong> canonical site for which the <code>org/site</code> matches the GitHub <code>owner/repo</code>. This is required for proper code-config association and CDN push invalidation.</li>
+        </ol>
+        <h2 id="create-your-organization">Create your Organization</h2>
+        <p>Follow the <a href="../../developer/tutorial/index.html">developer tutorial</a> to create your very first site. As part of this process, an <code>aem.live</code> org with the same name as your <code>github.com</code> org will be created, and the <code>github.com</code> user who added the <a href="https://github.com/apps/aem-code-sync">AEM Code Sync App</a> will be added as admin. Contact an Adobe representative if you need a different admin user.</p>
+        <h2 id="add-your-site">Add your Site</h2>
+        <p>In this example, we create a new site named <code>website</code> under a fictitious <code>acme</code> org.</p>
+        <p><strong>Note:</strong> Before running the example command below:</p>
+        <ul>
+          <li>Familiarize yourself with the <a href="../admin.html/index.html#tag/siteConfig" data-broken-link="true">Admin API</a></li>
+          <li>Make sure <a href="../admin.html/index.html#tag/authentication" data-broken-link="true">you are properly authenticated</a></li>
+          <li>Replace the fictitious <code>acme</code> and <code>website</code> in the URL with the names of your own org and site</li>
+          <li>Replace <code>code.owner</code> and <code>code.repo</code> with your own GitHub repository</li>
+          <li>Replace <code>content.source.url</code> with your own content source URL (adjust <code>content.source type</code> as needed)</li>
+        </ul>
+        <pre><code>curl -X PUT https://admin.hlx.page/config/acme/sites/website.json \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: {your-auth-token}' \
+  --data '{
+  "version": 1,
+  "code": {
+    "owner": "acme",
+    "repo": "boilerplate"
+  },
+  "content": {
+    "source": {
+      "url": "https://content.da.live/acme/website/",
+      "type": "markup"
+    }
+  }
+}'
+</code></pre>
+        <p><br>The resulting site would immediately be available at <code>https://main--website--acme.aem.page</code>. The <code>404.html</code> would be displayed until content has been previewed.</p>
+        <h2 id="updating-your-site">Updating your Site</h2>
+        <p>You can update the site configuration either as a whole document, or only certain sub-structures. Here are some examples:</p>
+        <h4 id="update-access-control">Update Access Control</h4>
+        <p>Use this to <a href="../authentication-setup-authoring/index.html">assign roles to your users</a>. For example, to add user <code>bob</code> to the configuration admin role:</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/{org}/sites/{site}/access/admin.json \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: {your-auth-token}' \
+  --data '{
+  "role": {
+    "config": [
+      "bob@acme.org",
+    ]
+  }
+}'
+
+</code></pre>
+        <h4 id="update-code-location">Update Code Location</h4>
+        <p>Use this to switch your site to a different codebase (see also <a href="../repoless/index.html">repoless</a>):</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/{org}/sites/{site}/code.json \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: {your-auth-token}' \
+  --data '{
+	"owner": "acme",
+	"repo": "boilerplate"
+}'
+</code></pre>
+        <h4 id="update-content-location">Update Content Location</h4>
+        <p>Use this to switch your site to a different content source (see also <a href="../repoless/index.html">repoless</a>):</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/{org}/sites/{site}/content.json \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: {your-auth-token}' \
+  --data '{
+    "source": {
+      "url": "https://content.da.live/acme/website/",
+      "type": "markup"
+    }
+  }'
+</code></pre>
+        <h4 id="update-production-cdn">Update Production CDN</h4>
+        <p>Use this to <a href="../configuration/index.html">configure the CDN settings</a>:</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/{org}/sites/{site}/cdn/prod.json \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: {your-auth-token}' \
+  --data '{
+		"host": "{host}",
+		"type": "fastly",
+		"serviceId": "{serviceId}",
+		"authToken": "{authToken}"
+}'
+</code></pre>
+        <h4 id="update-custom-headers">Update Custom Headers</h4>
+        <p>Use this to set <a href="../custom-headers/index.html">custom HTTP headers</a>:</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/{org}/sites/{site}/headers.json \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: {your-auth-token}' \
+  --data '{
+	"/**": [
+      {
+        "key": "access-control-allow-origin",
+        "value": "*"
+      }
+    ]
+}'
+</code></pre>
+        <h4 id="update-public-custom-configuration">Update Public Custom Configuration</h4>
+        <p>Use this to define public project configuration, for example for easy consumption on the client side:</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/{org}/sites/{site}/public.json \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: {your-auth-token}' \
+  --data '{
+	"custom": {
+		"attribute": "value"
+	}
+}'
+</code></pre>
+        <p><strong>Caution:</strong> Do not store any secrets in public configuration! It will be accessible to everyone at <code>https://{your-host}/config.json</code>.</p>
+        <h4 id="update-sidekick-configuration">Update Sidekick Configuration</h4>
+        <p>Use this to <a href="../../developer/sidekick-development/index.html#customizing-the-sidekick">customize the Sidekick</a>:</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/{org}/sites/{site}/sidekick.json \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: {your-auth-token}' \
+  --data '{
+    "plugins": [{
+      "id": "foo",
+      "title": "Foo",
+      "url": "https://www.aem.live/"
+    }]
+  }'
+</code></pre>
+        <h4 id="update-indexing-configuration">Update Indexing Configuration</h4>
+        <p>Use this to add your <a href="../indexing-reference/index.html">indexing configuration</a>:</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/{org}/sites/{site}/content/query.yaml \
+  -H 'content-type: text/yaml' \
+  -H 'x-auth-token: {your-auth-token}' \
+  --data @your-query.yaml
+</code></pre>
+        <h4 id="update-sitemap-configuration">Update Sitemap Configuration</h4>
+        <p>Use this to add your <a href="../../developer/sitemap/index.html">sitemap configuration</a>:</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/{org}/sites/{site}/content/sitemap.yaml \
+  -H 'content-type: text/yaml' \
+  -H 'x-auth-token: {your-auth-token}' \
+  --data @your-sitemap.yaml
+</code></pre>
+        <h4 id="update-robotstxt">Update robots.txt</h4>
+        <p>Use this to customize instructions for robots and crawlers:</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/{org}/sites/{site}/robots.txt \
+  -H 'content-type: text/plain' \
+  -H 'x-auth-token: {your-auth-token}' \
+  --data 'User-agent: *
+Allow: /
+Sitemap: https://{your-host}/sitemap.xml'
+</code></pre>
+        <h2 id="remove-unused-configuration-files">Remove unused configuration files</h2>
+        <p>Once you have enabled the configuration service, the configuration settings there override the settings you have in configuration files in your GitHub repository and your content source, so it is best to remove them:</p>
+        <p>First remove the files from GitHub:</p>
+        <ul>
+          <li><code>fstab.yaml</code></li>
+          <li><code>robots.txt</code></li>
+          <li><code>tools/sidekick/config.json</code></li>
+          <li><code>helix-query.yaml</code></li>
+          <li><code>helix-sitemap.yaml</code></li>
+        </ul>
+        <p>And after those are removed, check if the <code>hlx.page</code> preview page returns a 404. This means that the internal configuration of the repository based config is cleaned up. Then you can also unpreview and delete the configuration in <code>/.helix</code> folder in your content:</p>
+        <ul>
+          <li><code>.helix/config.xlsx</code></li>
+          <li><code>.helix/headers.xlsx</code></li>
+        </ul>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="repoless-sites"><a href="../repoless/index.html">Repoless Sites</a></h3>
+            </div>
+            <div>
+              <p>Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="configuration-blueprints"><a href="../configuration/index.html">Configuration Blueprints</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

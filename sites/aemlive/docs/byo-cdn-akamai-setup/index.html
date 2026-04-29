@@ -1,0 +1,464 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.893Z
+  page:             docs-byo-cdn-akamai-setup
+  pageUrl:          https://www.aem.live/docs/byo-cdn-akamai-setup
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Akamai Setup</title>
+  <meta name="description" content="The following screenshots illustrate how to use the Akamai Property Manager to configure a property to deliver content from AEM using your Akamai CDN setup. ...">
+  <meta property="og:title" content="Akamai Setup">
+  <meta property="og:description" content="The following screenshots illustrate how to use the Akamai Property Manager to configure a property to deliver content from AEM using your Akamai CDN setup. ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/byo-cdn-akamai-setup/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#origin-server">Origin Server</a></li>
+<li class="l-3"><a href="#configuration-properties">Configuration properties:</a></li>
+<li class="l-2"><a href="#add-behavior-remove-vary-header">Add Behavior: Remove Vary Header</a></li>
+<li class="l-3"><a href="#configuration-properties-1">Configuration properties:</a></li>
+<li class="l-2"><a href="#add-behavior-modify-outgoing-request-header">Add Behavior: Modify Outgoing Request Header</a></li>
+<li class="l-3"><a href="#configuration-properties-2">Configuration properties:</a></li>
+<li class="l-2"><a href="#addmodify-behavior-caching">Add/Modify Behavior: Caching</a></li>
+<li class="l-3"><a href="#configuration-properties-3">Configuration properties:</a></li>
+<li class="l-2"><a href="#add-behavior-http2">Add Behavior: HTTP/2</a></li>
+<li class="l-2"><a href="#add-rule-modify-outgoing-response-header">Add Rule: Modify Outgoing Response Header</a></li>
+<li class="l-2"><a href="#optional-authenticate-origin-requests">Optional: Authenticate Origin Requests</a></li>
+<li class="l-2"><a href="#caveats">Caveats</a></li>
+<li class="l-3"><a href="#byo-cdn-setup-overview">BYO CDN Setup Overview</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Akamai Setup</h1>
+          <p class="lede">The following screenshots illustrate how to use the Akamai Property Manager to configure a property to deliver content from AEM using your Akamai CDN setup. ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1d07c43f5918a053faf2f434f65680737bd41d657.jpg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d07c43f5918a053faf2f434f65680737bd41d657.jpg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="./media_1d07c43f5918a053faf2f434f65680737bd41d657.jpg?width=2000&amp;format=jpg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d07c43f5918a053faf2f434f65680737bd41d657.jpg?width=750&amp;format=jpg&amp;optimize=medium" width="1103" height="827">
+          </picture>
+        </p>
+        
+        <p>The following screenshots illustrate how to use the <a href="https://techdocs.akamai.com/property-mgr/docs/welcome-prop-manager">Akamai Property Manager</a> to configure a property to deliver content from AEM using your Akamai CDN setup. <strong>Essential settings are marked with a red circle.</strong></p>
+        <h1 id="essential-property-settings">Essential Property settings</h1>
+        <h2 id="origin-server">Origin Server</h2>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1d1457bbbdec2d3a746e1da9ebf3217b54d8bd210.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d1457bbbdec2d3a746e1da9ebf3217b54d8bd210.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1d1457bbbdec2d3a746e1da9ebf3217b54d8bd210.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d1457bbbdec2d3a746e1da9ebf3217b54d8bd210.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1088">
+          </picture>
+        </p>
+        <h3 id="configuration-properties">Configuration properties:</h3>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td align="center"><strong>Name</strong></td>
+                    <td align="center"><strong>Value</strong></td>
+                    <td align="center"><strong>Comment</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Origin Server Hostname</td>
+                    <td><code>main--&lt;repo&gt;--&lt;organization&gt;.aem.live</code></td>
+                    <td>Replace repo and organization with the values for your site.</td>
+                  </tr>
+                  <tr>
+                    <td>Forward Host Header</td>
+                    <td>Origin Hostname</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Cache Key Hostname</td>
+                    <td>Incoming Host Header</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Send True Client IP Header</td>
+                    <td>No</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Verification Settings</td>
+                    <td>Choose your own</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Use SNI TLS Extension</td>
+                    <td>Yes</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Trust</td>
+                    <td>Akamai-managed Certificate Authorities Sets</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Akamai Certificate Store</td>
+                    <td>Enabled</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p><br>⚠️Do NOT set <strong>Trust</strong> to <strong>Specific Certificates (pinning)</strong> as the certificate is periodically renewed and HTTPS traffic would be served with certificate errors due to the expired pinned certificate.</p>
+        <h2 id="add-behavior-remove-vary-header">Add Behavior: Remove Vary Header</h2>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1e9c5a845ae7c3792d625cf14e0fa20b5d4119a9d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1e9c5a845ae7c3792d625cf14e0fa20b5d4119a9d.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1e9c5a845ae7c3792d625cf14e0fa20b5d4119a9d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1e9c5a845ae7c3792d625cf14e0fa20b5d4119a9d.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="923">
+          </picture>
+        </p>
+        <h3 id="configuration-properties-1">Configuration properties:</h3>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td align="center"><strong>Name</strong></td>
+                    <td align="center"><strong>Value</strong></td>
+                    <td align="center"><strong>Comment</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Remove Vary Header</td>
+                    <td>On</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h2 id="add-behavior-modify-outgoing-request-header">Add Behavior: Modify Outgoing Request Header</h2>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_148d4097f403e221ef59265090e2c35ffb4bce07d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_148d4097f403e221ef59265090e2c35ffb4bce07d.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_148d4097f403e221ef59265090e2c35ffb4bce07d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_148d4097f403e221ef59265090e2c35ffb4bce07d.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="882">
+          </picture>
+        </p>
+        <p>We will need a number of outgoing request headers, please see the table below. Keep the "avoid duplicate headers" setting enabled for all.</p>
+        <h3 id="configuration-properties-2">Configuration properties:</h3>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td align="center"><strong>Action</strong></td>
+                    <td align="center"><strong>Select Header Name</strong></td>
+                    <td align="center"><strong>Custom Header Name</strong></td>
+                    <td align="center"><strong>New Header Value</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Modify</td>
+                    <td>Other</td>
+                    <td><code>X-Forwarded-Host</code></td>
+                    <td><code>{{builtin.AK_HOST}}</code></td>
+                  </tr>
+                  <tr>
+                    <td>Modify</td>
+                    <td>Other</td>
+                    <td><code>X-BYO-CDN-Type</code></td>
+                    <td><code>akamai</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>Modify</code></td>
+                    <td><code>Other</code></td>
+                    <td><code>X-Push-Invalidation</code></td>
+                    <td><code>enabled</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h2 id="addmodify-behavior-caching">Add/Modify Behavior: Caching</h2>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1a0ad784d7b6692f0bfb8df3812ac1cd9377f28f4.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1a0ad784d7b6692f0bfb8df3812ac1cd9377f28f4.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1a0ad784d7b6692f0bfb8df3812ac1cd9377f28f4.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1a0ad784d7b6692f0bfb8df3812ac1cd9377f28f4.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="688">
+          </picture>
+        </p>
+        <h3 id="configuration-properties-3">Configuration properties:</h3>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td align="center"><strong>Name</strong></td>
+                    <td align="center"><strong>Value</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Caching Option</td>
+                    <td>Honor origin Cache-Control</td>
+                  </tr>
+                  <tr>
+                    <td>Enhanced RFC support</td>
+                    <td>No</td>
+                  </tr>
+                  <tr>
+                    <td>Honor private</td>
+                    <td>No</td>
+                  </tr>
+                  <tr>
+                    <td>Honor must-revalidate</td>
+                    <td>No</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h2 id="add-behavior-http2">Add Behavior: HTTP/2</h2>
+        <p>(Optional, but recommended)</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_191476e341005e69d2ea4b5587b0cb15a3419ece3.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_191476e341005e69d2ea4b5587b0cb15a3419ece3.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_191476e341005e69d2ea4b5587b0cb15a3419ece3.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_191476e341005e69d2ea4b5587b0cb15a3419ece3.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="919">
+          </picture>
+        </p>
+        <h2 id="add-rule-modify-outgoing-response-header">Add Rule: Modify Outgoing Response Header</h2>
+        <p>In the list of rules in the sidebar, click the button "+ Rules"</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_18f51f91fc630e70eb49526d8d0a84f27c4abf618.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_18f51f91fc630e70eb49526d8d0a84f27c4abf618.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_18f51f91fc630e70eb49526d8d0a84f27c4abf618.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_18f51f91fc630e70eb49526d8d0a84f27c4abf618.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="377">
+          </picture>
+        </p>
+        <p>Select "Blank Rule Template", set a name such as "Conditionally strip headers" and click "Insert Rule".</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1d38bcc2bd2a7591bc2da8a9bfac1afc1c59ccbf9.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d38bcc2bd2a7591bc2da8a9bfac1afc1c59ccbf9.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1d38bcc2bd2a7591bc2da8a9bfac1afc1c59ccbf9.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d38bcc2bd2a7591bc2da8a9bfac1afc1c59ccbf9.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="940">
+          </picture>
+        </p>
+        <p>To set the criteria for the rule to be applied click "+ Match"</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_17cf61f4660ef639ddc8cd438a961830f02a56299.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_17cf61f4660ef639ddc8cd438a961830f02a56299.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_17cf61f4660ef639ddc8cd438a961830f02a56299.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_17cf61f4660ef639ddc8cd438a961830f02a56299.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="620">
+          </picture>
+        </p>
+        <p>Then select:</p>
+        <ul>
+          <li>If</li>
+          <li>Path</li>
+          <li>Does not match one of</li>
+          <li><code>*.plain.html</code></li>
+        </ul>
+        <p>Click "+ Behavior" and "Standard property behavior" to set the behavior if a match is found</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_132069ff2f9a7729a07e70096a3f5123451cabe50.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_132069ff2f9a7729a07e70096a3f5123451cabe50.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_132069ff2f9a7729a07e70096a3f5123451cabe50.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_132069ff2f9a7729a07e70096a3f5123451cabe50.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="821">
+          </picture>
+        </p>
+        <p>Then select "Modify Outgoing Response Header"</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_16e17f9a0a67e98deab8479c597c064560777e6ac.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_16e17f9a0a67e98deab8479c597c064560777e6ac.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_16e17f9a0a67e98deab8479c597c064560777e6ac.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_16e17f9a0a67e98deab8479c597c064560777e6ac.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="916">
+          </picture>
+        </p>
+        <p>With following values:</p>
+        <ul>
+          <li>Action: Remove</li>
+          <li>Select Header Name: Other</li>
+          <li>Custom Header Name: <code>X-Robots-Tag</code></li>
+        </ul>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1f7f469de295b733388be027c7c0a45b8eb17a81b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1f7f469de295b733388be027c7c0a45b8eb17a81b.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1f7f469de295b733388be027c7c0a45b8eb17a81b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1f7f469de295b733388be027c7c0a45b8eb17a81b.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="371">
+          </picture>
+        </p>
+        <p>These are all essential property settings for delivering content.</p>
+        <h2 id="optional-authenticate-origin-requests">Optional: Authenticate Origin Requests</h2>
+        <p>When using <a href="../authentication-setup-site/index.html">token-based Site Authentication</a>, add the following under "Add Behavior: Outgoing Request Headers"</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1df8c62edf53c060693420b317682000a94090056.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1df8c62edf53c060693420b317682000a94090056.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1df8c62edf53c060693420b317682000a94090056.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1df8c62edf53c060693420b317682000a94090056.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="443">
+          </picture>
+        </p>
+        <p><br>Configuration properties:</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td align="center"><strong>Name</strong></td>
+                    <td align="center"><strong>Value</strong></td>
+                    <td align="center"><strong>Comment</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Action</td>
+                    <td>Modify</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Custom Header Name</td>
+                    <td>Authorization</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><code>New Header Value</code></td>
+                    <td><code>token &lt;YOUR_TOKEN_HERE&gt;</code></td>
+                    <td>Replace with the site token value received in <a href="../authentication-setup-site/index.html">token-based Site Authentication</a></td>
+                  </tr>
+                  <tr>
+                    <td>Avoid Duplicate Headers</td>
+                    <td>Yes</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p>This setting will ensure that Akamai authenticates requests from your CDN to the AEM Origin, which validates the token received in the <code>Authorization</code> header.</p>
+        <h2 id="caveats">Caveats</h2>
+        <p><strong>Do not enable</strong> <a href="https://www.akamai.com/de/products/mpulse-real-user-monitoring">Akamai mPulse Real Usage Monitoring</a>. While the performance impact on most sites is negligible, for sites built for consistent high performance, enabling it will prevent reaching a Lighthouse Score of 100. In <a href="../rum/index.html" data-broken-link="true">AEM, you have a Real Use Monitoring service built-in</a>, so that dual instrumentation will be unnecessary and is strongly discouraged.</p>
+        <p>Also, <strong>do not enable</strong> <a href="https://www.akamai.com/products/bot-manager">Akamai Bot Manager Premier</a> (also called “Transactional Endpoint Protection”) or similar Web Application Firewall offerings, as they markedly interfere with rendering performance and user experience. Your site on AEM is protected against bot attacks on the backend, so that this performance cost comes with negligible benefit.</p>
+        <div class="fragment">
+          <div>
+            <div><a href="../setup-byo-cdn-push-invalidation-for-akamai/index.html">https://main--helix-website--adobe.hlx.page/docs/setup-byo-cdn-push-invalidation-for-akamai</a></div>
+          </div>
+        </div>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="byo-cdn-setup-overview"><a href="../byo-cdn-setup/index.html">BYO CDN Setup Overview</a></h3>
+            </div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

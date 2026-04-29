@@ -1,0 +1,299 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.178Z
+  page:             developer-admin-errors
+  pageUrl:          https://www.aem.live/developer/admin-errors
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Backend Errors</title>
+  <meta name="description" content="Backend error codes and templates in Adobe Experience Manager">
+  <meta property="og:title" content="Backend Errors">
+  <meta property="og:description" content="Backend error codes and templates in Adobe Experience Manager">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/admin-errors/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#error-codes-and-templates">Error Codes and Templates</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Backend Errors</h1>
+          <p class="lede">Backend error codes and templates in Adobe Experience Manager</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1f3ccd60d29c2b246418421dc13895b82ede32c72.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1f3ccd60d29c2b246418421dc13895b82ede32c72.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1f3ccd60d29c2b246418421dc13895b82ede32c72.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1f3ccd60d29c2b246418421dc13895b82ede32c72.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>In case of an error in a backend request, the <a href="../../docs/admin.html/index.html" data-broken-link="true">Admin Service</a> returns an appropriate <code>4xx</code> or <code>5xx</code> HTTP status code as well as the following HTTP headers in its response:</p>
+        <ul>
+          <li><code>x-error</code>: the English error message</li>
+          <li><code>x-error-code</code>: the error code</li>
+        </ul>
+        <p>Each error code maps to a template, which a client can use to process the English error message, for example to translate it into the user’s preferred language or adapt the error message to the context it occurred in.</p>
+        <h2 id="error-codes-and-templates">Error Codes and Templates</h2>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td align="center"><strong>Code</strong></td>
+                    <td align="center"><strong>Template</strong></td>
+                    <td align="center"><strong>Likely Root Cause</strong></td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_FETCH_FAILED</code></td>
+                    <td><code>Unable to fetch '$1' from '$2': $3</code></td>
+                    <td>Backend fetch failed (network, permissions, server error).</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_NOT_FOUND</code></td>
+                    <td><code>Unable to preview '$1': File not found</code></td>
+                    <td>Source document is missing or inaccessible.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_TYPE_UNSUPPORTED</code></td>
+                    <td><code>Unable to preview '$1': File type not supported: $2</code></td>
+                    <td>File type not supported by the preview system.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_NO_HANDLER</code></td>
+                    <td><code>Unable to preview '$1': No handler found for document: $2</code></td>
+                    <td>No processing handler available for this file type.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_NON_MATCHING_MEDIA</code></td>
+                    <td><code>Unable to preview '$1': content is not a '$2' but: $3</code></td>
+                    <td>Actual media type does not match expected type.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_VALIDATION_FAILED</code></td>
+                    <td><code>Unable to preview '$1': validation failed: $2</code></td>
+                    <td>Document failed backend validation checks.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_DOC_IMAGE_TOO_BIG</code></td>
+                    <td><code>Unable to preview '$1': source contains large image: $2</code></td>
+                    <td>Embedded image inside a doc exceeds size limits.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_UNSUPPORTED_MEDIA</code></td>
+                    <td><code>Unable to preview '$1': '$2' backend does not support file type.</code></td>
+                    <td>Specific backend does not support this media type.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_NO_CONTENT_TYPE</code></td>
+                    <td><code>Unable to preview '$1': Content type header is missing</code></td>
+                    <td>Source response missing Content-Type header.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_JSON_INVALID</code></td>
+                    <td><code>Unable to preview '$1': JSON fetched from markup is invalid: $2</code></td>
+                    <td>Markup contains malformed JSON.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_FILE_EMPTY</code></td>
+                    <td><code>Unable to preview '$1': File is empty, no markdown version available</code></td>
+                    <td>Source file is empty.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_FILE_TOO_BIG</code></td>
+                    <td><code>Unable to preview '$1': Documents larger than 100mb not supported: $2</code></td>
+                    <td>File exceeds 100 MB size limit.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_MP4_PARSING_FAILED</code></td>
+                    <td><code>Unable to preview '$1': Unable to parse MP4</code></td>
+                    <td>MP4 file corrupted or unparseable.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_MP4_TOO_LONG</code></td>
+                    <td><code>Unable to preview '$1': MP4 is longer than 2 minutes: $2</code></td>
+                    <td>MP4 exceeds duration limit.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_MP4_BIT_RATE_TOO_HIGH</code></td>
+                    <td><code>Unable to preview '$1': MP4 has a higher bitrate than 300 KB/s: $2</code></td>
+                    <td>MP4 exceeds bitrate threshold.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_ICO_TOO_BIG</code></td>
+                    <td><code>Unable to preview '$1': ICO is larger than 16KB: $2</code></td>
+                    <td>ICO exceeds maximum size.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_PDF_TOO_BIG</code></td>
+                    <td><code>Unable to preview '$1': PDF is larger than 10MB: $2</code></td>
+                    <td>PDF exceeds size limit.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_SVG_SCRIPTING_DETECTED</code></td>
+                    <td><code>Unable to preview '$1': Script or event handler detected in SVG at: $2</code></td>
+                    <td>Disallowed script/event attributes in SVG.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_SVG_ROOT_ITEM_MISSING</code></td>
+                    <td><code>Unable to preview '$1': Expected XML content with an SVG root item</code></td>
+                    <td>SVG missing &lt;svg&gt; root element.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_SVG_PARSING_FAILED</code></td>
+                    <td><code>Unable to preview '$1': Unable to parse SVG XML</code></td>
+                    <td>SVG XML is invalid or corrupted.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_SVG_TOO_BIG</code></td>
+                    <td><code>Unable to preview '$1': SVG is larger than 20KB: $2</code></td>
+                    <td>SVG file exceeds size limit.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_IMAGE_TOO_BIG</code></td>
+                    <td><code>Unable to preview '$1': Image is larger than $2: $3</code></td>
+                    <td>Image exceeds supported dimensions/size.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_CONFIG_EXISTS</code></td>
+                    <td><code>Config already exists</code></td>
+                    <td>Attempted to create a config that already exists.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_CONFIG_TYPE_MISSING</code></td>
+                    <td><code>No '$1' config in body or bad content type</code></td>
+                    <td>Config type missing from request or wrong content type.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_CONFIG_TYPE_INVALID</code></td>
+                    <td><code>Bad '$1' config: $2</code></td>
+                    <td>Invalid or malformed config type/value.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_CONFIG_MISSING</code></td>
+                    <td><code>Config not found</code></td>
+                    <td>Requested config does not exist.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_CONFIG_READ</code></td>
+                    <td><code>Error reading config: $1</code></td>
+                    <td>Config read operation failed.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_CONFIG_CREATE</code></td>
+                    <td><code>Error creating config: $1</code></td>
+                    <td>Config creation operation failed.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_CONFIG_UPDATE</code></td>
+                    <td><code>Error updating config: $1</code></td>
+                    <td>Config update operation failed.</td>
+                  </tr>
+                  <tr>
+                    <td><code>AEM_BACKEND_CONFIG_DELETE</code></td>
+                    <td><code>Error removing config: $1</code></td>
+                    <td>Config deletion operation failed.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

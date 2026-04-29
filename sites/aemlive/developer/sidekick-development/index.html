@@ -1,0 +1,596 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.137Z
+  page:             developer-sidekick-development
+  pageUrl:          https://www.aem.live/developer/sidekick-development
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Extending the Sidekick</title>
+  <meta name="description" content="The goal of this document is to explain how developers can interact with the sidekick, and how it can be customized at a project level.">
+  <meta property="og:title" content="Extending the Sidekick">
+  <meta property="og:description" content="The goal of this document is to explain how developers can interact with the sidekick, and how it can be customized at a project level.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/sidekick-development/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#events">Events</a></li>
+<li class="l-3"><a href="#listening-for-events">Listening for Events</a></li>
+<li class="l-2"><a href="#customizing-the-sidekick">Customizing the Sidekick</a></li>
+<li class="l-3"><a href="#host-settings">Host Settings</a></li>
+<li class="l-3"><a href="#custom-plugins">Custom Plugins</a></li>
+<li class="l-4"><a href="#common-plugin-properties">Common Plugin Properties</a></li>
+<li class="l-4"><a href="#url-based-plugins">URL-based Plugins</a></li>
+<li class="l-4"><a href="#event-based-plugins">Event-based Plugins</a></li>
+<li class="l-3"><a href="#special-plugin-types">Special Plugin Types</a></li>
+<li class="l-4"><a href="#palette-plugins">Palette Plugins</a></li>
+<li class="l-4"><a href="#popover-plugins">Popover Plugins</a></li>
+<li class="l-4"><a href="#container-plugins">Container Plugins</a></li>
+<li class="l-4"><a href="#badge-plugins">Badge Plugins</a></li>
+<li class="l-3"><a href="#customizing-default-plugins">Customizing Default Plugins</a></li>
+<li class="l-4"><a href="#publish-confirmations">Publish Confirmations</a></li>
+<li class="l-3"><a href="#custom-edit-urls">Custom Edit URLs</a></li>
+<li class="l-3"><a href="#special-views">Special Views</a></li>
+<li class="l-2"><a href="#development-workflow">Development Workflow</a></li>
+<li class="l-3"><a href="#using-a-site-copy">Using a Site Copy</a></li>
+<li class="l-3"><a href="#using-a-repository-branch">Using a Repository Branch</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Extending the Sidekick</h1>
+          <p class="lede">The goal of this document is to explain how developers can interact with the sidekick, and how it can be customized at a project level.</p>
+        </header>
+        <div class="content">
+        
+        <p>The goal of this document is to explain how developers can interact with the sidekick, and how it can be customized at a project level.</p>
+        <h2 id="events">Events</h2>
+        <p>The sidekick emits the following events:</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td align="center"><strong>Event Name</strong></td>
+                    <td align="center"><strong>Target Element</strong></td>
+                    <td align="center"><strong>Payload</strong></td>
+                    <td align="center"><strong>Description</strong></td>
+                  </tr>
+                  <tr>
+                    <td><code>sidekick-ready</code></td>
+                    <td><code>document</code></td>
+                    <td>-</td>
+                    <td>The sidekick element has been added to the DOM and is ready for use.</td>
+                  </tr>
+                  <tr>
+                    <td><code>previewed</code></td>
+                    <td><code>aem-sidekick</code></td>
+                    <td>(string) The path(s) of the previewed resource</td>
+                    <td>The Preview button has been clicked.</td>
+                  </tr>
+                  <tr>
+                    <td><code>updated</code></td>
+                    <td><code>aem-sidekick</code></td>
+                    <td>(string) The path of the updated resource</td>
+                    <td>The Reload button has been clicked.</td>
+                  </tr>
+                  <tr>
+                    <td><code>published</code></td>
+                    <td><code>aem-sidekick</code></td>
+                    <td>(string) The path of the published resource</td>
+                    <td>The Publish button has been clicked.</td>
+                  </tr>
+                  <tr>
+                    <td><code>deleted</code></td>
+                    <td><code>aem-sidekick</code></td>
+                    <td>(string) The path of the deleted resource</td>
+                    <td>The Delete button has been clicked.</td>
+                  </tr>
+                  <tr>
+                    <td><code>unpublished</code></td>
+                    <td><code>aem-sidekick</code></td>
+                    <td>(string) The path of the unpublished resource</td>
+                    <td>The Unpublish button has been clicked.</td>
+                  </tr>
+                  <tr>
+                    <td><code>env-switched</code></td>
+                    <td><code>aem-sidekick</code></td>
+                    <td>
+                      <p>(object) An object with the following properties:</p>
+                      <ul>
+                        <li>(string) sourceUrl: The source URL</li>
+                        <li>(string) targetUrl: The target URL</li>
+                      </ul>
+                    </td>
+                    <td>The user has switched the environment.</td>
+                  </tr>
+                  <tr>
+                    <td><code>plugin-used</code></td>
+                    <td><code>aem-sidekick</code></td>
+                    <td>(string) The plugin ID</td>
+                    <td>A plugin button has been clicked</td>
+                  </tr>
+                  <tr>
+                    <td><code>logged-in</code></td>
+                    <td><code>aem-sidekick</code></td>
+                    <td>(object) The profile object</td>
+                    <td>The user has signed in.</td>
+                  </tr>
+                  <tr>
+                    <td><code>logged-out</code></td>
+                    <td><code>aem-sidekick</code></td>
+                    <td>(object) The profile object</td>
+                    <td>The user has signed out.</td>
+                  </tr>
+                  <tr>
+                    <td><code>status-fetched</code></td>
+                    <td><code>aem-sidekick</code></td>
+                    <td>(object) The status object</td>
+                    <td>The status for a resource has been fetched from the Admin API</td>
+                  </tr>
+                  <tr>
+                    <td><code>custom:&lt;name&gt;</code></td>
+                    <td><code>aem-sidekick</code></td>
+                    <td>
+                      <p>(object) An object with the following properties:</p>
+                      <ul>
+                        <li>(object) config: The sidekick configuration</li>
+                        <li>(object) location: The location object</li>
+                        <li>(object) status: The status object</li>
+                      </ul>
+                    </td>
+                    <td>A custom event-based plugin button has been clicked.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p>An event’s payload can be found in the <code>event.detail</code> property.</p>
+        <h3 id="listening-for-events">Listening for Events</h3>
+        <p>In your project code (e.g. in <code>/scripts/scripts.js</code>), you can react to sidekick events as follows (replace <code>foo</code> with the name of the event you want to listen for):</p>
+        <pre><code>const doFoo = ({ detail: payload }) =&gt; {
+  console.log('something happened', payload);
+  // your custom code goes here
+};
+
+const sk = document.querySelector('aem-sidekick');
+if (sk) {
+  // sidekick already loaded
+  sk.addEventListener('foo', doFoo);
+} else {
+  // wait for sidekick to be loaded
+  document.addEventListener('sidekick-ready', () =&gt; {
+    // sidekick now loaded
+    document.querySelector('aem-sidekick')
+      .addEventListener('foo', doFoo);
+  }, { once: true });
+}
+</code></pre>
+        <h2 id="customizing-the-sidekick">Customizing the Sidekick</h2>
+        <p>You can customize the sidekick for your project by adding a <code>sidekick</code> object to your site configuration. See here for an example of how to <a href="../../docs/config-service-setup/index.html#update-sidekick-configuration">use the configuration service</a>.</p>
+        <pre><code>{
+  "project": "My project",
+  "plugins": []
+}
+</code></pre>
+        <p>For all available configuration options, see the <a href="https://tools.aem.live/sidekick/config.schema.json">config schema</a>. Here are some basics to get you started:</p>
+        <h3 id="host-settings">Host Settings</h3>
+        <p><strong>Note:</strong> The following host properties are <em>optional</em> in the sidekick configuration and should only be used to explicitly override the default values. In general, host names should be defined in the <a href="../../docs/config-service-setup/index.html#update-production-cdn">CDN settings of your site configuration</a> instead.</p>
+        <ul>
+          <li><code>host</code> (string) The host name of your production website. Overrides <code>cdn.prod.host</code>, no default. Sidekick will redirect to the live environment on publish if no production host name is defined.</li>
+          <li><code>previewHost</code> (string) The host name of the preview environment. Overrides <code>cdn.preview.host</code>, defaults to <code>*.aem.page</code> if undefined.</li>
+          <li><code>liveHost</code> (string) The host name of the live environment. Overrides <code>cdn.live.host</code>, defaults to <code>*.aem.live</code> if undefined. Sidekick will skip the live environment on publish in case a production host name is defined.</li>
+          <li><code>reviewHost</code> (string) The host name of the review environment. Overrides <code>cdn.review.host</code>, defaults to <code>*.aem.reviews</code> if undefined.</li>
+          <li><code>trustedHosts</code> (string[]) Additional host names trusted to use sidekick authentication (use with caution!)</li>
+        </ul>
+        <h3 id="custom-plugins">Custom Plugins</h3>
+        <p>Plugins allow you to add custom functionality to the sidekick, enhancing your users’ experience.</p>
+        <h4 id="common-plugin-properties">Common Plugin Properties</h4>
+        <p>The following properties are applicable to all plugin types:</p>
+        <ul>
+          <li><code>id</code> (string) is mandatory and must be unique within a sidekick configuration.</li>
+          <li><code>title</code> (string) will be shown on the plugin button.</li>
+          <li><code>titleI18n</code> (object&lt;string, string&gt;) defines optionally translated titles.<br>Supported languages: en, de, es, fr, it, ja, ko, pt_BR, zh_CN, and zh_TW.</li>
+          <li><code>pinned</code> (boolean) determines if the plugin is pinned to the toolbar (default) or folded into the … menu.</li>
+          <li><code>environments</code> (string[]) specifies where the plugin should appear:
+            <ul>
+              <li>any (default) - any environment</li>
+              <li>dev - the local development URL (e.g. <code>http://localhost:3000/</code>)</li>
+              <li>edit - an editor view (e.g. Word, Excel, Google Docs)</li>
+              <li>admin - a folder view (e.g. SharePoint, Google Drive)</li>
+              <li>preview - a preview URL (e.g. <code>https://main--site--org.aem.page/</code>)</li>
+              <li>live - a live URL (e.g. <code>https://main--site--org.aem.live/</code>)</li>
+              <li>prod - a preview URL (e.g. <code>https://www.example.com/</code>)</li>
+            </ul>
+          </li>
+          <li><code>excludePaths</code> (string[]) defines patterns to exclude the plugin based on the path in the current tab’s URL.</li>
+          <li><code>includePaths</code> (string[]) defines patterns to include the plugin based on the path in the current tab’s URL.</li>
+        </ul>
+        <h4 id="url-based-plugins">URL-based Plugins</h4>
+        <p>You can specify a <code>url</code> that will be opened in a new tab when the plugin button is clicked:</p>
+        <pre><code>{
+  "plugins": [
+    {
+      "id": "foo",
+      "title": "Foo",
+      "url": "/tools/sidekick/foo.html"
+    }
+  ]
+}
+</code></pre>
+        <p>The following properties are specific to URL-based plugins:</p>
+        <ul>
+          <li><code>passConfig</code> (boolean) pass the project configuration via query parameters</li>
+          <li><code>passReferrer</code> (boolean) pass the originating URL via query parameters</li>
+        </ul>
+        <h4 id="event-based-plugins">Event-based Plugins</h4>
+        <p>Alternatively, you can specify the name of an <code>event</code> to be fired when the plugin button is clicked. This allows the execution of custom JavaScript code in the context of your page by listening for the event on the sidekick element. Custom events will have a <code>custom:</code> prefix. For your convenience, the custom event dispatched contains a copy of the current sidekick state.</p>
+        <p><strong>Note:</strong> Event-based plugins can only be used in the following environments: Development, Preview, Live and Production. Executing custom code is not possible in Edit or Admin.</p>
+        <pre><code>{
+  "plugins": [
+    {
+      "id": "foo",
+      "title": "Foo",
+      "event": "foo"
+    }
+  ]
+}
+</code></pre>
+        <p>In your project code (e.g. in <code>/scripts/scripts.js</code>), you can react to the event as follows:</p>
+        <pre><code>const doFoo = ({ detail: payload }) =&gt; {
+  console.log('a custom event happened', payload);
+  // your custom code goes here
+};
+
+const sk = document.querySelector('aem-sidekick');
+if (sk) {
+  // sidekick already loaded
+    sk.addEventListener('custom:foo', doFoo);
+} else {
+  // wait for sidekick to be loaded
+  document.addEventListener('sidekick-ready', () =&gt; {
+    // sidekick now loaded
+    document.querySelector('aem-sidekick')
+      .addEventListener('custom:foo', doFoo);
+  }, { once: true });
+}
+</code></pre>
+        <h3 id="special-plugin-types">Special Plugin Types</h3>
+        <h4 id="palette-plugins">Palette Plugins</h4>
+        <p>Palettes are variants of URL-based plugins which load the configured URL inside a floating palette instead of opening a new tab.</p>
+        <ul>
+          <li><code>isPalette</code> (boolean) opens the target of a URL-based plugin in a palette instead of a new tab.</li>
+          <li><code>paletteRect</code> (string) optionally defines the size and position of the palette in the format of a <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMRect">DOMRect</a>.</li>
+        </ul>
+        <p>The following example creates a standard palette placed at the bottom left of the window:</p>
+        <pre><code>{
+  "plugins": [
+    {
+      "id": "foo",
+      "title": "Foo",
+      "url": "/tools/sidekick/foo-palette.html",
+      "isPalette": true
+    }
+  ]
+}
+</code></pre>
+        <p>If you wish to change the size and positioning of your palette, use <code>paletteRect</code>:</p>
+        <pre><code>{
+  "plugins": [
+    {
+      "id": "foo",
+      "title": "Foo",
+      "url": "/tools/sidekick/foo-palette.html",
+      "isPalette": true,
+      "paletteRect": "top:150px;left:7%;height:675px;width:85vw;"
+    }
+  ]
+}
+</code></pre>
+        <h5 id="manipulating-a-palette-from-within">Manipulating a palette from within</h5>
+        <p>Using Chrome's messaging API, you can tell the sidekick to close your palette, for example when the user clicks a button inside of it. The <code>id</code> property of the message object is the ID of your palette plugin:</p>
+        <pre><code>chrome.runtime.sendMessage('igkmdomcgoebiipaifhmpfjhbjccggml', {
+  id: 'foo',
+  action: 'closePalette',
+});
+</code></pre>
+        <p>You can also resize and reposition your palette dynamically. The <code>id</code> property of the message object is the ID of your palette plugin. The <code>rect</code> object can contain CSS properties and values for <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>, <code>width</code> and <code>height</code>.</p>
+        <pre><code>chrome.runtime.sendMessage('igkmdomcgoebiipaifhmpfjhbjccggml', {
+  id: 'foo',
+  action: 'resizePalette',
+  rect: { "top": "100px", "left": "20px", "width": "50vw", "height": "500px" }
+});
+</code></pre>
+        <h4 id="popover-plugins">Popover Plugins</h4>
+        <p>Popovers are variants of URL-based plugins which load the configured URL inside a popover instead of opening a new tab. Popovers are centered above the plugin's button.</p>
+        <ul>
+          <li><code>isPopover</code> (boolean) opens the target of a URL-based plugin in a popover instead of a new tab.</li>
+          <li><code>popoverRect</code> (string) optionally defines the width and height of the popover in the format of a <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMRect">DOMRect</a>.</li>
+        </ul>
+        <pre><code>{
+  "plugins": [
+    {
+      "id": "foo",
+      "title": "Foo",
+      "url": "/tools/sidekick/foo-popover.html",
+      "isPopover": true
+    }
+  ]
+}
+
+</code></pre>
+        <p>If you wish to change the width or height of your palette, use <code>popoverRect</code>:</p>
+        <pre><code>{
+  "plugins": [
+    {
+      "id": "foo",
+      "title": "Foo",
+      "url": "/tools/sidekick/foo-popover.html",
+      "isPopover": true,
+      "popoverRect": "width:300px;height:200px;"
+    }
+  ]
+}
+</code></pre>
+        <p>A <code>theme</code> query parameter is appended to the URL to style the iframe in line with the current sidekick theme. If no background color is set on the content’s body, it will inherit the popover’s translucent background.</p>
+        <h5 id="manipulating-a-popover-from-within">Manipulating a popover from within</h5>
+        <p>Using Chrome's messaging API, you can tell the sidekick to close your popover, for example when the user clicks a button inside of it. The <code>id</code> property of the message object is the ID of your popover plugin:</p>
+        <pre><code>chrome.runtime.sendMessage('igkmdomcgoebiipaifhmpfjhbjccggml', {
+  action: 'closePopover',
+  id: 'foo',
+});
+</code></pre>
+        <p>You can also resize your popover dynamically. The <code>id</code> property of the message object is the ID of your popover plugin. The <code>rect</code> object can contain CSS properties and values for <code>width</code> and <code>height</code>.</p>
+        <pre><code>chrome.runtime.sendMessage('igkmdomcgoebiipaifhmpfjhbjccggml', {
+  id: 'foo',
+  action: 'resizePopover',
+  rect: { "width": "50vw", "height": "500px" }
+});
+</code></pre>
+        <h4 id="container-plugins">Container Plugins</h4>
+        <p>Containers allow you grouping plugins together and help save space in the toolbar. Clicking a container plugin simply toggles its dropdown, it can’t have its own URL or event action.</p>
+        <ul>
+          <li><code>isContainer</code> (boolean) renders a plugin as a dropdown instead of a button.</li>
+          <li><code>containerId</code> (string) adds a plugin to a container plugin with the specified ID.</li>
+        </ul>
+        <p>The following example creates a container named “Tools” and places a plugin “Foo” in it:</p>
+        <pre><code>{
+  "plugins": [
+    {
+      "id": "tools",
+      "title": "Tools",
+      "isContainer": true
+    },
+    {
+      "id": "foo",
+      "containerId": "tools",
+      "title": "Foo",
+      "event": "foo"
+    }
+  ]
+}
+</code></pre>
+        <h4 id="badge-plugins">Badge Plugins</h4>
+        <p>Badges allow you to add labels to the sidekick under certain conditions. They will be rendered on the right hand side of the toolbar. Badges have a merley decorative purpose and can’t be clicked.</p>
+        <ul>
+          <li><code>isBadge</code> (boolean) renders a plugin as a badge instead of a button.</li>
+          <li><code>badgeVariant</code> (string) optionally determines the badge’s color scheme (gray, red, orange, yellow, chartreuse, celery, green, seafoam, cyan, blue, indigo, purple, fuchsia, or magenta)</li>
+        </ul>
+        <p>The following example adds a “Stage” badge to the sidekick in the preview environment:</p>
+        <pre><code>{
+  "plugins": [
+    {
+      "id": "stage",
+      "title": "Stage",
+      "isBadge": true,
+      "environments" ["preview"]
+    }
+  ]
+}
+</code></pre>
+        <h3 id="customizing-default-plugins">Customizing Default Plugins</h3>
+        <p>By specifying an <code>id</code> of a default plugin (such as <code>preview</code>, <code>update</code> or <code>publish</code>), you can modify the conditions under which they will be rendered. The following <a href="#common-plugin-properties">plugin properties</a> will be considered: <code>environments</code>, <code>excludePaths</code>, and <code>includePaths</code>.</p>
+        <p>In the following example, the publish plugin would only appear in the preview environment, and only if the path of the current resource does not contain a <code>drafts</code> segment:</p>
+        <pre><code>{
+  "plugins": [
+    {
+      "id": "publish",
+      "excludePaths": ["**/drafts/**"],
+      "environments": ["preview"]
+    }
+  ]
+}
+</code></pre>
+        <h4 id="publish-confirmations">Publish Confirmations</h4>
+        <p>The publish plugin can be configured to show a confirmation dialog prior to executing the action, prompting the user to verify the action and giving them the ability to cancel it. This can be used as an extra precaution, for example when dealing with critical content that could have business implications if published erroneously:</p>
+        <pre><code>{
+  "plugins": [
+    {
+      "id": "publish",
+      "confirm": true
+    }
+  ]
+}
+</code></pre>
+        <p><strong>Note:</strong> Publish confirmations can only be enabled for your entire site.</p>
+        <h3 id="custom-edit-urls">Custom Edit URLs</h3>
+        <p>If your project does not use SharePoint or Google Drive as content source, you can tell the sidekick how to link to your custom editing environment when the user clicks <em>Edit</em>.</p>
+        <p>The following two config options are available:</p>
+        <ul>
+          <li><code>editUrlLabel</code> (string) set the label visible to the user</li>
+          <li><code>editUrlPattern</code> (string) defines an URL pattern for the custom editing environment. Supports placeholders like <code>{{contentSourceUrl}}</code> or <code>{{pathname}}</code>.</li>
+        </ul>
+        <pre><code>{
+  "editUrlLabel": "Your Editor",
+  "editUrlPattern": "{{contentSourceUrl}}{{pathname}}?cmd=open"
+}
+</code></pre>
+        <h3 id="special-views">Special Views</h3>
+        <p>You can specify a special view for the sidekick to redirect to when the current tab’s URL matches a certain pattern. This can help you provide a seamless user experience across different media types, and also enables the execution of custom code (event-based plugins). The original resource URL will be available in a <code>url</code> query parameter.</p>
+        <p>The properties <code>path</code> and <code>viewer</code> are mandatory. Optionally, you can specify a <code>title</code> that will be shown at the top, and you can provide localized titles in a <code>titleI18n</code> object:</p>
+        <pre><code>{
+  "specialViews": [
+    {
+      "title": "Custom JSON Viewer",
+      "path" : "**.json",
+      "viewer": "/tools/sidekick/custom-json-viewer/index.html"
+    }
+  ]
+}
+</code></pre>
+        <p><br>At the path specified by <code>viewer</code>, add an HTML file to your GitHub repository, for example:</p>
+        <pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Custom JSON Viewer&lt;/title&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html;charset=UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;link rel="stylesheet" href="./custom-json-viewer.css"&gt;
+  &lt;!-- add your custom code --&gt;
+  &lt;script src="./custom-json-viewer.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        <p>Add an optional CSS file in the same directory, and a JS file with your custom logic, for example:</p>
+        <pre><code>try {
+  // get the resource URL from the url query parameter
+  const url = new URL(window.location.href).searchParams.get('url');
+  if (url) {
+    const res = await fetch(url);
+    if (res.ok) {
+      const text = await res.text();
+      const data = JSON.parse(text);
+      // do something with the data, e.g.
+      document.body.innerHTML = `
+        &lt;pre&gt;
+          ${JSON.stringify(data, null, 2)}
+        &lt;/pre&gt;
+       `;
+    } else {
+      throw new Error(`failed to load ${url}: ${res.status}`);
+    }
+  }
+} catch (e) {
+  console.error('error rendering custom json view', e);
+}
+</code></pre>
+        <h2 id="development-workflow">Development Workflow</h2>
+        <p>The following workflows are designed for detached sidekick development to prevent unintentional disruptions for the authors on your production site:</p>
+        <h3 id="using-a-site-copy">Using a Site Copy</h3>
+        <p>If your site’s configuration is stored in the <a href="../../docs/config-service-setup/index.html">Configuration Service</a>, you can use temporary site copies for sidekick development:</p>
+        <ol>
+          <li>Create a <a href="../../docs/repoless/index.html">copy of your site</a> in the Configuration Service. For example, if the name of your original site is <code>site1</code>, you could create a <code>site1-dev</code>, reusing the same code and content.</li>
+          <li>Open the preview URL for <code>site1-dev</code> in your browser: <code>https://main--site1-dev--org.aem.page</code>.</li>
+          <li>Make your desired changes to the <a href="../../docs/config-service-setup/index.html#update-sidekick-configuration">sidekick object</a> in the <code>site1-dev</code> configuration.</li>
+          <li>Refresh the browser tab after each change to test your changes.</li>
+          <li>When done, copy the <a href="../../docs/config-service-setup/index.html#update-sidekick-configuration">sidekick object</a> from <code>site1-dev</code> to the <code>site1</code> configuration to roll your changes out to all authors.</li>
+        </ol>
+        <p><strong>Note:</strong> When using the sidekick in an editor environment (Google Drive or Microsoft Sharepoint), it will load the config from the original site by default. If you want the sidekick to let you choose which configuration to load, first <a href="../../docs/sidekick/index.html#adding-projects">add the new site</a> to your sidekick from the preview or live URL. Now the sidekick will display a picker with all matching sites.</p>
+        <h3 id="using-a-repository-branch">Using a Repository Branch</h3>
+        <p>If your site’s configuration is not stored in the <a href="../../docs/config-service-setup/index.html">Configuration Service</a>, you can use a branch in GitHub for sidekick development:</p>
+        <ol>
+          <li>On your site’s GitHub repository, create a branch from <code>main</code>. For this example, we’ll use <code>dev</code> as the branch name.</li>
+          <li>Open the preview URL for the <code>dev</code> branch in your browser: <code>https://dev--site1--org.aem.page</code>.</li>
+          <li>Open or create the following file in your repository: <code>/tools/sidekick/config.json</code>.</li>
+          <li>Make your desired changes to the sidekick configuration file and push changes to the <code>dev</code> branch.</li>
+          <li>Refresh the browser tab after each change to test your changes.</li>
+          <li>When done, create a pull request and merge the changes to the <code>main</code> branch of your repository.</li>
+        </ol>
+        <p><strong>Caution:</strong> Never commit directly to the <code>main</code> branch in your original repository. Always create a branch and ask for a review of your changes via pull request before merging into <code>main</code>.</p>
+        <p><strong>Note:</strong> When using the sidekick in an editor environment (Google Drive or Microsoft Sharepoint), it will load the config from the original site by default. If you want the sidekick to let you choose which configuration to load, first <a href="../../docs/sidekick/index.html#adding-projects">add the new site</a> to your sidekick from the preview or live URL. Now the sidekick will display a picker with all matching sites.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

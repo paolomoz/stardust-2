@@ -1,0 +1,376 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.088Z
+  page:             developer-importer
+  pageUrl:          https://www.aem.live/developer/importer
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Importing Content</title>
+  <meta name="description" content="Learn how to use the AEM importer">
+  <meta property="og:title" content="Importing Content">
+  <meta property="og:description" content="Learn how to use the AEM importer">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/importer/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#import-concept">Import Concept</a></li>
+<li class="l-2"><a href="#getting-started">Getting Started</a></li>
+<li class="l-2"><a href="#the-aem-importer">The AEM Importer</a></li>
+<li class="l-3"><a href="#import---workbench">Import - Workbench</a></li>
+<li class="l-4"><a href="#document-authoring">Document Authoring</a></li>
+<li class="l-4"><a href="#aem-authoring">AEM Authoring</a></li>
+<li class="l-4"><a href="#where-are-my-assets">Where are my assets?</a></li>
+<li class="l-4"><a href="#import---workbench--general-features">Import - Workbench – General Features</a></li>
+<li class="l-4"><a href="#what-do-i-do-with-these-docx-filesjcr-packagehtml">What do I do with these docx files/JCR package/HTML?</a></li>
+<li class="l-3"><a href="#import---bulk">Import - Bulk</a></li>
+<li class="l-4"><a href="#report">Report</a></li>
+<li class="l-3"><a href="#crawl">Crawl</a></li>
+<li class="l-4"><a href="#get-from-robotstxt-or-sitemap">Get from robots.txt or sitemap</a></li>
+<li class="l-4"><a href="#crawl-1">Crawl</a></li>
+<li class="l-3"><a href="#eyedropper">Eyedropper</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Importing Content</h1>
+          <p class="lede">Learn how to use the AEM importer</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_15b4a2d14e2eb6d2f80993536acbd212dfb131d5b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_15b4a2d14e2eb6d2f80993536acbd212dfb131d5b.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_15b4a2d14e2eb6d2f80993536acbd212dfb131d5b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_15b4a2d14e2eb6d2f80993536acbd212dfb131d5b.png?width=750&amp;format=png&amp;optimize=medium" width="1463" height="1097">
+          </picture>
+        </p>
+        
+        <p>AEM offers the capability to easily import an existing site and convert its content to <code>docx</code> <a href="#document-authoring">files for document-based authoring, HTML files for Document Authoring</a>, or <a href="#aem-authoring">content packages for AEM authoring with the Universal Editor</a>.</p>
+        <h2 id="import-concept">Import Concept</h2>
+        <p>If you copy the content of a web page by selecting <strong>Select All</strong> and <strong>Copy</strong> in the browser and paste the selection inside a Word or a Google Doc document, you will see that both programs can easily convert the copied DOM elements into their own basic document elements. An HTML <code>h1</code> becomes text styled with <code>Heading 1</code>. Any <code>span</code>, <code>div</code>, or <code>p</code> element becomes a <code>Normal</code> paragraph. An image is inserted as an image. Et cetera.</p>
+        <p>The AEM Importer recognizes and understands these same page semantics and allows you to import content into:</p>
+        <ul>
+          <li><code>docx</code> files for document-based authoring with <a href="../tutorial/index.html">Google Drive</a> or <a href="../../docs/setup-customer-sharepoint/index.html">SharePoint</a></li>
+          <li>Content packages for <a href="../ue-tutorial/index.html">AEM authoring with the Universal Editor</a></li>
+          <li>HTML for <a href="../da-tutorial/index.html" data-broken-link="true">Document Authoring (DA)</a></li>
+        </ul>
+        <p>Check out the document <a href="../../docs/authoring-guide/index.html">Where to author</a> if you are not familiar with AEM’s authoring options.</p>
+        <p>The importer offers the tooling to automate the process for multiple pages of a site to be imported and converted.</p>
+        <ol>
+          <li>You start from an existing web page (the DOM is the input).</li>
+          <li>You apply a set of transformations (to remove unnecessary elements, reorder or transform some of the elements, perform cleanup, etc.).</li>
+          <li>The importer creates a <code>docx</code> document, a content package, or HTML for you.</li>
+        </ol>
+        <h2 id="getting-started">Getting Started</h2>
+        <p>While the content import is one of the first steps to be performed in a project, you need to be familiar with AEM, especially the desired structure of your content.</p>
+        <p>It is good practice to make example imports of each page type you wish to import. You can thereby confirm that the authors find the resulting structures intuitive. This also allows parallelization of the content import with the development work for blocks and styling. If you are using document-based authoring, you can do this by creating manual imports using copy/paste from the source website into a Word or Google Docs document.</p>
+        <p>Structuring your content in an intuitive manner is an important step in an AEM project. See the documents <a href="https://www.hlx.live/developer/markup-sections-blocks">Markup, Sections, Blocks and Auto Blocking</a> and <a href="https://www.hlx.live/docs/davidsmodel">David’s Model, Second take</a> for more information.</p>
+        <p>A project is usually ready for an import roughly at the end of the tutorial. See the following documents for more information.</p>
+        <ul>
+          <li><a href="../ue-tutorial/index.html">Getting Started – Universal Editor Developer Tutorial</a></li>
+          <li><a href="https://www.hlx.live/developer/tutorial">Getting Started with AEM - Developer Tutorial</a></li>
+          <li><a href="../../docs/setup-customer-sharepoint/index.html">How to use Sharepoint (application)</a></li>
+          <li><a href="../da-tutorial/index.html" data-broken-link="true">Getting Started – Document Authoring (DA) Developer Tutorial</a></li>
+        </ul>
+        <p>At the end of the tutorials, you can simply run the following command.</p>
+        <p><code>aem import</code></p>
+        <ol>
+          <li>This starts the AEM Importer. You can run this instead of or in addition to <code>aem up</code>.</li>
+          <li>The <a href="https://github.com/adobe/helix-importer-ui/">helix-importer-ui</a> project will be cloned under the <code>tools/importer/helix-importer-ui</code> folder.</li>
+          <li>The import proxy server starts and a new browser window opens at <code>http://localhost:3001/tools/importer/helix-importer-ui/index.html</code></li>
+          <li>As a first step, you must choose your authoring method so the importer UI presents the appropriate options. In the <strong>Authoring Experience Selection</strong> modal select one of the following and click <strong>Ok</strong>.
+            <ol>
+              <li><strong>Document Authoring</strong> if you will be using document-based authoring or Document Authoring (DA)</li>
+              <li><strong>AEM Authoring</strong> if you are using AEM and the Universal Editor to edit your content</li>
+            </ol>
+          </li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_18ef116fcd5c936279b28f1bedcdadebc3252cf49.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_18ef116fcd5c936279b28f1bedcdadebc3252cf49.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_18ef116fcd5c936279b28f1bedcdadebc3252cf49.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_18ef116fcd5c936279b28f1bedcdadebc3252cf49.png?width=750&amp;format=png&amp;optimize=medium" width="1247" height="945">
+          </picture><br><em>Select your authoring experience when first starting the importer</em>
+        </p>
+        <p>If you make the wrong selection for your authoring type or otherwise need to change it, click the project picker drop-down in the bottom-right corner of the importer window and select the appropriate option.</p>
+        <ul>
+          <li><strong>Document Authoring</strong></li>
+          <li><strong>AEM Authoring</strong></li>
+          <li><strong>Reset</strong> to be prompted with the Authoring Experience Selection modal again to make your selection</li>
+        </ul>
+        <p>The bottom-left of the importer window displays your current version of the importer UI as well as the AEM CLI tool.</p>
+        <h2 id="the-aem-importer">The AEM Importer</h2>
+        <p>The AEM Importer offers a set of tools to support you to quickly import your website content.</p>
+        <p>Please note that only Chrome-based browsers are supported.</p>
+        <h3 id="import---workbench">Import - Workbench</h3>
+        <p>The Import Workbench is where you define and start your import process. The UI differs depending on the authoring method you initially selected.</p>
+        <h4 id="document-authoring">Document Authoring</h4>
+        <p>Performing an initial import for document-based authoring is quite simple.</p>
+        <ol>
+          <li>Provide a <strong>URL</strong> (<a href="https://wknd.site/us/en.html">https://wknd.site/us/en.html</a> in our sample case) of a page to import.</li>
+          <li>Define your desired output.
+            <ul>
+              <li>By default, under <strong>Import Options</strong>, <strong>Save as docx</strong> is selected, which is required for document-based authoring.</li>
+              <li>Select <strong>Save HTML for Document Authoring</strong>, if you are using DA.</li>
+              <li>If you select multiple options, subdirectories are created in your selected destination for the various formats.</li>
+              <li>If you only select one option, no subdirectory is created.</li>
+            </ul>
+          </li>
+          <li>Click the <strong>Import</strong> button.</li>
+          <li>The importer triggers the browser to ask you where you want to save the resulting <code>docx</code> file (for document-based authoring) or HTML (for Document Authoring) and for confirmation that the browser is allowed to read and write to that location.</li>
+        </ol>
+        <p>Once you confirm this, the import is performed and saved to the selected location in subdirectories per output method. A green banner at the bottom of the importer window confirms a successful import. A red banner reports any errors.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1d0145fe96d3a307985d52f89e912e13c9026e56f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d0145fe96d3a307985d52f89e912e13c9026e56f.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1d0145fe96d3a307985d52f89e912e13c9026e56f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d0145fe96d3a307985d52f89e912e13c9026e56f.png?width=750&amp;format=png&amp;optimize=medium" width="1552" height="1169">
+          </picture><br><em>The workbench for document-based authoring</em>
+        </p>
+        <p>If you use document-based authoring, it does not matter if you work with Word documents on Sharepoint or Google Docs on Drive. The output of the AEM Importer is always <code>docx</code> file(s). Google Drive has an option to automatically convert the <code>docx</code> files (<strong>Settings &gt; General &gt; Convert uploads</strong>). When you upload the files to your drive, they will be converted automatically.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1652931c1e11135287918224f906b6b7ee9e349c0.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1652931c1e11135287918224f906b6b7ee9e349c0.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1652931c1e11135287918224f906b6b7ee9e349c0.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="Franklin Importer - Google Drive setting - Convert uploads" src="./media_1652931c1e11135287918224f906b6b7ee9e349c0.png?width=750&amp;format=png&amp;optimize=medium" width="715" height="229">
+          </picture>
+        </p>
+        <p><em>Check the "Convert uploaded files to Google Docs editor format" checkbox</em></p>
+        <h4 id="aem-authoring">AEM Authoring</h4>
+        <p>Performing an initial import for AEM authoring using the Universal Editor is quite simple.</p>
+        <ol>
+          <li>Provide a URL (<a href="https://wknd.site/us/en.html">https://wknd.site/us/en.html</a> in our sample case) of a page to import.</li>
+          <li>Define your desired output.
+            <ul>
+              <li>Under Import Options, select <strong>Save as JCR package</strong>, if you are using AEM authoring.</li>
+              <li>If you select another option like <strong>Save raw HTML</strong> or <strong>Save as markdown</strong>, subdirectories are created in your selected destination for the various formats.</li>
+              <li>If you only select one option, no subdirectory is created.</li>
+            </ul>
+          </li>
+          <li>Define your import paths.
+            <ul>
+              <li><strong>Content Import Path</strong> defines where in your destination repository the content will be stored. This must be under <code>/content</code>.</li>
+              <li><strong>Asset Import Path</strong> defines wherein your destination repository assets will be stored. This must be under <code>/content/dam</code>.</li>
+            </ul>
+          </li>
+          <li>Click the <strong>Import</strong> button.</li>
+          <li>The importer triggers the browser to ask you where you want to save the resulting JCR file and for confirmation that the browser is allowed to read and write to that location.</li>
+        </ol>
+        <p>Once you confirm this, the import is performed and saved to the selected location in subdirectories per output method. A green banner at the bottom of the importer window confirms a successful import. A red banner reports any errors.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_18bdb3ff9c59f7a49c65b57f36551d7a9ba8e899b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_18bdb3ff9c59f7a49c65b57f36551d7a9ba8e899b.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_18bdb3ff9c59f7a49c65b57f36551d7a9ba8e899b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_18bdb3ff9c59f7a49c65b57f36551d7a9ba8e899b.png?width=750&amp;format=png&amp;optimize=medium" width="1552" height="1169">
+          </picture>
+        </p>
+        <p><em>The workbench for AEM authoring</em></p>
+        <h4 id="where-are-my-assets">Where are my assets?</h4>
+        <p>The importer creates binaryless JCR packages. I.e. they contain content only without any binaries. If you choose to import your content as a JCR package, your content is mapped within the package as per the <strong>Content Import Path</strong> you specified. The assets are also mapped as per the <strong>Asset Import Path</strong>, but are proxied via your local importer.</p>
+        <p>The import process also generates an <code>asset-mapping.json</code> file alongside your JCR package, which maps the actual assets to the proxied paths. Due to authorization limitations, these assets could not be downloaded directly as part of the import. However you can use the <code>asset-mapping.json</code> file and the <a href="https://www.npmjs.com/package/@adobe/aem-import-helper#user-content-uploading-content-to-aem">AEM Import Helper app</a> to download and import your assets</p>
+        <h4 id="import---workbench--general-features">Import - Workbench – General Features</h4>
+        <p>The <strong>Page preview</strong> frame at the bottom of the middle panel shows you the page you are importing. The page is loaded in an iframe and served via the local proxy server. While AEM tries to remove all security settings, it is possible that the page does not fully render like the original due to CORS issues. This is usually fine in 90% of the cases. In the remaining cases, there are different solutions that can be attempted such as starting your browser with disabled security settings. Please contact the AEM team for assistance in such cases.</p>
+        <p>The <strong>Preview</strong> tab in the right panel shows you an approximation of how the import will appear.</p>
+        <ul>
+          <li>For document-based authoring, this is an approximation of the resulting Word document.</li>
+          <li>For AEM authoring, this is the JCR content based on the markdown and modeling.</li>
+        </ul>
+        <p><br>The AEM Importer transforms the HTML into markdown as a first step and then the markdown into a <code>docx</code> file, HTML, or JCR repository depending on your selected authoring method. The <strong>Markdown</strong> tab shows you the markdown from that intermediate step.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1d16134217dc48df35585ac39d23cb86ac60cff47.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d16134217dc48df35585ac39d23cb86ac60cff47.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1d16134217dc48df35585ac39d23cb86ac60cff47.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d16134217dc48df35585ac39d23cb86ac60cff47.png?width=750&amp;format=png&amp;optimize=medium" width="1552" height="1169">
+          </picture><em>Check the Markdown source</em>
+        </p>
+        <p>The <strong>HTML</strong> tab shows the result of the first step of the transformation. It is the result of the DOM manipulation. This tab can be occasionally useful but can be disregarded the majority of the time.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1ccdcea7e203f44c7a1c0ed55a744f522724a1804.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1ccdcea7e203f44c7a1c0ed55a744f522724a1804.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1ccdcea7e203f44c7a1c0ed55a744f522724a1804.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1ccdcea7e203f44c7a1c0ed55a744f522724a1804.png?width=750&amp;format=png&amp;optimize=medium" width="1552" height="1169">
+          </picture><br><em>Check the HTML source</em>
+        </p>
+        <p>By default, the AEM Importer performs a few things for you automatically, like removing the <code>head</code> and cleaning up the HTML.</p>
+        <p>To further customize the import process, you can create a <code>tools/importer/import.js</code> file. This file defines all of your own rules to convert your content. If you change and save the <code>import.js</code> file, the import is automatically re-executed. In this way, you can preview your changes while you are developing the transformation rules.</p>
+        <p>It is highly recommended that you read <a href="https://github.com/adobe/helix-importer-ui/blob/main/importer-guidelines.md">the GitHub documentation for the importer</a> to learn more and review code snippets to create your own <code>import.js</code>. Note that any rules you add to your own <code>import.js</code> file are in addition to the default behavior of the importer. Additional options for the import are also documented in detail there.</p>
+        <h4 id="what-do-i-do-with-these-docx-filesjcr-packagehtml">What do I do with these docx files/JCR package/HTML?</h4>
+        <p>With a set of rules (such as to remove <code>header</code> and <code>footer</code>, reorganize the hero section, create blocks, insert metadata, etc.), you can create an import that contains the essential content of the page and that fits perfectly in a Word document, content package, or HTML depending on your authoring method. You can use this content as the base of your new site by:</p>
+        <ul>
+          <li>Importing the docx into Google Drive or SharePoint or copying and pasting the content to start your site with document-based authoring.</li>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developer-tools/package-manager">Using AEM’s package manager</a> or the <a href="https://www.npmjs.com/package/@adobe/aem-import-helper#uploading-content-to-aem">AEM Import Helper tool</a> to import the JCR package to start your site with AEM authoring and the Universal Editor.</li>
+          <li><a href="../da-tutorial/index.html#browse-your-content" data-broken-link="true">Using Document Authoring’s</a> <strong><a href="../da-tutorial/index.html#browse-your-content" data-broken-link="true">Browse</a></strong> <a href="../da-tutorial/index.html#browse-your-content" data-broken-link="true">view</a>, you can drag-and-drop the HTML content into DA.</li>
+        </ul>
+        <h3 id="import---bulk">Import - Bulk</h3>
+        <p>Once you are satisfied with the transformation and you have individually tested one or more files, you likely will need to bulk import many more. The <strong>Import - Bulk</strong> tool works nearly the same as the <strong>Import - Workbench</strong> tool with a few minor differences.</p>
+        <ul>
+          <li>Provide a list of URLs instead of one. Simply paste the list of URLs to import with one URL per line.</li>
+          <li>The <code>import.js</code> file is not automatically reloaded as it is for one-off imports since if you are in the middle of importing 1000 URLs, you probably do not want the process to restart if you change the code.</li>
+        </ul>
+        <p>Otherwise the options are the same for importing one page or performing a bulk import.</p>
+        <p>The amount of URLs you can import varies mainly based on the memory each page consumes. For example, a heavy SPA page usually does not release memory and the browser tends to crash (between 60 and 100 pages). In such situations, if you only need information which is in the markup, you can disable Javascript execution in the options and you will be able to import many more pages.</p>
+        <p>You can still batch the set of URLs to import if the number is still manually manageable. If you have a lot of URLs to import (10k+), contact the AEM team. There are several ways to automate the process without using a browser, which you can discuss with them.</p>
+        <h4 id="report">Report</h4>
+        <p>During the process, you can download an Excel report with the list of pages imported and some process information (import success, 404, 301, etc.). At the end of the process, this report file contains everything the importer has done and can be used for further analysis such as to find pages with errors. Or it can be used for page processing such as previewing and publishing.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_158ab8e65c578d989b3e2dd2acc799b8c7ef89ab8.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_158ab8e65c578d989b3e2dd2acc799b8c7ef89ab8.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_158ab8e65c578d989b3e2dd2acc799b8c7ef89ab8.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_158ab8e65c578d989b3e2dd2acc799b8c7ef89ab8.png?width=750&amp;format=png&amp;optimize=medium" width="1552" height="1169">
+          </picture>
+        </p>
+        <p><em>Bulk import</em></p>
+        <h3 id="crawl">Crawl</h3>
+        <p>If you are importing pages from a website and you do not have the full list of URLs to import, you can use the <strong>Crawl</strong> tool to build the list based on the sitemap or by crawling the site.</p>
+        <h4 id="get-from-robotstxt-or-sitemap">Get from robots.txt or sitemap</h4>
+        <p>After providing a hostname and clicking <strong>Get from robots.txt or sitemap</strong>, the tool will first try to find sitemaps in the <code>/robots.txt</code> file. If no <code>robots.txt</code> is found, it will try the <code>/sitemap.xml</code> file (the default filename to search can be changed in the options).</p>
+        <p>If it finds a sitemap, it will collect all the URLs referenced in the siteamp and recursively follow the referenced other sitemap files. When the crawl is complete, you can use the download report button for the list of all unique URLs found.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_137b2284f6e6286027ed0d11175947293e55dfab4.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_137b2284f6e6286027ed0d11175947293e55dfab4.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_137b2284f6e6286027ed0d11175947293e55dfab4.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_137b2284f6e6286027ed0d11175947293e55dfab4.png?width=750&amp;format=png&amp;optimize=medium" width="1552" height="1169">
+          </picture><br><em>Sitemaps extracted URLs</em>
+        </p>
+        <p>You can use the <strong>Filter pathname</strong> option to only output the URLs under a certain path. The tool will still need to fetch all the URLs from all the sitemaps.</p>
+        <h4 id="crawl-1">Crawl</h4>
+        <p>After providing a URL and clicking <strong>Crawl</strong>, the tool will open the provided URL, try to identify the links on the page, and recursively visit all those links that are on the same host. It is basically navigating the site and collecting all the URLs it finds. For a large website, it can take a lot of time. If the website consumes a lot of resources / memory, it may even crash the browser. In such cases, hiding the preview and/or disabling the Javascript in the options can help.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1f906167230b3cd9f4793c78e83178034dbeeabfd.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1f906167230b3cd9f4793c78e83178034dbeeabfd.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1f906167230b3cd9f4793c78e83178034dbeeabfd.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1f906167230b3cd9f4793c78e83178034dbeeabfd.png?width=750&amp;format=png&amp;optimize=medium" width="1552" height="1169">
+          </picture><br><em>Crawling in-progress</em>
+        </p>
+        <p>You can use the <strong>Filter pathname</strong> option to only crawl URLs under a certain path. The provided URLs must then match this filter. This can be really useful to only crawl a subset of a large site.</p>
+        <h3 id="eyedropper">Eyedropper</h3>
+        <p>The <strong>Eyedropper</strong> tool allows you to capture the logo and some of the key CSS information of a website. You just need to provide a URL and click <strong>Eyedrop</strong>.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_10ddb3a6d2abad23cbd616d3ea5a3269a7b79ceb6.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_10ddb3a6d2abad23cbd616d3ea5a3269a7b79ceb6.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_10ddb3a6d2abad23cbd616d3ea5a3269a7b79ceb6.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_10ddb3a6d2abad23cbd616d3ea5a3269a7b79ceb6.png?width=750&amp;format=png&amp;optimize=medium" width="1552" height="1169">
+          </picture><br><em>Captured logo</em>
+        </p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_13c251a9dd55413a696763a9f601902b1582393fb.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_13c251a9dd55413a696763a9f601902b1582393fb.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_13c251a9dd55413a696763a9f601902b1582393fb.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_13c251a9dd55413a696763a9f601902b1582393fb.png?width=750&amp;format=png&amp;optimize=medium" width="1552" height="1169">
+          </picture><br><em>Captured colors</em>
+        </p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1eae6662f81c0c270d59c02e7fc98e4dc215df6e4.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1eae6662f81c0c270d59c02e7fc98e4dc215df6e4.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1eae6662f81c0c270d59c02e7fc98e4dc215df6e4.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1eae6662f81c0c270d59c02e7fc98e4dc215df6e4.png?width=750&amp;format=png&amp;optimize=medium" width="1552" height="1169">
+          </picture><br><em>Captured fonts and sizes</em>
+        </p>
+        <p>Clicking the <strong>Copy CSS to clipboard</strong> button copies all gathered information in a CSS format that is ready to be pasted into your AEM CSS for further testing and customization.</p>
+        <p>The <strong>Eydropper</strong> does its best to extract the correct information, but you should review the output and adapt it to your project needs.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

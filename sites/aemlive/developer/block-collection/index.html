@@ -1,0 +1,330 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.873Z
+  page:             developer-block-collection
+  pageUrl:          https://www.aem.live/developer/block-collection
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Block Collection</title>
+  <meta name="description" content="This is a collection of blocks considered a part of the AEM product and are recommended as blueprints for blocks in your project.">
+  <meta property="og:title" content="Block Collection">
+  <meta property="og:description" content="This is a collection of blocks considered a part of the AEM product and are recommended as blueprints for blocks in your project.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/block-collection/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#boilerplate">Boilerplate</a></li>
+<li class="l-2"><a href="#block-collection-1">Block Collection</a></li>
+<li class="l-2"><a href="#block-party">Block Party</a></li>
+<li class="l-3"><a href="#anatomy-of-a-project">Anatomy of a Project</a></li>
+<li class="l-3"><a href="#block-party-1">Block Party</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Block Collection</h1>
+          <p class="lede">This is a collection of blocks considered a part of the AEM product and are recommended as blueprints for blocks in your project.</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_18e872cbcb0d42cec5e1b7790d1b3fddfcea0dac8.jpeg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_18e872cbcb0d42cec5e1b7790d1b3fddfcea0dac8.jpeg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="./media_18e872cbcb0d42cec5e1b7790d1b3fddfcea0dac8.jpeg?width=2000&amp;format=jpeg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_18e872cbcb0d42cec5e1b7790d1b3fddfcea0dac8.jpeg?width=750&amp;format=jpeg&amp;optimize=medium" width="1103" height="827">
+          </picture>
+        </p>
+        
+        <p>This is a collection of blocks considered a part of the AEM product and are recommended as blueprints for blocks in your project.</p>
+        <p>These blocks come from real production AEM projects. To be a part of this collection, a block needs to have a high use across a number of projects and provide enough abstract functionality and be general enough so it can be reused without having to change the underlying content model.</p>
+        <p>As the needs and designs of websites change, the block collection will change as well. Additions will be made to reflect emerging needs of projects, but blocks that are not used frequently enough will also be removed (deprecated).</p>
+        <p>There are few technical principles for the blocks in the collection:</p>
+        <ul>
+          <li><strong>Intuitive:</strong> Content structure that’s intuitive and easy to author</li>
+          <li><strong>Useable:</strong> No dependencies, compatible with boilerplate</li>
+          <li><strong>Responsive:</strong> Works across all breakpoints</li>
+          <li><strong>Context Aware:</strong> Inherits CSS context such text and background colors</li>
+          <li><strong>Localizable:</strong> No hard-coded content</li>
+          <li><strong>Fast:</strong> No negative performance impact</li>
+          <li><strong>SEO and A11y:</strong> SEO friendly and accessible</li>
+        </ul>
+        <p>All of the blocks can be considered as a basis for your own block development. It is very likely that you will change all the <code>.css</code> and <code>.js</code> code to meet your own project needs. The primary value of these blocks is the content structure they provide.<br><br>Considering that the code of your block will be fully adapted to your project, there is no intent for the blocks in the collection to be backwards compatible to their respective older versions or to make them upgradable.</p>
+        <h2 id="boilerplate">Boilerplate</h2>
+        <p>The most commonly used blocks (as well as default content types) are curated in the AEM Boilerplate and are a part of every AEM project. For a block to become a part of boilerplate it has to be used by the vast majority of all AEM projects.</p>
+        <p>The code base for all the blocks in AEM Boilerplate is open-source and can be found on <a href="https://github.com/adobe/aem-boilerplate/tree/main/blocks">GitHub adobe/aem-boilerplate</a></p>
+        <p>Blocks in AEM Boilerplate can be discovered using the <a href="../../docs/sidekick-library/index.html">sidekick library</a> below, use the <code>copy</code> button to copy the corresponding content structure into your clipboard and paste into a document to see the content structure.</p>
+        <div class="cards">
+          <div>
+            <div>
+              <p><a href="headings/index.html">Headings</a></p>
+              <p><em>Default Content</em></p>
+              <p>Different levels of headings provide the semantic backbone of your document</p>
+            </div>
+            <div>
+              <p><a href="text/index.html">Text</a></p>
+              <p><em>Default Content</em></p>
+              <p>Body text or copy with rich semantic formatting options</p>
+            </div>
+            <div>
+              <p><a href="images/index.html">Images</a></p>
+              <p><em>Default Content</em></p>
+              <p>Pictures bring your content alive</p>
+            </div>
+            <div>
+              <p><a href="lists/index.html">Lists</a></p>
+              <p><em>Default Content</em></p>
+              <p>Ordered and unordered lists wherever they are needed</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p><a href="links/index.html">Links</a></p>
+              <p><em>Default Content</em></p>
+              <p>Reference other websites or your own content</p>
+            </div>
+            <div>
+              <p><a href="buttons/index.html">Buttons</a></p>
+              <p><em>Default Content</em></p>
+              <p>Call-to-action buttons and more</p>
+            </div>
+            <div>
+              <p><a href="code/index.html">Code</a></p>
+              <p><em>Default Content</em></p>
+              <p>Highlight preformatted code snippets in your content</p>
+            </div>
+            <div>
+              <p><a href="sections/index.html">Sections</a></p>
+              <p><em>Default Content</em></p>
+              <p>Group content on your page into sections</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p><a href="icons/index.html">Icons</a></p>
+              <p><em>Default Content</em></p>
+              <p>Make your content more interesting with icons</p>
+            </div>
+            <div>
+              <p><a href="hero/index.html" data-broken-link="true">Hero</a></p>
+              <p><em>Block</em></p>
+              <p>Hero treatment at the top of a page</p>
+            </div>
+            <div>
+              <p><a href="columns/index.html" data-broken-link="true">Columns</a></p>
+              <p><em>Block</em></p>
+              <p>Flexible way to handle multi-column layouts in a responsive way</p>
+            </div>
+            <div>
+              <p><a href="cards/index.html" data-broken-link="true">Cards</a></p>
+              <p><em>Block</em></p>
+              <p>List of cards with or without images and links</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p><a href="header/index.html">Header</a></p>
+              <p><em>Block</em></p>
+              <p>Flexible header and navigation example</p>
+            </div>
+            <div>
+              <p><a href="footer/index.html">Footer</a></p>
+              <p><em>Block</em></p>
+              <p>Simple extensible footer block</p>
+            </div>
+            <div>
+              <p><a href="metadata/index.html">Metadata</a></p>
+              <p>Add metadata to your page where needed</p>
+            </div>
+            <div>
+              <p><a href="section-metadata/index.html">Section Metadata</a></p>
+              <p>Highlight or structure all the content in a section</p>
+            </div>
+          </div>
+        </div>
+        <h2 id="block-collection-1">Block Collection</h2>
+        <p>The block collection contains blocks that are commonly-used, but are not so common to be considered boilerplate. As a rule-of-thumb, to be included in the block collection a block must be used on more than half of all AEM projects.</p>
+        <p>The block collection can be the entry path into boilerplate code. Likewise if a block in the boilerplate is no longer used as much, it can be moved to this collection.</p>
+        <p>The code base for all the blocks in AEM Block Collection is open-source and can be found on <a href="https://github.com/adobe/aem-block-collection/tree/main/blocks">GitHub adobe/aem-block-collection</a></p>
+        <p>Blocks in AEM Block Collection can be discovered using the <a href="../../docs/sidekick-library/index.html">sidekick library</a> below, use the <code>copy</code> button to copy the corresponding content structure into your clipboard and paste into a document to see the content structure.</p>
+        <div class="cards">
+          <div>
+            <div>
+              <p><a href="embed/index.html" data-broken-link="true">Embed</a></p>
+              <p><em>Block</em></p>
+              <p>A simple way to embed social media content into AEM pages</p>
+            </div>
+            <div>
+              <p><a href="fragment/index.html" data-broken-link="true">Fragment</a></p>
+              <p><em>Block</em></p>
+              <p>Share pieces of content across multiple pages</p>
+            </div>
+            <div>
+              <p><a href="table/index.html" data-broken-link="true">Table</a></p>
+              <p><em>Block</em></p>
+              <p>A way to organize tabular data into rows and columns</p>
+            </div>
+            <div>
+              <p><a href="video/index.html" data-broken-link="true">Video</a></p>
+              <p><em>Block</em></p>
+              <p>Display and playback videos directly from AEM</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p><a href="accordion/index.html" data-broken-link="true">Accordion</a></p>
+              <p><em>Block</em></p>
+              <p>A stack of descriptive labels that can be toggled to display related full content</p>
+            </div>
+            <div>
+              <p><a href="breadcrumbs/index.html">Breadcrumbs</a></p>
+              <p><em>Block Add-on</em></p>
+              <p>A list of page titles and relevant links showing the location of the current page in the navigational hierarchy</p>
+            </div>
+            <div>
+              <p><a href="carousel/index.html" data-broken-link="true">Carousel</a></p>
+              <p><em>Block</em></p>
+              <p>A dynamic display tool that smoothly transitions through a series of images with optional text content</p>
+            </div>
+            <div>
+              <p><a href="modal/index.html">Modal</a></p>
+              <p><em>Autoblock</em></p>
+              <p>A popup that appears over other site content</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p><a href="quote/index.html" data-broken-link="true">Quote</a></p>
+              <p><em>Block</em></p>
+              <p>A display of a quotation or a highlight of specific passage (or “pull quotes”) within a document</p>
+            </div>
+            <div>
+              <p><a href="search/index.html">Search</a></p>
+              <p><em>Block</em></p>
+              <p>Allows users to find site content by entering a search term</p>
+            </div>
+            <div>
+              <p><a href="tabs/index.html" data-broken-link="true">Tabs</a></p>
+              <p><em>Block</em></p>
+              <p>Segment information into multiple labeled (or “tabbed”) panels</p>
+            </div>
+            <div>
+              <p><a href="form/index.html" data-broken-link="true">Form</a></p>
+              <p><em>Block (Deprecated)</em></p>
+              <p>A set of input controls grouped together that enables users to submit information</p>
+            </div>
+          </div>
+        </div>
+        <p>The block collection is continually evolving based on the feedback from the AEM community. If you think that there is a block that should be included in the block collection please speak to your AEM contact. Current candidates for inclusion in the block collection include:</p>
+        <ul>
+          <li>Consent Banner</li>
+        </ul>
+        <p>If you have immediate need of a block that is not yet part of the collection, it is relatively easy to find AEM projects on GitHub that have example implementations for all of the above candidates.</p>
+        <h2 id="block-party">Block Party</h2>
+        <p>The Block Party is a place for the AEM developer community to showcase what they have built on AEM sites. It also allows others to avoid reinventing the wheel and reuse these blocks / code snippets / integrations built by the community and tweak the code as necessary to fit their own projects. See <a href="../block-party/index.html">Block Party</a> for everything it has to offer.</p>
+        <p><strong>Note: While we love and support our AEM developer community, Adobe is not responsible for maintaining or updating the code that is showcased in Block Party. Please use the code at your own discretion.</strong></p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="anatomy-of-a-project"><a href="../anatomy-of-a-franklin-project/index.html" data-broken-link="true">Anatomy of a Project</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="block-party-1"><a href="../block-party/index.html">Block Party</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

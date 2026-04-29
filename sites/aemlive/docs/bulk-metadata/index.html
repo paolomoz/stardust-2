@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.883Z
+  page:             docs-bulk-metadata
+  pageUrl:          https://www.aem.live/docs/bulk-metadata
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Bulk Metadata</title>
+  <meta name="description" content="By default, metadata is managed at the page level, but in some cases, it is useful to apply metadata en masse to a website. Common ...">
+  <meta property="og:title" content="Bulk Metadata">
+  <meta property="og:description" content="By default, metadata is managed at the page level, but in some cases, it is useful to apply metadata en masse to a website. Common ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/bulk-metadata/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#omitting-metadata-values">Omitting Metadata Values</a></li>
+<li class="l-2"><a href="#additional-metadata">Additional Metadata</a></li>
+<li class="l-2"><a href="#metadata-source-hierarchy">Metadata Source Hierarchy</a></li>
+<li class="l-3"><a href="#page-metadata">Page Metadata</a></li>
+<li class="l-3"><a href="#placeholders">Placeholders</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Bulk Metadata</h1>
+          <p class="lede">By default, metadata is managed at the page level, but in some cases, it is useful to apply metadata en masse to a website. Common ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1700294000e02ecedd96e97c5f692838c399c0fde.jpg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1700294000e02ecedd96e97c5f692838c399c0fde.jpg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="./media_1700294000e02ecedd96e97c5f692838c399c0fde.jpg?width=2000&amp;format=jpg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1700294000e02ecedd96e97c5f692838c399c0fde.jpg?width=750&amp;format=jpg&amp;optimize=medium" width="1103" height="827">
+          </picture>
+        </p>
+        
+        <p>By default, metadata is managed at the <a href="../metadata/index.html">page level</a>, but in some cases, it is useful to apply metadata en masse to a website. Common use cases include:</p>
+        <ul>
+          <li>Default metadata such as <code>image</code> should be applied to the entire website to ensure every page has an image defined.</li>
+          <li>A certain section of a website should look and feel different from the rest of the website (such as a different template or a theme).</li>
+          <li>A certain section of the website should not be indexed or crawled (<code>robots</code> set to <code>noindex</code>).</li>
+        </ul>
+        <p>If you want to create metadata for many pages at once, create a <code>metadata</code> sheet in the root folder of your website content.</p>
+        <ul>
+          <li>Name the file <code>metadata</code> in Document Authoring, Google Drive or AEM.</li>
+          <li>Name the file <code>metadata.xlsx</code> in SharePoint.</li>
+        </ul>
+        <p>The workbook should have only one sheet and at least two columns like in the following image:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_108869480050aff9442121e65bc499482432b0776.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_108869480050aff9442121e65bc499482432b0776.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_108869480050aff9442121e65bc499482432b0776.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_108869480050aff9442121e65bc499482432b0776.png?width=750&amp;format=png&amp;optimize=medium" width="1542" height="692">
+          </picture>
+        </p>
+        <p>The column titled <strong>URL</strong> has the URL pattern of the pages that should get a particular metadata entry.</p>
+        <p>The wildcard <code>*</code> (the asterisk) can be used as a prefix or suffix, allowing for flexible matches on the URL pathname. Typical examples include <code>/docs/**</code> or <code>**/docs/**</code>.</p>
+        <p>The metadata sheet is evaluated from top to bottom, site wide metadata set to <code>**</code> must be before more specific entries.</p>
+        <p>For each metadata property, create a column in the worksheet and name it using the property you want to assign. Typical examples include <code>template</code>, <code>theme</code>, or <code>robots</code>. Property names will be lower-cased in the HTML.</p>
+        <p>Page-level metadata added via a metadata block takes precedence over bulk metadata. See <a href="../metadata/index.html">Page Metadata</a> and <a href="../../developer/block-collection/metadata/index.html">Metadata (block)</a> for more information.</p>
+        <p><strong>Note:</strong> You need to preview and publish the metadata sheet in order to see changes reflected on your site.</p>
+        <div class="fragment">
+          <div>
+            <div><a href="../special-metadata-properties/index.html" data-broken-link="true">https://main--helix-website--adobe.aem.page/docs/special-metadata-properties</a></div>
+          </div>
+        </div>
+        <h2 id="omitting-metadata-values">Omitting Metadata Values</h2>
+        <p>To explicitly remove metadata a <code>""</code> can be used as a value. This will remove the element or set the corresponding attribute to <code>""</code> for a particular path.</p>
+        <p>Example:</p>
+        <pre><code>URL          Canonical
+/**          ""
+</code></pre>
+        <p>The example above will remove the <code>&lt;link rel="canonical"&gt;</code> from all pages by default, unless there is a specific override for example from a page metadata block.</p>
+        <h2 id="additional-metadata">Additional Metadata</h2>
+        <p>When metadata is managed by several teams, it is not practical to keep them all in a single metadata file. Multiple metadata files can therefore be optionally configured in the <a href="../config-service-setup/index.html">site configuration</a>:</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/{org}/sites/{site}/metadata.json \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: {your-auth-token}' \
+  --data '{
+    "source": [
+        "/metadata.json",
+        "/metadata-2nd.json",
+        "/metadata-seo.json"
+    ]
+}'
+</code></pre>
+        <p>The order of the entries in the array dictates the order of how the data is applied. Note that duplicate metadata properties can be overwritten by subsequent sources, but never deleted. In the above example, if the <code>/metadata.json</code> defines a property <code>title</code>, the same property in <code>/metadata-2nd.json</code> will overwrite the value, but only if it is not empty.</p>
+        <h2 id="metadata-source-hierarchy">Metadata Source Hierarchy</h2>
+        <p>Default hierarchy:</p>
+        <ul>
+          <li><a href="../metadata/index.html">Page level metadata</a> block wins over</li>
+          <li><a href="../../developer/folder-mapping/index.html#folder-mapped-metadata">Folder-mapped metadata</a>* sheet wins over</li>
+          <li>Bulk metadata sheet (<code>/metadata.json</code>)</li>
+        </ul>
+        <p>Hierarchy if there is <a href="#additional-metadata">additional metadata</a> configured:</p>
+        <ul>
+          <li><a href="../metadata/index.html">Page level metadata</a> block wins over</li>
+          <li><a href="../../developer/folder-mapping/index.html#folder-mapped-metadata">Folder-mapped metadata</a>* sheet wins over</li>
+          <li>Metadata sheets in configured order</li>
+        </ul>
+        <p>* deprecated</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="page-metadata"><a href="../metadata/index.html">Page Metadata</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="placeholders"><a href="../placeholders/index.html">Placeholders</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

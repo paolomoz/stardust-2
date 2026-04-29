@@ -1,0 +1,312 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.349Z
+  page:             developer-byo-cdn-adobe-managed-cdn-config
+  pageUrl:          https://www.aem.live/developer/byo-cdn-adobe-managed-cdn-config
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Adobe Managed CDN Advanced Configuration</title>
+  <meta name="description" content="Adobe Managed CDN can be configured for advanced use cases like setting or unsetting request and response headers, routing traffic to external origins, sending client ...">
+  <meta property="og:title" content="Adobe Managed CDN Advanced Configuration">
+  <meta property="og:description" content="Adobe Managed CDN can be configured for advanced use cases like setting or unsetting request and response headers, routing traffic to external origins, sending client ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/byo-cdn-adobe-managed-cdn-config/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#create-your-first-cdn-configuration">Create your first CDN configuration</a></li>
+<li class="l-2"><a href="#authentication-overview">Authentication overview</a></li>
+<li class="l-2"><a href="#cdn-basic-authentication">CDN Basic Authentication</a></li>
+<li class="l-2"><a href="#cdn-oidc-authentication">CDN OIDC Authentication</a></li>
+<li class="l-2"><a href="#origin-authentication">Origin Authentication</a></li>
+<li class="l-3"><a href="#adobe-managed-cdn-setup-overview">Adobe Managed CDN Setup Overview</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Adobe Managed CDN Advanced Configuration</h1>
+          <p class="lede">Adobe Managed CDN can be configured for advanced use cases like setting or unsetting request and response headers, routing traffic to external origins, sending client ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1581b6aee2f43df1d92f83787350d56a1adea76ea.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1581b6aee2f43df1d92f83787350d56a1adea76ea.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1581b6aee2f43df1d92f83787350d56a1adea76ea.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="A screen shot of a logo AI-generated content may be incorrect." src="./media_1581b6aee2f43df1d92f83787350d56a1adea76ea.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Adobe Managed CDN can be configured for advanced use cases like setting or unsetting request and response headers, routing traffic to external origins, sending client redirects, blocking traffic based on properties such as headers, and authenticating requests.</p>
+        <p>To configure such rules one needs to:</p>
+        <ul>
+          <li>configure <a href="../../docs/byo-cdn-adobe-managed/index.html">Adobe Managed CDN</a></li>
+          <li>create a <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/content-delivery/cdn-configuring-traffic">CDN configuration</a> file in a repository managed by Cloud Manager</li>
+          <li>deploy the CDN configuration using an <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/operations/config-pipeline#configurations">Edge Delivery Configuration Pipeline</a></li>
+        </ul>
+        <p>There are multiple types of <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/content-delivery/cdn-configuring-traffic#order-of-evaluation">CDN rules</a> that can be implemented:</p>
+        <ul>
+          <li>Request Transformations - add, remove, request headers and modify request url</li>
+          <li>Response Transformations - add, remove response headers</li>
+          <li>Traffic Filters - block, allow traffic based on request properties</li>
+          <li>Redirects - send 301 or 302 redirects</li>
+          <li>Origin Selectors - proxy to external origins</li>
+          <li>Authenticators - enforce authentication for parts of your site</li>
+        </ul>
+        <p>In this document, you will first learn how to set up and deploy CDN configuration rules for Adobe Managed CDN. Then, as a more complex example, we will set up authentication for visitors on your site.</p>
+        <h2 id="create-your-first-cdn-configuration">Create your first CDN configuration</h2>
+        <p>The following is a simple configuration that sets the response header <code>x-test </code>for requests to path <code>www.example.com/private/page</code>.</p>
+        <pre><code>kind: "CDN"
+version: "1"
+data:
+  responseTransformations:
+    rules:
+      - name: set-response-header
+        when: 
+          allOf:
+            - {reqProperty: domain, equals: "www.example.com" }
+            - {reqProperty: path, like: "/private/*"}
+        actions:
+          - type: set
+            respHeader: x-test
+            value: private
+</code></pre>
+        <p>Important note: Always guard your CDN rules with a condition targeting the domain so that your actions apply only for the desired domains.</p>
+        <p>Create a file <code>cdn.yaml </code>in a folder (e.g. <code>/config</code>) in your Cloud Manager git repository and deploy the CDN configuration by creating and running an Edge Delivery Pipeline.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1eb825c713c229fab6f7c79367a66cfeb8d87ce0f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1eb825c713c229fab6f7c79367a66cfeb8d87ce0f.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1eb825c713c229fab6f7c79367a66cfeb8d87ce0f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1eb825c713c229fab6f7c79367a66cfeb8d87ce0f.png?width=750&amp;format=png&amp;optimize=medium" width="1558" height="1256">
+          </picture>
+        </p>
+        <p>The deployment can take a couple of minutes to complete and after it is finished you can test with a simple <code>curl</code> to check that the header is correctly set.</p>
+        <pre><code>curl -sv https://www.example.com/private/page
+..
+&lt; x-test: private
+</code></pre>
+        <h2 id="authentication-overview">Authentication overview</h2>
+        <p>To implement authentication on your site you need to do the following steps:</p>
+        <ul>
+          <li>lock access to your custom domain (e.g. <a href="http://www.example.com">www.example.com</a>) for the entire site or for selected paths using an <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/content-delivery/cdn-credentials-authentication#basic-auth">Authentication CDN rule</a>.</li>
+          <li>lock access to your origin domain (e.g. <a href="../../index.html">https://main--website--acme.aem.live</a> ) using <a href="../../docs/authentication-setup-site/index.html">Site Authentication</a>.</li>
+        </ul>
+        <p>The following types of authenticators may be configured::</p>
+        <ul>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/content-delivery/cdn-credentials-authentication#basic-auth">Basic Authentication</a></li>
+          <li>OIDC Authentication (OpenID Connect). Request access to beta by emailing aemcs-edgecompute-feedback@adobe.com with your use case</li>
+        </ul>
+        <p>All authentication mechanisms require secrets that should not be hard-coded in your configuration, but use <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/operations/config-pipeline#secret-pipeline-vars">Pipeline Secret Variables</a> . Apply these variables to the <em>Deploy step</em></p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_18f8d525228738501a4711ed21cf10f22f687f6ae.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_18f8d525228738501a4711ed21cf10f22f687f6ae.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_18f8d525228738501a4711ed21cf10f22f687f6ae.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_18f8d525228738501a4711ed21cf10f22f687f6ae.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1023">
+          </picture>
+        </p>
+        <p>Secrets can be referenced in <code>cdn.yaml </code>using <code>${{...}} </code>notation:</p>
+        <pre><code>## e.g. password for Basic Authentication
+password: ${{JANE_DOE_PASSWORD}}
+
+## client secret for OIDC Authentication
+clientSecret: ${{OIDC_CLIENT_SECRET}}
+</code></pre>
+        <h2 id="cdn-basic-authentication">CDN Basic Authentication</h2>
+        <p><a href="#cdn-basic-authentication">Basic Authentication</a> is not recommended for live production domains, but rather for simple authentication use cases on lower environments or as an initial testing phase before deploying more advanced authentication mechanisms like OIDC Authentication.</p>
+        <pre><code>kind: "CDN"
+version: "1"
+data:
+  authentication:
+    authenticators:
+       - name: basic-auth
+         type: basic
+         credentials:
+           - user: johndoe
+             password: ${{JOHN_DOE_PASSWORD}}
+           - user: janedoe
+             password: ${{JANE_DOE_PASSWORD}}
+    rules:
+       - name: basic-auth-rule
+         when: 
+           allOf:
+             - {reqProperty: domain, equals: "www.example.com" }
+             - {reqProperty: path, like: "/private/*"}
+         action:
+           type: authenticate
+           authenticator: basic-auth
+</code></pre>
+        <h2 id="cdn-oidc-authentication">CDN OIDC Authentication</h2>
+        <p>CDN OIDC (OpenID Connect) Authentication is currently in beta; request access to beta by emailing <a href="mailto:aemcs-edgecompute-feedback@adobe.com">aemcs-edgecompute-feedback@adobe.com</a>.</p>
+        <p>OpenID Connect is an authentication protocol that allows applications to verify user identity through a third party identity provider (IdP). This feature has been tested with several identity providers like Azure Entra ID, Okta and Google, but given that it is based on a standard specification it should work with all identity providers that implement OIDC protocol.</p>
+        <p>The required information for the configuration is</p>
+        <ul>
+          <li>clientId: the client id (obtained from your IdP)</li>
+          <li>clientSecret: the client secret (obtained from your IdP)</li>
+          <li>authEndpoint: the authentication endpoint. (e.g. for Azure https://login.microsoftonline.com/XXXXX/oauth2/v2.0/authorize)</li>
+          <li>tokenEndpoint: the token endpoint (e.g for Azure https://login.microsoftonline.com/XXXXX/oauth2/v2.0/token)</li>
+          <li>jwksUri: the public keys endpoint (e.g. for Azure https://login.microsoftonline.com/XXXXX/discovery/v2.0/keys)</li>
+          <li>issuer: the issuer (eg. for Azure https://login.microsoftonline.com/XXXXX/v2.0)</li>
+        </ul>
+        <p>To block access to your site only for authenticated users you can deploy a CDN configuration that enforces OIDC authentication using your own OIDC Identity Provider.</p>
+        <pre><code>kind: CDN
+version: v1
+data:
+  authentication:
+    authenticators:
+      - type: oidc
+        name: oidc-auth
+        clientId: "..."
+        clientSecret: ${{OIDC_CLIENT_SECRET}}
+        callback: /callback
+        login: /login
+        logout: /logout
+        authEndpoint: "..."
+        tokenEndpoint: "..."
+        jwksUri: "..."
+        issuer: "..."
+    rules:
+      - name: oidc-auth-rule
+        when:
+          allOf:
+            - {reqPropery: domain, equals: www.example.com}
+            - {reqProperty: path, matches: ^/private/.* }
+        action:
+          type: authenticate
+          authenticator: oidc-auth
+</code></pre>
+        <p>After you deploy this configuration you should be able to access and load <code>https:// www.example.com/private/page</code> and you will be redirected to the configured IdP for login.</p>
+        <h2 id="origin-authentication">Origin Authentication</h2>
+        <p>In order to fully protect your content you also need to restrict access to <em>aem.live</em> origin. This has two parts:</p>
+        <ul>
+          <li>configure <a href="../../docs/authentication-setup-site/index.html">Site Authentication</a> to lock the origin access</li>
+          <li>configure Adobe Managed CDN to send the <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/content-delivery/cdn-credentials-authentication">authentication headers</a></li>
+        </ul>
+        <p>First you need to configure <a href="../../docs/authentication-setup-site/index.html">Site Authentication</a> and obtain a token to access</p>
+        <pre><code>curl https://main--website--acme.aem.live \
+  -H 'authorization: token hlx_ZGFzIGlzdCBkZWluIHRva2Vu'
+</code></pre>
+        <p>Then configure the HLX Token as a <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/operations/config-pipeline#secret-pipeline-vars">Pipeline Secret Variable</a> for Deploy step.</p>
+        <p>The secret variable should contain the entire string that will be sent in Authorization header (including “token hlx_” prefix)</p>
+        <p><code>HLX_TOKEN=token hlx_ZGFzIGlzdCBkZWluIHRva2Vu</code></p>
+        <p>Last, deploy the CDN configuration to send the token in Authorization header</p>
+        <pre><code>kind: CDN
+version: v1
+data:
+  originSelectors:
+    rules:
+      - name: select-aem-origin
+        when: { reqPropery: domain, equals: www.example.com }
+        action:
+          type: selectAemOrigin
+          headers:
+            Authorization: "${{HLX_TOKEN}}"
+</code></pre>
+        <p>To test this you should run the following <code>curl</code> command and expect a <code>200</code> instead of a <code>403</code>.</p>
+        <pre><code>curl -sv https://www.example.com/page
+..
+&lt; HTTP/2 200
+</code></pre>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="adobe-managed-cdn-setup-overview"><a href="../../docs/byo-cdn-adobe-managed/index.html">Adobe Managed CDN Setup Overview</a></h3>
+            </div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

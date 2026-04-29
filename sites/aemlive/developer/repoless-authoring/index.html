@@ -1,0 +1,351 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.233Z
+  page:             developer-repoless-authoring
+  pageUrl:          https://www.aem.live/developer/repoless-authoring
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Reusing code across sites with AEM authoring as your content source</title>
+  <meta name="description" content="By default, AEM is tightly bound to your code repository, which meets the majority of use cases. However you may have multiple sites that differ ...">
+  <meta property="og:title" content="Reusing code across sites with AEM authoring as your content source">
+  <meta property="og:description" content="By default, AEM is tightly bound to your code repository, which meets the majority of use cases. However you may have multiple sites that differ ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/repoless-authoring/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="l-2"><a href="#activate-repoless-feature">Activate repoless feature</a></li>
+<li class="l-3"><a href="#retrieve-access-token">Retrieve access token</a></li>
+<li class="l-3"><a href="#configure-your-content-and-code-sources">Configure your content and code sources</a></li>
+<li class="l-3"><a href="#add-path-mapping-for-site-configuration-and-set-technical-account">Add path mapping for site configuration and set technical account</a></li>
+<li class="l-3"><a href="#update-aem-configuration">Update AEM configuration</a></li>
+<li class="l-2"><a href="#troubleshooting">Troubleshooting</a></li>
+<li class="l-2"><a href="#repoless-use-cases">Repoless use cases</a></li>
+<li class="l-3"><a href="#multi-site-management-with-aem-authoring-as-your-content-source">Multi site management with AEM authoring as your content source</a></li>
+<li class="l-3"><a href="#repoless-stage-and-prod-environments-with-aem-authoring-as-your-content-source">Repoless stage and prod environments with AEM authoring as your content source</a></li>
+<li class="l-3"><a href="#configuring-site-authentication-for-aem-authoring-as-your-content-source">Configuring site authentication for AEM authoring as your content source</a></li>
+<li class="l-3"><a href="#path-mapping-for-aem-authoring-as-your-content-source">Path mapping for AEM authoring as your content source</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Reusing code across sites with AEM authoring as your content source</h1>
+          <p class="lede">By default, AEM is tightly bound to your code repository, which meets the majority of use cases. However you may have multiple sites that differ ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1bb754ba4f66c9259ee3ad879b788c31e48609984.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1bb754ba4f66c9259ee3ad879b788c31e48609984.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1bb754ba4f66c9259ee3ad879b788c31e48609984.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1bb754ba4f66c9259ee3ad879b788c31e48609984.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>By default, AEM is tightly bound to your code repository, which meets the majority of use cases. However you may have multiple sites that differ mostly in their content, but could leverage the same code base.</p>
+        <p>Rather than creating multiple GitHub repositories and running each site off a dedicated GitHub repository while keeping them in sync, AEM supports running multiple sites from the same codebase.</p>
+        <p>This simplified setup, which eliminates the need for code replication is also known as “<a href="../../docs/repoless/index.html">repoless</a>”, because all but your first site don’t need a GitHub repository of their own.</p>
+        <p>If your project requires the repoless flexibility of code reuse across sites, you can activate the feature.</p>
+        <p>Regardless of how many sites you want to ultimately create in a repoless fashion, you must create your first site, which serves as your base site. This document explains how to create your first site for repoless use.</p>
+        <h2 id="prerequisites">Prerequisites</h2>
+        <p>To take advantage of this feature, make sure you have done the following.</p>
+        <ul>
+          <li>Your site is already fully set up by following the document <a href="../ue-tutorial/index.html">Getting Started – Universal Editor Developer Tutorial</a>.</li>
+          <li>You are running AEM as a Cloud Service 2025.4 at a minimum.</li>
+          <li>Set up the configuration service by following the document <a href="../../docs/config-service-setup/index.html">Setting up the configuration service</a>.</li>
+        </ul>
+        <h2 id="activate-repoless-feature">Activate repoless feature</h2>
+        <p>There are several steps to activate repoless functionality for your project. Please substitute your own site and GitHub org information appropriately.</p>
+        <ol>
+          <li>Retrieve access token</li>
+          <li>Set up configuration service</li>
+          <li>Add site configuration and technical account</li>
+          <li>Update AEM configuration</li>
+          <li>Authenticate site</li>
+        </ol>
+        <p>This document details each of these steps.</p>
+        <h3 id="retrieve-access-token">Retrieve access token</h3>
+        <p>You will first need an access token to use the configuration service and configure it for the repoless use case.</p>
+        <ol>
+          <li>Go to <code>https://admin.hlx.page/login</code> and use the <code>login_adobe</code> address to login with the Adobe identity provider.</li>
+          <li>You will be forwarded to <code>https://admin.hlx.page/profile</code>.</li>
+          <li>By using your browser’s developer tools, copy the value of the <code>auth_token</code> cookie that the Admin Service sets.</li>
+        </ol>
+        <p>Once you have your access token, it can be passed in the header of cURL requests in the following format.</p>
+        <p><code>-H 'x-auth-token: &lt;your-token&gt;'</code></p>
+        <h3 id="configure-your-content-and-code-sources">Configure your content and code sources</h3>
+        <p>The configuration service needs to know where to find your code and AEM content. Execute this cURL command to create (<code>PUT</code>) or update (<code>POST</code>) a site to use your code and AEM content.</p>
+        <pre><code>curl -X PUT https://admin.hlx.page/config/&lt;your-github-org&gt;/sites/&lt;your-aem-project&gt;.json \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: &lt;your-token&gt;' \
+  --data '{
+  "code": {
+    "owner": "&lt;your-github-org&gt;",
+    "repo": "&lt;your-aem-project&gt;",
+    "source": {
+      "type": "github",
+      "url": "https://github.com/&lt;your-github-org&gt;/&lt;your-aem-project&gt;"
+    }
+  },
+  "content": {
+    "source": {
+      "url": "https://author-p&lt;your-programID&gt;-e&lt;your-environmentID&gt;.adobeaemcloud.com/bin/franklin.delivery/&lt;org&gt;/&lt;site&gt;/main",
+      "type": "markup",
+      "suffix": ".html"
+    }
+  }
+}'
+</code></pre>
+        <h3 id="add-path-mapping-for-site-configuration-and-set-technical-account">Add path mapping for site configuration and set technical account</h3>
+        <p>You need to create a site configuration and add it to your path mapping.</p>
+        <ol>
+          <li>Create a new page at the root of your site and choose the Configuration template.
+            <ul>
+              <li>You can leave the configuration empty with only the predefined key and value columns. You only need to create it.</li>
+            </ul>
+          </li>
+          <li>Create a mapping in the public configuration to the site configuration using a cURL command similar to the following.</li>
+        </ol>
+        <pre><code>curl --request POST \
+  --url https://admin.hlx.page/config/&lt;your-github-org&gt;/sites/&lt;your-aem-project&gt;/public.json \
+  --header 'x-auth-token: &lt;your-token&gt;' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "paths": {
+        "mappings": [
+            "/content/&lt;your-site-content&gt;/:/",
+            "/content/&lt;your-site-content&gt;/configuration:/.helix/config.json"
+   ],
+        "includes": [
+            "/content/&lt;your-site-content&gt;/"
+        ]
+    }
+}'
+</code></pre>
+        <ol start="3">
+          <li>Validate that the public configuration has been set and is available with a cURL command similar to the following.<br><code>curl 'https://main--&lt;your-aem-project&gt;--&lt;your-github-org&gt;.aem.live/config.json'</code></li>
+        </ol>
+        <p>Once the site configuration is mapped, you can configure access control by defining your technical account so it has privileges to publish.</p>
+        <ol>
+          <li>Sign into the AEM author instance and go to <strong>Tools</strong> → <strong>Cloud Services</strong> → <strong>Edge Delivery Services Configuration</strong> and select the configuration that was automatically created for your site and tap or click <strong>Properties</strong> in the tool bar.</li>
+          <li>In the <strong>Edge Delivery Services Configuration</strong> window, select the <strong>Authentication</strong> tab and copy the value for the technical account ID.
+            <ul>
+              <li>It will look similar to <code>&lt;tech-account-id&gt;@techacct.adobe.com</code></li>
+              <li>The technical account is the same for all sites on a single AEM author environment.</li>
+            </ul>
+          </li>
+          <li>Set the technical account for your repoless configuration with a cURL command similar to the following, using the technical account ID that you copied.
+            <ul>
+              <li>Adapt the admin block to define the users who should have full administrative access to the site.
+                <ol>
+                  <li>It is an array of email addresses.</li>
+                  <li>The wildcard * can be used.</li>
+                  <li>See the document <a href="../../docs/authentication-setup-authoring/index.html#default-roles">Configuring Authentication for Authors</a> for more information.</li>
+                </ol>
+              </li>
+            </ul>
+          </li>
+        </ol>
+        <pre><code>curl --request POST \
+  --url https://admin.hlx.page/config/&lt;your-github-org&gt;/sites/&lt;your-aem-project&gt;/access.json \
+  --header 'Content-Type: application/json' \
+  --header 'x-auth-token: &lt;your-token&gt;' \
+  --data '{
+    "admin": {
+        "role": {
+            "admin": [
+                "&lt;email&gt;@&lt;domain&gt;.&lt;tld&gt;"
+            ],
+            "config_admin": [
+                "&lt;tech-account-id&gt;@techacct.adobe.com"
+            ]
+        },
+        "requireAuth": "auto"
+    }
+}'
+</code></pre>
+        <p>Since you now use the configuration service, you can remove <code>fstab.yaml</code> and <code>paths.json</code> from your Git repository.</p>
+        <p><strong>NOTE</strong>: By using the configuration service and exposing the path mapping via <code>config.json</code>, the <code>path.json</code> file is ignored.</p>
+        <p>Once AEM is configured for repoless use, you must use the configuration service and provide a valid <code>config.json</code> with the paths mapping.</p>
+        <h3 id="update-aem-configuration">Update AEM configuration</h3>
+        <p>Now you are ready to make the necessary changes to your Edge Delivery Services in AEM.</p>
+        <ol>
+          <li>Sign into the AEM author instance and go to <strong>Tools</strong> → <strong>Cloud Services</strong> → <strong>Edge Delivery Services Configuration</strong> and select the configuration that was automatically created for your site and tap or click <strong>Properties</strong> in the tool bar.</li>
+          <li>In the <strong>Edge Delivery Services Configuration</strong> window, change project type to <strong>aem.live with repoless config setup</strong> and tap or click <strong>Save &amp; Close</strong>.<br>
+            <picture>
+              <source type="image/webp" srcset="./media_10143e20e8506a03dd5f5779d6b425f3545e7ec77.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+              <source type="image/webp" srcset="./media_10143e20e8506a03dd5f5779d6b425f3545e7ec77.png?width=750&amp;format=webply&amp;optimize=medium">
+              <source type="image/png" srcset="./media_10143e20e8506a03dd5f5779d6b425f3545e7ec77.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+              <img loading="lazy" alt="" src="./media_10143e20e8506a03dd5f5779d6b425f3545e7ec77.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+            </picture>
+          </li>
+          <li>Return to your site using the Universal Editor and ensure that it still renders properly.</li>
+          <li>Modify some of your content and re-publish.</li>
+          <li>Visit your published site at <code>https://main--&lt;your-aem-project&gt;--&lt;your-github-org&gt;.aem.page/</code> and verify that the changes are properly reflected.</li>
+        </ol>
+        <p>Your project is now set up for repoless use.</p>
+        <h2 id="troubleshooting">Troubleshooting</h2>
+        <p>The most common issue encountered after configuring the repoless use case is that pages in the Universal Editor no longer render or you receive a white page or a generic AEM as a Cloud Service error message. In such cases:</p>
+        <ul>
+          <li>View the source of the rendered page.
+            <ul>
+              <li>Is there actually something rendered (correct HTML <code>head</code> with <code>scripts.js</code>, <code>aem.js</code>, and editor-related JSON files)?</li>
+            </ul>
+          </li>
+          <li>Check the AEM <code>error.log</code> of the author instance for exceptions.
+            <ul>
+              <li>The most common issue is the page component fails with 404 errors.</li>
+              <li><code>config.json</code> or <code>paths.json</code> can not be loaded</li>
+              <li><code>component-definition.json</code> etc. can not be loaded</li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="repoless-use-cases">Repoless use cases</h2>
+        <p>Now that your base site is configured for repoless usage, you can create additional sites that leverage the same code base.</p>
+        <div class="card-list image-card-listing">
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1d1908452b63ceba075d440ca33359295be93b76b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1d1908452b63ceba075d440ca33359295be93b76b.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1d1908452b63ceba075d440ca33359295be93b76b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1d1908452b63ceba075d440ca33359295be93b76b.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="multi-site-management-with-aem-authoring-as-your-content-source"><a href="../repoless-multisite-manager/index.html">Multi site management with AEM authoring as your content source</a></h3>
+              <p>Create sites for multiple languages and markets from the same source documents</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1c1b568b1ec7baf46317e69d8861339fb4f8c3879.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1c1b568b1ec7baf46317e69d8861339fb4f8c3879.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1c1b568b1ec7baf46317e69d8861339fb4f8c3879.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1c1b568b1ec7baf46317e69d8861339fb4f8c3879.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="repoless-stage-and-prod-environments-with-aem-authoring-as-your-content-source"><a href="../repoless-environments/index.html">Repoless stage and prod environments with AEM authoring as your content source</a></h3>
+              <p>Use repoless to manage multiple environments</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1fcb22c690d4561fee2d7c7cde085c94216fd4095.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1fcb22c690d4561fee2d7c7cde085c94216fd4095.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1fcb22c690d4561fee2d7c7cde085c94216fd4095.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1fcb22c690d4561fee2d7c7cde085c94216fd4095.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="configuring-site-authentication-for-aem-authoring-as-your-content-source"><a href="../authentication-setup-site-for-aem-authoring/index.html">Configuring site authentication for AEM authoring as your content source</a></h3>
+              <p>When you author using AEM Sites and Universal Editor, you also must enable it in your AEM environment.</p>
+            </div>
+          </div>
+        </div>
+        <div class="pagination contained">
+          <div>
+            <div></div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="path-mapping-for-aem-authoring-as-your-content-source"><a href="../authoring-path-mapping/index.html">Path mapping for AEM authoring as your content source</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

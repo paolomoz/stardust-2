@@ -1,0 +1,347 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.184Z
+  page:             docs-sidekick-errors
+  pageUrl:          https://www.aem.live/docs/sidekick-errors
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>AEM Sidekick Errors</title>
+  <meta name="description" content="Error messages in AEM Sidekick">
+  <meta property="og:title" content="AEM Sidekick Errors">
+  <meta property="og:description" content="Error messages in AEM Sidekick">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/sidekick-errors/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html" aria-current="page">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>AEM Sidekick Errors</h1>
+          <p class="lede">Error messages in AEM Sidekick</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1f3ccd60d29c2b246418421dc13895b82ede32c72.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1f3ccd60d29c2b246418421dc13895b82ede32c72.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1f3ccd60d29c2b246418421dc13895b82ede32c72.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1f3ccd60d29c2b246418421dc13895b82ede32c72.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>In case of a problem, AEM Sidekick will display an appropriate error message. The following table contains all possible error messages and their likely root causes.</p>
+        <p>For more information on backend error codes and error message templates from the Admin API, see <a href="../../developer/admin-errors/index.html">Admin Errors</a>.</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td valign="bottom"><strong>Message</strong></td>
+                    <td valign="bottom"><strong>Likely Root Cause</strong></td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">File not found. Source document either missing or not shared with AEM.</td>
+                    <td valign="bottom">The source file is missing or not properly shared with AEM.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Unable to fetch $1 from $2.</td>
+                    <td valign="bottom">The backend was unable to retrieve the requested resource.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Unable to preview $1: empty file</td>
+                    <td valign="bottom">The file intended for preview is empty.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Unable to preview $1: file larger than 100MB</td>
+                    <td valign="bottom">The file exceeds the maximum allowed size for preview.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Unable to preview $1: ICO is larger than 16KB</td>
+                    <td valign="bottom">The ICO file size exceeds the allowed limit.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Unable to preview $2: invalid JSON</td>
+                    <td valign="bottom">The JSON data is malformed or not parsable.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Unable to preview $1: MP4 bit rate is higher than 300KB/s</td>
+                    <td valign="bottom">The video’s bitrate is too high, exceeding the processing limits.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Unable to preview $1: MP4 is longer than 2 minutes</td>
+                    <td valign="bottom">The MP4 video exceeds the allowed duration for preview.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Unable to preview $1: expected $2 but found $3</td>
+                    <td valign="bottom">There is a mismatch between the expected media type and the actual file type provided.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Unable to preview $1: content type header is missing</td>
+                    <td valign="bottom">The server response is missing the Content-Type header, leading to processing issues.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Unable to preview $1: no handler found</td>
+                    <td valign="bottom">No available handler exists to process the given file type.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Unable to preview $1: SVG contains invalid XML</td>
+                    <td valign="bottom">The SVG file has invalid XML, making it unprocessable.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Unable to preview $1: SVG root item missing</td>
+                    <td valign="bottom">The SVG file is malformed, lacking the required root element.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Unable to preview $1: illegal scripting detected in SVG</td>
+                    <td valign="bottom">The SVG file contains embedded scripts that are disallowed for security reasons.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Unable to preview $1: file type not supported</td>
+                    <td valign="bottom">The provided file type is not supported by the preview handler.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Unable to preview $2: file type not supported</td>
+                    <td valign="bottom">The media file is of a type that cannot be previewed by the system.</td>
+                  </tr>
+                  <tr>
+                    <td>Unable to preview $1: invalid MP4</td>
+                    <td>The MP4 file is invalid or could not be parsed.</td>
+                  </tr>
+                  <tr>
+                    <td>Unable to preview $1: image is larger than 10MB</td>
+                    <td>The image exceeds the allowed size limit.</td>
+                  </tr>
+                  <tr>
+                    <td>Unable to preview $1: contained image larger than 10MB</td>
+                    <td>An embedded image inside the document exceeds the allowed size.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Unable to preview $1: $2</td>
+                    <td valign="bottom">A validation error occurred while attempting to preview the file.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Bulk operation failed. Please try again later.</td>
+                    <td valign="bottom">The bulk operation encountered a general failure, possibly due to server issues.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Files can only contain normalized, small latin letters, digits and hyphens. This file contains illegal characters: $1</td>
+                    <td valign="bottom">The file name includes characters that are not permitted.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Files can only contain normalized, small latin letters, digits and hyphens. The following files contain illegal characters: $1</td>
+                    <td valign="bottom">One or more file names include characters that are not permitted.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Folders can only contain normalized, small latin letters, digits and hyphens. This folder contains illegal characters: $1</td>
+                    <td valign="bottom">The folder name includes characters that are not permitted.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">You need to sign in to generate the preview of more than 100 files</td>
+                    <td valign="bottom">The user is not signed in and has exceeded the preview limit.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">You need to sign in to publish more than 100 files</td>
+                    <td valign="bottom">The user is not signed in and has exceeded the publication limit.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Caution: unexpected side effects!</td>
+                    <td valign="bottom">This warns the user that an action might have unforeseen consequences.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Legacy sidekick not found. If the extension is installed but currently disabled, please enable it and try again.</td>
+                    <td valign="bottom">The legacy AEM Sidekick extension is either missing or disabled.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">This file no longer exists in the repository, deleting it cannot be undone! Are you sure you want to delete it?</td>
+                    <td valign="bottom">The file is missing from the repository, and deletion is irreversible.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">This page no longer has a source document, deleting it cannot be undone! Are you sure you want to delete it?</td>
+                    <td valign="bottom">The page is missing its source document, and deletion is irreversible.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Are you sure you want to $1 this?</td>
+                    <td valign="bottom">This is a generic prompt to confirm a destructive action.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Sorry, please enter the text exactly as displayed to confirm.</td>
+                    <td valign="bottom">The entered confirmation text did not match the expected text.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Type $1 to confirm</td>
+                    <td valign="bottom">A prompt asking the user to type a specific confirmation string.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Too many requests: Your project is being throttled by $1. Please wait and try again later.</td>
+                    <td valign="bottom">The system is rate limiting due to excessive requests.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Deletion failed. Please try again later.</td>
+                    <td valign="bottom">The deletion process encountered a server or permission issue.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Apologies, we seem to be having problems at the moment. Please try again later.</td>
+                    <td valign="bottom">A general, unexpected internal error occurred on the server.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">An error occurred: $1</td>
+                    <td valign="bottom">A catch-all error likely triggered by an unforeseen issue.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Job not found.</td>
+                    <td valign="bottom">The specified job identifier does not exist or could not be located.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Sign in aborted.</td>
+                    <td valign="bottom">The user or system canceled the sign-in process.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Sign in timed out. Please try again later.</td>
+                    <td valign="bottom">The sign-in process took too long—possibly due to network or server overload.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Sign out failed. Please try again later.</td>
+                    <td valign="bottom">An error occurred during sign-out, possibly due to session or network issues.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Preview generation failed. Please try again later.</td>
+                    <td valign="bottom">The system was unable to generate a preview, possibly because of file or backend issues.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Failed to activate configuration: $1</td>
+                    <td valign="bottom">There was a problem during configuration activation, possibly due to misconfiguration or missing parameters.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">This is a Microsoft Word document, please convert it to Google Docs first.</td>
+                    <td valign="bottom">The document format isn’t supported directly for preview; conversion is required.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">This is a Microsoft Excel document, please convert it to Google Sheets first.</td>
+                    <td valign="bottom">The document format isn’t supported directly for preview; conversion is required.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Preview generation failed. Must be Google document or spreadsheet.</td>
+                    <td valign="bottom">The file type is not supported for preview; the system expects a Google Doc/Sheet.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Publication failed. Please try again later.</td>
+                    <td valign="bottom">The publication process encountered an error, likely due to server or configuration issues.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Publication failed, generate preview first.</td>
+                    <td valign="bottom">A preview is required before publication; an intermediate step is missing.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Failed to fetch the page status. Please try again later.</td>
+                    <td valign="bottom">The system couldn’t retrieve the current status, possibly due to network or backend issues.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Failed to fetch the page status. Make sure this document is being shared with AEM.</td>
+                    <td valign="bottom">The document may not have been shared properly with AEM, causing a lookup failure.</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom">Unpublication failed. Please try again later.</td>
+                    <td valign="bottom">An error occurred during the unpublication process, possibly due to server or permission issues.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p>See a complete list of all messages <a href="https://github.com/adobe/aem-sidekick/blob/main/src/extension/_locales/en/messages.json">in GitHub</a>.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

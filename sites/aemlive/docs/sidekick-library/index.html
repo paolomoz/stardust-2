@@ -1,0 +1,802 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.104Z
+  page:             docs-sidekick-library
+  pageUrl:          https://www.aem.live/docs/sidekick-library
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>What is the Sidekick Library?</title>
+  <meta name="description" content="The Sidekick Library is an extension for the AEM Sidekick that enables developers to create UI-driven tooling for content authors. It includes a built-in blocks ...">
+  <meta property="og:title" content="What is the Sidekick Library?">
+  <meta property="og:description" content="The Sidekick Library is an extension for the AEM Sidekick that enables developers to create UI-driven tooling for content authors. It includes a built-in blocks ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/sidekick-library/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html" aria-current="page">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#how-to-use-the-sidekick-library">How to use the Sidekick Library?</a></li>
+<li class="l-3"><a href="#library-sheet-setup">Library Sheet Setup</a></li>
+<li class="l-3"><a href="#blocks-plugin">Blocks Plugin</a></li>
+<li class="l-4"><a href="#blocks-plugin-setup">Blocks Plugin Setup</a></li>
+<li class="l-2"><a href="#library-metadata">Library Metadata</a></li>
+<li class="l-3"><a href="#supported-library-metadata-options">Supported library metadata options</a></li>
+<li class="l-3"><a href="#default-library-metadata-vs-library-metadata">Default Library metadata vs Library metadata</a></li>
+<li class="l-3"><a href="#authoring-block-names-and-descriptions-using-library-metadata">Authoring block names and descriptions using Library Metadata</a></li>
+<li class="l-3"><a href="#autoblocks-and-default-content">Autoblocks and Default Content</a></li>
+<li class="l-3"><a href="#blocks-composed-of-content-in-subsequent-sections">Blocks composed of content in subsequent sections</a></li>
+<li class="l-3"><a href="#templates">Templates</a></li>
+<li class="l-2"><a href="#sidekick-plugin-setup">Sidekick plugin setup</a></li>
+<li class="l-3"><a href="#supported-configuration-parameters">Supported configuration parameters</a></li>
+<li class="l-3"><a href="#blocks-plugin-configuration-parameters">Blocks plugin configuration parameters</a></li>
+<li class="l-4"><a href="#examples">Examples</a></li>
+<li class="l-3"><a href="#custom-table-header-colors">Custom table header colors</a></li>
+<li class="l-3"><a href="#custom-plugin-setup">Custom plugin setup</a></li>
+<li class="l-3"><a href="#extended-libraries">Extended Libraries</a></li>
+<li class="l-3"><a href="#sidekick-config-setup">Sidekick config setup</a></li>
+<li class="l-2"><a href="#considerations-when-building-blocks-for-the-library">Considerations when building blocks for the library</a></li>
+<li class="l-3"><a href="#use-of-windowlocation">Use of window.location</a></li>
+<li class="l-3"><a href="#use-of-createoptimizedpicture-in-lib-aem">Use of createOptimizedPicture in lib-aem</a></li>
+<li class="l-3"><a href="#checking-for-the-presence-of-the-sidekick-library">Checking for the presence of the sidekick library</a></li>
+<li class="l-2"><a href="#building-a-plugin">Building a Plugin</a></li>
+<li class="l-3"><a href="#plugin-default-export--search">Plugin default export &amp; search</a></li>
+<li class="l-3"><a href="#plugin-web-components">Plugin web components</a></li>
+<li class="l-3"><a href="#plugin-events">Plugin Events</a></li>
+<li class="l-4"><a href="#toast-messages">Toast Messages</a></li>
+<li class="l-4"><a href="#show-and-hide-loader">Show and Hide Loader</a></li>
+<li class="l-3"><a href="#example-plugin">Example plugin</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>What is the Sidekick Library?</h1>
+          <p class="lede">The Sidekick Library is an extension for the AEM Sidekick that enables developers to create UI-driven tooling for content authors. It includes a built-in blocks ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1e5fb8dc7e6733da52dfc650a8634e9edf483eee5.jpg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1e5fb8dc7e6733da52dfc650a8634e9edf483eee5.jpg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="./media_1e5fb8dc7e6733da52dfc650a8634e9edf483eee5.jpg?width=2000&amp;format=jpg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1e5fb8dc7e6733da52dfc650a8634e9edf483eee5.jpg?width=750&amp;format=jpg&amp;optimize=medium" width="1103" height="827">
+          </picture>
+        </p>
+        
+        <p>The Sidekick Library is an extension for the AEM Sidekick that enables developers to create UI-driven tooling for content authors. It includes a built-in blocks plugin that can display a list of all blocks to authors in an intuitive manner, removing the need for authors to remember or search for every variation of a block. Developers can also write their own plugins for the sidekick library.</p>
+        <h2 id="how-to-use-the-sidekick-library">How to use the Sidekick Library?</h2>
+        <p>The steps below detail how to setup the sidekick library and configure the blocks plugin.</p>
+        <h3 id="library-sheet-setup">Library Sheet Setup</h3>
+        <p>The sidekick library is populated with your plugins and plugin content using a sheet.</p>
+        <p>1. Start by creating a directory in sharepoint or gdrive where you want to store the content for the library. We recommend storing the content in <code>/tools/sidekick</code> (or any other name) in the root of the mountpoint. The next steps will assume the directory is called <code>/tools/sidekick</code>.</p>
+        <p>2. Next, create a workbook (an Excel file) in the <code>/tools/sidekick</code> directory called <code>library</code> (or any other name). Each sheet in the workbook represents a plugin that will be loaded by the Sidekick Library. The name of the sheet determines the name of the plugin that will be loaded. Any data contained in the sheet will be passed to the plugin when loaded. The plugin sheet name must be prepended with <code>helix-</code>. For example, if you want to load a plugin called <code>tags</code>, you would create a sheet named <code>helix-tags</code>.</p>
+        <p>3. For this tutorial we will create a sheet for our <code>blocks</code> plugin. Create a sheet (or rename the default sheet) and call it `helix-blocks` and leave it empty for now.</p>
+        <h3 id="blocks-plugin">Blocks Plugin</h3>
+        <p>The Sidekick library comes with a <code>blocks</code> plugin.</p>
+        <div class="video">
+          <div>
+            <div><a href="../sidekick-library.mp4/index.html" data-broken-link="true">https://www.aem.live/docs/sidekick-library.mp4</a></div>
+          </div>
+        </div>
+        <h4 id="blocks-plugin-setup">Blocks Plugin Setup</h4>
+        <p>To generate content for the blocks plugin, you need to prepare a separate Word document for each block you want to include.</p>
+        <p>1. Create a directory inside the <code>/tools/sidekick</code> directory where you will store all the block variations. For example, you could create a directory called <code>blocks</code> inside <code>/tools/sidekick</code>.<br>2. For this example, let's assume we want to define all the variations of a block called <code>columns</code>. First create a Word document called <code>columns</code> inside the <code>blocks</code> directory and provide examples of all the variations of the <code>columns</code> block. After each variation of the block add in a <a href="../authoring/index.html#sections">section delimiter</a>.<br>3. Preview and publish the <code>columns</code> document.<br>4. Open the library workbook created in the last section, inside the <code>helix-blocks</code> sheet, create two columns named <code>name</code> and <code>path</code>.<br>6. Next we need to add a row for our <code>columns</code> block. Add the name of the block in the first column and the url to the document that defines the block variations in the second column. For instance, if you want to add the <code>columns</code> block, you could create a row with the name <code>Columns</code> and the path <code>/tools/sidekick/blocks/columns</code>. In order for the library to work across environments (page, live, prod) you should not use an absolute url for the path column.<br>7. Preview and publish the <code>library</code> workbook.</p>
+        <p>&gt; Since the example blocks are being published you should use <a href="../bulk-metadata/index.html">bulk metadata</a> to exclude the content inside of <code>/tools/**</code> from being indexed.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1c24bdcb68375b65304fd478204b3558e7b2e1153.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1c24bdcb68375b65304fd478204b3558e7b2e1153.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1c24bdcb68375b65304fd478204b3558e7b2e1153.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="Screenshot 2024-04-09 at 2 54 19 PM" src="./media_1c24bdcb68375b65304fd478204b3558e7b2e1153.png?width=750&amp;format=png&amp;optimize=medium" width="441" height="44">
+          </picture>
+        </p>
+        <h5 id="example-libraryxlsx">Example <code>library.xlsx</code></h5>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1cf667308be4eddf5d9b96ee6663d70febccae1af.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1cf667308be4eddf5d9b96ee6663d70febccae1af.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1cf667308be4eddf5d9b96ee6663d70febccae1af.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1cf667308be4eddf5d9b96ee6663d70febccae1af.png?width=750&amp;format=png&amp;optimize=medium" width="342" height="174">
+          </picture>
+        </p>
+        <h2 id="library-metadata">Library Metadata</h2>
+        <p>The blocks plugins supports a special type of block called <code>library metadata</code> which provides a way for developers to tell the blocks plugin some information about the block or how it should be rendered.</p>
+        <h3 id="supported-library-metadata-options">Supported library metadata options</h3>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Key Name</td>
+                    <td>Value</td>
+                    <td>Description</td>
+                    <td>Required</td>
+                  </tr>
+                  <tr>
+                    <td>name</td>
+                    <td>Name of the block</td>
+                    <td>Allows you to set a custom name for the block</td>
+                    <td>false</td>
+                  </tr>
+                  <tr>
+                    <td>description</td>
+                    <td>A description of the block</td>
+                    <td>Allows you to set a custom description for a block</td>
+                    <td>false</td>
+                  </tr>
+                  <tr>
+                    <td>type</td>
+                    <td>The type of the block</td>
+                    <td>This tells the blocks plugin how to group the content that makes up your block. Possible options are template or section (details below)</td>
+                    <td>false</td>
+                  </tr>
+                  <tr>
+                    <td>include next sections</td>
+                    <td>How many sections to include in the block item</td>
+                    <td>Use if your block requires content from subsequence sections in order to render. Should be a number value that indicates how much subsequent sections to include.</td>
+                    <td>false</td>
+                  </tr>
+                  <tr>
+                    <td>searchtags</td>
+                    <td>A comma seperated list of search terms</td>
+                    <td>Allows you to define other terms that could be used when searching for this block in the blocks plugin</td>
+                    <td>false</td>
+                  </tr>
+                  <tr>
+                    <td>tableHeaderBackgroundColor</td>
+                    <td>A hex color (ex #ff3300)</td>
+                    <td>Overrides the table header background color for any blocks in the section or page.</td>
+                    <td>false</td>
+                  </tr>
+                  <tr>
+                    <td>tableHeaderForegroundColor</td>
+                    <td>A hex color (ex #ffffff)</td>
+                    <td>Overrides the table header foreground color for any blocks in the section or page.</td>
+                    <td>false</td>
+                  </tr>
+                  <tr>
+                    <td>contentEditable</td>
+                    <td>A boolean value (default: true)</td>
+                    <td>Set to false to disable content editing in the preview window.</td>
+                    <td>false</td>
+                  </tr>
+                  <tr>
+                    <td>disableCopy</td>
+                    <td>A boolean value (default: false)</td>
+                    <td>Set to true to disable the copy button in the preview window.</td>
+                    <td>false</td>
+                  </tr>
+                  <tr>
+                    <td>hideDetailsView</td>
+                    <td>A boolean value (default: false)</td>
+                    <td>Hide the block details panel inside the preview window.</td>
+                    <td>false</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h3 id="default-library-metadata-vs-library-metadata">Default Library metadata vs Library metadata</h3>
+        <p>There are two types of <code>library metadata</code>. Library metadata that lives within a section containing the block, or <em>default</em> <code>library metadata</code> that applies to the document as a whole and lives in a section on it's own (a block called <code>library metadata</code> as the only child in a section).</p>
+        <p>Let's take an example of a hero block that has 5 variants. Suppose you want to add the same description for each variation of the block, rather than duplicating the <code>library metadata</code> with the description into each section containing the variations. You could instead use <em>default</em> <code>library metadata</code> to apply the same description to every variation of the block. If you decide that one variation actually needs a slightly different description you could add <code>library metadata</code> to the section containing the variation and it would override the <em>default</em> <code>library metadata</code> description when it's rendered within the blocks plugin.</p>
+        <h3 id="authoring-block-names-and-descriptions-using-library-metadata">Authoring block names and descriptions using Library Metadata</h3>
+        <p>By default the block name (with variation) will be used to render the item in the blocks plugin. For example, if the name of the block is <code>columns (center, background)</code> then that name will be used as the label when it’s rendered in the blocks plugin. This can be customized by creating a <code>library metadata</code> section within the same section as the block. Library metadata can also be used to author a description of the block as well as adding <code>searchTags</code> to include an alias for the block when using the search feature.</p>
+        <p>Example block with custom name and description</p>
+        <p><strong>Content</strong></p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1e8ca209a88408b18847f9e290dbc1b0b4ee0f1f6.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1e8ca209a88408b18847f9e290dbc1b0b4ee0f1f6.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1e8ca209a88408b18847f9e290dbc1b0b4ee0f1f6.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="Screenshot 2023-06-08 at 1 11 09 PM" src="./media_1e8ca209a88408b18847f9e290dbc1b0b4ee0f1f6.png?width=750&amp;format=png&amp;optimize=medium" width="644" height="706">
+          </picture>
+        </p>
+        <p><strong>Display</strong></p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1c7627edc617de392d1e308aa6547618028fbcf94.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1c7627edc617de392d1e308aa6547618028fbcf94.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1c7627edc617de392d1e308aa6547618028fbcf94.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="Screenshot 2023-06-08 at 1 13 32 PM" src="./media_1c7627edc617de392d1e308aa6547618028fbcf94.png?width=750&amp;format=png&amp;optimize=medium" width="1501" height="996">
+          </picture>
+        </p>
+        <h3 id="autoblocks-and-default-content">Autoblocks and Default Content</h3>
+        <p>The blocks plugin is capable of rendering <a href="../../developer/markup-sections-blocks/index.html#default-content">default content</a> and <a href="../../developer/markup-sections-blocks/index.html#auto-blocking">autoblocks</a>. In order to achieve this, it is necessary to place your <code>default content</code> or <code>autoblock</code> within a dedicated section, which should include a <code>library metadata</code> table defining a <code>name</code> property, as previously described. If no name is specified in the library metadata, the item will be labeled as "Unnamed Item."</p>
+        <h3 id="blocks-composed-of-content-in-subsequent-sections">Blocks composed of content in subsequent sections</h3>
+        <p>There are situations where developers may want a block to consist of content from subsequent sections. This pattern is discouraged for reasons stated <a href="../davidsmodel/index.html#rule-3-limit-row-and-column-spans">here</a>, but if you choose to use it the blocks plugin can render these items using the <code>include next sections</code> property in <code>library metadata</code>.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1671c45e263255331b3f2c47b48b7887157308651.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1671c45e263255331b3f2c47b48b7887157308651.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1671c45e263255331b3f2c47b48b7887157308651.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1671c45e263255331b3f2c47b48b7887157308651.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="300">
+          </picture>
+        </p>
+        <h3 id="templates">Templates</h3>
+        <p>Templates are a way to group an entire document into a single element in the sidekick library. To mark a document as a template set <code>type</code> to <code>template</code> in <code>default library metadata</code>.</p>
+        <p>&gt; Important, the <code>library metadata</code> needs to be in it's own section and be the only child to be considered <code>default library metadata</code>.</p>
+        <p>Supporting <code>metadata</code> is also desirable for templates. To add a metadata table to the template you can use a <code>Page metadata</code> block.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_13d086c555905679d232dd82ef88dc4bc1f49d9f0.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_13d086c555905679d232dd82ef88dc4bc1f49d9f0.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_13d086c555905679d232dd82ef88dc4bc1f49d9f0.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="266064147-12883ee0-147b-4171-b89a-c313e33eef24" src="./media_13d086c555905679d232dd82ef88dc4bc1f49d9f0.png?width=750&amp;format=png&amp;optimize=medium" width="648" height="269">
+          </picture>
+        </p>
+        <p>When the template is copied a <code>metadata</code> with the values will be added along with the content to the clipboard.</p>
+        <h2 id="sidekick-plugin-setup">Sidekick plugin setup</h2>
+        <p>Since the sidekick library is hosted on the same origin as the content, a static HTML page needs to be created to load and configure the content.</p>
+        <p>1. Create a file called <code>library.html</code> in <code>tools/sidekick/</code>;</p>
+        <p>2. Paste the following code in <code>library.html</code>.</p>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    /&gt;
+    &lt;meta name="Description" content="AEM Sidekick Library" /&gt;
+    &lt;meta name="robots" content="noindex" /&gt;
+    &lt;base href="/" /&gt;
+
+    &lt;style&gt;
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background-color: #ededed;
+        height: 100%;
+      }
+      
+      helix-sidekick { display: none }
+    &lt;/style&gt;
+    &lt;title&gt;Sidekick Library&lt;/title&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;script
+      type="module"
+      src="https://www.aem.live/tools/sidekick/library/index.js"
+    &gt;&lt;/script&gt;
+    &lt;script&gt;
+      const library = document.createElement('sidekick-library')
+      library.config = {
+        base: '/tools/sidekick/library.json',
+      }
+
+      document.body.prepend(library)
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        <p>In the code above we load the sidekick library from <code>aem.live</code> and then create a custom <code>sidekick-library</code> element and add it to the page. The <code>sidekick-library</code> element accepts a <code>config</code> object that is required to configure the sidekick library.</p>
+        <h3 id="supported-configuration-parameters">Supported configuration parameters</h3>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Parameter Name</td>
+                    <td>Value</td>
+                    <td>Description</td>
+                    <td>Required</td>
+                  </tr>
+                  <tr>
+                    <td>base</td>
+                    <td>Path to the library</td>
+                    <td>The base library to be loaded</td>
+                    <td>true</td>
+                  </tr>
+                  <tr>
+                    <td>extends</td>
+                    <td>Absolute URL to the extended library</td>
+                    <td>A library to extend the base library with</td>
+                    <td>false</td>
+                  </tr>
+                  <tr>
+                    <td>plugins</td>
+                    <td>An object containing plugins to register with the sidekick library.</td>
+                    <td>The plugins object can be used to register plugins and configure data that should be passed to the plugin</td>
+                    <td>false</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p>The blocks plugin supports the following configuration properties that can be set using the plugins object.</p>
+        <h3 id="blocks-plugin-configuration-parameters">Blocks plugin configuration parameters</h3>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Parameter Name</td>
+                    <td>Value</td>
+                    <td>Description</td>
+                    <td>Required</td>
+                  </tr>
+                  <tr>
+                    <td>encodeImages</td>
+                    <td>A boolean value that indicates if images should be encoded during copy operations</td>
+                    <td>If your site has a Zero trust network access (ZTNA) service enabled such as Cloudflare Access then images should be encoded for copy/paste operations to work correctly with images.</td>
+                    <td>true</td>
+                  </tr>
+                  <tr>
+                    <td>viewPorts</td>
+                    <td>Full or simplified configuration object, see examples below.</td>
+                    <td>Configuration to overwrite the default viewport sizes. The default is 480px fo mobile, 768px for tablet and 100% of the current window for desktop.</td>
+                    <td>false</td>
+                  </tr>
+                  <tr>
+                    <td>contentEditable</td>
+                    <td>A boolean value to disable content editing globally in previews.</td>
+                    <td>Set to false to disable content editing.</td>
+                    <td>false</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h4 id="examples">Examples</h4>
+        <p>Encoding images</p>
+        <pre><code>const library = document.createElement('sidekick-library')
+library.config = {
+  base: '/tools/sidekick/library.json',
+  plugins: {
+    blocks: {
+      encodeImages: true,
+    }
+  }
+}
+</code></pre>
+        <p>Custom viewports (short form)</p>
+        <pre><code>const library = document.createElement('sidekick-library')
+library.config = {
+  base: '/tools/sidekick/library.json',
+  plugins: {
+    blocks: {
+      viewPorts: [600, 900],
+    }
+  }
+}
+</code></pre>
+        <p>Custom viewports</p>
+        <pre><code>const library = document.createElement('sidekick-library')
+library.config = {
+  base: '/tools/sidekick/library.json',
+  plugins: {
+    blocks: {
+      viewPorts: [
+        {
+          width: '599px',
+          label: 'Small',
+          icon: 'device-phone',
+        },
+        {
+          width: '899px',
+          label: 'Medium',
+          icon: 'device-tablet',
+        },
+        {
+          width: '100%',
+          label: 'Large',
+          icon: 'device-desktop',
+          default: true,
+        },
+      ],
+    }
+  }
+}
+</code></pre>
+        <h3 id="custom-table-header-colors">Custom table header colors</h3>
+        <p>You can customize the table header background and foreground color when pasting a block, section metadata or metadata that was copied from the blocks plugin.</p>
+        <p>Default styles can be set in <code>library.html</code> using css variables.</p>
+        <pre><code> &lt;style&gt;
+    :root {
+      --sk-block-table-background-color: #03A;
+      --sk-block-table-foreground-color: #fff;
+
+      --sk-section-metadata-table-background-color: #f30;
+      --sk-section-metadata-table-foreground-color: #000;
+
+      --sk-metadata-table-background-color: #000;
+      --sk-metadata-table-foreground-color: #fff;
+    }
+  &lt;/style&gt;
+</code></pre>
+        <p>These values can be overridden using <a href="index.html#supported-library-metadata-options">library metadata</a>.</p>
+        <p>&gt; Depending on the system color scheme selected for the users computer (dark mode), Word may alter the chosen colors in an attempt to improve accessibility.</p>
+        <h3 id="custom-plugin-setup">Custom plugin setup</h3>
+        <p>The example below defines a <code>tags</code> plugin in the config. The keys of the plugins object must match the name of the plugin, any other properties defined in the plugin object will be available to the plugin via the context argument of the <a href="index.html#building-a-plugin">decorate</a> method.</p>
+        <pre><code>const library = document.createElement('sidekick-library')
+library.config = {
+  base: '/tools/sidekick/library.json',
+  plugins: {
+    tags: {
+      src: '/tools/sidekick/plugins/tags/tags.js',
+      foo: 'bar'
+    }
+  }
+}
+</code></pre>
+        <h3 id="extended-libraries">Extended Libraries</h3>
+        <p>In some cases merging two block libraries may be desirable. When an extended library is defined the sidekick library application will merge the base library and the extended library together into a single library list for authors.</p>
+        <p>The example below defines a base library and an extended library (on another origin) that will be merged into the base library.</p>
+        <pre><code>const library = document.createElement('sidekick-library')
+library.config = {
+  base: '/tools/sidekick/library.json',
+  extends: 'https://main--repo--owner.hlx.live/tools/sidekick/library.json'
+}
+</code></pre>
+        <p>&gt; The <code>Access-Control-Allow-Origin</code> headers will need to be set on the <code>library.json</code> and blocks of the extended library in order for them to load in the sidekick library. See <a href="../custom-headers/index.html">Custom HTTP Response Headers</a> for more info.</p>
+        <p>&gt; Due to same-origin policies enforced by browsers on iframes a preview of an extended block cannot be loaded at this time.</p>
+        <h3 id="sidekick-config-setup">Sidekick config setup</h3>
+        <p>Next, in order for the sidekick library to appear in the sidekick we need to add the plugin to the sidekick object in the configuration service.</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/{org}/sites/{site}/sidekick.json \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: {your-auth-token}' \
+  --data '{
+    "project": "Example",
+    "plugins": [{
+      "id": "library",
+      "title": "Library",
+      "environments": ["edit"],
+      "url": "/tools/sidekick/library.html",
+      "includePaths": ["**.docx**"]
+    }]
+  }'
+</code></pre>
+        <p>The <code>url</code> property in the plugin configuration indicates the location from which the sidekick should load the plugin. This should point to the <code>library.html</code> file we previously created.</p>
+        <p>&gt; If you have already configured the sidekick, be careful not to overwrite the sidekick config with the request above. You should GET the config first and add the plugin to the existing configuration if it exists.</p>
+        <h2 id="considerations-when-building-blocks-for-the-library">Considerations when building blocks for the library</h2>
+        <p>The sidekick library renders blocks by first fetching the <code>plain.html</code> rendition of the the block and then strips it of any other blocks in the content (for example if there are multiple variations of a block in the response). It then requests the same page (without <code>.plain.html</code>) and replaces the <code>main</code> element with the stripped block and loads the entire document into an <code>iframe</code> using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/srcdoc">srcdoc</a> attribute.</p>
+        <h3 id="use-of-windowlocation">Use of <code>window.location</code></h3>
+        <p>Since the block is loaded in an iframe using the <code>srcdoc</code> attribute, the instance of the <code>window.location</code> object used by your sites code will not contain the typical values you would expect to see.</p>
+        <p>Example <code>window.location</code> object when running in the library</p>
+        <pre><code>{
+  "host": "",
+  "hostname": "",
+  "href": "about:srcdoc"
+  "origin": "null"
+  "pathname": "srcdoc"
+  "port": ""
+  "protocol": "about:"
+}
+</code></pre>
+        <p>For this reason, if your block requires use of the <code>window.location</code> object we recommend adding the following functions to your <code>scripts.js</code> file and importing them into your function for use.</p>
+        <pre><code>/**
+ * Returns the true origin of the current page in the browser.
+ * If the page is running in a iframe with srcdoc, the ancestor origin is returned.
+ * @returns {String} The true origin
+ */
+export function getOrigin() {
+  const { location } = window;
+  return location.href === 'about:srcdoc' ? window.parent.location.origin : location.origin;
+}
+
+/**
+ * Returns the true of the current page in the browser.mac
+ * If the page is running in a iframe with srcdoc,
+ * the ancestor origin + the path query param is returned.
+ * @returns {String} The href of the current page or the href of the block running in the library
+ */
+export function getHref() {
+  if (window.location.href !== 'about:srcdoc') return window.location.href;
+
+  const { location: parentLocation } = window.parent;
+  const urlParams = new URLSearchParams(parentLocation.search);
+  return `${parentLocation.origin}${urlParams.get('path')}`;
+}
+</code></pre>
+        <h3 id="use-of-createoptimizedpicture-in-lib-aem">Use of <code>createOptimizedPicture</code> in lib-aem</h3>
+        <p>The <code>createOptimizedPicture</code> function in <code>lib-aem</code> also <a href="https://github.com/adobe/helix-project-boilerplate/blob/c6ab59278d89a251c864fad1100f6de03a63a6fe/scripts/lib-franklin.js#L480">uses</a> <code>window.location.href</code>. If you are using this function we recommend moving it into <code>scripts.js</code> and modify it to use the <code>getHref()</code> function above.</p>
+        <h3 id="checking-for-the-presence-of-the-sidekick-library">Checking for the presence of the sidekick library</h3>
+        <p>Sometimes you may want to know if the page or the block is running in the sidekick library. To do this there are a couple of options.</p>
+        <p>1. Check if <code>window.location.href === 'about:srcdoc'</code></p>
+        <p>2. The <code>main</code> element and the block element will contain the <code>sidekick-library</code> class</p>
+        <h2 id="building-a-plugin">Building a Plugin</h2>
+        <p>Developing a plugin is similar to constructing a block in AEM. Once a user tries to load the plugin, the sidekick library will trigger the <code>decorate()</code> method on your plugin. This method receives the container to render the plugin in and any data that is included in the plugins sheet.</p>
+        <pre><code>/**
+ * Called when a user tries to load the plugin
+ * @param {HTMLElement} container The container to render the plugin in
+ * @param {Object} data The data contained in the plugin sheet
+ * @param {String} query If search is active, the current search query
+ * @param {Object} context contains any properties set when the plugin was registered
+ */
+export async function decorate(container, data, query, context) {
+  // Render your plugin
+}
+</code></pre>
+        <p>&gt; The <code>decorate()</code> function must be exported from the plugin.</p>
+        <h3 id="plugin-default-export--search">Plugin default export &amp; search</h3>
+        <p>The default export from a plugin allows authors to customize the plugin name displayed in the header upon loading, as well as activate the search functionality within the sidekick library.</p>
+        <pre><code>export default {
+  title: 'Tags',
+  searchEnabled: true,
+};
+</code></pre>
+        <p>When the <code>searchEnabled</code> property is true, the library header will display a search icon upon loading the plugin. If the user initiates a search by entering a query, the <code>decorate()</code> function of the plugin will be triggered again, this time with the search string passed in the query parameter of the <code>decorate()</code> function.</p>
+        <h3 id="plugin-web-components">Plugin web components</h3>
+        <p>Plugin authors can utilize a select set of web components from <a href="https://opensource.adobe.com/spectrum-web-components/index.html">Spectrum</a> when building a custom plugin.</p>
+        <p>The following components from Spectrum are available</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Component</td>
+                    <td>Documentation Link</td>
+                  </tr>
+                  <tr>
+                    <td>sp-tooltip</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/tooltip/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-toast</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/toast/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-textfield</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/textfield/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-sidenav-item</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/sidenav-item/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-sidenav</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/sidenav/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-search</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/search/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-progress-circle</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/progress-circle/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-picker</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/picker/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-menu-item</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/menu/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-menu-group</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/menu/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-menu-divider</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/menu/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-menu</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/menu/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-illustrated-message</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/illustrated-message/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-divider</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/divider/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-card</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/card/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-button-group</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/button-group/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-button</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/button/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-action-button</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/action-button/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>overlay-trigger</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/overlay-trigger/">Docs</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p>The following icons from Spectrum are also available</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Component</td>
+                    <td>Documentation Link</td>
+                  </tr>
+                  <tr>
+                    <td>sp-icon-search</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/icons-workflow/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-icon-file-template</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/icons-workflow/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-icon-file-code</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/icons-workflow/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-icon-device-phone</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/icons-workflow/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-icon-device-tablet</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/icons-workflow/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-icon-device-desktop</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/icons-workflow/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-icon-magic-wand</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/icons-workflow/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-icon-copy</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/icons-workflow/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-icon-preview</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/icons-workflow/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-icon-info</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/icons-workflow/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-icon-view-detail</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/icons-workflow/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-icon-chevron-right</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/icons-workflow/">Docs</a></td>
+                  </tr>
+                  <tr>
+                    <td>sp-icon-chevron-left</td>
+                    <td><a href="https://opensource.adobe.com/spectrum-web-components/components/icons-workflow/">Docs</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h3 id="plugin-events"><br>Plugin Events</h3>
+        <p>Plugin authors can dispatch events from their plugin to the parent sidekick library in order to display a loader or to show a toast message.</p>
+        <h4 id="toast-messages">Toast Messages</h4>
+        <pre><code>import { PLUGIN_EVENTS } from 'https://www.aem.live/tools/sidekick/library/events/events.js';
+
+export async function decorate(container, data, query) {
+  // Show a toast message
+  container.dispatchEvent(new CustomEvent(PLUGIN_EVENTS.TOAST,  { detail: { message: 'Toast Shown!', variant: 'positive | negative' } }))
+}
+</code></pre>
+        <h4 id="show-and-hide-loader">Show and Hide Loader</h4>
+        <pre><code>import { PLUGIN_EVENTS } from 'https://www.aem.live/tools/sidekick/library/events/events.js';
+
+export async function decorate(container, data, query) {
+  // Show loader
+  container.dispatchEvent(new CustomEvent(PLUGIN_EVENTS.SHOW_LOADER))
+  ...
+  // Hide loader
+  container.dispatchEvent(new CustomEvent(PLUGIN_EVENTS.HIDE_LOADER))
+}
+</code></pre>
+        <h3 id="example-plugin">Example plugin</h3>
+        <p><a href="https://github.com/dylandepass/boilerplate-with-library/blob/main/tools/sidekick/plugins/tags/tags.js">Tags Plugin</a></p>
+        <p><a href="https://github.com/dylandepass/boilerplate-with-library/blob/main/tools/sidekick/plugins/api-test/api-test.js">Plugin API Example</a></p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.296Z
+  page:             blog-toms-developer-dilemma
+  pageUrl:          https://www.aem.live/blog/toms-developer-dilemma
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>The Architecture Problem That's Breaking AIs for Content Management (and the Secret Sauce to Fix It)</title>
+  <meta name="description" content="The Martin-Gropius-Bau sticks out in my commute to Adobe's Berlin office: a russet neo-Renaissance masterpiece from 1881. Martin built it after the Paris Commune, when ...">
+  <meta property="og:title" content="The Architecture Problem That's Breaking AIs for Content Management (and the Secret Sauce to Fix It)">
+  <meta property="og:description" content="The Martin-Gropius-Bau sticks out in my commute to Adobe's Berlin office: a russet neo-Renaissance masterpiece from 1881. Martin built it after the Paris Commune, when ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/blog/toms-developer-dilemma/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../index.html" aria-current="page">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-success)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#why-ai-gets-stuck-on-old-cms-architecture">Why AI Gets Stuck on Old CMS Architecture</a></li>
+<li class="l-2"><a href="#enter-toms-framework">Enter Tom's Framework</a></li>
+<li class="l-2"><a href="#the-architecture-that-ai-dreams-of-not-the-architecture-that-ai-hallucinates-of">The architecture that AI dreams of (not the architecture that AI hallucinates of)</a></li>
+<li class="l-2"><a href="#ready-to-see-whats-possible">Ready to See What's Possible?</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog · BLOG</p>
+          <h1>The Architecture Problem That's Breaking AIs for Content Management (and the Secret Sauce to Fix It)</h1>
+          <p class="lede">The Martin-Gropius-Bau sticks out in my commute to Adobe's Berlin office: a russet neo-Renaissance masterpiece from 1881. Martin built it after the Paris Commune, when ...</p>
+        </header>
+        <div>
+        
+        <p>The Martin-Gropius-Bau sticks out in my commute to Adobe's Berlin office: a russet neo-Renaissance masterpiece from 1881. Martin built it after the Paris Commune, when Berlin thought good architecture could prevent revolutions, every frieze an argument for order.</p>
+        <p>Martin lived long enough to see the world that necessitated his buildings disappear – train stations becoming glass cathedrals, factories replacing cathedrals. His great-nephew Walter carried these contradictions to America's highways and open-plan offices, where he claimed what Martin couldn't: that beauty might live in absence rather than abundance.</p>
+        <p>This morning I'm thinking about how every CMS conversation sounds like that family argument. Traditional systems inherit Martin's ambition: more layers, more structure, more ways to express intention. These systems made perfect sense for their moment—until language models arrived, and the question became not what we <strong>can</strong> build, but what we <em>should</em> when our architect is silicon rather than stone.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_11f2d759c4e505567d6db3fcae328afb27cd28d51.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_11f2d759c4e505567d6db3fcae328afb27cd28d51.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_11f2d759c4e505567d6db3fcae328afb27cd28d51.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_11f2d759c4e505567d6db3fcae328afb27cd28d51.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        <p>Martin's building still stands because it solved a problem that disappeared while he was working on it. <a href="https://allabout.network/">Tom Cranstoun</a>'s new approach doesn't solve disappearing problems—it solves the one in front of us now: how to build when our partners think in probabilities rather than columns.</p>
+        <h2 id="why-ai-gets-stuck-on-old-cms-architecture">Why AI Gets Stuck on Old CMS Architecture</h2>
+        <p>Yesterday in our internal Slack, Bruce (one of your AI engineers) and I unpacked a question that keeps coming up: why do LLMs struggle with traditional CMS architectures?</p>
+        <p>Here's the problem: traditional CMS gives developers tremendous flexibility with deep nesting, recursive fragments, and complex component trees. But when you're teaching an AI with limited context windows, that flexibility becomes debilitating.</p>
+        <p>Traditional systems use primitives like "file" and "folder" with no inherent semantics. Edge Delivery uses native HTML semantics - the same language AIs already understand from billions of web pages.</p>
+        <p>Worse, traditional CMS encourages deep nesting and recursive structures. Great for developers, brutal for AIs trying to reason about content without long-term memory.</p>
+        <p>Then there's transparency. With traditional systems, you're debugging server-generated HTML you can't see behind bundled dependencies. With Edge Delivery, open DevTools and everything's right there - unminified, unobfuscated, fully transparent.</p>
+        <p>The final killer? Development loop speed. Traditional setups take minutes to see changes. Edge Delivery updates in the blink of an eye. For AI agents that need frequent iteration to bridge the gap between an 80% solution and the 99% you'll actually deploy, this speed isn't just convenient - it's essential.</p>
+        <h2 id="enter-toms-framework">Enter Tom's Framework</h2>
+        <p>Tom's been living this problem every day. What started as a simple observation - that developing complex components in Edge Delivery meant jumping between Google Sheets, GitHub, and a local dev server - turned into something bigger.</p>
+        <p>His framework, documented in <a href="https://allabout.network/blogs/ddt/integrations/the-eds-developer-dilemma-and-how-one-framework-solved-it">The Edge Delivery Services Developer Dilemma and How One Framework Solved It</a>, does three things that made me stop and say "well, that's brilliant":</p>
+        <ol>
+          <li><strong>Local-first development</strong> - no more context-switching hell</li>
+          <li><strong>AI-native architecture</strong> - gives your favorite coding assistant full visibility into code, content, and data</li>
+          <li><strong>Preserves what makes Edge Delivery fast</strong> - you still get those 100/100 Lighthouse scores</li>
+        </ol>
+        <h2 id="the-architecture-that-ai-dreams-of-not-the-architecture-that-ai-hallucinates-of">The architecture that AI dreams of (not the architecture that AI hallucinates of)</h2>
+        <p>Remember what makes Edge Delivery special architecturally? We use HTML semantics natively, keep structures flat and simple, and make everything transparent and open source. Tom's framework doubles down on these principles.</p>
+        <p>Instead of fighting the platform to get sophisticated components, his dual-directory structure lets you:</p>
+        <ul>
+          <li>Start simple (as always)</li>
+          <li>Switch to sophisticated when you need it</li>
+          <li>Have your AI assistant understand the full picture</li>
+        </ul>
+        <h2 id="ready-to-see-whats-possible">Ready to See What's Possible?</h2>
+        <p>For me, Tom's blog isn't just another technical post - it's a blueprint for pushing Edge Delivery further than most people thought possible.</p>
+        <p>The <a href="https://github.com/ddttom/webcomponents-with-eds">repository is live at on GitHub</a>, and I can guarantee this: your next Edge Delivery project will be easier because of what Tom figured out here.</p>
+        <p>Check it out and compare with our own <a href="../../developer/ai-coding-agents/index.html">guide to using AI Coding Agents with AEM</a>.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

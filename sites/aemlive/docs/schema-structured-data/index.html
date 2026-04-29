@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.316Z
+  page:             docs-schema-structured-data
+  pageUrl:          https://www.aem.live/docs/schema-structured-data
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Using Schema (Structured Data) as JSON-LD</title>
+  <meta name="description" content="Before adding any structured data (schema), define what SEO or SERP outcome you're targeting:">
+  <meta property="og:title" content="Using Schema (Structured Data) as JSON-LD">
+  <meta property="og:description" content="Before adding any structured data (schema), define what SEO or SERP outcome you're targeting:">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/schema-structured-data/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#set-clear-goals-for-schema-implementation">Set Clear Goals for Schema Implementation</a></li>
+<li class="l-2"><a href="#two-approaches-block-based-vs-page-based-schema">Two Approaches: Block-Based vs Page-Based Schema</a></li>
+<li class="l-2"><a href="#how-to-test-and-measure">How to Test and Measure</a></li>
+<li class="l-4"><a href="#tools">Tools:</a></li>
+<li class="l-4"><a href="#metrics-to-track">Metrics to Track:</a></li>
+<li class="l-2"><a href="#best-practice-iterate--promote">Best Practice: Iterate &amp; Promote</a></li>
+<li class="l-2"><a href="#summary">Summary</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Using Schema (Structured Data) as JSON-LD</h1>
+          <p class="lede">Before adding any structured data (schema), define what SEO or SERP outcome you're targeting:</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1cf7bb3a1af050eff35416bc16502895c1f5a166e.jpg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1cf7bb3a1af050eff35416bc16502895c1f5a166e.jpg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="./media_1cf7bb3a1af050eff35416bc16502895c1f5a166e.jpg?width=2000&amp;format=jpg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1cf7bb3a1af050eff35416bc16502895c1f5a166e.jpg?width=750&amp;format=jpg&amp;optimize=medium" width="1103" height="827">
+          </picture>
+        </p>
+        
+        <h2 id="set-clear-goals-for-schema-implementation">Set Clear Goals for Schema Implementation</h2>
+        <p>Before adding any structured data (schema), define what SEO or SERP outcome you're targeting:</p>
+        <ul>
+          <li><strong>Rich Results</strong> (FAQs, Recipes, Reviews, Product snippets)</li>
+          <li><strong>Increased CTR</strong> through enhanced listings</li>
+          <li><strong>Visibility Improvements</strong> in Google Search Console (GSC)</li>
+        </ul>
+        <p>Set clear goals in one or more metrics and make sure that there are no side-effects relative to SERP and ranking.</p>
+        <p>Establish a <strong>baseline without schema</strong> using tools like GSC, and compare against performance after schema deployment. It is likely that the impact is not measured immediately so account for at least a couple of weeks to validate the effects.</p>
+        <p><em>Note:</em> Google does not guarantee that structured data will be shown in search results, even if it is valid [<a href="https://developers.google.com/search/docs/appearance/structured-data/sd-policies">source</a>].</p>
+        <h2 id="two-approaches-block-based-vs-page-based-schema">Two Approaches: Block-Based vs Page-Based Schema</h2>
+        <p>AEM supports two main approaches to adding schema, and which one you choose depends on the type of content and how critical it is to appear in the first-pass crawl.</p>
+        <p><strong>Block-Based Schema</strong> is typically implemented via client-side JavaScript. It's great when you're working with content that's already visible on the page and just needs to be restructured into JSON-LD. Think FAQs, recipes, or reviews—these can be automatically converted with no extra effort for the author. Just drop in a block, and the system generates the necessary schema in the background. This is fast, lightweight, and ideal for high-velocity content creation. The tradeoff? It relies on JavaScript execution, so it might not always be picked up immediately by crawlers [<a href="https://developers.google.com/search/docs/appearance/structured-data/generate-structured-data-with-javascript">source</a>].</p>
+        <p><strong>Page-Based Schema</strong>, on the other hand, is baked into the <a href="../authoring/index.html#json-ld">page metadata</a>. This approach is most useful when you need the schema to be picked up in the initial HTML crawl—such as with product or offer pages. These values usually come from a PIM, ERP, or commerce platform and are added automatically, with little to no manual input. It’s more robust for structured e-commerce content, especially when you're targeting rich results that depend on immediate visibility.</p>
+        <p><em>Quote from Google:</em> "We strongly recommend using HTML for critical content that you want to be indexed quickly, as it helps ensure discovery in the initial crawl pass" [<a href="https://www.searchenginejournal.com/google-strongly-recommends-using-html-to-get-content-indexed-quickly/269841/">source</a>].</p>
+        <h2 id="how-to-test-and-measure">How to Test and Measure</h2>
+        <h4 id="tools"><strong>Tools:</strong></h4>
+        <ul>
+          <li><strong>Google Search Console &gt; Enhancements</strong> (Rich Results performance)</li>
+          <li><strong>URL Inspection Tool</strong> (check rendered HTML)</li>
+          <li><strong>Schema Markup Validator</strong></li>
+          <li><strong>Split Testing</strong> using tools like ContentKing, or A/B publishing if supported</li>
+        </ul>
+        <h4 id="metrics-to-track"><strong>Metrics to Track:</strong></h4>
+        <ul>
+          <li><strong>CTR before and after</strong> adding schema</li>
+          <li><strong>Impression growth</strong> for pages with schema</li>
+          <li><strong>Error or warnings in GSC Enhancements</strong></li>
+        </ul>
+        <p><em>Example</em>: Add FAQ schema to a page block and monitor CTR uplift using GSC over 2–4 weeks. Compare with similar pages without schema.</p>
+        <h2 id="best-practice-iterate--promote">Best Practice: Iterate &amp; Promote</h2>
+        <ul>
+          <li>Start with <strong>Page-Based schema</strong> for quick iteration without developer support.</li>
+          <li>Once schema is validated and shows improvement, <strong>transition to Block-Based</strong> for authoring scale.</li>
+          <li>Regularly <strong>audit</strong> schema output for correctness and completeness.</li>
+          <li>Always <strong>align schema content with visible content</strong> to avoid manual penalties.</li>
+        </ul>
+        <h2 id="summary">Summary</h2>
+        <p>Using schema in AEM may enhance search presence but requires a clear testing and measurement strategy. Block-based schema is ideal for repeatable visible content; page-based metadata is critical for e-commerce product data, and is useful for quick initial prototyping. Always validate and measure performance before scaling.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

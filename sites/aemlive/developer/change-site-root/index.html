@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.881Z
+  page:             developer-change-site-root
+  pageUrl:          https://www.aem.live/developer/change-site-root
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Change Site Root</title>
+  <meta name="description" content="The AEM Boilerplate project assumes that the document root is situated at the project's root. However, if your project begins on a subpage of another ...">
+  <meta property="og:title" content="Change Site Root">
+  <meta property="og:description" content="The AEM Boilerplate project assumes that the document root is situated at the project's root. However, if your project begins on a subpage of another ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/change-site-root/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#content-changes">Content Changes</a></li>
+<li class="l-2"><a href="#code-changes">Code Changes</a></li>
+<li class="l-2"><a href="#other-things-to-look-for">Other things to look for</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Change Site Root</h1>
+          <p class="lede">The AEM Boilerplate project assumes that the document root is situated at the project's root. However, if your project begins on a subpage of another ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_15282d0c76e2c630cf008d927887acfa0dc92012a.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_15282d0c76e2c630cf008d927887acfa0dc92012a.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_15282d0c76e2c630cf008d927887acfa0dc92012a.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_15282d0c76e2c630cf008d927887acfa0dc92012a.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1280">
+          </picture>
+        </p>
+        
+        <p>The AEM Boilerplate project assumes that the document root is situated at the project's root. However, if your project begins on a subpage of another site, it is necessary to adjust the site root to align with the path.</p>
+        <p>Modifying the site root involves relocating various files and folders in both the document storage and code repository, along with making code updates where paths are referenced. The new folder should have identical names in both the document storage and GitHub and it should also correspond to the name in the path where the site will be located.</p>
+        <p>That means if the site location will be at <code>https://yourdomain.com/topics</code> then the recommended folder name would be <code>topics</code>.</p>
+        <p><strong>Note:</strong> If you plan to move multiple sections of the site over at different times, then follow the “Code Changes” section but move it to a unique folder name (that does not clash with any existing paths you may already have) like <code>aemedge</code> so that it is not tied to just one section of the site content.</p>
+        <h2 id="content-changes">Content Changes</h2>
+        <p>To update your document storage, follow these steps:</p>
+        <ul>
+          <li>Create the new root folder in document storage</li>
+          <li>Move all items into the new folder, <strong>excluding the following</strong>:
+            <ul>
+              <li><code>.helix</code> folder</li>
+              <li><code>redirects(.xslx)</code></li>
+              <li><code>block-library</code> folder (if it exists)</li>
+            </ul>
+          </li>
+          <li>Publish the relocated files in their new location</li>
+        </ul>
+        <p>IMPORTANT: In case any files in the previous location have been previewed or published, it is advisable to <a href="../../docs/authoring/index.html#delete">first delete the published content</a>. These outdated files can be seen as duplicate content, will probably not get updates from authors and confuse visitors who stumble upon them.</p>
+        <h2 id="code-changes">Code Changes</h2>
+        <p>To update your project code, follow these steps:</p>
+        <ul>
+          <li>Create the new root folder in your code, using the identical folder name used in document storage</li>
+          <li>Move the following folders into the new folder:
+            <ul>
+              <li><code>blocks</code></li>
+              <li><code>fonts</code></li>
+              <li><code>icons</code></li>
+              <li><code>scripts</code></li>
+              <li><code>styles</code></li>
+            </ul>
+          </li>
+          <li>Update the paths to styles and scripts in the following files:
+            <ul>
+              <li><code>head.html</code></li>
+              <li><code>404.html</code></li>
+            </ul>
+          </li>
+          <li>In <code>font.css</code>, update the paths to your font files in the <code>src</code> properties of <code>@font-face</code> definitions
+            <ul>
+              <li>Since the fonts folder was moved, these paths may need to be updated</li>
+            </ul>
+          </li>
+          <li>In <code>package.json</code>, update the <code>lint:css</code> path for both blocks and styles</li>
+        </ul>
+        <p><strong>Note:</strong> <code>window.hlx.codeBasePath</code> is set automatically by the AEM Boilerplate code, so you do not need to explicitly define it in your <code>scripts.js</code>.</p>
+        <h2 id="other-things-to-look-for">Other things to look for</h2>
+        <p>Depending on your stage of development, you might have to identify additional instances where paths are referenced.</p>
+        <ul>
+          <li>Look for <code>fetchPlaceholders()</code> calls. Pass your folder name as an argument
+            <ul>
+              <li>e.g. <code>fetchPlaceholders('/your-folder-name')</code></li>
+            </ul>
+          </li>
+          <li>Look for <code>loadCSS()</code> or <code>loadBlock()</code> calls
+            <ul>
+              <li>In some cases the <code>window.hlx.codeBasePath</code> may not have been used</li>
+            </ul>
+          </li>
+          <li>Look for HTML snippets that are included in blocks
+            <ul>
+              <li>You can incorporate HTML snippets into your custom code. If the snippet contains relative paths, it may be necessary to update them</li>
+            </ul>
+          </li>
+          <li>Look for any custom Git workflows
+            <ul>
+              <li>In a workflow, file relocations may occur, necessitating the correction of paths as needed</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

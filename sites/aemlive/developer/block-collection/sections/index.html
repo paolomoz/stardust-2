@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.855Z
+  page:             developer-block-collection-sections
+  pageUrl:          https://www.aem.live/developer/block-collection/sections
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Sections</title>
+  <meta name="description" content="Sections are the top level grouping mechanism in documents, think of them as containers for a set of default content and blocks. Learn more about ...">
+  <meta property="og:title" content="Sections">
+  <meta property="og:description" content="Sections are the top level grouping mechanism in documents, think of them as containers for a set of default content and blocks. Learn more about ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/block-collection/sections/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../../docs/index.html">Documentation</a></li>
+        <li><a href="../../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../../blog/index.html">Blog</a></li>
+        <li><a href="../../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#notes">Notes:</a></li>
+<li class="l-2"><a href="#example">Example:</a></li>
+<li class="l-2"><a href="#content-structure">Content Structure:</a></li>
+<li class="l-2"><a href="#code">Code:</a></li>
+<li class="l-3"><a href="#code-1">Code</a></li>
+<li class="l-3"><a href="#icons">Icons</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Sections</h1>
+          <p class="lede">Sections are the top level grouping mechanism in documents, think of them as containers for a set of default content and blocks. Learn more about ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_16a9c2a39a53dd97ee82fd8b152f751405f19923c.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_16a9c2a39a53dd97ee82fd8b152f751405f19923c.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_16a9c2a39a53dd97ee82fd8b152f751405f19923c.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_16a9c2a39a53dd97ee82fd8b152f751405f19923c.png?width=750&amp;format=png&amp;optimize=medium" width="1463" height="1097">
+          </picture>
+        </p>
+        
+        <h2 id="notes">Notes:</h2>
+        <p>Sections are the top level grouping mechanism in documents, think of them as containers for a set of default content and blocks. Learn more about the Document Structure <a href="https://www.hlx.live/developer/markup-sections-blocks">here</a>.</p>
+        <p>Sections are separated by “Horizontal Rules” or --- to group certain elements of a page together. There may be both semantic and design reasons to group content together, a simple case could be that a section of a page has a different background color.</p>
+        <p>Technically a section just introduces a <code>&lt;div&gt;</code> wrapper in the markup delivered around all the blocks and default content contained in the section.</p>
+        <h2 id="example">Example:</h2>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1887836d328598bc4cf2db9630f427b0a5957856f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1887836d328598bc4cf2db9630f427b0a5957856f.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1887836d328598bc4cf2db9630f427b0a5957856f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1887836d328598bc4cf2db9630f427b0a5957856f.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1318">
+          </picture>
+        </p>
+        <p><a href="../../../block-collection/sections/index.html" data-broken-link="true">See Live output</a></p>
+        <h2 id="content-structure">Content Structure:</h2>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_158fb207d8801ce85abc50b04d62c11f1349ea0a9.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_158fb207d8801ce85abc50b04d62c11f1349ea0a9.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_158fb207d8801ce85abc50b04d62c11f1349ea0a9.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_158fb207d8801ce85abc50b04d62c11f1349ea0a9.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1318">
+          </picture>
+        </p>
+        <p><a href="https://docs.google.com/document/d/15ZW6PTraZ41Oxb27kIcEig9JIm0oETXGX9_ojQmSW-Y/edit">See Content in Document</a></p>
+        <h2 id="code">Code:</h2>
+        <p>In most cases generic sections don’t have much styling code beyond project specific box layout (eg. <code>margins</code>, <code>padding</code>, <code>max-width</code>) and are sometimes augmented with section metadata to control styling (often background colors or images).</p>
+        <p><a href="https://github.com/adobe/helix-project-boilerplate/blob/27e8571592220da8ded7c8a7e5064d982f7cfe76/styles/styles.css#L165-L167">See Section Styling Code</a></p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="code-1"><a href="../code/index.html">Code</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="icons"><a href="../icons/index.html">Icons</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../../docs/index.html">Documentation</a></li>
+          <li><a href="../../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../../blog/index.html">Blog</a></li>
+          <li><a href="../../../community/index.html">Community</a></li>
+          <li><a href="../../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

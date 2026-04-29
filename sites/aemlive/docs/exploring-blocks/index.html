@@ -1,0 +1,244 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.073Z
+  page:             docs-exploring-blocks
+  pageUrl:          https://www.aem.live/docs/exploring-blocks
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Exploring blocks</title>
+  <meta name="description" content="Blocks are a foundational concept behind adding form and function to sections of a page. If you followed along with the tutorial, you will know ...">
+  <meta property="og:title" content="Exploring blocks">
+  <meta property="og:description" content="Blocks are a foundational concept behind adding form and function to sections of a page. If you followed along with the tutorial, you will know ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/exploring-blocks/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#introduction">Introduction</a></li>
+<li class="l-2"><a href="#example-blocks-ideas">Example blocks ideas</a></li>
+<li class="l-2"><a href="#how-they-work">How they work</a></li>
+<li class="l-2"><a href="#decorating-blocks">Decorating blocks</a></li>
+<li class="l-2"><a href="#conclusion">Conclusion</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Exploring blocks</h1>
+          <p class="lede">Blocks are a foundational concept behind adding form and function to sections of a page. If you followed along with the tutorial, you will know ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_17531c5817dba9e27ed6963d25d92986d72d70014.jpeg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_17531c5817dba9e27ed6963d25d92986d72d70014.jpeg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="./media_17531c5817dba9e27ed6963d25d92986d72d70014.jpeg?width=2000&amp;format=jpeg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_17531c5817dba9e27ed6963d25d92986d72d70014.jpeg?width=750&amp;format=jpeg&amp;optimize=medium" width="1103" height="828">
+          </picture>
+        </p>
+        
+        <h2 id="introduction">Introduction</h2>
+        <p>Blocks are a foundational concept behind adding form and function to sections of a page. If you followed along with the tutorial, you will know that you can create simple content structures with just text and images. When you want to group pieces of content, add a bit more structure, or add more complex functionality, blocks can help you achieve these goals.</p>
+        <h2 id="example-blocks-ideas">Example blocks ideas</h2>
+        <p>A block can really be anything you choose, but here are a few possible use cases:</p>
+        <ol>
+          <li>Hero</li>
+          <li>Navigation</li>
+          <li>Accordion</li>
+          <li>Carousel</li>
+          <li>Tab List</li>
+        </ol>
+        <h2 id="how-they-work">How they work</h2>
+        <p>Blocks are built using tables in Google Docs or Microsoft Word. These tables are converted to Markdown and rendered as simple divs when requesting HTML.</p>
+        <p><strong>To create a block, you only need a table with at least one row &amp; one column:</strong></p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1116e27b4e6c51721c8b7209f4114390cc154153c.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1116e27b4e6c51721c8b7209f4114390cc154153c.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1116e27b4e6c51721c8b7209f4114390cc154153c.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1116e27b4e6c51721c8b7209f4114390cc154153c.png?width=750&amp;format=png&amp;optimize=medium" width="671" height="94">
+          </picture>
+        </p>
+        <p><strong>This will output in HTML as:</strong></p>
+        <p><a href="https://gist.github.com/auniverseaway/11fd8e0d00038872e77c5f2e4ee9b1f1">https://gist.github.com/auniverseaway/11fd8e0d00038872e77c5f2e4ee9b1f1</a></p>
+        <p><strong>In order to give some context to our block, we will add a name to the first row + column:</strong></p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_111faaadb8b329cfe810ea88a413d6b252ec418b1.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_111faaadb8b329cfe810ea88a413d6b252ec418b1.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_111faaadb8b329cfe810ea88a413d6b252ec418b1.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_111faaadb8b329cfe810ea88a413d6b252ec418b1.png?width=750&amp;format=png&amp;optimize=medium" width="672" height="97">
+          </picture>
+        </p>
+        <p><strong>This will output in HTML as:</strong></p>
+        <p><a href="https://gist.github.com/auniverseaway/280d80aef8c1a5a2937874933d84f9d5">https://gist.github.com/auniverseaway/280d80aef8c1a5a2937874933d84f9d5</a></p>
+        <p>We now have a CSS class that we can use to either style our block or attach functionality with Javascript. Of course, an empty div with a class is not tremendously useful.</p>
+        <p><strong>Let’s add a bit of content using additional rows and columns:</strong></p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1727410584f9fb17eaf0e087a64778dda4dde3cc0.jpeg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1727410584f9fb17eaf0e087a64778dda4dde3cc0.jpeg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="./media_1727410584f9fb17eaf0e087a64778dda4dde3cc0.jpeg?width=2000&amp;format=jpeg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1727410584f9fb17eaf0e087a64778dda4dde3cc0.jpeg?width=750&amp;format=jpeg&amp;optimize=medium" width="652" height="1146">
+          </picture>
+        </p>
+        <p>Each accordion item will have a header with an image and text sitting below. I could have made this content a little simpler by joining the image and text columns, but I want to highlight a few important areas with how the HTML is rendered from this table. Let’s look at the markup:</p>
+        <p><a href="https://gist.github.com/auniverseaway/21b2db5b928b6014e9a5a485780038c4">https://gist.github.com/auniverseaway/21b2db5b928b6014e9a5a485780038c4</a></p>
+        <p>As we saw before, we have a div with a class representing the entire table. There are a few other notable additions:</p>
+        <ul>
+          <li>Every row after the first is represented by a div (Line 2).</li>
+          <li>Every column is also represented by a div (Line 7).</li>
+          <li>If you have multiple columns, but have merged cells, you will get an empty div (Line 4).</li>
+        </ul>
+        <p>Once you have created this structure in your document, you will want to decorate and style it.</p>
+        <h2 id="decorating-blocks">Decorating blocks</h2>
+        <p>The concept of decorating blocks is to perform several optional tasks:</p>
+        <ol>
+          <li>Add additional classes or IDs to your markup.</li>
+          <li>Add any semantic elements you may want.</li>
+          <li>Add any aria or accessibility attributes you need.</li>
+          <li>Manipulate the DOM in a way to match your desired output.</li>
+        </ol>
+        <p><strong>For our use case, we’ll decorate the block to add a few classes to help with styling and add an event handler for interactivity:</strong><br>(Copy the following code to <code>blocks/accordion/accordion.js</code>)</p>
+        <p><a href="https://gist.github.com/auniverseaway/8e9d73d7df4e26abef151a9be390ccb6">https://gist.github.com/auniverseaway/8e9d73d7df4e26abef151a9be390ccb6</a></p>
+        <p><strong>Let’s also add some CSS:</strong><br>(Copy the following code to <code>blocks/accordion/accordion.css</code>)</p>
+        <p><a href="https://gist.github.com/auniverseaway/a95567f5ff633b7803710d46c002f9ff">https://gist.github.com/auniverseaway/a95567f5ff633b7803710d46c002f9ff</a></p>
+        <p><strong>The end result should look something a bit like this:</strong></p>
+        <div class="accordion">
+          <div>
+            <div>Guatemala Huehuetenango Finca Rosma</div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_13e8a4dea06f4903c024e77f43593594b7872135e.jpeg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_13e8a4dea06f4903c024e77f43593594b7872135e.jpeg?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/jpeg" srcset="./media_13e8a4dea06f4903c024e77f43593594b7872135e.jpeg?width=2000&amp;format=jpeg&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_13e8a4dea06f4903c024e77f43593594b7872135e.jpeg?width=750&amp;format=jpeg&amp;optimize=medium" width="320" height="320">
+              </picture>
+            </div>
+            <div>A flavor compound of dark sugars, oatmeal-raisin cookies, a faint blackberry accent note and acidic impression.</div>
+          </div>
+          <div>
+            <div>Ethiopia Dry Process Dari Kidame</div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1ba3ec527ac9da48bf5aa6c3e63642292b1ae0b99.jpeg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1ba3ec527ac9da48bf5aa6c3e63642292b1ae0b99.jpeg?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/jpeg" srcset="./media_1ba3ec527ac9da48bf5aa6c3e63642292b1ae0b99.jpeg?width=2000&amp;format=jpeg&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1ba3ec527ac9da48bf5aa6c3e63642292b1ae0b99.jpeg?width=750&amp;format=jpeg&amp;optimize=medium" width="320" height="320">
+              </picture>
+            </div>
+            <div>Fruits are well-integrated into the coffee's sweetness, and acidity is bright for a dry process. Date sugar, orange marmalade, mango, and aromatic cedar. Intense chocolate and a blueberry hint in this dark roast.</div>
+          </div>
+          <div>
+            <div>Colombia Buesaco Alianza Granjeros</div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_118913321ba6d7bd29ccd23948bbd965d858fa030.jpeg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_118913321ba6d7bd29ccd23948bbd965d858fa030.jpeg?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/jpeg" srcset="./media_118913321ba6d7bd29ccd23948bbd965d858fa030.jpeg?width=2000&amp;format=jpeg&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_118913321ba6d7bd29ccd23948bbd965d858fa030.jpeg?width=750&amp;format=jpeg&amp;optimize=medium" width="320" height="320">
+              </picture>
+            </div>
+            <div>Raw demurara sugar sweetness, aromatic butterscotch, hints of apple, golden raisin, orange peel, and elegant citrus acidic impression. Full City adds in a ribbon of cacao/chocolate bar, rich bittersweetness. Good for espresso.</div>
+          </div>
+        </div>
+        <h2 id="conclusion">Conclusion</h2>
+        <p>And that’s it! You’ve taken a simple table in Docs or Word and made it a much more rich experience for your visitors.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

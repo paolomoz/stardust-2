@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.100Z
+  page:             docs-setup-byo-cdn-push-invalidation
+  pageUrl:          https://www.aem.live/docs/setup-byo-cdn-push-invalidation
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Configuring push invalidation for BYO production CDN</title>
+  <meta name="description" content="Push invalidation automatically purges content on the customer's production CDN (e.g. www.yourdomain.com), whenever an author publishes content changes or a developer pushes code changes to ...">
+  <meta property="og:title" content="Configuring push invalidation for BYO production CDN">
+  <meta property="og:description" content="Push invalidation automatically purges content on the customer's production CDN (e.g. www.yourdomain.com), whenever an author publishes content changes or a developer pushes code changes to ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/setup-byo-cdn-push-invalidation/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#configuration">Configuration</a></li>
+<li class="l-2"><a href="#opt-in-request-header">Opt-In Request Header</a></li>
+<li class="l-3"><a href="#placeholders">Placeholders</a></li>
+<li class="l-3"><a href="#sitemap">Sitemap</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Configuring push invalidation for BYO production CDN</h1>
+          <p class="lede">Push invalidation automatically purges content on the customer's production CDN (e.g. www.yourdomain.com), whenever an author publishes content changes or a developer pushes code changes to ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_16a9c2a39a53dd97ee82fd8b152f751405f19923c.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_16a9c2a39a53dd97ee82fd8b152f751405f19923c.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_16a9c2a39a53dd97ee82fd8b152f751405f19923c.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_16a9c2a39a53dd97ee82fd8b152f751405f19923c.png?width=750&amp;format=png&amp;optimize=medium" width="1463" height="1097">
+          </picture>
+        </p>
+        
+        <p>Push invalidation automatically purges content on the customer's production CDN (e.g. <code>www.yourdomain.com</code>), whenever an author publishes content changes or a developer pushes code changes to the <code>main</code> branch (changes on other branches do <strong>not</strong> trigger push invalidation).</p>
+        <p>Content is purged by url and by cache tag/key.</p>
+        <p>Setting up push invalidation requires 2 steps:</p>
+        <ul>
+          <li><a href="#configuration">Configuration</a></li>
+          <li><a href="#opt-in-request-header">Opt-In Request Header</a></li>
+        </ul>
+        <h2 id="configuration">Configuration</h2>
+        <p>Push invalidation is currently supported for CDNs of the following vendors:</p>
+        <ul>
+          <li><a href="#setup-push-invalidation-for-fastly">Fastly</a></li>
+          <li><a href="#setup-push-invalidation-for-akamai">Akamai</a></li>
+          <li><a href="#setup-push-invalidation-for-cloudflare">Cloudflare</a></li>
+          <li><a href="#set-up-push-invalidation-for-aws-cloudfront">CloudFront</a></li>
+          <li><a href="#setup-push-invalidation-for-adobe-managed-cdn">Adobe Managed</a></li>
+        </ul>
+        <p>Push invalidation is enabled by adding specific properties to the project's configuration (an Excel workbook named <code>.helix/config.xlsx</code> in Sharepoint or a Google Sheet named <code>.helix/config</code> in Google Drive).</p>
+        <p>The following sections describe the vendor specific properties required to set up push invalidation.</p>
+        <div class="fragment">
+          <div>
+            <div><a href="../setup-byo-cdn-push-invalidation-for-fastly/index.html">https://main--helix-website--adobe.aem.page/docs/setup-byo-cdn-push-invalidation-for-fastly</a></div>
+          </div>
+        </div>
+        <div class="fragment">
+          <div>
+            <div><a href="../setup-byo-cdn-push-invalidation-for-akamai/index.html">https://main--helix-website--adobe.aem.page/docs/setup-byo-cdn-push-invalidation-for-akamai</a></div>
+          </div>
+        </div>
+        <div class="fragment">
+          <div>
+            <div><a href="../setup-byo-cdn-push-invalidation-for-cloudflare/index.html">https://main--helix-website--adobe.aem.page/docs/setup-byo-cdn-push-invalidation-for-cloudflare</a></div>
+          </div>
+        </div>
+        <div class="fragment">
+          <div>
+            <div><a href="../setup-byo-cdn-push-invalidation-for-cloudfront/index.html">https://main--helix-website--adobe.aem.page/docs/setup-byo-cdn-push-invalidation-for-cloudfront</a></div>
+          </div>
+        </div>
+        <div class="fragment">
+          <div>
+            <div><a href="../setup-byo-cdn-push-invalidation-for-managed/index.html">https://main--helix-website--adobe.aem.page/docs/setup-byo-cdn-push-invalidation-for-managed</a></div>
+          </div>
+        </div>
+        <h2 id="opt-in-request-header">Opt-In Request Header</h2>
+        <p>The production CDN needs to send the following opt-in header to the origin in order to enable long cache TTLs:</p>
+        <p><code>X-Push-Invalidation: enabled</code></p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="placeholders"><a href="../placeholders/index.html">Placeholders</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="sitemap"><a href="../../developer/sitemap/index.html">Sitemap</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

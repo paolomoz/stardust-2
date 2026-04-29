@@ -1,0 +1,330 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.078Z
+  page:             docs-limits
+  pageUrl:          https://www.aem.live/docs/limits
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Limits</title>
+  <meta name="description" content="Size and Rate Limits">
+  <meta property="og:title" content="Limits">
+  <meta property="og:description" content="Size and Rate Limits">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/limits/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#delivery-limits">Delivery Limits</a></li>
+<li class="l-3"><a href="#document-naming-restrictions">Document Naming Restrictions</a></li>
+<li class="l-3"><a href="#supported-file-types">Supported File Types</a></li>
+<li class="l-3"><a href="#response-payloads">Response Payloads</a></li>
+<li class="l-3"><a href="#rate-limits-number-of-requests-from-single-ip-address-per-time">Rate Limits (number of requests from single IP address per time)</a></li>
+<li class="l-2"><a href="#content-source-limits">Content Source Limits</a></li>
+<li class="l-3"><a href="#file-size-limits">File Size Limits</a></li>
+<li class="l-3"><a href="#indexing-limits">Indexing Limits</a></li>
+<li class="l-3"><a href="#sitemap-limits">Sitemap Limits</a></li>
+<li class="l-3"><a href="#redirect-limits">Redirect Limits</a></li>
+<li class="l-3"><a href="#number-of-pages-per-site">Number of pages per site</a></li>
+<li class="l-3"><a href="#rate-limits-number-of-preview-operations-per-time">Rate Limits (number of preview operations per time)</a></li>
+<li class="l-2"><a href="#aem-code-syncgithub-limits">AEM Code Sync/GitHub Limits</a></li>
+<li class="l-3"><a href="#github-naming-restrictions">GitHub Naming Restrictions</a></li>
+<li class="l-3"><a href="#rate-limits-number-of-deploy-operations-per-time">Rate Limits (number of deploy operations per time)</a></li>
+<li class="l-2"><a href="#byom-content-source-limits">BYOM Content Source Limits</a></li>
+<li class="l-2"><a href="#admin-api-limits">Admin API Limits</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Limits</h1>
+          <p class="lede">Size and Rate Limits</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_12128144bfee4f64ba2f701646dc5edc48f309a9a.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_12128144bfee4f64ba2f701646dc5edc48f309a9a.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_12128144bfee4f64ba2f701646dc5edc48f309a9a.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_12128144bfee4f64ba2f701646dc5edc48f309a9a.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>To ensure functioning within normal parameters and system stability for all customers, we enforce limits across many dimensions. The limits are designed to prevent accidental misuse and are subject to change and often can individually be raised on a per customer basis.</p>
+        <p>If you find yourself in a situation where you think that the limits are prohibitive for your use case, contact us and let us know.</p>
+        <h2 id="delivery-limits">Delivery Limits</h2>
+        <h3 id="document-naming-restrictions">Document Naming Restrictions</h3>
+        <p>The URLs generated for document names will only take into account the following characters:</p>
+        <ul>
+          <li>alphabetical, lowercase characters (<code>a-z</code>)</li>
+          <li>numbers (<code>0-9</code>)</li>
+          <li>simple dash (<code>-</code>)</li>
+        </ul>
+        <p>All other characters are replaced with a single dash, and the final document name will have leading and trailing dashes removed.</p>
+        <p>The full file path for a document should not exceed 900 characters.</p>
+        <h3 id="supported-file-types">Supported File Types</h3>
+        <p>The following file types can be delivered from the Content Bus and Media Bus:</p>
+        <p><code>HTML</code> (extension-less only), <code>JSON</code>, <code>MP4</code>, <code>PDF</code>, <code>SVG</code>, <code>JPG</code>, <code>PNG</code>, <code>AVIF</code> and <code>WEBP</code></p>
+        <p>Other file types are deliverable via Code Bus, or may need to be delivered through 3rd party systems.</p>
+        <h3 id="response-payloads">Response Payloads</h3>
+        <p>The total response payload may not exceed 6MB (compressed). This is especially relevant for large JSON resources like metadata sheets, or query indices which can grow automatically with published content. Ensure using the <code>limit</code> and/or <code>offset</code> query parameters when requesting potentially large JSON resources. See <a href="../../developer/spreadsheets/index.html">Spreadsheets and JSON</a> for more information.</p>
+        <h3 id="rate-limits-number-of-requests-from-single-ip-address-per-time">Rate Limits (number of requests from single IP address per time)</h3>
+        <p>In order to protect against abuse and to ensure system stability and fair resource usage the number of requests made from a single IP address to a specific <code>aem.live</code> or <code>aem.page</code> host name is limited to 200 requests per second. Requests exceeding this limit will receive a <code>429</code> status code response.</p>
+        <h2 id="content-source-limits">Content Source Limits</h2>
+        <p>The following limits below are applied on <code>preview</code> operations for content that is ingested from Sharepoint or Google Drive. If exceeded most of them produce an error in sidekick for authors.</p>
+        <h3 id="file-size-limits">File Size Limits</h3>
+        <p>Support for uploads of files from the content sources is provided for the following file types with the following limits.</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>File type</td>
+                    <td>Limit</td>
+                  </tr>
+                  <tr>
+                    <td>Document (<code>.docx</code> / <code>gdoc</code>)</td>
+                    <td>100 MB</td>
+                  </tr>
+                  <tr>
+                    <td>Spreadsheets</td>
+                    <td>100k rows, 500k cells.<br>Character limit per cell: 32K (Microsoft Excel) or 50K (Google Sheets)</td>
+                  </tr>
+                  <tr>
+                    <td>Videos (<code>.mp4</code>)</td>
+                    <td>36 MB (e.g. 2 minutes at 300KB/s)</td>
+                  </tr>
+                  <tr>
+                    <td>PDF</td>
+                    <td>20 MB</td>
+                  </tr>
+                  <tr>
+                    <td>SVG</td>
+                    <td>40 KB</td>
+                  </tr>
+                  <tr>
+                    <td>Images (<code>.png</code>, <code>.jpg</code>, <code>.avif</code>)</td>
+                    <td>20 MB</td>
+                  </tr>
+                  <tr>
+                    <td>Fav Icons (<code>.ico</code>)</td>
+                    <td>16 KB</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p>Other file types may be uploaded through code (eg. through GitHub) or depending on the use case created on the client-side (eg. <code>.ics</code>, etc.).</p>
+        <h3 id="indexing-limits">Indexing Limits</h3>
+        <p>An individual index cannot grow beyond 50k pages indexed.</p>
+        <h3 id="sitemap-limits">Sitemap Limits</h3>
+        <p>An individual sitemap file cannot grow beyond 50k pages or 50MB</p>
+        <h3 id="redirect-limits">Redirect Limits</h3>
+        <p>The number of redirects per site cannot exceed 100k.</p>
+        <h3 id="number-of-pages-per-site">Number of pages per site</h3>
+        <p>An individual site should not grow beyond 1 million pages. It is <a href="../davidsmodel/index.html#rule-8-access-controls-and-content-grouping">advisable</a> to split up a large site into smaller ones matching business units or markets. A <a href="../repoless/index.html">repoless setup</a> allows you to reuse the same code base for multiple sites.</p>
+        <h3 id="rate-limits-number-of-preview-operations-per-time">Rate Limits (number of preview operations per time)</h3>
+        <p>Rate limits are inferred from the underlying content source (eg. Sharepoint and Google Drive). Throttled requests will receive a response with a <code>503</code> status code and an <code>x-error</code> HTTP header containing <code>(429)</code> followed by the message from the backend.</p>
+        <p>Note, that because of a limit inferred from Cloudflare’s R2 storage, the number of preview operations on the <em>same</em> resource are limited to 1 per second.</p>
+        <h2 id="aem-code-syncgithub-limits">AEM Code Sync/GitHub Limits</h2>
+        <p>To keep the project size manageable we limit the number and size of files that we synchronize from your GitHub repository, as well as the number of active branches/refs. If you have more files in your repo use <code>.hlxignore</code> to avoid syncing them.</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Dimension</td>
+                    <td>Limit</td>
+                  </tr>
+                  <tr>
+                    <td>Number of files per ref</td>
+                    <td>500</td>
+                  </tr>
+                  <tr>
+                    <td>Number of active refs</td>
+                    <td>100</td>
+                  </tr>
+                  <tr>
+                    <td>Total size of ref</td>
+                    <td>10 MB</td>
+                  </tr>
+                  <tr>
+                    <td><code>ref--repo--owner</code></td>
+                    <td><a href="https://en.wikipedia.org/wiki/Fully_qualified_domain_name">63 characters</a></td>
+                  </tr>
+                  <tr>
+                    <td>Default branch</td>
+                    <td><code>main</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h3 id="github-naming-restrictions">GitHub Naming Restrictions</h3>
+        <p>GitHub names including owner, repository and ref may only contain the following characters:</p>
+        <ul>
+          <li>alphabetical (<code>a-z</code>)</li>
+          <li>numerical (<code>0-9</code>)</li>
+          <li>simple dash (<code>-</code>)</li>
+        </ul>
+        <h3 id="rate-limits-number-of-deploy-operations-per-time">Rate Limits (number of deploy operations per time)</h3>
+        <p>Rate limits are inferred from GitHub.</p>
+        <h2 id="byom-content-source-limits">BYOM Content Source Limits</h2>
+        <p>The following limits below are applied on <code>preview</code> operations for content that is ingested via a bring your own content source. If exceeded most of them produce an error in sidekick for authors.</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Type</td>
+                    <td>Limit</td>
+                  </tr>
+                  <tr>
+                    <td>Source size (<code>.html</code>)</td>
+                    <td>1 MB</td>
+                  </tr>
+                  <tr>
+                    <td>Response Time</td>
+                    <td>10 seconds*</td>
+                  </tr>
+                  <tr>
+                    <td>Number of unique images</td>
+                    <td>200</td>
+                  </tr>
+                  <tr>
+                    <td>Image fetch response time</td>
+                    <td>5 seconds*</td>
+                  </tr>
+                  <tr>
+                    <td>Size of images</td>
+                    <td>20mb</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p><strong>*</strong> Please note that the overall response time for fetching the html and the images must not exceed 25 seconds.</p>
+        <p>The admin service observes the following per-site limits when sending requests to the content source:</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Type</td>
+                    <td>Limit</td>
+                  </tr>
+                  <tr>
+                    <td>Maximum concurrency</td>
+                    <td>100</td>
+                  </tr>
+                  <tr>
+                    <td>Maximum requests per minute</td>
+                    <td>600</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h2 id="admin-api-limits">Admin API Limits</h2>
+        <p>The admin API is rate limited to <strong>10 requests per second, per project</strong> for all operations. Throttled requests will receive a response with a <code>429</code> status code.</p>
+        <p>Use the respective bulk APIs for operating on large amounts of resources.</p>
+        <p>Note that using async jobs via the bulk API is limited to 500 pending jobs per topic.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

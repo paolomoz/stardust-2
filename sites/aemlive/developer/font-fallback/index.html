@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.852Z
+  page:             developer-font-fallback
+  pageUrl:          https://www.aem.live/developer/font-fallback
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Font Fallback and CLS</title>
+  <meta name="description" content="Learn how to create a font fallback">
+  <meta property="og:title" content="Font Fallback and CLS">
+  <meta property="og:description" content="Learn how to create a font fallback">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/font-fallback/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#the-font-fallback-extension">The font-fallback extension</a></li>
+<li class="l-2"><a href="#edge-cases">Edge cases</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Font Fallback and CLS</h1>
+          <p class="lede">Learn how to create a font fallback</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1efffe0288d261803d829a5fbc7f0d34748e6dacc.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1efffe0288d261803d829a5fbc7f0d34748e6dacc.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1efffe0288d261803d829a5fbc7f0d34748e6dacc.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1efffe0288d261803d829a5fbc7f0d34748e6dacc.png?width=750&amp;format=png&amp;optimize=medium" width="1463" height="1097">
+          </picture>
+        </p>
+        
+        <p>…in the context of Core Web Vitals</p>
+        <p>Loading a custom font (a font which is not known by default by all browsers) can easily introduce some delays in the loading sequence and a <a href="https://web.dev/cls/">CLS</a> (Cumulative Layout Shift) problem. This is true for the first page load on your site, until the font is cached by the browser.</p>
+        <p>You can try to preload and/or push the custom font, but there will always be a time where the browser will render the body with a default font. This is especially true on slow devices or on a slow connection. You can hide the full body until the font is loaded, but then the <a href="https://web.dev/fcp/">FCP</a> (First Contentful Paint) and <a href="https://web.dev/lcp/">LCP</a> (Largest Contentful Paint) scores will be highly penalized.</p>
+        <p>You can also use CSS tricks like <code>font-display: optional</code>, but the font might not be loaded at all on a slow connection: the browser has the instruction to ignore it after a certain (short) delay.</p>
+        <p>This last solution does not prevent the CLS score to be impacted: when swapping the font, the size of the content might change, and layout might “shift”.</p>
+        <p>There is another mechanism that can be used to prevent those 2 issues (font loading delay and CLS): use a font fallback.</p>
+        <p>The idea of the font fallback is to scale a browser default font so that when applied to the content of a page, the content takes up the same "space" with the font fallback and with the custom font. Like this, you can swap one with the other without a layout shift. If you use a default font that looks “similar” enough to the custom font, those few milliseconds of first-time page load will look really close to the experience you want to provide with the custom font. You can then defer the custom font loading or at least make it non-blocking in the loading sequence.</p>
+        <h2 id="the-font-fallback-extension">The font-fallback extension</h2>
+        <p>We have built a <a href="https://chrome.google.com/webstore/detail/helix-font-fallback/deceeoanicnkoieibbfellglginplfbm">chrome extension</a> to help compute the font fallback.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1eed5080c1fcf089c11c2151415addc236e5f277f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1eed5080c1fcf089c11c2151415addc236e5f277f.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1eed5080c1fcf089c11c2151415addc236e5f277f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1eed5080c1fcf089c11c2151415addc236e5f277f.png?width=750&amp;format=png&amp;optimize=medium" width="788" height="838">
+          </picture>
+        </p>
+        <p>When you open the extension on a page, it analyzes the font faces in use on that page: a font face is a combination of font family and font weight. Now for each of those font faces, you can select a default browser font and run the font fallback computation. For each font face, the extension computes which <code>size-adjustment</code> of the default browser font is required so that the content has the same width with both fonts.<br>The computation happens only on the width because the height should be controlled by the <code>line-height</code>: you should set a <code>line-height</code> on your site to not let the font decide what the height of the text is. This is true for paragraphs, headings, lists…<br><br>Note: with font kits, there is a tendency to load many font faces that are never used (or used somewhere else on the site than on the current page). The extension shows also how many are loaded in total. It is also a good indicator if some optimization can be done: optimize the font kit by reducing the font faces it delivers, you can save a lot of bytes to transfer!</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_14d0f30592bf3309f8b4e8ffd469bdea246c20a87.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_14d0f30592bf3309f8b4e8ffd469bdea246c20a87.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_14d0f30592bf3309f8b4e8ffd469bdea246c20a87.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_14d0f30592bf3309f8b4e8ffd469bdea246c20a87.png?width=750&amp;format=png&amp;optimize=medium" width="778" height="611">
+          </picture><br><br>Once the computation work is done, you can copy the computed CSS and paste it in your main CSS.
+        </p>
+        <p>The generated font families must be added after the custom font in your CSS <code>font-family</code>: the browser will initially not find the custom font, use the fallback until, later, the custom font is loaded. Since they use the same space, the swap does not generate CLS!</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_16b54f35f2b37ad5303cce0ca694b264bdd69b0b4.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_16b54f35f2b37ad5303cce0ca694b264bdd69b0b4.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_16b54f35f2b37ad5303cce0ca694b264bdd69b0b4.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_16b54f35f2b37ad5303cce0ca694b264bdd69b0b4.png?width=750&amp;format=png&amp;optimize=medium" width="839" height="32">
+          </picture>
+        </p>
+        <p>To fine tune the font adjust value, you can also use the simulation panel.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1b05d411d3f512b8fbb75c74df1466a41ad54a4ab.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1b05d411d3f512b8fbb75c74df1466a41ad54a4ab.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1b05d411d3f512b8fbb75c74df1466a41ad54a4ab.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1b05d411d3f512b8fbb75c74df1466a41ad54a4ab.png?width=750&amp;format=png&amp;optimize=medium" width="986" height="707">
+          </picture>
+        </p>
+        <p>Checking the box replaces the custom font by the computed fallback font directly in the page. The text input allows you to change the <code>size-adjust</code> value and immediately visualize the result (you need to toggle the checkbox each time you change the value).</p>
+        <h2 id="edge-cases">Edge cases</h2>
+        <p>The extension makes a calculation based on an existing site, with existing content and CSS rules. In a different context, the <code>size-adjust</code> may not fit perfectly and the font swap may still produce CLS:</p>
+        <ul>
+          <li>Content dependency: the text <code>iiiii</code> has a smaller width than <code>mmmmm</code> for the same number of characters. The number of <code>m</code> in the text has a bigger influence on the width. But you can find a <code>size-adjust</code> that matches the average text by running the extension on multiple pages and taking an average of the <code>size-adjust</code>.</li>
+          <li>Small container: if your text is in a small container (especially true on mobile) with a restricted width and height, the space allowed to the text is then limited and the computation of the fallback might need to be more precise, i.e. made on this exact text.</li>
+        </ul>
+        <p>You will find more technical details and other tools directly In the extension repository: <a href="https://github.com/adobe/helix-font-fallback-extension">https://github.com/adobe/helix-font-fallback-extension</a></p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

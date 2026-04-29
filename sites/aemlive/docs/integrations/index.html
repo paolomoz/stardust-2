@@ -1,0 +1,328 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.256Z
+  page:             docs-integrations
+  pageUrl:          https://www.aem.live/docs/integrations
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Integrations Overview</title>
+  <meta name="description" content="Adobe Experience Manager integrates with all technologies required to create and operate a high-performing website. For some of the key integrations, we have provided detailed ...">
+  <meta property="og:title" content="Integrations Overview">
+  <meta property="og:description" content="Adobe Experience Manager integrates with all technologies required to create and operate a high-performing website. For some of the key integrations, we have provided detailed ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/integrations/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#cdn-integration-overview">CDN Integration Overview</a></li>
+<li class="l-3"><a href="#authoring-integration-overview">Authoring Integration Overview</a></li>
+<li class="l-3"><a href="#aem-forms-integration">AEM Forms Integration</a></li>
+<li class="l-3"><a href="#building-integrations-with-edge-delivery-services">Building integrations with Edge Delivery Services</a></li>
+<li class="l-3"><a href="#adobe-experience-cloud-integration">Adobe Experience Cloud Integration</a></li>
+<li class="l-3"><a href="#google-analytics--tag-manager-integration">Google Analytics &amp; Tag Manager Integration</a></li>
+<li class="l-3"><a href="#cloudflare-zero-trust-site-protection">Cloudflare Zero Trust Site Protection</a></li>
+<li class="l-3"><a href="#github-actions-integration">GitHub Actions Integration</a></li>
+<li class="l-3"><a href="#bring-your-own-git">Bring your Own Git</a></li>
+<li class="l-3"><a href="#bring-your-own-markup">Bring your Own Markup</a></li>
+<li class="l-3"><a href="#content-fragments-from-other-aem-instances">Content Fragments from other AEM instances</a></li>
+<li class="l-3"><a href="#ai-coding-agents">AI Coding Agents</a></li>
+<li class="l-2"><a href="#unsupported-integrations">Unsupported Integrations</a></li>
+<li class="l-3"><a href="#unsupported-integrations-1">Unsupported Integrations</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Integrations Overview</h1>
+          <p class="lede">Adobe Experience Manager integrates with all technologies required to create and operate a high-performing website. For some of the key integrations, we have provided detailed ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1176cde3920563861963472ad71a1f1a9c817a436.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1176cde3920563861963472ad71a1f1a9c817a436.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1176cde3920563861963472ad71a1f1a9c817a436.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1176cde3920563861963472ad71a1f1a9c817a436.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Adobe Experience Manager integrates with all technologies required to create and operate a high-performing website. For some of the key integrations, we have provided detailed guides.</p>
+        <div class="card-list image-card-listing">
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_141d72765656534440a69d2bf6e223feef96def5d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_141d72765656534440a69d2bf6e223feef96def5d.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_141d72765656534440a69d2bf6e223feef96def5d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_141d72765656534440a69d2bf6e223feef96def5d.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="cdn-integration-overview"><a href="../byo-cdn-setup/index.html">CDN Integration Overview</a></h3>
+              <p>A CDN is required to deliver content from AEM to your visitors under your domain. This overview links to guides for all supported CDNs.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1cf7bb3a1af050eff35416bc16502895c1f5a166e.jpg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1cf7bb3a1af050eff35416bc16502895c1f5a166e.jpg?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/jpeg" srcset="./media_1cf7bb3a1af050eff35416bc16502895c1f5a166e.jpg?width=2000&amp;format=jpg&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1cf7bb3a1af050eff35416bc16502895c1f5a166e.jpg?width=750&amp;format=jpg&amp;optimize=medium" width="1103" height="827">
+              </picture>
+            </div>
+            <div>
+              <h3 id="authoring-integration-overview"><a href="../authoring-guide/index.html">Authoring Integration Overview</a></h3>
+              <p>AEM has multiple options for authoring providers, including Microsoft Word, Google Docs, and multiple Adobe-provided options. This guide is a good starting point.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_11ab97601e91b12d6da7e6f92c0236759f761aad5.jpg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_11ab97601e91b12d6da7e6f92c0236759f761aad5.jpg?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/jpeg" srcset="./media_11ab97601e91b12d6da7e6f92c0236759f761aad5.jpg?width=2000&amp;format=jpg&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_11ab97601e91b12d6da7e6f92c0236759f761aad5.jpg?width=750&amp;format=jpg&amp;optimize=medium" width="1103" height="828">
+              </picture>
+            </div>
+            <div>
+              <h3 id="aem-forms-integration"><a href="../../developer/forms/index.html">AEM Forms Integration</a></h3>
+              <p>Adobe Experience Manager Sites integrates with AEM Forms. This guide helps you to get started.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1aff073120432e446fa1cae6b2b7ffffcd1baca87.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1aff073120432e446fa1cae6b2b7ffffcd1baca87.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1aff073120432e446fa1cae6b2b7ffffcd1baca87.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1aff073120432e446fa1cae6b2b7ffffcd1baca87.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="building-integrations-with-edge-delivery-services"><a href="../../developer/integrations/index.html" data-broken-link="true">Building integrations with Edge Delivery Services</a></h3>
+              <p>Learn how to build Integrations with AEM Edge Delivery Services</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="adobe-experience-cloud-integration"><a href="../../developer/martech-integration/index.html">Adobe Experience Cloud Integration</a></h3>
+              <p>Connect AEM with Adobe's marketing, analytics, and personalization tools to streamline workflows and deliver consistent customer experiences across channels.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="google-analytics--tag-manager-integration"><a href="../../developer/gtm-martech-integration/index.html">Google Analytics &amp; Tag Manager Integration</a></h3>
+              <p>Connect AEM with Google Analytics (GA) and Google Tag Manager (GTM) to track page view and custom events configured in your GTM containers.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1b40ff4d5ece5386ad83cb1998da2bc6b2715e3e1.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1b40ff4d5ece5386ad83cb1998da2bc6b2715e3e1.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1b40ff4d5ece5386ad83cb1998da2bc6b2715e3e1.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1b40ff4d5ece5386ad83cb1998da2bc6b2715e3e1.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="cloudflare-zero-trust-site-protection"><a href="../../developer/cloudflare-zero-trust/index.html">Cloudflare Zero Trust Site Protection</a></h3>
+              <p>Enhance security with Cloudflare Zero Trust authentication and authorization features that control access to your AEM site, protecting against unauthorized users and potential threats.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_11c9996a61d9eea9ba46dfd34cb02f0eeedc98110.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_11c9996a61d9eea9ba46dfd34cb02f0eeedc98110.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_11c9996a61d9eea9ba46dfd34cb02f0eeedc98110.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_11c9996a61d9eea9ba46dfd34cb02f0eeedc98110.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="github-actions-integration"><a href="../../developer/github-actions/index.html">GitHub Actions Integration</a></h3>
+              <p>GitHub Actions can be used to automate based on code and content changes.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_10dd64f8ce455a4d7d4248e17eca3ce3a5602a040.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_10dd64f8ce455a4d7d4248e17eca3ce3a5602a040.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_10dd64f8ce455a4d7d4248e17eca3ce3a5602a040.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_10dd64f8ce455a4d7d4248e17eca3ce3a5602a040.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="bring-your-own-git"><a href="../../developer/byo-git/index.html">Bring your Own Git</a></h3>
+              <p>In addition to supporting GitHub.com out of the box, other git providers can be integrated with AEM, too.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_163649ea05f49d30d779c990171c0a271f31bab3b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_163649ea05f49d30d779c990171c0a271f31bab3b.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_163649ea05f49d30d779c990171c0a271f31bab3b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_163649ea05f49d30d779c990171c0a271f31bab3b.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="bring-your-own-markup"><a href="../../developer/byom/index.html">Bring your Own Markup</a></h3>
+              <p>In addition to the natively supported content sources, more 3rd party content sources can easily be integrated using the BYOM interface.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1ddce71081c078ab6cb63a557795952f4350be777.jpg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1ddce71081c078ab6cb63a557795952f4350be777.jpg?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/jpeg" srcset="./media_1ddce71081c078ab6cb63a557795952f4350be777.jpg?width=2000&amp;format=jpg&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1ddce71081c078ab6cb63a557795952f4350be777.jpg?width=750&amp;format=jpg&amp;optimize=medium" width="750" height="562">
+              </picture>
+            </div>
+            <div>
+              <h3 id="content-fragments-from-other-aem-instances"><a href="../../developer/content-fragment-overlay/index.html">Content Fragments from other AEM instances</a></h3>
+              <p>Content Fragments from AEM instances without Edge Delivery Services can be integrated into Edge Delivery Services using this Early Access technology.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_187e02a1c2db3b2b6641c969122a4e588d41b5657.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_187e02a1c2db3b2b6641c969122a4e588d41b5657.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_187e02a1c2db3b2b6641c969122a4e588d41b5657.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_187e02a1c2db3b2b6641c969122a4e588d41b5657.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="ai-coding-agents"><a href="../../developer/ai-coding-agents/index.html">AI Coding Agents</a></h3>
+              <p>GitHub Copilot, OpenAI Codex, Google Gemini, Claude Code, Cursor, Zed, OpenCode, Kiro, Windsurf, Aider, Cline and other AI coding agents</p>
+            </div>
+          </div>
+        </div>
+        <h2 id="unsupported-integrations">Unsupported Integrations</h2>
+        <div class="card-list image-card-listing">
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1c28758b79582d19b79d7257cc9a5a8a0dedc9182.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1c28758b79582d19b79d7257cc9a5a8a0dedc9182.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1c28758b79582d19b79d7257cc9a5a8a0dedc9182.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1c28758b79582d19b79d7257cc9a5a8a0dedc9182.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="unsupported-integrations-1"><a href="../unsupported/index.html">Unsupported Integrations</a></h3>
+              <p>Some integrations have proven problematic in customer environments and are therefore unsupported or heavily discouraged.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.236Z
+  page:             developer-repoless-environments
+  pageUrl:          https://www.aem.live/developer/repoless-environments
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Repoless stage and prod environments with AEM authoring as your content source</title>
+  <meta name="description" content="You may wish to set up a site for your production environment separate from your staging environment. Setting up a second site for a separate ...">
+  <meta property="og:title" content="Repoless stage and prod environments with AEM authoring as your content source">
+  <meta property="og:description" content="You may wish to set up a site for your production environment separate from your staging environment. Setting up a second site for a separate ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/repoless-environments/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#requirements">Requirements</a></li>
+<li class="l-2"><a href="#configuration">Configuration</a></li>
+<li class="l-3"><a href="#create-new-edge-delivery-services-sites-for-your-production-environment">Create New Edge Delivery Services Sites for Your Production Environment</a></li>
+<li class="l-3"><a href="#update-cloud-configurations-in-aem-for-your-production-site">Update Cloud Configurations in AEM for Your Production Site</a></li>
+<li class="l-2"><a href="#verify-your-setup">Verify Your Setup</a></li>
+<li class="l-2"><a href="#usage">Usage</a></li>
+<li class="l-3"><a href="#reusing-content-across-sites-with-aem-authoring-as-your-content-source">Reusing content across sites with AEM authoring as your content source</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Repoless stage and prod environments with AEM authoring as your content source</h1>
+          <p class="lede">You may wish to set up a site for your production environment separate from your staging environment. Setting up a second site for a separate ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1c1b568b1ec7baf46317e69d8861339fb4f8c3879.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1c1b568b1ec7baf46317e69d8861339fb4f8c3879.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1c1b568b1ec7baf46317e69d8861339fb4f8c3879.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1c1b568b1ec7baf46317e69d8861339fb4f8c3879.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>You may wish to set up a site for your production environment separate from your staging environment. Setting up a second site for a separate staging and production <a href="../repoless-multisite-manager/index.html">setup is similar to the setup required for multi site management.</a> In fact, it can be combined with MSM site structures if required.</p>
+        <p>This document uses the typical example of separate staging and production environments. You can create separate environments for any environments you wish.</p>
+        <h2 id="requirements">Requirements</h2>
+        <p>To configure repoless stage and production environments, you must first complete the following tasks:</p>
+        <ul>
+          <li>This document assumes that you have already created a site for your project based on the <a href="../ue-tutorial/index.html">Getting Started – Universal Editor Developer Tutorial</a></li>
+          <li>You must have already <a href="../repoless-authoring/index.html">enabled the repoless feature for your project.</a></li>
+        </ul>
+        <h2 id="configuration">Configuration</h2>
+        <p>This document describes how to set up a separate production site for your project using the same code base. The following assumptions are made.</p>
+        <ul>
+          <li>The staging site is already set up and you now want to create a configuration for the production site.</li>
+          <li>The content structure in AEM authoring is similar.</li>
+          <li>The same path mappings will be used for staging and production.</li>
+        </ul>
+        <p>In this example, we are assuming that a production site has already been created for the project called wknd whose GitHub repo is also called wknd.</p>
+        <p>There are two steps to configuring a separate production site.</p>
+        <ol>
+          <li>Create new Edge Delivery Services sites for your production environment.</li>
+          <li>Update cloud configuration in AEM for your production site.</li>
+        </ol>
+        <p>This document details these configuration steps.</p>
+        <h3 id="create-new-edge-delivery-services-sites-for-your-production-environment">Create New Edge Delivery Services Sites for Your Production Environment</h3>
+        <ol>
+          <li>Retrieve your auth token and the technical account for your program.
+            <ul>
+              <li>Please see the document Reusing Code Across Sites for details on <a href="../repoless-authoring/index.html#retrieve-access-token">how to obtain your access token</a> and the <a href="../repoless-authoring/index.html#add-path-mapping-for-site-configuration-and-set-technical-account">technical account</a> for your program.</li>
+            </ul>
+          </li>
+          <li>Create a new site by making the following call to the configuration service. Please consider:
+            <ul>
+              <li>The project name in the POST URL must be the new site name you are creating. In this example, it is <code>website-prod</code>.</li>
+              <li>The code configuration should be the same as you used for the initial project creation.</li>
+              <li>The <code>content → source → url</code> must be adapted to the name of the new site you are creating. In this example, it is <code>website-prod</code>.</li>
+              <li>I.e., the site name in POST URL and the <code>content → source → url</code> must be the same.</li>
+              <li>Adapt the admin block to define the users who should have full administrative access to the site.
+                <ul>
+                  <li>It is an array of email addresses.</li>
+                  <li>The wildcard <code>*</code> can be used.</li>
+                  <li>See the document <a href="../../docs/authentication-setup-authoring/index.html#default-roles">Configuring Authentication for Authors</a> for more information.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ol>
+        <pre><code>curl --request POST \
+  --url https://admin.hlx.page/config/&lt;your-github-org&gt;/sites/website-prod.json \
+  --header 'x-auth-token: &lt;your-token&gt;' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "code": {
+        "owner": "&lt;your-github-org&gt;",
+        "repo": "website",
+        "source": {
+            "type": "github",
+            "url": "https://github.com/&lt;your-github-org&gt;/website"
+        }
+    },
+    "content": {
+        "source": {
+            "url": "https://author-p&lt;programID&gt;-e&lt;environmentID&gt;.adobeaemcloud.com/bin/franklin.delivery/&lt;your-github-org&gt;/website-prod/main",
+            "type": "markup",
+            "suffix": ".html"
+        }
+    },
+    "access": {
+        "admin": {
+            "role": {
+                "admin": [
+                    "&lt;email&gt;@&lt;domain&gt;.&lt;tld&gt;"
+                ],
+                "config_admin": [
+                    "&lt;tech-account-id&gt;@techacct.adobe.com"
+                ]
+            },
+            "requireAuth": "auto"
+        }
+    }
+}'
+</code></pre>
+        <ol start="3">
+          <li>Add the path mapping for your new site by making the following call to the configuration service.</li>
+        </ol>
+        <pre><code>curl --request POST \
+  --url https://admin.hlx.page/config/&lt;your-github-org&gt;/sites/website-prod/public.json \
+  --header 'x-auth-token: &lt;your-token&gt;' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "paths": {
+        "mappings": [
+            "/content/website/:/"
+        ],
+        "includes": [
+            "/content/website/"
+        ]
+    }
+}'
+</code></pre>
+        <p>Verify that the public configuration of your new site is working by calling <code>https://main--website-prod--&lt;your-github-org&gt;.aem.page/config.json</code> and verifying the content of the returned JSON.</p>
+        <h3 id="update-cloud-configurations-in-aem-for-your-production-site">Update Cloud Configurations in AEM for Your Production Site</h3>
+        <p>Your production AEM must be configured to use the new Edge Delivery Sites you created in the previous section for a dedicated production site. In this example, content under <code>/content/website</code> on your production environment needs to know to use the <code>website-prod</code> site you created.</p>
+        <ol>
+          <li>Sign into the AEM production instance and go to <strong>Tools</strong> → <strong>Cloud Services</strong> → <strong>Edge Delivery Services Configuration</strong>.</li>
+          <li>Select the configuration that was automatically created for your project.</li>
+          <li>Tap or click <strong>Properties</strong> in the tool bar.</li>
+          <li>In the <strong>Edge Delivery Services Configuration</strong> window:
+            <ul>
+              <li>Provide your GitHub organization in the <strong>Organization</strong> field.</li>
+              <li>Change the site name to the name of the site you created in the previous section. In this case, that would be <code>website-prod</code>.</li>
+              <li>Change project type to <strong>aem.live with repoless config setup</strong>.</li>
+            </ul>
+          </li>
+          <li>Tap or click <strong>Save &amp; Close</strong>.</li>
+        </ol>
+        <h2 id="verify-your-setup">Verify Your Setup</h2>
+        <p>Now that you have made all of the necessary configuration changes, verify that everything is working as expected.</p>
+        <ol>
+          <li>Sign into your AEM production authoring instance.</li>
+          <li>Navigate to the <strong>Sites</strong> console by going to <strong>Navigation</strong> → <strong>Sites</strong>.</li>
+          <li>Select a page in your site.</li>
+          <li>Tap or click <strong>Edit</strong> in the toolbar.</li>
+          <li>Ensure that the page properly renders in the Universal Editor and uses the same code as your site root.</li>
+          <li>Make a change to the page and re-publish.</li>
+          <li>Visit your new Edge Delivery Services site for that page at <code>https://main--website-prod--&lt;your-github-org&gt;.aem.page</code>.</li>
+        </ol>
+        <p>If you see the changes that you made, your separate production site setup is working properly.</p>
+        <h2 id="usage">Usage</h2>
+        <p>Once you have configured your project with repoless staging and production environments, you can manage code for them independently. The following diagram illustrates the relationship of the content in your various environments in AEM, Edge Delivery Services sites, and your GitHub repositories.</p>
+        <p><a href="../repoless-environments.svg/index.html" data-broken-link="true">https://www.aem.live/developer/repoless-environments.svg</a></p>
+        <p>Note: While AEM Cloud Services provides all customers with Production, Stage and Development environments, Edge Delivery Services typically does not need all of these. Although setting these up using the repo-less approach is easy, this incurs the additional cost of extra tasks such as content sync and managing separate user access.</p>
+        <p>Consider using Staging and Development environments if you have use cases for them, such as having a dedicated environment for user acceptance tests.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="reusing-content-across-sites-with-aem-authoring-as-your-content-source"><a href="../repoless-authoring/index.html">Reusing content across sites with AEM authoring as your content source</a></h3>
+            </div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

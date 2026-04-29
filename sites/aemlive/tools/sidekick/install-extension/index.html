@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.079Z
+  page:             tools-sidekick-install-extension
+  pageUrl:          https://www.aem.live/tools/sidekick/install-extension
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Sidekick Extension (Beta)</title>
+  <meta name="description" content="The Sidekick Extension is a browser extension allowing multiple project configurations, and remembering when to show or hide the Sidekick.">
+  <meta property="og:title" content="Sidekick Extension (Beta)">
+  <meta property="og:description" content="The Sidekick Extension is a browser extension allowing multiple project configurations, and remembering when to show or hide the Sidekick.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/tools/sidekick/install-extension/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../../docs/index.html">Documentation</a></li>
+        <li><a href="../../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../../blog/index.html">Blog</a></li>
+        <li><a href="../../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#install-sidekick-extension-in-chrome">Install Sidekick Extension in Chrome</a></li>
+<li class="l-2"><a href="#add-project-configurations">Add project configurations</a></li>
+<li class="l-3"><a href="#options-page">Options page</a></li>
+<li class="l-3"><a href="#share-url-or-github-repository-url">Share URL or GitHub Repository URL</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; GUIDE</p>
+          <h1>Sidekick Extension (Beta)</h1>
+          <p class="lede">The Sidekick Extension is a browser extension allowing multiple project configurations, and remembering when to show or hide the Sidekick.</p>
+        </header>
+        <div>
+        
+        <p>The Sidekick Extension is a browser extension allowing multiple project configurations, and remembering when to show or hide the <a href="https://www.hlx.live/tools/sidekick/">Sidekick</a>.</p>
+        <h2 id="install-sidekick-extension-in-chrome">Install Sidekick Extension in Chrome</h2>
+        <p>To install the Sidekick Extension in Chrome:</p>
+        <ol>
+          <li>Download the <a href="https://www.hlx.live/tools/sidekick/extension.crx">.crx package</a> (right-click and save as…)</li>
+          <li>Select <em>Window &gt; Extensions</em> in the Chrome menu bar to open the Extension Manager.</li>
+          <li>Browse to your downloads folder and drag the .crx package onto the Extension Manager.</li>
+          <li>Click the <em>Extensions</em> (puzzle piece) icon next to the address bar to show a list of installed extensions, then click the little pin next to <em>Helix Sidekick</em> to keep the extension’s icon visible.</li>
+          <li>Close the Extension Manager.</li>
+        </ol>
+        <h2 id="add-project-configurations">Add project configurations</h2>
+        <p>There are multiple ways to add project configurations to the Sidekick Extension:</p>
+        <h3 id="options-page">Options page</h3>
+        <p>The options page lists all project configurations and allows you to add, edit or delete them.</p>
+        <ol>
+          <li>Click the Helix icon next to your browser’s address bar and select <em>Options</em> from the context menu. (If clicking the icon toggles the Sidekick, use right-click to bring up the context menu.)</li>
+          <li>Add a project configuration using one of the two following methods:
+            <ol>
+              <li>Add via share URL: the project configuration will be retrieved from the parameters contained in the share URL.</li>
+              <li>Add manually: enter the GitHub repository URL and other optional parameters for your project.</li>
+            </ol>
+          </li>
+        </ol>
+        <h3 id="share-url-or-github-repository-url">Share URL or GitHub Repository URL</h3>
+        <ol>
+          <li>Navigate to a share URL or a GitHub repository:
+            <ol>
+              <li>Share URLs start with <code>https://www.hlx.live/tools/sidekick/?...</code></li>
+              <li>GitHub repository URLs start with <code>https://github.com/?...</code></li>
+            </ol>
+          </li>
+          <li>Click the Helix icon next to your browser’s address bar and select <em>Add Project</em> from the context menu.</li>
+          <li>A dialog will be shown for confirmation. Click <em>OK</em> to continue.</li>
+        </ol>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../../docs/index.html">Documentation</a></li>
+          <li><a href="../../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../../blog/index.html">Blog</a></li>
+          <li><a href="../../../community/index.html">Community</a></li>
+          <li><a href="../../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

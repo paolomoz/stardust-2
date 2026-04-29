@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.185Z
+  page:             docs-snapshots-reviews
+  pageUrl:          https://www.aem.live/docs/snapshots-reviews
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Snapshots and Reviews</title>
+  <meta name="description" content="To support the concept of publishing a set of content (dozens or hundreds of pages) usually for a launch of an initiative or event, the ...">
+  <meta property="og:title" content="Snapshots and Reviews">
+  <meta property="og:description" content="To support the concept of publishing a set of content (dozens or hundreds of pages) usually for a launch of an initiative or event, the ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/snapshots-reviews/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#how-to-use-snapshots-and-reviews">How to use Snapshots and Reviews</a></li>
+<li class="l-2"><a href="#lifecycle-of-a-snapshot">Lifecycle of a snapshot</a></li>
+<li class="l-3"><a href="#relationship-of-pages-and-snapshots">Relationship of Pages and Snapshots</a></li>
+<li class="l-3"><a href="#special-mention-redirects-and-bulk-metadata">Special Mention: Redirects and Bulk Metadata</a></li>
+<li class="l-2"><a href="#permissions">Permissions</a></li>
+<li class="l-2"><a href="#protected-sites">Protected Sites</a></li>
+<li class="l-2"><a href="#tools">Tools</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Snapshots and Reviews</h1>
+          <p class="lede">To support the concept of publishing a set of content (dozens or hundreds of pages) usually for a launch of an initiative or event, the ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1f0a20136d57db477c73b7633d273c158825a2056.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1f0a20136d57db477c73b7633d273c158825a2056.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1f0a20136d57db477c73b7633d273c158825a2056.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1f0a20136d57db477c73b7633d273c158825a2056.png?width=750&amp;format=png&amp;optimize=medium" width="1463" height="1097">
+          </picture>
+        </p>
+        
+        <p>To support the concept of publishing a set of content (dozens or hundreds of pages) usually for a launch of an initiative or event, the concept of content snapshots and reviews has been introduced.</p>
+        <p>A snapshot is made up of a set of pages (and other resources) that are captured at a particular point in time, when the preview state of a page is added to a snapshot. The snapshot has a name that is often tied to the launch of those pages. To draw comparisons to the version control of code, a snapshot is similar to a branch for content.</p>
+        <p>The <code>.aem.reviews</code> environments show what the entire website will look like, when the snapshot is eventually published, and allows for reviews of the overall website, before a release of the content in question.</p>
+        <h2 id="how-to-use-snapshots-and-reviews">How to use Snapshots and Reviews</h2>
+        <p>For developers the API endpoint for <code>/snapshot</code> can be helpful. <a href="../admin.html/index.html#tag/snapshot" data-broken-link="true">See documentation here</a>.</p>
+        <p>The easiest way for users to get engaged is to add the following plugin to your sidekick configuration.</p>
+        <pre><code> "plugins": [
+    {
+      "id": "review",
+      "title": "Review...",
+      "environments": [
+        "dev",
+        "preview",
+        "review"
+      ],
+      "url": "https://tools.aem.live/tools/snapshot-admin/popover.html",
+      "isPopover": true,
+      "popoverRect": "width:400px; height:400px",
+      "passConfig": true,
+      "passReferrer": true
+    },
+
+</code></pre>
+        <h2 id="lifecycle-of-a-snapshot">Lifecycle of a snapshot</h2>
+        <p>Usually a snapshot is created for a launch or an event that requires a set changes to a website. The snapshot is given a name that identifies the event e.g. <code>product-launch-2025</code> or <code>fall-collection-2025</code> , then all the pages are edited and previewed, and added to the snapshot.</p>
+        <p>While the snapshot is put together the pages can be reviewed on the corresponding <code>.aem.reviews</code> environment. For example <code>product-launch-2025--main–&lt;site&gt;--&lt;org&gt;.aem.reviews</code> or <code>fall-collection-2025--main–&lt;site&gt;--&lt;org&gt;.aem.reviews</code>.</p>
+        <p>Once the set of pages is complete, the snapshot can be locked and the review can be completed. Once the review is completed the snapshot can be published.</p>
+        <p>There is a higher level review request and approval (or rejection) that implies locking / unlocking the snapshot as well as publishing when approved.</p>
+        <ul>
+          <li>Requesting a review will lock the snapshot while the review is in progress.</li>
+          <li>Rejecting a review will unlock the snapshot from review.</li>
+          <li>Approving a review will publish the snapshot and remove the URLs from the snapshot</li>
+        </ul>
+        <h3 id="relationship-of-pages-and-snapshots">Relationship of Pages and Snapshots</h3>
+        <p>When a page (or a resource in general) is added to a snapshot, a copy of the current state in the content bus is taken and is added to the snapshot. The copy remains immutable, even if the underlying page changes unless the page gets explicitly updated in snapshot. The content contains all the information that was in the underlying document including metadata.</p>
+        <p>Any page can be a part of multiple snapshots, either at the exact same state or at a different state. If there are snapshots that are going to be published sequentially for different launches or events, the snapshots can contain different states of the same page.</p>
+        <h3 id="special-mention-redirects-and-bulk-metadata">Special Mention: Redirects and Bulk Metadata</h3>
+        <p>Redirects and Bulk metadata can be added to snapshots by adding their underlying (spreadsheet) documents to a snapshot. In some projects these files are changing frequently and it might make sense to isolate the redirects or metadata changes to individual files, have a separate publication of metadata and redirects or provide more governance in preparation for a large-scale snapshot.</p>
+        <h2 id="permissions">Permissions</h2>
+        <p>To view snapshots either directly or via <code>.aem.reviews</code> a user needs to be able to access <code>.aem.page</code>, and to edit a snapshot the <code>author</code> role is needed. To publish a snapshot the <code>publish</code> role is needed.</p>
+        <h2 id="protected-sites">Protected Sites</h2>
+        <p>There are a few requirements to use snapshot reviews with a protected site. This setup <u>will not</u> require the installation of the sidekick:</p>
+        <ul>
+          <li>The snapshot must have a review password set.</li>
+          <li>The site must be configured with an access token:</li>
+        </ul>
+        <p>Create an ORG <a href="../admin.html/index.html#tag/orgConfig/operation/createOrgSecret" data-broken-link="true">secret</a>:<br>POST <code>https://admin.hlx.page/config/${org}/secrets.json</code></p>
+        <p>Add secretId to site(s) <a href="../admin.html/index.html#schema/AccessConfig" data-broken-link="true">access</a>:<br>POST <code>https://admin.hlx.page/config/${org}/sites/${site}/access/preview.json</code> (preview-only example)<br>Add the secretId to each site which you will be using snapshot reviews. They should all be in the same ORG.</p>
+        <pre><code>{
+  "secretId": [
+    "pre-existing-secret-id",
+    "${secretId}"
+  ]
+}
+</code></pre>
+        <p>Once you have these steps complete, contact Adobe and provide the secret value (token) and the ORG name.</p>
+        <h2 id="tools">Tools</h2>
+        <p>From the above review button in the sidekick you can also get to the snapshot admin user interface at</p>
+        <p><a href="https://tools.aem.live/tools/snapshot-admin/index.html">https://tools.aem.live/tools/snapshot-admin/index.html</a></p>
+        <p>The snapshot admin allows you to add and remove pages in bulk for example from a spreadsheet as well as performing all of the snapshot related operations (lock, unlock, request, reject and approve).</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

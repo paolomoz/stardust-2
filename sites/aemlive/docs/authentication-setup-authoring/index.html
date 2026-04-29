@@ -1,0 +1,586 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.976Z
+  page:             docs-authentication-setup-authoring
+  pageUrl:          https://www.aem.live/docs/authentication-setup-authoring
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Configuring Authentication for Authors</title>
+  <meta name="description" content="Learn how to enable authentication for AEM authors.">
+  <meta property="og:title" content="Configuring Authentication for Authors">
+  <meta property="og:description" content="Learn how to enable authentication for AEM authors.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/authentication-setup-authoring/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#enable-authentication-for-authors">Enable Authentication for Authors</a></li>
+<li class="l-3"><a href="#step-1-add-access-allow-to-configuration">Step 1: Add Access Allow To Configuration</a></li>
+<li class="l-3"><a href="#step-2-login-via-sidekick">Step 2: Login via Sidekick</a></li>
+<li class="l-3"><a href="#step-2-alternative-granting-admin-consent-via-azure-portal">Step 2 (Alternative) Granting Admin Consent via Azure Portal</a></li>
+<li class="l-3"><a href="#using-the-admin-service-adminhlxpage">Using the Admin Service (admin.hlx.page)</a></li>
+<li class="l-2"><a href="#define-user-roles-without-enforcing-authentication">Define user roles without enforcing authentication</a></li>
+<li class="l-3"><a href="#example">Example:</a></li>
+<li class="l-2"><a href="#default-roles">Default Roles</a></li>
+<li class="l-2"><a href="#evaluation">Evaluation</a></li>
+<li class="l-2"><a href="#admin-permissions">Admin Permissions</a></li>
+<li class="l-2"><a href="#admin-roles">Admin Roles</a></li>
+<li class="l-2"><a href="#further-reading">Further Reading</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Configuring Authentication for Authors</h1>
+          <p class="lede">Learn how to enable authentication for AEM authors.</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1440edf7c6f082e7b36d324d1ed8927febc5e8e6e.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1440edf7c6f082e7b36d324d1ed8927febc5e8e6e.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1440edf7c6f082e7b36d324d1ed8927febc5e8e6e.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1440edf7c6f082e7b36d324d1ed8927febc5e8e6e.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <h2 id="enable-authentication-for-authors">Enable Authentication for Authors</h2>
+        <p>By default, authors don’t need to be logged in in order to use AEM via Sidekick. In order to enable authentication, it is sufficient to add relevant access-statements to your site configuration. Upon encountering said access-statements, the Sidekick will enforce authentication with the respective provider: Microsoft for Sharepoint based projects, and Google for Google Drive based projects.</p>
+        <h3 id="step-1-add-access-allow-to-configuration">Step 1: Add Access Allow To Configuration</h3>
+        <p>Use the configuration service to update the <a href="../admin.html/index.html#schema/AdminAccessConfig" data-broken-link="true">access/admin</a> section of your site configuration.</p>
+        <p>Add <code>admin/role/author</code> and or <code>admin/role/publish</code> array properties for each individual user or wildcard-domain you’d like to give access to the site for.</p>
+        <p>Example for an individual user: <code>admin/role/publish: [ "some.user@example.com" ]</code><br>Example for a wildcard domain: <code>admin/role/author: [ "*@example.com" ]</code></p>
+        <p>The following example would grant author access all users within the “example.com” domain and publish rights to a the single user “<a href="mailto:some.user@adobe.com">some.user@example.com</a>”:</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/acme/sites/website/access/admin.json \
+  -H "content-type: application/json" \
+  -H "x-auth-token: &lt;your-auth-token&gt;" \
+  --data '{
+	"role": {
+         "author": [ "*@example.com" ],
+         "publish": [ "some.user@example.com" ],
+	}
+}'
+
+</code></pre>
+        <p><strong>Ensure that the users are able to authenticate themselves using their login credentials as follows:</strong></p>
+        <ul>
+          <li>If using <a href="../aem-authoring/index.html">AEM</a> or <a href="../../developer/da-tutorial/index.html" data-broken-link="true">Document Authoring</a>, they must be able to authenticate with their credentials using Adobe authentication..</li>
+          <li>If using Google Drive, they must be able to authenticate with their credentials using Google authentication.</li>
+          <li>If using Microsoft SharePoint, they must be able to authenticate with their credentials using Microsoft authentication.</li>
+        </ul>
+        <h3 id="step-2-login-via-sidekick">Step 2: Login via Sidekick</h3>
+        <div class="columns contained fullscreen-images">
+          <div>
+            <div>The next time the Sidekick opens on a document, it will show a "Sign In" option:</div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_15919a221054c2bc06c12f7547b8e9d8eafff036e.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_15919a221054c2bc06c12f7547b8e9d8eafff036e.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_15919a221054c2bc06c12f7547b8e9d8eafff036e.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_15919a221054c2bc06c12f7547b8e9d8eafff036e.png?width=750&amp;format=png&amp;optimize=medium" width="430" height="214">
+              </picture>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>Once you click it, it will open a new browser tab, redirecting to your respective provider:</p>
+              <p>The first time, it will ask for consent that the Admin service can access your Sharepoint or Google data. In case you are not an admin on the account, you will see the following message:</p>
+            </div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1c7025cf9a99d9c8ac905063b73dbee0498342549.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1c7025cf9a99d9c8ac905063b73dbee0498342549.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1c7025cf9a99d9c8ac905063b73dbee0498342549.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1c7025cf9a99d9c8ac905063b73dbee0498342549.png?width=750&amp;format=png&amp;optimize=medium" width="470" height="570">
+              </picture>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>In this case, ask an Active Directory admin of your organization to login via Sidekick or directly via the admin link: <a href="https://admin.hlx.page/auth/microsoft">https://admin.hlx.page/auth/microsoft</a></p>
+              <p>The admin can either grant consent directly by checking the ‘<code>Consent on behalf of your organization</code>’ when they log in, or later via the Azure Portal.</p>
+            </div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1ad6939b742ee7b916ed30c6d3b34afd179fd982d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1ad6939b742ee7b916ed30c6d3b34afd179fd982d.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1ad6939b742ee7b916ed30c6d3b34afd179fd982d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1ad6939b742ee7b916ed30c6d3b34afd179fd982d.png?width=750&amp;format=png&amp;optimize=medium" width="469" height="607">
+              </picture>
+            </div>
+          </div>
+          <div>
+            <div>Now, the non admin user should be able to login:</div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1fa9e15b2ade6dd3fdb63e373ec0eae618e655a79.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1fa9e15b2ade6dd3fdb63e373ec0eae618e655a79.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1fa9e15b2ade6dd3fdb63e373ec0eae618e655a79.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1fa9e15b2ade6dd3fdb63e373ec0eae618e655a79.png?width=750&amp;format=png&amp;optimize=medium" width="488" height="438">
+              </picture>
+            </div>
+          </div>
+        </div>
+        <h3 id="step-2-alternative-granting-admin-consent-via-azure-portal">Step 2 (Alternative) Granting Admin Consent via Azure Portal</h3>
+        <div class="columns contained fullscreen-images">
+          <div>
+            <div>
+              <p>In order to grant admin consent, open the Azure portal and go to:<br><strong>Home</strong> → <strong>Active Directory</strong> → <strong>Enterprise Application</strong>s</p>
+              <p>(Note that the application is only visible, if an admin has logged in in the steps above)</p>
+              <p>Search for the <strong>AEM Content Integration Admin API</strong>:</p>
+            </div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1dc5e73805d52b673075ebec2eb7f99983a167614.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1dc5e73805d52b673075ebec2eb7f99983a167614.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1dc5e73805d52b673075ebec2eb7f99983a167614.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1dc5e73805d52b673075ebec2eb7f99983a167614.png?width=750&amp;format=png&amp;optimize=medium" width="694" height="328">
+              </picture>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>It should have the application id shown above.</p>
+              <p>Select the Permissions tab (below security):</p>
+            </div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1276c60ff80cd0b7908b9ddb211806e2738ade4e7.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1276c60ff80cd0b7908b9ddb211806e2738ade4e7.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1276c60ff80cd0b7908b9ddb211806e2738ade4e7.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1276c60ff80cd0b7908b9ddb211806e2738ade4e7.png?width=750&amp;format=png&amp;optimize=medium" width="935" height="704">
+              </picture>
+            </div>
+          </div>
+          <div>
+            <div>And click on <code>Grant admin consent for {your organization}</code>.</div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1935b6dd559b3f4a7c5f251f00ccac70c80984278.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1935b6dd559b3f4a7c5f251f00ccac70c80984278.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1935b6dd559b3f4a7c5f251f00ccac70c80984278.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1935b6dd559b3f4a7c5f251f00ccac70c80984278.png?width=750&amp;format=png&amp;optimize=medium" width="474" height="654">
+              </picture>
+            </div>
+          </div>
+          <div>
+            <div>After clicking Accept you can refresh the <strong>Permissions</strong> blade a few times, until the consented permissions show up:</div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_15a7effc4dddf882bee8c67ed3171b9e431a50ba7.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_15a7effc4dddf882bee8c67ed3171b9e431a50ba7.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_15a7effc4dddf882bee8c67ed3171b9e431a50ba7.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_15a7effc4dddf882bee8c67ed3171b9e431a50ba7.png?width=750&amp;format=png&amp;optimize=medium" width="1528" height="573">
+              </picture>
+            </div>
+          </div>
+        </div>
+        <h3 id="using-the-admin-service-adminhlxpage">Using the Admin Service (admin.hlx.page)</h3>
+        <p>When authentication is enabled for <code>admin.hlx.page</code> using the API endpoint with tools like <code>curl</code> will require to use a proper auth token. For one time ad-hoc use by developers it is very convenient to just copy/paste the <code>x-auth-token</code> header from your browser's network tab from an authenticated request sent by sidekick to <code>admin.hlx.page</code> and pass it into the <code>curl</code> via the <code>-H</code> option. eg:</p>
+        <pre><code>curl -v -H "x-auth-token: id_token=..." "https://admin.hlx.page/status/{org}/{repo}/main/?editUrl=auto"
+</code></pre>
+        <h2 id="define-user-roles-without-enforcing-authentication">Define user roles without enforcing authentication</h2>
+        <p>By default, as soon as the role mapping is defined via an <code>admin/role/*</code> entry, authentication is enforced on that project. It might be desirable to allow unauthenticated access but still be able to define a user mapping, for example give a user the <code>admin</code> role.</p>
+        <p>The <code>requireAuth</code> property can be used for this with the following values:</p>
+        <ul>
+          <li><code>auto</code> is the default and enforces authentication as soon as a role mapping is defined.</li>
+          <li><code>true</code> will always enforce authentication</li>
+          <li><code>false</code> will not enforce authentication</li>
+        </ul>
+        <h3 id="example">Example:</h3>
+        <p>Give the user <code>bob@example.com</code> the <code>admin</code> role but don’t enforce authentication:</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/acme/sites/website/access/admin.json \
+  -H "content-type: application/json" \
+  -H "x-auth-token: &lt;your-auth-token&gt;" \
+  --data '{
+	"role": {
+         "admin": [ "bob@example.com" ]
+	},
+       "requireAuth": false
+}'
+</code></pre>
+        <h2 id="default-roles">Default Roles</h2>
+        <p>If no role mapping is configured, the admin uses default roles to determine the permissions of the request. The default role can be specified using the <code>admin/defaultRole</code> property.</p>
+        <p>By default there are no default roles, unless <code>requireAuth</code> is <code>auto</code>, in this case the <em>default role</em> is <code>basic_publish</code> (see below). Example:</p>
+        <p>Use <code>publish</code> as default role:</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/acme/sites/website/access/admin.json \
+  -H "content-type: application/json" \
+  -H "x-auth-token: &lt;your-auth-token&gt;" \
+  --data '{
+       "defaultRole": "publish"
+}'
+</code></pre>
+        <h2 id="evaluation">Evaluation</h2>
+        <p>The effective roles of a request are evaluated as follows:</p>
+        <ol>
+          <li>If a request isn’t authenticated and <code>requireAuth</code> is <code>true</code>, a <code>401</code> status code is returned.</li>
+          <li>If a request isn’t authenticated and <code>requireAuth</code> is <code>auto</code> and role mapping is defined, a <code>401</code> status code is returned.</li>
+          <li>If a request isn’t authenticated the <code>defaultRole</code> is used.</li>
+          <li>If a request is authenticated and no role mapping is defined, or if <code>requireAuth</code> is <code>false</code>, the <code>defaultRole</code> is used.</li>
+          <li>If a request is authenticated and role mapping is defined and <code>requireAuth</code> is <strong>not</strong> <code>false</code>, the roles that match the user are used.
+            <ol>
+              <li>If no mapping matches, the user will have no role; effectively always returning a <code>403</code> status code.</li>
+              <li>If several mapping matches, the user will have a combined set of roles</li>
+            </ol>
+          </li>
+        </ol>
+        <h2 id="admin-permissions">Admin Permissions</h2>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td><strong>Permission</strong></td>
+                    <td><strong>Purpose</strong></td>
+                  </tr>
+                  <tr>
+                    <td><code>cache:write</code></td>
+                    <td>Purge cache</td>
+                  </tr>
+                  <tr>
+                    <td><code>code:read</code></td>
+                    <td>Read code status</td>
+                  </tr>
+                  <tr>
+                    <td><code>code:write</code></td>
+                    <td>Update code</td>
+                  </tr>
+                  <tr>
+                    <td><code>code:delete</code></td>
+                    <td>Delete code</td>
+                  </tr>
+                  <tr>
+                    <td><code>code:delete-forced</code></td>
+                    <td>Delete code (forced)</td>
+                  </tr>
+                  <tr>
+                    <td><code>config:read</code></td>
+                    <td>Read all config</td>
+                  </tr>
+                  <tr>
+                    <td><code>config:read-redacted</code></td>
+                    <td>Read redacted config</td>
+                  </tr>
+                  <tr>
+                    <td><code>config:write</code></td>
+                    <td>Update config</td>
+                  </tr>
+                  <tr>
+                    <td><code>index:read</code></td>
+                    <td>Read index matching</td>
+                  </tr>
+                  <tr>
+                    <td><code>index:write</code></td>
+                    <td>Reindex</td>
+                  </tr>
+                  <tr>
+                    <td><code>preview:read</code></td>
+                    <td>Read preview information</td>
+                  </tr>
+                  <tr>
+                    <td><code>preview:write</code></td>
+                    <td>Update preview</td>
+                  </tr>
+                  <tr>
+                    <td><code>preview:delete</code></td>
+                    <td>Delete preview resources</td>
+                  </tr>
+                  <tr>
+                    <td><code>preview:delete-forced</code></td>
+                    <td>Delete preview resources (forced)</td>
+                  </tr>
+                  <tr>
+                    <td><code>preview:list</code></td>
+                    <td>List preview resources</td>
+                  </tr>
+                  <tr>
+                    <td><code>edit:read</code></td>
+                    <td>Read edit status</td>
+                  </tr>
+                  <tr>
+                    <td><code>edit:list</code></td>
+                    <td>List edit resources</td>
+                  </tr>
+                  <tr>
+                    <td><code>live:read</code></td>
+                    <td>Read live status</td>
+                  </tr>
+                  <tr>
+                    <td><code>live:write</code></td>
+                    <td>Update live resources (publish)</td>
+                  </tr>
+                  <tr>
+                    <td><code>live:delete</code></td>
+                    <td>Delete live resources</td>
+                  </tr>
+                  <tr>
+                    <td><code>live:delete-forced</code></td>
+                    <td>Delete live resources (forced)</td>
+                  </tr>
+                  <tr>
+                    <td><code>live:list</code></td>
+                    <td>List live resources</td>
+                  </tr>
+                  <tr>
+                    <td><code>cron:read</code></td>
+                    <td>Read cron job config</td>
+                  </tr>
+                  <tr>
+                    <td><code>cron:write</code></td>
+                    <td>Update cron job config</td>
+                  </tr>
+                  <tr>
+                    <td><code>snapshot:read</code></td>
+                    <td>Read snapshots</td>
+                  </tr>
+                  <tr>
+                    <td><code>snapshot:write</code></td>
+                    <td>Update snapshots</td>
+                  </tr>
+                  <tr>
+                    <td><code>snapshot:delete</code></td>
+                    <td>Delete snapshots</td>
+                  </tr>
+                  <tr>
+                    <td><code>job:read</code></td>
+                    <td>Read job information</td>
+                  </tr>
+                  <tr>
+                    <td><code>job:write</code></td>
+                    <td>Start jobs</td>
+                  </tr>
+                  <tr>
+                    <td><code>job:list</code></td>
+                    <td>List jobs</td>
+                  </tr>
+                  <tr>
+                    <td><code>log:read</code></td>
+                    <td>Read logs</td>
+                  </tr>
+                  <tr>
+                    <td><code>log:write</code></td>
+                    <td>Write logs (append)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h2 id="admin-roles">Admin Roles</h2>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td><strong>Role</strong></td>
+                    <td><strong>Permissions</strong></td>
+                  </tr>
+                  <tr>
+                    <td><code>admin</code></td>
+                    <td>
+                      <ul>
+                        <li><code>&lt;all permissions&gt;</code></li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>basic_author</code></td>
+                    <td>
+                      <ul>
+                        <li><code>cache:write</code></li>
+                        <li><code>code:read</code></li>
+                        <li><code>code:write</code></li>
+                        <li><code>code:delete</code></li>
+                        <li><code>index:read</code></li>
+                        <li><code>index:write</code></li>
+                        <li><code>preview:read</code></li>
+                        <li><code>preview:write</code></li>
+                        <li><code>preview:delete</code></li>
+                        <li><code>edit:read</code></li>
+                        <li><code>live:read</code></li>
+                        <li><code>cron:read</code></li>
+                        <li><code>cron:write</code></li>
+                        <li><code>snapshot:read</code></li>
+                        <li><code>job:read</code></li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>basic_publish</code></td>
+                    <td>
+                      <ul>
+                        <li><code>&lt;basic_author&gt;</code></li>
+                        <li><code>live:write</code></li>
+                        <li><code>live:delete</code></li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>author</code></td>
+                    <td>
+                      <ul>
+                        <li><code>&lt;basic_author&gt;</code></li>
+                        <li><code>edit:list</code></li>
+                        <li><code>job:list</code></li>
+                        <li><code>log:read</code></li>
+                        <li><code>preview:list</code></li>
+                        <li><code>preview:delete-forced</code></li>
+                        <li><code>snapshot:delete</code></li>
+                        <li><code>snapshot:write</code></li>
+                        <li><code>job:write</code></li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>publish</code></td>
+                    <td>
+                      <ul>
+                        <li><code>&lt;author&gt;</code></li>
+                        <li><code>live:write</code></li>
+                        <li><code>Live:delete</code></li>
+                        <li><code>live:delete-forced</code></li>
+                        <li><code>live:list</code></li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>develop</code></td>
+                    <td>
+                      <ul>
+                        <li><code>&lt;author&gt;</code></li>
+                        <li><code>code:write</code></li>
+                        <li><code>code:delete</code></li>
+                        <li><code>code:delete-forced</code></li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>config</code></td>
+                    <td>
+                      <ul>
+                        <li><code>config:read-redacted</code></li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>config_admin</code></td>
+                    <td>
+                      <ul>
+                        <li><code>&lt;publish&gt;</code></li>
+                        <li><code>config:read</code></li>
+                        <li><code>config:write</code></li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h2 id="further-reading">Further Reading</h2>
+        <p>If you have <a href="../config-service-setup/index.html">set up the Configuration Service</a> for your site, then you can use the following API operations to configure permissions for authors:</p>
+        <ul>
+          <li><a href="../admin.html/index.html#tag/siteConfig/operation/createSiteSite" data-broken-link="true">Create Site Configuration</a> (applies to a single site)</li>
+          <li><a href="../admin.html/index.html#tag/siteConfig/operation/updateConfigSite" data-broken-link="true">Update Site Configuration</a> (applies to a single site)</li>
+          <li><a href="../admin.html/index.html#tag/profileConfig/operation/createConfigProfile" data-broken-link="true">Create Profile Configuration</a> (applies to multiple sites)</li>
+          <li><a href="../admin.html/index.html#tag/profileConfig/operation/updateConfigProfile" data-broken-link="true">Update Profile Configuration</a> (applies to multiple sites)</li>
+        </ul>
+        <p>In each of these API requests, you will use the fields</p>
+        <ul>
+          <li><code>groups</code> (with the <a href="../admin.html/index.html#schema/GroupsConfig" data-broken-link="true">GroupsConfig</a> schema) to define groups and assign group members</li>
+          <li><code>access.admin</code> (with the <a href="../admin.html/index.html#schema/AdminAccessConfig" data-broken-link="true">AdminAccessConfig</a> schema) to assign access permissions to groups or users</li>
+        </ul>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.966Z
+  page:             docs-network-profile
+  pageUrl:          https://www.aem.live/docs/network-profile
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Network Profile</title>
+  <meta name="description" content="Take a deep dive into the network profile Adobe Experience Manager Services.">
+  <meta property="og:title" content="Network Profile">
+  <meta property="og:description" content="Take a deep dive into the network profile Adobe Experience Manager Services.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/network-profile/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#architecture">Architecture</a></li>
+<li class="l-2"><a href="#delivery-services">Delivery Services</a></li>
+<li class="l-3"><a href="#dns-scheme">DNS Scheme</a></li>
+<li class="l-3"><a href="#http-and-tls-versions">HTTP and TLS versions</a></li>
+<li class="l-3"><a href="#http-headers">HTTP Headers</a></li>
+<li class="l-4"><a href="#cache-control">Cache-Control</a></li>
+<li class="l-4"><a href="#vary">Vary</a></li>
+<li class="l-4"><a href="#x-robots-tag">X-Robots-Tag</a></li>
+<li class="l-4"><a href="#cdn-specific-headers">CDN Specific Headers</a></li>
+<li class="l-3"><a href="#url-space">URL Space</a></li>
+<li class="l-4"><a href="#access-to-the-available-url-space">Access to the available URL Space</a></li>
+<li class="l-4"><a href="#access-to-a-more-limited-url-space">Access to a more limited URL Space</a></li>
+<li class="l-2"><a href="#admin-service-api">Admin Service (API)</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Network Profile</h1>
+          <p class="lede">Take a deep dive into the network profile Adobe Experience Manager Services.</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_172c0e6ce73b5b5798586d9ad60b04ed7ed933cf7.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_172c0e6ce73b5b5798586d9ad60b04ed7ed933cf7.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_172c0e6ce73b5b5798586d9ad60b04ed7ed933cf7.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_172c0e6ce73b5b5798586d9ad60b04ed7ed933cf7.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <h2 id="architecture">Architecture</h2>
+        <p>The AEM Delivery services are set up as origins behind Content Delivery Network (CDN) infrastructure for production and are accessed by authors, stakeholders and developers directly from their browsers. In some cases the CDN infrastructure for production sites is hosted and managed by AEM customers directly (we call this BYO CDN) or it is managed by Adobe via a Cloud Service CDN (eg. <a href="../byo-dns/index.html" data-broken-link="true">BYO DNS</a>).</p>
+        <p>The network profile below is relevant both for the interactions of end-users directly with their browsers (or other clients) but also for setup and communication from your CDN.</p>
+        <h2 id="delivery-services">Delivery Services</h2>
+        <h3 id="dns-scheme">DNS Scheme</h3>
+        <p>We use a DNS scheme that identifies each origin with the following pattern. <code>https://&lt;ref&gt;--&lt;site&gt;--&lt;org&gt;.aem.page</code> (for preview) and <code>https://&lt;ref&gt;--&lt;site&gt;--&lt;org&gt;.aem.live</code> (for live content). <code>&lt;ref&gt;</code>, <code>&lt;site&gt;</code> and <code>&lt;org&gt;</code> commonly identify GitHub repositories and references (branches or tags). Special characters in references, orgs and repositories are replaced by a single <code>-</code>. The maximum length of a domain name label is 63 characters, which limits the length of the <code>&lt;ref&gt;--&lt;site&gt;--&lt;org&gt;</code> the combination.</p>
+        <p>The DNS records for <code>aem.page</code> and <code>aem.live</code> are delivered with a short 10-minute time to live (TTL), so that we can switch between delivery stacks. This happens automatically.</p>
+        <h3 id="http-and-tls-versions">HTTP and TLS versions</h3>
+        <p>The AEM Delivery endpoints support HTTP/1.1 and HTTP/2 (H2) and TLS 1.2. HTTPS (via TLS) is enforced. All <code>.page</code> and<code> .live</code> subdomains additionally set HTTP Strict Transport Security (HSTS) headers, so that downgrades to HTTP are prohibited.</p>
+        <h3 id="http-headers">HTTP Headers</h3>
+        <p>Many HTTP headers can be configured by the project or are dependent on the payload, but there are some headers that are handled out of the box.</p>
+        <h4 id="cache-control">Cache-Control</h4>
+        <p>The client-facing <code>cache-control</code> headers are set automatically by default to reflect production tested, continuously evolving, best practices based on resource types, response code and origin type. We recommend passing them on to the client "as is" through a customer's CDN.</p>
+        <p>Some resources that are immutable have very long <code>max-age</code> and others that tend to change more frequently have shorter <code>max-age</code>. On preview (<code>.page)</code> origins <code>max-age</code> is set very short, to avoid the explicit need for authors, developers and stakeholders to clear their browser cache when making changes.</p>
+        <p>We don't have any data that suggests that changing the <code>cache-header</code> values on a per customer basis provides improved experiences to visitors of the sites and we do have data that shows adverse effects from changes, but we appreciate that this is a contract between the browser and a customer's CDN and understand that this is out of scope for AEM to fully control.</p>
+        <p>It is important to note that these values apply only to the <code>cache-control</code> headers sent to the client, and are not related to cache management in the CDN, which is using push invalidation.</p>
+        <h5 id="cache-control-header-values-on-aempage">Cache-Control Header Values on <code>.aem.page</code></h5>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Responses for</td>
+                    <td>Header Value</td>
+                  </tr>
+                  <tr>
+                    <td><code>200</code> - Code (<code>.js</code>, <code>.css</code>, <code>.svg</code>, etc.)</td>
+                    <td><code>max-age=60, must-revalidate</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>200</code> - Content (<code>text/html</code>, <code>application/json</code>)</td>
+                    <td><code>max-age=60, must-revalidate</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>200</code> - Media (images, videos, etc.)</td>
+                    <td><code>max-age=2592000, must-revalidate</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>301</code> - Moved Permanently</td>
+                    <td><code>max-age=60, must-revalidate</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>304</code> - Code</td>
+                    <td><code>max-age=60, must-revalidate</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>304</code> - Content</td>
+                    <td><code>max-age=60, must-revalidate</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>404</code> - Code</td>
+                    <td><code>max-age=60, must-revalidate</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>404</code> - Content</td>
+                    <td><code>max-age=60, must-revalidate</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>5xx</code></td>
+                    <td><code>max-age=60, must-revalidate</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>3xx</code>, <code>4xx</code> and <code>5xx</code> - Media</td>
+                    <td><code>max-age=3600, must-revalidate</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h5 id="cache-control-header-values-on-aemlive">Cache-Control Header Values on <code>.aem.live</code></h5>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Responses for</td>
+                    <td>Header Value</td>
+                  </tr>
+                  <tr>
+                    <td><code>200</code> - Code (<code>.js</code>, <code>.css</code>, <code>.svg</code>, etc.)</td>
+                    <td><code>max-age=7200, must-revalidate</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>200</code> - Content (<code>text/html</code>, <code>application/json</code>)</td>
+                    <td><code>max-age=7200, must-revalidate</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>200</code> - Media (images, videos, etc.)</td>
+                    <td><code>max-age=2592000, must-revalidate</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>301</code> - Moved Permanently</td>
+                    <td><code>max-age=7200, must-revalidate</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>304</code> - Code</td>
+                    <td><code>max-age=7200, must-revalidate</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>304</code> - Content</td>
+                    <td><code>max-age=7200, must-revalidate</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>404</code> - Code</td>
+                    <td><code>max-age=7200, must-revalidate</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>404</code> - Content</td>
+                    <td><code>max-age=7200, must-revalidate</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>5xx</code> - Code and Content</td>
+                    <td><code>max-age=7200, must-revalidate</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>3xx</code>, <code>4xx</code> and <code>5xx</code> - Media</td>
+                    <td><code>max-age=3600, must-revalidate</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h4 id="vary">Vary</h4>
+        <p>The <code>vary</code> header is set to <code>Accept-Encoding,X-Forwarded-Host</code></p>
+        <h4 id="x-robots-tag">X-Robots-Tag</h4>
+        <p>The <code>x-robots-tag</code> header is automatically set to <code>noindex, nofollow</code> on any <code>.live</code> and <code>.page</code> origin to avoid indexing. This header is removed by the CDN tier for production only.</p>
+        <h4 id="cdn-specific-headers">CDN Specific Headers</h4>
+        <p>To manage the cache consistency with your CDN in an optimal way and support precise push invalidation there are custom headers set for each supported CDN that control the CDNs caching behavior and cache keys. The terminology and headers as well as the available features and semantics vary greatly between vendors.<br>These headers are only added for requests coming from a CDN and are consumed by the CDN and are not surfaced to the browser or other clients.</p>
+        <h3 id="url-space">URL Space</h3>
+        <p>The available URL space on the <code>.page</code> and <code>.live</code> origins is limited to a combination of upper and lowercase basic latin letters (<code>A-Z</code> and <code>a-z</code>), numbers <code>(0-9)</code>, dash (<code>-</code>), underscore (<code>_</code>), period (<code>.</code>) and forward slash (<code>/</code>). Certain combinations of <code>.</code> and/or <code>/</code> in direct succession are also not valid.</p>
+        <p>If you need to service a broader URL space we recommend rewriting URLs on your CDN tier.</p>
+        <h4 id="access-to-the-available-url-space">Access to the available URL Space</h4>
+        <p>Developers and Authors have access to the full URL space via resources coming from GitHub, Folder names or redirect sources coming from the <code>redirects</code> spreadsheet.</p>
+        <h4 id="access-to-a-more-limited-url-space">Access to a more limited URL Space</h4>
+        <p>File names in content sources (documents and spreadsheets in Sharepoint or Google Drive) are automatically rewritten to a more narrow character set including only lowercase basic latin letters (<code>a-z</code>), numbers (<code>0-9</code>) and dash(<code>-</code>) with the corresponding extension appended.</p>
+        <h2 id="admin-service-api">Admin Service (API)</h2>
+        <p>The admin service endpoint available on <code>admin.hlx.page</code> (see <a href="../admin.html/index.html" data-broken-link="true">API Spec here</a>) is built to be accessed via a broad range of HTTP clients including browsers, command line tools as well as common HTTP clients.<br><br>It supports HTTP/1.1 and HTTP/2 (H2) with TLS 1.2. HTTPS (via TLS) is enforced.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

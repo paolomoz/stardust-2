@@ -1,0 +1,160 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.273Z
+  page:             docs-fragments
+  pageUrl:          https://www.aem.live/docs/fragments
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Fragments</title>
+  <meta name="description" content="Fragments are reusable chunks of site content: think headers, footers, or any element that appears on multiple pages. In Adobe Experience Manager (AEM) Edge Delivery ...">
+  <meta property="og:title" content="Fragments">
+  <meta property="og:description" content="Fragments are reusable chunks of site content: think headers, footers, or any element that appears on multiple pages. In Adobe Experience Manager (AEM) Edge Delivery ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/fragments/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#how-fragments-work">How Fragments work</a></li>
+<li class="l-2"><a href="#referencing-fragments">Referencing Fragments</a></li>
+<li class="l-2"><a href="#when-to-use-fragments">When to use Fragments</a></li>
+<li class="l-2"><a href="#when-to-avoid-fragments">When to avoid Fragments</a></li>
+<li class="l-2"><a href="#fragments-and-indexing">Fragments and Indexing</a></li>
+<li class="l-2"><a href="#other-types-of-fragments">Other Types of Fragments</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Fragments</h1>
+          <p class="lede">Fragments are reusable chunks of site content: think headers, footers, or any element that appears on multiple pages. In Adobe Experience Manager (AEM) Edge Delivery ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_12005483fba21aec5db1f6f8403a31c2fc1d30a00.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_12005483fba21aec5db1f6f8403a31c2fc1d30a00.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_12005483fba21aec5db1f6f8403a31c2fc1d30a00.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_12005483fba21aec5db1f6f8403a31c2fc1d30a00.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Fragments are reusable chunks of site content: think headers, footers, or any element that appears on multiple pages. In Adobe Experience Manager (AEM) Edge Delivery Services, fragments have moved from “nice-to-have” add-ons to a built-in foundation of the product.</p>
+        <p>Making fragments first-class citizens eliminates duplicate markup, streamlines caching all the way to the CDN, and delivers consistent performance. Every new <a href="https://github.com/adobe/aem-boilerplate">AEM project built with boilerplate</a> now ships with header and footer fragments out of the box, so teams can author once and reuse everywhere with minimal effort.</p>
+        <h2 id="how-fragments-work">How Fragments work</h2>
+        <p>A fragment is a standalone piece of content (authored as either a document or a spreadsheet) that can be reused across multiple pages. Instead of copying the same content into every page, authors create a single source of truth and reference it where needed. This content is then inserted into the page at the time of delivery: documents are served as semantic HTML and spreadsheets as JSON (data-driven or table-like content).</p>
+        <p>Because fragments are delivered from separate resources, they can be cached and served independently. This improves performance and reduces the load on the main page, especially for content that appears across many parts of a site.</p>
+        <h2 id="referencing-fragments">Referencing Fragments</h2>
+        <p>Fragments can be referenced in multiple ways, depending on the use case.</p>
+        <ul>
+          <li><strong>Automatically by boilerplate:</strong> Fragments (like the header and footer) are programmatically pulled in by the site's display logic.</li>
+          <li><strong>Conditionally by metadata:</strong> Fragments can also be loaded based on page metadata. For example, a promotional banner might only appear on pages using a specific template.</li>
+          <li><strong>Manually by authors:</strong> Authors can selectively place a <code>Fragment</code> block with an explicit reference to a fragment document using the <code>.aem.page</code> or <code>.aem.live</code> link.</li>
+        </ul>
+        <p>Documents in the <code>/fragments/</code> folders are automatically recognized and treated as fragments. For example, a link to <code>https://main--site--org.aem.page/fragments/my-fragment</code> will automatically be auto-blocked and decorated without additional author effort.</p>
+        <p>For implementation details, see the <a href="../../developer/block-collection/fragment/index.html" data-broken-link="true">fragment block documentation</a>.</p>
+        <h2 id="when-to-use-fragments">When to use Fragments</h2>
+        <p>Fragments are ideal for content that appears across multiple pages, but reuse isn’t the only reason to use them. Sometimes, isolating a complex section (even if it appears only once on site) can make some pages easier to manage from an authoring perspective. Creating smaller, more focused fragments can reduce visual and structural clutter.</p>
+        <p>Fragments can also improve delivery performance by allowing a more controlled loading pattern for content that may not be relevant to all users (like content below the fold). It is important, however, that performance considerations are not the primary driver for content modeling decisions about when to use fragments.</p>
+        <h2 id="when-to-avoid-fragments">When to avoid Fragments</h2>
+        <p>While fragments can offer reusability and simplicity, they also introduce a level of indirection which can sometimes make authoring less intuitive. Instead of managing all content for a page in one document, fragments require authors to deal with references, navigate between multiple documents, and understand the separate life cycles (preview/publish) between those resources. For this reason, it’s best to use fragments only when they provide a clear benefit.</p>
+        <p>In most cases, fragments are best suited to content that enhances the page but isn’t central to its meaning (like headers, footers, or supplemental sections). Primary canonical content should remain in the main document to ensure clarity for both authors and automated systems (like search engines and indexers) that are trying to identify the main content on a page.</p>
+        <p>This is especially relevant for tools like spiders and robots that don’t support JavaScript execution. Because fragments are decorated on the client side, their content may not be indexed alongside the rest of the embedding page. Failing to separate essential and auxiliary content can result in inconsistent indexing and negatively impact SEO performance.</p>
+        <h2 id="fragments-and-indexing">Fragments and Indexing</h2>
+        <p>Since their primary purpose is to be inserted into other pages, it often doesn't make sense to have fragment pages indexed by search engines. or have AEM add them to your site's <a href="../../developer/indexing/index.html">query index</a> and <a href="../../developer/sitemap/index.html">sitemap</a> independently. It is therefore recommended to set <code>robots</code> to <code>noindex</code> in the metadata block of the fragment document, or globally via the <a href="../bulk-metadata/index.html">bulk metadata sheet</a>:</p>
+        <pre><code>URL		Robots
+*/fragments/*	noindex
+</code></pre>
+        <h2 id="other-types-of-fragments">Other Types of Fragments</h2>
+        <p>If you want to use Content Fragments from Adobe Experience Manager as a Cloud Service authoring in your Edge Delivery Services site you might be interested in trying the following approach to <a href="../../developer/content-fragment-overlay/index.html">publish Content Fragments directly to Edge Delivery Services as self-contained semantic HTML</a>.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

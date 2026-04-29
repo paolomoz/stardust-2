@@ -1,0 +1,152 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.956Z
+  page:             docs-global
+  pageUrl:          https://www.aem.live/docs/global
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Global Availability</title>
+  <meta name="description" content="Adobe Experience Manager is globally distributed and fully redundant">
+  <meta property="og:title" content="Global Availability">
+  <meta property="og:description" content="Adobe Experience Manager is globally distributed and fully redundant">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/global/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#your-sites-globally-available">Your sites, globally available</a></li>
+<li class="l-2"><a href="#your-content-globally-distributed">Your content, globally distributed</a></li>
+<li class="l-2"><a href="#what-about-data-residency">What about data residency?</a></li>
+<li class="l-2"><a href="#and-holiday-or-event-readiness">And holiday or event readiness?</a></li>
+<li class="l-3"><a href="#crosswalk">Crosswalk</a></li>
+<li class="l-3"><a href="#load-performance-and-penetration-testing">Load, Performance, and Penetration Testing</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Global Availability</h1>
+          <p class="lede">Adobe Experience Manager is globally distributed and fully redundant</p>
+        </header>
+        <div class="content">
+        <div class="availability">
+          <div>
+            <div><a href="https://www.aem.live/docs/global.json" data-broken-link="true">https://main--helix-website--adobe.aem.page/docs/global.json</a></div>
+          </div>
+        </div>
+        
+        <p>The Edge Delivery Services <a href="../architecture/index.html">architecture</a> for Adobe Experience Manager makes use of redundant content delivery networks (CDNs) to ensure high availability with low latency. The cacheable components of your sites are delivered directly from globally-distributed points of presence (POPs).</p>
+        <h2 id="your-sites-globally-available">Your sites, globally available</h2>
+        <p>The two highest priorities in delivering web experiences are availability and performance. For this reason, we use multiple content delivery networks to provide the Adobe Experience Manager service. Multiple CDNs so that, in the rare case of a CDN outage, we can switch the full delivery stack to a separate CDN to provide continued high availability.</p>
+        <p>Each CDN uses dozens to thousands of different points of presence (POPs): high-performance caching servers located at critical internet junctures in global locations, close to population centers. These POPs cache the content served for your websites and make it available to “nearby” visitors, minimizing the inherent network latency of interactions.</p>
+        <p><a href="../operational-telemetry/index.html">Operational Telemetry</a> is used to maintain awareness of site stability and availability over time.</p>
+        <h2 id="your-content-globally-distributed">Your content, globally distributed</h2>
+        <p>In order to ensure this global availability, your cacheable content has to be globally distributed to the same extent that it is published to global visitors. Each of the core storage areas of the AEM content hub (media, content, code) is therefore equally globally-distributed to be within reach of those global visitors.</p>
+        <h2 id="what-about-data-residency">What about data residency?</h2>
+        <p>The Edge Delivery Services architecture is designed for global publication of information that would normally appear on public sites. Site owners are responsible for ensuring that the information they choose to publish is in compliance with applicable laws or regulations. Likewise, the data we collect for <a href="../operational-telemetry/index.html">Operational Telemetry</a> is deliberately limited for the sake of privacy and compliance.</p>
+        <h2 id="and-holiday-or-event-readiness">And holiday or event readiness?</h2>
+        <p>If you are expecting <a href="../peak-traffic/index.html">traffic spikes due to seasonal or regional events such as public holidays, major promotions, sports, or cultural events</a> then there is no need for advance capacity planning, advance notification, or request for assistance. The edge delivery network is able to handle this traffic any time of the year.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="crosswalk"><a href="../publishing-from-authoring/index.html">Crosswalk</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="load-performance-and-penetration-testing"><a href="../testing/index.html">Load, Performance, and Penetration Testing</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

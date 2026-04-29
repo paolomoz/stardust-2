@@ -1,0 +1,309 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.160Z
+  page:             developer-cli-reference
+  pageUrl:          https://www.aem.live/developer/cli-reference
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>aem Command Line Reference</title>
+  <meta name="description" content="The content command set lets you check out your da.live content into a local content/ folder, edit it offline, inspect and merge changes against the ...">
+  <meta property="og:title" content="aem Command Line Reference">
+  <meta property="og:description" content="The content command set lets you check out your da.live content into a local content/ folder, edit it offline, inspect and merge changes against the ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/cli-reference/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#installation">Installation</a></li>
+<li class="l-2"><a href="#usage">Usage</a></li>
+<li class="l-2"><a href="#available-commands">Available Commands</a></li>
+<li class="l-3"><a href="#up">up</a></li>
+<li class="l-4"><a href="#server-options">Server Options</a></li>
+<li class="l-4"><a href="#aem-options">AEM Options</a></li>
+<li class="l-4"><a href="#options">Options</a></li>
+<li class="l-3"><a href="#import">import</a></li>
+<li class="l-4"><a href="#server-options-1">Server Options</a></li>
+<li class="l-4"><a href="#aem-importer-options">AEM Importer Options</a></li>
+<li class="l-3"><a href="#content">content</a></li>
+<li class="l-4"><a href="#authentication">Authentication</a></li>
+<li class="l-4"><a href="#subcommands">Subcommands</a></li>
+<li class="l-4"><a href="#content-clone">content clone</a></li>
+<li class="l-4"><a href="#content-status">content status</a></li>
+<li class="l-4"><a href="#content-diff">content diff</a></li>
+<li class="l-4"><a href="#content-merge">content merge</a></li>
+<li class="l-4"><a href="#content-add">content add</a></li>
+<li class="l-4"><a href="#content-commit">content commit</a></li>
+<li class="l-4"><a href="#content-push">content push</a></li>
+<li class="l-4"><a href="#options-1">Options</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>aem Command Line Reference</h1>
+          <p class="lede">The content command set lets you check out your da.live content into a local content/ folder, edit it offline, inspect and merge changes against the ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_130390ea6c8366c27bfda6908b30667a11e564fc6.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_130390ea6c8366c27bfda6908b30667a11e564fc6.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_130390ea6c8366c27bfda6908b30667a11e564fc6.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_130390ea6c8366c27bfda6908b30667a11e564fc6.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <h2 id="installation"><strong>Installation</strong></h2>
+        <pre><code>$ npm install -g @adobe/aem-cli
+</code></pre>
+        <h2 id="usage"><strong>Usage</strong></h2>
+        <pre><code>$ aem --help
+</code></pre>
+        <p>Help output:</p>
+        <pre><code>Usage: aem &lt;command&gt; [options]
+
+Commands:
+  aem up       Run a AEM development server
+  aem import   Run the AEM import server
+  aem content  Manage AEM content from da.live
+
+
+
+Options:
+  --version                Show version number                         [boolean]
+  --log-file, --logFile    Log file (use "-" for stdout)  [array] [default: "-"]
+  --log-level, --logLevel  Log level
+  [string] [choices: "silly", "debug", "verbose", "info", "warn", "error"] [default: "info"]
+  --help                   Show help                                   [boolean]
+
+use &lt;command&gt; --help to get command specific details.
+
+for more information, find our manual at https://github.com/adobe/helix-cli
+</code></pre>
+        <h2 id="available-commands"><strong>Available Commands</strong></h2>
+        <ul>
+          <li><a href="#up">up</a></li>
+          <li><a href="#import">import</a></li>
+          <li><a href="#content">content</a></li>
+        </ul>
+        <h3 id="up"><strong>up</strong></h3>
+        <h4 id="server-options"><strong>Server Options</strong></h4>
+        <ul>
+          <li><code>--port</code><br>Start development server on port<br>Default: <code>3000</code></li>
+          <li><code>--addr</code><br>Bind development server on address. Use <code>*</code> to bind to any address and allow external connections.<br>Default: <code>"127.0.0.1"</code></li>
+          <li><code>--stop-other</code>, <code>--stopOther</code><br>Stop other AEM CLI running on the above port<br>Default: <code>true</code></li>
+          <li><code>--tls-cert</code>, <code>--tlsCert</code><br>File location for your <code>.pem</code> file for local TLS support</li>
+          <li><code>--tls-key</code>, <code>--tlsKey</code><br>File location for your <code>.key</code> file for local TLS support</li>
+        </ul>
+        <h4 id="aem-options"><strong>AEM Options</strong></h4>
+        <ul>
+          <li><code>--url</code>, <code>--pagesUrl</code>, <code>--pages-url</code><br>The origin URL to fetch content from.</li>
+          <li><code>--livereload</code><br>Enable automatic reloading of modified sources in the browser.<br>Default: <code>true</code></li>
+          <li><code>--no-livereload</code>, <code>--noLiveReload</code><br>Disable live-reload</li>
+          <li><code>--open</code><br>Open a browser window at specified path<br>Default: <code>"/"</code></li>
+          <li><code>--no-open</code>, <code>--noOpen</code><br>Disable automatic opening of browser window</li>
+          <li><code>--print-index</code>, <code>--printIndex</code><br>Prints the indexed records for the current page.<br>Default: <code>false</code></li>
+          <li><code>--cache</code></li>
+          <li><code>--forward-browser-logs, -–forwardBrowserLogs</code><br>Forward browser console logs to terminal<br>Default: <code>false</code></li>
+        </ul>
+        <h4 id="options"><strong>Options</strong></h4>
+        <ul>
+          <li><code>--version</code><br>Show version number<br>Default: <code>boolean</code></li>
+          <li><code>--log-file</code>, <code>--logFile</code><br>Log file (use <code>"-"</code> for stdout)<br>Default: <code>"-"</code></li>
+          <li><code>--log-level</code>, <code>--logLevel</code><br>Log level<br>Choices: <code>"silly"</code>, <code>"debug"</code>, <code>"verbose"</code>, <code>"info"</code>, <code>"warn"</code>, <code>"error"</code><br>Default: <code>"info"</code></li>
+          <li><code>--site-token, --siteToken</code><br>Site token to be used by the cli to access the website</li>
+          <li><code>--alpha-cache</code>, <code>--alphaCache</code><br>Path to local folder to cache the responses (alpha feature, may be removed without notice)</li>
+          <li><code>--allow-insecure</code>, <code>--allowInsecure</code><br>Whether to allow insecure requests to the server<br>Default: <code>false</code></li>
+          <li><code>--cookies</code><br>Proxy all cookies in requests. By default, only the hlx-auth-token cookie is proxied.<br>Default: <code>false</code></li>
+          <li><code>--html-folder, --htmlFolder</code><br>Serve HTML files from this folder without extensions (e.g., /folder/file serves folder/file.html or folder/file.plain.html) use this to preview content changes if you do not have access to the authoring system. Can be helpful for <a href="../ai-coding-agents/index.html">Developing with AI Tools</a></li>
+          <li><code>--help</code><br>Show help<br>Default: <code>boolean</code></li>
+        </ul>
+        <h3 id="import"><strong>import</strong></h3>
+        <h4 id="server-options-1"><strong>Server Options</strong></h4>
+        <ul>
+          <li><code>--port</code><br>Start import server on port<br>Default: <code>3001</code></li>
+          <li><code>--addr</code><br>Bind import server on address. Use <code>*</code> to bind to any address and allow external connections.<br>Default: <code>"127.0.0.1"</code></li>
+          <li><code>--stop-other</code>, <code>--stopOther</code><br>Stop other AEM CLI running on the above port<br>Default: <code>true</code></li>
+          <li><code>--tls-cert</code>, <code>--tlsCert</code><br>File location for your <code>.pem</code> file for local TLS support</li>
+          <li><code>--tls-key</code>, <code>--tlsKey</code><br>File location for your <code>.key</code> file for local TLS support</li>
+        </ul>
+        <h4 id="aem-importer-options"><strong>AEM Importer Options</strong></h4>
+        <ul>
+          <li><code>--open</code><br>Open a browser window at specified path<br>Default: <code>"/tools/importer/helix-importer-ui/index.html"</code></li>
+          <li><code>--no-open</code>, <code>--noOpen</code><br>Disable automatic opening of browser window</li>
+          <li><code>--cache</code><br>Path to local folder to cache the responses</li>
+          <li><code>--ui-repo</code>, <code>--uiRepo</code><br>Git repository for the AEM Importer UI. A fragment may indicate a branch other than <code>main</code>.<br>Default: <code>"https://github.com/adobe/helix-importer-ui"</code></li>
+          <li><code>--skip-ui</code>, <code>--skipUI</code><br>Do not install the AEM Importer UI<br>Default: <code>false</code></li>
+          <li><code>--headers-file</code>, <code>--headersFile</code><br>Location of a custom <code>.json</code> file containing headers to be used with all proxy requests</li>
+        </ul>
+        <h3 id="content"><strong>content</strong></h3>
+        <p>The <code>content</code> command set lets you check out your da.live content into a local <code>content/</code> folder, edit it offline, inspect and merge changes against the remote, and push updates back. It follows a git-like workflow (stage, commit, push) and uses an internal git repository inside <code>content/</code> to track your edits.</p>
+        <p>Typical workflow:</p>
+        <pre><code>$ aem content clone            # fetch remote content into ./content
+$ # edit files under ./content
+$ aem content status           # see what changed
+$ aem content diff             # compare local vs remote
+$ aem content add &lt;path&gt;       # stage changes
+$ aem content commit -m "..."  # commit staged changes
+$ aem content push             # upload to da.live
+</code></pre>
+        <p>When <code>content/</code> is present, <code>aem up</code> automatically serves matching paths from it, so you can preview local edits before pushing.</p>
+        <h4 id="authentication"><strong>Authentication</strong></h4>
+        <p>The <code>content</code> commands authenticate against da.live using Adobe IMS. On first use, a browser window opens for you to sign in; after a successful login the callback redirects to <code>https://tools.aem.live/cli/logged-in</code>. The resulting token is cached locally (in the project's <code>.hlx/</code> folder, alongside the site token) and reused on subsequent invocations.</p>
+        <ul>
+          <li><code>--token</code><br>IMS token to use instead of the interactive browser flow. Useful for CI / non-interactive environments.</li>
+        </ul>
+        <h4 id="subcommands"><strong>Subcommands</strong></h4>
+        <ul>
+          <li><code>content clone</code></li>
+          <li><code>content status</code></li>
+          <li><code>content diff</code></li>
+          <li><code>content merge</code></li>
+          <li><code>content add</code></li>
+          <li><code>content commit</code></li>
+          <li><code>content push</code></li>
+        </ul>
+        <h4 id="content-clone"><strong>content clone</strong></h4>
+        <p>Downloads da.live sources into <code>./content/</code>, initializes a git repository with a baseline commit, writes a <code>.da-config.json</code> (org, repo, root path) inside <code>content/</code>, and records initial sync state.</p>
+        <p>Options:</p>
+        <ul>
+          <li><code>--path</code><br>Path prefix to clone. Recommended for large sites to limit the scope of the initial clone.</li>
+          <li><code>--force</code><br>Overwrite an existing local <code>content/</code> folder.</li>
+          <li><code>--yes</code><br>Skip the confirmation prompt for large clones. Required in non-interactive environments (e.g. CI) when the clone exceeds the size threshold.</li>
+          <li><code>--token</code><br>IMS token (see Authentication).</li>
+        </ul>
+        <h4 id="content-status"><strong>content status</strong></h4>
+        <p>Lists added, modified, and deleted files under <code>content/</code> relative to the last sync — similar to <code>git status</code>, but scoped to content rather than code.</p>
+        <h4 id="content-diff"><strong>content diff</strong></h4>
+        <p>Shows the diff between your local working tree and the remote on da.live.</p>
+        <p>Options:</p>
+        <ul>
+          <li><code>--path</code><br>Limit the diff to a specific path. If omitted, all changed paths are included.</li>
+        </ul>
+        <h4 id="content-merge"><strong>content merge</strong></h4>
+        <p>Merges remote content into local files when both sides have changed.</p>
+        <p>Options:</p>
+        <ul>
+          <li><code>--path</code><br>Merge a specific path. If omitted, all paths with conflicts are merged.</li>
+        </ul>
+        <h4 id="content-add"><strong>content add</strong></h4>
+        <p>Stages one or more paths so they will be included in the next commit. Works like <code>git add</code>.</p>
+        <p>Usage:</p>
+        <pre><code>$ aem content add &lt;path&gt; [&lt;path&gt; ...]
+</code></pre>
+        <h4 id="content-commit"><strong>content commit</strong></h4>
+        <p>Commits the currently staged changes with a message. Works like <code>git commit</code>.</p>
+        <p>Options:</p>
+        <ul>
+          <li><code>-m</code>, <code>--message</code><br>Commit message. Required.</li>
+        </ul>
+        <h4 id="content-push"><strong>content push</strong></h4>
+        <p>Uploads committed changes from <code>content/</code> to da.live. You must <code>content add</code> and <code>content commit</code> first.</p>
+        <p>Options:</p>
+        <ul>
+          <li><code>--path</code><br>Limit the push to a specific path.</li>
+          <li><code>--dry-run</code><br>Show what would be uploaded / deleted without making any changes on da.live.</li>
+          <li><code>--force</code><br>Proceed even when the remote has diverged. Use with care — this can overwrite remote changes.</li>
+          <li><code>--token</code><br>IMS token (see Authentication).</li>
+        </ul>
+        <h4 id="options-1"><strong>Options</strong></h4>
+        <ul>
+          <li><code>--version</code><br>Show version number<br>Default: <code>boolean</code></li>
+          <li><code>--log-file</code>, <code>--logFile</code><br>Log file (use <code>"-"</code> for stdout)<br>Default: <code>"-"</code></li>
+          <li><code>--log-level</code>, <code>--logLevel</code><br>Log level<br>Choices: <code>"silly"</code>, <code>"debug"</code>, <code>"verbose"</code>, <code>"info"</code>, <code>"warn"</code>, <code>"error"</code><br>Default: <code>"info"</code></li>
+          <li><code>--dump-headers, --dumpHeaders</code><br>Dump request headers to console for debugging<br>Default: <code>false</code></li>
+          <li><code>--allow-insecure</code>, <code>--allowInsecure</code><br>Whether to allow insecure requests to the server<br>Default: <code>true</code></li>
+          <li><code>--help</code><br>Show help<br>Default: <code>boolean</code></li>
+        </ul>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

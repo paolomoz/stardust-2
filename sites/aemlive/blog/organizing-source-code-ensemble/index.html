@@ -1,0 +1,278 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.254Z
+  page:             blog-organizing-source-code-ensemble
+  pageUrl:          https://www.aem.live/blog/organizing-source-code-ensemble
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Unlocking Efficiency with Helix 5: A Scalable Approach to Multi-Site Development</title>
+  <meta name="description" content="Imagine needing to launch four websites rapidly - while maintaining quality, consistency, and performance. One of our customers faced this exact challenge. They implemented AEM ...">
+  <meta property="og:title" content="Unlocking Efficiency with Helix 5: A Scalable Approach to Multi-Site Development">
+  <meta property="og:description" content="Imagine needing to launch four websites rapidly - while maintaining quality, consistency, and performance. One of our customers faced this exact challenge. They implemented AEM ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/blog/organizing-source-code-ensemble/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../index.html" aria-current="page">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-success)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#why-aem-edge-delivery-services-helix-5">Why AEM Edge Delivery Services (Helix 5)?</a></li>
+<li class="l-2"><a href="#key-differences-from-helix-4">Key Differences from Helix 4</a></li>
+<li class="l-2"><a href="#building-components-keep-it-simple">Building Components: Keep It Simple</a></li>
+<li class="l-3"><a href="#best-practices-for-component-development">Best Practices for Component Development</a></li>
+<li class="l-2"><a href="#templates-standardizing-layouts-without-extra-work">Templates: Standardizing Layouts Without Extra Work</a></li>
+<li class="l-3"><a href="#example-article-page-templates">Example: Article Page Templates</a></li>
+<li class="l-3"><a href="#applying-a-template">Applying a Template</a></li>
+<li class="l-2"><a href="#configuration-made-easy">Configuration Made Easy</a></li>
+<li class="l-2"><a href="#theming-customization-without-chaos">Theming: Customization Without Chaos</a></li>
+<li class="l-3"><a href="#theme-structure">Theme Structure</a></li>
+<li class="l-3"><a href="#applying-a-theme">Applying a Theme</a></li>
+<li class="l-3"><a href="#example-of-themed-variables">Example of Themed Variables</a></li>
+<li class="l-2"><a href="#final-thoughts">Final Thoughts</a></li>
+<li class="l-3"><a href="#what-makes-it-stand-out">What Makes It Stand Out?</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog · BLOG</p>
+          <h1>Unlocking Efficiency with Helix 5: A Scalable Approach to Multi-Site Development</h1>
+          <p class="lede">Imagine needing to launch four websites rapidly - while maintaining quality, consistency, and performance. One of our customers faced this exact challenge. They implemented AEM ...</p>
+        </header>
+        <div>
+        
+        <p>Imagine needing to launch four websites rapidly - while maintaining quality, consistency, and performance. One of our customers faced this exact challenge. They implemented AEM Edge Delivery Services (Helix 5), which enabled them to develop all four sites using a single codebase. This resulted in faster, more efficient deployment with reduced complications.</p>
+        <h2 id="why-aem-edge-delivery-services-helix-5">Why AEM Edge Delivery Services (Helix 5)?</h2>
+        <p>Before Helix 5, teams managed multiple repositories, spreadsheets, and configuration files, creating complexity and inefficiency. The new approach provides a streamlined workflow for multiple websites under one flexible system.</p>
+        <p>One client needed to launch four websites with unique branding but shared core functionality. Using Helix 5, they utilized a single component library instead of building each site from scratch. This provided faster development, theme-based customization, cross-site consistency, and simpler maintenance. While traditional methods would have required months, the shared codebase approach launched all four websites much faster with fewer complications.</p>
+        <h2 id="key-differences-from-helix-4">Key Differences from Helix 4</h2>
+        <p>Previously, managing configuration elements for multiple websites meant dealing with scattered spreadsheets and YAML files, leading to complexity and inconsistency.</p>
+        <p><strong>What Has Changed?</strong></p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1a642e7974834ee8f3544be71161c5785fb234a12.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1a642e7974834ee8f3544be71161c5785fb234a12.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1a642e7974834ee8f3544be71161c5785fb234a12.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1a642e7974834ee8f3544be71161c5785fb234a12.png?width=750&amp;format=png&amp;optimize=medium" width="1374" height="436">
+          </picture>
+        </p>
+        <h3 id="h-0-"></h3>
+        <p>With Helix 5, everything is handled through the Admin API, streamlining updates and ensuring consistency across all sites.</p>
+        <h2 id="building-components-keep-it-simple">Building Components: Keep It Simple</h2>
+        <p>Developing components in Helix 5 is all about reusability and flexibility. Instead of building custom components for every project, you can create a single set of modular pieces that work across different sites.</p>
+        <h3 id="best-practices-for-component-development">Best Practices for Component Development</h3>
+        <ul>
+          <li><strong>Use CSS variables</strong> for all customizable properties to ensure flexibility.</li>
+          <li><strong>Avoid hardcoded values</strong> to maintain scalability and prevent future design limitations.</li>
+          <li><strong>Organize components consistently</strong> with standard Edge Delivery Services structures—no need for overengineering.</li>
+        </ul>
+        <h2 id="templates-standardizing-layouts-without-extra-work">Templates: Standardizing Layouts Without Extra Work</h2>
+        <p>Templates help maintain a consistent look and feel across multiple pages.</p>
+        <h3 id="example-article-page-templates">Example: Article Page Templates</h3>
+        <p>Instead of reinventing the wheel for each new site, Helix 5 lets teams create template-specific CSS and JS files that can be easily reused:</p>
+        <pre><code>templates
+|-- articles
+|   |-- articles.css
+|   |-- articles.js
+</code></pre>
+        <p>When multiple templates are needed, we simply add more folders within the templates directory. Each template folder includes its own CSS and JS file to define its design and behaviour. This approach ensures that all article pages have a uniform design, reducing design inconsistencies.</p>
+        <h3 id="applying-a-template">Applying a Template</h3>
+        <p>Templates are assigned using metadata by simply specifying the template name in the Metadata table, meaning no extra coding is required.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_11b156bc048cbf364b8ee236ebf0ae55b390b86b2.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_11b156bc048cbf364b8ee236ebf0ae55b390b86b2.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_11b156bc048cbf364b8ee236ebf0ae55b390b86b2.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_11b156bc048cbf364b8ee236ebf0ae55b390b86b2.png?width=750&amp;format=png&amp;optimize=medium" width="1368" height="110">
+          </picture>
+        </p>
+        <h2 id="configuration-made-easy">Configuration Made Easy</h2>
+        <p>With Helix 5, configurations are managed via the Admin API, eliminating the need for manual file updates.</p>
+        <p><strong>Sample API Request:</strong></p>
+        <p><code>GET https://admin.hlx.page/config/{org)/sites/{website).json</code></p>
+        <p><strong>API Response Example:</strong></p>
+        <pre><code>{
+  "code": {
+    "owner": "{org}",
+    "repo": "{repo}",
+    "source": {
+      "type": "github",
+      "url": "https://github.com/{org}/{repo}"
+    }  
+  },
+  "content": {
+    "source": {
+      "url": "https://{path-to-sharepoint}",
+      "type": "onedrive"
+    },
+    "contentBusId": “{content-bus-id}”
+  }
+}
+</code></pre>
+        <h2 id="theming-customization-without-chaos">Theming: Customization Without Chaos</h2>
+        <p>Each website can have its own unique branding while still sharing a common structure.</p>
+        <h3 id="theme-structure">Theme Structure</h3>
+        <p>To manage multiple site themes, we use a structured approach:</p>
+        <pre><code>styles
+|-- base-styles.css
+|-- themes
+|   |-- site1-styles.css
+|   |-- site2-styles.css
+</code></pre>
+        <p>The base styles define the general design, while theme-specific styles are stored in separate CSS files.</p>
+        <h3 id="applying-a-theme">Applying a Theme</h3>
+        <p>Each website's theme is assigned in the Metadata table, like this:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1cfa6a043aca4e77d00edb9309833eb8d3a75edf7.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1cfa6a043aca4e77d00edb9309833eb8d3a75edf7.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1cfa6a043aca4e77d00edb9309833eb8d3a75edf7.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1cfa6a043aca4e77d00edb9309833eb8d3a75edf7.png?width=750&amp;format=png&amp;optimize=medium" width="1368" height="104">
+          </picture>
+        </p>
+        <p>A function in scripts.js dynamically loads the corresponding CSS file based on the metadata:</p>
+        <pre><code>async function loadSiteCss() {
+  try {
+    const theme = toClassName(getMetadata(‘theme’));
+
+  switch (theme) {
+    case ‘site1’:
+      loadCSS(`${window.hlx.codeBasePath}/styles/themes/site1-styles.css`);
+      break;
+    case ‘site2’:
+      loadCSS(`${window.hlx.codeBasePath}/styles/themes/site2-styles.css`);
+      break;
+    default:
+      loadCSS(`${window.hlx.codeBasePath}/styles/base-styles.css`);
+      break;
+    }
+  } catch (error) {
+    console.log(‘Theme loading failed’, error);
+  }
+}
+</code></pre>
+        <h3 id="example-of-themed-variables">Example of Themed Variables</h3>
+        <p>Each theme defines the same CSS variable names but with different values:</p>
+        <p><strong>Site 1 Theme Variables</strong></p>
+        <pre><code>:root {
+  —-background-color: white;
+  —-text-color: #003049;
+  —-button-color: purple;
+  —-button-text-color: #fff;
+}
+</code></pre>
+        <p><strong>Site 2 Theme Variables</strong></p>
+        <pre><code>:root {
+  —-background-color: #f4f4f4;
+  —-text-color: #262626;
+  —-button-color: blue;
+  —-button-text-color: yellow;
+}
+</code></pre>
+        <p>By referencing these variables, components adapt automatically to the active theme:</p>
+        <pre><code>footer {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+</code></pre>
+        <p>This approach ensures components remain reusable and adaptable across different sites without requiring individual modifications. Because all components reference these variables, switching themes is effortless!</p>
+        <h2 id="final-thoughts">Final Thoughts</h2>
+        <p>Helix 5 is more than just an upgrade—it’s a smarter way to build, scale, and maintain multiple websites efficiently.</p>
+        <h3 id="what-makes-it-stand-out">What Makes It Stand Out?</h3>
+        <ul>
+          <li><strong>Saves time</strong> by reusing components.</li>
+          <li><strong>Improves code organization</strong> with a structured approach.</li>
+          <li><strong>Reduces effort</strong> by simplifying site management.</li>
+          <li><strong>Minimizes redundant code</strong> while allowing site-specific customization.</li>
+        </ul>
+        <p>It represents a major leap forward for edge Delivery Services, enabling the use of a single codebase across multiple websites. By centralizing development into a shared component library, Helix 5 eliminates redundancy while supporting multiple themes and configurations. This structured approach significantly enhances efficiency, scalability, and maintainability in modern web development.</p>
+        <p>For teams looking to simplify their workflow without compromising on quality, Helix 5 is the way forward.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

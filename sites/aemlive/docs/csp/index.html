@@ -1,0 +1,353 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.357Z
+  page:             docs-csp
+  pageUrl:          https://www.aem.live/docs/csp
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Content Security Policy: strict-dynamic + (cached) nonce</title>
+  <meta name="description" content="Content Security Policy is a browser feature that helps prevent and mitigate certain types of threats and attacks.">
+  <meta property="og:title" content="Content Security Policy: strict-dynamic + (cached) nonce">
+  <meta property="og:description" content="Content Security Policy is a browser feature that helps prevent and mitigate certain types of threats and attacks.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/csp/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#introduction">Introduction</a></li>
+<li class="l-2"><a href="#configuration">Configuration</a></li>
+<li class="l-3"><a href="#trusted-scripts">1. Trusted Scripts</a></li>
+<li class="l-4"><a href="#headhtml">1.1. head.html</a></li>
+<li class="l-4"><a href="#other-static-html-files-from-your-repository-for-example-404html">1.2. Other static HTML files from your repository (for example 404.html)</a></li>
+<li class="l-3"><a href="#policy-enforcement">2. Policy Enforcement</a></li>
+<li class="l-4"><a href="#header-configuration">2.1 Header Configuration</a></li>
+<li class="l-4"><a href="#meta-tag-configuration">2.2 Meta Tag Configuration</a></li>
+<li class="l-3"><a href="#a-note-on-byo-cdn---cloudflare">3. A note on BYO CDN - Cloudflare</a></li>
+<li class="l-2"><a href="#technical-deepdive---faq">Technical Deepdive - FAQ</a></li>
+<li class="l-3"><a href="#does-caching-the-nonce-render-the-content-security-policy-ineffective">1. Does caching the nonce render the content security policy ineffective?</a></li>
+<li class="l-4"><a href="#stored-xss--reflected-xss">1. Stored XSS + Reflected XSS</a></li>
+<li class="l-4"><a href="#dom-based-xss">2. DOM Based XSS</a></li>
+<li class="l-3"><a href="#why-isnt-the-cache-simply-disabled-when-the-nonce-is-present">2. Why isn’t the cache simply disabled when the nonce is present?</a></li>
+<li class="l-3"><a href="#why-not-use-hash-based-content-security-policies-which-work-with-caching">3. Why not use hash based content security policies, which work with caching?</a></li>
+<li class="l-3"><a href="#why-use-this-content-security-policy-instead-of-a-host-based-one">4. Why use this content security policy instead of a host based one?</a></li>
+<li class="l-3"><a href="#cant-an-attacker-simply-add-another-script-with-nonceaem-in-the-html-before-it-is-replaced-with-the-actual-nonce-value">5. Can’t an attacker simply add another script with nonce="aem" in the HTML, before it is replaced with the actual nonce value?</a></li>
+<li class="l-3"><a href="#i-found-a-bypassvulnerability-which-is-not-covered-here-can-i-report-it">7. I found a bypass/vulnerability which is not covered here. Can I report it?</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Content Security Policy: strict-dynamic + (cached) nonce</h1>
+          <p class="lede">Content Security Policy is a browser feature that helps prevent and mitigate certain types of threats and attacks.</p>
+        </header>
+        <div class="content">
+        
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_111d61890a53373bbee6ba7d73233550524a17e77.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_111d61890a53373bbee6ba7d73233550524a17e77.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_111d61890a53373bbee6ba7d73233550524a17e77.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_111d61890a53373bbee6ba7d73233550524a17e77.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        <h2 id="introduction">Introduction</h2>
+        <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP">Content Security Policy</a> is a browser feature that helps prevent and mitigate certain types of threats and attacks.</p>
+        <p>There are multiple directives to restrict and control which resources can be loaded on your webpage by the browser, which other domains are allowed to iframe your content, etc.</p>
+        <p>This guide is very specific for mitigating Cross Site Scripting (XSS) attacks with a specific Content Security Policy configuration in AEM Edge Delivery Services and is not intended to be a general, exhaustive guide of all the Content Security Policy options and possibilities supported by the browser.</p>
+        <p><strong>Important Note:</strong> Content Security Policies are meant as a last line of defense when other measures fail. It is not intended to replace the use of safe DOM APIs and proper sanitisation of user input by developers in the code. It will not cover every single attack path and it is not meant to. It is always recommended that developers code in a safe manner.</p>
+        <p>The specific content security policy configuration recommended by this guide is:</p>
+        <p><code>script-src 'nonce-aem' 'strict-dynamic'; base-uri 'self'; object-src 'none';</code></p>
+        <p>As a short summary: This content security policy will allow the execution of only those scripts which have the correct nonce value at top level (<code>nonce</code> component) and any script loaded by these and their descendants client-side, creating a trust chain, as long as the additional scripts are loaded via non-”parser-inserted” elements (<code>strict-dynamic</code> component). <a href="https://content-security-policy.com/strict-dynamic/">More information</a></p>
+        <p>We have chosen this specific content security policy after reviewing the following:</p>
+        <ul>
+          <li>The findings of the following <a href="https://research.google/pubs/csp-is-dead-long-live-csp-on-the-insecurity-of-whitelists-and-the-future-of-content-security-policy/">Google Research paper</a> in regards to host based CSPs</li>
+          <li>Ease of deployment and maintenance on customer sites (through the use of <code>strict-dynamic</code>)</li>
+          <li>The number of threats it mitigates as opposed to other alternatives</li>
+          <li>How well it fits in the AEM Edge Delivery Services architecture</li>
+          <li>The recommendation coming from the <a href="https://developer.chrome.com/docs/lighthouse/best-practices/csp-xss">Google Lighthouse Report</a></li>
+        </ul>
+        <p>Customers can choose to add other directives to complement this one to meet their security needs.</p>
+        <h2 id="configuration">Configuration</h2>
+        <p>Starting with version 5 of the AEM Edge Delivery Services architecture, this feature is part of the boilerplate and is included by default in all new sites built from it.</p>
+        <p>There are two components to the configuration:</p>
+        <ol>
+          <li>Trusted Scripts</li>
+          <li>Policy Enforcement.</li>
+        </ol>
+        <p>Instructions below show how to mark trusted scripts in your repository and then how to configure the policy to be enforced.</p>
+        <p>After the enforcement is put in place, AEM will replace the <code>aem</code> part of the nonce in both the policy and the script attributes with a cryptographic random string, for every request that hits the rendering engine, generating new HTML markup from content. Once the HTML markup + headers is generated, it is cached on the CDN and is considered immutable.</p>
+        <p>Requests that hit the CDN cache will see the same nonce value until cache expiration.</p>
+        <p>The result should look as follows. If you don’t see the nonce generating a random value, it means the configuration was not correctly done.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1e1d6d2562fc2fac0892619033d80b32b81f7534b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1e1d6d2562fc2fac0892619033d80b32b81f7534b.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1e1d6d2562fc2fac0892619033d80b32b81f7534b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1e1d6d2562fc2fac0892619033d80b32b81f7534b.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="46">
+          </picture>
+        </p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_198dc31420eb9bb3ffce14346d58f0d41ae0ad642.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_198dc31420eb9bb3ffce14346d58f0d41ae0ad642.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_198dc31420eb9bb3ffce14346d58f0d41ae0ad642.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_198dc31420eb9bb3ffce14346d58f0d41ae0ad642.png?width=750&amp;format=png&amp;optimize=medium" width="1440" height="180">
+          </picture>
+        </p>
+        <h3 id="trusted-scripts">1. Trusted Scripts</h3>
+        <p>First, no matter how you choose to enforce it, you must add the nonce attribute marker (<code>nonce="aem"</code>) to the scripts you trust in HTML. This can be in:</p>
+        <h4 id="headhtml">1.1. <code>head.html</code></h4>
+        <pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"/&gt;
+&lt;script nonce="aem" src="/scripts/aem.js" type="module"&gt;&lt;/script&gt;
+&lt;script nonce="aem" src="/scripts/scripts.js" type="module"&gt;&lt;/script&gt;
+&lt;script nonce="aem" src="/scripts/scripts.js" type="module"&gt;&lt;/script&gt;
+&lt;link nonce="aem" rel="preload" as="script" crossorigin="anonymous" href="/scripts/preloaded.js" /&gt;
+&lt;link rel="stylesheet" href="/styles/styles.css"/&gt;
+</code></pre>
+        <h4 id="other-static-html-files-from-your-repository-for-example-404html">1.2. Other static HTML files from your repository (for example <code>404.html</code>)</h4>
+        <h3 id="policy-enforcement">2. Policy Enforcement</h3>
+        <p>For enforcing the policy you can configure it via either</p>
+        <ul>
+          <li>Header</li>
+          <li><code>&lt;meta&gt;</code> tag</li>
+        </ul>
+        <p><strong>IMPORTANT:</strong> Depending on where you are in the development cycle with your website we recommend you use the configuration options in the following order:</p>
+        <p>If your site is <strong>already in production</strong> without the CSP, serving content to your customers:</p>
+        <ol>
+          <li>Use the meta tag option <strong>2.1.2</strong> from below <strong>in a feature branch</strong></li>
+          <li>Thoroughly test the functionality of your website to make sure that there are no regressions</li>
+          <li>Proceed to put this configuration in the <strong>main</strong> branch to go in production, only after you are sure that there are no regressions.</li>
+          <li>Once you are confident that there are no problems in production, move the configuration as a header option <strong>2.1.1</strong> , to make sure that even future development is protected</li>
+        </ol>
+        <p>If your site is <strong>already in the middle of development,</strong> follow the same progression from above, but try moving quicker with putting the configuration in the <strong>main</strong> branch or as a header. This may mean that a couple of features need fixing for regressions, but every new feature will be already coded and tested inline with the CSP.</p>
+        <p>If you are <strong>starting a new website</strong> the AEM boilerplate has the meta tag option <strong>2.1.2</strong> already configured out of the box. Your developers will be coding and testing the features directly inline with the CSP. We recommend you move it as a header configuration (option <strong>2.1.1</strong>), to ensure that even new static HTML files, if included in the repository, are tested to be inline.</p>
+        <h4 id="header-configuration">2.1 Header Configuration</h4>
+        <p>You can choose to configure either the <code>content-security-policy</code> or the <code>content-security-policy-report-only</code> headers with the following value:</p>
+        <p><code>script-src 'nonce-aem' 'strict-dynamic'; base-uri 'self'; object-src 'none';</code></p>
+        <p><strong>Note:</strong> The <code>content-security-policy-report-only</code> header doesn’t offer any protection, it only allows you to test if there are any scripts which would be blocked when the policy is fully enforced through error messages.</p>
+        <p>This can be done using one of the following methods:</p>
+        <p>2.1.1 <strong><a href="../config-service-setup/index.html#update-headers">The configuration service</a></strong></p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/acme/sites/website/headers.json \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: &lt;your-auth-token&gt;' \
+  --data '{
+	"/**": [
+      {
+        "key": "content-security-policy",
+        "value": "script-src 'nonce-aem' 'strict-dynamic'; base-uri 'self'; object-src 'none';"
+      }
+    ]
+}'
+</code></pre>
+        <p>2.1.2 <strong>A specific attribute for the meta tag</strong> <code>move-to-http-header="true"</code> (only for <code>content-security-policy</code> and <strong>only when using a nonce based CSP</strong>).</p>
+        <p>This method can be useful for trying out the configuration in a branch, but has the disadvantage that it needs to be added to <code>head.html </code>and every other static HTML file from your repository.</p>
+        <pre><code>&lt;meta
+  http-equiv="content-security-policy"
+  content="script-src 'nonce-aem' 'strict-dynamic'; base-uri 'self'; object-src 'none';"
+  move-to-http-header="true"
+&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"/&gt;
+&lt;script nonce="aem" src="/scripts/aem.js" type="module"&gt;&lt;/script&gt;
+&lt;script nonce="aem" src="/scripts/scripts.js" type="module"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="/styles/styles.css"/&gt;
+</code></pre>
+        <h4 id="meta-tag-configuration">2.2 Meta Tag Configuration</h4>
+        <p>You can configure the content security policy also as a meta tag. This is a browser out of the box feature, but it is considered less secure than using a header.</p>
+        <pre><code>&lt;meta
+  http-equiv="content-security-policy"
+  content="script-src 'nonce-aem' 'strict-dynamic'; base-uri 'self'; object-src 'none';"
+&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"/&gt;
+&lt;script nonce="aem" src="/scripts/aem.js" type="module"&gt;&lt;/script&gt;
+&lt;script nonce="aem" src="/scripts/scripts.js" type="module"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="/styles/styles.css"/&gt;
+</code></pre>
+        <h3 id="a-note-on-byo-cdn---cloudflare">3. A note on BYO CDN - Cloudflare</h3>
+        <p>If you are using <a href="../byo-cdn-cloudflare-worker-setup/index.html">Cloudflare as BYO CDN</a> in front of AEM, please ensure that you are using the latest version of the Cloudflare Worker code, which removes the <code>content-security-policy</code> header for <code>304</code> response codes.</p>
+        <p>This ensures that the CDN does not return a <code>content-security-policy</code> header in a <code>304</code> response with a nonce value that conflicts with what your users already have in their browser cache.</p>
+        <h2 id="technical-deepdive---faq">Technical Deepdive - FAQ</h2>
+        <h3 id="does-caching-the-nonce-render-the-content-security-policy-ineffective">1. Does caching the nonce render the content security policy ineffective?</h3>
+        <p>No, given a set of assumptions, which hold true for typical sites implemented with AEM Edge Delivery Services.</p>
+        <p><strong>Assumptions:</strong></p>
+        <ul>
+          <li>Websites do not make modifications server-side to the HTML produced by AEM Edge Delivery Services (for example in the customer’s CDN).</li>
+          <li><code>unsafe-eval</code>, <code>unsafe-hashes</code> are not added to the content security policy.</li>
+        </ul>
+        <p>Customers with implementations which break these assumptions should evaluate the effectiveness of the content security policy in the context of the new set of conditions specific for their website.</p>
+        <p>Breaking this down into classes of Cross Site Scripting Attacks:</p>
+        <h4 id="stored-xss--reflected-xss">1. Stored XSS + Reflected XSS</h4>
+        <p>These types of Cross Site Scripting attacks occur through injection server side.</p>
+        <p>Every new request that hits the AEM Edge Delivery Services’ HTML rendering pipeline will always receive a new nonce value.<br>This effectively mitigates these types of attacks, because attackers trying to inject a <code>&lt;script&gt;</code> tag server side into the HTML cannot guess the new value of the nonce.</p>
+        <h4 id="dom-based-xss">2. DOM Based XSS</h4>
+        <p>This type of Cross Site Scripting attack occurs client side, when the client side JavaScript injects user input (from query parameters, url fragments, author supplied information in HTML) without proper context specific encoding/sanitization into a unsafe DOM APIs which interpret the input as HTML or JavaScript, instead of text.</p>
+        <p>The list below shows which use of DOM APIs* are considered mitigated and which aren't.</p>
+        <p>*Tested with Chrome, Mozilla, Safari</p>
+        <p><strong>2.1 Mitigated even if the nonce is cached</strong></p>
+        <p>✅ <strong>HTML inlined attribute event handlers</strong> (<code>onclick</code>, <code>onblur</code>, <code>onload</code>, <code>onerror</code> etc.). e.g: <code>&lt;img src='x' onerror='alert("xss")'&gt;</code></p>
+        <p>When <code>strict-dynamic</code> is present, browsers will ignore <code>unsafe-inline</code> directive and will not execute inlined even handlers.</p>
+        <p>✅ <strong>javascript: navigations</strong></p>
+        <ul>
+          <li><code>javascript:</code> protocol in the <code>href</code>/<code>src</code> attributes (e.g. <code>&lt;a href="javascript:alert(1)" &gt;click me!&lt;/a&gt;</code>)</li>
+          <li><code>location.href</code> / <code>location.assign()</code> / <code>location.replace </code>(e.g. <code>location.href = 'javascript:alert("xss")' </code>)</li>
+        </ul>
+        <p>When <code>strict-dynamic</code> is present, browsers will ignore <code>unsafe-inline</code> directive and will not execute this type of JavaScript.</p>
+        <p>✅ <strong>Eval based XSS</strong> - (obviously, as long as <code>unsafe-eval</code> is not present in the policy)</p>
+        <ul>
+          <li><code>eval</code> / <code>setTimeout</code> / <code>setInterval</code> / <code>Function</code></li>
+        </ul>
+        <p><strong>✅</strong> <code>.innerHTML</code><strong>,</strong> <code>.outerHTML</code><strong>,</strong> <code>.insertAdjacentHTML</code><strong>,</strong> <code>.setHTMLUnsafe</code></p>
+        <p>Modern browsers should not execute <code>&lt;script&gt;</code> tags injected through these DOM APIs, according to the MDN <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML#security_considerations">documentation</a>.</p>
+        <p>This leaves just</p>
+        <ul>
+          <li><strong>HTML inlined event handlers</strong>: which as specified above are mitigated</li>
+          <li><strong>javascript: navigations</strong>: which as specified above are mitigated</li>
+        </ul>
+        <p><strong>2.2 not protected, because the nonce is cached</strong></p>
+        <p>The following DOM APIs remain vulnerable, because looking up the value of the cached nonce can lead to a successful XSS.</p>
+        <p>❌ <code>document.write</code> / <code>document.writeln</code></p>
+        <p>The MDN documentation <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/write">strongly discourages</a> the use of these APIs.</p>
+        <p><strong>2.3 not protected, regardless if the nonce is cached</strong></p>
+        <p><strong>❌</strong> <code>document.createRange().createContextualFragment</code></p>
+        <p>whether the nonce is cached/known is irrelevant, scripts injected using this API are always executed when <code>strict-dynamic</code>.</p>
+        <p>Currently reported to:</p>
+        <ul>
+          <li><a href="https://github.com/w3c/webappsec-csp/issues/708">https://github.com/w3c/webappsec-csp/issues/708</a></li>
+          <li><a href="https://issues.chromium.org/issues/376479689">https://issues.chromium.org/issues/376479689</a></li>
+        </ul>
+        <p>❌ <strong>Unsanitized user input in the following scenarios is not mitigated as the use is permitted by</strong> <code>strict-dynamic</code></p>
+        <ul>
+          <li><code>src</code> attribute of a <code>&lt;script&gt;</code> tag created by <code>document.createElement('script')</code></li>
+          <li>body of a <code>&lt;script&gt;</code> tag created by <code>document.createElement('script')</code></li>
+          <li>usage of <code>import</code> API</li>
+        </ul>
+        <p>The general recommendation in these cases is simply that no user input should reach these places (either url path, query parameters, fragment or even from the HTML), as they are extremely difficult to mitigate even with the strictest CSPs.</p>
+        <p><strong>2.4. not protected by CSPs in general</strong></p>
+        <p>❌ Script-less attacks: HTML injection, DOM clobbering, etc.</p>
+        <p>It is important to note that CSPs don’t block every type of web attack and that’s why they are meant as an additional defense, rather than your main defense.</p>
+        <h3 id="why-isnt-the-cache-simply-disabled-when-the-nonce-is-present">2. Why isn’t the cache simply disabled when the nonce is present?</h3>
+        <p>Like with any engineering solution, the content security policy and protection it provides needs to be put in the context of where it is used and what are the trade-offs.</p>
+        <p>In AEM Edge Delivery Services the highly efficient use of the CDN cache is a key component of how Adobe delivers high performance, reliability and scalability.</p>
+        <p>With the current data outlined above, our understanding is that the theoretical disabling of the cache would benefit only a highly discouraged edge case (the usage of <code>document.write</code> / <code>document.writeln</code>), as the other cases don’t seem to depend on whether the nonce is cached or not.</p>
+        <h3 id="why-not-use-hash-based-content-security-policies-which-work-with-caching">3. Why not use hash based content security policies, which work with caching?</h3>
+        <p>There are a couple of reasons that make the use of hashes less efficient for this architecture:</p>
+        <p>3.1. We observed that when hashes are used, the <code>import</code> browser API doesn’t work. This is a key component in the AEM Boilerplate and how the client side rendering is structured.</p>
+        <p>3.2. The second problem is that the policy (which sits in either the HTML header or body) would have a separate caching lifecycle from the scripts referenced in the HTML. This can cause the rendering of the website to break if for any reason the hash from the policy is outdated, compared to the script delivered. This felt like a too high risk for the uptime of the site, especially when the nonce alternative does not suffer from this problem. Since the nonce header and HTML body are always stored together in the cache, this problem should not appear.</p>
+        <h3 id="why-use-this-content-security-policy-instead-of-a-host-based-one">4. Why use this content security policy instead of a host based one?</h3>
+        <p>The following <a href="https://research.google/pubs/csp-is-dead-long-live-csp-on-the-insecurity-of-whitelists-and-the-future-of-content-security-policy/">research paper</a> from Google has found the following problems, which we could confirm in practice for AEM Edge Delivery Services customers that did have host based content security policies:</p>
+        <p>4.1. Presence of <code>unsafe-inline</code> for inline scripts, this makes trivial DOM based XSS possible, since any unsanitised user input that ends up in a sink like <code>innerHTML</code> can be exploited.</p>
+        <p>4.2. Presence of domains where anybody can without restrictions place their own scripts. This presents a very low barrier for an attacker to instead of serving a specific script from a denylisted domain, to just upload it to one that’s allowlisted. Making the advantages over <code>strict-dynamic</code> in practice quite limited.</p>
+        <p>The host based content security policies are also quite hard to maintain, so we were looking for an alternative which works easily for a majority of customers, without the need for constant maintenance.</p>
+        <p>If you have <code>script-src 'self'; object-src 'none'; base-uri 'self';</code> you are probably safer, but it means you cannot load any tag manager and any script from outside domains, which we haven't seen this yet in practice.</p>
+        <h3 id="cant-an-attacker-simply-add-another-script-with-nonceaem-in-the-html-before-it-is-replaced-with-the-actual-nonce-value">5. Can’t an attacker simply add another script with nonce="aem" in the HTML, before it is replaced with the actual nonce value?</h3>
+        <p>No. The <code>nonce="aem"</code> attribute is not the main way we determine which scripts to add the new unique nonce value to.</p>
+        <p>We only apply the unique nonce value to scripts coming from <code>head.html</code> and static HTML files from your repository. These resources are considered trusted and controlled only by your developers. It is considered that if attackers can change these, they already can modify any code in your repository, thus trying to prevent XSS is no longer a concern. Scripts that could theoretically end up injected through any currently unknown method in the HTML will not receive the correct nonce value, even if they have the <code>nonce="aem" </code>attribute.</p>
+        <p>The <code>nonce="aem"</code> is rather a fallback mechanism, in case Adobe ever needs to deactivate this feature, your site continues to be served, without downtime, because the <code>aem</code> nonce value is present in both script attributes and policy enforcement, even if the protection is degraded.</p>
+        <p>6. Can I see example sites that use it already in production?</p>
+        <p>Yes, of course. Here are Adobe sites running in production, with different CDNs that are using this content security policy:</p>
+        <ol>
+          <li>Fastly: <a href="../../index.html"></a><a href="../../index.html">https://www.aem.live</a></li>
+          <li>Cloudflare: <a href="https://da.live"></a><a href="https://da.live">https://da.live</a></li>
+          <li>Akamai: <a href="https://blog.adobe.com"></a><a href="https://blog.adobe.com">https://blog.adobe.com</a></li>
+        </ol>
+        <h3 id="i-found-a-bypassvulnerability-which-is-not-covered-here-can-i-report-it">7. I found a bypass/vulnerability which is not covered here. Can I report it?</h3>
+        <p>Absolutely! Trust, but verify!</p>
+        <p>We appreciate feedback regarding any inaccuracies of this guide or content security policy approach and thank you for the time to report it to us!</p>
+        <p>Security measures work best when they are peer-reviewed and limitations well understood!</p>
+        <p>Please disclose responsibly vulnerabilities, bypasses or findings using the following two possibilities:</p>
+        <ol>
+          <li>Reach out to Adobe using your dedicated Slack channel if you are already a customer</li>
+          <li>Notify our Adobe Security team at <a href="mailto:psirt@adobe.com">psirt@adobe.com</a></li>
+        </ol>
+        <p>It is preferred that your report is also accompanied by a proof of concept example bypass, so we understand best your concern.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.175Z
+  page:             docs-unsupported
+  pageUrl:          https://www.aem.live/docs/unsupported
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Unsupported Integrations</title>
+  <meta name="description" content="Don't try these unsupported integrations at home">
+  <meta property="og:title" content="Unsupported Integrations">
+  <meta property="og:description" content="Don't try these unsupported integrations at home">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/unsupported/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#unsupported-content-delivery-networks">Unsupported Content Delivery Networks</a></li>
+<li class="l-2"><a href="#discouraged-security-practices">Discouraged Security Practices</a></li>
+<li class="l-3"><a href="#tls-interception">TLS Interception</a></li>
+<li class="l-3"><a href="#web-application-firewalls">Web Application Firewalls</a></li>
+<li class="l-3"><a href="#peak-traffic">Peak Traffic</a></li>
+<li class="l-3"><a href="#crosswalk">Crosswalk</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Unsupported Integrations</h1>
+          <p class="lede">Don't try these unsupported integrations at home</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1c28758b79582d19b79d7257cc9a5a8a0dedc9182.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1c28758b79582d19b79d7257cc9a5a8a0dedc9182.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1c28758b79582d19b79d7257cc9a5a8a0dedc9182.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="“Everybody has a testing environment. Some people are lucky enough to have a totally separate environment to run production in”" src="./media_1c28758b79582d19b79d7257cc9a5a8a0dedc9182.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>As a composable architecture, AEM embraces integrations with customer’s preferred infrastructure, be it Content Delivery Networks, Content Authoring and Content Repositories, or Web Optimization and Analytics software.</p>
+        <p>There are a number of integration patterns that have proven to be problematic for security, availability and performance reasons. These patterns are generally discouraged by Adobe. Refer to this document for an outline of integration patterns that are frequently causing issues for AEM customers.</p>
+        <h2 id="unsupported-content-delivery-networks"><strong>Unsupported Content Delivery Networks</strong></h2>
+        <p>Adobe Experience Manager supports a <a href="../byo-cdn-setup/index.html"></a><a href="../byo-cdn-setup/index.html">wide set of Content Delivery Networks</a> (CDNs) and offers deep integrations, including optimized time-to-live (TTL) and surgical invalidation upon content or code update.</p>
+        <p>For CDNs not included in this list, following common problems can be observed:</p>
+        <ul>
+          <li>Caching relies on fixed TTLs, slowing down the rollout of content updates and code changes</li>
+          <li>Caching is often misconfigured or disabled, increasing time-to-first-byte (TTFB) and decreasing web performance</li>
+          <li>Origin requests sometimes use insecure Transport Layer Security (TLS) practices such as domain fronting, which impedes availability and security of the site</li>
+        </ul>
+        <p>To rectify this, we recommend customers to switch to a supported CDN. Every Adobe Experience Manager license includes access to an Adobe-managed, supported CDN and we provide <a href="../cdn-guide/index.html"></a><a href="../cdn-guide/index.html">a guide for picking the right supported CDN</a>.</p>
+        <h2 id="discouraged-security-practices"><strong>Discouraged Security Practices</strong></h2>
+        <p>Adobe Experience Manager supports <a href="../security/index.html"></a><a href="../security/index.html">various security configurations and integrations</a> with Web Application Firewalls (WAFs) and security tools. However, certain security practices have proven to be problematic for performance and reliability.</p>
+        <h3 id="tls-interception"><strong>TLS Interception</strong></h3>
+        <p>TLS interception or SSL inspection, while intended to enhance security, often creates the following issues:</p>
+        <p>TLS interception introduces multiple challenges that can severely impact your site's performance and security posture. The additional processing required for intercepting and re-encrypting traffic creates noticeable latency, while improper certificate handling can introduce new security vulnerabilities rather than preventing them.</p>
+        <p>Furthermore, these interception practices often conflict with modern security protocols, breaking the fundamental promise of end-to-end encryption that many applications rely on. When TLS connections are intercepted, the original security guarantees between the client and server are compromised, potentially exposing sensitive data to unnecessary risks.</p>
+        <p>Finally, incomplete rollout of custom Certificate Agency (CA) certificate to developers, <a href="https://github.com/adobe/helix-cli?tab=readme-ov-file#aem-up-fails-with-unable-to-get-local-issuer-certificate"></a><a href="https://github.com/adobe/helix-cli?tab=readme-ov-file#aem-up-fails-with-unable-to-get-local-issuer-certificate">causing certificate rejection issues</a> in the <a href="../../developer/cli-reference/index.html"></a><a href="../../developer/cli-reference/index.html">AEM CLI</a>.</p>
+        <p>We recommend implementing end-to-end encryption without intermediate TLS termination points, utilizing modern security features built into supported CDNs.</p>
+        <h3 id="web-application-firewalls"><strong>Web Application Firewalls</strong></h3>
+        <p>While WAFs are essential for security, certain implementations can negatively impact site performance.</p>
+        <p>Web Application Firewalls can introduce performance challenges through synchronous request processing, complex pattern matching rules, inefficient geographic routing, and interference with CDN caching. These factors combine to create unnecessary latency and diminish the performance benefits of your content delivery architecture.</p>
+        <p>For optimal security and performance, consider using Adobe's <a href="../security/index.html#request-filtering"></a><a href="../security/index.html#request-filtering">built-in WAF security features</a> or implementing WAF solutions through supported CDN providers.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="peak-traffic"><a href="../peak-traffic/index.html">Peak Traffic</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="crosswalk"><a href="../publishing-from-authoring/index.html">Crosswalk</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

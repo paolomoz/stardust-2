@@ -1,0 +1,537 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.322Z
+  page:             developer-json2html
+  pageUrl:          https://www.aem.live/developer/json2html
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>JSON2HTML for Edge Delivery Services</title>
+  <meta name="description" content="Learn how to convert JSON from your backend endpoints to Edge Delivery Services friendly Semantic HTML to build dynamic pages via configuration only">
+  <meta property="og:title" content="JSON2HTML for Edge Delivery Services">
+  <meta property="og:description" content="Learn how to convert JSON from your backend endpoints to Edge Delivery Services friendly Semantic HTML to build dynamic pages via configuration only">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/json2html/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#usage">Usage</a></li>
+<li class="l-3"><a href="#configuration-management">Configuration Management</a></li>
+<li class="l-4"><a href="#authentication">Authentication</a></li>
+<li class="l-4"><a href="#request-format">Request Format</a></li>
+<li class="l-4"><a href="#configuration-structure">Configuration Structure</a></li>
+<li class="l-3"><a href="#configuration-parameters">Configuration Parameters</a></li>
+<li class="l-4"><a href="#optional-and-advanced-configurations">Optional and advanced configurations</a></li>
+<li class="l-3"><a href="#using-header-placeholders-in-endpoints">Using Header Placeholders in Endpoints</a></li>
+<li class="l-3"><a href="#example-configuration-updates">Example Configuration Updates</a></li>
+<li class="l-4"><a href="#using-curl">Using curl:</a></li>
+<li class="l-3"><a href="#example-regex-and-endpoint-combinations">Example Regex and Endpoint Combinations</a></li>
+<li class="l-3"><a href="#understanding-the-relativeurlprefix-option">Understanding the relativeURLPrefix Option</a></li>
+<li class="l-2"><a href="#example-template">Example Template</a></li>
+<li class="l-2"><a href="#odds-and-ends">Odds and ends</a></li>
+<li class="l-2"><a href="#faq">FAQ</a></li>
+<li class="l-3"><a href="#byom-bring-your-own-markup">BYOM (Bring your own markup)</a></li>
+<li class="l-3"><a href="#publish-aem-content-fragments-with-json2html">Publish AEM Content Fragments with json2html</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>JSON2HTML for Edge Delivery Services</h1>
+          <p class="lede">Learn how to convert JSON from your backend endpoints to Edge Delivery Services friendly Semantic HTML to build dynamic pages via configuration only</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_17846d607e543805b0a5e179b3ca7b93de2bacbd8.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_17846d607e543805b0a5e179b3ca7b93de2bacbd8.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_17846d607e543805b0a5e179b3ca7b93de2bacbd8.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_17846d607e543805b0a5e179b3ca7b93de2bacbd8.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Delivering well-structured markup is essential for any AEM site, but when working with a legacy headless CMS, you're often limited to raw JSON responses - far from the clean HTML you're aiming for.</p>
+        <p>That's where <strong>JSON2HTML</strong> comes in. This generic worker bridges the gap by transforming JSON data into fully formed HTML pages tailored for Edge Delivery Services.</p>
+        <p>Best of all, it requires minimal setup - no need to deploy your own service. Here’s how it works…</p>
+        <h2 id="usage"><strong>Usage</strong></h2>
+        <p>Once you have your JSON data, endpoint, and a mustache template to transform JSON into BYOM friendly HTML - then follow these steps to stitch everything together.</p>
+        <ul>
+          <li>Step 1: Prepare your JSON data</li>
+          <li>Step 2: Use a Mustache template to generate Edge Delivery Friendly HTML using <a href="../byom/index.html">BYOM (Bring your own markup)</a></li>
+          <li>Step 3: Add an overlay to your content source as follows:</li>
+        </ul>
+        <pre><code>"overlay": {
+   "url": "https://json2html.adobeaem.workers.dev/&lt;ORG&gt;/&lt;SITE&gt;/&lt;BRANCH&gt;",
+   "type": "markup"
+ },
+</code></pre>
+        <ul>
+          <li>Step 4: Update the configuration using a POST call to the <code>/config/</code> endpoint:</li>
+        </ul>
+        <pre><code>POST https://json2html.adobeaem.workers.dev/config/&lt;ORG&gt;/&lt;SITE&gt;/&lt;BRANCH&gt;
+Authorization: token &lt;your-admin-token&gt;
+Content-Type: application/json
+ [
+    {
+      "path": "/path1/abc/def/",
+      "endpoint": "https://&lt;some-endpoint/path&gt;/event-{{id}}.json",
+      "regex": "/[^/]+$/",
+      "template": "/templates/category/template.html",
+      "headers": {
+        "X-API-Key": "your-api-key-here",
+        "Accept": "application/json"
+      },
+      "forwardHeaders": [
+        "Authorization",
+      ],
+      "relativeURLPrefix": "https://some-domain.com"
+    },
+    {
+      "path": "/path2/xyz/",
+      "endpoint": "https://&lt;another-endpoint/path&gt;/event-{{id}}.json",
+      "regex": "/[^/]+$/",
+      "template": "/templates/category/template.html"
+    },
+    {
+       "path": "/dynamic-pages/",
+       "endpoint": "https://www.edge-delivery-site.com/all-the-data.json",
+       "arrayKey": "data",
+       "pathKey": "URL",
+       "template": "/templates/fun-template.html"
+    }
+ ]
+</code></pre>
+        <ul>
+          <li>Step 5: Preview the dynamic path that would use this overlay and it will generate the HTML based on the configuration above and you can then visit the .aem.page of that path and see the result. Once previewed, everything in Edge Delivery Services will continue to work as expected.</li>
+        </ul>
+        <h3 id="configuration-management"><strong>Configuration Management</strong></h3>
+        <p>The configuration is managed through a POST request to the <code>/config/:org/:site/:branch</code> endpoint.</p>
+        <h4 id="authentication"><strong>Authentication</strong></h4>
+        <ul>
+          <li>Authorization Header: Include your AEM Admin API token in the <code>Authorization</code> header</li>
+        </ul>
+        <h4 id="request-format"><strong>Request Format</strong></h4>
+        <ul>
+          <li>Method: POST</li>
+          <li>URL: <code>https://json2html.adobeaem.workers.dev/config/&lt;ORG&gt;/&lt;SITE&gt;/&lt;BRANCH&gt;</code></li>
+          <li>Headers:
+            <ul>
+              <li><code>Authorization: token &lt;your-admin-token&gt;</code></li>
+              <li><code>Content-Type: application/json</code></li>
+            </ul>
+          </li>
+          <li>Body: JSON configuration object</li>
+        </ul>
+        <h4 id="configuration-structure"><strong>Configuration Structure</strong></h4>
+        <p>The request body should contain an array with one or more configuration objects:</p>
+        <pre><code>[
+  {
+    "path": "/path1/abc/def/",
+    "endpoint": "https://&lt;some-endpoint/path&gt;/event-{{id}}.json",
+    "regex": "/[^/]+$/",
+    "template": "/templates/category/template.html",
+    "headers": {
+      "X-API-Key": "your-api-key-here",
+      "Accept": "application/json"
+    },
+    "forwardHeaders": [
+      "Authorization",
+    ],
+    "relativeURLPrefix": "https://some-domain.com"
+  },
+  {
+    "path": "/path2/xyz/",
+    "endpoint": "https://&lt;another-endpoint/path&gt;/event-{{id}}.json",
+    "regex": "/[^/]+$/",
+    "template": "/templates/category/template.html"
+  }
+]
+</code></pre>
+        <h3 id="configuration-parameters"><strong>Configuration Parameters</strong></h3>
+        <p>Each configuration object in the array requires the following keys:</p>
+        <ul>
+          <li><code>path</code>: The URL path pattern to match for this overlay configuration. The worker will use this to determine which config to apply.
+            <ul>
+              <li>Example: <code>/path1/abc/def/</code></li>
+              <li>Required: Yes</li>
+            </ul>
+          </li>
+          <li><code>endpoint</code>: The API endpoint URL that contains the JSON data. Use <code>{{id}}</code> as a placeholder that will be replaced with the ID extracted from the request URL. <code>{{id}}</code> is used in conjunction with the regex option. You can also <a href="#using-header-placeholders-in-endpoints">inject header values into the endpoint</a>.
+            <ul>
+              <li>Example: <code>https://api.example.com/event-list.json</code></li>
+              <li>Required: Yes</li>
+            </ul>
+          </li>
+        </ul>
+        <h4 id="optional-and-advanced-configurations">Optional and advanced configurations</h4>
+        <ul>
+          <li><code>regex</code>: A regular expression pattern to extract the ID from the request URL. Should be provided as a string with forward slashes.
+            <ul>
+              <li>Example: <code>/[^/]+$/</code> (matches the last segment of the URL path)</li>
+              <li>Required: Only if you use <code>`{{id}}`</code> in the endpoint. Not required if you're using <code>`arrayKey`</code> and <code>`pathKey`</code></li>
+            </ul>
+          </li>
+          <li><code>template</code>: Relative URL to a Mustache template file located under the same org/site/branch that will be used to render the JSON data. If not provided, a default semantic HTML structure will be generated.
+            <ul>
+              <li>Example: <code>/templates/event.html</code></li>
+              <li>Required: No (but recommended to have a template)</li>
+              <li>Default: Basic semantic HTML with nested divs</li>
+            </ul>
+          </li>
+          <li><code>headers</code>: Custom HTTP headers to send when fetching data from the endpoint. If not provided, it defaults to <code>{ 'Content-Type': 'application/json' }</code>.
+            <ul>
+              <li>Example: <code>{ 'X-API-Key': 'your-api-key-here', 'Accept': 'application/json' }</code></li>
+              <li>Required: No</li>
+              <li>Default: <code>{ 'Content-Type': 'application/json' }</code></li>
+            </ul>
+          </li>
+          <li><code>forwardHeaders</code>: An array of header names to forward from the incoming request to the endpoint API call. This is useful for passing authentication tokens from Helix Admin to AEM content source for example.
+            <ul>
+              <li>Example: <code>["Authorization"]</code></li>
+              <li>Required: No</li>
+              <li>Default: No incoming headers are forwarded</li>
+            </ul>
+          </li>
+          <li><code>relativeURLPrefix</code>: allows you to prefix relative URLs in the generated HTML content with a domain. Applies only to src and href attributes and only for these file types that are supported by BYOM: .mp4, .pdf, .svg, .jpg, .jpeg, .png
+            <ul>
+              <li>Example: <code>https://some-domain.com</code></li>
+              <li>Required: No</li>
+              <li>Default: No prefix will be added to relative paths</li>
+            </ul>
+          </li>
+          <li><code>useAEMMapping</code>: Uses the AEM mapping available at /config.json to rewrite the links in the resulting HTML appropriately
+            <ul>
+              <li>Example: <code>true</code></li>
+              <li>Required: No</li>
+              <li>Default: <code>false</code></li>
+            </ul>
+          </li>
+          <li><code>arrayKey</code>: Specifies the key in the JSON response that contains an array of items. When provided, the worker will iterate through this array to get the JSON object that matches the incoming path with <code>pathKey</code>. This is useful for handling JSON responses that contain collections of data and you only want to select an object. Also a good option for leveraging Edge Delivery spreadsheet json as the endpoint.
+            <ul>
+              <li>Example: <code>"data"</code> or <code>"events"</code></li>
+              <li>Required: No</li>
+              <li>Default: <code>null</code> (no filtering the json data)</li>
+              <li>When used with <code>pathKey</code>, allows to filter to the specific matching item to be used from a larger data set</li>
+            </ul>
+          </li>
+          <li><code>pathKey</code>: Specifies the key in each array item that should be used to match with the incoming path. This works in conjunction with <code>arrayKey</code> to select only a specific JSON object from an array to be used for generating the dynamic HTML.
+            <ul>
+              <li>Example: <code>"URL"</code> or <code>"path"</code></li>
+              <li>Required: No (but required if using arrayKey)</li>
+              <li>Default: <code>null</code> (no filtering the json data)</li>
+              <li>When used with <code>arrayKey</code>, allows to filter to the specific matching item to be used from a larger data set</li>
+            </ul>
+          </li>
+          <li><code>templateApiKey: </code>A <a href="../../docs/authentication-setup-site/index.html#create-a-site-token-to-access-your-protected-site">Site Token</a> used to authenticate when fetching the Mustache template from a protected site.
+            <ul>
+              <li>Example: <code>"your-site-token"</code>, will be in the format <code>hlx_XXX</code></li>
+              <li>Required: No (but required if your site uses site authentication)</li>
+              <li>Default: No authentication header is sent when fetching templates</li>
+              <li>Note: This key is sent as <code>Authorization: token &lt;templateApiKey&gt; </code>header when fetching:
+                <ul>
+                  <li>The Mustache template file</li>
+                  <li>The <code>/config.json</code> file (when <code>useAEMMapping </code>is enabled)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>The worker will:</p>
+        <ul>
+          <li>Match the request URL against the <code>path</code> patterns</li>
+          <li>Use the <code>regex</code> to extract an ID from the URL</li>
+          <li>Replace <code>{{id}}</code> in the <code>endpoint</code> URL with the extracted ID (if applicable)</li>
+          <li>Fetch JSON data from the endpoint</li>
+          <li>If <code>`arrayKey`</code> is specified, iterate through the array and use <code>`pathKey`</code> to filter to the right json object to be used for rendering</li>
+          <li>Render using either the specified <code>template</code> or default HTML structure</li>
+        </ul>
+        <h3 id="using-header-placeholders-in-endpoints"><strong>Using Header Placeholders in Endpoints</strong></h3>
+        <p>You can dynamically construct endpoint URLs using values from request headers. This is useful when the API endpoint path depends on information passed via headers (e.g., <code>x-content-source-location</code>).</p>
+        <p><strong>Supported Syntax:</strong> The endpoint URL supports two placeholder patterns for header values:</p>
+        <ul>
+          <li>Dot notation: <code>{{headers.headerName}}</code></li>
+          <li>Bracket notation: <code>{{headers['header-name']}}</code></li>
+        </ul>
+        <p>Both patterns support case-insensitive header matching, so <code>{{headers.Authorization}}</code> will match an <code>authorization</code> header.</p>
+        <p><strong>Example Configuration:</strong></p>
+        <pre><code>{
+  "path": "/tenant/data/",
+  "endpoint": "https://api.example.com/{{headers.x-tenant-id}}/resources/{{id}}.json",
+  "regex": "/[^/]+$/",
+  "forwardHeaders": ["x-tenant-id"]
+}
+</code></pre>
+        <p>With an incoming request containing <code>X-Tenant-Id: acme-corp</code>, the endpoint resolves to: <code>https://api.example.com/acme-corp/resources/123.json</code></p>
+        <p>For header names containing hyphens or special characters, use bracket notation:</p>
+        <pre><code>{
+  "path": "/api/users/",
+  "endpoint": "https://backend.example.com/org/{{headers['x-org-id']}}/users/{{headers['x-user-id']}}.json",
+  "forwardHeaders": ["x-org-id", "x-user-id"]
+}
+</code></pre>
+        <p><strong>Note:</strong></p>
+        <ul>
+          <li>Remember to include any headers you reference in the <code>forwardHeaders</code> array if they come from the incoming request</li>
+          <li>Headers defined in the <code>headers</code> config object are also available for substitution</li>
+          <li>This feature works in combination with the <code>{{id}}</code> placeholder from regex matching</li>
+        </ul>
+        <h3 id="example-configuration-updates"><strong>Example Configuration Updates</strong></h3>
+        <h4 id="using-curl"><strong>Using curl:</strong></h4>
+        <pre><code>curl -X POST \
+  https://json2html.adobeaem.workers.dev/config/myorg/mysite/main \
+  -H "Authorization: token your-admin-token-here" \
+  -H "Content-Type: application/json" \
+  -d '[
+      {
+        "path": "/events/",
+        "endpoint": "https://api.example.com/events/{{id}}.json",
+        "regex": "/[^/]+$/",
+        "template": "/templates/event.html",
+        "templateApiKey": "your-site-token",
+        "headers": {
+          "X-API-Key": "your-api-key-here"
+        },
+    "forwardHeaders": [
+      "Authorization",
+    ],
+    "relativeURLPrefix": "https://some-domain.com",    
+      },
+      {
+        "path": "/path2/xyz/",
+        "endpoint": "https://&lt;another-endpoint/path&gt;/event-{{id}}.json",
+        "regex": "/[^/]+$/",
+        "template": "/templates/another-mustache-template.html"
+      },
+     {
+       "path": "/dynamic-pages/",
+       "endpoint": "https://www.edge-delivery-site.com/all-the-data.json",
+       "arrayKey": "data",
+       "pathKey": "URL",
+       "template": "/templates/fun-template.html"
+     }
+    ]'
+</code></pre>
+        <h3 id="example-regex-and-endpoint-combinations"><strong>Example Regex and Endpoint Combinations</strong></h3>
+        <ul>
+          <li>Match numeric ID at end of path:</li>
+        </ul>
+        <pre><code>"regex": "/\\d+$/"
+"endpoint": "https://api.example.com/items/{{id}}.json"
+</code></pre>
+        <p>Matches: <code>/products/123</code>, <code>/categories/789</code></p>
+        <ul>
+          <li>Match alphanumeric slug:</li>
+        </ul>
+        <pre><code>"regex": "/[a-zA-Z0-9-]+$/"
+"endpoint": "https://api.example.com/articles/{{id}}"
+</code></pre>
+        <p>Matches: <code>/blog/my-article-123</code>, <code>/news/breaking-news</code></p>
+        <ul>
+          <li>Match date and ID pattern:</li>
+        </ul>
+        <pre><code>"regex": "/\\d{4}/\\d{2}/\\d{2}/[\\w-]+$/"
+"endpoint": "https://api.example.com/archive/{{id}}"
+</code></pre>
+        <p>Matches: <code>/posts/2023/12/25/christmas-special</code></p>
+        <ul>
+          <li>Match multiple path segments:</li>
+        </ul>
+        <pre><code>"regex": "/([^/]+)/([^/]+)$/"
+"endpoint": "https://api.example.com/{{id}}/details.json"
+</code></pre>
+        <p>Matches: <code>/category/subcategory</code>, <code>/region/city</code></p>
+        <ul>
+          <li>Match specific prefix with ID:</li>
+        </ul>
+        <pre><code>"regex": "/event-([\\w-]+)$/"
+"endpoint": "https://api.example.com/events/{{id}}/full"
+</code></pre>
+        <p>Matches: <code>/calendar/event-summer-2023</code>, <code>/schedule/event-conf-2024</code></p>
+        <ul>
+          <li>Match UUID format:</li>
+        </ul>
+        <pre><code>"regex": "/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/"
+"endpoint": "https://api.example.com/records/{{id}}"
+</code></pre>
+        <p>Matches: <code>/data/550e8400-e29b-41d4-a716-446655440000</code></p>
+        <h3 id="understanding-the-relativeurlprefix-option"><strong>Understanding the relativeURLPrefix Option</strong></h3>
+        <p>The <code>relativeURLPrefix</code> is a configuration option that allows you to rewrite relative URLs in the generated HTML content. This is particularly useful for serving static assets from a CDN or different domain while keeping content URLs relative.</p>
+        <p><strong>What it does:</strong> Automatically adds a custom domain prefix to relative URLs in your HTML content.</p>
+        <p>Before: <code>&lt;img src="/images/photo.jpg"&gt;</code></p>
+        <p>After: <code>&lt;img src="https://cdn.example.com/images/photo.jpg"&gt;</code></p>
+        <p><strong>How to use it</strong>: Add <code>“relativeURLPrefix”: “https://your-cdn.com”</code> to your config.</p>
+        <p><strong>What gets changed:</strong> Only URLs that start with <code>/</code> and end with supported file types</p>
+        <p><strong>What doesn't change:</strong> URLs that are already full web addresses or don't match the file type criteria.</p>
+        <p><strong>Supported File Types:</strong> The system only rewrites URLs for these file extensions:</p>
+        <ul>
+          <li><code>.mp4</code> - Video files</li>
+          <li><code>.pdf</code> - PDF documents</li>
+          <li><code>.svg</code> - SVG graphics</li>
+          <li><code>.jpg</code> / <code>.jpeg</code> - JPEG images</li>
+          <li><code>.png</code> - PNG images</li>
+        </ul>
+        <p><strong>Important Notes</strong></p>
+        <ul>
+          <li>Only affects URLs starting with forward slash (root-relative URLs)</li>
+          <li>Does not modify URLs that are already absolute or protocol-relative</li>
+        </ul>
+        <h2 id="example-template"><strong>Example Template</strong></h2>
+        <p>The example template below demonstrates how to handle complex JSON structures and conditional rendering using <a href="https://github.com/janl/mustache.js">mustache.js</a> syntax.</p>
+        <ul>
+          <li>Variable substitution with <code>{{variable}}</code></li>
+          <li>Section blocks with <code>{{#section}}...{{/section}}</code></li>
+          <li>Conditional rendering with <code>{{#condition}}...{{/condition}}</code></li>
+          <li>Array iteration</li>
+          <li>Nested object access</li>
+          <li>HTML escaping with <code>{{{triple-mustache}}}</code></li>
+          <li>Boolean flags for conditional content</li>
+        </ul>
+        <p>This template showcases various Mustache patterns:</p>
+        <pre><code>&lt;!-- Basic variable substitution --&gt;
+&lt;title&gt;{{title}}&lt;/title&gt;
+
+&lt;!-- Conditional sections --&gt;
+{{#hasValues}}
+  &lt;!-- Content only rendered if hasValues is true --&gt;
+{{/hasValues}}
+
+&lt;!-- Array iteration --&gt;
+{{#values}}
+  &lt;!-- Content repeated for each item in values array --&gt;
+{{/values}}
+
+&lt;!-- Nested object access --&gt;
+{{values.0.valueName}}
+
+&lt;!-- HTML content with triple mustache --&gt;
+{{{highlights}}}
+
+&lt;!-- Boolean flags for conditional rendering --&gt;
+{{#hasConsensus}}
+  &lt;!-- Content only rendered if hasConsensus is true --&gt;
+{{/hasConsensus}}
+</code></pre>
+        <ul>
+          <li>The template uses standard Mustache syntax</li>
+          <li>HTML content in JSON should be properly escaped</li>
+          <li>Boolean flags control the visibility of optional sections</li>
+          <li>The template demonstrates handling of nested data structures</li>
+          <li>All variable substitutions use proper Mustache escaping</li>
+        </ul>
+        <h2 id="odds-and-ends"><strong>Odds and ends</strong></h2>
+        <p>Some meta tags are handled differently in Edge Delivery Services while previewing.</p>
+        <p>For example, if you want to add a bunch of article:tags, you can do the following in the mustache template:</p>
+        <p><code>&lt;meta name="tags" content="{{#tags}}{{.}},{{/tags}}"&gt;</code></p>
+        <p>and they will be blown up into individual article:tag meta elements in the resulting HTML</p>
+        <h2 id="faq"><strong>FAQ</strong></h2>
+        <p><strong>Why use mustache and not handlebars or more complex templating solutions?</strong><br>As with everything else in Edge Delivery Services, we strive to make complex interactions as simple and as fast as possible. We use a dependency-free version of Mustache which is a logic-less template syntax that keeps things as simple as possible and results in extremely fast processing times.</p>
+        <p><strong>What if I want to do some pre/post-processing of the source JSON / resulting HTML for my pages?</strong></p>
+        <ul>
+          <li><em>For source JSON</em> - you can either update the source JSON into the format you need or handle it at a different edge worker that the json2html worker will use as an endpoint.</li>
+          <li><em>For resulting HTML</em> - the HTML generated by this service will be previewed and published like any other page. You can control the resulting HTML on the page using block/site JS/CSS as you please like with any other page in Edge Delivery Services. You can also do whatever is in the confines of the mustache template which is pretty powerful in itself.</li>
+        </ul>
+        <p><strong>How do I develop and test for this without disturbing my production configuration?</strong><br>Like with everything else in Edge Delivery, this service is also branch-aware. That means you can push a config to a separate branch and use that branch for testing anything you would want to. Once you are satisfied with the testing, then you can push it up the main branch and update the config in the main branch as necessary.</p>
+        <p><strong>Can I use JSON2HTML with sites that have site authentication enabled?</strong><br>Yes! If your Edge Delivery site uses site authentication, you'll need to provide a “templateApiKey” in your configuration. This key is used to authenticate when fetching the Mustache template and other resources (like “/config.json” when using “useAEMMapping”). Without this key, the worker won't be able to fetch templates from authenticated sites and will fall back to generating generic HTML.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="byom-bring-your-own-markup"><a href="../byom/index.html">BYOM (Bring your own markup)</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="publish-aem-content-fragments-with-json2html"><a href="../content-fragment-overlay/index.html">Publish AEM Content Fragments with json2html</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

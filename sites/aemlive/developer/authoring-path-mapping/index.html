@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.222Z
+  page:             developer-authoring-path-mapping
+  pageUrl:          https://www.aem.live/developer/authoring-path-mapping
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Path mapping for AEM authoring as your content source</title>
+  <meta name="description" content="To be able to use AEM authoring as your content source and publish your content to Edge Delivery Services, you must set up your project’s ...">
+  <meta property="og:title" content="Path mapping for AEM authoring as your content source">
+  <meta property="og:description" content="To be able to use AEM authoring as your content source and publish your content to Edge Delivery Services, you must set up your project’s ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/authoring-path-mapping/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#configuration-format">Configuration format</a></li>
+<li class="l-3"><a href="#mappings">mappings</a></li>
+<li class="l-4"><a href="#examples">Examples</a></li>
+<li class="l-3"><a href="#includes">includes</a></li>
+<li class="l-2"><a href="#how-to-configure">How to configure</a></li>
+<li class="l-3"><a href="#path-mapping">Path Mapping</a></li>
+<li class="l-3"><a href="#anatomy-of-an-aem-project">Anatomy of an AEM Project</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Path mapping for AEM authoring as your content source</h1>
+          <p class="lede">To be able to use AEM authoring as your content source and publish your content to Edge Delivery Services, you must set up your project’s ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_152a6907988019c7269a93117139036b43f773054.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_152a6907988019c7269a93117139036b43f773054.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_152a6907988019c7269a93117139036b43f773054.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_152a6907988019c7269a93117139036b43f773054.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>To be able to use AEM authoring as your content source and publish your content to Edge Delivery Services, you must set up your project’s path mapping. This mapping has two purposes.</p>
+        <ul>
+          <li>It maps and creates a relationship between page paths used on your AEM authoring instance and the public page paths used on your website.</li>
+          <li>It controls which content (pages, sheets, assets, etc.) are published to Edge Delivery Services.</li>
+        </ul>
+        <p>The path mapping must be configured for each project individually and according to the project’s content and URL structure. It is used by AEM during content publishing and while editing content in the <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/sites/authoring/universal-editor/navigation">Universal Editor</a>.</p>
+        <h2 id="configuration-format">Configuration format</h2>
+        <p>The format of the path mapping configuration contains two sections (mappings and includes) similar to the following example.</p>
+        <pre><code>{
+  "mappings": [
+    "/content/aem-boilerplate/:/",
+    "/content/aem-boilerplate/configuration:/.helix/config.json"
+  ],
+  "includes": [
+    "/content/aem-boilerplate/"
+  ]
+}
+</code></pre>
+        <h3 id="mappings">mappings</h3>
+        <p>The <code>mappings</code> configuration holds an array of internal paths (on the AEM authoring instance) and external URL paths (on the public website).</p>
+        <p>The format is <code>&lt;internal paths&gt;:&lt;external path&gt;</code>. It typically consists of a minimum of two entries.</p>
+        <ol>
+          <li>The first entry from the example is the path mapping of the website pages.</li>
+          <li>The second entry controls the mapping of the <code>.helix/config.json</code> to the corresponding spreadsheet page in the AEM authoring repository.</li>
+        </ol>
+        <p>In this example, all pages stored under <code>/content/aem-boilerplate/...</code> will be publicly accessible on the Edge Delivery Services site directly under <code>https://main--my-site--org.aem.live/....</code>.</p>
+        <p><strong>TIP</strong>: All tabular data managed as spreadsheets (e.g. metadata, redirects, and taxonomy) are typically published as <code>.json</code> API URLs on Edge Delivery Services. To do so, they must be individually listed in the mapping configuration. Please see the document <a href="../../docs/authoring-tabular-data/index.html">Using Spreadsheets to Manage Tabular Data</a> for more information.</p>
+        <h4 id="examples">Examples</h4>
+        <ul>
+          <li><code>../path/:/</code> maps a folder (both ending in <code>/</code>).</li>
+          <li><code>../path:/anotherpath</code> maps a document to a different path (previously known as a vanity URL).</li>
+          <li><code>../path/en:/folder/</code> is a special case and maps the document to <code>/folder/index</code>.</li>
+          <li><code>../path/:/en</code> maps a folder to a document and not a typical use case.</li>
+        </ul>
+        <p>All rules are applied and the last that matches is used. I.e. the order of the rules is from least to most significant.</p>
+        <h3 id="includes">includes</h3>
+        <p>The <code>includes</code> configuration controls which content paths are actually replicated to Edge Delivery Services. It can hold any array of paths as well and typically contains the site’s top-level root page.</p>
+        <p>Assets used on Edge Delivery Services pages are typically published alongside the webpage. They will be exported from the AEM authoring instance to Edge Delivery Services automatically.</p>
+        <p><strong>TIP</strong>: If you have a use case where you want assets published directly to Edge Delivery Services (for example you would like images or PDFs to be directly accessible by their URLs outside of a page context), you must add the DAM paths to the <code>includes</code> section of the configuration as well. For example, if an asset root folder such as <code>/content/dam/my-site/documents</code> containing a set of PDF should be publicly accessible via <code>/assets/...</code>, an entry must be added to the <code>includes</code> section of the configuration.</p>
+        <h2 id="how-to-configure">How to configure</h2>
+        <p>Your path mappings can be configured in one of two ways depending on the setup of your project.</p>
+        <ol>
+          <li>If the project is configured for <code>aem.live</code> and uses <a href="../../docs/config-service-setup/index.html">the configuration service</a> for centralized configurations, the paths mapping for each site is configured via this configuration service.
+            <ul>
+              <li>Here is an example cURL request to configure path mappings.</li>
+            </ul>
+          </li>
+        </ol>
+        <pre><code>curl --request POST \
+  --url https://admin.aem.page/config/{org}/sites/{site}/public.json \
+  --header 'Content-Type: application/json' \
+  --header 'x-auth-token: ......' \
+  --data '{
+    "paths": {
+    "mappings": [
+      "/content/aem-boilerplate/:/",
+      "/content/aem-boilerplate/configuration:/.helix/config.json"
+    ],
+    "includes": [
+      "/content/aem-boilerplate/"
+    ]
+}
+}'
+</code></pre>
+        <ol start="2">
+          <li>If the project does not use the configuration service, the paths mapping is configured via a <code>paths.json</code> file in your project’s GitHub repository.
+            <ul>
+              <li>See <code>https://github.com/adobe-rnd/aem-boilerplate-xwalk/blob/main/paths.json</code> for an example.</li>
+            </ul>
+          </li>
+        </ol>
+        <p>In both cases, once you configure your path mappings, you can check the configuration via the publicly-accessible configuration URL <code>https://&lt;branch&gt;--&lt;site&gt;--&lt;org&gt;.aem.page/config.json</code>.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="path-mapping"><a href="index.html">Path Mapping</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="anatomy-of-an-aem-project"><a href="../anatomy-of-a-helix-project/index.html" data-broken-link="true">Anatomy of an AEM Project</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

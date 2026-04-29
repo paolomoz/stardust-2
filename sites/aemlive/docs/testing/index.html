@@ -1,0 +1,192 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.353Z
+  page:             docs-testing
+  pageUrl:          https://www.aem.live/docs/testing
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Load, Performance, and Penetration Testing</title>
+  <meta name="description" content="Load Testing, Performance Testing, and Penetration Testing on AEM">
+  <meta property="og:title" content="Load, Performance, and Penetration Testing">
+  <meta property="og:description" content="Load Testing, Performance Testing, and Penetration Testing on AEM">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/testing/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#three-different-disciplines">Three different disciplines</a></li>
+<li class="l-2"><a href="#what-you-are-actually-testing">What you are actually testing</a></li>
+<li class="l-2"><a href="#load-testing">Load testing</a></li>
+<li class="l-3"><a href="#common-mistakes-to-avoid-in-load-tests">Common mistakes to avoid in load tests</a></li>
+<li class="l-2"><a href="#performance-testing">Performance testing</a></li>
+<li class="l-2"><a href="#penetration-testing">Penetration testing</a></li>
+<li class="l-2"><a href="#what-you-should-focus-on">What you should focus on</a></li>
+<li class="l-3"><a href="#global-availability">Global Availability</a></li>
+<li class="l-3"><a href="#china">China</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Load, Performance, and Penetration Testing</h1>
+          <p class="lede">Load Testing, Performance Testing, and Penetration Testing on AEM</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_15e575fd1bbeff5a78658d69e06b9c127766caa14.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_15e575fd1bbeff5a78658d69e06b9c127766caa14.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_15e575fd1bbeff5a78658d69e06b9c127766caa14.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="“Everybody has a testing environment. Some people are lucky enough to have a totally separate environment to run production in”" src="./media_15e575fd1bbeff5a78658d69e06b9c127766caa14.png?width=750&amp;format=png&amp;optimize=medium" width="750" height="562">
+          </picture>
+        </p>
+        
+        <p>Edge Delivery Services is built on a <a href="../architecture/index.html"></a><a href="../architecture/index.html">serverless, CDN-first architecture</a> that is designed to absorb traffic at scale without the need for any manual intervention or capacity planning. We trust this architecture to serve a quiet Monday morning as well as Black Friday, which is why we do not require customers to seek approval before running reasonable load tests, performance tests, or penetration tests against their sites.</p>
+        <p>That said, we do <a href="../operations/index.html"></a><a href="../operations/index.html">monitor all traffic</a> to our infrastructure continuously. We can tell when a test is running, we can tell when a test is not achieving anything useful, and we will tell you. This guide explains how to test effectively and what to avoid.</p>
+        <h2 id="three-different-disciplines"><strong>Three different disciplines</strong></h2>
+        <p>Customers frequently treat load testing, performance testing, and penetration testing as interchangeable. They are not. Each validates a different aspect of your site and requires different tools, different targets, and a different interpretation of results.</p>
+        <p><strong>Load testing</strong> answers the question: can the system sustain the traffic volumes I expect? The goal is to verify that all components of the delivery chain, from CDN edge to origin to third-party backends, continue to function correctly under realistic concurrent load.</p>
+        <p><strong>Performance testing</strong> answers the question: does the experience remain fast? This is about measuring user-facing metrics like Largest Contentful Paint, Cumulative Layout Shift, and Interaction to Next Paint under varying conditions, not about saturating the origin.</p>
+        <p><strong>Penetration testing</strong> answers the question: can the system be exploited? This is a security exercise aimed at discovering vulnerabilities in the application layer, the CDN configuration, or the content pipeline.</p>
+        <h2 id="what-you-are-actually-testing"><strong>What you are actually testing</strong></h2>
+        <p>In a traditional monolithic CMS, a load test that hammers the origin server with HTTP requests is a meaningful exercise because the origin is the bottleneck. Edge Delivery Services is not a traditional monolithic CMS. Content is being served from <a href="../global/index.html"></a><a href="../global/index.html">globally distributed CDN edge locations</a>. The origin is serverless and <a href="../peak-traffic/index.html"></a><a href="../peak-traffic/index.html">scales horizontally without limit</a>. A raw HTTP flood proves exactly one thing: that the CDN can serve cached responses. It always can. The delivery tier already applies <a href="../security/index.html#request-filtering"></a><a href="../security/index.html#request-filtering">strict path filtering</a> that is functionally equivalent to a web application firewall, blocking thousands of illegitimate requests per minute.</p>
+        <h2 id="load-testing"><strong>Load testing</strong></h2>
+        <p>Edge Delivery Services hosts thousands of websites, serving billions of page views per month. Unless your site is in the 100 most visited sites in the world, your day-to-day traffic won't have an impact on our overall load, and you can save yourself the effort and cost of a load test.</p>
+        <p>If you are still convinced that you need to perform a load test, we kindly ask you to follow these rules:</p>
+        <ol>
+          <li>Test against your production CDN origin. Your visitors do not hit <code>*.aem.page</code> or <code>*.aem.live</code> directly; they hit your CDN. A load test that bypasses your CDN is testing an architecture that no visitor will ever experience.</li>
+          <li>Use browser-based load testing tools that render pages fully. Tools like WebPageTest, Lighthouse CI, Playwright-based harnesses, or commercial real-browser platforms generate the kind of load that reflects actual user behavior. They execute JavaScript, fire third-party tags, and trigger the same API calls a real session would.</li>
+          <li>Simulate realistic traffic patterns. Real visitors do not request the same URL ten thousand times per second. They land on different pages, navigate through the site, interact with forms and carts, and leave. Your load test should model this diversity.</li>
+          <li>Stay within realistic volumes. Test at or slightly above the 99th percentile of your actual traffic, not at arbitrary multiples. Edge Delivery Services enforces <a href="../limits/index.html"></a><a href="../limits/index.html">rate and volume limits</a> on a per-project basis, and extreme volumes will result in your IP being blocked. On some days, a single customer's load test exceeds the combined traffic of all AEM customers. This is neither useful nor appreciated.</li>
+          <li>Use <a href="../operational-telemetry/index.html"></a><a href="../operational-telemetry/index.html">Operational Telemetry</a> (RUM) data to establish your baseline and identify the pages that actually receive the most traffic. Test those pages under load rather than inventing synthetic scenarios that do not reflect your site's real traffic profile.</li>
+        </ol>
+        <h3 id="common-mistakes-to-avoid-in-load-tests">Common mistakes to avoid in load tests</h3>
+        <p><strong>🚫 Hitting a single URL repeatedly</strong></p>
+        <p>A test that requests the same URL thousands of times per second validates nothing but the CDN's ability to serve a cached response. The response will be cached after the first request and served from edge memory thereafter. You will see excellent numbers. They will be meaningless.</p>
+        <p><strong>🚫 Testing at unrealistic volumes</strong></p>
+        <p>Edge Delivery Services is multi-tenant infrastructure with strict <a href="../limits/index.html"></a><a href="../limits/index.html">rate and volume limits</a>. Tests that exceed 200 uncached requests from a single IP per second, or otherwise vastly surpass your site's actual traffic patterns, will be rate-limited or blocked. This is not a limitation of the architecture; it is a deliberate protection for all customers sharing the infrastructure.</p>
+        <p>If you have a legitimate reason to validate behavior at extreme scale, coordinate with Adobe through <a href="../teams/index.html">Teams</a>, <a href="../slack/index.html"></a><a href="../slack/index.html">Slack</a> or <a href="https://business.adobe.com/customers/consulting-services/premier-support.html"></a><a href="https://business.adobe.com/customers/consulting-services/premier-support.html">Adobe Support</a> so we can distinguish a legitimate test from an attack.</p>
+        <p><strong>🚫 Testing at the network layer</strong></p>
+        <p>Useful load tests simulate real users in real browsers navigating real pages. They execute the full page rendering, including JavaScript execution, third-party resource loading, and API calls. Network-level HTTP generators like <code>ab</code>, <code>wrk</code>, or <code>vegeta</code> do not do this.</p>
+        <p><strong>🚫</strong> <strong>Testing against the origin</strong></p>
+        <p>The hostnames <code>*.aem.page</code> or <code>*.aem.live </code>serve Adobe's built-in <a href="../architecture/index.html#how-content-gets-published"></a><a href="../architecture/index.html#how-content-gets-published">preview and delivery</a> tiers. They are not your production origins. Your visitors reach your site through your CDN, which may apply its own caching rules, edge logic, security policies, and geographic routing. Testing against <code>*.aem.page</code> or <code>*.aem.live</code> bypasses all of that and produces results that do not reflect the experience your visitors will have.</p>
+        <p>Additionally, <code>*.aem.page</code> uses <a href="../staging/index.html"></a><a href="../staging/index.html">different caching rules</a> optimized for content preview immediacy, not production delivery. Performance characteristics measured against <code>*.aem.page</code> are not representative of your published site.</p>
+        <h2 id="performance-testing"><strong>Performance testing</strong></h2>
+        <p>Performance testing does not require high traffic volumes. It requires accurate measurement of the experience as perceived by a real browser.</p>
+        <p>Use <a href="../operational-telemetry/index.html"></a><a href="../operational-telemetry/index.html">Operational Telemetry</a> as your primary performance measuring tool. RUM data collected from actual visitors provides the most accurate picture of real-world performance across devices, networks, and geographies. Synthetic lab tests are useful for identifying regressions during development, but field data from RUM is the authoritative source.</p>
+        <p>For synthetic testing, tools like <a href="https://pagespeed.web.dev/"></a><a href="https://pagespeed.web.dev/">PageSpeed Insights</a>, WebPageTest, and Lighthouse provide detailed performance diagnostics. Run these against your production CDN hostname with appropriate geographic distribution to reflect your visitor base.</p>
+        <p>Establish performance budgets based on <a href="https://web.dev/vitals/"></a><a href="https://web.dev/vitals/">Core Web Vitals</a> and monitor them continuously through RUM rather than relying on periodic test runs. A site that passes a lab test on Tuesday can degrade on Thursday when a marketing team adds a new third-party script. Continuous monitoring catches this; scheduled tests do not.</p>
+        <h2 id="penetration-testing"><strong>Penetration testing</strong></h2>
+        <p>As stated in our <a href="../security/index.html"></a><a href="../security/index.html">Security Overview</a>, you are permitted to perform penetration tests against our services without advance notice. We ask that you follow two rules:</p>
+        <ol>
+          <li>Perform load tests including simulated (D)DoS attacks only against <strong>production</strong> infrastructure, which includes your CDN</li>
+          <li>If you find a vulnerability, disclose it responsibly to psirt@adobe.com</li>
+        </ol>
+        <p>Penetration testing should target the full production stack: your CDN, your custom edge logic, and any backend integrations. Testing against origin environments or bypassing the CDN does not reflect the attack surface that a real adversary would encounter.</p>
+        <h2 id="what-you-should-focus-on"><strong>What you should focus on</strong></h2>
+        <p>Your testing effort is best directed at the components which you control: your <a href="../byo-cdn-setup/index.html">CDN configuration</a>, your client-side code, your third-party integrations, and your backend services. These are the components that determine whether your visitors have a good experience under load, and they are the components where testing produces actionable results.</p>
+        <p>If your CDN is not on the <a href="../byo-cdn-setup/index.html"></a><a href="../byo-cdn-setup/index.html">list of supported CDNs</a>, fixing that will do more for your site's performance than any load test. See <a href="../unsupported/index.html"></a><a href="../unsupported/index.html">Unsupported Integrations</a> for common pitfalls.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="global-availability"><a href="../global/index.html">Global Availability</a></h3>
+            </div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Up Next</p>
+              <h3 id="china"><a href="../china/index.html">China</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

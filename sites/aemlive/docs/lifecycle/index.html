@@ -1,0 +1,251 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.182Z
+  page:             docs-lifecycle
+  pageUrl:          https://www.aem.live/docs/lifecycle
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Feature Lifecycle</title>
+  <meta name="description" content="Simplicity and productivity guide everything we do. To stay lean and fast, we’ve redefined our approach—focusing only on features that customers actively use.">
+  <meta property="og:title" content="Feature Lifecycle">
+  <meta property="og:description" content="Simplicity and productivity guide everything we do. To stay lean and fast, we’ve redefined our approach—focusing only on features that customers actively use.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/lifecycle/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#map-of-interest">Map of Interest</a></li>
+<li class="l-3"><a href="#aem-authoring-with-universal-editor">AEM Authoring with Universal Editor</a></li>
+<li class="l-2"><a href="#release-history">Release history</a></li>
+<li class="l-2"><a href="#early-access-technology">Early-access technology</a></li>
+<li class="l-2"><a href="#deprecations-and-removals">Deprecations and Removals</a></li>
+<li class="l-2"><a href="#questions-or-ideas">Questions or Ideas?</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Feature Lifecycle</h1>
+          <p class="lede">Simplicity and productivity guide everything we do. To stay lean and fast, we’ve redefined our approach—focusing only on features that customers actively use.</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1f621bffc514132d811a1e4864f783d8028af40ec.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1f621bffc514132d811a1e4864f783d8028af40ec.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1f621bffc514132d811a1e4864f783d8028af40ec.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1f621bffc514132d811a1e4864f783d8028af40ec.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Simplicity and productivity guide everything we do. To stay lean and fast, we’ve redefined our approach—focusing only on features that customers actively use.</p>
+        <p><strong>What does this look like?</strong></p>
+        <p>Edge Delivery Services follows a feature lifecycle, not a traditional roadmap. When our existing features don’t meet a business need, we collaborate with customers to develop a solution. If it gains traction across multiple customers, we productize it and monitor usage. When a feature is no longer actively used, we replace it with a better solution.</p>
+        <p><strong>Feature Lifecycle Stages:</strong></p>
+        <ul>
+          <li><strong>Map of Interest</strong> – A collection of business needs that cannot yet be met with our existing features.</li>
+          <li><strong>Adobe-led Implementation</strong> – Solutions developed in collaboration with customers to address a Map of Interest need.</li>
+          <li><strong>Product Feature</strong> – A fully productized feature, proven in real-world usage, and available as part of the product offering.</li>
+          <li><strong>Deprecation</strong> – Features no longer recommended to be used because they lack justified usage or general usefulness.</li>
+          <li><strong>Removal</strong> – Deprecated features are removed in favor of better alternatives.</li>
+        </ul>
+        <p>This approach ensures Edge Delivery Services remains agile, customer-driven, and optimized for real-world needs.</p>
+        <p><a href="../featurelifecycle.svg/index.html" data-broken-link="true">https://www.aem.live/docs/featurelifecycle.svg</a></p>
+        <h2 id="map-of-interest">Map of Interest</h2>
+        <p>Through active collaboration and discussion with customers, our Map of Interest is populated. It represents a list of needs that are under consideration for solution development in partnership with a customer team.</p>
+        <ol>
+          <li><a href="../snapshots-reviews/index.html">Reviews and snapshots</a></li>
+          <li>Fine-grained content permissions</li>
+          <li><a href="../product-bus/index.html" data-broken-link="true">Streamlined product catalog integration</a></li>
+          <li>Intuitive multi-origin endpoint configuration</li>
+        </ol>
+        <h3 id="aem-authoring-with-universal-editor">AEM Authoring with Universal Editor</h3>
+        <p>When using AEM Authoring with Universal Editor as your content source for your Edge Delivery Services project, most Sites features are available. For example, nearly any action available in the <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/sites/authoring/sites-console/introduction">Sites console</a> is applicable to Edge Delivery Services.</p>
+        <p>However, some features of the Sites console are either not yet or only partially available for Edge Delivery Services. For this reason, such features may be presented differently than their Sites counterparts or there may be alternative solutions for the use case. If your project requires one of the following features, please review the alternatives suggested below and reach out to Adobe to work together to understand your use case.</p>
+        <div class="table">
+          <div>
+            <div><strong>Sites feature</strong></div>
+            <div><strong>Status on edge</strong></div>
+            <div><strong>Notes</strong></div>
+          </div>
+          <div>
+            <div>MSM, Language Copy, and Launches</div>
+            <div>
+              <p>Available</p>
+              <p>(<a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/sites/authoring/universal-editor/inheritance">documentation</a>)</p>
+            </div>
+            <div>Inheritance can be reverted at the page level or at the component level with a Universal Editor Extension</div>
+          </div>
+          <div>
+            <div>Page templates</div>
+            <div>
+              <p>Partially available</p>
+              <p>(<a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/sites/authoring/universal-editor/templates">documentation</a>)</p>
+            </div>
+            <div>Pages created from templates are independent copies of the original template.</div>
+          </div>
+          <div>
+            <div>Context Hub and targeting</div>
+            <div>Not available</div>
+            <div></div>
+          </div>
+          <div>
+            <div>Timewarp</div>
+            <div>Not available</div>
+            <div></div>
+          </div>
+          <div>
+            <div>Associated content</div>
+            <div>Not available</div>
+            <div></div>
+          </div>
+          <div>
+            <div>Experience Fragments</div>
+            <div>Alternative</div>
+            <div>Create a page and use a fragment component</div>
+          </div>
+        </div>
+        <h2 id="release-history">Release history</h2>
+        <p>We roll out new releases for AEM components and services on a continuous basis to deploy enhancements and address issues. See the <a href="../release-history/index.html">Recent Releases</a> for a detailed change list by component. If you would like to get more information on a particular release, <a href="../../community/index.html">please reach out</a>.</p>
+        <h2 id="early-access-technology">Early-access technology</h2>
+        <p>Recently added features now available for customer use. These are features that still may undergo significant changes, require higher-than-usual levels of support, or are not widely adopted yet.</p>
+        <div class="cards alternate earlyaccess">
+          <div>
+            <div>
+              <p><a href="../experimentation/index.html">Experimentation</a></p>
+              <p>Experimentation is the practice of making your site more effective by changing content or functionality, comparing the results with the prior version, and picking the improvements that have measurable effects.</p>
+            </div>
+            <div>
+              <p><a href="../aem-assets-sidekick-plugin/index.html">Adobe Experience Manager Assets Sidekick Plugin</a></p>
+              <p>With the Experience Manager Assets Sidekick plugin, you can use assets from your Experience Manager Assets repository while authoring documents in Microsoft Word or Google Docs.</p>
+            </div>
+            <div>
+              <p><a href="../../developer/target-integration/index.html">Configuring Adobe Target Integration</a></p>
+              <p>This article will walk you through the steps of setting up an integration with Adobe Target so you can personalize your pages via the Adobe Target Visual Experience Composer (VEC).</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p><a href="../product-bus/index.html" data-broken-link="true">Product Bus / Product Pipeline</a></p>
+              <p>Simple way to manage / update product information with a https://schema.org/Product inspired JSON structure. Produces Feeds, Sitemaps, Indexes as well as markup for Product Detail Pages (PDP).</p>
+            </div>
+            <div>
+              <p><a href="../../developer/martech-integration/index.html">Configuring Adobe Experience Cloud Integration</a></p>
+              <p>This article will walk you through the steps of setting up an integration with the Adobe Marketing Technology stack. The stack combines Adobe Experience Platform WebSDK, Adobe Analytics, Adobe Target or Adobe Journey Optimizer, Adobe Client Data Layer and Adobe Experience Platform Tags.</p>
+            </div>
+            <div>
+              <p><a href="../../developer/web-components/index.html">Web Components</a></p>
+              <p>Web Components are a collection of web standards that allow the creation and use of reusable, modular functionality in web sites and web apps.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p><a href="../snapshots-reviews/index.html">Snapshots and Reviews</a></p>
+              <p>A new feature to support the concept of publishing a set of content (dozens or hundreds of pages) usually for a launch of an initiative or event.</p>
+            </div>
+            <div>
+              <p><a href="../../developer/json2html/index.html">json2html</a></p>
+              <p>An OOTB overlay to create dynamic server-side rendered Edge Delivery friendly HTML pages out of JSON data from any endpoint.</p>
+            </div>
+            <div>
+              <p><a href="../../developer/content-fragment-overlay/index.html">Publishing AEM Content Fragments</a></p>
+              <p>AEM content fragments can be published to Edge Delivery Services as semantic HTML, improving SEO / discoverability, and fast content delivery.</p>
+            </div>
+          </div>
+        </div>
+        <h2 id="deprecations-and-removals">Deprecations and Removals</h2>
+        <p>Features that have been deprecated or removed from the product based on lack of justified usage or significant misuse of a feature that leads to undesirable results. See <a href="../deprecation/index.html">Deprecations and Removals</a> for features slated for removal.</p>
+        <h2 id="questions-or-ideas">Questions or Ideas?</h2>
+        <p>Please contact the community via <a href="https://discord.gg/aem-live">Discord</a>.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

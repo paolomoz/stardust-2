@@ -1,0 +1,324 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.128Z
+  page:             docs-sidekick-security
+  pageUrl:          https://www.aem.live/docs/sidekick-security
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>AEM Sidekick Security</title>
+  <meta name="description" content="This page describes security aspects of the Sidekick such as required browser permissions, privacy and network requests being made during operation.">
+  <meta property="og:title" content="AEM Sidekick Security">
+  <meta property="og:description" content="This page describes security aspects of the Sidekick such as required browser permissions, privacy and network requests being made during operation.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/sidekick-security/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html" aria-current="page">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#browser-permissions">Browser Permissions</a></li>
+<li class="l-2"><a href="#trusted-origins">Trusted Origins</a></li>
+<li class="l-2"><a href="#privacy">Privacy</a></li>
+<li class="l-2"><a href="#network-requests">Network Requests</a></li>
+<li class="l-2"><a href="#restricting-access">Restricting Access</a></li>
+<li class="l-2"><a href="#security-audits">Security Audits</a></li>
+<li class="l-3"><a href="#using-sidekick">Using Sidekick</a></li>
+<li class="l-3"><a href="#customizing-sidekick">Customizing Sidekick</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>AEM Sidekick Security</h1>
+          <p class="lede">This page describes security aspects of the Sidekick such as required browser permissions, privacy and network requests being made during operation.</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1e5fb8dc7e6733da52dfc650a8634e9edf483eee5.jpg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1e5fb8dc7e6733da52dfc650a8634e9edf483eee5.jpg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="./media_1e5fb8dc7e6733da52dfc650a8634e9edf483eee5.jpg?width=2000&amp;format=jpg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1e5fb8dc7e6733da52dfc650a8634e9edf483eee5.jpg?width=750&amp;format=jpg&amp;optimize=medium" width="1103" height="827">
+          </picture>
+        </p>
+        
+        <p>This page describes security aspects of the Sidekick such as required browser permissions, privacy and network requests being made during operation.</p>
+        <p>You can also refer to the following resources for additional information:</p>
+        <ul>
+          <li>The <a href="https://chromewebstore.google.com/detail/aem-sidekick/igkmdomcgoebiipaifhmpfjhbjccggml">listing page</a> in Google Chrome Web Store</li>
+          <li>The <a href="https://github.com/adobe/aem-sidekick/blob/main/src/extension/manifest.json">manifest file</a> on GitHub (open source)</li>
+          <li>The extension’s context menu</li>
+        </ul>
+        <h2 id="browser-permissions">Browser Permissions</h2>
+        <p>The Sidekick requires the following browser permissions as defined in its <a href="https://github.com/adobe/aem-sidekick/blob/main/src/extension/manifest.json">manifest file</a> to function as expected:</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td align="center"><strong>Permission</strong></td>
+                    <td align="center"><strong>Justification</strong></td>
+                  </tr>
+                  <tr>
+                    <td><strong>activeTab</strong></td>
+                    <td>Required to determine whether to show or hide the Sidekick in the active tab</td>
+                  </tr>
+                  <tr>
+                    <td><strong>contextMenus</strong></td>
+                    <td>Required to simplify adding and removing projects</td>
+                  </tr>
+                  <tr>
+                    <td><strong>declarativeNetRequests</strong></td>
+                    <td>
+                      <p>Required to manipulate HTTP headers.</p>
+                      <ul>
+                        <li>Request headers:
+                          <ul>
+                            <li>add the user's <a href="../authentication-setup-authoring/index.html">AEM credentials</a> to requests made to the <a href="../admin.html/index.html" data-broken-link="true">Admin API</a>; project URLs if the site is <a href="../authentication-setup-site/index.html">protected</a>; other Adobe-managed services if used by the project</li>
+                            <li>temporarily suppress browser caching on project URLs after content modifications</li>
+                          </ul>
+                        </li>
+                        <li>Response headers:
+                          <ul>
+                            <li>allow cross-site requests to project URLs if originating from <a href="https://tools.aem.live/">AEM Admin Tools</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>scripting</strong></td>
+                    <td>Required to load the Sidekick in a relevant browser tab</td>
+                  </tr>
+                  <tr>
+                    <td><strong>storage</strong></td>
+                    <td>
+                      <p>Required to persist the following:</p>
+                      <ul>
+                        <li>state settings (local storage)</li>
+                        <li>project configurations (synchronized across devices)</li>
+                        <li>access tokens (session storage)</li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>host_permissions</strong></td>
+                    <td>
+                      <p>Required hosts:</p>
+                      <ul>
+                        <li><code>http://localhost:3000/*</code> – Used by developers during local development. See <a href="../../developer/cli-reference/index.html">aem CLI</a> for more information.</li>
+                        <li><code>https://*/*</code> – Used to determine whether to show or hide the Sidekick based on a tab’s URL.</li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>externally_connectible</strong></td>
+                    <td>
+                      <p>Required to allow customer sites to interact with the Sidekick UI, e.g. for resizing or closing custom popovers. See <a href="../../developer/sidekick-development/index.html">Sidekick Development</a> for more information.</p>
+                      <ul>
+                        <li><code>http://localhost:3000/*</code> – Used by Adobe during local development.</li>
+                        <li><code>https://*/*</code> – Allows receiving messages from any site using HTTPS. Write access is restricted to <a href="#trusted-origins">trusted origins</a> via code.</li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h2 id="trusted-origins">Trusted Origins</h2>
+        <p>The following Adobe-owned origins are allowed to communicate with the Sidekick extension on behalf of the user to add, remove and and sign into sites:</p>
+        <ul>
+          <li><code>https://admin.hlx.page</code> – The current endpoint of the AEM <a href="../admin.html/index.html" data-broken-link="true">Admin API</a></li>
+          <li><code>https://api.aem.live</code> – The new endpoint of the AEM <a href="../admin.html/index.html" data-broken-link="true">Admin API</a></li>
+          <li><code>https://tools.aem.live</code> – Tools to help administrators manage AEM sites</li>
+        </ul>
+        <h2 id="privacy">Privacy</h2>
+        <p>The Sidekick collects user activity allowing Adobe to:</p>
+        <ul>
+          <li>Learn how users interact with the UI</li>
+          <li>Enhance the user experience in future releases</li>
+        </ul>
+        <p>All data collected is:</p>
+        <ul>
+          <li>Minimal: names of actions users click in the user interface and target URLs.</li>
+          <li>Sampled: only every 10th interaction triggers data collection.</li>
+          <li>Anonymous: no PII is being transmitted or stored.</li>
+          <li>Secure: Data is transmitted using HTTPS and only authorized Adobe personnel have access to stored data.</li>
+        </ul>
+        <p>Adobe further <a href="https://chromewebstore.google.com/detail/aem-sidekick/igkmdomcgoebiipaifhmpfjhbjccggml">declares</a> that user data is:</p>
+        <ul>
+          <li>Not being sold to third parties</li>
+          <li>Not being used or transferred for purposes that are unrelated to the item's core functionality</li>
+          <li>Not being used or transferred to determine creditworthiness or for lending purposes</li>
+        </ul>
+        <h2 id="network-requests">Network Requests</h2>
+        <p>The Sidekick performs HTTPS request to the following hosts:</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td align="center"><strong>Network Request</strong></td>
+                    <td align="center"><strong>Justification</strong></td>
+                  </tr>
+                  <tr>
+                    <td><code>https://admin.hlx.page/*</code></td>
+                    <td>The current endpoint of the AEM <a href="../admin.html/index.html" data-broken-link="true">Admin API</a>. Used to perform actions like previewing, publishing and signing in. Requests can originate from the service worker as well as the active tab and can include the user’s access token. Methods: <code>GET</code>, <code>POST</code> and <code>DELETE</code>.</td>
+                  </tr>
+                  <tr>
+                    <td><code>https://api.aem.live/*</code></td>
+                    <td>The new endpoint of the AEM <a href="../admin.html/index.html" data-broken-link="true">Admin API</a>. Used to perform actions like previewing, publishing and signing in. Requests can originate from the service worker as well as the active tab and can include the user’s access token. Methods: <code>GET</code>, <code>POST</code> and <code>DELETE</code>.</td>
+                  </tr>
+                  <tr>
+                    <td><code>https://rum.hlx.page/*</code></td>
+                    <td>The endpoint of Adobe’s RUM (Real Use Monitoring) service. Used to collect anonymous usage data. Requests can originate from the service worker as well as the active tab. Method: <code>POST</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>https://*.sharepoint.com/*</code></td>
+                    <td>The endpoint of the <a href="../setup-customer-sharepoint-user/index.html">configured SharePoint instance</a>. Used to retrieve the <code>driveItem</code> if the URL in the active tab matches the configured SharePoint host. Requests originate from the active tab and can include the user’s SharePoint credentials. Method: <code>GET</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>https://*--project--example.aem.*/*</code></td>
+                    <td>The URLs of your preview and live environments. Used to refresh the browser cache after preview and publish operations. Requests can originate from the service worker as well as the current tab and can include the user’s credentials. Method: <code>GET</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h2 id="restricting-access">Restricting Access</h2>
+        <p>You can restrict the Sidekick’s access to certain hosts for all users in your enterprise by defining the <code>runtime_blocked_hosts</code> and <code>runtime_allowed_hosts</code> settings in your enterprise’s Chrome profile. See Google’s documentation on <a href="https://support.google.com/chrome/a/answer/9296680">Managing Extensions in Your Enterprise</a> for more information.</p>
+        <p><strong>Example 1: Allow everything, deny few</strong></p>
+        <pre><code>{
+  "igkmdomcgoebiipaifhmpfjhbjccggml": {
+    "runtime_blocked_hosts": [
+      "https://intranet.example.com/*",
+      "https://extranet.example.com/*"
+    ]
+  }
+}
+</code></pre>
+        <p>This would prevent the Sidekick extension from interacting with any URL matching <code>https://intranet.example.com/*</code> or <code>https://extranet.example.com/*</code>.</p>
+        <p><strong>Example 2: Deny everything, allow few</strong></p>
+        <pre><code>{
+  "igkmdomcgoebiipaifhmpfjhbjccggml": {
+    "runtime_blocked_hosts": ["http*://*/*"],
+    "runtime_allowed_hosts": [
+      "https://admin.hlx.page/*",
+      "https://api.aem.live/*",
+      "https://rum.hlx.page/*",
+      "http://localhost:3000/*",
+      "https://*.sharepoint.com/*",
+      "https://*--project--example.aem.*/*"
+    ]
+  }
+}		
+</code></pre>
+        <p>This would prevent the Sidekick extension from interacting with <em>any</em> URL, except the ones matching a pattern defined in <code>runtime_allowed_hosts</code>. This example uses a combination of the <code>host_permissions</code> in the <a href="https://github.com/adobe/aem-sidekick/blob/main/src/extension/manifest.json">manifest file</a> and the list of URLs from the chapter <a href="#network-requests">Network Requests</a> above to ensure maximum functionality and an optimal user experience.</p>
+        <h2 id="security-audits">Security Audits</h2>
+        <p>The Sidekick’s entire source code is <a href="https://github.com/adobe/aem-sidekick">publicly available</a> and – like all of AEM – subject to regular audits performed by 3rd party security researchers. Reports can be shared with customers and prospects under NDA.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="using-sidekick"><a href="../sidekick/index.html">Using Sidekick</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="customizing-sidekick"><a href="../../developer/sidekick-development/index.html">Customizing Sidekick</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

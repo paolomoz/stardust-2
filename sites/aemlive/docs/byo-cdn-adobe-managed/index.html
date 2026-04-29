@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.176Z
+  page:             docs-byo-cdn-adobe-managed
+  pageUrl:          https://www.aem.live/docs/byo-cdn-adobe-managed
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Adobe Managed CDN</title>
+  <meta name="description" content="The following steps illustrate how to use the Adobe Managed CDN (part of Edge Delivery Services entitlement) to configure a property to deliver content from ...">
+  <meta property="og:title" content="Adobe Managed CDN">
+  <meta property="og:description" content="The following steps illustrate how to use the Adobe Managed CDN (part of Edge Delivery Services entitlement) to configure a property to deliver content from ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/byo-cdn-adobe-managed/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#prerequisites-and-limitations">Prerequisites and limitations</a></li>
+<li class="l-2"><a href="#before-you-go-live">Before you go live</a></li>
+<li class="l-3"><a href="#option-1-setup-a-proxy-from-an-existing-environment">(Option 1) Setup a proxy from an existing environment</a></li>
+<li class="l-3"><a href="#option-2-setup-an-edge-delivery-site-without-an-existing-environment">(Option 2) Setup an Edge Delivery site without an existing environment</a></li>
+<li class="l-3"><a href="#setup-push-invalidation">Setup push invalidation</a></li>
+<li class="l-2"><a href="#optional-lower-the-ttl-of-existing-dns-records-before-going-live-to-enable-a-faster-rollout">(Optional) Lower the TTL of existing DNS records before going live to enable a faster rollout</a></li>
+<li class="l-2"><a href="#as-you-go-live">As you go live</a></li>
+<li class="l-2"><a href="#after-you-go-live">After you go live</a></li>
+<li class="l-3"><a href="#byo-cdn-setup-overview">BYO CDN Setup Overview</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Adobe Managed CDN</h1>
+          <p class="lede">The following steps illustrate how to use the Adobe Managed CDN (part of Edge Delivery Services entitlement) to configure a property to deliver content from ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1581b6aee2f43df1d92f83787350d56a1adea76ea.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1581b6aee2f43df1d92f83787350d56a1adea76ea.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1581b6aee2f43df1d92f83787350d56a1adea76ea.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1581b6aee2f43df1d92f83787350d56a1adea76ea.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>The following steps illustrate how to use the <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/edge-delivery-sites/introduction-to-edge-delivery-services">Adobe Managed CDN</a> (part of Edge Delivery Services entitlement) to configure a property to deliver content from a site powered by Edge Delivery Services in Adobe Experience Manager Sites as a Cloud Service.</p>
+        <h2 id="prerequisites-and-limitations">Prerequisites and limitations</h2>
+        <ul>
+          <li>You must have a license with an Edge Delivery Services entitlement.</li>
+          <li>You must own the domain under which you want to serve your site.</li>
+          <li>You need to be able to make Domain Name System (DNS) changes to the domain name.</li>
+          <li>You have the choice to bring your own certificate or <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/manage-ssl-certificates/add-ssl-certificate">ask Adobe to provide one provisioned by Let’s Encrypt</a>.</li>
+          <li>HTTPS is required and IPv6 is not supported.</li>
+        </ul>
+        <h2 id="before-you-go-live">Before you go live</h2>
+        <p>There are two deployment options for going live with Adobe Managed CDN</p>
+        <ol>
+          <li>Setup an HTTP proxy from an existing AEM Sites as a Cloud Service environment. This is typically used when you already have an existing environment and you want to migrate part of a site to Edge Delivery Services. You can also <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/manage-environments#adding-environments">add a new environment</a>.</li>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/edge-delivery-sites/add-edge-delivery-site">Setup a new Edge Delivery site</a> independently of an AEM Sites as a Cloud Service environment. This is the approach used when you do not have an AEM author or publish environment and you want to use Edge Delivery Services on its own. <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/edge-delivery-sites/introduction-to-edge-delivery-services#recommended-path-eds">See here for benefits</a>.</li>
+        </ol>
+        <p>A checklist of the steps you need to do for both options:</p>
+        <ol>
+          <li>Install or <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/manage-ssl-certificates/add-ssl-certificate">request a certificate in Cloud Manager</a> (you need to do that for both <code>www</code> and non-www apex domains)</li>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/custom-domain-names/add-custom-domain-name#:~:text=Log%20into%20Cloud%20Manager%20at,Programs%20console%2C%20select%20the%20program.&amp;text=Domain%20Settings.,Settings%20page%2C%20click%20Add%20Domain.">Install the domains Cloud Manager</a> (you need to do that for both www and apex domains)</li>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/cdn-configurations/add-cdn-config">Add a CDN configuration</a> to map your domain to your Edge Delivery site. (This will be done differently depending on what deployment option you chose).<br>Make sure that any production setup maps to the <code>main</code> branch of your Edge Delivery origin, meaning that your origin hostname starts with <code>main--</code> to allow for caching and push invalidation of content changes..</li>
+          <li>Setup push invalidation in the project's configuration</li>
+          <li>Point the DNS <code>CNAME</code> of your <code>www</code> site to <code>cdn.adobeaemcloud.com </code>and the <code>A</code> records of your apex to the IP addresses listed below.</li>
+        </ol>
+        <h3 id="option-1-setup-a-proxy-from-an-existing-environment">(Option 1) Setup a proxy from an existing environment</h3>
+        <p>This requires an existing AEM Sites as a Cloud Service environment that needs to be configured via configuration pipeline to proxy some (or all) paths on your domain to your Edge Delivery Site. (see how to define a proxy using <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/content-delivery/cdn-configuring-traffic#proxying-to-edge-delivery">originSelectors</a> and how to run a <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/operations/config-pipeline">Configuration Pipeline)</a>.</p>
+        <p>A redirect from <code>https://example.com</code> to <code>https://www.example.com</code> must be defined using a <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/content-delivery/cdn-configuring-traffic#proxying-to-edge-delivery#client-side-redirectors">redirect rule</a>, but all other redirects may use the <a href="https://www.hlx.live/docs/redirects">redirects spreadsheet</a></p>
+        <h3 id="option-2-setup-an-edge-delivery-site-without-an-existing-environment">(Option 2) Setup an Edge Delivery site without an existing environment</h3>
+        <p>In case you do not have an existing authoring/publish environment, follow the steps for setting up a new Edge Delivery site in <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/edge-delivery-sites/introduction-to-edge-delivery-services">Cloud Manager</a>.</p>
+        <p>An automatic redirect will be established from <code>https://example.com</code> to <code>https://www.example.com</code> but all other redirects must happen through the <a href="https://www.hlx.live/docs/redirects">redirects spreadsheet</a></p>
+        <h3 id="setup-push-invalidation">Setup push invalidation</h3>
+        <p>Push invalidation automatically purges content on the managed CDN whenever an author publishes content changes.</p>
+        <p>Content is purged by URL and by cache tag/key.</p>
+        <p>Push invalidation is enabled by adding specific properties to the project's configuration. Depending on <a href="../authoring-guide/index.html">how you author your content</a>, this is done in two different ways:</p>
+        <ul>
+          <li>If you author your content with Sharepoint or Google Docs, create an Excel workbook named <code>.helix/config.xlsx</code> in Sharepoint or a Google Sheet named <code>.helix/config</code> in Google Drive.</li>
+          <li>If you author your content with AEM Authoring and the Universal Editor, create a spreadsheet called <code>configuration</code> <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/wysiwyg-authoring/tabular-data">in the Sites console.</a></li>
+          <li>If your site is using the configuration service, <a href="../config-service-setup/index.html#update-production-cdn">see here how to update the CDN configuration</a>.</li>
+        </ul>
+        <p>In the spreadsheet, define the following configuration properties:</p>
+        <table>
+          <tbody>
+            <tr>
+              <td align="center"><strong>key</strong></td>
+              <td align="center"><strong>value</strong></td>
+              <td align="center"><strong>comment</strong></td>
+            </tr>
+            <tr>
+              <td><code>cdn.prod.host</code></td>
+              <td><code>&lt;Production Host&gt;</code></td>
+              <td>Host name of production site, e.g. <code>www.example.com</code></td>
+            </tr>
+            <tr>
+              <td><code>cdn.prod.type</code></td>
+              <td><code>managed</code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code>cdn.prod.envId</code></td>
+              <td><code>&lt;environment ID&gt;</code></td>
+              <td>optional (format: <code>pXXXX-eXXXX</code>)</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>After making changes to the configuration sheet, preview it with the Sidekick or publish it in the Sites console to activate the changes.</p>
+        <h2 id="optional-lower-the-ttl-of-existing-dns-records-before-going-live-to-enable-a-faster-rollout">(Optional) Lower the TTL of existing DNS records before going live to enable a faster rollout</h2>
+        <p>If the DNS records for your go-live domain have a long time-to-live (TTL)—such as 12 hours or more—you may want to temporarily lower the TTL (for example, to 1 hour or even 60 seconds) to speed up site rollout. Doing so ensures traffic is routed to the new site more quickly after launch. Be sure to restore the original TTL value when updating the DNS records for go-live.</p>
+        <h2 id="as-you-go-live">As you go live</h2>
+        <p>Make or request following DNS change:</p>
+        <ul>
+          <li>For <code>www.example.com</code> set the <code>CNAME</code> DNS record to <code>cdn.adobeaemcloud.com </code>(see <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/custom-domain-names/add-custom-domain-name#adobe-managed-cert-cname-record">details</a>).</li>
+          <li>Use a high time-to-live (TTL) value of 3600 seconds (one hour) or more to improve site reliability during a DNS outage. If you previously lowered the TTL for a faster go-live rollout, make sure to restore it to its original longer value.</li>
+        </ul>
+        <p>If you want to establish an automatic redirect from <code>https://example.com</code> to <code>https://www.example.com,</code> the following additional steps are required</p>
+        <ul>
+          <li>For <code>example.com</code> set the <code>A</code> record to these four IP addresses: <code>151.101.3.10, 151.101.67.10, 151.101.131.10</code>, and <code>151.101.195.10 </code>(see <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/custom-domain-names/add-custom-domain-name#adobe-managed-cert-apex-record">details</a>)</li>
+          <li>If your DNS provider cannot support multiple IP addresses in an <code>A</code> record (for example, GoDaddy), use any of the listed IP addresses. This will be a bit less reliable.</li>
+          <li>Use the same high TTL as described above</li>
+        </ul>
+        <p>Depending on your DNS setup—including the TTL specified in your DNS records—changes can take anywhere from a few minutes to several hours to propagate. If your site already receives traffic, ensure all redirects are configured or keep the existing site live until the TTL expires and all traffic is routed to the new site.</p>
+        <p>If you are hosting both the apex and www versions of the domain, make sure DNS is properly configured for both to enable certificate generation.</p>
+        <p>For a timed launch, consider setting up a temporary holding homepage that you can quickly replace with the final content at the launch time. Because publishing in AEM is fast and reliable, this approach gives you better control over when your content becomes publicly visible than relying solely on DNS changes.</p>
+        <h2 id="after-you-go-live">After you go live</h2>
+        <p>The AEM team reviews your setup and notifies you if any issues are found.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="byo-cdn-setup-overview"><a href="../byo-cdn-setup/index.html">BYO CDN Setup Overview</a></h3>
+            </div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

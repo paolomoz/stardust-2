@@ -1,0 +1,328 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.868Z
+  page:             docs-auditlog
+  pageUrl:          https://www.aem.live/docs/auditlog
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Audit log</title>
+  <meta name="description" content="Admin and indexing operations are recorded in an audit log that can be queried via an Admin endpoint.">
+  <meta property="og:title" content="Audit log">
+  <meta property="og:description" content="Admin and indexing operations are recorded in an audit log that can be queried via an Admin endpoint.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/auditlog/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#admin-operations">Admin operations</a></li>
+<li class="l-2"><a href="#indexing-operations">Indexing operations</a></li>
+<li class="l-2"><a href="#examples">Examples</a></li>
+<li class="l-2"><a href="#retention-policy">Retention policy</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Audit log</h1>
+          <p class="lede">Admin and indexing operations are recorded in an audit log that can be queried via an Admin endpoint.</p>
+        </header>
+        <div class="content">
+        
+        <p>Admin and indexing operations are recorded in an audit log that can be queried via an <a href="https://www.hlx.live/docs/admin.html#tag/log/operation/getLogs">Admin endpoint</a>.</p>
+        <p>Only users who have the role <code>admin.role.author</code> can read the audit logs, see <a href="../authentication-setup-authoring/index.html#admin-roles">Admin Roles</a> for more information.</p>
+        <p>There’s also a <a href="https://tools.aem.live/log-viewer">handy tool</a> to look at the audit logs.</p>
+        <h2 id="admin-operations">Admin operations</h2>
+        <p>The audit log stores information about the following <strong>successful</strong> Admin operations:</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td><strong>Name</strong></td>
+                    <td><strong>Description</strong></td>
+                  </tr>
+                  <tr>
+                    <td><code>preview</code></td>
+                    <td>When a page is previewed or removed from preview..</td>
+                  </tr>
+                  <tr>
+                    <td><code>live</code></td>
+                    <td>When a page is published or unpublished.</td>
+                  </tr>
+                  <tr>
+                    <td><code>index</code></td>
+                    <td>When a page is indexed or removed from the index..</td>
+                  </tr>
+                  <tr>
+                    <td><code>cache</code></td>
+                    <td>When a page is manually purged from the cache.</td>
+                  </tr>
+                  <tr>
+                    <td><code>code</code></td>
+                    <td>When code is synchronized from GitHub.</td>
+                  </tr>
+                  <tr>
+                    <td><code>config</code></td>
+                    <td>When the site configuration is modified.</td>
+                  </tr>
+                  <tr>
+                    <td><code>sitemap</code></td>
+                    <td>When a sitemap is rebuilt manually.</td>
+                  </tr>
+                  <tr>
+                    <td><code>job</code></td>
+                    <td>When a cache purge job is triggered after code synchronization .</td>
+                  </tr>
+                  <tr>
+                    <td><code>form</code></td>
+                    <td>When a sheet is prepared for data ingestion (deprecated).</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p>The following information about those operations is stored:</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td><strong>Name</strong></td>
+                    <td><strong>Description</strong></td>
+                  </tr>
+                  <tr>
+                    <td><code>timestamp</code></td>
+                    <td>Epoch when the operation took place.</td>
+                  </tr>
+                  <tr>
+                    <td><code>duration</code></td>
+                    <td>Time in milliseconds the operation took.</td>
+                  </tr>
+                  <tr>
+                    <td><code>method</code></td>
+                    <td>HTTP method used (<code>POST</code> or <code>DELETE</code>)</td>
+                  </tr>
+                  <tr>
+                    <td><code>route</code></td>
+                    <td>Operation that took place (see above).</td>
+                  </tr>
+                  <tr>
+                    <td><code>path</code></td>
+                    <td>Target path of the operation.</td>
+                  </tr>
+                  <tr>
+                    <td><code>contentBusId</code></td>
+                    <td>Internal content bus ID of the project.</td>
+                  </tr>
+                  <tr>
+                    <td><code>org</code></td>
+                    <td>Organization name.</td>
+                  </tr>
+                  <tr>
+                    <td><code>site</code></td>
+                    <td>Site name.</td>
+                  </tr>
+                  <tr>
+                    <td><code>ref</code></td>
+                    <td>GitHub branch or tag affected.</td>
+                  </tr>
+                  <tr>
+                    <td><code>user</code></td>
+                    <td>User that made the change, missing if the request was not authenticated.</td>
+                  </tr>
+                  <tr>
+                    <td><code>ip</code></td>
+                    <td>Originating IP</td>
+                  </tr>
+                  <tr>
+                    <td><code>search</code></td>
+                    <td>Query string of the URL requested.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h2 id="indexing-operations">Indexing operations</h2>
+        <p>The audit log stores information about the outcome of background indexing operations, namely:</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td><strong>Name</strong></td>
+                    <td><strong>Description</strong></td>
+                  </tr>
+                  <tr>
+                    <td><code>timestamp</code></td>
+                    <td>Epoch when the operation took place.</td>
+                  </tr>
+                  <tr>
+                    <td><code>contentBusId</code></td>
+                    <td>Internal content bus ID of the project.</td>
+                  </tr>
+                  <tr>
+                    <td><code>changes</code></td>
+                    <td>An array of strings describing what changed in the index.</td>
+                  </tr>
+                  <tr>
+                    <td><code>errors</code></td>
+                    <td>An array of strings containing errors that occurred while indexing.</td>
+                  </tr>
+                  <tr>
+                    <td><code>unmodified</code></td>
+                    <td>Number of index changes that did not change a row in the index.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h2 id="examples">Examples</h2>
+        <p>Here are some examples of how common <a href="../sidekick/index.html">operations triggered via Sidekick</a> will be reflected in the audit log:</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td><strong>Operation</strong></td>
+                    <td><strong>Sidekick</strong></td>
+                    <td><strong>Audit log</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Preview</td>
+                    <td><em>Preview</em> button in editor<br><em>Reload</em> button in preview environment</td>
+                    <td>
+                      <pre><code>method: POST, route: /preview
+</code></pre>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Publish</td>
+                    <td><em>Publish</em> button in preview, live or production environment</td>
+                    <td>
+                      <pre><code>method: POST, route: /live
+</code></pre>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Unpublish</td>
+                    <td><em>Unpublish</em> button in preview, live or production environment</td>
+                    <td>
+                      <pre><code>method: DELETE, route: /live
+</code></pre>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Delete</td>
+                    <td><em>Delete</em> button in preview, live or production environment</td>
+                    <td>
+                      <pre><code>method: DELETE, route: /preview
+method: DELETE, route: /live
+</code></pre>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h2 id="retention-policy">Retention policy</h2>
+        <p>Edge Delivery Services audit logs are kept indefinitely, or as long as the customer wants to keep them.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

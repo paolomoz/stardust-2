@@ -1,0 +1,299 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.924Z
+  page:             docs-byo-cdn-fastly-setup
+  pageUrl:          https://www.aem.live/docs/byo-cdn-fastly-setup
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Fastly Setup</title>
+  <meta name="description" content="The following screenshots illustrate how to configure Fastly to deliver content. Essential settings are marked with a red circle.">
+  <meta property="og:title" content="Fastly Setup">
+  <meta property="og:description" content="The following screenshots illustrate how to configure Fastly to deliver content. Essential settings are marked with a red circle.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/byo-cdn-fastly-setup/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#create-a-fastly-service">Create a Fastly service</a></li>
+<li class="l-2"><a href="#add-domain">Add Domain</a></li>
+<li class="l-2"><a href="#configure-origin">Configure Origin</a></li>
+<li class="l-2"><a href="#create-vcl-snippets">Create VCL Snippets</a></li>
+<li class="l-2"><a href="#optional-authenticate-origin-requests">Optional: Authenticate Origin Requests</a></li>
+<li class="l-2"><a href="#note">Note</a></li>
+<li class="l-3"><a href="#byo-cdn-setup-overview">BYO CDN Setup Overview</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Fastly Setup</h1>
+          <p class="lede">The following screenshots illustrate how to configure Fastly to deliver content. Essential settings are marked with a red circle.</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1c8e056645c57ad87499ef645e28e010db5583b02.jpg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1c8e056645c57ad87499ef645e28e010db5583b02.jpg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="./media_1c8e056645c57ad87499ef645e28e010db5583b02.jpg?width=2000&amp;format=jpg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1c8e056645c57ad87499ef645e28e010db5583b02.jpg?width=750&amp;format=jpg&amp;optimize=medium" width="1103" height="828">
+          </picture>
+        </p>
+        
+        <p>The following screenshots illustrate how to configure <a href="https://www.fastly.com/">Fastly</a> to deliver content. Essential settings are marked with a red circle.</p>
+        <div class="fragment">
+          <div>
+            <div><a href="../setup-byo-cdn-push-invalidation-for-fastly/index.html">https://main--helix-website--adobe.aem.page/docs/setup-byo-cdn-push-invalidation-for-fastly</a></div>
+          </div>
+        </div>
+        <h2 id="create-a-fastly-service">Create a Fastly service</h2>
+        <p>Go to the <a href="https://manage.fastly.com/services/all">Fastly Management UI</a> and select <strong>Create Service</strong>, CDN.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_15b1e60338f9b0dd19bfb879ee5afdff7dd5c9c4f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_15b1e60338f9b0dd19bfb879ee5afdff7dd5c9c4f.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_15b1e60338f9b0dd19bfb879ee5afdff7dd5c9c4f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_15b1e60338f9b0dd19bfb879ee5afdff7dd5c9c4f.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="505">
+          </picture>
+        </p>
+        <h2 id="add-domain">Add Domain</h2>
+        <p>Add your production domain (e.g. <code>www.mydomain.com</code>):<br>
+          <picture>
+            <source type="image/webp" srcset="./media_1e563371d0049c49f47f7aa7c00a3fd41f63ae167.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1e563371d0049c49f47f7aa7c00a3fd41f63ae167.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1e563371d0049c49f47f7aa7c00a3fd41f63ae167.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1e563371d0049c49f47f7aa7c00a3fd41f63ae167.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1112">
+          </picture>
+        </p>
+        <h2 id="configure-origin">Configure Origin</h2>
+        <p>Add your origin (e.g. <code>main–{site}--{org}.aem.live</code>) and keep the default settings for:</p>
+        <ul>
+          <li>Override default host</li>
+          <li>Default compression</li>
+          <li>Force TLS &amp; HSTS</li>
+        </ul>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1782a23c840e107eef5c9efde33feab2d215f58c7.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1782a23c840e107eef5c9efde33feab2d215f58c7.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1782a23c840e107eef5c9efde33feab2d215f58c7.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1782a23c840e107eef5c9efde33feab2d215f58c7.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1077">
+          </picture>
+        </p>
+        <p>In the new configuration, click "Edit configuration" in the top right corner and "clone version 1 to edit".</p>
+        <p>In the sidebar, select "Hosts" underneath "Origins" and click the pencil icon to change host settings.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1363ad3d1cfa3bda39ccaa97369a08d12c9616832.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1363ad3d1cfa3bda39ccaa97369a08d12c9616832.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1363ad3d1cfa3bda39ccaa97369a08d12c9616832.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1363ad3d1cfa3bda39ccaa97369a08d12c9616832.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1073">
+          </picture>
+        </p>
+        <p>Scroll down and change <strong>Shielding</strong> to <code>Ashburn Metro (IAD)</code> (non-mandatory but <em>recommended</em> setting):</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_186ee94d159657eb1906c86472e1a03932c4a973c.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_186ee94d159657eb1906c86472e1a03932c4a973c.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_186ee94d159657eb1906c86472e1a03932c4a973c.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_186ee94d159657eb1906c86472e1a03932c4a973c.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="530">
+          </picture>
+        </p>
+        <p>Don't forget to "update".</p>
+        <h2 id="create-vcl-snippets">Create VCL Snippets</h2>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1da297bde56c7cc7576fdbadefd49050d29755e27.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1da297bde56c7cc7576fdbadefd49050d29755e27.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1da297bde56c7cc7576fdbadefd49050d29755e27.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1da297bde56c7cc7576fdbadefd49050d29755e27.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1064">
+          </picture>
+        </p>
+        <p>Create a VCL snippet for the <code>recv</code> subroutine with the following VCL code:</p>
+        <pre><code>if (fastly.ff.visits_this_service == 0) {
+  # edge delivery node
+  if (req.url.qs != "") {
+    # remember query string
+    set req.http.X-QS = req.url.qs;
+
+    if (req.url.path !~ "/media_[0-9a-f]{40,}[/a-zA-Z0-9_-]*\.[0-9a-z]+$" 
+      &amp;&amp; req.url.ext !~ "(?i)^(gif|png|jpe?g|webp)$"
+      &amp;&amp; req.url.ext != "json"
+      &amp;&amp; req.url.path != "/.auth") {
+      # strip query string from request url
+      set req.url = req.url.path;
+    }
+  }
+}
+</code></pre>
+        <p>Create additional VCL snippets for the <code>miss</code> and <code>pass</code> subroutines with the following VCL code:</p>
+        <pre><code>set bereq.http.X-BYO-CDN-Type = "fastly";
+set bereq.http.X-Push-Invalidation = "enabled";
+</code></pre>
+        <p><strong>Note</strong>: The <code>X-Push-Invalidation: enabled</code> request header enables the push invalidation including long cache TTLs.</p>
+        <p><br>Create a <code>deliver</code> snippet with the following VCL code:</p>
+        <pre><code>if (fastly.ff.visits_this_service == 0) {
+  # on edge delivery node
+  if (
+    http_status_matches(resp.status, "301,302,303,307,308")
+    &amp;&amp; req.http.X-QS
+    &amp;&amp; resp.http.location
+    &amp;&amp; resp.http.location !~ "\?.*\z"
+  ) {
+    # preserve request query string in redirect location
+    set resp.http.location = resp.http.location "?" req.http.X-QS;
+  }
+}
+</code></pre>
+        <p><br>Finally create a <code>deliver</code> snippet with the following VCL code:</p>
+        <pre><code>unset resp.http.Age;
+
+if (req.url.path !~ "\.plain\.html$") {
+  unset resp.http.X-Robots-Tag;
+}
+</code></pre>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1c6bfd52af6f5804d48cf5bbc8c9757b38c57f95d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1c6bfd52af6f5804d48cf5bbc8c9757b38c57f95d.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1c6bfd52af6f5804d48cf5bbc8c9757b38c57f95d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1c6bfd52af6f5804d48cf5bbc8c9757b38c57f95d.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1334">
+          </picture>
+        </p>
+        <p>After completing all steps and activating the service version you should be all set:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_19f0690259581f8832aace89d0abe5b317fb0dce3.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_19f0690259581f8832aace89d0abe5b317fb0dce3.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_19f0690259581f8832aace89d0abe5b317fb0dce3.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_19f0690259581f8832aace89d0abe5b317fb0dce3.png?width=750&amp;format=png&amp;optimize=medium" width="1423" height="63">
+          </picture>
+        </p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_173e518454b60a41b1fea3dbc30e4a1661cb6319c.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_173e518454b60a41b1fea3dbc30e4a1661cb6319c.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_173e518454b60a41b1fea3dbc30e4a1661cb6319c.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_173e518454b60a41b1fea3dbc30e4a1661cb6319c.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="648">
+          </picture>
+        </p>
+        <h2 id="optional-authenticate-origin-requests">Optional: Authenticate Origin Requests</h2>
+        <p>If you have enabled <a href="../authentication-setup-site/index.html">token-based Site Authentication</a>, navigate in the sidebar to Content → Headers, then "create a header" with following settings:</p>
+        <ul>
+          <li>Name: Origin Authentication</li>
+          <li>Type: Request/Set</li>
+          <li>Destination: <code>http.Authorization</code></li>
+          <li>Source: <code>"token &lt;your-token-here&gt;"</code> (don't forget the quotes, and replace <code>&lt;your-token-here&gt;</code> with the site token retrieved in <a href="../authentication-setup-site/index.html">token-based Site Authentication</a> – the token starts with <code>hlx_</code>)</li>
+          <li>Ignore if set: no</li>
+          <li>Priority: 10</li>
+        </ul>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_194f1b58b8683c26ebf9c4c42bc0c94b67ca53458.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_194f1b58b8683c26ebf9c4c42bc0c94b67ca53458.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_194f1b58b8683c26ebf9c4c42bc0c94b67ca53458.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_194f1b58b8683c26ebf9c4c42bc0c94b67ca53458.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1298">
+          </picture>
+        </p>
+        <h2 id="note">Note</h2>
+        <p>Edge Delivery Services needs no Web Application Firewall, as it is running on hardened, shared, and ultra-scalable infrastructure. Requests that a WAF would typically intercept are terminated in our CDNs.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="byo-cdn-setup-overview"><a href="../byo-cdn-setup/index.html">BYO CDN Setup Overview</a></h3>
+            </div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

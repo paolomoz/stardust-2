@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.251Z
+  page:             blog-future-proof-multilingual-website-edge-ensemble
+  pageUrl:          https://www.aem.live/blog/future-proof-multilingual-website-edge-ensemble
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Bonjour! Hola! Hello! – Creating Multilingual Sites with Ease</title>
+  <meta name="description" content="For businesses looking to reach a broad audience or customer base, multilingual support is often an essential requirement. The dominant approach is often to create ...">
+  <meta property="og:title" content="Bonjour! Hola! Hello! – Creating Multilingual Sites with Ease">
+  <meta property="og:description" content="For businesses looking to reach a broad audience or customer base, multilingual support is often an essential requirement. The dominant approach is often to create ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/blog/future-proof-multilingual-website-edge-ensemble/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../index.html" aria-current="page">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-success)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#considering-languages--regions-in-content-structure">Considering Languages &amp; Regions in Content Structure</a></li>
+<li class="l-3"><a href="#link-rewriting">Link Rewriting</a></li>
+<li class="l-2"><a href="#leveraging-placeholders-for-translations-in-code">Leveraging Placeholders for Translations in Code</a></li>
+<li class="l-2"><a href="#contentdocument-translation">Content/Document Translation</a></li>
+<li class="l-2"><a href="#improving-seo-with-sitemaps">Improving SEO with Sitemaps</a></li>
+<li class="l-2"><a href="#alternative-configurations">Alternative Configurations</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog · BLOG</p>
+          <h1>Bonjour! Hola! Hello! – Creating Multilingual Sites with Ease</h1>
+          <p class="lede">For businesses looking to reach a broad audience or customer base, multilingual support is often an essential requirement. The dominant approach is often to create ...</p>
+        </header>
+        <div>
+        
+        <p>For businesses looking to reach a broad audience or customer base, multilingual support is often an essential requirement. The dominant approach is often to create separate content and pathing for each region and language. On larger sites, however, this inevitably leads to an explosion of duplicated content, impacting SEO, user accessibility, and the effort needed by authors to manage and update content. Within this blog post, we’ll be looking at how Edge Delivery Services seeks to address these issues by minimizing the need for duplicate content using a combination of <a href="../../developer/placeholders/index.html">placeholders</a>, <a href="../../developer/indexing/index.html">indexes</a>, <a href="../../developer/sitemap/index.html">sitemaps</a>, and recommended content structuring practices.</p>
+        <h2 id="considering-languages--regions-in-content-structure">Considering Languages &amp; Regions in Content Structure</h2>
+        <p>Before diving into how to best handle multilingual support, it’s important to consider that apart from differences in language, more sales-oriented sites often may have the added requirement of needing to support different markets/regions as well. The traditional approach is often to create a separate folder for each combination of region and language, leading to pathing like:</p>
+        <pre><code>https://&lt;domain&gt;/en-us/
+https://&lt;domain&gt;/en-ca/
+https://&lt;domain&gt;/fr-ca/
+</code></pre>
+        <p><br>However, as discussed, our goal here is to reduce duplicate content. In the example above if Canada and the U.S. both contain the same English pages, then it makes little sense to host these under both paths. This often can alienate some users as well who may want to consume content in a language unsupported by that region ... say a French speaker in the U.S. region. Of course in cases where there is little overlap in content across regions or where each has different branding requirements this approach may still be best.</p>
+        <p>Where possible though we want to operate with a “language first” approach:</p>
+        <pre><code>https://&lt;domain&gt;/en/us
+https://&lt;domain&gt;/en/ca
+https://&lt;domain&gt;/fr/ca
+</code></pre>
+        <p>This ensures that only content that is regional needs be created separately. Referring again to our example above, if both the Canadian and U.S. versions of our site share the same “about-us” page then it makes sense to just have this live under:</p>
+        <p><code>https://&lt;domain&gt;/en/about-us</code></p>
+        <p>Similarly, it follows that the French version of this page can now be made available to all users regardless of region:</p>
+        <p><code>https://&lt;domain&gt;/fr/about-us</code></p>
+        <p>By using this approach we’ve removed the need to duplicate this page across both English regions while still allowing ourselves the option to create region-specific content. If our Canadian and U.S. regions sell different products for example, we can add that additional specificity to the URL for each and place these pages within regional sub-folders:</p>
+        <pre><code>https://&lt;domain&gt;/en/us/products
+https://&lt;domain&gt;/en/ca/products
+</code></pre>
+        <h3 id="link-rewriting">Link Rewriting</h3>
+        <p>The unfortunate complication of this new URL structure is that we can’t rely on non-regional pages to link out to the correct regional ones. We'll need to instead leverage sessionStorage, localStorage, or cookies to track a user's region and set up a query index within each language folder and regional subfolder. For every link on a page, we search our user's captured region’s index to see if the links’ relative path exists there and update the link accordingly if it does. If it does not, we instead search through the language index and use the link there if it exists. Continuing with our example, if a U.S. user was to navigate to the “products” page from a non-regional page we would first look through:</p>
+        <p><code>https://&lt;domain&gt;/en/us/query-index.json</code><br>Seeing that the links’ relative path is contained within the index (and therefore a regional page) we would then alter the link to point to:</p>
+        <p><code>https://&lt;domain&gt;/en/us/products</code><br>If the regional content had not been found, we would have continued our search looking through:</p>
+        <p><code>https://&lt;domain&gt;/en/query-index.json</code></p>
+        <p>And likely linking to:</p>
+        <p><code>https://&lt;domain&gt;/en/products</code></p>
+        <h2 id="leveraging-placeholders-for-translations-in-code">Leveraging Placeholders for Translations in Code</h2>
+        <p>For multilingual sites we obviously do not want to hard code any language specific strings, particularly on our blocks which are shared across all pages regardless of language. By taking advantage of Edge Delivery Service’s built in placeholders functionality and taking design cues from the previous section we can instead dynamically fetch the properly translated string value based on the pages' location, metadata, or the user’s selected language. Much like with our indexes we create a placeholders spreadsheet within each language folder and populate each with the same keys and their respective translated values. From our code we can now use the “fetchPlaceholders” function and dynamically pass in our captured language value like so:</p>
+        <pre><code>const placeholders = await fetchPlaceholders('fr');
+const placeholders = await fetchPlaceholders('en');
+</code></pre>
+        <p>As an example, let’s look at a basic countdown block which contains the following HTML:</p>
+        <pre><code>&lt;p class='unit'&gt;${placeholders.days}&lt;/p&gt;
+&lt;p class='unit'&gt;${placeholders.hours}&lt;/p&gt;
+&lt;p class='unit'&gt;${placeholders.minutes}&lt;/p&gt;
+</code></pre>
+        <p>And the related snippets from the placeholder spreadsheets for each language folder:</p>
+        <p><code>/en/placeholders.xlsx</code></p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_18f080561bc1acf1b5f58934687e0445ec5a7efce.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_18f080561bc1acf1b5f58934687e0445ec5a7efce.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_18f080561bc1acf1b5f58934687e0445ec5a7efce.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_18f080561bc1acf1b5f58934687e0445ec5a7efce.png?width=750&amp;format=png&amp;optimize=medium" width="400" height="82">
+          </picture>
+        </p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1853c7fc9d0f6e148efcd74146160775ef7ed0992.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1853c7fc9d0f6e148efcd74146160775ef7ed0992.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1853c7fc9d0f6e148efcd74146160775ef7ed0992.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1853c7fc9d0f6e148efcd74146160775ef7ed0992.png?width=750&amp;format=png&amp;optimize=medium" width="636" height="338">
+          </picture>
+        </p>
+        <p><code>/fr/placeholders.xlsx</code></p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_138d5f1d89a2a08322c5e01038f64d2a82903f04d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_138d5f1d89a2a08322c5e01038f64d2a82903f04d.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_138d5f1d89a2a08322c5e01038f64d2a82903f04d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_138d5f1d89a2a08322c5e01038f64d2a82903f04d.png?width=750&amp;format=png&amp;optimize=medium" width="354" height="74">
+          </picture>
+        </p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_199fd92a03112113f37464912f572d624e3cc0c98.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_199fd92a03112113f37464912f572d624e3cc0c98.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_199fd92a03112113f37464912f572d624e3cc0c98.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_199fd92a03112113f37464912f572d624e3cc0c98.png?width=750&amp;format=png&amp;optimize=medium" width="646" height="356">
+          </picture>
+        </p>
+        <p>As you can see by leveraging placeholders we’ve removed any language specific strings from our block code and instead reference shared keys, thereby ensuring we can use the same block anywhere on our site.</p>
+        <p>Without going into too much detail, you can imagine how this same concept could be applied to our regional folders to alter our code's behavior using placeholders across regions as well.</p>
+        <h2 id="contentdocument-translation">Content/Document Translation</h2>
+        <p>Of course, having now covered how to handle translations within our code this brings up the question of how best to translate the content itself. Because Edge Delivery Services with document-based editing typically involves using Word, Google Docs, and spreadsheets, we have built in machine translation already available to us right out of the box. In addition, we can assume that nearly all third-party translation services will be able to seamlessly integrate with our choice of editor and content repository. This flexibility in tooling allows us to automate our translation process exactly how we’d like to, allowing for quick content creation within our language subfolders and in turn, across all our sites.</p>
+        <h2 id="improving-seo-with-sitemaps">Improving SEO with Sitemaps</h2>
+        <p>Now that we have set up our language specific folders, placeholders files, and query indexes we can now set up our sitemaps in an SEO friendly way. It is common to have sitemaps for each language, Edge Delivery Services supports multiple sitemaps and allows you to set their corresponding hreflang references. Following our example above we should now have both French and English language subfolders, each containing their own query index. In the root folder of our project we can create a file called “<code>helix-sitemap.yaml</code>” and populate it with the following:</p>
+        <pre><code>sitemaps:
+  example:
+    lastmod: YYYY-MM-DD
+    languages:
+      en:
+        source: /en/query-index.json
+        destination: /sitemap-en.xml
+        hreflang: en
+      fr:
+        source: /fr/query-index.json
+        destination: /sitemap-fr.xml
+        hreflang: fr
+        alternate: /fr/{path}
+</code></pre>
+        <p>This will generate a sitemap for each of our language subfolders based on the indexes we set up within each.</p>
+        <h2 id="alternative-configurations">Alternative Configurations</h2>
+        <p>This post only captures the setup of a standard multilingual site. There may be cases where your region/language requirements are entirely different or where your site typically caters to a specific audience, in which case that audience's language would be best placed at the root of the project with alternative languages being contained within subfolders.</p>
+        <p>For additional information please consult related AEM documentation covering <a href="../../docs/translation-and-localization/index.html">translations</a>, <a href="../../docs/placeholders/index.html">placeholders</a>, and the <a href="../../developer/indexing/index.html">query index</a>.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

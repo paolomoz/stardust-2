@@ -1,0 +1,281 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.941Z
+  page:             docs-setup-byo-cdn-push-invalidation-for-cloudfront
+  pageUrl:          https://www.aem.live/docs/setup-byo-cdn-push-invalidation-for-cloudfront
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Set up push invalidation for AWS Cloudfront</title>
+  <meta name="description" content="Push invalidation automatically purges content on the customer's production CDN (e.g. www.yourdomain.com), whenever an author publishes content changes or a developer pushes code changes to ...">
+  <meta property="og:title" content="Set up push invalidation for AWS Cloudfront">
+  <meta property="og:description" content="Push invalidation automatically purges content on the customer's production CDN (e.g. www.yourdomain.com), whenever an author publishes content changes or a developer pushes code changes to ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/setup-byo-cdn-push-invalidation-for-cloudfront/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#set-up-push-invalidation-for-aws-cloudfront">Set up push invalidation for AWS Cloudfront</a></li>
+<li class="l-3"><a href="#to-create-the-aws-credentials">To create the AWS credentials:</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Set up push invalidation for AWS Cloudfront</h1>
+          <p class="lede">Push invalidation automatically purges content on the customer's production CDN (e.g. www.yourdomain.com), whenever an author publishes content changes or a developer pushes code changes to ...</p>
+        </header>
+        <div class="content">
+        <h2 id="set-up-push-invalidation-for-aws-cloudfront">Set up push invalidation for AWS Cloudfront</h2>
+        <p>Push invalidation automatically purges content on the customer's production CDN (e.g. <code>www.yourdomain.com</code>), whenever an author publishes content changes or a developer pushes code changes to the <code>main</code> branch (changes on other branches do <strong>not</strong> trigger push invalidation).</p>
+        <p>Push invalidation is enabled by setting up the Cloudfront purge credentials in the cdn section of the <a href="../config-service-setup/index.html">configuration service</a>.</p>
+        <pre><code>curl --request POST \
+  --url https://admin.hlx.page/config/{org}/sites/{site}/cdn.json \
+  --header 'content-type: application/json' \
+  --data '{
+	"prod": {
+		"host": "{production host}",
+		"type": "cloudfront",
+		"distributionId": "{distributionId}",
+		"accessKeyId": "{accessKeyId}",
+		"secretAccessKey": "{secretAccessKey}"
+	}
+}'
+</code></pre>
+        <p><strong>NB</strong>: CloudFront does NOT support purging by cache tag/key. Purge by cache tag/key always triggers a purge all.<br><br>Configuration properties:</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td align="center"><strong>key</strong></td>
+                    <td align="center"><strong>value</strong></td>
+                    <td align="center"><strong>comment</strong></td>
+                  </tr>
+                  <tr>
+                    <td><code>host</code></td>
+                    <td><code>&lt;Production Host&gt;</code></td>
+                    <td>Host name of production site, e.g. <code>www.yourdomain.com</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>type</code></td>
+                    <td><code>cloudfront</code></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><code>distributionId</code></td>
+                    <td><code>&lt;Cloudfront Distribution ID&gt;</code></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><code>accessKeyId</code></td>
+                    <td><code>&lt;AWS Access key ID&gt;</code></td>
+                    <td>AWS credentials</td>
+                  </tr>
+                  <tr>
+                    <td><code>secretAccessKey</code></td>
+                    <td><code>&lt;AWS Secret access key&gt;</code></td>
+                    <td>AWS credentials</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h3 id="to-create-the-aws-credentials">To create the AWS credentials:<br></h3>
+        <p>In the AWS Console, open the IAM dashboard, then select Policies → Create policy:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1894dcce709641e3c4781fbdf8d5fbf3d760fb939.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1894dcce709641e3c4781fbdf8d5fbf3d760fb939.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1894dcce709641e3c4781fbdf8d5fbf3d760fb939.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1894dcce709641e3c4781fbdf8d5fbf3d760fb939.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="573">
+          </picture>
+        </p>
+        <p>In the following screen, select "CloudFront" as a service, and "CreateInvalidation" as action, then click "Add ARNs" to restrict the permissions to a single distribution.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_100caf1256f8c50f31f4a2f218af042bc8b2e6afc.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_100caf1256f8c50f31f4a2f218af042bc8b2e6afc.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_100caf1256f8c50f31f4a2f218af042bc8b2e6afc.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_100caf1256f8c50f31f4a2f218af042bc8b2e6afc.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1142">
+          </picture>
+        </p>
+        <p>Enter you Distribution Id and click on “Add ARNs”:<br><br>
+          <picture>
+            <source type="image/webp" srcset="./media_13d54c78e47420e41cca1bd8e7950330d3c5db059.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_13d54c78e47420e41cca1bd8e7950330d3c5db059.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_13d54c78e47420e41cca1bd8e7950330d3c5db059.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_13d54c78e47420e41cca1bd8e7950330d3c5db059.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1142">
+          </picture>
+        </p>
+        <p>Proceed to “Next: Tags” and then “Next: Review”.<br><br>Enter a name for the new policy, e.g. “AEM&lt;YourSite&gt;Invalidate”, and click on “Create policy”:<br><br>
+          <picture>
+            <source type="image/webp" srcset="./media_136b4925d54316ff6aea82273e64bbdee745feec3.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_136b4925d54316ff6aea82273e64bbdee745feec3.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_136b4925d54316ff6aea82273e64bbdee745feec3.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_136b4925d54316ff6aea82273e64bbdee745feec3.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1142">
+          </picture>
+        </p>
+        <p>In the IAM dashboard, select Users → Create user<br>
+          <picture>
+            <source type="image/webp" srcset="./media_1939ba5aeaff089d550fa8de3e4a1c9f5562ffb8a.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1939ba5aeaff089d550fa8de3e4a1c9f5562ffb8a.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1939ba5aeaff089d550fa8de3e4a1c9f5562ffb8a.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1939ba5aeaff089d550fa8de3e4a1c9f5562ffb8a.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="510">
+          </picture>
+        </p>
+        <p>Enter a user name (e.g. “Invalidator”) and click on Next:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1fc4bc74dc5f2bf8e8901c0b0c1a69adfeee5c461.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1fc4bc74dc5f2bf8e8901c0b0c1a69adfeee5c461.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1fc4bc74dc5f2bf8e8901c0b0c1a69adfeee5c461.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1fc4bc74dc5f2bf8e8901c0b0c1a69adfeee5c461.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="726">
+          </picture>
+        </p>
+        <p>On the “Set permissions” pane, select “Attach policies directly” and select the newly created policy (“AEM&lt;YourSite&gt;Invalidate” in our example):</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_13c0dffe2ba6f96c6b77fe000288aa9c0b40eb562.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_13c0dffe2ba6f96c6b77fe000288aa9c0b40eb562.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_13c0dffe2ba6f96c6b77fe000288aa9c0b40eb562.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_13c0dffe2ba6f96c6b77fe000288aa9c0b40eb562.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1142">
+          </picture>
+        </p>
+        <p>Proceed to the next step, click on “Create user” end then “View user”:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_117a4775e2aa42cec57566db8d6cc38e5f61774f0.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_117a4775e2aa42cec57566db8d6cc38e5f61774f0.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_117a4775e2aa42cec57566db8d6cc38e5f61774f0.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_117a4775e2aa42cec57566db8d6cc38e5f61774f0.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1142">
+          </picture>
+        </p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_12088c115158b9afa04ef4fbcc932ea57d4c75f44.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_12088c115158b9afa04ef4fbcc932ea57d4c75f44.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_12088c115158b9afa04ef4fbcc932ea57d4c75f44.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_12088c115158b9afa04ef4fbcc932ea57d4c75f44.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="352">
+          </picture>
+        </p>
+        <p>Select the “Security credentials” tab and click on “Create access key”:<br><br>
+          <picture>
+            <source type="image/webp" srcset="./media_14ea743573b7b5d96f454c06352bbabe1f48322dc.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_14ea743573b7b5d96f454c06352bbabe1f48322dc.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_14ea743573b7b5d96f454c06352bbabe1f48322dc.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_14ea743573b7b5d96f454c06352bbabe1f48322dc.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1142">
+          </picture>
+        </p>
+        <p>Select “Third-party service”, click the checkbox and proceed to “Next”:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_120e2f96ce9c5fc266415c342e5686b619f86c75b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_120e2f96ce9c5fc266415c342e5686b619f86c75b.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_120e2f96ce9c5fc266415c342e5686b619f86c75b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_120e2f96ce9c5fc266415c342e5686b619f86c75b.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1142">
+          </picture>
+        </p>
+        <p>Finally, copy the Access key ID and Secret access key values:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1e4c32ae4fd058d5782e8d66d307ed3cc19009ade.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1e4c32ae4fd058d5782e8d66d307ed3cc19009ade.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1e4c32ae4fd058d5782e8d66d307ed3cc19009ade.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1e4c32ae4fd058d5782e8d66d307ed3cc19009ade.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="893">
+          </picture>
+        </p>
+        <p>You can validate the credentials with this <a href="https://tools.aem.live/tools/push-invalidation/index.html?type=cloudfront">tool</a>.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

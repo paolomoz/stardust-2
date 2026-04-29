@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.903Z
+  page:             docs-setup-customer-googledrive
+  pageUrl:          https://www.aem.live/docs/setup-customer-googledrive
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>How to use Google Drive with a custom user</title>
+  <meta name="description" content="It is best practice to use a generic (or technical) user to access the content on behalf of the service. This is better than using ...">
+  <meta property="og:title" content="How to use Google Drive with a custom user">
+  <meta property="og:description" content="It is best practice to use a generic (or technical) user to access the content on behalf of the service. This is better than using ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/setup-customer-googledrive/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#create-a-folder-within-google-drive">1. Create a folder within Google Drive</a></li>
+<li class="l-2"><a href="#create-or-define-the-technical-user">2. Create or define the (technical) user</a></li>
+<li class="l-2"><a href="#share-the-website-root-folder-with-that-user">3. Share the website root folder with that user</a></li>
+<li class="l-2"><a href="#configure-the-fstabyaml-with-the-respective-folder">4. Configure the fstab.yaml with the respective folder</a></li>
+<li class="l-2"><a href="#register-the-user">5. Register the user</a></li>
+<li class="l-3"><a href="#overview">Overview</a></li>
+<li class="l-3"><a href="#access-the-service-setup-ui">Access the Service Setup UI</a></li>
+<li class="l-3"><a href="#connect-the-technical-user">Connect the technical user</a></li>
+<li class="l-3"><a href="#important">Important</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>How to use Google Drive with a custom user</h1>
+          <p class="lede">It is best practice to use a generic (or technical) user to access the content on behalf of the service. This is better than using ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1efffe0288d261803d829a5fbc7f0d34748e6dacc.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1efffe0288d261803d829a5fbc7f0d34748e6dacc.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1efffe0288d261803d829a5fbc7f0d34748e6dacc.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="White Adobe logo on a red square." src="./media_1efffe0288d261803d829a5fbc7f0d34748e6dacc.png?width=750&amp;format=png&amp;optimize=medium" width="1463" height="1097">
+          </picture>
+        </p>
+        
+        <p>Setting up the custom user involves the following steps:</p>
+        <ol>
+          <li>Create a folder within Google Drive that will be the website root</li>
+          <li>Create or define the (technical) user that will access the Google Drive content</li>
+          <li>Share the website root folder with that user</li>
+          <li>Configure the <code>fstab.yaml</code> with the respective folder</li>
+          <li>Register the user with the service</li>
+        </ol>
+        <h2 id="create-a-folder-within-google-drive">1. Create a folder within Google Drive</h2>
+        <p>Please follow the respective steps of the <a href="../../developer/tutorial/index.html#link-your-own-content-source-using-google-drive">tutorial</a>.</p>
+        <h2 id="create-or-define-the-technical-user">2. Create or define the (technical) user</h2>
+        <p>It is best practice to use a generic (or technical) user to access the content on behalf of the service. This is better than using an employee user account because the exact scope of the files the user can access can be defined. Furthermore, there is no risk losing access to the files, should that employee leave the company.</p>
+        <p>Every company has different procedures to create technical users, so ask your IT department on how to do this.</p>
+        <h2 id="share-the-website-root-folder-with-that-user">3. Share the website root folder with that user</h2>
+        <p>Please follow the steps of the <a href="../../developer/tutorial/index.html#link-your-own-content-source-using-google-drive">tutorial</a> but instead of sharing the content with the default user, share it with your custom user. The example below uses <code>helixdocumentation@gmail.com</code> as the example user:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_12ea941043e0824604b6a656df2e1f924cf306ad4.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_12ea941043e0824604b6a656df2e1f924cf306ad4.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_12ea941043e0824604b6a656df2e1f924cf306ad4.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_12ea941043e0824604b6a656df2e1f924cf306ad4.png?width=750&amp;format=png&amp;optimize=medium" width="547" height="434">
+          </picture>
+        </p>
+        <h2 id="configure-the-fstabyaml-with-the-respective-folder">4. Configure the fstab.yaml with the respective folder</h2>
+        <p>Please follow the respective steps of the <a href="../../developer/tutorial/index.html">tutorial</a></p>
+        <h2 id="register-the-user">5. Register the user</h2>
+        <h3 id="overview">Overview</h3>
+        <p>In order for the AEM service to access the authored content it needs a couple of information and setup. The AEM service (a cloud function) accesses the <a href="https://developers.google.com/drive/api/guides/about-sdk">Google Drive API</a> on behalf of a configured user. In order to do so, it needs to authenticate first in the context of a <a href="https://cloud.google.com/app?hl=de">Google Cloud Application</a>. This is important because the scopes given to the application define what permission the service has on the Google Drive API. For example, it should be allowed to read and write documents, but not to alter access control.</p>
+        <h3 id="access-the-service-setup-ui">Access the Service Setup UI</h3>
+        <p>To get started, open the <a href="https://admin.hlx.page/register">Admin Service Setup UI</a> and enter the GitHub URL of your project:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_15f7774ed460e7f26b93219abcf45f67a57f46545.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_15f7774ed460e7f26b93219abcf45f67a57f46545.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_15f7774ed460e7f26b93219abcf45f67a57f46545.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_15f7774ed460e7f26b93219abcf45f67a57f46545.png?width=750&amp;format=png&amp;optimize=medium" width="1562" height="1040">
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="./media_1242c66d66a4a214cdeaf8725fb0db0ea59a213b9.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1242c66d66a4a214cdeaf8725fb0db0ea59a213b9.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1242c66d66a4a214cdeaf8725fb0db0ea59a213b9.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1242c66d66a4a214cdeaf8725fb0db0ea59a213b9.png?width=750&amp;format=png&amp;optimize=medium" width="889" height="603">
+          </picture>
+        </p>
+        <p>Then you need to “Sign In” with a user that has access to the website root. This is to verify that only people with sufficient credentials can manage the user registration. This can be your own personal user or the technical user you selected above.</p>
+        <p>The first time you login, you probably see the “Google hasn’t verified this app” screen. This shows up because the verification process is still pending:
+          <picture>
+            <source type="image/webp" srcset="./media_16a90db8701ae3c0a04a5ae4bb846cd676d17d853.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_16a90db8701ae3c0a04a5ae4bb846cd676d17d853.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_16a90db8701ae3c0a04a5ae4bb846cd676d17d853.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_16a90db8701ae3c0a04a5ae4bb846cd676d17d853.png?width=750&amp;format=png&amp;optimize=medium" width="862" height="757">
+          </picture><br>Click on <code>Advanced</code> and then on <code>Go to admin.hlx.page (unsafe)</code>:
+        </p>
+        <p>Next, you see the permission grant screen that informs you about which permissions the “Franklin Service” application will have.<br>
+          <picture>
+            <source type="image/webp" srcset="./media_11b6f35923cc6c351415ccb5eb76c74826979c9c2.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_11b6f35923cc6c351415ccb5eb76c74826979c9c2.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_11b6f35923cc6c351415ccb5eb76c74826979c9c2.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_11b6f35923cc6c351415ccb5eb76c74826979c9c2.png?width=750&amp;format=png&amp;optimize=medium" width="799" height="1452">
+          </picture>
+        </p>
+        <h3 id="connect-the-technical-user">Connect the technical user</h3>
+        <p>With the permission properly granted, you should be able to login properly to the Franklin Service Setup UI:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1f38e1f7dafb91f63816a3b193b7c73bb25f11021.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1f38e1f7dafb91f63816a3b193b7c73bb25f11021.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1f38e1f7dafb91f63816a3b193b7c73bb25f11021.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1f38e1f7dafb91f63816a3b193b7c73bb25f11021.png?width=750&amp;format=png&amp;optimize=medium" width="881" height="1082">
+          </picture>
+        </p>
+        <p>Click on “Connect User” and you should see a new login window, where you want to login with your technical user. After the login process (and permission granting), the UI should show the connected user information:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_121d3a1a81f1f3824114fd2ed4e349f768b016c44.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_121d3a1a81f1f3824114fd2ed4e349f768b016c44.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_121d3a1a81f1f3824114fd2ed4e349f768b016c44.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_121d3a1a81f1f3824114fd2ed4e349f768b016c44.png?width=750&amp;format=png&amp;optimize=medium" width="731" height="270">
+          </picture>
+        </p>
+        <p>Once the user is registered, you should be able to preview a page.</p>
+        <h3 id="important">Important</h3>
+        <p>Changing the user's password will invalidate the <em>grant</em> that is established when connecting the user. This will eventually cause an error in the sidekick. In order to prevent this, you need to reconnect the user, by clicking the disconnect button then connect it again.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

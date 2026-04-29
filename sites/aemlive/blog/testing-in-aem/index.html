@@ -1,0 +1,158 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.319Z
+  page:             blog-testing-in-aem
+  pageUrl:          https://www.aem.live/blog/testing-in-aem
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Why I don’t recommend UI testing in AEM (even though I write tests for my own projects)</title>
+  <meta name="description" content="When customers or partners ask me, “Should we write UI tests for our AEM projects?”, I usually say, “No, probably not.” But here’s the twist: ...">
+  <meta property="og:title" content="Why I don’t recommend UI testing in AEM (even though I write tests for my own projects)">
+  <meta property="og:description" content="When customers or partners ask me, “Should we write UI tests for our AEM projects?”, I usually say, “No, probably not.” But here’s the twist: ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/blog/testing-in-aem/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../index.html" aria-current="page">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-success)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#lets-start-with-the-basics-why-do-we-test">Let’s start with the basics: Why do we test?</a></li>
+<li class="l-3"><a href="#scenario-1-backend-utility-library">Scenario 1: Backend Utility Library</a></li>
+<li class="l-3"><a href="#scenario-2-ui-testing-in-aem">Scenario 2: UI Testing in AEM</a></li>
+<li class="l-2"><a href="#why-any-cms-makes-ui-testing-even-harder">Why Any CMS Makes UI Testing Even Harder</a></li>
+<li class="l-2"><a href="#so-should-you-test-in-aem">So, should you test in AEM?</a></li>
+<li class="l-2"><a href="#final-thought-test-with-purpose-not-by-habit">Final Thought: Test with Purpose, Not by Habit</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog · BLOG</p>
+          <h1>Why I don’t recommend UI testing in AEM (even though I write tests for my own projects)</h1>
+          <p class="lede">When customers or partners ask me, “Should we write UI tests for our AEM projects?”, I usually say, “No, probably not.” But here’s the twist: ...</p>
+        </header>
+        <div>
+        
+        <p>When customers or partners ask me, “Should we write UI tests for our AEM projects?”, I usually say, “No, probably not.” But here’s the twist: when I’m working on something like <a href="../../tools/oversight/explorer.html/index.html?domain=emigrationbrewing.com&amp;filter=&amp;view=month&amp;metrics=all&amp;domainkey=open" data-broken-link="true">Optel Explorer</a> <em>or</em> <a href="https://github.com/adobe/aem-sidekick/">AEM Sidekick</a>, I write extensive tests.</p>
+        <p>Sounds contradictory, right?</p>
+        <p>It’s not. It’s all about understanding the cost-benefit trade-off of testing and most importantly, knowing <em>why</em> we test in the first place.</p>
+        <h2 id="lets-start-with-the-basics-why-do-we-test">Let’s start with the basics: Why do we test?</h2>
+        <p>Testing isn’t glamorous but it’s the quiet force behind fast releases, fewer bugs, and happier users. We don’t test just to tick a box; we test to gain confidence. Confidence that our code works, that we can ship faster and that users won’t hit broken experiences in production.</p>
+        <p>But testing comes at a cost: time, complexity, maintenance, and infrastructure. So the real question becomes: Is the benefit of testing worth the cost in this context?</p>
+        <p>Think of testing like insurance. You don’t insure everything—you insure what’s valuable and vulnerable. Similarly, in software, we should test where the <em>impact of failure is high</em> and the <em>cost of testing is low.</em></p>
+        <p>Let’s bring this to life with two contrasting examples.</p>
+        <h3 id="scenario-1-backend-utility-library">Scenario 1: Backend Utility Library</h3>
+        <p>Imagine you're building a backend library that’s used across multiple services. If something breaks here, the consequences are serious. A single bug could ripple across dozens of features. Fortunately, testing this kind of logic is straightforward. It can be done in isolation, without any UI, using fast and reliable unit tests. Since the logic doesn’t change often, the tests remain stable and require minimal upkeep.</p>
+        <p>In this case, the value of testing is high, and the cost is low. It’s a no-brainer; definitely worth the effort.</p>
+        <h3 id="scenario-2-ui-testing-in-aem">Scenario 2: UI Testing in AEM</h3>
+        <p>Now picture writing UI tests for a visual component in AEM. A misaligned button or a slightly off layout might be annoying, but it rarely breaks the user experience. Setting up automated UI tests, however, is anything but simple. Frameworks like Playwright or Web Test Runner require significant setup, and the tests themselves are fragile - small, unrelated changes can cause them to fail. Maintaining them becomes a chore.</p>
+        <p>Here, the value is low, and the cost is high. In most cases, it’s just not worth it.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1a00db20e2429f78b2b1a35284d82b174d8d4c9b9.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1a00db20e2429f78b2b1a35284d82b174d8d4c9b9.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1a00db20e2429f78b2b1a35284d82b174d8d4c9b9.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1a00db20e2429f78b2b1a35284d82b174d8d4c9b9.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        <h2 id="why-any-cms-makes-ui-testing-even-harder">Why Any CMS Makes UI Testing Even Harder</h2>
+        <p>Content Management Systems (CMSs) are designed for flexibility, not predictability and that’s exactly what makes UI testing in these environments so challenging.</p>
+        <p>Components are rendered dynamically based on authored content, which can vary wildly. Different authors structure pages differently, introducing inconsistencies that automated tests struggle with. What works locally might fail in CI/CD due to rendering differences or timing issues. And DOM structures change often due to styling or layout updates, breaking tests even when functionality is intact.</p>
+        <p>Unless you’re testing a critical user flow like login, checkout, or form submission - UI tests in CMS environments often become more of a maintenance burden than a quality safeguard.</p>
+        <h2 id="so-should-you-test-in-aem">So, should you test in AEM?</h2>
+        <p>Yes, but <strong>strategically</strong>.</p>
+        <p>Focus your efforts on areas that carry real weight: backend logic, reusable libraries, critical user journeys like login or checkout, and integrations that tie systems together. These are the pillars of your application’s reliability.</p>
+        <p>On the other hand, let go of the urge to validate every pixel. Visual tweaks on content-heavy pages, components that shift frequently, or purely aesthetic elements rarely justify the overhead. They tend to break often, demand constant updates, and offer little in return.</p>
+        <h2 id="final-thought-test-with-purpose-not-by-habit">Final Thought: Test with Purpose, Not by Habit</h2>
+        <p>Testing isn’t a ritual. It’s a strategic decision. That’s why I write tests for my other projects but still advise others to think twice for writing tests in AEM. Because I know exactly what I’m validating, why it matters, and what I’m prepared to maintain. I’m not chasing perfection, I’m investing in stability where it counts.</p>
+        <p>In the world of Content Management Systems, where the UI is dynamic, content-driven, and constantly evolving, the cost of exhaustive UI testing often outweighs the value it brings. So instead of testing everything, focus on what truly matters.<br>Think in terms of impact versus effort. Validate what’s stable, critical, and cost-effective. Let go of what’s fragile, cosmetic, or constantly shifting.</p>
+        <p>That’s how you build AEM solutions that are not only reliable but agile, efficient, and future-proof.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

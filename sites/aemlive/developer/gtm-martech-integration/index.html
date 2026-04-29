@@ -1,0 +1,360 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.312Z
+  page:             developer-gtm-martech-integration
+  pageUrl:          https://www.aem.live/developer/gtm-martech-integration
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Configuring Google Analytics &amp; Tag Manager Integration</title>
+  <meta name="description" content="This article will walk you through the steps of setting up an integration with Google Analytics (GA) and Google Tag Manager (GTM) . This will ...">
+  <meta property="og:title" content="Configuring Google Analytics &amp; Tag Manager Integration">
+  <meta property="og:description" content="This article will walk you through the steps of setting up an integration with Google Analytics (GA) and Google Tag Manager (GTM) . This will ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/gtm-martech-integration/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#choosing-the-right-integration">Choosing the Right Integration</a></li>
+<li class="l-2"><a href="#when-to-use-this-integration">When to Use This Integration</a></li>
+<li class="l-3"><a href="#integration-comparison">Integration Comparison</a></li>
+<li class="l-2"><a href="#integration-overview">Integration Overview</a></li>
+<li class="l-2"><a href="#how-it-works">How It Works</a></li>
+<li class="l-2"><a href="#rationale">Rationale</a></li>
+<li class="l-3"><a href="#performance-benefits">Performance Benefits</a></li>
+<li class="l-2"><a href="#pre-requisites">Pre-requisites</a></li>
+<li class="l-3"><a href="#gtm-container-configuration">GTM Container Configuration</a></li>
+<li class="l-2"><a href="#installation--configuration">Installation &amp; Configuration</a></li>
+<li class="l-3"><a href="#step-1-install-the-plugin">Step 1: Install the Plugin</a></li>
+<li class="l-3"><a href="#step-2-configure-consent-management">Step 2: Configure Consent Management</a></li>
+<li class="l-3"><a href="#step-3-deploy-your-code">Step 3: Deploy Your Code</a></li>
+<li class="l-3"><a href="#step-4-test-the-integration">Step 4: Test the Integration</a></li>
+<li class="l-2"><a href="#verification--testing">Verification &amp; Testing</a></li>
+<li class="l-3"><a href="#browser-based-testing">Browser-Based Testing</a></li>
+<li class="l-3"><a href="#google-analytics-verification">Google Analytics Verification</a></li>
+<li class="l-3"><a href="#gtm-preview-mode">GTM Preview Mode</a></li>
+<li class="l-3"><a href="#expected-network-activity">Expected Network Activity</a></li>
+<li class="l-2"><a href="#privacy--consent-management">Privacy &amp; Consent Management</a></li>
+<li class="l-2"><a href="#troubleshooting">Troubleshooting</a></li>
+<li class="l-3"><a href="#common-issues">Common Issues</a></li>
+<li class="l-3"><a href="#debugging-tools">Debugging Tools</a></li>
+<li class="l-2"><a href="#next-steps--related-resources">Next Steps &amp; Related Resources</a></li>
+<li class="l-3"><a href="#demo--examples">Demo &amp; Examples</a></li>
+<li class="l-3"><a href="#additional-documentation">Additional Documentation</a></li>
+<li class="l-3"><a href="#alternative-integration-options">Alternative Integration Options</a></li>
+<li class="l-3"><a href="#technical-resources">Technical Resources</a></li>
+<li class="l-3"><a href="#google-resources">Google Resources</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Configuring Google Analytics &amp; Tag Manager Integration</h1>
+          <p class="lede">This article will walk you through the steps of setting up an integration with Google Analytics (GA) and Google Tag Manager (GTM) . This will ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>This article will walk you through the steps of setting up an integration with Google Analytics (GA) and Google Tag Manager (GTM) . This will let you automatically track page view and custom events, along with any other tags configured in your GTM containers.</p>
+        <h2 id="choosing-the-right-integration">Choosing the Right Integration</h2>
+        <p>This document covers integration with <strong>Google's marketing technology stack</strong><br>(Google Analytics 4, Google Tag Manager).</p>
+        <p><strong>Looking for Adobe Experience Cloud integration instead?</strong><br>See our <a href="../martech-integration/index.html">Adobe Experience Cloud Integration guide</a>.</p>
+        <h2 id="when-to-use-this-integration">When to Use This Integration</h2>
+        <ul>
+          <li>You're using Google Analytics as your primary analytics solution</li>
+          <li>You want to leverage Google Tag Manager for tag management</li>
+          <li>You're already invested in the Google marketing ecosystem</li>
+        </ul>
+        <h3 id="integration-comparison">Integration Comparison</h3>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td><strong>Feature</strong></td>
+                    <td><strong>Google Analytics &amp; GTM</strong></td>
+                    <td><strong>Adobe Experience Cloud</strong></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Analytics</strong></td>
+                    <td>Google Analytics 4</td>
+                    <td>Adobe Analytics</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Tag Management</strong></td>
+                    <td>Google Tag Manager</td>
+                    <td>Adobe Experience Platform Tags</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Personalization</strong></td>
+                    <td>Limited (via GTM)</td>
+                    <td>Adobe Target/AJO</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Data Layer</strong></td>
+                    <td>Google Data Layer</td>
+                    <td>Adobe Client Data Layer</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Cost</strong></td>
+                    <td>Free tier available</td>
+                    <td>Enterprise licensing</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Privacy</strong></td>
+                    <td>GDPR/CCPA compliant</td>
+                    <td>GDPR/CCPA compliant</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h2 id="integration-overview">Integration Overview</h2>
+        <p>The Google Analytics &amp; Tag Manager integration provides a streamlined marketing technology stack that enables:</p>
+        <ul>
+          <li><strong>Comprehensive analytics</strong> with Google Analytics 4</li>
+          <li><strong>Flexible tag management</strong> through Google Tag Manager</li>
+          <li><strong>Custom event tracking</strong> for business-specific metrics</li>
+          <li><strong>Performance-optimized loading</strong> aligned with AEM EDS phases</li>
+          <li><strong>Privacy-compliant data collection</strong></li>
+        </ul>
+        <p>This integration is designed to work seamlessly with AEM Edge Delivery Services while maintaining optimal performance and user experience.</p>
+        <h2 id="how-it-works">How It Works</h2>
+        <p>The integration splits the traditional monolithic GTM approach into optimized phases:</p>
+        <ul>
+          <li><strong>Google Analytics 4 Tag</strong>: Provides comprehensive web analytics and user behavior tracking</li>
+          <li><strong>Google Tag Manager</strong>: Manages all marketing tags and pixels from a centralized interface</li>
+          <li><strong>Google Data Layer</strong>: Standardizes data collection and event tracking</li>
+          <li><strong>Phased Loading</strong>: Separates critical tracking from delayed tag execution</li>
+          <li><strong>First-Party Data</strong>: Ensures reliable tracking while respecting privacy preferences</li>
+        </ul>
+        <h2 id="rationale">Rationale</h2>
+        <p>In a traditional GTM implementation, one container is used to initialize tracking and load all other containers. This approach typically has a performance impact on the initial page load, degrading the Core Web Vitals (CWV).</p>
+        <p>This optimized approach attaches tracking actions to the Edge Delivery Services phases. By splitting up the loading of the libraries and containers, we have minimized the impact on page performance, while maintaining page event tracking.</p>
+        <h3 id="performance-benefits">Performance Benefits</h3>
+        <ul>
+          <li><strong>Reduced initial load time</strong> by deferring non-critical tags</li>
+          <li><strong>Improved Core Web Vitals</strong> through phased loading</li>
+          <li><strong>Faster Time to Interactive</strong> by prioritizing essential tracking</li>
+          <li><strong>Maintained tracking accuracy</strong> while optimizing performance</li>
+        </ul>
+        <h2 id="pre-requisites">Pre-requisites</h2>
+        <p>Before you can use this plugin, make sure you have access to:</p>
+        <ul>
+          <li><strong>Google Analytics</strong> account with GA4 property configured</li>
+          <li><strong>Google Tag Manager</strong> account with container(s) set up</li>
+        </ul>
+        <p>You'll also need the following information:</p>
+        <ul>
+          <li><strong>Google Analytics Measurement ID</strong> (format: G-XXXXXXXXXX)</li>
+          <li><strong>Google Tag Manager container ID(s)</strong> (format: GTM-XXXXXXX)</li>
+          <li>If using multiple containers, ensure to make note of which should be loaded in the different phases (lazy or delayed)</li>
+        </ul>
+        <h3 id="gtm-container-configuration">GTM Container Configuration</h3>
+        <ul>
+          <li>Ensure your GTM container has the necessary tags configured</li>
+          <li>Set up triggers for page views and custom events</li>
+          <li>Configure variables for data layer values</li>
+          <li>Test your container in preview mode before deploying</li>
+        </ul>
+        <h2 id="installation--configuration">Installation &amp; Configuration</h2>
+        <h3 id="step-1-install-the-plugin">Step 1: Install the Plugin</h3>
+        <p>Follow the technical steps in the <a href="https://github.com/adobe-rnd/aem-gtm-martech">aem-gtm-martech GitHub repository</a>.</p>
+        <h3 id="step-2-configure-consent-management">Step 2: Configure Consent Management</h3>
+        <p>Make sure you implement and pass a <code>consentCallback</code> according to the documentation. This is essential for GDPR/CCPA compliance.</p>
+        <p><strong>Privacy Considerations</strong>: The integration includes built-in consent management support. Default consent is set to require explicit user permission before tracking begins.</p>
+        <h3 id="step-3-deploy-your-code">Step 3: Deploy Your Code</h3>
+        <p>Commit and push your code branch to trigger the deployment.</p>
+        <h3 id="step-4-test-the-integration">Step 4: Test the Integration</h3>
+        <p>Open a browser to the branch containing the plugin and verify the configuration.</p>
+        <h2 id="verification--testing">Verification &amp; Testing</h2>
+        <p>To verify the configuration is correct you can:</p>
+        <h3 id="browser-based-testing">Browser-Based Testing</h3>
+        <ul>
+          <li>Use the <strong>Google Tag Assistant Chrome extension</strong> to view the events</li>
+          <li>Use the <strong>Google Tag Assistant</strong> site to view events in real-time</li>
+          <li>Monitor the network tab for scripts loaded from Google</li>
+          <li>Check for calls to <code>https://www.google-analytics.com/g/collect</code></li>
+        </ul>
+        <h3 id="google-analytics-verification">Google Analytics Verification</h3>
+        <ul>
+          <li>Check real-time reports in Google Analytics</li>
+          <li>Verify page view events are being recorded</li>
+          <li>Test custom event tracking</li>
+          <li>Confirm conversion tracking (if configured)</li>
+        </ul>
+        <h3 id="gtm-preview-mode">GTM Preview Mode</h3>
+        <ul>
+          <li>Use GTM's preview mode to debug tag firing</li>
+          <li>Verify data layer variables are populated correctly</li>
+          <li>Check that triggers are working as expected</li>
+          <li>Validate tag configurations</li>
+        </ul>
+        <h3 id="expected-network-activity">Expected Network Activity</h3>
+        <p>When properly configured, you should see:</p>
+        <ul>
+          <li>GA4 measurement calls to <code>google-analytics.com</code></li>
+          <li>GTM container loads from <code>googletagmanager.com</code></li>
+          <li>Data layer pushes in browser console (if debugging enabled)</li>
+        </ul>
+        <h2 id="privacy--consent-management">Privacy &amp; Consent Management</h2>
+        <p>The integration provides comprehensive privacy controls:</p>
+        <ul>
+          <li><strong>Default consent state</strong>: Requires explicit user permission</li>
+          <li><strong>Granular consent categories</strong>: Analytics, marketing, preferences</li>
+          <li><strong>Consent callback integration</strong>: Works with popular consent management platforms</li>
+          <li><strong>Data retention controls</strong>: Configurable data retention periods</li>
+        </ul>
+        <h2 id="troubleshooting">Troubleshooting</h2>
+        <h3 id="common-issues">Common Issues</h3>
+        <p><strong>No tracking data in Google Analytics:</strong></p>
+        <ul>
+          <li>Verify your GA4 Measurement ID is correct</li>
+          <li>Check that consent has been granted</li>
+          <li>Ensure GTM container is published, not just saved</li>
+          <li>Monitor browser console for JavaScript errors</li>
+        </ul>
+        <p><strong>GTM tags not firing:</strong></p>
+        <ul>
+          <li>Check GTM preview mode for trigger debugging</li>
+          <li>Verify data layer variables are populated</li>
+          <li>Ensure consent is properly granted for relevant storage types</li>
+          <li>Check tag configuration and triggers</li>
+        </ul>
+        <p><strong>Performance degradation:</strong></p>
+        <ul>
+          <li>Review the number of tags in your GTM container</li>
+          <li>Consider moving non-critical tags to delayed phase</li>
+          <li>Monitor Core Web Vitals impact</li>
+          <li>Optimize trigger conditions to reduce unnecessary tag fires</li>
+        </ul>
+        <h3 id="debugging-tools">Debugging Tools</h3>
+        <ul>
+          <li><strong>GTM Preview Mode</strong>: Real-time tag debugging</li>
+          <li><strong>Google Tag Assistant</strong>: Browser extension for validation</li>
+          <li><strong>GA4 DebugView</strong>: Real-time event monitoring</li>
+          <li><strong>Browser DevTools</strong>: Network and console monitoring</li>
+        </ul>
+        <h2 id="next-steps--related-resources">Next Steps &amp; Related Resources</h2>
+        <h3 id="demo--examples">Demo &amp; Examples</h3>
+        <p>A demo site with the plugin can be found <a href="demo/index.html" data-broken-link="true">here</a>.</p>
+        <h3 id="additional-documentation">Additional Documentation</h3>
+        <ul>
+          <li>Google Analytics 4: <a href="https://support.google.com/analytics/answer/9304153"></a><a href="https://support.google.com/analytics/answer/9304153">GA4 Setup Guide</a></li>
+          <li>Google Tag Manager: <a href="https://support.google.com/tagmanager/answer/6103696"></a><a href="https://support.google.com/tagmanager/answer/6103696">GTM Implementation Guide</a></li>
+        </ul>
+        <h3 id="alternative-integration-options">Alternative Integration Options</h3>
+        <ul>
+          <li>Adobe Experience Cloud: <a href="../martech-integration/index.html">Adobe MarTech Integration</a></li>
+        </ul>
+        <h3 id="technical-resources">Technical Resources</h3>
+        <ul>
+          <li>GitHub Repository: <a href="https://github.com/adobe-rnd/aem-gtm-martech"></a><a href="https://github.com/adobe-rnd/aem-gtm-martech">adobe-rnd/aem-gtm-martech</a></li>
+        </ul>
+        <h3 id="google-resources">Google Resources</h3>
+        <ul>
+          <li>Tag Assistant Chrome Extension: <a href="https://chromewebstore.google.com/detail/tag-assistant-companion/jmekfmbnaedfebfnmakmokmlfpblbfdm?hl=en"></a><a href="https://chromewebstore.google.com/detail/tag-assistant-companion/jmekfmbnaedfebfnmakmokmlfpblbfdm?hl=en">Install from Chrome Web Store</a></li>
+          <li>Google Tag Assistant: <a href="https://tagassistant.google.com/"></a><a href="https://tagassistant.google.com/">Online Validation Tool</a></li>
+          <li>Google Analytics Help: <a href="https://support.google.com/analytics"></a><a href="https://support.google.com/analytics">Support Documentation</a></li>
+          <li>Google Tag Manager Help: <a href="https://support.google.com/tagmanager"></a><a href="https://support.google.com/tagmanager">Support Documentation</a></li>
+        </ul>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

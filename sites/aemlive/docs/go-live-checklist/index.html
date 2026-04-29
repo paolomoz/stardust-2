@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.090Z
+  page:             docs-go-live-checklist
+  pageUrl:          https://www.aem.live/docs/go-live-checklist
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Go-Live Checklist</title>
+  <meta name="description" content="The go-live checklist is a summary of best practices to consider when launching a website. These steps are generally good practices but have some aspects ...">
+  <meta property="og:title" content="Go-Live Checklist">
+  <meta property="og:description" content="The go-live checklist is a summary of best practices to consider when launching a website. These steps are generally good practices but have some aspects ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/go-live-checklist/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#steps-before-go-live">Steps Before Go-Live</a></li>
+<li class="l-3"><a href="#content-and-design-qa">Content and Design QA</a></li>
+<li class="l-3"><a href="#performance-validation">Performance Validation</a></li>
+<li class="l-3"><a href="#analytics-validation">Analytics Validation</a></li>
+<li class="l-3"><a href="#rum-instrumentation">RUM instrumentation</a></li>
+<li class="l-3"><a href="#legacy-redirects">Legacy Redirects</a></li>
+<li class="l-3"><a href="#sitemap--robots">Sitemap &amp; Robots</a></li>
+<li class="l-3"><a href="#canonical-urls">Canonical URLs</a></li>
+<li class="l-3"><a href="#favicon">Favicon</a></li>
+<li class="l-3"><a href="#authentication-for-authors">Authentication for Authors</a></li>
+<li class="l-3"><a href="#sharepoint-access">SharePoint Access</a></li>
+<li class="l-3"><a href="#cdn-configuration">CDN Configuration</a></li>
+<li class="l-3"><a href="#push-invalidation-setup">Push Invalidation Setup</a></li>
+<li class="l-3"><a href="#notify-engineering-on-call">Notify Engineering On-Call</a></li>
+<li class="l-2"><a href="#post-go-live-validation">Post Go-Live Validation</a></li>
+<li class="l-3"><a href="#performance-validation-1">Performance Validation</a></li>
+<li class="l-3"><a href="#google-search-console">Google Search Console</a></li>
+<li class="l-3"><a href="#martech-and-analytics-validation">Martech and Analytics validation</a></li>
+<li class="l-3"><a href="#report">404 Report</a></li>
+<li class="l-3"><a href="#launch">Launch</a></li>
+<li class="l-3"><a href="#byo-cdn-setup-overview">BYO CDN Setup Overview</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Go-Live Checklist</h1>
+          <p class="lede">The go-live checklist is a summary of best practices to consider when launching a website. These steps are generally good practices but have some aspects ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1da4bd7d3a1161f686fa72258c51bd49249fa142a.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1da4bd7d3a1161f686fa72258c51bd49249fa142a.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1da4bd7d3a1161f686fa72258c51bd49249fa142a.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1da4bd7d3a1161f686fa72258c51bd49249fa142a.png?width=750&amp;format=png&amp;optimize=medium" width="1200" height="900">
+          </picture>
+        </p>
+        
+        <p>The go-live checklist is a summary of best practices to consider when launching a website. These steps are generally good practices but have some aspects specific to Adobe Experience Manager.</p>
+        <h2 id="steps-before-go-live">Steps Before Go-Live</h2>
+        <h3 id="content-and-design-qa">Content and Design QA</h3>
+        <p>Make sure that your content and design conforms to the specifications and that you are happy with the website you see on your projects <code>.aem.live</code> domain. This may include checks for specific accessibility and SEO requirements of your project.</p>
+        <h3 id="performance-validation">Performance Validation</h3>
+        <p>Every AEM project should produce a lighthouse score of 100 for mobile and desktop from <a href="https://pagespeed.web.dev/">Google Pagespeed insights</a> on its respective <code>.aem.live</code> site.</p>
+        <p>See the document <a href="https://www.hlx.live/developer/keeping-it-100">Keeping it 100, Web Performance</a> for more information.</p>
+        <h3 id="analytics-validation">Analytics Validation</h3>
+        <p>Make sure that all your analytics setup and the rest of your martech stack is firing as expected and visitor data is visible in your reporting dashboards.<br>In any relaunch of a website the analytics instrumentation will change based on loading sequence and performance.</p>
+        <p>It is important to expect that the baseline of any metric captured by analytics will change. Contact the corresponding analysts to make sure that the adjustment of the baseline is understood and expected.</p>
+        <p>Metrics that may change their baselines as reported by analytics may include pageviews, conversion rates, bounce rates, time on page, etc. Depending on the change in loading patterns the baseline of the metrics may go up and down.<br>Bottom of the funnel metrics like checkout, transactions or form submission that are captured by operational systems are not affected and are expected to stay flat past a lift-and-shift launch.</p>
+        <h3 id="rum-instrumentation">RUM instrumentation</h3>
+        <p>To be able to see performance impact quickly and reliably and to compare before / after launch metrics we recommend instrumenting your website before launch with <a href="../rum/index.html" data-broken-link="true">Real Use Monitoring</a> (RUM), ideally as early as possible. <a href="../../developer/rum/index.html#how-to-add-rum-instrumentation-to-your-site" data-broken-link="true">Adding RUM to your existing site is trivial</a> and can give you important operational insights even before launch.</p>
+        <h3 id="legacy-redirects">Legacy Redirects</h3>
+        <p>In most migrations there are legacy URLs that are retired. Make sure those are reflected in your redirects spreadsheet (<code>redirects.xlsx</code> in sharepoint or <code>redirects</code> in google), found in your project content folder. Check Google Search Console for the most impactful backlinks (in terms of SEO) to create redirects for.</p>
+        <p>See the document <a href="https://www.hlx.live/docs/redirects">Redirects</a> for more information.</p>
+        <h3 id="sitemap--robots">Sitemap &amp; Robots</h3>
+        <p>For most websites with a significant number of pages, a sitemap is desirable. AEM automatically generates sitemaps from the query index. For multilingual sites, adding hreflang to the sitemap ensures that the website correctly targets the appropriate geographic and language audience, which is essential for SEO and prevents issues like duplicate content across different language versions (aka SEO cannibalisation) and improves the search engine's ability to serve the right version of the content to the right users.</p>
+        <p>If you have a sitemap that’s generated for your site make sure it is discoverable from your <code>robots.txt</code>. ​​Note that <code>robots.txt</code> is (technically) case sensitive, and a good example is:</p>
+        <pre><code>User-agent: *
+Allow: /
+
+Sitemap: https://&lt;your-domain&gt;/sitemap.xml
+</code></pre>
+        <p>Note: <code>aem.page</code> and <code>aem.live</code> are kept hidden from crawlers intentionally, to avoid duplicate content. There is no need to set the <code>robots.txt</code> to <code>Disallow</code> crawlers during development.</p>
+        <p>It is important to understand that a <code>Disallow</code> in <code>robots.txt</code> is potentially helping with crawler budget issues under certain conditions, but does not prevent a page from being added to the google index, and conversely will make its removal via <code>noindex</code> impossible. URLs of pages that have a <code>Disallow</code> can still be discovered in a SERP.</p>
+        <p>An effective way to remove a URL from the index is to <code>Allow</code> crawlers and put a <code>noindex</code> <code>robots</code> tag on the page.</p>
+        <p>Adding a custom <code>robots.txt</code> is done via <a href="../config-service-setup/index.html#update-robotstxt">config service</a>.</p>
+        <p>See the documents <a href="https://www.hlx.live/developer/indexing">Indexing</a> and <a href="https://www.hlx.live/developer/sitemap">Sitemaps</a> for more information.</p>
+        <h3 id="canonical-urls">Canonical URLs</h3>
+        <p>Make sure canonical URLs return 2xx HTML response status code (not 3xx or 4xx) and that they are correctly implemented, which is crucial for preventing duplicate content issues across the site. Proper canonicalization helps search engines understand which versions of similar pages to index and display in search results, directly impacting SEO performance.</p>
+        <p>See the following external documentation for more information: <a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">Consolidate duplicate urls</a></p>
+        <h3 id="favicon">Favicon</h3>
+        <p>Adding a favicon to your site gives it a professional look in your visitor’s browsers.</p>
+        <p>See the document <a href="https://www.hlx.live/developer/favicon">Favicon</a> for more information.</p>
+        <h3 id="authentication-for-authors">Authentication for Authors</h3>
+        <p>By default, authors don’t need to be logged in to use AEM Sidekick. If you decide you want to control who can preview and publish documents this can be configured.</p>
+        <p>See the document <a href="../authentication-setup-authoring/index.html">Configuring Authentication for Authors</a> for more information.</p>
+        <h3 id="sharepoint-access">SharePoint Access</h3>
+        <p>If your content is in SharePoint, follow <a href="../setup-customer-sharepoint/index.html">this guide</a> to configure dedicated access which you control.</p>
+        <h3 id="cdn-configuration">CDN Configuration</h3>
+        <p>One of the last steps in a go-live is usually to update your CDN to point to your <code>aem.live</code> endpoint.</p>
+        <p>You can either use your existing, self-managed CDN or an Adobe-managed CDN included in your license. <a href="../byo-cdn-setup/index.html">See here for details on supported CDN options</a>.</p>
+        <p>Ideally the CDN configuration is tested in a staging environment to make sure everything works as expected, which includes redirects from www to APEX and vice-versa.</p>
+        <h3 id="push-invalidation-setup">Push Invalidation Setup</h3>
+        <p>Make sure push invalidation is properly set up according to the document <a href="https://www.hlx.live/docs/setup-byo-cdn-push-invalidation">Configuring Push Invalidation for BYO Production CDN</a>. Test the setup by publishing a small change and verifying that the change is visible on the production domain.</p>
+        <h3 id="notify-engineering-on-call">Notify Engineering On-Call</h3>
+        <p>The Edge Delivery Services team is closely monitoring all systems as part of our standard 24/7 operations. Multi-tenant incidents typically appear on <a href="https://status.adobe.com">status.adobe.com</a>. If we detect irregularities affecting a single tenant, we will reach out to the affected customer to help them address the problem.</p>
+        <p>By notifying us about your go-live, you can help us pay extra attention to your project during the go-live, and we can contact you via Teams or Slack more quickly in case of any anomalies we can assist with.</p>
+        <p>To notify us, please send an email to <strong>aemgolives@adobe.com</strong> and include the following information:</p>
+        <ul>
+          <li><code>aem.live</code> <strong>URL(s)</strong> that will be going live on Edge Delivery Services</li>
+          <li><strong>Production domain</strong></li>
+          <li><strong>Planned go-live date and time</strong></li>
+          <li><strong>Primary contact person</strong> for the go-live</li>
+          <li><strong>Teams or Slack channel</strong> for real-time collaboration with Engineering
+            <ul>
+              <li>If you do not yet have a collaboration channel set up yet, please refer to <a href="../teams/index.html">Teams Collaboration</a> for guidance.</li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="post-go-live-validation">Post Go-Live Validation</h2>
+        <h3 id="performance-validation-1">Performance Validation</h3>
+        <p>Validate that the performance is still at a lighthouse score of 100 via <a href="https://pagespeed.web.dev/">pagespeed insights</a> on the production environment. Introducing a CDN layer can have adverse performance effects that are usually visible on the protocol layer. Typical culprits are running HTTP/1.1 or ineffective origin caching as well as bot detection or other libraries injected by the CDN configuration.</p>
+        <h3 id="google-search-console">Google Search Console</h3>
+        <p>If you have an active Google Search Console with your sitemap uploaded, it may be valuable to get a coverage report and make sure that indexing works as expected. The Google Search Console should be monitored for the weeks after a go-live to track the indexing status of new and updated pages, ensuring they are properly recognized by Google. It's crucial to check for total clicks, total impressions, backlinks changes and crawl errors, as these can significantly impact the site's SEO performance and authority.</p>
+        <h3 id="martech-and-analytics-validation">Martech and Analytics validation</h3>
+        <p>Certain aspects of your martech stack may be tied to specific origins / hostnames, and operate differently on staging (or <code>.page</code> and <code>.live</code>) hostnames if not configured correctly. It is advisable to make sure that all the important tags in the martech stack fire correctly and the information is continuously collected after a go-live.</p>
+        <h3 id="report">404 Report</h3>
+        <p>After a website has been migrated there is usually a set of 404 Not Founds, which should be monitored after the go-live and redirected to popular page URLs. This information can be pulled from your site analytics and the respective Slack bot report. Monitoring this for the weeks after a go-live is recommended.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="launch"><a href="../index.html#launch">Launch</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="byo-cdn-setup-overview"><a href="../byo-cdn-setup/index.html">BYO CDN Setup Overview</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

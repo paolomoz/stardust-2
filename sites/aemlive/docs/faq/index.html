@@ -1,0 +1,905 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.938Z
+  page:             docs-faq
+  pageUrl:          https://www.aem.live/docs/faq
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Frequently Asked Questions</title>
+  <meta name="description" content="Franklin and Helix were internal project names for the Adobe Experience Manager engineering team’s initiative to develop an innovative publishing and delivery service situated at ...">
+  <meta property="og:title" content="Frequently Asked Questions">
+  <meta property="og:description" content="Franklin and Helix were internal project names for the Adobe Experience Manager engineering team’s initiative to develop an innovative publishing and delivery service situated at ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/faq/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#general-questions">General Questions</a></li>
+<li class="l-3"><a href="#why-was-this-site-renamed-from-helix-to-franklin-to-edge-delivery-services">Why was this site renamed from Helix to Franklin to Edge Delivery Services?</a></li>
+<li class="l-3"><a href="#what-makes-edge-delivery-services-websites-so-fast">What makes Edge Delivery Services websites so fast?</a></li>
+<li class="l-3"><a href="#is-edge-delivery-services-a-static-site-generator-ssg">Is Edge Delivery Services a Static Site Generator (SSG)?</a></li>
+<li class="l-3"><a href="#is-edge-delivery-services-a-headless-cms-like-aem">Is Edge Delivery Services a Headless CMS, like AEM?</a></li>
+<li class="l-3"><a href="#what-is-a-good-lighthouse-score">What is a good Lighthouse score?</a></li>
+<li class="l-3"><a href="#what-is-the-difference-between-aempage-and-aemlive">What is the difference between aem.page and aem.live?</a></li>
+<li class="l-3"><a href="#which-browsers-are-supported">Which browsers are supported?</a></li>
+<li class="l-3"><a href="#how-much-does-edge-delivery-services-cost">How much does Edge Delivery Services cost?</a></li>
+<li class="l-3"><a href="#does-edge-delivery-services-require-an-enterprise-license">Does Edge Delivery Services require an Enterprise license?</a></li>
+<li class="l-3"><a href="#can-i-run-edge-delivery-services-without-full-aem-sites">Can I run Edge Delivery Services without full AEM Sites?</a></li>
+<li class="l-3"><a href="#how-can-we-communicate-with-the-aem-engineering-team">How can we communicate with the AEM engineering team?</a></li>
+<li class="l-3"><a href="#where-can-i-learn-more">Where can I learn more?</a></li>
+<li class="l-2"><a href="#use-cases">Use Cases</a></li>
+<li class="l-3"><a href="#is-edge-delivery-services-better-for-large-or-small-sites">Is Edge Delivery Services better for large or small sites?</a></li>
+<li class="l-3"><a href="#how-big-are-the-biggest-edge-delivery-services-sites">How big are the biggest Edge Delivery Services sites?</a></li>
+<li class="l-3"><a href="#is-edge-delivery-services-a-good-solution-for-landing-pages">Is Edge Delivery Services a good solution for landing pages?</a></li>
+<li class="l-3"><a href="#is-edge-delivery-services-a-good-fit-for-sites-with-dozens-or-hundreds-of-local-markets-languages-or-sub-brands">Is Edge Delivery Services a good fit for sites with dozens or hundreds of local markets, languages, or sub-brands?</a></li>
+<li class="l-3"><a href="#is-edge-delivery-services-a-suitable-platform-for-small-e-commerce-websites">Is Edge Delivery Services a suitable platform for small e-commerce websites?</a></li>
+<li class="l-3"><a href="#can-edge-delivery-services-generate-content-for-external-platforms-like-gitbook">Can Edge Delivery Services generate content for external platforms like GitBook?</a></li>
+<li class="l-3"><a href="#does-edge-delivery-services-support-content-approval-workflows">Does Edge Delivery Services support content approval workflows?</a></li>
+<li class="l-2"><a href="#site-configuration-and-management">Site Configuration and Management</a></li>
+<li class="l-3"><a href="#how-can-i-manage-multiple-subdomains">How can I manage multiple subdomains?</a></li>
+<li class="l-3"><a href="#how-does-edge-delivery-services-handle-inheritance-and-rollouts-across-multiple-sites">How does Edge Delivery Services handle inheritance and rollouts across multiple sites?</a></li>
+<li class="l-3"><a href="#can-edge-delivery-services-be-used-along-other-cms-platforms-on-the-same-site">Can Edge Delivery Services be used along other CMS platforms on the same site?</a></li>
+<li class="l-3"><a href="#can-edge-delivery-services-support-secure-content-access-for-intranets-portals-or-closed-user-groups">Can Edge Delivery Services support secure content access for intranets, portals, or closed user groups?</a></li>
+<li class="l-3"><a href="#how-does-edge-delivery-services-handle-access-control-and-multi-tenant-authoring">How does Edge Delivery Services handle access control and multi-tenant authoring?</a></li>
+<li class="l-3"><a href="#what-is-the-best-way-to-fetch-backend-data">What is the best way to fetch backend data?</a></li>
+<li class="l-3"><a href="#does-edge-delivery-services-support-server-side-customizations-or-includes-ssiesi">Does Edge Delivery Services support server-side customizations or includes (SSI/ESI)?</a></li>
+<li class="l-3"><a href="#how-does-edge-delivery-services-support-taxonomy-management">How does Edge Delivery Services support taxonomy management?</a></li>
+<li class="l-3"><a href="#how-does-edge-delivery-services-handle-caching-and-content-invalidation">How does Edge Delivery Services handle caching and content invalidation?</a></li>
+<li class="l-3"><a href="#how-can-i-confirm-that-a-push-invalidation-token-is-working">How can I confirm that a push invalidation token is working?</a></li>
+<li class="l-3"><a href="#how-does-the-development-flow-look-like-is-it-independent-of-the-authoring-flow">How does the development flow look like? Is it independent of the authoring flow?</a></li>
+<li class="l-3"><a href="#what-content-should-be-created-by-an-author-versus-a-developer">What content should be created by an author versus a developer?</a></li>
+<li class="l-3"><a href="#is-edge-delivery-services-down-right-now">Is Edge Delivery Services down right now?</a></li>
+<li class="l-2"><a href="#indexing-and-seo">Indexing and SEO</a></li>
+<li class="l-3"><a href="#what-are-the-best-practices-for-search-engine-optimization-seo">What are the best practices for search engine optimization (SEO)?</a></li>
+<li class="l-3"><a href="#how-do-i-optimize-edge-delivery-services-pages-for-social-media-sharing-on-platforms-like-facebook-and-twitter">How do I optimize Edge Delivery Services pages for social media sharing on platforms like Facebook and Twitter?</a></li>
+<li class="l-3"><a href="#can-i-retrieve-a-list-of-pages-within-a-folder">Can I retrieve a list of pages within a folder?</a></li>
+<li class="l-3"><a href="#how-does-google-index-edge-delivery-services-pages">How does Google index Edge Delivery Services pages?</a></li>
+<li class="l-3"><a href="#can-google-index-edge-delivery-services-pages-that-load-content-fragments-dynamically">Can Google index Edge Delivery Services pages that load content fragments dynamically?</a></li>
+<li class="l-3"><a href="#how-should-additional-fields-be-queried-when-all-pages-are-stored-in-a-single-index">How should additional fields be queried when all pages are stored in a single index?</a></li>
+<li class="l-3"><a href="#how-can-i-include-specific-sections-of-a-site-in-query-indexjson-for-indexing">How can I include specific sections of a site in query-index.json for indexing?</a></li>
+<li class="l-3"><a href="#how-do-i-use-selectors-for-indexing-content-within-the-decorated-dom">How do I use selectors for indexing content within the decorated DOM?</a></li>
+<li class="l-3"><a href="#how-do-i-prevent-a-page-from-being-indexed">How do I prevent a page from being indexed?</a></li>
+<li class="l-3"><a href="#what-strategies-should-i-use-to-manage-urls-and-prevent-seo-ranking-loss">What strategies should I use to manage URLs and prevent SEO ranking loss?</a></li>
+<li class="l-3"><a href="#does-edge-delivery-services-support-rss-feeds">Does Edge Delivery Services support RSS feeds?</a></li>
+<li class="l-2"><a href="#localization">Localization</a></li>
+<li class="l-3"><a href="#what-localization-l10n-capabilities-does-edge-delivery-services-support">What localization (l10n) capabilities does Edge Delivery Services support?</a></li>
+<li class="l-3"><a href="#what-are-the-best-practices-for-handling-localized-or-country-specific-sites">What are the best practices for handling localized or country-specific sites?</a></li>
+<li class="l-3"><a href="#does-edge-delivery-services-support-hreflang">Does Edge Delivery Services support HREFLang?</a></li>
+<li class="l-2"><a href="#performance-and-monitoring">Performance and Monitoring</a></li>
+<li class="l-3"><a href="#what-is-operational-telemetry">What is Operational Telemetry?</a></li>
+<li class="l-3"><a href="#how-do-i-enable-operational-telemetry-on-my-site">How do I enable Operational Telemetry on my site?</a></li>
+<li class="l-3"><a href="#how-can-i-track-page-kpis-such-as-completions-clicks-and-impressions">How can I track page KPIs such as completions, clicks, and impressions?</a></li>
+<li class="l-2"><a href="#authoring-content">Authoring Content</a></li>
+<li class="l-3"><a href="#what-are-the-differences-between-different-authoring-modes-like-universal-editor-and-document-authoring">What are the differences between different authoring modes, like Universal Editor and Document Authoring?</a></li>
+<li class="l-3"><a href="#where-can-i-find-the-edge-delivery-services-url-of-my-document">Where can I find the Edge Delivery Services URL of my document?</a></li>
+<li class="l-3"><a href="#how-do-i-edit-pages">How do I edit pages?</a></li>
+<li class="l-3"><a href="#how-do-i-publish-a-page">How do I publish a page?</a></li>
+<li class="l-3"><a href="#why-are-my-changes-in-microsoft-word-not-appearing-on-my-site-after-previewing-or-publishing">Why are my changes in Microsoft Word not appearing on my site after previewing or publishing?</a></li>
+<li class="l-3"><a href="#how-do-i-unpublish-a-page">How do I unpublish a page?</a></li>
+<li class="l-3"><a href="#how-do-i-delete-a-page">How do I delete a page?</a></li>
+<li class="l-3"><a href="#why-does-my-new-document-return-a-404-not-found-error">Why does my new document return a “404 Not Found” error?</a></li>
+<li class="l-3"><a href="#how-do-i-schedule-content-publication-in-edge-delivery-services">How do I schedule content publication in Edge Delivery Services?</a></li>
+<li class="l-3"><a href="#what-if-i-have-a-big-release-of-content-that-needs-to-be-published-at-the-same-time">What if I have a big release of content that needs to be published at the same time?</a></li>
+<li class="l-3"><a href="#what-should-i-do-if-my-content-seems-outdated">What should I do if my content seems outdated?</a></li>
+<li class="l-3"><a href="#how-does-edge-delivery-services-generate-urls-what-characters-are-allowed">How does Edge Delivery Services generate URLs? What characters are allowed?</a></li>
+<li class="l-3"><a href="#does-edge-delivery-services-have-a-wysiwyg-editor-for-in-browser-editing">Does Edge Delivery Services have a WYSIWYG editor for in-browser editing?</a></li>
+<li class="l-3"><a href="#does-edge-delivery-services-support-inline-text-styling-within-a-paragraph">Does Edge Delivery Services support inline text styling within a paragraph?</a></li>
+<li class="l-3"><a href="#how-do-i-set-an-image-size">How do I set an image size?</a></li>
+<li class="l-3"><a href="#how-do-i-add-alt-text-to-images">How do I add alt text to images?</a></li>
+<li class="l-3"><a href="#can-a-metadata-block-be-used-as-the-first-block-in-a-document">Can a metadata block be used as the first block in a document?</a></li>
+<li class="l-3"><a href="#what-is-the-metadata-spreadsheet-and-how-is-it-used">What is the metadata spreadsheet and how is it used?</a></li>
+<li class="l-3"><a href="#how-do-i-add-name-anchors-to-headlines-in-pages">How do I add name anchors to headlines in pages?</a></li>
+<li class="l-3"><a href="#what-do-the-three-dashes-----in-a-document-do">What do the three dashes (---) in a document do?</a></li>
+<li class="l-3"><a href="#does-edge-delivery-services-support-videos-as-source-content">Does Edge Delivery Services support videos as source content?</a></li>
+<li class="l-3"><a href="#should-animated-gifs-or-mp4-files-be-used-for-short-video-content">Should animated GIFs or MP4 files be used for short video content?</a></li>
+<li class="l-3"><a href="#can-i-use-embeds-or-iframes">Can I use embeds or iframes?</a></li>
+<li class="l-3"><a href="#how-can-i-manage-editable-content-templates">How can I manage editable content templates?</a></li>
+<li class="l-3"><a href="#how-can-i-compare-different-versions-of-a-page">How can I compare different versions of a page?</a></li>
+<li class="l-3"><a href="#does-edge-delivery-services-offer-content-reporting-or-a-search-and-replace-feature">Does Edge Delivery Services offer content reporting or a search-and-replace feature?</a></li>
+<li class="l-3"><a href="#how-are-internal-and-external-links-handled-in-edge-delivery-services">How are internal and external links handled in Edge Delivery Services?</a></li>
+<li class="l-3"><a href="#how-are-links-to-documents-content-source-handled">How are links to documents (content source) handled?</a></li>
+<li class="l-2"><a href="#sidekick">Sidekick</a></li>
+<li class="l-3"><a href="#what-is-the-aem-sidekick">What is the AEM Sidekick?</a></li>
+<li class="l-3"><a href="#how-do-i-install-the-sidekick">How do I install the Sidekick?</a></li>
+<li class="l-3"><a href="#what-should-i-do-if-my-sidekick-isnt-working">What should I do if my Sidekick isn’t working?</a></li>
+<li class="l-3"><a href="#with-a-dynamic-media-license-can-authors-select-different-asset-variations-in-the-sidekick">With a Dynamic Media license, can authors select different asset variations in the Sidekick?</a></li>
+<li class="l-2"><a href="#development-and-deployment">Development and Deployment</a></li>
+<li class="l-3"><a href="#how-do-i-set-up-a-local-development-environment">How do I set up a local development environment?</a></li>
+<li class="l-3"><a href="#how-do-i-create-a-testing-or-staging-environment">How do I create a testing or staging environment?</a></li>
+<li class="l-3"><a href="#how-does-edge-delivery-services-handle-concurrent-code-editing-by-multiple-developers">How does Edge Delivery Services handle concurrent code editing by multiple developers?</a></li>
+<li class="l-3"><a href="#does-edge-delivery-services-support-private-github-repositories">Does Edge Delivery Services support private GitHub repositories?</a></li>
+<li class="l-3"><a href="#can-edge-delivery-services-integrate-with-github-enterprise">Can Edge Delivery Services integrate with GitHub Enterprise?</a></li>
+<li class="l-3"><a href="#does-edge-delivery-services-support-alternative-git-repository-hosts-like-bitbucket">Does Edge Delivery Services support alternative Git repository hosts, like Bitbucket?</a></li>
+<li class="l-3"><a href="#what-is-fstabyaml">What is fstab.yaml?</a></li>
+<li class="l-3"><a href="#does-edge-delivery-services-support-multiple-content-mountpoints-in-fstabyaml">Does Edge Delivery Services support multiple content mountpoints in fstab.yaml?</a></li>
+<li class="l-3"><a href="#how-does-code-move-from-page-to-live">How does code move from .page to .live?</a></li>
+<li class="l-3"><a href="#how-is-continuous-integration-and-deployment-cicd-configured">How is continuous integration and deployment (CI/CD) configured?</a></li>
+<li class="l-3"><a href="#how-does-edge-delivery-services-handle-caching-for-headhtml-updates-do-i-need-to-clear-the-cache-manually">How does Edge Delivery Services handle caching for head.html updates? Do I need to clear the cache manually?</a></li>
+<li class="l-3"><a href="#do-i-need-to-protect-against-dos-attacks-with-a-waf-on-our-cdn">Do I need to protect against DOS attacks with a WAF on our CDN?</a></li>
+<li class="l-3"><a href="#should-redirects-be-managed-on-the-cdn-or-does-edge-delivery-services-handle-them">Should redirects be managed on the CDN, or does Edge Delivery Services handle them?</a></li>
+<li class="l-3"><a href="#why-do-content-based-assets-return-a-301-redirect-to-a-media_-image">Why do content-based assets return a 301 redirect to a media_ image?</a></li>
+<li class="l-3"><a href="#can-i-configure-redirects-to-return-a-302-temporarily-moved-status-code">Can I configure redirects to return a 302 (temporarily moved) status code?</a></li>
+<li class="l-3"><a href="#what-is-the-character-limit-for-a-branchsubdomain">What is the character limit for a branch/subdomain?</a></li>
+<li class="l-3"><a href="#what-is-the-policy-on-using-cookies-or-localstorage-to-store-application-state">What is the policy on using cookies or localStorage to store application state?</a></li>
+<li class="l-2"><a href="#content-blocks">Content Blocks</a></li>
+<li class="l-3"><a href="#does-edge-delivery-services-have-something-like-components">Does Edge Delivery Services have something like components?</a></li>
+<li class="l-3"><a href="#how-do-i-create-a-block">How do I create a block?</a></li>
+<li class="l-3"><a href="#where-can-i-find-a-list-of-available-blocks">Where can I find a list of available blocks?</a></li>
+<li class="l-3"><a href="#does-edge-delivery-services-support-nested-blocks">Does Edge Delivery Services support nested blocks?</a></li>
+<li class="l-3"><a href="#how-can-i-implement-a-design-system">How can I implement a design system?</a></li>
+<li class="l-3"><a href="#how-can-i-reuse-content-across-multiple-pages-in-edge-delivery-services-like-aems-content-and-experience-fragments">How can I reuse content across multiple pages in Edge Delivery Services, like AEM’s Content and Experience Fragments?</a></li>
+<li class="l-3"><a href="#what-is-the-equivalent-of-core-components-in-edge-delivery-services">What is the equivalent of Core Components in Edge Delivery Services?</a></li>
+<li class="l-3"><a href="#how-do-blocks-compare-to-web-components">How do blocks compare to Web Components?</a></li>
+<li class="l-2"><a href="#frameworks-and-web-technologies">Frameworks and Web Technologies</a></li>
+<li class="l-3"><a href="#are-web-components-recommended-for-edge-delivery-services-projects">Are Web Components recommended for Edge Delivery Services projects?</a></li>
+<li class="l-3"><a href="#how-do-i-minify-jscss-in-edge-delivery-services">How do I minify JS/CSS in Edge Delivery Services?</a></li>
+<li class="l-3"><a href="#can-i-integrate-web-components-from-a-design-system-into-edge-delivery-services">Can I integrate Web Components from a design system into Edge Delivery Services?</a></li>
+<li class="l-3"><a href="#can-i-use-javascript-frameworks">Can I use JavaScript frameworks?</a></li>
+<li class="l-3"><a href="#can-i-use-css-frameworks">Can I use CSS frameworks?</a></li>
+<li class="l-3"><a href="#does-edge-delivery-services-support-server-side-rendering-ssr-for-lit-based-web-components">Does Edge Delivery Services support server-side rendering (SSR) for Lit-based Web Components?</a></li>
+<li class="l-2"><a href="#integrations-and-third-party-tools">Integrations and Third-Party Tools</a></li>
+<li class="l-3"><a href="#what-are-the-performance-considerations-when-integrating-with-third-party-tools">What are the performance considerations when integrating with third-party tools?</a></li>
+<li class="l-3"><a href="#can-i-integrate-with-aem-sites">Can I integrate with AEM Sites?</a></li>
+<li class="l-3"><a href="#can-i-use-adobe-target">Can I use Adobe Target?</a></li>
+<li class="l-3"><a href="#can-i-use-adobe-analytics">Can I use Adobe Analytics?</a></li>
+<li class="l-3"><a href="#can-i-use-adobe-launch">Can I use Adobe Launch?</a></li>
+<li class="l-3"><a href="#can-i-use-aem-forms">Can I use AEM Forms?</a></li>
+<li class="l-3"><a href="#can-i-use-marketo-forms">Can I use Marketo forms?</a></li>
+<li class="l-3"><a href="#is-there-a-default-forms-capability-that-can-send-email-on-submission">Is there a default forms capability that can send email on submission?</a></li>
+<li class="l-3"><a href="#can-i-use-aem-assets">Can I use AEM Assets?</a></li>
+<li class="l-3"><a href="#does-edge-delivery-services-support-cloudflare">Does Edge Delivery Services support Cloudflare?</a></li>
+<li class="l-3"><a href="#does-aem-support-fastly">Does AEM support Fastly?</a></li>
+<li class="l-3"><a href="#does-aem-support-cloudfront">Does AEM support Cloudfront?</a></li>
+<li class="l-3"><a href="#does-edge-delivery-services-support-akamai">Does Edge Delivery Services support Akamai?</a></li>
+<li class="l-3"><a href="#can-i-use-google-tag-manager">Can I use Google Tag Manager?</a></li>
+<li class="l-3"><a href="#can-i-integrate-with-onetrust-for-consent-management">Can I integrate with OneTrust for consent management?</a></li>
+<li class="l-3"><a href="#can-i-integrate-translation-tools">Can I integrate translation tools?</a></li>
+<li class="l-3"><a href="#can-i-integrate-a-third-party-search-solution">Can I integrate a third-party search solution?</a></li>
+<li class="l-3"><a href="#can-i-import-content-from-other-platforms-to-edge-delivery-services">Can I import content from other platforms to Edge Delivery Services?</a></li>
+<li class="l-3"><a href="#how-do-i-configure-edge-delivery-services-with-dynamic-media-and-smart-cropping">How do I configure Edge Delivery Services with Dynamic Media and Smart Cropping?</a></li>
+<li class="l-2"><a href="#legal-and-compliance">Legal and Compliance</a></li>
+<li class="l-3"><a href="#what-is-the-service-level-agreement-sla-for-edge-delivery-services">What is the service level agreement (SLA) for Edge Delivery Services?</a></li>
+<li class="l-3"><a href="#how-can-i-report-the-misuse-of-an-adobe-product-or-service">How can I report the misuse of an Adobe product or service?</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Frequently Asked Questions</h1>
+          <p class="lede">Franklin and Helix were internal project names for the Adobe Experience Manager engineering team’s initiative to develop an innovative publishing and delivery service situated at ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_13872adbc8f226c65c00a81078b84ab4152476fc7.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_13872adbc8f226c65c00a81078b84ab4152476fc7.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_13872adbc8f226c65c00a81078b84ab4152476fc7.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_13872adbc8f226c65c00a81078b84ab4152476fc7.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+      </div>
+      <div>
+        <h2 id="general-questions">General Questions</h2>
+      </div>
+      <div>
+        <h3 id="why-was-this-site-renamed-from-helix-to-franklin-to-edge-delivery-services">Why was this site renamed from Helix to Franklin to Edge Delivery Services?</h3>
+        <p>Franklin and Helix were internal project names for the Adobe Experience Manager engineering team’s initiative to develop an innovative publishing and delivery service situated at the edge. Between 2022 and 2023, Adobe worked with select clients to test these capabilities, focusing on integrating diverse content sources and delivering web experiences that surpass the performance of a significant majority.</p>
+        <p>In October 2023, Adobe officially introduced Edge Delivery Services and document-based authoring as part of Adobe Experience Manager, marking the transition from the Franklin and Helix project names to a fully integrated solution.</p>
+      </div>
+      <div>
+        <h3 id="what-makes-edge-delivery-services-websites-so-fast">What makes Edge Delivery Services websites so fast?</h3>
+        <p>Edge Delivery Services optimizes web performance through a combination of caching and real-time content rendering at the edge. To maintain high speed, it continuously monitors site performance using strictly necessary operational telemetry and enforces automated performance checks via Google PageSpeed Insights on every code update (pull request).</p>
+        <p>Want to keep your site fast? Check out the <a href="../../developer/keeping-it-100/index.html">Keeping It 100 guide</a>.</p>
+      </div>
+      <div>
+        <h3 id="is-edge-delivery-services-a-static-site-generator-ssg">Is Edge Delivery Services a Static Site Generator (SSG)?</h3>
+        <p>No, Edge Delivery Services is <em>not</em> a Static Site Generator. Unlike traditional SSGs that require a full rebuild to update content, Edge Delivery Services dynamically renders and serves content at the edge, enabling instant updates without the need for a time-consuming build process.</p>
+      </div>
+      <div>
+        <h3 id="is-edge-delivery-services-a-headless-cms-like-aem">Is Edge Delivery Services a Headless CMS, like AEM?</h3>
+        <p>Edge Delivery Services is not a Headless CMS but rather the “head,” leveraging a CMS or document-based authoring as the content source.</p>
+        <p>While Edge Delivery Services primarily delivers fast-loading HTML experiences, it can also provide structured content in JSON format for applications that require it. Content authored in Edge Delivery Services can be aggregated into indices and delivered as JSON, making it compatible with headless implementations.</p>
+      </div>
+      <div>
+        <h3 id="what-is-a-good-lighthouse-score">What is a good Lighthouse score?</h3>
+        <p>Every Edge Delivery Services site can and should achieve a Lighthouse score of 100. AEM’s strictly necessary operational telemetry provides insights into actual site performance over time, allowing you to assess whether your site continues to meet that score.</p>
+        <p>Want to keep your Lighthouse score at 100? Check out the <a href="../../developer/keeping-it-100/index.html">Keeping It 100 guide</a>.</p>
+      </div>
+      <div>
+        <h3 id="what-is-the-difference-between-aempage-and-aemlive">What is the difference between <u>aem.page</u> and <u>aem.live</u>?</h3>
+        <p><u>aem.page</u> provides an up-to-date preview of unpublished content. <u>aem.live</u> serves published content and is used as the origin for your production CDN.</p>
+        <p>Previously, these domains were known as <u>hlx.page</u> and <u>hlx.live</u>.</p>
+        <p>Take a look at our <a href="../architecture/index.html#how-content-gets-published">architecture diagram</a> for more information on how content gets published.</p>
+      </div>
+      <div>
+        <h3 id="which-browsers-are-supported">Which browsers are supported?</h3>
+        <p>Edge Delivery Services supports all modern browsers, including Google Chrome, Apple Safari, and Microsoft Edge. Internet Explorer (IE) is <em>not</em> supported.</p>
+      </div>
+      <div>
+        <h3 id="how-much-does-edge-delivery-services-cost">How much does Edge Delivery Services cost?</h3>
+        <p>Your Adobe account team can provide licensing estimates based on your target site’s needs and traffic expectations, as well as information on available trial license opportunities.</p>
+        <p>Get started for free by following the <a href="../../developer/tutorial/index.html">Getting Started: Developer Tutorial</a>.</p>
+      </div>
+      <div>
+        <h3 id="does-edge-delivery-services-require-an-enterprise-license">Does Edge Delivery Services require an Enterprise license?</h3>
+        <p>Edge Delivery Services is part of AEM Sites and requires an AEM Sites license. <a href="../../developer/tutorial/index.html">Development access to the service</a> does not require a separate license and is available for free.</p>
+      </div>
+      <div>
+        <h3 id="can-i-run-edge-delivery-services-without-full-aem-sites">Can I run Edge Delivery Services without full AEM Sites?</h3>
+        <p>Yes, Edge Delivery Services can run independently without requiring an AEM Sites author or publish instance. If you want to use AEM authoring, an AEM Sites author instance is required.</p>
+      </div>
+      <div>
+        <h3 id="how-can-we-communicate-with-the-aem-engineering-team">How can we communicate with the AEM engineering team?</h3>
+        <p>The AEM team is available for support and collaboration through both <a href="../slack/index.html">Slack</a> and <a href="../teams/index.html">Microsoft Teams</a>.</p>
+      </div>
+      <div>
+        <h3 id="where-can-i-learn-more">Where can I learn more?</h3>
+        <p>Connect with the <a href="../../community/index.html">AEM Community on Discord</a> or join an <a href="https://aem-augs.adobe.com/">Adobe User Group</a> to learn and build connections with fellow practitioners. For more information, visit our homepage at <a href="../../index.html">aem.live</a> or the <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/overview">Experience Manager documentation</a>.</p>
+      </div>
+      <div>
+        <h2 id="use-cases">Use Cases</h2>
+      </div>
+      <div>
+        <h3 id="is-edge-delivery-services-better-for-large-or-small-sites">Is Edge Delivery Services better for large or small sites?</h3>
+        <p>Edge Delivery Services is a great solution for both small and large sites. Small sites benefit from its ease of setup, while large sites can take advantage of its ability to support many authors, frequent updates, and high traffic.</p>
+      </div>
+      <div>
+        <h3 id="how-big-are-the-biggest-edge-delivery-services-sites">How big are the biggest Edge Delivery Services sites?</h3>
+        <p>The biggest sites have over 100k pages and hundreds of authors.</p>
+      </div>
+      <div>
+        <h3 id="is-edge-delivery-services-a-good-solution-for-landing-pages">Is Edge Delivery Services a good solution for landing pages?</h3>
+        <p>Yes, Edge Delivery Services is well-suited for landing pages. Adobe uses <a href="https://pages.adobe.com/">pages.adobe.com</a> to manage hundreds of landing pages, each owned and maintained by independent teams.</p>
+      </div>
+      <div>
+        <h3 id="is-edge-delivery-services-a-good-fit-for-sites-with-dozens-or-hundreds-of-local-markets-languages-or-sub-brands">Is Edge Delivery Services a good fit for sites with dozens or hundreds of local markets, languages, or sub-brands?</h3>
+        <p>Yes, Edge Delivery Services is a great solution for global enterprises managing multiple markets, languages, and sub-brands. It supports centralized content management and inheritance, enabling global updates while allowing local teams to make adjustments. Content rollout and localization can be integrated with existing translation memory systems in content sources like SharePoint and Google Drive.</p>
+        <p>Learn more on the <a href="../translation-and-localization/index.html">Translation and Localization page</a>.</p>
+      </div>
+      <div>
+        <h3 id="is-edge-delivery-services-a-suitable-platform-for-small-e-commerce-websites">Is Edge Delivery Services a suitable platform for small e-commerce websites?</h3>
+        <p>Yes, Edge Delivery Services can be used for e-commerce websites. See Commerce Storefront.</p>
+      </div>
+      <div>
+        <h3 id="can-edge-delivery-services-generate-content-for-external-platforms-like-gitbook">Can Edge Delivery Services generate content for external platforms like GitBook?</h3>
+        <p>Yes, but Edge Delivery Services no longer natively supports Markdown documents in GitHub as a content source. To publish content from GitHub, Markdown documents must first be copied to a supported authoring environment where they can be previewed and published.</p>
+      </div>
+      <div>
+        <h3 id="does-edge-delivery-services-support-content-approval-workflows">Does Edge Delivery Services support content approval workflows?</h3>
+        <p>Edge Delivery Services does not provide built-in content approval workflows, but instead delegates workflow management to the content source.</p>
+        <p>For document review and approval processes within SharePoint or Google Drive, we recommend <a href="https://business.adobe.com/products/workfront/main.html">Adobe Workfront</a>.</p>
+      </div>
+      <div>
+        <h2 id="site-configuration-and-management">Site Configuration and Management</h2>
+      </div>
+      <div>
+        <h3 id="how-can-i-manage-multiple-subdomains">How can I manage multiple subdomains?</h3>
+        <p>Edge Delivery Services allows customers to use their own CDN to deliver content under their own domains or subdomains (BYO Production CDN).</p>
+        <p>Sites can be created with different code repositories or via <a href="../repoless/index.html">repoless</a> and point the site configuration to different CDN endpoints for Push Invalidation.</p>
+        <p>Learn more on the <a href="%20https://www.aem.live/docs/byo-cdn-setup">BYO CDN Setup page</a>.</p>
+      </div>
+      <div>
+        <h3 id="how-does-edge-delivery-services-handle-inheritance-and-rollouts-across-multiple-sites">How does Edge Delivery Services handle inheritance and rollouts across multiple sites?</h3>
+        <p>Edge Delivery Services has a broad range of facilities for centralized content and code management, allowing updates to be shared across multiple sites while still allowing for localized adjustments. AEM Universal Editor or Document Authoring have out of the box solutions for existing inheritance and content rollouts.</p>
+      </div>
+      <div>
+        <h3 id="can-edge-delivery-services-be-used-along-other-cms-platforms-on-the-same-site">Can Edge Delivery Services be used along other CMS platforms on the same site?</h3>
+        <p>Yes, Edge Delivery Services can be used alongside other CMS platforms when managed at the CDN tier. Many large, mature sites combine content from multiple origins, allowing different sections to be powered by separate AEM projects or external CMS solutions.</p>
+        <p>It helps to have top-level paths (sections of a site) be delivered from the same CMS so that CDN configurations will be easier to manage as opposed to a random list of URLs with no common parent in the URL.</p>
+      </div>
+      <div>
+        <h3 id="can-edge-delivery-services-support-secure-content-access-for-intranets-portals-or-closed-user-groups">Can Edge Delivery Services support secure content access for intranets, portals, or closed user groups?</h3>
+        <p>Yes, Edge Delivery Services can support secure content access for intranets, portals, and closed user groups. Customer-specific authentication and authorization are typically enforced at the CDN tier, where all CDN vendors offer a broad set of integrations with existing identity providers.</p>
+        <p>In Edge Delivery Services, access to <u>.page</u> and <u>.live</u> origins can be restricted (independently), ensuring that content is only accessible through the CDN with the necessary authentication in place.</p>
+        <p>Learn more on the <a href="../authentication-setup-site/index.html">Configuring Site Authentication page</a>.</p>
+      </div>
+      <div>
+        <h3 id="how-does-edge-delivery-services-handle-access-control-and-multi-tenant-authoring">How does Edge Delivery Services handle access control and multi-tenant authoring?</h3>
+        <p>Edge Delivery Services follows the access control model of its connected content source. For example, SharePoint and Google Drive provide robust enterprise-level permissions that users and system administrators are already familiar with. For partial page access control, fragments are recommended to isolate content with different access control into separate documents. Separate teams can control their own content within their assigned folders, ensuring isolated workflows.</p>
+        <p>Access to specific blocks can be restricted (via the content library) and blocks can also be configured to prevent rendering in specific sections of a site.</p>
+      </div>
+      <div>
+        <h3 id="what-is-the-best-way-to-fetch-backend-data">What is the best way to fetch backend data?</h3>
+        <p>The client (browser) requests data from backend systems. If authentication is required, a middleware layer running on the Edge/CDN (e.g., Edge Workers) acts as an intermediary, managing authentication and facilitating communication between the client and backend.</p>
+        <p>Browser → Middleware (Edge Worker) → Backend</p>
+      </div>
+      <div>
+        <h3 id="does-edge-delivery-services-support-server-side-customizations-or-includes-ssiesi">Does Edge Delivery Services support server-side customizations or includes (SSI/ESI)?</h3>
+        <p>Edge Delivery Services renders semantic markup (excluding fragments) on the server-side, but it does not support <em>any</em> server-side customizations or includes. Instead, it generates optimized, static markup that can be adjusted on the client side for styling, functionality, and personalization. While some customer CDNs support ESI, it generally introduces performance and complexity trade-offs and we have found no benefit to metrics like Largest Contentful Paint (LCP) or Cumulative Layout Shift (CLS) when using ESI over client-side includes. Because of this, we do not recommend using ESI and advise against it.</p>
+      </div>
+      <div>
+        <h3 id="how-does-edge-delivery-services-support-taxonomy-management">How does Edge Delivery Services support taxonomy management?</h3>
+        <p>Edge Delivery Services supports taxonomy management through structured metadata and hierarchical tagging. Common approaches include managing taxonomies in spreadsheets or documents to define hierarchical structures and adding tags to metadata of pages or content fragments.</p>
+        <p>External taxonomy systems or APIs can be embedded into the authoring environment as a Sidekick plugin. AI-based tagging can be implemented as an authoring plugin or directly in the delivery tier, depending on the use case.</p>
+      </div>
+      <div>
+        <h3 id="how-does-edge-delivery-services-handle-caching-and-content-invalidation">How does Edge Delivery Services handle caching and content invalidation?</h3>
+        <p>Edge Delivery Services uses caching to optimize performance while ensuring content updates are reflected quickly. When authors publish changes, the system automatically, and surgically purges cached content at multiple levels, including the CDN.</p>
+        <p>For BYO CDNs (including Cloudflare, Fastly, Akamai, and CloudFront), push invalidation can be enabled to purge content by URL and cache key whenever updates are published. Learn more on the <a href="../setup-byo-cdn-push-invalidation/index.html">Configuring Push Invalidation page</a>.</p>
+      </div>
+      <div>
+        <h3 id="how-can-i-confirm-that-a-push-invalidation-token-is-working">How can I confirm that a push invalidation token is working?</h3>
+        <p>You can use the <a href="https://tools.aem.live/tools/push-invalidation/index.html">CDN Setup tool</a> to confirm that your CDN automatically purges outdated content when content changes are published. This tool validates your project’s vendor-specific properties and credentials.</p>
+      </div>
+      <div>
+        <h3 id="how-does-the-development-flow-look-like-is-it-independent-of-the-authoring-flow">How does the development flow look like? Is it independent of the authoring flow?</h3>
+        <p>The development flow can be completely separated from the authoring flow. However, it's important to note that AEM allows parallelizing content authoring and development and thereby significantly reduces project durations. Authors and developers are encouraged to collaborate closely to ensure an optimal outcome.</p>
+        <p>See <a href="../dev-collab-and-good-practices/index.html">Best Practices</a> and <a href="../../developer/anatomy-of-a-project/index.html">Anatomy of a Project</a> for more details.</p>
+      </div>
+      <div>
+        <h3 id="what-content-should-be-created-by-an-author-versus-a-developer">What content should be created by an author versus a developer?</h3>
+        <p>Authors create content in the chosen authoring environment, while developers build site functionality using CSS and JavaScript in GitHub.</p>
+        <p>Authors and developers also create work in progress content for new features in /drafts/ folder for testing, training and development.</p>
+      </div>
+      <div>
+        <h3 id="is-edge-delivery-services-down-right-now">Is Edge Delivery Services down right now?</h3>
+        <p>Edge Delivery Services is probably not down, but you can always check <a href="https://status.adobe.com/">Adobe’s status page</a> for real-time service updates and interruption notifications.</p>
+      </div>
+      <div>
+        <h2 id="indexing-and-seo">Indexing and SEO</h2>
+      </div>
+      <div>
+        <h3 id="what-are-the-best-practices-for-search-engine-optimization-seo">What are the best practices for search engine optimization (SEO)?</h3>
+        <p>Add metadata to your pages using the metadata block and metadata sheet to improve indexing. Ensure your site achieves strong Core Web Vitals (CWV) scores for fast loading and a smooth user experience. Use clear headings, alt text for images, and descriptive URLs.</p>
+      </div>
+      <div>
+        <h3 id="how-do-i-optimize-edge-delivery-services-pages-for-social-media-sharing-on-platforms-like-facebook-and-twitter">How do I optimize Edge Delivery Services pages for social media sharing on platforms like Facebook and Twitter?</h3>
+        <p>Set a default placeholder image to ensure consistent previews. Use the metadata block and metadata sheet to define the title, description, and other page metadata.</p>
+      </div>
+      <div>
+        <h3 id="can-i-retrieve-a-list-of-pages-within-a-folder">Can I retrieve a list of pages within a folder?</h3>
+        <p>Yes, Edge Delivery Services can generate an index (or multiple indices) of pages within a folder, storing the data in a spreadsheet and serving it as JSON.</p>
+        <p>Learn more on the <a href="../../developer/indexing/index.html">Indexing page</a>.</p>
+      </div>
+      <div>
+        <h3 id="how-does-google-index-edge-delivery-services-pages">How does Google index Edge Delivery Services pages?</h3>
+        <p>Search engines, like Google, index Edge Delivery Services pages the same way they index traditional web pages by crawling the published content and evaluating metadata, page structure, and performance metrics like Core Web Vitals.</p>
+      </div>
+      <div>
+        <h3 id="can-google-index-edge-delivery-services-pages-that-load-content-fragments-dynamically">Can Google index Edge Delivery Services pages that load content fragments dynamically?</h3>
+        <p>Yes, Google can index Edge Delivery Services pages that load content fragments dynamically via the fetch API. However, to avoid duplicate indexing issues, it is recommended to disable indexing for fragment URLs using the <code>noindex</code> directive in <a href="../bulk-metadata/index.html">metadata</a>.</p>
+      </div>
+      <div>
+        <h3 id="how-should-additional-fields-be-queried-when-all-pages-are-stored-in-a-single-index">How should additional fields be queried when all pages are stored in a single index?</h3>
+        <p>Edge Delivery Services supports querying specific fields within a single index and suggests creating additional indexes when needed. Best practices include creating one index per language and additional dedicated indexes for common queries.</p>
+      </div>
+      <div>
+        <h3 id="how-can-i-include-specific-sections-of-a-site-in-query-indexjson-for-indexing">How can I include specific sections of a site in <u>query-index.json</u> for indexing?</h3>
+        <p>Edge Delivery Services supports indexing parts of the site by configuring an index at that path of the content or via a custom index configuration.</p>
+        <p>Learn more about setting up index definitions on the <a href="../../developer/indexing/index.html#setting-up-more-index-configurations">Indexing page</a>.</p>
+      </div>
+      <div>
+        <h3 id="how-do-i-use-selectors-for-indexing-content-within-the-decorated-dom">How do I use selectors for indexing content within the decorated DOM?</h3>
+        <p>The indexing service captures the non-decorated DOM from the initial page load, before JavaScript executes. Content added dynamically won’t be indexed by default, but can be included by combining it with the indexing sheet via formulas or API calls depending on where the data needs to surface.</p>
+      </div>
+      <div>
+        <h3 id="how-do-i-prevent-a-page-from-being-indexed">How do I prevent a page from being indexed?</h3>
+        <p>To prevent individual pages from being indexed, add the <code>noindex</code> directive in the metadata block. To exclude larger site sections, configure exclusions in the <a href="../bulk-metadata/index.html">bulk metadata</a> sheet.</p>
+      </div>
+      <div>
+        <h3 id="what-strategies-should-i-use-to-manage-urls-and-prevent-seo-ranking-loss">What strategies should I use to manage URLs and prevent SEO ranking loss?</h3>
+        <p>Maintaining existing URL structure is the best way to prevent ranking loss. If simplifying or modernizing URLs during a site rebuild, <a href="../redirects/index.html">use redirects</a> to guide search engines and users to the new URLs. Temporary ranking fluctuations may occur until search engines reindex the updated content and recognize the new URLs as stable.</p>
+      </div>
+      <div>
+        <h3 id="does-edge-delivery-services-support-rss-feeds">Does Edge Delivery Services support RSS feeds?</h3>
+        <p>Edge Delivery Services does not have built-in RSS or Atom feed publishing. However, the Sidekick is extensible and it can be configured to generate Atom feeds for RSS readers from a page index.</p>
+      </div>
+      <div>
+        <h2 id="localization">Localization</h2>
+      </div>
+      <div>
+        <h3 id="what-localization-l10n-capabilities-does-edge-delivery-services-support">What localization (l10n) capabilities does Edge Delivery Services support?</h3>
+        <p>Edge Delivery Services supports localization by leveraging the built-in translation tools of your chosen content source. This allows customers to use familiar systems for content authoring and translation.</p>
+        <p>Learn more on the <a href="../translation-and-localization/index.html">Translation and Localization page</a>.</p>
+      </div>
+      <div>
+        <h3 id="what-are-the-best-practices-for-handling-localized-or-country-specific-sites">What are the best practices for handling localized or country-specific sites?</h3>
+        <p>Organize content into different folders for each language version. Use translation tools integrated with your authoring environment. Create language-specific indices. Use <a href="../../developer/placeholders/index.html">placeholders</a> for different languages.</p>
+      </div>
+      <div>
+        <h3 id="does-edge-delivery-services-support-hreflang">Does Edge Delivery Services support <code>HREFLang</code>?</h3>
+        <p>Yes, Edge Delivery Services supports <code>HREFLang</code> as part of sitemaps (<u>sitemap.xml</u>). It can be configured to reference different locales where needed.</p>
+        <p>Learn more on the <a href="../../developer/sitemap/index.html#multiple-sitemaps">Sitemaps: Multiple Sitemaps page</a>.</p>
+      </div>
+      <div>
+        <h2 id="performance-and-monitoring">Performance and Monitoring</h2>
+      </div>
+      <div>
+        <h3 id="what-is-operational-telemetry">What is Operational Telemetry?</h3>
+        <p><a href="../operational-telemetry/index.html">Operational Telemetry</a> is a service that measures how fast your site loads for actual visitors, what errors users experience, and where interactions are broken. Unlike lab-based tools like Lighthouse, Operational telemetry provides more accurate real-world performance data.</p>
+      </div>
+      <div>
+        <h3 id="how-do-i-enable-operational-telemetry-on-my-site">How do I enable Operational Telemetry on my site?</h3>
+        <p>To enable operational telemetry, contact the AEM engineering team. They will open a pull request (PR) with the necessary JavaScript. All operational telemetry data is GDPR-compliant and does not collect personally identifiable information (PII).</p>
+        <p>Learn more on the <a href="../../developer/rum/index.html#how-to-add-rum-instrumentation-to-your-site" data-broken-link="true">Developing Real Use Monitoring page</a>.</p>
+      </div>
+      <div>
+        <h3 id="how-can-i-track-page-kpis-such-as-completions-clicks-and-impressions">How can I track page KPIs such as completions, clicks, and impressions?</h3>
+        <p>Edge Delivery Services supports tracking page KPIs through operational telemetry. Operational telemetry collection can be extended with custom checkpoints to track specific conversion events. Note that operational telemetry only samples visitor interactions and does <em>not</em> track individual users.</p>
+        <p>Learn more on the <a href="../../developer/rum/index.html#checkpoints" data-broken-link="true">Developing Real Use Monitoring: Checkpoints page</a>.</p>
+      </div>
+      <div>
+        <h2 id="authoring-content">Authoring Content</h2>
+      </div>
+      <div>
+        <h3 id="what-are-the-differences-between-different-authoring-modes-like-universal-editor-and-document-authoring">What are the differences between different authoring modes, like Universal Editor and Document Authoring?</h3>
+        <p>Fill out the <a href="../authoring-guide/index.html">Where To Author Your Site questionnaire</a> and see which option fits your needs best.</p>
+        <p>Edge Delivery Services is agnostic to whichever authoring source you would like to use, but we recommend picking the right one for the actual authors who need to update content every day.</p>
+      </div>
+      <div>
+        <h3 id="where-can-i-find-the-edge-delivery-services-url-of-my-document">Where can I find the Edge Delivery Services URL of my document?</h3>
+        <p>To find the URL of your document, open the <a href="../sidekick/index.html">Sidekick</a> in your content editor and select “Preview”. This will take you to the preview URL of your page.</p>
+      </div>
+      <div>
+        <h3 id="how-do-i-edit-pages">How do I edit pages?</h3>
+        <p>Edge Delivery Services supports content editing in Microsoft Word and Excel, Google Docs and Sheets, AEM’s Universal Editor, as well as custom authoring environments.</p>
+        <p>Learn more on the <a href="../authoring/index.html#authoring-content">Authoring Content page</a>.</p>
+      </div>
+      <div>
+        <h3 id="how-do-i-publish-a-page">How do I publish a page?</h3>
+        <p>To publish a page in Edge Delivery Services, open the Sidekick on the preview URL of your page and select “Publish”. This will make the page publicly available on your site.</p>
+        <p>Learn more on the <a href="../authoring/index.html#preview-and-publish-content">Preview and Publish Content page</a>.</p>
+      </div>
+      <div>
+        <h3 id="why-are-my-changes-in-microsoft-word-not-appearing-on-my-site-after-previewing-or-publishing">Why are my changes in Microsoft Word not appearing on my site after previewing or publishing?</h3>
+        <p>The SharePoint API can sometimes introduce a delay of up to three minutes before changes made in Microsoft Word become visible in Edge Delivery Services. To ensure changes appear immediately, manually save the document using <code>CMD+S</code> (Mac) or <code>CTRL+S</code> (Windows) before previewing and publishing.</p>
+        <p>You can also click on ‘Update’ in the Sidekick on the Preview page to get the latest saved content.</p>
+      </div>
+      <div>
+        <h3 id="how-do-i-unpublish-a-page">How do I unpublish a page?</h3>
+        <p>To unpublish a page, first delete the corresponding source document. Then, open the Sidekick on the preview site. The “Unpublish” button will now appear, allowing you to remove the page from the public site while keeping it available in preview.</p>
+        <p>Learn more on the <a href="../sidekick/index.html#unpublishing-and-deleting-content">Authoring and Publishing Content page</a>.</p>
+      </div>
+      <div>
+        <h3 id="how-do-i-delete-a-page">How do I delete a page?</h3>
+        <p>To delete a page, first delete the corresponding source document. Then, open the Sidekick on the preview site. The “Delete” button will now appear, allowing you to remove the page from both the public site <em>and</em> the preview environment.</p>
+        <p>The “Unpublish” and “Delete” buttons only appear after the source document has been deleted, ensuring that pages are not removed accidentally.</p>
+        <p>Learn more on the <a href="../sidekick/index.html#unpublishing-and-deleting-content">Authoring and Publishing Content page</a>.</p>
+      </div>
+      <div>
+        <h3 id="why-does-my-new-document-return-a-404-not-found-error">Why does my new document return a “404 Not Found” error?</h3>
+        <p>New documents <em>do not</em> automatically generate a preview URL. To create one, open the Sidekick in the editor and click “Preview”.</p>
+      </div>
+      <div>
+        <h3 id="how-do-i-schedule-content-publication-in-edge-delivery-services">How do I schedule content publication in Edge Delivery Services?</h3>
+        <p>Edge Delivery Services allows you to schedule API-driven publication using spreadsheets. For large-scale launches, such as a rebrand or product launch, best practices include using GitHub branches or forks and copies of large content folders to coordinate and time content changes effectively.</p>
+        <p>Learn more on the <a href="../scheduling/index.html">Scheduling page</a>.</p>
+      </div>
+      <div>
+        <h3 id="what-if-i-have-a-big-release-of-content-that-needs-to-be-published-at-the-same-time">What if I have a big release of content that needs to be published at the same time?</h3>
+        <p>Edge Delivery Services has APIs to support the concept of <a href="../admin.html/index.html#tag/snapshot" data-broken-link="true">Snapshots</a> that allow customers to Add/Remove individual pages to a collection called a “Snapshot Manifest”. The Snapshot can then be reviewed and approved/rejected. Publishing a Snapshot will take everything from the Snapshot Manifest and publish it at the same time immediately. You can use the <a href="https://labs.aem.live/tools/snapshot-admin/index.html">Snapshot Admin</a> tool to manage Snapshots.</p>
+      </div>
+      <div>
+        <h3 id="what-should-i-do-if-my-content-seems-outdated">What should I do if my content seems outdated?</h3>
+        <p>First, ensure that any recent changes to the content have been saved in your authoring environment. Then, open the Sidekick and select “Preview” to refresh the preview of your page. You can also click on ‘Update’ on the Sidekick if you are in the Preview URL</p>
+      </div>
+      <div>
+        <h3 id="how-does-edge-delivery-services-generate-urls-what-characters-are-allowed">How does Edge Delivery Services generate URLs? What characters are allowed?</h3>
+        <p>Edge Delivery Services constructs page URLs based on document and folder names. To maintain clean and easy-to-type URLs, only lowercase letters (a-z), numbers (0-9), and dashes (-) are allowed. Unsupported characters are automatically transformed.</p>
+        <p>Learn more on the <a href="../limits/index.html#document-naming">Document Naming page</a>.</p>
+      </div>
+      <div>
+        <h3 id="does-edge-delivery-services-have-a-wysiwyg-editor-for-in-browser-editing">Does Edge Delivery Services have a WYSIWYG editor for in-browser editing?</h3>
+        <p>Edge Delivery Services supports multiple authoring environments, including AEM Universal Editor, Adobe Document Authoring, and commonly used existing tools like Microsoft Word, Excel, Google Docs, and Google Sheets.</p>
+      </div>
+      <div>
+        <h3 id="does-edge-delivery-services-support-inline-text-styling-within-a-paragraph">Does Edge Delivery Services support inline text styling within a paragraph?</h3>
+        <p>Edge Delivery Services supports inline <a href="../../developer/block-collection/text/index.html">text styling with semantic formatting</a>: <strong>bold</strong>, <em>italic</em>, <u>underline</u>, <del>strikethrough</del>, <sub>subscript</sub>, <sup>superscript</sup>, and <code>code</code>. Colors and font settings (like font face and size) must be defined explicitly in CSS.</p>
+      </div>
+      <div>
+        <h3 id="how-do-i-set-an-image-size">How do I set an image size?</h3>
+        <p>Edge Delivery Services automatically optimizes image sizes, so authors do not need to manually set dimensions. Developers can use existing helper functions to get the appropriate size of the image they want to use.</p>
+      </div>
+      <div>
+        <h3 id="how-do-i-add-alt-text-to-images">How do I add alt text to images?</h3>
+        <p>In Word, select the image, go to the “Picture” ribbon, and choose “Alt Text.” In Google Docs, right-click the image and select “Alt Text.”</p>
+        <p>Other authoring environments may have different interfaces for adding alt text. It’s important to ensure alt text is properly set wherever content is authored to improve accessibility and SEO of your page.</p>
+      </div>
+      <div>
+        <h3 id="can-a-metadata-block-be-used-as-the-first-block-in-a-document">Can a metadata block be used as the first block in a document?</h3>
+        <p>Yes, a <a href="../../developer/block-collection/metadata/index.html">metadata block</a> can be placed anywhere in a document, including as the first block.</p>
+      </div>
+      <div>
+        <h3 id="what-is-the-metadata-spreadsheet-and-how-is-it-used">What is the metadata spreadsheet and how is it used?</h3>
+        <p>The metadata spreadsheet is a centralized sheet for managing site-wide metadata for SEO. It allows you to set default metadata, exclude specific page sections from indexing, and more.</p>
+        <p>Learn more on the <a href="../bulk-metadata/index.html">Bulk Metadata page</a>.</p>
+      </div>
+      <div>
+        <h3 id="how-do-i-add-name-anchors-to-headlines-in-pages">How do I add name anchors to headlines in pages?</h3>
+        <p>Edge Delivery Services automatically generates <code>id</code> attributes for all <a href="../../developer/block-collection/headings/index.html">headings</a>. For example, a heading titled “This is a Title” will be accessible via the URL fragment <u>#this-is-a-title</u>, eliminating the need to manually add anchors.</p>
+      </div>
+      <div>
+        <h3 id="what-do-the-three-dashes-----in-a-document-do">What do the three dashes (---) in a document do?</h3>
+        <p>Three dashes indicate a <a href="../../developer/block-collection/sections/index.html">section break</a>. Sections can be useful in structuring pages, applying different background styles, or triggering animations.</p>
+      </div>
+      <div>
+        <h3 id="does-edge-delivery-services-support-videos-as-source-content">Does Edge Delivery Services support videos as source content?</h3>
+        <p>Yes, <a href="../limits/index.html#file-size-limits">short videos</a> can be uploaded to your authoring environment. After previewing and publishing the video with Sidekick, a URL will be generated that can be referenced in the source document.</p>
+      </div>
+      <div>
+        <h3 id="should-animated-gifs-or-mp4-files-be-used-for-short-video-content">Should animated GIFs or MP4 files be used for short video content?</h3>
+        <p>MP4 is recommended for short videos and animations because it provides smaller file sizes, broader compatibility, and a more predictable authoring experience (while Google Docs displays animated GIFs inline, Microsoft Word only shows the first frame though the full animation is still hosted).</p>
+      </div>
+      <div>
+        <h3 id="can-i-use-embeds-or-iframes">Can I use embeds or <code>iframes</code>?</h3>
+        <p>Yes, the <a href="../../tools/sidekick/library.html/index.html?plugin=blocks&amp;path=/block-collection/embed&amp;index=0" data-broken-link="true">embed block</a> supports embedding content from external sources, including <code>iframes</code>, such as YouTube videos.</p>
+      </div>
+      <div>
+        <h3 id="how-can-i-manage-editable-content-templates">How can I manage editable content templates?</h3>
+        <p>Content templates can be managed using the templating mechanisms available in your chosen authoring environment. For example, Microsoft Word and Google Docs provide a broad range of built-in template functionality.</p>
+        <p>In any environment, you can create example documents (such as article pages, landing pages, or two-column layouts) that authors can duplicate and modify as needed.</p>
+      </div>
+      <div>
+        <h3 id="how-can-i-compare-different-versions-of-a-page">How can I compare different versions of a page?</h3>
+        <p>Version comparison is managed through the versioning features available in your chosen authoring environment. For example, Microsoft SharePoint and Word provide built-in version tracking and document comparison tools.</p>
+        <p>Many external tools, such as <a href="https://pianomister.github.io/diffsite/?url1=https%3A%2F%2Fmain--wknd--hlxsites.aem.page%2F&amp;url2=https%3A%2F%2Fmain--wknd--hlxsites.aem.live%2F">DiffSite</a>, can also be used to compare differences between the preview and publish states of a page.</p>
+      </div>
+      <div>
+        <h3 id="does-edge-delivery-services-offer-content-reporting-or-a-search-and-replace-feature">Does Edge Delivery Services offer content reporting or a search-and-replace feature?</h3>
+        <p>Edge Delivery Services has APIs and tools like <a href="https://labs.aem.live/tools/image-audit/index.html">Image Audit</a> or <a href="https://labs.aem.live/tools/page-status/index.html">Page Status</a> to help with common content reporting needs in addition to what the source content repositories provide.</p>
+        <p>While Search and Replace is easy to do in individual documents, to do it across multiple documents can be done using either the <a href="../../developer/importer/index.html">AEM Importer</a> or other custom scripts using libraries to bulk update Word or Google documents.</p>
+      </div>
+      <div>
+        <h3 id="how-are-internal-and-external-links-handled-in-edge-delivery-services">How are internal and external links handled in Edge Delivery Services?</h3>
+        <p>Internal links to <u>.page</u> and <u>.live</u> URLs are automatically converted into relative links to ensure proper navigation between pages. External links to third-party sites remain unchanged and function as standard external links.</p>
+      </div>
+      <div>
+        <h3 id="how-are-links-to-documents-content-source-handled">How are links to documents (content source) handled?</h3>
+        <p>By default, links to documents point to their original locations in the content source. If a document is published as a page on the site, its URL will match its folder structure from the source (unless a redirect is configured). For authors, it is often more intuitive to use absolute links copied and pasted from the browser.</p>
+      </div>
+      <div>
+        <h2 id="sidekick">Sidekick</h2>
+      </div>
+      <div>
+        <h3 id="what-is-the-aem-sidekick">What is the AEM Sidekick?</h3>
+        <p>The <a href="../sidekick/index.html">AEM Sidekick</a> is a browser extension that provides editing, previewing, and publishing capabilities for your Edge Delivery Services site. It can support multiple projects.</p>
+      </div>
+      <div>
+        <h3 id="how-do-i-install-the-sidekick">How do I install the Sidekick?</h3>
+        <p>The Sidekick is available for Chrome-based browsers (including Microsoft Edge) from the <a href="https://chromewebstore.google.com/detail/aem-sidekick/igkmdomcgoebiipaifhmpfjhbjccggml">Chrome web store</a>.</p>
+      </div>
+      <div>
+        <h3 id="what-should-i-do-if-my-sidekick-isnt-working">What should I do if my Sidekick isn’t working?</h3>
+        <p>If your Sidekick is not functioning, we recommend you reinstall the Sidekick for your project by visiting the <a href="../../tools/sidekick/index.html" data-broken-link="true">AEM Sidekick Configurator</a>.</p>
+      </div>
+      <div>
+        <h3 id="with-a-dynamic-media-license-can-authors-select-different-asset-variations-in-the-sidekick">With a Dynamic Media license, can authors select different asset variations in the Sidekick?</h3>
+        <p>Currently, the <a href="../aem-assets-sidekick-plugin/index.html">Asset Selector Sidekick Plugin</a> <em>does not</em> provide an option to pick a variation. If the customer has a Dynamic Media (DM) license with DM Open API access, they can configure the Asset Selector to copy the DM asset link as a reference. Authors can then modify the copied DM URL by appending query parameters to retrieve different asset variations.</p>
+      </div>
+      <div>
+        <h2 id="development-and-deployment">Development and Deployment</h2>
+      </div>
+      <div>
+        <h3 id="how-do-i-set-up-a-local-development-environment">How do I set up a local development environment?</h3>
+        <p>To develop Edge Delivery Services pages locally, install <code>Node.js</code> and run <code>npm install -g @adobe/aem-cli &amp;&amp; aem up</code>. This starts a local server that updates with code changes in real time and uses production content for accurate previews.</p>
+        <p>For a full guide to get started, visit the <a href="../../developer/tutorial/index.html">Developer Tutorial</a>.</p>
+      </div>
+      <div>
+        <h3 id="how-do-i-create-a-testing-or-staging-environment">How do I create a testing or staging environment?</h3>
+        <p>Edge Delivery Services is fully serverless, eliminating the need for dedicated environments. To try new functionality, simply create a branch in your GitHub repository.</p>
+        <p>Learn more on the <a href="../staging/index.html">Staging &amp; Environments page</a>.</p>
+      </div>
+      <div>
+        <h3 id="how-does-edge-delivery-services-handle-concurrent-code-editing-by-multiple-developers">How does Edge Delivery Services handle concurrent code editing by multiple developers?</h3>
+        <p>As long as you are developing locally, your code remains on your machine and only content is shared. When you commit code to a GitHub repository, Git manages version control and merges changes from multiple developers.</p>
+      </div>
+      <div>
+        <h3 id="does-edge-delivery-services-support-private-github-repositories">Does Edge Delivery Services support private GitHub repositories?</h3>
+        <p>Yes, Edge Delivery Services supports private GitHub repositories. As with public repositories, The <a href="https://github.com/apps/aem-code-sync">AEM Code Sync bot</a> needs to be installed on the repository.</p>
+      </div>
+      <div>
+        <h3 id="can-edge-delivery-services-integrate-with-github-enterprise">Can Edge Delivery Services integrate with GitHub Enterprise?</h3>
+        <p>Edge Delivery Services supports <strong>GitHub Enterprise Cloud</strong> but <em>does not</em> support <strong>GitHub Enterprise Server</strong> (because Edge Delivery Services requires access to a public GitHub API).</p>
+      </div>
+      <div>
+        <h3 id="does-edge-delivery-services-support-alternative-git-repository-hosts-like-bitbucket">Does Edge Delivery Services support alternative Git repository hosts, like Bitbucket?</h3>
+        <p>A <a href="../../developer/anatomy-of-a-project/index.html#git-and-github">GitHub repository is mandatory</a>. However, since Git is a distributed version control system (DVCS), you can host your codebase on other platforms (like Bitbucket) and push branches to GitHub for deployment.<br><br>Note: There is now the new BYOGIT feature as early access technology. It allows to directly use a bitbucket, gitlab and soon azure repos repository directly with EDS. see <a href="../../developer/byo-git/index.html">https://www.aem.live/developer/byo-git</a></p>
+      </div>
+      <div>
+        <h3 id="what-is-fstabyaml">What is <u>fstab.yaml</u>?</h3>
+        <p><a href="../../developer/anatomy-of-a-project/index.html#the-content-connection-fstabyaml">fstab.yaml</a> is a configuration file that defines the content source for your site. It specifies a mountpoint using sharing URLs from your authoring environment, determining where Edge Delivery Services pulls content from. Its format is similar to an <code>fstab</code> file in UNIX.</p>
+        <p>Edge Delivery Services will always reference the <code>fstab.yaml</code> from your <code>main</code> branch.</p>
+        <p>With Helix 5, fstab.yaml is no longer required. Content sources can now be configured via the <a href="../config-service-setup/index.html">Configuration Service API</a>, allowing the same code repository can be reused across multiple sites in a <a href="../repoless/index.html">repoless</a> fashion.</p>
+      </div>
+      <div>
+        <h3 id="does-edge-delivery-services-support-multiple-content-mountpoints-in-fstabyaml">Does Edge Delivery Services support multiple content mountpoints in <u>fstab.yaml</u>?</h3>
+        <p>No, each project can have only one content source in both <u>fstab.yaml</u> or the Configuration Service.</p>
+      </div>
+      <div>
+        <h3 id="how-does-code-move-from-page-to-live">How does code move from <u>.page</u> to <u>.live</u>?</h3>
+        <p>When code is pushed to any branch in GitHub, the <a href="https://github.com/apps/aem-code-sync">AEM Code Sync app</a> automatically syncs it to the Codebus, making it available on both <u>.page</u> and <u>.live</u>.</p>
+      </div>
+      <div>
+        <h3 id="how-is-continuous-integration-and-deployment-cicd-configured">How is continuous integration and deployment (CI/CD) configured?</h3>
+        <p>Edge Delivery Services works in a <a href="../dev-collab-and-good-practices/index.html#scaled-trunk-based-development">scaled trunk-based development model</a>. Since there is no build process required, it makes developer velocity much faster. Customers can add their internal processes via Github Actions and Workflows to also trigger other processes and build checks needed during Pull Requests.</p>
+      </div>
+      <div>
+        <h3 id="how-does-edge-delivery-services-handle-caching-for-headhtml-updates-do-i-need-to-clear-the-cache-manually">How does Edge Delivery Services handle caching for <u>head.html</u> updates? Do I need to clear the cache manually?</h3>
+        <p>When you update <u>head.html</u>, Edge Delivery Services automatically purges the cache for all HTML pages, ensuring that changes take effect immediately. Manual cache clearing is <em>not</em> required.</p>
+      </div>
+      <div>
+        <h3 id="do-i-need-to-protect-against-dos-attacks-with-a-waf-on-our-cdn">Do I need to protect against DOS attacks with a WAF on our CDN?</h3>
+        <p>Edge Delivery Services origins are designed to withstand common internet attacks, including typical scripted and DOS attacks. The AEM security and operations team continuously implements countermeasures to mitigate risks. Because your CDN may also connect to other origins beyond Edge Delivery Services, you may still want to use WAF services to protect those additional origins.</p>
+        <p>Learn more on the <a href="../security/index.html">Security page</a>.</p>
+      </div>
+      <div>
+        <h3 id="should-redirects-be-managed-on-the-cdn-or-does-edge-delivery-services-handle-them">Should redirects be managed on the CDN, or does Edge Delivery Services handle them?</h3>
+        <p>Edge Delivery Services supports redirect management through a <a href="../redirects/index.html">“redirects” spreadsheet</a> stored in the root folder of your project in your authoring environment. This allows for centralized control of URL redirects <em>without</em> requiring CDN-level configuration.</p>
+      </div>
+      <div>
+        <h3 id="why-do-content-based-assets-return-a-301-redirect-to-a-media_-image">Why do content-based assets return a 301 redirect to a <code>media_</code> image?</h3>
+        <p>When an asset is previewed, it is uploaded to the media bus, which stores it immutably. To maintain a human-readable filename, the asset can still be addressed by its original name. During delivery, the request is redirected (via 301) to the immutable media bus URL for retrieval.</p>
+      </div>
+      <div>
+        <h3 id="can-i-configure-redirects-to-return-a-302-temporarily-moved-status-code">Can I configure redirects to return a 302 (temporarily moved) status code?</h3>
+        <p>Edge Delivery Services only supports 301 (permanently moved) redirects through the redirects spreadsheet file to optimize caching. Other kinds of redirects must be configured at the CDN level.</p>
+        <p>From an SEO perspective, 301 redirects are generally considered safe as the original URL's SEO value is preserved. On the other hand, failure to maintain a 302 redirect only temporarily can be risky as search engines might de-index the original page and fail to transfer the SEO value to the new URL.</p>
+      </div>
+      <div>
+        <h3 id="what-is-the-character-limit-for-a-branchsubdomain">What is the character limit for a branch/subdomain?</h3>
+        <p>Edge Delivery Services subdomains follow the format <u>branch--repo--owner</u>. The combined length of the branch, repository, and owner name (including the two required separators [--]) <em>cannot</em> exceed 63 characters. This is a DNS limitation and is not specific to Edge Delivery Services.</p>
+        <p>For more details, see the <a href="https://www.freesoft.org/CIE/RFC/1035/9.htm">DNS size limits section in RFC 1035</a>.</p>
+      </div>
+      <div>
+        <h3 id="what-is-the-policy-on-using-cookies-or-localstorage-to-store-application-state">What is the policy on using cookies or <code>localStorage</code> to store application state?</h3>
+        <p>Edge Delivery Services does <em>not</em> process cookies on the server side. We recommend using URL parameters to store application state.</p>
+      </div>
+      <div>
+        <h2 id="content-blocks">Content Blocks</h2>
+      </div>
+      <div>
+        <h3 id="does-edge-delivery-services-have-something-like-components">Does Edge Delivery Services have something like components?</h3>
+        <p>Yes, Edge Delivery Services uses <a href="../exploring-blocks/index.html">“blocks”</a> as our components. A block is a reusable section of a page. By default, Edge Delivery Services displays document content as-is, but blocks allow for specific functionality and styling.</p>
+      </div>
+      <div>
+        <h3 id="how-do-i-create-a-block">How do I create a block?</h3>
+        <p>To create a block, place your content inside a table with a header row containing the block name. Edge Delivery Services will recognize this structure and apply the corresponding functionality or styling.</p>
+        <p>Learn more on the <a href="../exploring-blocks/index.html#how-they-work">Exploring Blocks: How They Work page</a>.</p>
+      </div>
+      <div>
+        <h3 id="where-can-i-find-a-list-of-available-blocks">Where can I find a list of available blocks?</h3>
+        <p>Available blocks vary by project. Many projects maintain a block inventory (or “kitchen sink”) page that showcases the available blocks and their structure.</p>
+        <p>Edge Delivery Services boiler plate code includes a set of commonly used blocks. Apart from that there is Block Collection boilerplate that includes additional blocks .</p>
+        <p>Learn more about <a href="../../developer/block-collection/index.html">Block Collection</a></p>
+      </div>
+      <div>
+        <h3 id="does-edge-delivery-services-support-nested-blocks">Does Edge Delivery Services support nested blocks?</h3>
+        <p>No, Edge Delivery Services does not support nested blocks to keep authoring simple and manageable. However, nested structures can be achieved in other author-friendly ways. For example, <a href="../../developer/block-collection/fragment/index.html" data-broken-link="true">nested fragments</a> can be used for more complex layouts.</p>
+      </div>
+      <div>
+        <h3 id="how-can-i-implement-a-design-system">How can I implement a design system?</h3>
+        <p>To implement a design system in Edge Delivery Services, leverage (or expand) the existing CSS variables for design tokens and ensure blocks are reusable across pages.</p>
+      </div>
+      <div>
+        <h3 id="how-can-i-reuse-content-across-multiple-pages-in-edge-delivery-services-like-aems-content-and-experience-fragments">How can I reuse content across multiple pages in Edge Delivery Services, like AEM’s Content and Experience Fragments?</h3>
+        <p>Edge Delivery Services supports centrally managed content reuse through the <a href="../../developer/block-collection/fragment/index.html" data-broken-link="true">fragment block</a>, which embeds content from one page into another. Edge Delivery Services loads headers and footers as fragments by default.</p>
+      </div>
+      <div>
+        <h3 id="what-is-the-equivalent-of-core-components-in-edge-delivery-services">What is the equivalent of Core Components in Edge Delivery Services?</h3>
+        <p>The <a href="../../developer/block-collection/index.html">Block Collection</a> serves as the equivalent of Core Components in Edge Delivery Services. The collection provides a set of pre-built, extensible blocks designed for modern websites, providing an easily customizable foundation for any project.</p>
+      </div>
+      <div>
+        <h3 id="how-do-blocks-compare-to-web-components">How do blocks compare to Web Components?</h3>
+        <p><a href="../exploring-blocks/index.html">Blocks</a> are a core feature of Edge Delivery Services, integrating seamlessly with minimal setup. They are easy to author, optimized for performance, and are built using standard HTML, CSS, and JavaScript.</p>
+        <p><a href="../../developer/web-components/index.html">Web Components</a> provide encapsulation and cross-platform reusability, making them valuable for design systems. However, they require careful lifecycle and performance management to avoid unnecessary overhead.</p>
+      </div>
+      <div>
+        <h2 id="frameworks-and-web-technologies">Frameworks and Web Technologies</h2>
+      </div>
+      <div>
+        <h3 id="are-web-components-recommended-for-edge-delivery-services-projects">Are Web Components recommended for Edge Delivery Services projects?</h3>
+        <p>Web Components can be used in Edge Delivery Services projects, but they are not the default recommendation. While they offer modularity and reusability, they require careful optimization to avoid impacting performance.</p>
+        <p>Learn more on the <a href="../../developer/web-components/index.html">Web Components page</a>.</p>
+      </div>
+      <div>
+        <h3 id="how-do-i-minify-jscss-in-edge-delivery-services">How do I minify JS/CSS in Edge Delivery Services?</h3>
+        <p>The short answer is: you don't need to. Minification adds project complexities without measurable performance benefits. See <a href="../dev-collab-and-good-practices/index.html#minification">Developer Best Practices</a> for more details.</p>
+      </div>
+      <div>
+        <h3 id="can-i-integrate-web-components-from-a-design-system-into-edge-delivery-services">Can I integrate Web Components from a design system into Edge Delivery Services?</h3>
+        <p>Yes, Edge Delivery Services supports <a href="../../developer/web-components/index.html">integrating Web Components from design systems</a>. Web Components should be initialized within blocks and only loaded when needed to avoid unnecessary overhead.</p>
+      </div>
+      <div>
+        <h3 id="can-i-use-javascript-frameworks">Can I use JavaScript frameworks?</h3>
+        <p>Edge Delivery Services does not require a specific frontend framework, but supports integration with frameworks like React, Angular, Vue, and Svelte. The recommended approach is to use technologies such as React Portals or Web Components within application-centric blocks while keeping simpler blocks in plain CSS and JavaScript for optimal web performance.</p>
+        <p>When loading external components that are render-critical for the largest contentful paint (LCP), make sure to load them from the same host as the main website, so you avoid the performance penalty of a second DNS lookup and TLS handshake. This can be accomplished by mapping the path in the CDN or pushing the required components into the site's git repository.</p>
+      </div>
+      <div>
+        <h3 id="can-i-use-css-frameworks">Can I use CSS frameworks?</h3>
+        <p>Yes, CSS frameworks like Less, PostCSS, and TailwindCSS can be used in Edge Delivery Services. CSS frameworks should be used thoughtfully, balancing page speed with layout shifts while keeping styling readable and maintainable. Usually, using any framework also adds a build step that can slow down development velocity and is not as instantaneous anymore which is a big advantage of going without a framework.</p>
+      </div>
+      <div>
+        <h3 id="does-edge-delivery-services-support-server-side-rendering-ssr-for-lit-based-web-components">Does Edge Delivery Services support server-side rendering (SSR) for Lit-based Web Components?</h3>
+        <p>No, Edge Delivery Services does not support <em>any</em> server-side customizations. Instead, it generates optimized, semantic markup that can be <em>decorated</em> on the client side for styling, functionality, and personalization. This ensures flexibility while maintaining optimized performance.</p>
+      </div>
+      <div>
+        <h2 id="integrations-and-third-party-tools">Integrations and Third-Party Tools</h2>
+      </div>
+      <div>
+        <h3 id="what-are-the-performance-considerations-when-integrating-with-third-party-tools">What are the performance considerations when integrating with third-party tools?</h3>
+        <p>Integrating third-party tools can impact performance, especially if they block rendering or delay LCP (Largest Contentful Paint). Avoid adding scripts in <code>&lt;head.html&gt;</code> to keep the critical rendering path clear. Instead, load scripts only when needed using <code>loadScript()</code> within specific blocks or <code>IntersectionObserver</code> to defer execution. Defer non-essential integrations and tools, such as analytics or tag managers, until after page load to reduce Total Blocking Time (TBT) and improve user experience.</p>
+        <p>Want to maintain high performance? Check out the <a href="../../developer/keeping-it-100/index.html">Keeping It 100 guide</a>.</p>
+      </div>
+      <div>
+        <h3 id="can-i-integrate-with-aem-sites">Can I integrate with AEM Sites?</h3>
+        <p>Yes, Edge Delivery Services can be seamlessly integrated. Edge Delivery Services is a part of AEM Sites!</p>
+      </div>
+      <div>
+        <h3 id="can-i-use-adobe-target">Can I use Adobe Target?</h3>
+        <p>Yes, Edge Delivery Services is compatible with Adobe Target. Learn more at the <a href="../../developer/target-integration/index.html">Configuring Adobe Target Integration page</a>.</p>
+        <p>Additionally, Edge Delivery Services features a built-in <a href="../experimentation/index.html">experimentation framework</a> that enables quick test creation, execution without performance impact, and fast deployment of test winners.</p>
+      </div>
+      <div>
+        <h3 id="can-i-use-adobe-analytics">Can I use Adobe Analytics?</h3>
+        <p>Yes, Adobe Analytics can be integrated with Edge Delivery Services just like on any other website.</p>
+      </div>
+      <div>
+        <h3 id="can-i-use-adobe-launch">Can I use Adobe Launch?</h3>
+        <p>Yes, Adobe Launch can be integrated with Edge Delivery Services just like on any other website.</p>
+      </div>
+      <div>
+        <h3 id="can-i-use-aem-forms">Can I use AEM Forms?</h3>
+        <p>Yes, with a valid AEM Forms license, Edge Delivery Services supports AEM Forms through the <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/build-forms/getting-started-edge-delivery-services-forms/create-forms">Adaptive Forms Block</a>, allowing you to create, style, and manage forms within your site.</p>
+        <p>Learn more on the <a href="../../developer/forms/index.html">Forms page</a>.</p>
+      </div>
+      <div>
+        <h3 id="can-i-use-marketo-forms">Can I use Marketo forms?</h3>
+        <p>Yes, Marketo forms can be embedded in Edge Delivery Services pages using the Marketo Forms API or <a href="../../tools/sidekick/library.html/index.html?plugin=blocks&amp;path=/block-collection/embed&amp;index=0" data-broken-link="true">iframe embed codes</a>.</p>
+      </div>
+      <div>
+        <h3 id="is-there-a-default-forms-capability-that-can-send-email-on-submission">Is there a default forms capability that can send email on submission?</h3>
+        <p>No, Edge Delivery Services does not include a default forms capability that sends emails on submission. However, you can integrate services like AEM Forms, Adobe Campaign, Workfront, or external email APIs to handle form submissions and email notifications.</p>
+      </div>
+      <div>
+        <h3 id="can-i-use-aem-assets">Can I use AEM Assets?</h3>
+        <p>Yes, AEM Assets can be used in Edge Delivery Services by <a href="../aem-assets-sidekick-plugin/index.html">configuring the AEM Assets Sidekick plugin</a>. This allows authors to access and use AEM Assets within SharePoint or Google Docs.</p>
+      </div>
+      <div>
+        <h3 id="does-edge-delivery-services-support-cloudflare">Does Edge Delivery Services support Cloudflare?</h3>
+        <p>Yes, you can run a Cloudflare CDN in front of Edge Delivery Services to add a custom domain or integrate Edge Delivery Services into an existing site.</p>
+        <p>Learn more on the <a href="../byo-cdn-cloudflare-worker-setup/index.html">Cloudflare Setup page</a>.</p>
+      </div>
+      <div>
+        <h3 id="does-aem-support-fastly">Does AEM support Fastly?</h3>
+        <p>Yes, you can run a Fastly CDN in front of Edge Delivery Services to add a custom domain or integrate Edge Delivery Services into an existing site.</p>
+        <p>Learn more on the <a href="../byo-cdn-fastly-setup/index.html">Fastly Setup page</a>.</p>
+      </div>
+      <div>
+        <h3 id="does-aem-support-cloudfront">Does AEM support Cloudfront?</h3>
+        <p>Yes, you can run a Cloudfront CDN in front of Edge Delivery Services to add a custom domain or integrate Edge Delivery Services into an existing site.</p>
+        <p>Learn more on the <a href="../byo-cdn-cloudfront-setup/index.html">Amazon Web Services (AWS) CloudFront Setup page</a>.</p>
+      </div>
+      <div>
+        <h3 id="does-edge-delivery-services-support-akamai">Does Edge Delivery Services support Akamai?</h3>
+        <p>Yes, you can run an Akamai CDN in front of Edge Delivery Services to add a custom domain or integrate Edge Delivery Services into an existing site.</p>
+        <p>Learn more on the <a href="../byo-cdn-akamai-setup/index.html">Akamai Setup page</a>.</p>
+      </div>
+      <div>
+        <h3 id="can-i-use-google-tag-manager">Can I use Google Tag Manager?</h3>
+        <p>Yes, Google Tag Manager can be integrated with Edge Delivery Services just like on any other website.</p>
+      </div>
+      <div>
+        <h3 id="can-i-integrate-with-onetrust-for-consent-management">Can I integrate with OneTrust for consent management?</h3>
+        <p>Yes, OneTrust can be integrated with Edge Delivery Services just like on any other website.</p>
+      </div>
+      <div>
+        <h3 id="can-i-integrate-translation-tools">Can I integrate translation tools?</h3>
+        <p>Yes, third-party translation tools can be integrated into Edge Delivery Services. While Edge Delivery Services natively supports translation features within content sources, additional translation services can be incorporated at the content source or CDN tier for more advanced localization needs.</p>
+      </div>
+      <div>
+        <h3 id="can-i-integrate-a-third-party-search-solution">Can I integrate a third-party search solution?</h3>
+        <p>Yes, integrating a third-party site search is common for large websites. The built-in sitemap feature is typically used to facilitate this integration. Edge Delivery Services includes <a href="../../developer/indexing/index.html">out-of-the-box indexing</a>, which provides a fast and simple search option for most websites.</p>
+      </div>
+      <div>
+        <h3 id="can-i-import-content-from-other-platforms-to-edge-delivery-services">Can I import content from other platforms to Edge Delivery Services?</h3>
+        <p>Yes, Edge Delivery Services supports content migration from various platforms, including WordPress, Unsplash, Contentful, other AEM instances, and more. The AEM team will help you in the <a href="../../developer/importer/index.html">import process</a>, ensuring your content from any CMS is converted.</p>
+      </div>
+      <div>
+        <h3 id="how-do-i-configure-edge-delivery-services-with-dynamic-media-and-smart-cropping">How do I configure Edge Delivery Services with Dynamic Media and Smart Cropping?</h3>
+        <p>Smart cropping can be <a href="https://experienceleague.adobe.com/en/docs/experience-manager-learn/assets/dynamic-media/images/smart-crop-feature-video-use">configured within AEM Assets</a>.</p>
+      </div>
+      <div>
+        <h2 id="legal-and-compliance">Legal and Compliance</h2>
+      </div>
+      <div>
+        <h3 id="what-is-the-service-level-agreement-sla-for-edge-delivery-services">What is the service level agreement (SLA) for Edge Delivery Services?</h3>
+        <p>The SLA for Edge Delivery Services is the same as the <a href="https://www.adobe.com/legal/service-commitments.html">SLA for AEM as a Cloud Service</a>. You can check <a href="https://status.adobe.com/">Adobe Status</a> for availability of all Adobe services.</p>
+      </div>
+      <div>
+        <h3 id="how-can-i-report-the-misuse-of-an-adobe-product-or-service">How can I report the misuse of an Adobe product or service?</h3>
+        <p>Contact <a href="mailto:abuse@adobe.com">abuse@adobe.com</a> or <a href="https://helpx.adobe.com/security/alertus.html">notify Adobe Security</a>.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

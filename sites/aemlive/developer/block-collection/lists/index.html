@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.832Z
+  page:             developer-block-collection-lists
+  pageUrl:          https://www.aem.live/developer/block-collection/lists
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Lists</title>
+  <meta name="description" content="Lists serve many purposes in the Web in general, some uses or obvious lists inside default content, while others are used in navigations or other ...">
+  <meta property="og:title" content="Lists">
+  <meta property="og:description" content="Lists serve many purposes in the Web in general, some uses or obvious lists inside default content, while others are used in navigations or other ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/block-collection/lists/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../../docs/index.html">Documentation</a></li>
+        <li><a href="../../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../../blog/index.html">Blog</a></li>
+        <li><a href="../../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#notes">Notes:</a></li>
+<li class="l-2"><a href="#example">Example:</a></li>
+<li class="l-2"><a href="#content-structure">Content Structure:</a></li>
+<li class="l-2"><a href="#code">Code:</a></li>
+<li class="l-3"><a href="#images">Images</a></li>
+<li class="l-3"><a href="#links">Links</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Lists</h1>
+          <p class="lede">Lists serve many purposes in the Web in general, some uses or obvious lists inside default content, while others are used in navigations or other ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_16a9c2a39a53dd97ee82fd8b152f751405f19923c.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_16a9c2a39a53dd97ee82fd8b152f751405f19923c.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_16a9c2a39a53dd97ee82fd8b152f751405f19923c.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_16a9c2a39a53dd97ee82fd8b152f751405f19923c.png?width=750&amp;format=png&amp;optimize=medium" width="1463" height="1097">
+          </picture>
+        </p>
+        
+        <h2 id="notes">Notes:</h2>
+        <p>Lists serve many purposes in the Web in general, some uses or obvious lists inside default content, while others are used in navigations or other hierarchical constructs.</p>
+        <p>Extraction of nested numbered lists and bullet lists is supported. Lists are converted to the <code>&lt;ol&gt;</code> and <code>&lt;ul&gt;</code> HTML tags respectively.</p>
+        <p>Complex list items seem to be hard to manage in word processing without accidentally being broken up so it is generally recommended to keep lists relatively simple when it comes to the complexity of the items in the list.</p>
+        <h2 id="example">Example:</h2>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_15c55ae5a49cbd235b64c7a53737ab347d868a590.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_15c55ae5a49cbd235b64c7a53737ab347d868a590.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_15c55ae5a49cbd235b64c7a53737ab347d868a590.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_15c55ae5a49cbd235b64c7a53737ab347d868a590.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1318">
+          </picture>
+        </p>
+        <p><a href="../../../block-collection/lists/index.html" data-broken-link="true">See Live output</a></p>
+        <h2 id="content-structure">Content Structure:</h2>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_15c55ae5a49cbd235b64c7a53737ab347d868a590.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_15c55ae5a49cbd235b64c7a53737ab347d868a590.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_15c55ae5a49cbd235b64c7a53737ab347d868a590.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_15c55ae5a49cbd235b64c7a53737ab347d868a590.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1318">
+          </picture>
+        </p>
+        <p><a href="https://docs.google.com/document/d/1Jt7hG6P7sjpAsjRO5ExuXZQHAbeZmIeSVG1JzFvARpg/edit">See Content in Document</a></p>
+        <h2 id="code">Code:</h2>
+        <p>As lists are considered Default Content they are styled in project or block CSS code. There is usually no JavaScript code used.<br>This code is included in Boilerplate, there is no need to copy it.</p>
+        <p><a href="https://github.com/adobe/helix-project-boilerplate/blob/27e8571592220da8ded7c8a7e5064d982f7cfe76/styles/styles.css#L201-L205">View Code</a></p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="images"><a href="../images/index.html">Images</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="links"><a href="../links/index.html">Links</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../../docs/index.html">Documentation</a></li>
+          <li><a href="../../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../../blog/index.html">Blog</a></li>
+          <li><a href="../../../community/index.html">Community</a></li>
+          <li><a href="../../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

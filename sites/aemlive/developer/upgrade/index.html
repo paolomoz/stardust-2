@@ -1,0 +1,195 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.131Z
+  page:             developer-upgrade
+  pageUrl:          https://www.aem.live/developer/upgrade
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Upgrading to aem.live from hlx.live</title>
+  <meta name="description" content="As outlined on our deprecations and end-of-service page, the hlx.live domain has been blocked on December 18 2025.">
+  <meta property="og:title" content="Upgrading to aem.live from hlx.live">
+  <meta property="og:description" content="As outlined on our deprecations and end-of-service page, the hlx.live domain has been blocked on December 18 2025.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/upgrade/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#end-of-service-warning">End-of-service warning</a></li>
+<li class="l-2"><a href="#try-your-site-on-aemlive">Try your site on aem.live</a></li>
+<li class="l-2"><a href="#try-previews-on-aempage">Try previews on aem.page</a></li>
+<li class="l-2"><a href="#tell-sidekick-to-use-aemlive-and-aempage">Tell Sidekick to use aem.live and aem.page</a></li>
+<li class="l-2"><a href="#point-your-cdn-to-aemlive">Point your CDN to aem.live</a></li>
+<li class="l-2"><a href="#if-you-are-using-byo-dns-without-byo-cdn">If you are using BYO DNS without BYO CDN</a></li>
+<li class="l-2"><a href="#if-you-are-using-hlxpage-or-hlxlive-urls-in-your-code">If you are using hlx.page or hlx.live urls in your code</a></li>
+<li class="l-2"><a href="#if-you-are-using-hlxpage-or-hlxlive-in-your-content">If you are using hlx.page or hlx.live in your content</a></li>
+<li class="l-2"><a href="#if-you-use-the-deprecated-forms-endpoint-to-receive-form-posts-in-excel-or-google-sheets">If you use the deprecated forms endpoint to receive form posts in Excel or Google Sheets</a></li>
+<li class="l-2"><a href="#if-you-have-configured-external-services-to-use-hlxpage-or-hlxlive">If you have configured external services to use hlx.page or hlx.live</a></li>
+<li class="l-2"><a href="#if-you-want-to-update-aemjs-too">If you want to update aem.js, too</a></li>
+<li class="l-3"><a href="#build">Build</a></li>
+<li class="l-3"><a href="#anatomy-of-an-aem-project">Anatomy of an AEM Project</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Upgrading to aem.live from hlx.live</h1>
+          <p class="lede">As outlined on our deprecations and end-of-service page, the hlx.live domain has been blocked on December 18 2025.</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1c4c7dc09ea738d661e244ec26968945fd8473d95.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1c4c7dc09ea738d661e244ec26968945fd8473d95.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1c4c7dc09ea738d661e244ec26968945fd8473d95.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1c4c7dc09ea738d661e244ec26968945fd8473d95.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <div class="deprecation">
+          <div>
+            <div>
+              <h3 id="end-of-service-warning">End-of-service warning</h3>
+              <p>As outlined on our <a href="../../docs/deprecation/index.html#hlxlive-and-hlxpage">deprecations and end-of-service page</a>, the <code>hlx.live</code> domain has been <strong>blocked on December 18 2025</strong>.</p>
+            </div>
+          </div>
+        </div>
+        <p>If you are familiar with <code>*.hlx.live</code> for published content and <code>*.hlx.page</code> for previews, please note that we are introducing <code>*.aem.live</code> and <code>*.aem.page</code> as new domains for your sites.</p>
+        <p>With this change, we are also introducing several improvements while making sure everything works just as before. <strong>The most important benefit is that preview URLs will load faster on aem.page thanks to caching.</strong></p>
+        <p>In this guide, we will walk you through the changes you'll need to make to upgrade to aem.live. Many of these steps are only required if you use specific features, so you may not need to complete all steps. Rest assured, the process is straightforward, and we are here to help you every step of the way.</p>
+        <h2 id="try-your-site-on-aemlive">Try your site on aem.live</h2>
+        <p>Go to your site on hlx.live and replace hlx.live in the URL with <code>aem.live</code>. For instance, if you used to see your site on <a href="../../index.html">https://main--helix-website--adobe.hlx.live/</a> then your new URL would be <a href="../../index.html">https://main--helix-website--adobe.aem.live/</a>. No more hlx.live, instead it's aem.live now.</p>
+        <h2 id="try-previews-on-aempage">Try previews on aem.page</h2>
+        <p>If your site works on aem.live, then previews will also work on aem.page. For instance, if you used to see your site on <a href="../../index.html">https://main--helix-website--adobe.hlx.page/</a> then your new URL would be <a href="../../index.html">https://main--helix-website--adobe.aem.page/</a>.</p>
+        <h2 id="tell-sidekick-to-use-aemlive-and-aempage">Tell Sidekick to use aem.live and aem.page</h2>
+        <p>Even though both <code>hlx.page</code> and <code>aem.page</code> work for previews now, on older projects Sidekick defaults to hlx.page.</p>
+        <p>In the configuration for your site <a href="../../docs/admin.html/index.html#schema/SiteConfig" data-broken-link="true">https://www.aem.live/docs/admin.html#schema/SiteConfig</a> you can find the <code>cdn.live.host</code> and <code>cdn.preview.host</code> and set them to the following values, replacing <code>&lt;owner</code> with your GitHub organization and <code>&lt;repo&gt;</code> with your repository name:</p>
+        <ul>
+          <li><code>cdn.live.host</code>: <code>main--&lt;repo&gt;--&lt;owner&gt;.aem.live</code></li>
+          <li><code>cdn.preview.host</code>: <code>main--&lt;repo&gt;--&lt;owner&gt;.aem.page</code></li>
+        </ul>
+        <p><br><br>If you are in a legacy setup you can find the <code>.helix/config</code> spreadsheet (or equivalent configuration file in other authoring environments) and set following values, Preview the spreadsheet using Sidekick to activate the new configuration.<br><br>After activating the configuration, please make sure the Sidekick preview action is opening urls with .aem.page.</p>
+        <h2 id="point-your-cdn-to-aemlive">Point your CDN to aem.live</h2>
+        <p>In your <a href="../../docs/byo-cdn-setup/index.html">CDN setup</a>, change the origin URL or host name from <code>hlx.live</code> to <code>aem.live</code> and activate the change. If you experience any issues, then revert the origin URL or host name back to <code>hlx.live</code> and contact Adobe for assistance.</p>
+        <p><strong>We recommend to make the change in a lower environment such as stage before performing it in production environment</strong></p>
+        <p><strong>That's it, you made it! Your site is now on aem.live. For 95% of all sites, this is all you have to do. Keep reading for the remaining 5% of special cases.</strong></p>
+        <p><strong>If you need help during the upgrade or ran into issues, please</strong> <strong><a href="https://discord.gg/aem-live">join our Discord channel</a></strong> <strong>or</strong> <strong><a href="../../business/reachout/index.html">get in touch with us</a></strong> <strong>to discuss further.</strong></p>
+        <h1 id="advanced-upgrade-scenarios">Advanced Upgrade Scenarios</h1>
+        <h2 id="if-you-are-using-byo-dns-without-byo-cdn">If you are using BYO DNS without BYO CDN</h2>
+        <p>If you use <a href="../../docs/byo-dns/index.html" data-broken-link="true">custom domains without a custom CDN</a>, please contact Adobe to perform the origin change to aem.live.</p>
+        <h2 id="if-you-are-using-hlxpage-or-hlxlive-urls-in-your-code">If you are using hlx.page or hlx.live urls in your code</h2>
+        <p>Check your GitHub repository for any references to <code>hlx.page</code> or <code>hlx.live</code>. If you find them, double-check the functionality, as the changed hostname may introduce CORS or other cross-origin issues. Update the references to <code>aem.page</code> or <code>aem.live</code>.</p>
+        <p><em>Code references to</em> <code>hlx.page</code> <em>and</em> <code>hlx.live</code> <em>in the</em> <code>sampleRUM() </code><em>function,</em> <code>lib-franklin.js</code> <em>or</em> <code>aem.js</code> <em>do not need to be changed.</em></p>
+        <h2 id="if-you-are-using-hlxpage-or-hlxlive-in-your-content">If you are using hlx.page or hlx.live in your content</h2>
+        <p>Check your content repository for any instances where you might have references for <code>hlx.page</code> or <code>hlx.live</code> in any content areas, including spreadsheets, for project-specific functionality.</p>
+        <p>Update link references around project documentation areas that may include, but not limited to, <em>Block Library</em>, <em>Runbooks</em>, <em>Authoring Guides</em>, and <em>Pull Request Templates</em>.</p>
+        <p>We don't need to update in-content or absolute links/hrefs pointing to <code>hlx.page</code> or <code>hlx.live</code> in the Word documents, as they will be auto-transformed to <code>aem.page</code> and <code>aem.live</code>.</p>
+        <h2 id="if-you-use-the-deprecated-forms-endpoint-to-receive-form-posts-in-excel-or-google-sheets">If you use the deprecated forms endpoint to receive form posts in Excel or Google Sheets</h2>
+        <p>The <a href="../forms/index.html">forms service on hlx.live has been deprecated</a> and will not be supported on aem.live. Please contact Adobe to discuss possible alternatives for this service.</p>
+        <h2 id="if-you-have-configured-external-services-to-use-hlxpage-or-hlxlive">If you have configured external services to use hlx.page or hlx.live</h2>
+        <p>Many services like Google reCaptcha, Google Maps, Cloudflare Turnstile, etc. use the site domain or referrer domain to validate API tokens. If you have configured these services to allow your site on <code>hlx.page</code> or <code>hlx.live</code>, make sure to also allow aem.page and aem.live</p>
+        <h2 id="if-you-want-to-update-aemjs-too">If you want to update aem.js, too</h2>
+        <p>Upgrading to aem.live does not require code changes. Some teams use the opportunity to also update to the latest version of <a href="https://github.com/adobe/aem-lib">aem.js</a>. It's best to treat this as a separate upgrade and (like all code changes) test it on a separate branch.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="build"><a href="../../docs/index.html#build">Build</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="anatomy-of-an-aem-project"><a href="../anatomy-of-a-helix-project/index.html" data-broken-link="true">Anatomy of an AEM Project</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

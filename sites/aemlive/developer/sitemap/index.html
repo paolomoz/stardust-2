@@ -1,0 +1,330 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.879Z
+  page:             developer-sitemap
+  pageUrl:          https://www.aem.live/developer/sitemap
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Sitemaps</title>
+  <meta name="description" content="Create automatically generated sitemap files to be referenced from your robots.txt. This helps with SEO and the discovery of new content. AEM can generate three ...">
+  <meta property="og:title" content="Sitemaps">
+  <meta property="og:description" content="Create automatically generated sitemap files to be referenced from your robots.txt. This helps with SEO and the discovery of new content. AEM can generate three ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/sitemap/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#creating-a-sitemap-without-any-configuration">Creating a Sitemap without any configuration</a></li>
+<li class="l-3"><a href="#domain-name-used-in-external-urls">Domain name used in external URLs</a></li>
+<li class="l-2"><a href="#generating-a-sitemap-configuration-based-on-an-index">Generating a Sitemap configuration based on an index</a></li>
+<li class="l-2"><a href="#manual-setup-of-your-sitemap-configuration">Manual setup of your Sitemap configuration</a></li>
+<li class="l-3"><a href="#simple-sitemap">Simple Sitemap</a></li>
+<li class="l-3"><a href="#multiple-sitemaps">Multiple Sitemaps</a></li>
+<li class="l-3"><a href="#specifying-the-primary-language-manually">Specifying the primary language manually</a></li>
+<li class="l-3"><a href="#specifying-the-default-language">Specifying the default language</a></li>
+<li class="l-3"><a href="#specifying-multiple-hreflangs-for-one-subtree">Specifying multiple hreflangs for one subtree</a></li>
+<li class="l-3"><a href="#multiple-indexes-aggregated-into-one-sitemap">Multiple Indexes Aggregated Into One Sitemap</a></li>
+<li class="l-3"><a href="#including-other-sitemaps-as-input">Including other sitemaps as input</a></li>
+<li class="l-3"><a href="#adding-an-extension-to-all-locations-in-the-sitemap">Adding an extension to all locations in the sitemap</a></li>
+<li class="l-3"><a href="#push-invalidation">Push Invalidation</a></li>
+<li class="l-3"><a href="#launch">Launch</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Sitemaps</h1>
+          <p class="lede">Create automatically generated sitemap files to be referenced from your robots.txt. This helps with SEO and the discovery of new content. AEM can generate three ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_191790b100d361466b2b0a3dc149a79ecc6511102.jpg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_191790b100d361466b2b0a3dc149a79ecc6511102.jpg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="./media_191790b100d361466b2b0a3dc149a79ecc6511102.jpg?width=2000&amp;format=jpg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_191790b100d361466b2b0a3dc149a79ecc6511102.jpg?width=750&amp;format=jpg&amp;optimize=medium" width="1103" height="828">
+          </picture>
+        </p>
+        
+        <p>Create automatically generated sitemap files to be referenced from your <code>robots.txt</code>. This helps with SEO and the discovery of new content. AEM can generate three types of sitemaps: without any configuration, based solely on a query index or based on a manual sitemap configuration. A single sitemap must be limited to 50,000 URLs and 50MB (uncompressed) in size - see <a href="../../docs/limits/index.html#sitemap-limits">Limits</a>.</p>
+        <h2 id="creating-a-sitemap-without-any-configuration">Creating a Sitemap without any configuration</h2>
+        <p>If you don’t do anything you will see your sitemap in <code>sitemap.xml</code> and have a sitemap index in <code>sitemap.json</code>. It will contain a list of all your published documents.</p>
+        <p>If you started with another type of sitemap and would like to switch to this type, you’ll have to delete the <code>helix-sitemap.yaml</code> configuration file - either manually defined in GitHub or automatically generated - and reindex your site.</p>
+        <h3 id="domain-name-used-in-external-urls">Domain name used in external URLs</h3>
+        <p>To customize the domain used in creating external URLs, add a property named <code>cdn.prod.host</code> in your project configuration.</p>
+        <ul>
+          <li>If you are using the configuration service, <a href="../../docs/config-service-setup/index.html#update-production-cdn">see here how to update the site configuration</a>.</li>
+          <li>Otherwise, <a href="../../docs/configuration/index.html">see here for document-based configuration</a>.</li>
+        </ul>
+        <h2 id="generating-a-sitemap-configuration-based-on-an-index">Generating a Sitemap configuration based on an index</h2>
+        <p>Please see the document <a href="../indexing/index.html">Indexing</a> to learn more about indexing. In order to generate a sitemap configuration based on an index, please ensure that you have already set up an initial query index as explained there. This will generate a sitemap at the location:</p>
+        <p><code>https://&lt;branch&gt;--&lt;repo&gt;--&lt;owner&gt;.hlx.page/sitemap.xml</code></p>
+        <p>And a sitemap configuration at the following location:</p>
+        <p><code>https://&lt;branch&gt;--&lt;repo&gt;--&lt;owner&gt;.hlx.page/helix-sitemap.yaml</code></p>
+        <p><br>It is recommended that you create a <code>sitemap-index.xml</code> file that references all your sitemaps and keep that as part of your project code in your github repo. This way it is easy to add new sitemaps as the project expands.</p>
+        <h2 id="manual-setup-of-your-sitemap-configuration">Manual setup of your Sitemap configuration</h2>
+        <p>If you need more customization than your generated sitemap configuration file provides, you can copy its contents and paste it into a file named <code>helix-sitemap.yaml</code> in the root folder of your project.</p>
+        <p>Alternatively, if you are using the configuration service, you can also update the <code>sitemap.yaml</code> via the <a href="../../docs/config-service-setup/index.html#update-sitemapyaml">site configuration</a>.</p>
+        <p><strong>Note:</strong> When using a manually configured index and sitemap (e.g. your code repo includes a helix-query.yaml and helix-sitemap.yaml file) your index definition must include the robots property to ensure the sitemap excludes pages with <code>robots: noindex</code> metadata. When using auto-generated index definitions, simply follow the recommendations in the <a href="../indexing/index.html#setting-up-properties-to-be-added-to-the-index">indexing documentation</a> so those pages are excluded from the index.</p>
+        <p>The following sections contain the supported types of sitemaps.</p>
+        <h3 id="simple-sitemap">Simple Sitemap</h3>
+        <p>The following is a simple <code>helix-sitemap.yaml</code>. It assumes a single index containing all the pages that need to appear in the sitemap.</p>
+        <pre><code> sitemaps:
+   example:
+     source: /query-index.json
+     destination: /sitemap-en.xml
+</code></pre>
+        <p>If you want last modification dates to be included in the URLs of your sitemap, add a <code>lastmod</code> property including a format to your configuration.</p>
+        <pre><code> sitemaps:
+   example:
+     source: /query-index.json
+     destination: /sitemap-en.xml
+     lastmod: YYYY-MM-DD
+</code></pre>
+        <p>If your site does not have a <code>cdn.prod.host</code> defined or you want your sitemap URLs to use a different host name, you can specify an optional <code>origin</code>. Note that the origin value must include the protocol.</p>
+        <pre><code> sitemaps:
+   example:
+     origin: https://www.mysite.com
+     source: /query-index.json
+     destination: /sitemap-en.xml
+     lastmod: YYYY-MM-DD
+</code></pre>
+        <h3 id="multiple-sitemaps">Multiple Sitemaps</h3>
+        <p>It is common to have sitemaps per section of the sites and/or per country or language. AEM supports sitemaps including the corresponding <code>hreflang</code> references. In the following example we assume that there is a one to one mapping between the indexes and the sitemaps XML files.</p>
+        <pre><code> sitemaps:
+   example:
+     lastmod: YYYY-MM-DD
+     languages:
+       en:
+         source: /en/query-index.json
+         destination: /sitemap-en.xml
+         hreflang: en
+       fr:
+         source: /fr/query-index.json
+         destination: /sitemap-fr.xml
+         hreflang: fr
+         alternate: /fr/{path}
+</code></pre>
+        <p>If there are two pages in the english and french section that share a common suffix, they will be related, so e.g. if you have a page <code>/welcome</code> in the english section and a page <code>/fr/welcome</code> in the french section, the resulting entry in the <code>/sitemap-en.xml</code> will look like this:</p>
+        <pre><code>&lt;url&gt;
+  &lt;loc&gt;https://wwww.mysite.com/welcome&lt;/loc&gt;
+  &lt;xhtml:link rel="alternate" hreflang="en" href="https://wwww.mysite.com/welcome"/&gt;
+  &lt;xhtml:link rel="alternate" hreflang="fr" href="https://wwww.mysite.com/fr/welcome"/&gt;
+&lt;/url&gt;
+</code></pre>
+        <p>A similar entry will be available in <code>/sitemap-fr.xml</code>.</p>
+        <h3 id="specifying-the-primary-language-manually">Specifying the primary language manually</h3>
+        <p>There might be situations where you have alternate versions of a page, but you’re unable to use a common suffix to identify them, possibly because you’re porting a legacy website that should not have its paths changed. In that situation, you can specify a <code>primary-language-url</code> for the alternate location, in the <a href="../../docs/authoring/index.html#metadata--seo">metadata of the document</a>.</p>
+        <p>Let’s assume our primary language is english, we have a page <code>/welcome</code> in the english section and <code>/fr/bienvenu</code> in the french section, and the latter is an alternate version of the former.</p>
+        <p>First, we add that information to the document at <code>/fr/bienvenu</code> in its metadata:<br>
+          <picture>
+            <source type="image/webp" srcset="./media_1aebb7da49a5deb3fb4824e7a625c23b856d41376.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1aebb7da49a5deb3fb4824e7a625c23b856d41376.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1aebb7da49a5deb3fb4824e7a625c23b856d41376.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1aebb7da49a5deb3fb4824e7a625c23b856d41376.png?width=750&amp;format=png&amp;optimize=medium" width="1202" height="172">
+          </picture>
+        </p>
+        <p>This can also be added to a global <code>metadata</code> sheet, as shown in <a href="../../docs/bulk-metadata/index.html">Bulk Metadata</a>.</p>
+        <p>Then, we add an indexed property <code>primary-language-url</code> to the french index:</p>
+        <pre><code> primary-language-url:
+   select: head &gt; meta[name="primary-language-url"]
+   value: attribute(el, "content")
+</code></pre>
+        <p>Finally, we re-publish the french page, and <a href="../../docs/admin.html/index.html#tag/sitemap/operation/generateSitemap" data-broken-link="true">rebuild the sitemap</a>.</p>
+        <h3 id="specifying-the-default-language">Specifying the default language</h3>
+        <p>Another common requirement is to specify the default language for a sitemap with multiple languages. This can be achieved by adding a property <code>default</code> in the sitemap:</p>
+        <pre><code> sitemaps:
+   example:
+     default: en
+     lastmod: YYYY-MM-DD
+     languages:
+       en:
+         source: /en/query-index.json
+         destination: /sitemap-en.xml
+         hreflang: en
+       fr:
+         source: /fr/query-index.json
+         destination: /sitemap-fr.xml
+         hreflang: fr
+         alternate: /fr/{path}
+</code></pre>
+        <p>In the resulting sitemap, all entries from the english subtree will have an extra alternate entry with hreflang <code>x-default</code>.</p>
+        <h3 id="specifying-multiple-hreflangs-for-one-subtree">Specifying multiple hreflangs for one subtree</h3>
+        <p>Sometimes, it is required to map multiple hreflangs to only one language subtree, e.g. consider we want the following to appear in the resulting sitemap:</p>
+        <pre><code>&lt;url&gt;
+ &lt;loc&gt;https://myhost/la/page&lt;/loc&gt;
+ &lt;xhtml:link rel="alternate" hreflang="es-VE" href="https://myhost/la/page"/&gt;
+ &lt;xhtml:link rel="alternate" hreflang="es-SV" href="https://myhost/la/page"/&gt;
+ &lt;xhtml:link rel="alternate" hreflang="es-PA" href="https://myhost/la/page"/&gt;
+&lt;/url&gt;
+</code></pre>
+        <p>Every page in our sitemap source should appear exactly once, but have multiple alternate hreflangs associated with it. In order to achieve this, you should specify an array of languages in the <code>hreflang</code> property:</p>
+        <pre><code> sitemaps:
+   example:
+     lastmod: YYYY-MM-DD
+     languages:
+       la:
+         source: /la/query-index.json
+         destination: /sitemap-la.xml
+         hreflang:
+           - es-VE
+           - es-SV
+           - es-PA
+</code></pre>
+        <h3 id="multiple-indexes-aggregated-into-one-sitemap">Multiple Indexes Aggregated Into One Sitemap</h3>
+        <p>There are cases where it is easier to have a single larger sitemap than fragmented small sitemaps, especially as there is a limit of sitemaps that can be submitted to search engines per site.</p>
+        <p>The following example shows how to aggregate a number of separate indexes into a single sitemap.</p>
+        <pre><code> sitemaps:
+   example:
+     lastmod: YYYY-MM-DD
+     languages:
+       dk:
+         source: /dk/query-index.json
+         destination: /sitemap.xml
+         hreflang: dk
+         alternate: /dk/{path}
+       no:
+         source: /no/query-index.json
+         destination: /sitemap.xml
+         hreflang: no
+         alternate: /no/{path}
+</code></pre>
+        <p>Using the same destination it is possible to combine multiple small sitemaps into one larger sitemap.</p>
+        <h3 id="including-other-sitemaps-as-input">Including other sitemaps as input</h3>
+        <p>In a mixed scenario, where not all languages in a sitemap are managed in AEM, you can include sitemaps from other language trees by specifying an XML path as source, as in:</p>
+        <pre><code>sitemaps:
+   example:
+     lastmod: YYYY-MM-DD
+     languages:
+       en:
+         source: /en/query-index.json
+         destination: /sitemaps/sitemap-en.xml
+         hreflang: en
+       fr:
+         source: https://www.mysite.com/legacy/sitemap-fr.xml
+         destination: /sitemaps/sitemap-fr.xml
+         hreflang: fr
+         alternate: /fr/{path}
+</code></pre>
+        <p>In this example, we use an external french sitemap to calculate all sitemap locations. AEM will determine alternates for english sitemap URLs by deconstructing the french counterparts in external sitemap using the <code>alternate</code> definition.</p>
+        <h3 id="adding-an-extension-to-all-locations-in-the-sitemap">Adding an extension to all locations in the sitemap</h3>
+        <p>In a scenario, where you want all your locations to have an extension, e.g. <code>.html</code>, and you’re unable to generate a <code>helix-sitemap</code> sheet in your query index to derive a formula, you can add an extension to all languages or an individual language using an <code>extension</code> property:</p>
+        <pre><code>sitemaps:
+   example:
+     lastmod: YYYY-MM-DD
+     extension: .html
+     languages:
+       en:
+         source: /en/query-index.json
+         destination: /en/sitemap.xml
+         hreflang: en
+       fr:
+         source: /fr/query-index.json
+         destination: /fr/sitemap.xml
+         hreflang: fr
+         alternate: /fr/{path}
+</code></pre>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="push-invalidation"><a href="../../docs/setup-byo-cdn-push-invalidation/index.html">Push Invalidation</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="launch"><a href="../../docs/index.html#launch">Launch</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

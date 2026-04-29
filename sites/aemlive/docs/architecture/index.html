@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.914Z
+  page:             docs-architecture
+  pageUrl:          https://www.aem.live/docs/architecture
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Architecture</title>
+  <meta name="description" content="Take a deep dive into the architecture behind Edge Delivery Services and document based authoring in Adobe Experience Manager Sites as a Cloud Service.">
+  <meta property="og:title" content="Architecture">
+  <meta property="og:description" content="Take a deep dive into the architecture behind Edge Delivery Services and document based authoring in Adobe Experience Manager Sites as a Cloud Service.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/architecture/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#how-aem-fits-in">How AEM fits in</a></li>
+<li class="l-2"><a href="#the-full-picture">The full picture</a></li>
+<li class="l-2"><a href="#how-content-gets-published">How content gets published</a></li>
+<li class="l-3"><a href="#what-about-code">What about code?</a></li>
+<li class="l-2"><a href="#lifecycle-differences-of-content-media-code-and-configuration">Lifecycle differences of Content, Media, Code and Configuration.</a></li>
+<li class="l-3"><a href="#staging--environments">Staging &amp; Environments</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Architecture</h1>
+          <p class="lede">Take a deep dive into the architecture behind Edge Delivery Services and document based authoring in Adobe Experience Manager Sites as a Cloud Service.</p>
+        </header>
+        <div class="content">
+        
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_12c0b6c754f10cc4e98df8f6e378c543531f7149e.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_12c0b6c754f10cc4e98df8f6e378c543531f7149e.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_12c0b6c754f10cc4e98df8f6e378c543531f7149e.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_12c0b6c754f10cc4e98df8f6e378c543531f7149e.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        <p>Edge Delivery Services and document-based authoring are part of the next generation of Adobe Experience Manager’s composable architecture. A key aspect of this architecture is to enable customers to create great experiences using the infrastructure and processes that already enable their success.</p>
+        <h2 id="how-aem-fits-in">How AEM fits in</h2>
+        <p><a href="../architecture-delivery.svg/index.html" data-broken-link="true">https://main--helix-website--adobe.hlx.page/docs/architecture-delivery.svg</a></p>
+        <p>At the highest level, Adobe Experience Manager is an on origin service that you plug in to your existing Content Delivery Network (CDN). There are out of the box integrations with <a href="../byo-cdn-akamai-setup/index.html">Akamai</a>, <a href="../byo-cdn-cloudflare-worker-setup/index.html">Cloudflare</a>, <a href="../byo-cdn-fastly-setup/index.html">Fastly</a>, and Amazon <a href="../byo-cdn-cloudfront-setup/index.html">Cloudfront</a>.</p>
+        <p>The AEM stack itself is engineered for high performance and availability. In order to achieve best possible availability, all delivery services are run in two fully redundant edge providers, have fully redundant storage infrastructure, and are constantly monitored for performance.</p>
+        <h2 id="the-full-picture">The full picture</h2>
+        <p><a href="../architecture-overview.svg/index.html" data-broken-link="true">https://main--helix-website--adobe.hlx.page/docs/architecture-overview.svg</a></p>
+        <p>Looking at the full stack, there are four key layers:</p>
+        <ol>
+          <li>Your customer-specific infrastructure like CDNs, DNS, TLS certificates, etc.</li>
+          <li>Adobe’s edge compute layer</li>
+          <li>Adobe’s storage layer for edge delivery</li>
+          <li>Your customer-specific sources of content and code</li>
+        </ol>
+        <p>In the visitor-facing tier of this architecture, Edge Delivery Services, customers use their existing CDNs, DNS, certificates, etc. which is then delivering the AEM-produced experience to all modern web browsers, native mobile applications, chat bots, or other backend applications.</p>
+        <p>The central tier consists of the experience composition service, a dual-stack (for maximum availability) architecture that serves content stored in highly optimized formats for experience delivery. The storage layer is made up of Content Bus for structured and unstructured content, Media Bus for assets and media, and Code Bus for the code of the site.</p>
+        <p>The bottom tier enables authoring productivity and just like the top tier, it composes the tools and infrastructure already in use, be it AEM Authoring, Microsoft Sharepoint, Word, Excel, or Google Drive, Docs, and Sheets.</p>
+        <h2 id="how-content-gets-published">How content gets published</h2>
+        <p><a href="../architecture-publishing.svg/index.html" data-broken-link="true">https://main--helix-website--adobe.hlx.page/docs/architecture-publishing.svg</a></p>
+        <p>The core publishing process is facilitated by the Admin service for preview and publishing and consists of two key steps, both triggered by authors through the <a href="../sidekick/index.html">sidekick</a>.</p>
+        <p>The preview operation in sidekick will pull content from the configured content source such as Sharepoint or Google Drive, or Adobe Experience Manager Sites. This integration is based on the standardized delivery format for structured and unstructured content and can be extended to other third-party content providers. Once the content has been pulled from the originating repository, it will be stored in AEM’s storage layer, separated by structured, unstructured content, assets, and media.</p>
+        <p>In a second step, authors can publish content. This operation takes the previewed content and makes it available to the delivery tier of our infrastructure. The most important step here is to purge the CDN. AEM will purge every layer of the caching infrastructure, thanks to its deep integration with content delivery networks.</p>
+        <h3 id="what-about-code">What about code?</h3>
+        <p>Like content, AEM uses code from your customer-provided repositories. Unlike content, code is taken from GitHub, using the <a href="https://github.com/apps/aem-code-sync">AEM code sync app for GitHub</a> that has been installed during the <a href="../../developer/tutorial/index.html">initial tutorial</a>.</p>
+        <p>This integration pulls code from all active branches, enabling effective parallel development and scalable testing. When code is merged into the main branch, the CDN will be purged of all affected resources, making deployments fast and easy.</p>
+        <h2 id="lifecycle-differences-of-content-media-code-and-configuration">Lifecycle differences of Content, Media, Code and Configuration.</h2>
+        <p>Internally AEM separates different resources needed to assemble and deliver a website based on their corresponding lifecycle and manages them separately.<br><br><strong>Content</strong> (text in documents and spreadsheets, PDFs, SVGs, redirects, etc.) follow lifecycle states of <code>preview</code> and <code>publish</code> have stages of preview and publish. Content is immediately available to all Code branches on the corresponding <code>.aem.page</code> and <code>.aem.live</code> URLs depending on their previewed / published state.</p>
+        <p><strong>Media</strong> (images, and videos uploaded or copy/pasted into a document) is using <a href="https://en.wikipedia.org/wiki/Content-addressable_storage">Content Addressable Storage</a> internally, meaning that every asset is only stored once with a unique hash following the <code>media_</code> prefix. Media is accessible on all branch URLs across <code>.aem.page</code> and <code>.aem.live</code> as soon as it is added to the system via a <code>preview</code> operation of the asset itself or a document that contains the asset. Since the hash is produced from the binary content of the asset itself, it is immutable and can be cached permanently.</p>
+        <p><strong>Code</strong> (javascript, css, etc. ) is managed in branches, creating individual environments for every branch. Changes are visible across <code>.aem.page</code> and <code>.aem.live</code> URLs at the same time.</p>
+        <p><strong>Configuration</strong> (via config service) is using inheritance from a <code>profile</code> and is immediately applied to all branch environments on both <code>.aem.page</code> and <code>.aem.live</code> for a particular site.</p>
+        <div class="pagination contained">
+          <div>
+            <div></div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="staging--environments"><a href="../staging/index.html">Staging &amp; Environments</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

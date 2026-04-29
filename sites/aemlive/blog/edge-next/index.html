@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.159Z
+  page:             blog-edge-next
+  pageUrl:          https://www.aem.live/blog/edge-next
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>The Performance Paradox: When Simple Architecture Beats Complex Frameworks</title>
+  <meta name="description" content="Web performance and developer experience often pull in opposite directions. As frameworks like Next.js have grown more powerful, they've also become more complex—requiring specialized expertise ...">
+  <meta property="og:title" content="The Performance Paradox: When Simple Architecture Beats Complex Frameworks">
+  <meta property="og:description" content="Web performance and developer experience often pull in opposite directions. As frameworks like Next.js have grown more powerful, they've also become more complex—requiring specialized expertise ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/blog/edge-next/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../index.html" aria-current="page">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-success)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#technical-architecture">Technical Architecture</a></li>
+<li class="l-2"><a href="#performance">Performance</a></li>
+<li class="l-2"><a href="#content-authoring-experience">Content Authoring Experience</a></li>
+<li class="l-2"><a href="#developer-experience">Developer Experience</a></li>
+<li class="l-2"><a href="#making-the-choice">Making the Choice</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog · BLOG</p>
+          <h1>The Performance Paradox: When Simple Architecture Beats Complex Frameworks</h1>
+          <p class="lede">Web performance and developer experience often pull in opposite directions. As frameworks like Next.js have grown more powerful, they've also become more complex—requiring specialized expertise ...</p>
+        </header>
+        <div>
+        
+        <p>Web performance and developer experience often pull in opposite directions. As frameworks like Next.js have grown more powerful, they've also become more complex—requiring specialized expertise to achieve and maintain high performance scores. Meanwhile, simpler architectures built on web fundamentals are showing that perfect Lighthouse scores don't always require perfect developers.</p>
+        <p>This tension sits at the heart of a choice facing many web teams today: stick with sophisticated React tooling that offers flexibility and familiarity, or consider alternative approaches that prioritize performance by default. Edge Delivery Services and Next.js represent these two distinct philosophies.</p>
+        <p>This analysis goes beyond surface-level feature comparisons to examine the real-world implications of these architectural choices. We'll explore when each approach makes sense, why some teams are reconsidering their JavaScript dependencies, and how different priorities around performance, developer experience, and content workflows should guide your platform decisions.</p>
+        <h2 id="technical-architecture"><strong>Technical Architecture</strong></h2>
+        <p>Edge Delivery Services and Next.js represent two fundamentally different approaches to building web experiences. Edge Delivery Services is a fully managed service, while Next.js is a React framework. This core difference shapes how teams architect and maintain their websites.</p>
+        <p>Edge Delivery Services was designed from scratch with speed as its guiding principle - fast delivery, authoring, and development. The platform <a href="../../docs/architecture/index.html"></a><a href="../../docs/architecture/index.html">automatically transforms content from different sources into optimized web pages through a pipeline handling transformation, asset optimization, and delivery</a>. This architecture is not just an implementation detail - it's a fundamental design choice enabling breakthrough speed across the content lifecycle.</p>
+        <p>Next.js, a framework, provides building blocks for web applications but requires teams to decide on hosting, deployment, and infrastructure. It follows a component-based architecture where content can come from various sources - headless Content Management Systems (including <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/headless/introduction"></a><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/headless/introduction">Adobe Experience Manager Sites Headless</a>), APIs, or static files. This offers implementation flexibility but means taking responsibility for the entire stack.</p>
+        <p>Deployment models differ. Edge Delivery Services uses a git-based deployment where code changes in GitHub automatically trigger updates, while content changes publish instantly through the platform's content delivery network. Next.js applications require setting up build and deployment pipelines; commercial platforms can simplify this for an additional cost.</p>
+        <h2 id="performance"><strong>Performance</strong></h2>
+        <p>Web performance isn't just about speed. It impacts <a href="https://wpostats.com"></a><a href="https://wpostats.com">user engagement, conversion rates, and search rankings</a>. Both platforms aim for fast experiences, they take different approaches.</p>
+        <p>Edge Delivery Services was built from the ground up with performance as a non-negotiable requirement. Its integrated approach combines clean markup, minimal JavaScript, <a href="../../developer/keeping-it-100/index.html#three-phase-loading-e-l-d"></a><a href="../../developer/keeping-it-100/index.html#three-phase-loading-e-l-d">three-phase (Eager-Lazy-Delayed) loading patterns</a>, and <a href="../../docs/byo-cdn-setup/index.html"></a><a href="../../docs/byo-cdn-setup/index.html">deep CDN integration</a> with surgical cache invalidation. This isn't just about optimization - it's an architectural foundation that consistently delivers Lighthouse scores of 100.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1f7949cb9317eda148db3241fd5b348fefdba8843.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1f7949cb9317eda148db3241fd5b348fefdba8843.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1f7949cb9317eda148db3241fd5b348fefdba8843.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1f7949cb9317eda148db3241fd5b348fefdba8843.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1409">
+          </picture>
+        </p>
+        <p>Next.js faces an inherent challenge: React's client-side JavaScript overhead. While it offers performance strategies like server-side rendering, static generation, and incremental static regeneration to address these limitations, achieving and maintaining high performance requires careful implementation. These solutions add complexity to development and operations, often requiring specialized expertise to optimize effectively.</p>
+        <p>Edge Delivery Services sites achieve perfect Core Web Vitals scores out of the box, while Next.js applications require significant optimization effort to match that performance, with JavaScript overhead as a limiting factor.</p>
+        <p>Edge Delivery Services includes <a href="../../docs/rum/index.html" data-broken-link="true"></a><a href="../../docs/rum/index.html" data-broken-link="true">built-in Real Use Monitoring (RUM)</a> that continuously measures actual user experience. It recognizes that maintaining performance is not just a technical challenge but a cultural commitment requiring continuous attention.</p>
+        <h2 id="content-authoring-experience"><strong>Content Authoring Experience</strong></h2>
+        <p>Edge Delivery Services offers multiple integrated authoring options. Content teams can work in familiar tools like Microsoft Word and Google Docs, use the AEM Universal Editor for WYSIWYG page composition, or leverage the new Document Authoring feature. This flexibility allows organizations to select the authoring approach for their teams while maintaining a consistent delivery pipeline.</p>
+        <p>As a framework rather than a complete platform, Next.js requires teams to implement their own content authoring solution. While this offers flexibility, it means additional integration work and maintenance. For teams using AEM, the AEM Headless CMS provides a natural integration point, though any headless CMS or content source can be integrated.</p>
+        <h2 id="developer-experience"><strong>Developer Experience</strong></h2>
+        <p>Edge Delivery Services embraces a "use what you know" philosophy. Developers use familiar tools: GitHub for version control and fundamental web platform technologies - HTML, CSS, and vanilla JavaScript. This approach prioritizes stability and backwards compatibility, reducing cognitive overhead and allowing teams to concentrate on delivering value rather than managing tooling complexity. However, for teams deeply invested in React development with limited web fundamentals, this could represent a significant mindset shift.</p>
+        <p>Next.js offers a rich but complex development ecosystem that stays close to the cutting edge of frontend tooling. This brings access to the latest React features and build optimizations, but it means dealing with frequent updates and breaking changes. <a href="https://nextjs.org/blog/next-15"></a><a href="https://nextjs.org/blog/next-15">Two</a> <a href="https://nextjs.org/blog/next-14"></a><a href="https://nextjs.org/blog/next-14">major</a> releases with breaking changes between October 2023 and October 2024 evidence this. Teams need to actively maintain their applications to keep pace with the ecosystem's rapid evolution.</p>
+        <h2 id="making-the-choice"><strong>Making the Choice</strong></h2>
+        <p>The choice of technology for a high-impact web experience isn't universal. It depends on your specific use case, team composition, and business objectives.</p>
+        <p>Let’s consider two hypothetical scenarios, each with its own priorities and constraints:</p>
+        <p>Edge Delivery Services is the choice for a public-facing website where SEO, user engagement, and conversion rates are critical - especially in content marketing, brand presence, or e-commerce with session times under 10 minutes. Its performance-first architecture, integrated content authoring, and automatic optimizations support these objectives while reducing operational complexity.</p>
+        <p>For teams deeply invested in the React ecosystem, building internal applications with captive users and secondary performance concerns: Next.js may be the pragmatic choice. Its familiar React patterns and extensive component ecosystem can accelerate development for teams already fluent in this stack, despite additional maintenance overhead and performance trade-offs.</p>
+        <p>Align your platform choice with your objectives. Edge Delivery Services optimizes for speed of delivery, speed of authoring, and speed of development in public-facing web experiences. Next.js optimizes for developer familiarity within the React ecosystem and flexibility in implementation. Choose based on which trade-offs serve your needs.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

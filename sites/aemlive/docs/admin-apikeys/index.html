@@ -1,0 +1,233 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.257Z
+  page:             docs-admin-apikeys
+  pageUrl:          https://www.aem.live/docs/admin-apikeys
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Admin API Keys</title>
+  <meta name="description" content="Learn how to create admin API keys">
+  <meta property="og:title" content="Admin API Keys">
+  <meta property="og:description" content="Learn how to create admin API keys">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/admin-apikeys/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#overview">1. Overview</a></li>
+<li class="l-3"><a href="#how-to-use-api-keys-in-requests-example-using-curl">How to use API keys in requests (example using cURL):</a></li>
+<li class="l-3"><a href="#key-expiration-and-rotation">Key Expiration and Rotation:</a></li>
+<li class="l-3"><a href="#interoperability">Interoperability</a></li>
+<li class="l-3"><a href="#permissions">Permissions</a></li>
+<li class="l-2"><a href="#create">2. Create</a></li>
+<li class="l-2"><a href="#import">3. Import</a></li>
+<li class="l-2"><a href="#list">4. List</a></li>
+<li class="l-2"><a href="#update">5. Update</a></li>
+<li class="l-2"><a href="#delete">6. Delete</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Admin API Keys</h1>
+          <p class="lede">Learn how to create admin API keys</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1440edf7c6f082e7b36d324d1ed8927febc5e8e6e.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1440edf7c6f082e7b36d324d1ed8927febc5e8e6e.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1440edf7c6f082e7b36d324d1ed8927febc5e8e6e.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1440edf7c6f082e7b36d324d1ed8927febc5e8e6e.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>This document outlines the process of generating and managing API keys for the Admin Service API.</p>
+        <h2 id="overview"><strong>1. Overview</strong></h2>
+        <p>API keys are unique identifiers used to authenticate requests to the <a href="../admin.html/index.html" data-broken-link="true">Admin Service API</a>. They function similarly to a password, granting access to your account's resources. When making a request, the API key must be included in the request header.</p>
+        <h3 id="how-to-use-api-keys-in-requests-example-using-curl">How to use API keys in requests (example using cURL):</h3>
+        <p>You should include your API key in the <code>X-Auth-Token</code> or <code>Authorization</code> header of your HTTP requests.</p>
+        <pre><code>curl -si \
+  https://admin.hlx.page/.... \
+  -H 'X-Auth-Token: YOUR_API_KEY_HERE'
+</code></pre>
+        <p>Or</p>
+        <pre><code>curl -si \
+  https://admin.hlx.page/... \
+  -H 'Authorization: token YOUR_API_KEY_HERE'
+</code></pre>
+        <h3 id="key-expiration-and-rotation">Key Expiration and Rotation:</h3>
+        <p>For security best practices, API keys have an expiration period. It is crucial to rotate your API keys regularly to minimize the risk of unauthorized access if a key is compromised. We recommend setting up a process to generate new keys and replace the old ones before their expiration. This can be automated or done manually, depending on your operational needs.</p>
+        <h3 id="interoperability">Interoperability</h3>
+        <p>When you successfully create a new API key or import an existing one, the key is automatically enabled for your Admin Service API. There is no need to manually add the API Key ID to the <code>access.admin.apiKeyId</code> property of the site configuration. Note that both API Key Id sources are respected, the key listed here and in the <code>access.admin.apiKeyId</code> property.</p>
+        <h3 id="permissions">Permissions</h3>
+        <p>In order to create, update or delete the keys, your request needs to be authenticated with an <code>admin</code> role.</p>
+        <h2 id="create"><strong>2. Create</strong></h2>
+        <p>New API keys can be created by sending a <code>POST</code> request to the <strong><a href="../admin.html/index.html#tag/orgConfig/operation/createOrgApiKey" data-broken-link="true">org</a></strong>, <strong><a href="../admin.html/index.html#tag/profileConfig/operation/createProfileApiKey" data-broken-link="true">profile</a></strong> or <strong><a href="../admin.html/index.html#tag/siteConfig/operation/createSiteApiKey" data-broken-link="true">site</a></strong> config of your project.</p>
+        <p><strong>Endpoint:</strong> <code>POST https://admin.hlx.page/config/{org}/sites/{site}/apiKeys.json</code></p>
+        <p><strong>Request Body Example:</strong></p>
+        <pre><code>{
+  "description": "API key for development environment",
+  "roles": ["publish"]
+}
+</code></pre>
+        <p><strong>Response Example (Success):</strong></p>
+        <pre><code>{
+  "id": "newly_generated_key_id",
+  "value": "your_new_api_key_value",
+  "description": "API key for development environment",
+  "created": "2023-10-27T10:00:00Z",
+  "expiration": "2024-10-27T10:00:00Z"
+}
+</code></pre>
+        <p><strong>Note:</strong> The <code>value</code> in the response is the actual API key. Store it securely as it will not be retrievable again through the API.</p>
+        <p><strong>Note:</strong> The API key is <strong>never stored</strong> in our system and can not be retrieved at a later time.</p>
+        <h2 id="import"><strong>3. Import</strong></h2>
+        <p>Existing API keys can be imported using the same <code>/apiKeys.json</code> endpoint as above, but by including a <code>jwt</code> payload property in the request body. This method is typically used for migrating existing keys.</p>
+        <p><strong>Endpoint:</strong> <code>POST https://admin.hlx.page/config/{org}/sites/{site}/apiKeys.json</code></p>
+        <p><strong>Request Body Example:</strong></p>
+        <pre><code>{
+  "description": "Imported API key for legacy system",
+  "jwt": "YOUR_JWT_PAYLOAD_CONTAINING_KEY_INFO"
+}
+</code></pre>
+        <p><strong>Note:</strong> The API key is <strong>never stored</strong> in our system and can not be retrieved at a later time.</p>
+        <h2 id="list"><strong>4. List</strong></h2>
+        <p>You can retrieve a list of all existing API keys by sending a <code>GET</code> request to the <strong><a href="../admin.html/index.html#tag/orgConfig/operation/listOrgApiKeys" data-broken-link="true">org</a></strong>, <strong><a href="../admin.html/index.html#tag/profileConfig/operation/listProfileApiKeys" data-broken-link="true">profile</a></strong> or <strong><a href="../admin.html/index.html#tag/siteConfig/operation/listSiteApiKeys" data-broken-link="true">site</a></strong> config of your project.</p>
+        <p><strong>Endpoint:</strong> <code>GET https://admin.hlx.page/config/{org}/sites/{site}/apiKeys.json</code></p>
+        <p>R <strong>esponse Example:</strong></p>
+        <pre><code>{
+  "key_id_1": {
+    "id": "key_id_1",
+    "description": "API key for production service",
+    "created": "2023-01-15T09:30:00Z",
+    "expiration": "2024-01-15T09:30:00Z"
+  },
+  "key_id_2": {
+    "id": "key_id_2",
+    "description": "API key for internal tooling",
+    "created": "2023-03-20T14:00:00Z",
+    "expiration": "2024-03-20T14:00:00Z"
+  },
+  "key_id_3": {
+    "id": "key_id_3",
+    "description": "API key for development environment",
+    "created": "2023-10-27T10:00:00Z",
+    "expiration": "2024-10-27T10:00:00Z"
+  }
+]
+</code></pre>
+        <p><strong>Note:</strong> For security reasons, the actual API key (<code>value</code> property) is <strong>not</strong> returned when listing keys. Only metadata about the keys is provided.</p>
+        <h2 id="update"><strong>5. Update</strong></h2>
+        <p>To update the <code>description</code> of an existing API key, send a <code>POST</code> request to the respective config entry.</p>
+        <p><strong>Endpoint:</strong> <code>POST https://admin.hlx.page/config/{org}/sites/{site}/apiKeys/{id}.json</code></p>
+        <p><strong>Request Body Example:</strong></p>
+        <pre><code>{
+  "description": "Updated description for production API key"
+}
+</code></pre>
+        <p><strong>Response Example (Success):</strong></p>
+        <p>JSON</p>
+        <pre><code>
+{
+  "id": "existing_key_id",
+  "description": "Updated description for production API key",
+  "created": "2023-10-27T10:00:00Z",
+  "expiration": "2024-10-27T10:00:00Z"
+}
+</code></pre>
+        <h2 id="delete"><strong>6. Delete</strong></h2>
+        <p>To delete an API key, send a <code>DELETE</code> request to the request to the respective config entry.</p>
+        <p><strong>Endpoint:</strong> <code>DELETE https://admin.hlx.page/config/{org}/sites/{site}/apiKeys/{id}.json</code></p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

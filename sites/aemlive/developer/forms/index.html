@@ -1,0 +1,357 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.952Z
+  page:             developer-forms
+  pageUrl:          https://www.aem.live/developer/forms
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Forms</title>
+  <meta name="description" content="Edge Delivery Services for AEM Forms allows you to update, publish, and launch new forms rapidly. These forms are easy to author and develop. You ...">
+  <meta property="og:title" content="Forms">
+  <meta property="og:description" content="Edge Delivery Services for AEM Forms allows you to update, publish, and launch new forms rapidly. These forms are easy to author and develop. You ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/forms/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#key-features-of-document-based-authoring-and-wysiwyg-authoring">Key Features of Document-based Authoring and WYSIWYG Authoring</a></li>
+<li class="l-2"><a href="#get-started">Get Started</a></li>
+<li class="l-3"><a href="#create-or-configure-your-aem-edge-delivery-services-github-project">Create or configure your AEM Edge Delivery Services Github Project</a></li>
+<li class="l-3"><a href="#create-a-form-and-add-it-to-your-aem-edge-delivery-services-page">Create a form and add it to your AEM Edge Delivery Services page</a></li>
+<li class="l-3"><a href="#custom-headers">Custom Headers</a></li>
+<li class="l-3"><a href="#indexing">Indexing</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Forms</h1>
+          <p class="lede">Edge Delivery Services for AEM Forms allows you to update, publish, and launch new forms rapidly. These forms are easy to author and develop. You ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_11ab97601e91b12d6da7e6f92c0236759f761aad5.jpg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_11ab97601e91b12d6da7e6f92c0236759f761aad5.jpg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="./media_11ab97601e91b12d6da7e6f92c0236759f761aad5.jpg?width=2000&amp;format=jpg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_11ab97601e91b12d6da7e6f92c0236759f761aad5.jpg?width=750&amp;format=jpg&amp;optimize=medium" width="1103" height="828">
+          </picture>
+        </p>
+        
+        <p>Edge Delivery Services for AEM Forms allows you to update, publish, and launch new forms rapidly. These forms are easy to author and develop. You can</p>
+        <ul>
+          <li><strong>Create forms with tools of your choice:</strong> You can use Document-based Authoring (Microsoft SharePoint or Google Drive with Microsoft Excel or Google Sheets) or WYSIWYG Authoring (Universal Editor) to create forms.</li>
+          <li><strong>Create forms optimized for speed, performance, and higher conversions:</strong> Deliver forms experiences that load and render quickly and continuously monitor your forms performance through Operational Telemetry.</li>
+          <li><strong>Use developer friendly toolset:</strong> Edge Delivery Services for AEM Forms uses plain HTML, modern CSS, and vanilla JavaScript to create exceptional forms experiences. A developer with basic web development skills can customize and easily build form components and forms experiences. There is no need to wait for a pipeline to run, just check-in your code into GitHub and your changes are live.</li>
+          <li><strong>Use Forms Submission Service:</strong> The Forms Submission Service lets you save form submissions directly to spreadsheets like OneDrive, SharePoint, or Google Sheets, even if the spreadsheet isn’t managed by Edge Delivery Services.</li>
+        </ul>
+        <p><strong>Note:</strong> To use Edge Delivery Services for AEM Forms, a valid AEM Forms license is required. Refer to the <a href="https://helpx.adobe.com/in/legal/product-descriptions/aem-cloud-service.html">Product Description</a> for licensing details.</p>
+        <h3 id="key-features-of-document-based-authoring-and-wysiwyg-authoring"><strong>Key Features of Document-based Authoring and WYSIWYG Authoring</strong></h3>
+        <p>The choice between Document-based Authoring and WYSIWYG Authoring depends on your needs: Use <a href="#">Document-based Authoring</a> for simple, spreadsheet-like forms with basic fields and quick data connectivity, while <a href="#">WYSIWYG Authoring</a> is ideal for complex forms requiring multiple panels, business logic, data integration, and AEM Workflows.</p>
+        <div class="table">
+          <div>
+            <div><strong>Features</strong></div>
+            <div></div>
+            <div><strong>Document-based Authoring</strong></div>
+            <div><strong>WYSIWYG Authoring</strong></div>
+          </div>
+          <div>
+            <div>Accessible components for a user-friendly experience.</div>
+            <div></div>
+            <div>Y</div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Standardized HTML structure for consistent rendering</div>
+            <div>Y</div>
+            <div>Y</div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Rules and validations to ensure data accuracy</div>
+            <div></div>
+            <div>Y</div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>File attachment options for collecting additional information</div>
+            <div></div>
+            <div>Y</div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Ability to create custom form components for specific needs</div>
+            <div></div>
+            <div>Y</div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Submit form data directly to Microsoft Excel or Google Sheets or email addresses</div>
+            <div></div>
+            <div>Y</div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Monitor your forms performance through Operational Telemetry</div>
+            <div></div>
+            <div>Y</div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Advanced rules editor for creating complex logic</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Client-side extensibility for custom functionalities.</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>WYSIWYG editing experience for easy form creation and visualization.</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Document of record functionality to create tamper-proof archives of submitted data</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Google reCAPTCHA integration for spam protection.</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Integration with Adobe Workfront Fusion to trigger Adobe Workfront Fusion scenarios upon form submission.</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Integration with various data sources for pre-populating forms and submitting data</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Form Data Model (FDM) for defining data structure and interactions with various data sources.</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Custom Submit Action for handling form submissions</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Submit to Microsoft SharePoint</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Submit to Microsoft OneDrive</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Submit to Azure Blob Storage</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Submit to REST endpoint</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Invoke an AEM Workflow</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Invoke a Power Automate flow</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Submit to Marketo Engage</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Submit to Adobe Experience Platform (AEP)</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Submit to Spreadsheet</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Submit using Form Data Model (FDM)</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Connect to Salesforce application</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+          <div>
+            <div>Connect to Microsoft Dynamics OData</div>
+            <div></div>
+            <div></div>
+            <div>Y</div>
+          </div>
+        </div>
+        <p>In essence, <a href="#">WYSIWYG Authoring</a> builds upon the foundation of <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/build-forms/getting-started-edge-delivery-services-forms/create-forms">Document-based Authoring</a>, providing a more advanced toolkit for creating and managing complex forms.</p>
+        <h2 id="get-started">Get Started</h2>
+        <p>Edge Delivery Services for AEM Forms provides Adaptive Forms Block to allow you to create and render forms. You can style various components of the form as per your requirements.</p>
+        <h3 id="create-or-configure-your-aem-edge-delivery-services-github-project">Create or configure your AEM Edge Delivery Services Github Project</h3>
+        <ul>
+          <li>If you have an existing AEM Edge Delivery Services Github Project, you can <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/build-forms/getting-started-edge-delivery-services-forms/tutorial#add-adaptive-forms-block-to-your-existing-aem-project">integrate the Adaptive Forms Block into your current project</a> to get started on form creation.</li>
+          <li>If you don’t have an existing AEM Edge Delivery Services Github Project, <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/build-forms/getting-started-edge-delivery-services-forms/tutorial#create-a-new-aem-project-pre-configured-with-adaptive-forms-block">create a new AEM project pre-configured with Adaptive Forms Block</a>.</li>
+        </ul>
+        <h3 id="create-a-form-and-add-it-to-your-aem-edge-delivery-services-page">Create a form and add it to your AEM Edge Delivery Services page</h3>
+        <p><strong>WYSIWYG authoring:</strong></p>
+        <ul>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/build-forms/universal-editor/getting-started-universal-editor">Create a form using Universal Editor</a></li>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/build-forms/universal-editor/rule-editor-universal-editor">Add Dynamic Behavior to Forms</a></li>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/build-forms/universal-editor/submit-action">Configure and Customize Form Submit Actions</a></li>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/build-forms/universal-editor/publish-forms">Publish and Deploy Forms</a></li>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/build-forms/universal-editor/style-theme-forms">Styling and Theming Guide</a></li>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/build-forms/universal-editor/recaptcha-forms">Protect Your Forms from Spam: Adding reCAPTCHA Security</a></li>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/build-forms/universal-editor/create-custom-component">Build Custom Form Components</a></li>
+        </ul>
+        <p><strong>Document-based authoring:</strong></p>
+        <ul>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/build-forms/getting-started-edge-delivery-services-forms/create-forms">Create a form using Google Sheets or Microsoft Excel</a></li>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/build-forms/getting-started-edge-delivery-services-forms/submit-forms">Set up your Google Sheets or Microsoft Excel files to start accepting data​</a></li>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/build-forms/getting-started-edge-delivery-services-forms/publish-forms">Publish your form and start collecting data</a></li>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/build-forms/getting-started-edge-delivery-services-forms/style-theme-forms">Customize the look of your forms​</a></li>
+        </ul>
+        <p>For more details about Adaptive Forms Block, check out <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/build-forms/forms-references/form-components">AEM Forms Edge Delivery Services documentation</a>.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="custom-headers"><a href="../../docs/custom-headers/index.html">Custom Headers</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="indexing"><a href="../indexing/index.html">Indexing</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

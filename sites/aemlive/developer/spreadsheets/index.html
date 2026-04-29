@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.959Z
+  page:             developer-spreadsheets
+  pageUrl:          https://www.aem.live/developer/spreadsheets
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Spreadsheets and JSON</title>
+  <meta name="description" content="In addition to translating Google Docs and Word documents into markdown and HTML markup, AEM also translates spreadsheets (Microsoft Excel workbooks and Google Sheets) into ...">
+  <meta property="og:title" content="Spreadsheets and JSON">
+  <meta property="og:description" content="In addition to translating Google Docs and Word documents into markdown and HTML markup, AEM also translates spreadsheets (Microsoft Excel workbooks and Google Sheets) into ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/spreadsheets/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#sheets-and-sheet-structure">Sheets and Sheet structure</a></li>
+<li class="l-2"><a href="#multi-sheet-format">Multi-Sheet Format</a></li>
+<li class="l-2"><a href="#query-parameters">Query Parameters</a></li>
+<li class="l-3"><a href="#offset-and-limit">Offset and Limit</a></li>
+<li class="l-3"><a href="#sheet">Sheet</a></li>
+<li class="l-2"><a href="#special-sheet-names">Special Sheet Names</a></li>
+<li class="l-2"><a href="#arrays">Arrays</a></li>
+<li class="l-3"><a href="#markup---sections">Markup - Sections</a></li>
+<li class="l-3"><a href="#publish">Publish</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Spreadsheets and JSON</h1>
+          <p class="lede">In addition to translating Google Docs and Word documents into markdown and HTML markup, AEM also translates spreadsheets (Microsoft Excel workbooks and Google Sheets) into ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_10a516dc1e3a4c9b42aacb149e1bf202ea3e93b8c.jpeg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_10a516dc1e3a4c9b42aacb149e1bf202ea3e93b8c.jpeg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="./media_10a516dc1e3a4c9b42aacb149e1bf202ea3e93b8c.jpeg?width=2000&amp;format=jpeg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_10a516dc1e3a4c9b42aacb149e1bf202ea3e93b8c.jpeg?width=750&amp;format=jpeg&amp;optimize=medium" width="1103" height="827">
+          </picture>
+        </p>
+        
+        <p>In addition to translating Google Docs and Word documents into markdown and HTML markup, AEM also translates spreadsheets (Microsoft Excel workbooks and Google Sheets) into JSON files that can easily be consumed by your website or web application.</p>
+        <p>This enables many uses for content that is table-oriented or structured.</p>
+        <h2 id="sheets-and-sheet-structure">Sheets and Sheet structure</h2>
+        <p>The simplest example of a sheet consists of a table that uses the first row as column names and the subsequent rows as data. An example might look something like this.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1a0aa697c252fdd6e810b0c4fa8263d8243939426.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1a0aa697c252fdd6e810b0c4fa8263d8243939426.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1a0aa697c252fdd6e810b0c4fa8263d8243939426.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1a0aa697c252fdd6e810b0c4fa8263d8243939426.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="361">
+          </picture>
+        </p>
+        <p>After a preview and publish via the <a href="https://www.hlx.live/docs/sidekick">sidekick</a>, AEM translates this table to a JSON representation which is served to requests to the corresponding <code>.json</code> resource. The above example gets translated to:</p>
+        <pre><code>{
+  "total": 4,
+  "offset": 0,
+  "limit": 4,
+  "columns": ["Source", "Destination"],
+  "data": [
+    {
+      "Source": "/sidekick-extension",
+      "Destination": "https://chromewebstore.google.com/detail/aem-sidekick/igkmdomcgoebiipaifhmpfjhbjccggml"
+    },
+    {
+      "Source": "/github-bot",
+      "Destination": "https://github.com/apps/helix-bot"
+    },
+    {
+      "Source": "/install-github-bot",
+      "Destination": "https://github.com/apps/helix-bot/installations/new"
+    },
+    {
+      "Source": "/tutorial",
+      "Destination": "/developer/tutorial"
+    }
+  ],
+  ":type": "sheet"
+}
+</code></pre>
+        <p>AEM allows you to manage workbooks with multiple sheets.</p>
+        <ul>
+          <li><strong>If there is only one sheet,</strong> AEM will by default use that sheet as the source of the information.</li>
+          <li><strong>If there are multiple sheets,</strong> AEM will deliver sheets that have names prefixed with <code>shared-</code>. This lets you keep sheets in the same workbook that will not be exposed.</li>
+          <li><strong>If there is a sheet named</strong> <code>shared-default</code>, AEM will deliver it as a single sheet, unless there is a <a href="#sheet">query parameter</a> pointing to a different sheet.</li>
+          <li><strong>If there are multiple sheets with</strong> <code>shared-</code> <strong>prefix</strong>, AEM will deliver them in multi-sheet format. See <a href="#multi-sheet-format">below</a> for an example.</li>
+        </ul>
+        <p><strong>Note</strong>: the <code>helix-</code> prefix is deprecated and the more neutral <code>shared-</code> prefix should be used.</p>
+        <p>See the <a href="#query-parameters">query parameter section</a> for details on how to query a specific sheet.</p>
+        <h2 id="multi-sheet-format">Multi-Sheet Format</h2>
+        <p>If there are multiple sheets with <code>shared-</code> prefix, AEM will deliver them in multi-sheet format. Here's an example of a payload with 2 sheets:</p>
+        <pre><code>{
+  ":names": [
+    "first",
+    "second"
+  ],
+  ":type": "multi-sheet",
+  ":version": 3,
+  "first": {
+    "total": 0,
+    "offset": 0,
+    "limit": 0,
+    "data": [],
+    "columns": []
+  },
+  "second": {
+    "total": 0,
+    "offset": 0,
+    "limit": 0,
+    "data": [],
+    "columns": []
+  }
+}
+</code></pre>
+        <ul>
+          <li>The <code>:names</code> property contains an array with all the names of the contained sheets.</li>
+          <li>For each sheet name in <code>:names</code> there is a property in the payload. The value is the corresponding sheet data in <a href="#sheets-and-sheet-structure">single sheet</a> format.</li>
+        </ul>
+        <h2 id="query-parameters">Query Parameters</h2>
+        <h3 id="offset-and-limit">Offset and Limit</h3>
+        <p>Spreadsheets and JSON files can get very large. In such cases, AEM supports the use of <code>limit</code> and <code>offset</code> query parameters to indicate which rows of the spreadsheet are delivered. In case of a <a href="#multi-sheet-format">multi-sheet</a>, offset and limit are applied to all sheets in the payload.</p>
+        <p>As AEM always compresses the JSON, payloads are generally relatively small. Therefore by default AEM limits the number of rows it returns to 1000 if the <code>limit</code> query parameter is not specified. This is sufficient for many simple cases.</p>
+        <h3 id="sheet">Sheet</h3>
+        <p>The <code>sheet</code> query parameter allows an application to specify one or multiple specific sheets in the spreadsheet or workbook. As an example <code>?sheet=jobs</code> will return the sheet named <code>shared-jobs</code> and <code>?sheet=jobs&amp;sheet=articles</code> will return the data for the sheets named <code>shared-jobs</code> and <code>shared-articles</code>.</p>
+        <h2 id="special-sheet-names">Special Sheet Names</h2>
+        <p>In certain use cases, AEM also writes to spreadsheets, where it expects specific sheet names:</p>
+        <ul>
+          <li><a href="../indexing/index.html">The indexing service</a> only writes to a sheet named <code>raw_index</code>, which may be delivered via JSON in a single sheet setup.</li>
+        </ul>
+        <h2 id="arrays">Arrays</h2>
+        <p>Native arrays are not supported as cell values, so they are delivered as strings.</p>
+        <p><code>"tags": "[\"Adobe Life\",\"Responsibility\",\"Diversity &amp; Inclusion\"]"</code></p>
+        <p>You can turn them back into arrays in JavaScript using <code>JSON.parse()</code>.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="markup---sections"><a href="../markup-sections-blocks/index.html">Markup - Sections</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="publish"><a href="../../docs/index.html#publish">Publish</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

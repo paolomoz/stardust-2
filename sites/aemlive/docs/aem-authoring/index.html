@@ -1,0 +1,349 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.198Z
+  page:             docs-aem-authoring
+  pageUrl:          https://www.aem.live/docs/aem-authoring
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Authoring with AEM Sites for Edge Delivery Services</title>
+  <meta name="description" content="Authoring and persisting content in AEM as a Cloud Service using the Universal Editor, you benefit from the power of AEM’s robust tool set for ...">
+  <meta property="og:title" content="Authoring with AEM Sites for Edge Delivery Services">
+  <meta property="og:description" content="Authoring and persisting content in AEM as a Cloud Service using the Universal Editor, you benefit from the power of AEM’s robust tool set for ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/aem-authoring/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#authoring-workflow">Authoring Workflow</a></li>
+<li class="l-2"><a href="#page-structure">Page Structure</a></li>
+<li class="l-2"><a href="#first-steps">First Steps</a></li>
+<li class="l-3"><a href="#getting-started--universal-editor-developer-tutorial">Getting Started – Universal Editor Developer Tutorial</a></li>
+<li class="l-3"><a href="#creating-blocks-for-use-with-the-universal-editor">Creating Blocks for use with the Universal Editor</a></li>
+<li class="l-3"><a href="#path-mapping">Path mapping</a></li>
+<li class="l-3"><a href="#managing-tabular-data">Managing tabular data</a></li>
+<li class="l-3"><a href="#publishing-pages-with-aem-assets">Publishing pages with AEM Assets</a></li>
+<li class="l-2"><a href="#advanced-usage">Advanced Usage</a></li>
+<li class="l-3"><a href="#managing-taxonomy-data">Managing taxonomy data</a></li>
+<li class="l-3"><a href="#reusing-code-across-sites">Reusing code across sites</a></li>
+<li class="l-3"><a href="#multi-site-management">Multi site management</a></li>
+<li class="l-3"><a href="#repoless-stage-and-prod-environments">Repoless stage and prod environments</a></li>
+<li class="l-3"><a href="#configuration-templates">Configuration templates</a></li>
+<li class="l-3"><a href="#content-fragments-from-other-aem-instances">Content Fragments from other AEM instances</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Authoring with AEM Sites for Edge Delivery Services</h1>
+          <p class="lede">Authoring and persisting content in AEM as a Cloud Service using the Universal Editor, you benefit from the power of AEM’s robust tool set for ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1b57584b3464df56562d358f127780590772dead0.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1b57584b3464df56562d358f127780590772dead0.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1b57584b3464df56562d358f127780590772dead0.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1b57584b3464df56562d358f127780590772dead0.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Authoring and persisting content in AEM as a Cloud Service using the Universal Editor, you benefit from the power of AEM’s robust tool set for managing your content such as multi-site, management, localization workflows, and launches, while at the same time your pages are delivered with unparalleled performance by Edge Delivery Services.</p>
+        <h2 id="authoring-workflow">Authoring Workflow</h2>
+        <p>When using AEM as a Cloud Service for managing your content, the Universal Editor and Edge Delivery Services work together for a seamless authoring experience.</p>
+        <p><a href="../aem-authoring.svg/index.html" data-broken-link="true">https://www.aem.live/docs/aem-authoring.svg</a></p>
+        <ol>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/sites/authoring/quick-start">The AEM Sites console</a> is used for content management such as creating new pages, Experience Fragments, Content Fragments, etc.
+            <ul>
+              <li>All features of AEM are available such as workflows, MSM, translation, Launches, etc.</li>
+            </ul>
+          </li>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/sites/authoring/universal-editor/authoring">The Universal Editor</a> is used to author the content managed in AEM.
+            <ul>
+              <li>The Universal Editor offers a new and modern UI for content authoring.</li>
+              <li>AEM renders the HTML but includes the scripts, styles, icons and other resources from Edge Delivery Services.</li>
+              <li>All changes are persisted to AEM as a Cloud Service.</li>
+            </ul>
+          </li>
+          <li>Content that you author with the Universal Editor and persist to AEM is published to Edge Delivery Services.
+            <ul>
+              <li>AEM renders semantic HTML that is needed for ingestion by Edge Delivery Services.</li>
+              <li>Content is published to Edge Delivery Services.</li>
+            </ul>
+          </li>
+          <li><a href="../../developer/keeping-it-100/index.html">Edge Delivery Services</a> ensure a 100% core web vitals score.</li>
+        </ol>
+        <h2 id="page-structure">Page Structure</h2>
+        <p>When authoring content using AEM and the Universal Editor, the same concepts of page blocks and sections used when authoring document-based content are used to structure your pages.</p>
+        <p>Blocks are fundamental components of a page delivered by Edge Delivery Services. Authors can choose from default blocks provided as standard by Adobe or from blocks customized for your project by your developers.</p>
+        <p>The Universal Editor provides a modern and intuitive GUI for authoring your content by adding and arranging blocks, which the Universal Editor refers to as components.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1a834d988a5ed8ab51b994f784f4709b5a86c6f53.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1a834d988a5ed8ab51b994f784f4709b5a86c6f53.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1a834d988a5ed8ab51b994f784f4709b5a86c6f53.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1a834d988a5ed8ab51b994f784f4709b5a86c6f53.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <p>Details of the components can then be configured in the <strong>Properties</strong> panel.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1a9fcdc8eb5bb4bbb908febf51c7e879eefc01bbf.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1a9fcdc8eb5bb4bbb908febf51c7e879eefc01bbf.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1a9fcdc8eb5bb4bbb908febf51c7e879eefc01bbf.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1a9fcdc8eb5bb4bbb908febf51c7e879eefc01bbf.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <h2 id="first-steps">First Steps</h2>
+        <p>If you wish to get started authoring content using AEM and the Universal Editor with Edge Delivery Services, please see the following documents.</p>
+        <div class="card-list image-card-listing">
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1d00989ba18e942fbddc9bb108add01e153029f22.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1d00989ba18e942fbddc9bb108add01e153029f22.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1d00989ba18e942fbddc9bb108add01e153029f22.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1d00989ba18e942fbddc9bb108add01e153029f22.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="getting-started--universal-editor-developer-tutorial"><a href="../../developer/ue-tutorial/index.html">Getting Started – Universal Editor Developer Tutorial</a></h3>
+              <p>Get you up-and-running with a new project using the Universal Editor and AEM for authoring.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_16452698b3eab5476eb5ac38bcfd3fd4a63756af6.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_16452698b3eab5476eb5ac38bcfd3fd4a63756af6.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_16452698b3eab5476eb5ac38bcfd3fd4a63756af6.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_16452698b3eab5476eb5ac38bcfd3fd4a63756af6.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="creating-blocks-for-use-with-the-universal-editor"><a href="../../developer/universal-editor-blocks/index.html">Creating Blocks for use with the Universal Editor</a></h3>
+              <p>Learn how to create blocks instrumented for the Universal Editor including definitions, block decoration, and styles.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_152a6907988019c7269a93117139036b43f773054.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_152a6907988019c7269a93117139036b43f773054.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_152a6907988019c7269a93117139036b43f773054.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_152a6907988019c7269a93117139036b43f773054.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="path-mapping"><a href="../../developer/authoring-path-mapping/index.html">Path mapping</a></h3>
+              <p>To use AEM authoring as your content source, you need to set up your project’s path mapping.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_11b9214509f21647767e9965fe77c43e7e9a3478d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_11b9214509f21647767e9965fe77c43e7e9a3478d.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_11b9214509f21647767e9965fe77c43e7e9a3478d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_11b9214509f21647767e9965fe77c43e7e9a3478d.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="managing-tabular-data"><a href="../authoring-tabular-data/index.html">Managing tabular data</a></h3>
+              <p>Manage tabular data using an intuitive tool: the spreadsheet.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_19e56fa359f4dd1c50c997299519eaeb754fe3645.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_19e56fa359f4dd1c50c997299519eaeb754fe3645.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_19e56fa359f4dd1c50c997299519eaeb754fe3645.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_19e56fa359f4dd1c50c997299519eaeb754fe3645.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="publishing-pages-with-aem-assets"><a href="../universal-editor-assets/index.html">Publishing pages with AEM Assets</a></h3>
+              <p>Publish assets from AEM Assets along with content you edit in AEM to Edge Delivery Services.</p>
+            </div>
+          </div>
+        </div>
+        <h2 id="advanced-usage">Advanced Usage</h2>
+        <p>Depending on your project needs, you might like to investigate some more advanced features.</p>
+        <div class="card-list image-card-listing">
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_129b5b9425c45217950e8b0caa67bf1cb1b2d241f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_129b5b9425c45217950e8b0caa67bf1cb1b2d241f.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_129b5b9425c45217950e8b0caa67bf1cb1b2d241f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_129b5b9425c45217950e8b0caa67bf1cb1b2d241f.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="managing-taxonomy-data"><a href="../authoring-taxonomy/index.html">Managing taxonomy data</a></h3>
+              <p>AEM allows you to create a rich taxonomy of tags to organize your pages.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1bb754ba4f66c9259ee3ad879b788c31e48609984.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1bb754ba4f66c9259ee3ad879b788c31e48609984.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1bb754ba4f66c9259ee3ad879b788c31e48609984.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1bb754ba4f66c9259ee3ad879b788c31e48609984.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="reusing-code-across-sites"><a href="../../developer/repoless-authoring/index.html">Reusing code across sites</a></h3>
+              <p>If you have many similar sites that mostly look and behave the same, but have different content, you may want to share code across multiple sites.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1d1908452b63ceba075d440ca33359295be93b76b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1d1908452b63ceba075d440ca33359295be93b76b.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1d1908452b63ceba075d440ca33359295be93b76b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1d1908452b63ceba075d440ca33359295be93b76b.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="multi-site-management"><a href="../../developer/repoless-multisite-manager/index.html">Multi site management</a></h3>
+              <p>You can use multi site management to create an entire content structure for your brand across locales and languages, authoring the content centrally.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1c1b568b1ec7baf46317e69d8861339fb4f8c3879.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1c1b568b1ec7baf46317e69d8861339fb4f8c3879.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1c1b568b1ec7baf46317e69d8861339fb4f8c3879.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1c1b568b1ec7baf46317e69d8861339fb4f8c3879.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="repoless-stage-and-prod-environments"><a href="../../developer/repoless-environments/index.html">Repoless stage and prod environments</a></h3>
+              <p>Learn how to set up a site for your production environment separate from your staging environment.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1e85aed06630489b93102500099a073c2d15f9a46.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1e85aed06630489b93102500099a073c2d15f9a46.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1e85aed06630489b93102500099a073c2d15f9a46.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1e85aed06630489b93102500099a073c2d15f9a46.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="configuration-templates"><a href="../configuration-templates/index.html">Configuration templates</a></h3>
+              <p>Learn how to use the Sites console to easily create and manage your project configuration by using a configuration template.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1ddce71081c078ab6cb63a557795952f4350be777.jpg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1ddce71081c078ab6cb63a557795952f4350be777.jpg?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/jpeg" srcset="./media_1ddce71081c078ab6cb63a557795952f4350be777.jpg?width=2000&amp;format=jpg&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1ddce71081c078ab6cb63a557795952f4350be777.jpg?width=750&amp;format=jpg&amp;optimize=medium" width="750" height="562">
+              </picture>
+            </div>
+            <div>
+              <h3 id="content-fragments-from-other-aem-instances"><a href="../../developer/content-fragment-overlay/index.html">Content Fragments from other AEM instances</a></h3>
+              <p>Content Fragments from AEM instances without Edge Delivery Services can be integrated into Edge Delivery Services using this Early Access technology.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

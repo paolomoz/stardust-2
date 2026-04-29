@@ -1,0 +1,341 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.226Z
+  page:             docs-authoring-tabular-data
+  pageUrl:          https://www.aem.live/docs/authoring-tabular-data
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Managing tabular data with AEM authoring as your content source</title>
+  <meta name="description" content="For any AEM with Edge Delivery Services site, there is a need to maintain lists of tabular data such as for key-value mappings. These can ...">
+  <meta property="og:title" content="Managing tabular data with AEM authoring as your content source">
+  <meta property="og:description" content="For any AEM with Edge Delivery Services site, there is a need to maintain lists of tabular data such as for key-value mappings. These can ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/authoring-tabular-data/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#creating-a-spreadsheet">Creating a spreadsheet</a></li>
+<li class="l-2"><a href="#importing-spreadsheet-data">Importing spreadsheet data</a></li>
+<li class="l-2"><a href="#other-spreadsheet-types">Other spreadsheet types</a></li>
+<li class="l-2"><a href="#creating-your-own-spreadsheet">Creating your own spreadsheet</a></li>
+<li class="l-2"><a href="#publishing-a-spreadsheet-pathsjson-optional">Publishing a spreadsheet paths.json (optional)</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Managing tabular data with AEM authoring as your content source</h1>
+          <p class="lede">For any AEM with Edge Delivery Services site, there is a need to maintain lists of tabular data such as for key-value mappings. These can ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_11b9214509f21647767e9965fe77c43e7e9a3478d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_11b9214509f21647767e9965fe77c43e7e9a3478d.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_11b9214509f21647767e9965fe77c43e7e9a3478d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_11b9214509f21647767e9965fe77c43e7e9a3478d.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>For any AEM with Edge Delivery Services site, there is a need to maintain lists of tabular data such as for key-value mappings. These can be lists of many different values such as metadata and redirects. Edge Deliver Services allows you to maintain such tabular lists using an intuitive tool: the spreadsheet. AEM translates these spreadsheets into JSON files that can easily be consumed by your website or web application.</p>
+        <p>Common use cases include:</p>
+        <ul>
+          <li><a href="../placeholders/index.html">Placeholders</a></li>
+          <li><a href="../bulk-metadata/index.html">Metadata</a></li>
+          <li><a href="../custom-headers/index.html">Headers</a></li>
+          <li><a href="../redirects/index.html">Redirects</a></li>
+          <li><a href="../configuration-templates/index.html">Configurations</a> such as for <a href="../setup-byo-cdn-push-invalidation/index.html">CDN setups</a></li>
+        </ul>
+        <p>In addition, you can <a href="index.html#creating-your-own-spreadsheet">create your spreadsheets of any structure</a> to store mappings for your own purposes.</p>
+        <p>This document uses the example of redirects to illustrate how to create such spreadsheets. See the previously-linked topics in the Edge Delivery Services documentation for details of each use case.</p>
+        <p><strong>TIP</strong>: For more information on how spreadsheets in general work with Edge Delivery Services, please see the document <a href="../../developer/spreadsheets/index.html">Spreadsheets and JSON</a>.</p>
+        <p><strong>TIP</strong>: Spreadsheets should only be used to maintain tabular data. For storing structured data, <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/headless/introduction">check out AEM’s headless features.</a></p>
+        <h2 id="creating-a-spreadsheet">Creating a spreadsheet</h2>
+        <p>In this example, you will create a spreadsheet to manage redirects for your project with AEM authoring as your content source. The same steps apply to other spreadsheet types that you wish to create.</p>
+        <ol>
+          <li>Sign in to your AEM as a Cloud Service authoring instance, go to the <strong>Sites</strong> console, and navigate to the root of the site which requires a spreadsheet. Tap or click <strong>Create</strong> → <strong>Page</strong>.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_185a90a9227213ad5ff8514127b1165d9bc52e83f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_185a90a9227213ad5ff8514127b1165d9bc52e83f.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_185a90a9227213ad5ff8514127b1165d9bc52e83f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_185a90a9227213ad5ff8514127b1165d9bc52e83f.png?width=750&amp;format=png&amp;optimize=medium" width="1134" height="753">
+          </picture>
+        </p>
+        <ol start="2">
+          <li>On the <strong>Template</strong> tab of the create page wizard, tap or click the <strong>Redirects</strong> template to select it and then tap or click <strong>Next</strong>.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_101882d45b326ac7688a1b2b52afdedd4a5b70e32.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_101882d45b326ac7688a1b2b52afdedd4a5b70e32.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_101882d45b326ac7688a1b2b52afdedd4a5b70e32.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_101882d45b326ac7688a1b2b52afdedd4a5b70e32.png?width=750&amp;format=png&amp;optimize=medium" width="1134" height="753">
+          </picture>
+        </p>
+        <ol start="3">
+          <li>The <strong>Properties</strong> tab of the wizard presents the default values for the redirects spreadsheet. Tap or click <strong>Create</strong>.
+            <ul>
+              <li><strong>Title</strong> - Leave this value as-is.</li>
+              <li><strong>Columns</strong> - The minimum columns needed for redirects are prepopulated.
+                <ul>
+                  <li><strong>source</strong> - The page to be redirected</li>
+                  <li><strong>destination</strong> - The page to redirect to</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1bc0d4fe69b2266cca5e950f3cf264d454374c29c.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1bc0d4fe69b2266cca5e950f3cf264d454374c29c.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1bc0d4fe69b2266cca5e950f3cf264d454374c29c.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1bc0d4fe69b2266cca5e950f3cf264d454374c29c.png?width=750&amp;format=png&amp;optimize=medium" width="1134" height="753">
+          </picture>
+        </p>
+        <ol start="4">
+          <li>In the <strong>Success</strong> dialog, tap or click <strong>Open</strong>.</li>
+          <li>A new tab opens with the spreadsheet loaded into an editor with the predefined <strong>source</strong> and destination <strong>columns</strong>. To define your redirects, tap or click the empty row of the <strong>source</strong> column. Changes are saved automatically as you edit the spreadsheet.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1ac01f95397a8d68826effa19cdd1cd5d77441059.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1ac01f95397a8d68826effa19cdd1cd5d77441059.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1ac01f95397a8d68826effa19cdd1cd5d77441059.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1ac01f95397a8d68826effa19cdd1cd5d77441059.png?width=750&amp;format=png&amp;optimize=medium" width="1134" height="753">
+          </picture>
+        </p>
+        <ul>
+          <li>The <strong>source</strong> is relative to the domain of your website, so it only contains the relative path.</li>
+          <li>The <strong>destination</strong> can be either a fully qualified URL if you are redirecting to a different website, or it can be a relative path if you are redirecting within your own website.</li>
+          <li>Use the tab-key to move focus to the next cell.</li>
+          <li>The editor adds new rows to the spreadsheet as necessary.</li>
+          <li>To delete or move a row, use the <strong>Delete</strong> icon at the end of each row and the drag handles at the beginning of each row, respectively.</li>
+        </ul>
+        <h2 id="importing-spreadsheet-data">Importing spreadsheet data</h2>
+        <p>In addition to editing spreadsheets in the AEM Page Editor, you can also import data from a CSV file.</p>
+        <ol>
+          <li>When editing your spreadsheet in AEM, tap or click the <strong>Upload</strong> button at the top-left of the screen.</li>
+          <li>In the drop-down, select how you would like to import your data.
+            <ul>
+              <li><strong>Replace Doc</strong> to replace the content of the entire spreadsheet with the content of the CSV file you will upload.</li>
+              <li><strong>Append To Doc</strong> to append the data of the CSV file you will upload to the existing spreadsheet contents.</li>
+            </ul>
+          </li>
+          <li>In the dialog that opens, select your CSV file and then tap or click <strong>Open</strong>.</li>
+        </ol>
+        <p>A dialog opens as the import is processed. Once complete, the data in the CSV file is added to or replaces the content of the spreadsheet. If any errors are encountered such as a mismatch of columns, they are reported so you can correct your CSV file.</p>
+        <p>NOTE: Keep the following in mind when importing data.</p>
+        <ul>
+          <li>The headings in the CSV file must match the columns in the spreadsheet exactly.</li>
+          <li>Importing the entire CSV does not modify the column headings, only the content rows.</li>
+          <li>If you need to update the columns, you must do that in the AEM Page Editor before performing the import of the CSV.</li>
+          <li>A CSV file can not be larger than 10 MB for import.</li>
+        </ul>
+        <p>Depending on your selection of mode, you can also create, replace, or append to spreadsheets using a CSV and a cURL command similar to the following.</p>
+        <pre><code>curl --request POST \
+  --url http://&lt;aem-instance&gt;/bin/asynccommand \
+  --header 'content-type: multipart/form-data' \
+  --form file=@/path/to/your.csv \
+  --form spreadsheetPath=/content/&lt;your-site&gt;/&lt;your-spreadsheet&gt; \
+  --form 'spreadsheetTitle=Your Spreadsheet' \
+  --form cmd=spreadsheetImport \
+  --form operation=asyncSpreadsheetImport \
+  --form _charset_=utf-8 \
+  --form mode=append
+</code></pre>
+        <p>The call returns an HTML page with information about the job ID.</p>
+        <p><code>Message | Job(Id:2024/9/18/15/27/5cb0cacc-585d-4176-b018-b684ad2dfd02_90) created successfully. Please check status at Async Job Status Navigation.</code></p>
+        <p><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/operations/asynchronous-jobs">You can use the Jobs console</a> to view the status of the job or use the ID returned to query it.</p>
+        <p><code>https://&lt;aem-instance&gt;/bin/asynccommand?optype=JOBINF&amp;jobid=2024/10/24/14/1/8da63f9e-066b-4134-95c9-21a9c57836a5_1</code></p>
+        <h2 id="other-spreadsheet-types">Other spreadsheet types</h2>
+        <p>Now that you know how to create a redirects spreadsheet, you can create any other standard spreadsheet type:</p>
+        <ul>
+          <li><a href="../placeholders/index.html">Placeholders</a></li>
+          <li><a href="../bulk-metadata/index.html">Metadata</a></li>
+          <li><a href="../custom-headers/index.html">Headers</a></li>
+          <li><a href="../configuration/index.html">Configuration</a> - Such as for <a href="../byo-cdn-adobe-managed/index.html#setup-push-invalidation">cache invalidation</a></li>
+          <li><a href="../authoring-taxonomy/index.html">Taxonomy</a></li>
+          <li><a href="../configuration-templates/index.html">Configuration</a></li>
+        </ul>
+        <p>Simply follow the same steps in the sections <a href="index.html#creating-a-spreadsheet">Create Spreadsheet</a> and <a href="index.html#publishing-a-spreadsheet-pathsjson">Publish</a> <code>paths.json</code> and choose the appropriate template and update the<code> paths.json</code> file appropriately.</p>
+        <p>For <a href="../configuration/index.html">Configuration</a>, <a href="../custom-headers/index.html">Headers</a> and <a href="../bulk-metadata/index.html">Metadata</a> make sure to add a mapping to publish them to their default locations:</p>
+        <ul>
+          <li>Configuration: <code>/.helix/config.json</code></li>
+          <li>Headers: <code>/.helix/headers.json</code></li>
+          <li>Metadata: <code>/metadata.json</code></li>
+          <li>Taxonomy: Please see the document <a href="../authoring-taxonomy/index.html">Managing Taxonomy Data</a> for more information.</li>
+        </ul>
+        <p>Additionally, you can create your own spreadsheet with arbitrary columns for your own use.</p>
+        <p><strong>NOTE</strong>: You do not need to create a spreadsheet to manage indexing for AEM as a Cloud Service with Edge Delivery Services projects. If you wish to create your own indices, please follow <a href="../../developer/indexing/index.html#setting-up-more-index-configurations">this documentation</a> to create your own <code>helix-query.yaml</code> file.</p>
+        <h2 id="creating-your-own-spreadsheet">Creating your own spreadsheet</h2>
+        <ol>
+          <li>Follow the same steps in the section <a href="index.html#creating-a-spreadsheet">Create Spreadsheet.</a></li>
+          <li>When selecting the template, choose <strong>Spreadsheet</strong>.</li>
+          <li>In the <strong>Properties</strong> tab of the wizard, you can add your own columns.<br>
+            <picture>
+              <source type="image/webp" srcset="./media_1d06423edd120d52c548bf817a107946b5bbf93a5.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+              <source type="image/webp" srcset="./media_1d06423edd120d52c548bf817a107946b5bbf93a5.png?width=750&amp;format=webply&amp;optimize=medium">
+              <source type="image/png" srcset="./media_1d06423edd120d52c548bf817a107946b5bbf93a5.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+              <img loading="lazy" alt="" src="./media_1d06423edd120d52c548bf817a107946b5bbf93a5.png?width=750&amp;format=png&amp;optimize=medium" width="1134" height="753">
+            </picture>
+            <ul>
+              <li>In the <strong>Columns</strong> section, tap or click <strong>Add</strong> to add a new column.</li>
+              <li>Provide a name for the column.</li>
+              <li>Remove or reorganize the columns using the <strong>Delete</strong> and drag handle icons, respectively.</li>
+            </ul>
+          </li>
+          <li>Create the spreadsheet and publish as per the instructions for the redirects spreadsheet.</li>
+          <li>Add a mapping to the <code>paths.json</code> file as per the instructions for the redirects spreadsheet.</li>
+        </ol>
+        <h2 id="publishing-a-spreadsheet-pathsjson-optional">Publishing a spreadsheet paths.json (optional)</h2>
+        <p>In order for AEM to be able to publish the data in your spreadsheet, you may need to update the <code>paths.json</code> file of your project in certain situations.</p>
+        <ol>
+          <li>Open the root of your project in GitHub.</li>
+          <li>Tap or click the <code>paths.json</code> file to open its details and then the <strong>Edit</strong> icon.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_12f2a6be55f3e73c7abd6f2f5464aae6ec7e85e5d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_12f2a6be55f3e73c7abd6f2f5464aae6ec7e85e5d.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_12f2a6be55f3e73c7abd6f2f5464aae6ec7e85e5d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_12f2a6be55f3e73c7abd6f2f5464aae6ec7e85e5d.png?width=750&amp;format=png&amp;optimize=medium" width="1134" height="753">
+          </picture>
+        </p>
+        <ol start="3">
+          <li>Add a line to map your new spreadsheet to a <code>redirects.json</code> resource.</li>
+        </ol>
+        <pre><code>{
+  "mappings": [
+   "/content/&lt;site-name&gt;/:/",
+   "/content/&lt;site-name&gt;/redirects:/redirects.json"
+  ]
+}
+</code></pre>
+        <ul>
+          <li><strong>NOTE</strong> This paths.json entry is based on the example of creating redirects using tabular data. Make sure to update the path appropriate to the <a href="index.html#other-spreadsheet-types">type of spreadsheet you are creating.</a></li>
+        </ul>
+        <ol start="4">
+          <li>Click <strong>Commit changes…</strong> to save the changes to <code>main</code>.
+            <ul>
+              <li>Either commit to <code>main</code> or create a pull request as per your process.</li>
+            </ul>
+          </li>
+          <li>When you are finished defining your redirects and you updated the path mapping, return to the <strong>Sites</strong> console.</li>
+          <li>Tap or click to select the redirects spreadsheet that you created in the console and then tap or click <strong>Quick Publish</strong> in the actions bar to publish the spreadsheet.</li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_199db8e5a2a0c93eba9c2aa80e03df26566c79780.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_199db8e5a2a0c93eba9c2aa80e03df26566c79780.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_199db8e5a2a0c93eba9c2aa80e03df26566c79780.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_199db8e5a2a0c93eba9c2aa80e03df26566c79780.png?width=750&amp;format=png&amp;optimize=medium" width="1134" height="753">
+          </picture>
+        </p>
+        <ol start="7">
+          <li>In the <strong>Quick Publish</strong> dialog, tap or click <strong>Publish</strong>.</li>
+          <li>A banner confirms the publication.<br>
+            <picture>
+              <source type="image/webp" srcset="./media_199db8e5a2a0c93eba9c2aa80e03df26566c79780.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+              <source type="image/webp" srcset="./media_199db8e5a2a0c93eba9c2aa80e03df26566c79780.png?width=750&amp;format=webply&amp;optimize=medium">
+              <source type="image/png" srcset="./media_199db8e5a2a0c93eba9c2aa80e03df26566c79780.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+              <img loading="lazy" alt="" src="./media_199db8e5a2a0c93eba9c2aa80e03df26566c79780.png?width=750&amp;format=png&amp;optimize=medium" width="1134" height="753">
+            </picture>
+          </li>
+        </ol>
+        <p>The redirects spreadsheet is now published and publicly-accessible.</p>
+        <p><strong>TIP:</strong> For more information about path mappings, please see the document <a href="../../developer/authoring-path-mapping/index.html">Path Mapping for Edge Delivery Services.</a></p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

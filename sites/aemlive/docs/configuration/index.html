@@ -1,0 +1,302 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.884Z
+  page:             docs-configuration
+  pageUrl:          https://www.aem.live/docs/configuration
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Document-based Project Configuration</title>
+  <meta name="description" content="Learn how to configure your project">
+  <meta property="og:title" content="Document-based Project Configuration">
+  <meta property="og:description" content="Learn how to configure your project">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/configuration/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#configuration-service">Configuration Service</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Document-based Project Configuration</h1>
+          <p class="lede">Learn how to configure your project</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_15797f15710852969aba8d27f25800586232b1e1d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_15797f15710852969aba8d27f25800586232b1e1d.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_15797f15710852969aba8d27f25800586232b1e1d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_15797f15710852969aba8d27f25800586232b1e1d.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <div class="deprecation">
+          <div>
+            <div>We don't recommend using document based project configuration. Please use <a href="../config-service-setup/index.html">Configuration Service</a> and corresponding tools on <a href="https://tools.aem.live">https://tools.aem.live</a> .</div>
+          </div>
+        </div>
+        <p>The project configuration file is located in <code>/.helix/config.xlsx</code> (for sharepoint) or <code>/.helix/config</code> (for google drive). It consists of a table using <code>Key</code> and <code>value</code> columns. For example:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_15dda6ccaf5654bb721eae52190c7b83ae050a96a.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_15dda6ccaf5654bb721eae52190c7b83ae050a96a.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_15dda6ccaf5654bb721eae52190c7b83ae050a96a.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_15dda6ccaf5654bb721eae52190c7b83ae050a96a.png?width=750&amp;format=png&amp;optimize=medium" width="1540" height="356">
+          </picture>
+        </p>
+        <p>The format of the keys follows the identifier-dot notation, like in javascript. You can think of the sheets as a flattened JSON structure. If a key appears more than once, it would form an array, eg:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_114436e403512e4cd11974b396f40aa052c96de98.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_114436e403512e4cd11974b396f40aa052c96de98.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_114436e403512e4cd11974b396f40aa052c96de98.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_114436e403512e4cd11974b396f40aa052c96de98.png?width=750&amp;format=png&amp;optimize=medium" width="1110" height="92">
+          </picture>
+        </p>
+        <p>Will conceptually be a structure like:</p>
+        <pre><code>{
+  "access": {
+    "allow": [
+      "*@adobe.com",
+      "*@example.com",
+    ]
+  }
+}
+</code></pre>
+        <p>The following table lists the configuration options of a project.</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Key</td>
+                    <td>Comment</td>
+                    <td>Example</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>name</code></td>
+                    <td valign="bottom">Name of the project used by the slack bot when reporting.</td>
+                    <td valign="bottom">Franklin Website</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>slack</code></td>
+                    <td valign="bottom">slack channel for this project</td>
+                    <td valign="bottom">T03DFTYDQ/C12U1A8480Q</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>host</code></td>
+                    <td valign="bottom">host displayed in slack-bot info</td>
+                    <td valign="bottom">www.example.com</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>timezone</code></td>
+                    <td valign="bottom">timezone used by slack-bot</td>
+                    <td valign="bottom">Europe/Zurich</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>cdn.prod.host</code></td>
+                    <td valign="bottom">CDN host name for production environment</td>
+                    <td valign="bottom">www.example.com</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>cdn.prod.type</code></td>
+                    <td valign="bottom">CDN type</td>
+                    <td valign="bottom">fastly</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>cdn.prod.route</code></td>
+                    <td valign="bottom">Route or routes on the CDN that are rendered with Franklin</td>
+                    <td valign="bottom">/site</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>cdn.prod.serviceId</code></td>
+                    <td valign="bottom">Fastly specific: service ID</td>
+                    <td valign="bottom">1234</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>cdn.prod.authToken</code></td>
+                    <td valign="bottom">Fastly specific: API Token</td>
+                    <td valign="bottom"></td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>cdn.prod.endpoint</code></td>
+                    <td valign="bottom">Akamai specific: Endpoint</td>
+                    <td valign="bottom"></td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>cdn.prod.clientSecret</code></td>
+                    <td valign="bottom">Akamai specific: Client secret</td>
+                    <td valign="bottom"></td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>cdn.prod.clientToken</code></td>
+                    <td valign="bottom">Akamai specific: Client token</td>
+                    <td valign="bottom"></td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>cdn.prod.accessToken</code></td>
+                    <td valign="bottom">Akamai specific:Access token</td>
+                    <td valign="bottom"></td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>cdn.prod.origin</code></td>
+                    <td valign="bottom">Cloudflare specific: origin</td>
+                    <td valign="bottom"></td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>cdn.prod.plan</code></td>
+                    <td valign="bottom">Cloudflare specific: plan</td>
+                    <td valign="bottom"></td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>cdn.prod.zoneId</code></td>
+                    <td valign="bottom">Cloudflare specific: zone id</td>
+                    <td valign="bottom"></td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>cdn.prod.apiToken</code></td>
+                    <td valign="bottom">Cloudflare specific: api token</td>
+                    <td valign="bottom"></td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>cdn.preview.host</code></td>
+                    <td valign="bottom">Custom CDN host name for preview environment</td>
+                    <td valign="bottom">preview.example.com</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>cdn.live.host</code></td>
+                    <td valign="bottom">Custom CDN host name for live environment</td>
+                    <td valign="bottom">live.example.com</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>access.allow</code></td>
+                    <td valign="bottom">The email glob of the users that are allowed. This will enable site authentication if set.</td>
+                    <td valign="bottom">*@adobe.com</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>access.require.repository</code></td>
+                    <td valign="bottom">The list of owner/repo pointers to projects that are allowed to use this content.</td>
+                    <td valign="bottom">adobe/helix-website</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>admin.role.author</code></td>
+                    <td valign="bottom">The email glob of the users with the author role.</td>
+                    <td valign="bottom">*@adobe.com</td>
+                  </tr>
+                  <tr>
+                    <td valign="bottom"><code>admin.role.publish</code></td>
+                    <td valign="bottom">The email glob of the users with the publish role.</td>
+                    <td valign="bottom">*@adobe.com</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p>Also see the <a href="https://github.com/adobe/helix-admin-support/blob/main/src/schemas/project-config.schema.json">JSON Schema</a> and <a href="https://github.com/adobe/helix-admin-support/blob/main/types/project-config.d.ts">Typescript Types</a> of this config.</p>
+        <p><strong>Note:</strong> Activate the configuration using the <a href="../sidekick/index.html">Sidekick</a> for your configuration changes to become active.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="configuration-service"><a href="../config-service-setup/index.html">Configuration Service</a></h3>
+            </div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

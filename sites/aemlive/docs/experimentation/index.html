@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.965Z
+  page:             docs-experimentation
+  pageUrl:          https://www.aem.live/docs/experimentation
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Experimentation</title>
+  <meta name="description" content="Experimentation is the practice of making your site more effective by changing content or functionality, comparing the results with the prior version, and picking the ...">
+  <meta property="og:title" content="Experimentation">
+  <meta property="og:description" content="Experimentation is the practice of making your site more effective by changing content or functionality, comparing the results with the prior version, and picking the ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/experimentation/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#experiment-variants">Experiment Variants</a></li>
+<li class="l-3"><a href="#experiment-identifier">Experiment Identifier</a></li>
+<li class="l-3"><a href="#create-your-challenger-page">Create your Challenger Page</a></li>
+<li class="l-3"><a href="#set-up-your-experiment">Set up your Experiment</a></li>
+<li class="l-3"><a href="#preview-and-stage-your-experiment-variants">Preview and Stage your Experiment Variants</a></li>
+<li class="l-3"><a href="#send-your-experiment-variant-to-production">Send your Experiment Variant to Production</a></li>
+<li class="l-3"><a href="#running-experiment-variants-on-multiple-pages">Running Experiment Variants on Multiple Pages</a></li>
+<li class="l-3"><a href="#make-sure-experiment-variants-are-not-indexed">Make sure Experiment Variants are not indexed</a></li>
+<li class="l-2"><a href="#questions-or-ideas">Questions or Ideas?</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Experimentation</h1>
+          <p class="lede">Experimentation is the practice of making your site more effective by changing content or functionality, comparing the results with the prior version, and picking the ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Experimentation is the practice of making your site more effective by changing content or functionality, comparing the results with the prior version, and picking the improvements that have measurable effects.</p>
+        <p>When done right, it is a powerful pattern to improve conversions, engagement, and visitor experience. There are three main pitfalls to avoid when looking to adopt the practice:</p>
+        <ol>
+          <li><strong>Too little</strong>: most companies are not experimenting enough, and when they do, they experiment with too little traffic to get meaningful results.</li>
+          <li><strong>Too slow</strong>: many experimentation frameworks slow the site down so much that the potential new conversions can’t make up for the lost traffic and bounces due to slow rendering</li>
+          <li><strong>Too complex</strong>: if it takes too much time to set up a new experiment, then fewer experiments will be run.</li>
+        </ol>
+        <p>For sites running on Adobe Experience Manager, there is the <a href="https://github.com/adobe/aem-experience-decisioning">experimentation plugin</a> that allows developers to add an experimentation capability to their sites. Three things make this approach different:</p>
+        <ul>
+          <li>It’s easy to set up tests in the tools your authors are already familiar with, <strong>no separate login</strong> is needed</li>
+          <li>It’s deeply integrated into the AEM delivery system, <strong>does not slow down your site</strong> and is <strong>resilient to changes in code and content</strong></li>
+          <li>It allows <strong>testing simple content changes</strong> as well as <strong>experiments covering design, functionality, and code</strong></li>
+        </ul>
+        <p>Follow the rest of this guide to set up your first experiment. There are a few terms that you will find used repeatedly:</p>
+        <ul>
+          <li>Control: the experience prior to running the experiment. Any experiment tries to prove an improvement over the control experience.</li>
+          <li>Challenger: an experience that differs from the control experience and that may or may not have better results such as conversions</li>
+          <li>Variants: control and challenger are all variants of an experiment</li>
+          <li>Significance: is your challenger <em>really</em> better than the control or is this just luck? Calculating significance allows you to rule out luck and concentrate on results that have a real effect</li>
+        </ul>
+        <h2 id="experiment-variants">Experiment Variants</h2>
+        <p>Experiment variants are the easiest way to get started with experimentation. This approach uses the page you already have as the control, you then create a challenger page that will replace the control for some of your visitors. In your challenger page, you can test different variants of your hero blocks, different page layout or call-to-action (CTA) placements and verbiage.</p>
+        <p>As long as you stay within the established design language of your website and use existing block functionality you should be able to set up an experiment variant and send it to production in a matter of a few minutes using your established authoring tools.</p>
+        <h3 id="experiment-identifier">Experiment Identifier</h3>
+        <p>Every experiment should have its own identifier for tracking and analytics purposes.<br>A good starting point is to come up with a good, unique identifier for your experiment, called the “Experiment ID”.<br>Experiments are often numbered linearly or correlated to their Issue ID in an issue tracker or management system that is used. Experiment IDs often use a prefix for the project. Examples are <code>OPT-0134, EXP0004</code> or <code>CCX0076</code>.</p>
+        <h3 id="create-your-challenger-page">Create your Challenger Page</h3>
+        <p>By convention it is recommended to create a folder with a lowercase experiment ID in your <code>/experiments/</code> folder (for example <code>/experiments/ccx0076/</code>) which is where all the pages for your challenger variants live.</p>
+        <p>Your <code>experiments</code> folder will look something like this:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1312dbaf6562cdf0150bc447e67afec3d5726a02f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1312dbaf6562cdf0150bc447e67afec3d5726a02f.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1312dbaf6562cdf0150bc447e67afec3d5726a02f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1312dbaf6562cdf0150bc447e67afec3d5726a02f.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="991">
+          </picture>
+        </p>
+        <p>Once the folder has been created, put a copy of your control page into that folder, and apply the changes on the page that you would like to test as part of your experiment variant. As an example let’s assume we have the following page on the website that we want to run an experiment on.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_19f3391ce32b7758a8c1d7d960c9aea28b3ef958f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_19f3391ce32b7758a8c1d7d960c9aea28b3ef958f.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_19f3391ce32b7758a8c1d7d960c9aea28b3ef958f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_19f3391ce32b7758a8c1d7d960c9aea28b3ef958f.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1138">
+          </picture>
+        </p>
+        <p>Your copy of the challenger placed in the <code>experiments/&lt;experiment-id&gt;</code> folder might look like this:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1be2b49ef0b33e8a2ce29b82c932dcfb78ca180c2.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1be2b49ef0b33e8a2ce29b82c932dcfb78ca180c2.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1be2b49ef0b33e8a2ce29b82c932dcfb78ca180c2.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1be2b49ef0b33e8a2ce29b82c932dcfb78ca180c2.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1138">
+          </picture>
+        </p>
+        <p>Preview and publish the challenger page using the sidekick and when you are done authoring the challenger page, the URL of the published challenger will be used in the next section - setting up the experiment.</p>
+        <h3 id="set-up-your-experiment">Set up your Experiment</h3>
+        <p>As soon as you have your challengers ready to go, all you need to do is to go back to the control page and add some <code>metadata</code> indicating that this page is now part of a test.</p>
+        <p>There are two metadata rows that need to be added for an experiment variant.</p>
+        <p><code>Experiment</code> : containing your experiment ID</p>
+        <p><code>Experiment Variants</code>: containing URLs for all the challengers of this page, separated by line breaks if you have more than one challenger</p>
+        <p>See example below:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1c4bf8d6b6a945abd2b631e04e037a014387a76d5.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1c4bf8d6b6a945abd2b631e04e037a014387a76d5.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1c4bf8d6b6a945abd2b631e04e037a014387a76d5.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1c4bf8d6b6a945abd2b631e04e037a014387a76d5.png?width=750&amp;format=png&amp;optimize=medium" width="745" height="237">
+          </picture>
+        </p>
+        <p>For an experiment variant the traffic split between all the variants (control + challengers) is automatically set to an even distribution. If you have one challenger, there will automatically be an even 50/50 split between control and the challenger. If you have 2 challengers, you will automatically see a third of the traffic allocated to control and each challenger and so on.</p>
+        <p>You can override the traffic split via metadata. For more information, see <a href="https://github.com/adobe/aem-experience-decisioning/wiki/Experiments#authoring">https://github.com/adobe/aem-experience-decisioning/wiki/Experiments#authoring</a></p>
+        <h3 id="preview-and-stage-your-experiment-variants">Preview and Stage your Experiment Variants</h3>
+        <p>As soon as you are ready to preview and stage your experiment you can preview the control page with the additional metadata. Whenever you are previewing a page that has a running experiment, you will see the experimentation overlay in your <code>.hlx.page</code> preview environment that lets you switch between the variants and gives you confidence that your test is setup correctly and ready to be launched.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1a50fadf67877b290b1370e3aa9c57113d98a8eb7.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1a50fadf67877b290b1370e3aa9c57113d98a8eb7.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1a50fadf67877b290b1370e3aa9c57113d98a8eb7.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1a50fadf67877b290b1370e3aa9c57113d98a8eb7.png?width=750&amp;format=png&amp;optimize=medium" width="493" height="686">
+          </picture>
+        </p>
+        <p>Authors can get quick insights on the performance of experiments being run on the production site. These insights are helpful in making a decision about the duration of the experiment, but also about which variant is best suited for production.</p>
+        <p>The data collection to measure the effectiveness of each variant is based on <a href="../rum/index.html" data-broken-link="true">Real User Monitoring</a>.</p>
+        <h3 id="send-your-experiment-variant-to-production">Send your Experiment Variant to Production</h3>
+        <p>To send your experiment to production and collect data about the performance of each variant, the only step left is to publish the control page as well as each of the challenger pages.</p>
+        <h3 id="running-experiment-variants-on-multiple-pages">Running Experiment Variants on Multiple Pages</h3>
+        <p>Some experiments include changes across multiple pages. If you would like to run experiments across multiple pages, all you need to make sure is to use the same experiment ID in metadata across multiple pages and in case you have multiple challengers, make sure that your challenger URLs in the <code>Experiment Variants</code> metadata field are sequenced corresponding to their challengers across pages.</p>
+        <h3 id="make-sure-experiment-variants-are-not-indexed">Make sure Experiment Variants are not indexed</h3>
+        <p>When running experiments, it is usually best practice to exclude the variants from the sitemap and ensure they are not indexed by search engines, as the page could be seen as duplicate content and negatively impact SEO.</p>
+        <p>This can be achieved by either of the following 2 methods:</p>
+        <ul>
+          <li>If you centralize all experiments in a dedicated folder, like <code>/experiments</code>: make sure your bulk <code>metadata.xlsx</code> sheet contains a row with <code>/experiments/**</code> as path, and a <code>robots</code> column with the value <code>noindex,nofollow</code>.</li>
+          <li>If you keep the experiment control and variants with the regular content: add a <code>robots</code> entry in the page metadata for each variant, with the value <code>noindex,nofollow</code>.</li>
+        </ul>
+        <h2 id="questions-or-ideas">Questions or Ideas?</h2>
+        <p>Please contact the community via <a href="https://discord.gg/aem-live">Discord</a>.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

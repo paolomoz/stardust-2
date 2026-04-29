@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.231Z
+  page:             docs-universal-editor-assets
+  pageUrl:          https://www.aem.live/docs/universal-editor-assets
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Publishing pages with AEM Assets</title>
+  <meta name="description" content="When editing content for the Universal Editor, you of course can select assets from AEM Assets. When you publish your content to Edge Delivery Services, ...">
+  <meta property="og:title" content="Publishing pages with AEM Assets">
+  <meta property="og:description" content="When editing content for the Universal Editor, you of course can select assets from AEM Assets. When you publish your content to Edge Delivery Services, ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/universal-editor-assets/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#ensuring-assets-folders-are-accessible">Ensuring assets folders are accessible</a></li>
+<li class="l-2"><a href="#assigning-a-proper-configuration-to-an-asset-folder">Assigning a Proper Configuration to an Asset Folder</a></li>
+<li class="l-2"><a href="#resizing-assets-to-be-within-supported-limits-of-edge-delivery-services">Resizing Assets to be within Supported Limits of Edge Delivery Services</a></li>
+<li class="l-3"><a href="#creating-a-processing-profile">Creating a Processing Profile</a></li>
+<li class="l-3"><a href="#assigning-the-processing-profile-to-an-asset-folder">Assigning the Processing Profile to an Asset Folder</a></li>
+<li class="l-2"><a href="#troubleshooting">Troubleshooting</a></li>
+<li class="l-3"><a href="#i-am-getting-an-error-message-that-some-images-exceed-the-allowed-limit-of-10-mb">I am getting an error message that some images exceed the allowed limit of 10 MB</a></li>
+<li class="l-3"><a href="#i-am-getting-an-error-message-that-an-assetjpg-cannot-be-previewed-because-it-is-of-type-imagepng">I am getting an error message that an asset.jpg cannot be previewed because it is of type image/png</a></li>
+<li class="l-3"><a href="#i-am-getting-an-error-message-that-an-imagewebp-is-not-a-supported-file-type">I am getting an error message that an image.webp is not a supported file type</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Publishing pages with AEM Assets</h1>
+          <p class="lede">When editing content for the Universal Editor, you of course can select assets from AEM Assets. When you publish your content to Edge Delivery Services, ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_108a38a25b3ab89d724b7e254e8b4ce6ff215edbc.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_108a38a25b3ab89d724b7e254e8b4ce6ff215edbc.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_108a38a25b3ab89d724b7e254e8b4ce6ff215edbc.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_108a38a25b3ab89d724b7e254e8b4ce6ff215edbc.png?width=750&amp;format=png&amp;optimize=medium" width="2048" height="1536">
+          </picture>
+        </p>
+        
+        <p>When editing content for the Universal Editor, you of course can select assets from AEM Assets. When you publish your content to Edge Delivery Services, the related AEM Assets content is published as well.</p>
+        <p>To ensure this seamless behavior, AEM and Edge Delivery Services must have proper access to AEM Assets in order to publish, and the assets, especially images and videos, must adhere to the <a href="../limits/index.html">limits of Edge Delivery</a>. This includes:</p>
+        <ul>
+          <li>Ensuring that assets folders are accessible.</li>
+          <li>Assigning a proper configuration to an asset folder (as required).</li>
+          <li>Resizing assets to be within the supported limits (as required)</li>
+        </ul>
+        <p>This document describes how to configure these two points.</p>
+        <h2 id="ensuring-assets-folders-are-accessible">Ensuring assets folders are accessible</h2>
+        <p>When publishing pages from AEM to Edge Delivery Services, <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/generating-access-tokens-for-server-side-apis">a technical account</a> is used. This account, with a name in the format <code>&lt;hash&gt;@techacct.adobe.com</code>, is created automatically as a user in AEM by Cloud Manager whenever you first publish a page created with the Universal Editor.</p>
+        <p>When you upload assets to a folder in AEM Assets, these will be accessible to this technical account by default, as long as you don’t make the folder private. If you use private asset folders, make sure you grant access to the folder to the technical account.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_112a6702e232165a343dfdbc0b69070afefdb31e0.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_112a6702e232165a343dfdbc0b69070afefdb31e0.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_112a6702e232165a343dfdbc0b69070afefdb31e0.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_112a6702e232165a343dfdbc0b69070afefdb31e0.png?width=750&amp;format=png&amp;optimize=medium" width="1157" height="890">
+          </picture>
+        </p>
+        <h2 id="assigning-a-proper-configuration-to-an-asset-folder">Assigning a Proper Configuration to an Asset Folder</h2>
+        <p>Generally assuring that your technical account has read access to your assets in AEM Assets is sufficient for publishing your assets along with your pages to Edge Delivery Services.</p>
+        <p>Any asset is published at its individual path automatically to the Edge Delivery Services sites they are used on, as long as the path to the asset folder is included in the site’s <a href="../../developer/authoring-path-mapping/index.html#includes">path mapping</a>. For example, a PDF <code>/content/dam/site/en/terms-of-use.pdf</code> used in a <a href="../../developer/repoless-multisite-manager/index.html">multi-regional site</a> will automatically be published to <a href="http://site.co.uk">site.co.uk</a> and <a href="http://site.eu">site.eu</a> if they both include the path <code>/content/dam/site/en/</code> in their respective path mapping, and reference the asset on any page.</p>
+        <p>Additional configuration is needed, however, when you want to publish assets to a site individually, that are not referenced by a site.</p>
+        <p>To support both this use case, <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/configurations">a configuration</a> must be assigned to the AEM Assets folder.</p>
+        <ol>
+          <li>Sign into your AEM authoring environment.</li>
+          <li>Under <strong>Sites</strong> select the site where you are publishing your assets or the site with which the assets will be associated.</li>
+          <li>Tap or click <strong>Properties</strong> in the tool bar.</li>
+          <li>On the <strong>Advanced</strong> tab in the properties window, take note of the configuration in the field <strong>Cloud Configuration</strong>.
+            <ul>
+              <li>This is created automatically when you create your site in the format <code>/conf/&lt;site-name&gt;</code>.</li>
+            </ul>
+          </li>
+          <li>Tap or click <strong>Cancel</strong> in the properties window and navigate to <strong>Assets</strong> → <strong>Files</strong> and select your AEM Assets folder.</li>
+          <li>Tap or click <strong>Properties</strong> in the tool bar.</li>
+          <li>On the <strong>Cloud Services</strong> tab of the properties window, in the <strong>Cloud Configuration</strong> field, select the same configuration as you noted previously.</li>
+          <li>Tap or click <strong>Save &amp; Close</strong>.</li>
+        </ol>
+        <h2 id="resizing-assets-to-be-within-supported-limits-of-edge-delivery-services">Resizing Assets to be within Supported Limits of Edge Delivery Services</h2>
+        <p>AEM Assets supports assets in <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/assets/file-format-support">various formats and sizes</a>, possibly being too big to be reasonably served as web-optimize renditions. Edge Delivery Services, however, enforces limits on which <a href="../limits/index.html#content-source-limits">formats, image and video sizes</a> are supported.</p>
+        <p>To guarantee a seamless integration of AEM Assets with Edge Delivery Services, the assets can either be downscaled by content creators locally and uploaded to AEM Assets in the supported size, or a processing profile can be used to prepare the asset to be used for Edge Delivery.</p>
+        <p>In the latter case AEM Assets will create static renditions that will automatically be used instead of the original asset, when the original asset exceeds the supported limits.</p>
+        <p><strong>Rendition naming convention</strong>: AEM looks up the Edge Delivery Service-compatible rendition by name. The name is always<code> edge-delivery-services-&lt;subtype&gt;</code>, where <code>&lt;subtype&gt;</code> is the part of the asset's MIME type after the <code>/</code>. If a rendition with that exact name exists and is within Edge Delivery Service limits, it is delivered instead of the original.</p>
+        <h3 id="creating-a-processing-profile">Creating a Processing Profile</h3>
+        <ol>
+          <li>Sign in to your AEM authoring environment</li>
+          <li>Under <strong>Tools</strong> navigate to <strong>Assets</strong> and select <strong>Processing Profiles</strong></li>
+          <li>Tap or click <strong>Create</strong> to create a new processing profile or select an existing one and tap or click on <strong>Edit</strong></li>
+          <li>Add two image renditions to the processing profile: <strong>edge-delivery-services-jpeg</strong> with the extension <code>jpeg</code> and the <strong>edge-delivery-services-png</strong> with the extension <code>png</code>.</li>
+          <li>Configure a maximum <strong>width and height</strong> to <strong>2000x2000</strong> pixels for both, and a quality of <strong>100</strong> for the jpeg rendition.</li>
+          <li>Configure the <strong>included mime type</strong> to <code>image/jpeg</code> for the jpeg rendition, and to <code>image/png</code> for the png rendition respectively.</li>
+          <li>Tap or click <strong>Save</strong></li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_15a378087d695b6b1113e8b8bb092d1623966ec98.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_15a378087d695b6b1113e8b8bb092d1623966ec98.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_15a378087d695b6b1113e8b8bb092d1623966ec98.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_15a378087d695b6b1113e8b8bb092d1623966ec98.png?width=750&amp;format=png&amp;optimize=medium" width="2048" height="1770">
+          </picture>
+        </p>
+        <p>You can follow the same steps to add a video rendition to downscale and downsample videos as well.</p>
+        <ol>
+          <li>Select the previously created processing profile in the overview, and tap or click <strong>Edit</strong></li>
+          <li>In the wizard, navigate to the <strong>Video</strong> tab</li>
+          <li>Add a rendition called <strong>edge-delivery-services-mp4</strong> and select the <code>mp4</code> extension</li>
+          <li>Configure the <strong>Bitrate</strong> to be <strong>300</strong> and (optionally) set a reasonable <strong>width</strong> for your intended use case</li>
+          <li>Tap or click <strong>Save</strong></li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1ead7468d5d5937d46f88ac441d459573909a8f9a.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1ead7468d5d5937d46f88ac441d459573909a8f9a.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1ead7468d5d5937d46f88ac441d459573909a8f9a.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1ead7468d5d5937d46f88ac441d459573909a8f9a.png?width=750&amp;format=png&amp;optimize=medium" width="2048" height="1770">
+          </picture>
+        </p>
+        <h3 id="assigning-the-processing-profile-to-an-asset-folder">Assigning the Processing Profile to an Asset Folder</h3>
+        <p>To use the previously created processing profile, it has to be assigned to an asset folder and the assets within that folder have to be reprocessed.</p>
+        <ol>
+          <li>Under <strong>Assets</strong> tap or click on <strong>Files</strong></li>
+          <li>Navigate to the folder that contains your assets and select it</li>
+          <li>Tap or click <strong>Properties</strong></li>
+          <li>Navigate to the <strong>Asset Processing</strong> tab</li>
+          <li>In the field set <strong>Processing Profile</strong>, select the previously created processing profile</li>
+          <li>Tap or click <strong>Save &amp; Close</strong></li>
+        </ol>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_16c5e1ddd6ab88699220ab911fce230c5be5ba313.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_16c5e1ddd6ab88699220ab911fce230c5be5ba313.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_16c5e1ddd6ab88699220ab911fce230c5be5ba313.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_16c5e1ddd6ab88699220ab911fce230c5be5ba313.png?width=750&amp;format=png&amp;optimize=medium" width="2048" height="1770">
+          </picture>
+        </p>
+        <p>Every new asset uploaded to this folder or any sub folder will be processed using the assigned processing profile, and the Edge Delivery Services specific asset renditions will be generated. Existing assets, however, have to be <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/assets/manage/reprocessing">reprocessed</a>.</p>
+        <h2 id="troubleshooting">Troubleshooting</h2>
+        <h3 id="i-am-getting-an-error-message-that-some-images-exceed-the-allowed-limit-of-10-mb">I am getting an error message that some images exceed the allowed limit of 10 MB</h3>
+        <p>Edge Delivery Services enforces <a href="../limits/index.html">limits</a> to the published content. Publishing content that exceeds these limits fails. Follow the steps above to resize your images.</p>
+        <h3 id="i-am-getting-an-error-message-that-an-assetjpg-cannot-be-previewed-because-it-is-of-type-imagepng">I am getting an error message that an asset.jpg cannot be previewed because it is of type <code>image/png</code></h3>
+        <p>Edge Delivery Services enforces that images have to be published with an extension matching the type of the image. A <code>JEPG</code> for example has to be published with a <code>.jpg</code> or <code>.jpeg</code> extension, and a <code>PNG</code> has to be published with a <code>.png</code> extension. To resolve this issue, simply rename the image so that the extension matches the type of the image.</p>
+        <h3 id="i-am-getting-an-error-message-that-an-imagewebp-is-not-a-supported-file-type">I am getting an error message that an image.webp is not a supported file type</h3>
+        <p>While Edge Delivery Services serves web-optimized images as <code>WEBP</code> when a browser supports this image format, it does not support the upload of such images. To resolve this issue, simply reupload the image with one of the supported <a href="../limits/index.html#supported-file-types">image file types</a>.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

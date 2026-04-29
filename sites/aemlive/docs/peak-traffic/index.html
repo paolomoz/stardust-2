@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.351Z
+  page:             docs-peak-traffic
+  pageUrl:          https://www.aem.live/docs/peak-traffic
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Service Scaling and High-Visibility Events</title>
+  <meta name="description" content="AEM is prepared for peak traffic.">
+  <meta property="og:title" content="Service Scaling and High-Visibility Events">
+  <meta property="og:description" content="AEM is prepared for peak traffic.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/peak-traffic/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#service-scaling">Service Scaling</a></li>
+<li class="l-2"><a href="#high-visibility-events">High-Visibility Events</a></li>
+<li class="l-2"><a href="#availability-and-disaster-recovery">Availability and Disaster Recovery</a></li>
+<li class="l-2"><a href="#service-level-objectives">Service Level Objectives</a></li>
+<li class="l-2"><a href="#what-you-should-focus-on">What You Should Focus On</a></li>
+<li class="l-3"><a href="#operations">Operations</a></li>
+<li class="l-3"><a href="#unsupported">Unsupported</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Service Scaling and High-Visibility Events</h1>
+          <p class="lede">AEM is prepared for peak traffic.</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1005f61a54b2b43487e0728f3e9bde9f6adea0a81.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1005f61a54b2b43487e0728f3e9bde9f6adea0a81.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1005f61a54b2b43487e0728f3e9bde9f6adea0a81.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1005f61a54b2b43487e0728f3e9bde9f6adea0a81.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Edge Delivery Services is architecturally designed to handle traffic variability without manual intervention. Unlike traditional infrastructure that requires peak-season preparation, the service's serverless foundation and multi-cloud redundancy ensure consistent performance regardless of traffic patterns.</p>
+        <p>This document outlines the operational posture Edge Delivery Services maintains continuously, and describes how customers can leverage enhanced monitoring during business-critical periods.</p>
+        <h2 id="service-scaling"><strong>Service Scaling</strong></h2>
+        <p>Edge Delivery Services runs on fully serverless infrastructure across multiple cloud providers. Functions spawn instantaneously in response to demand and terminate when idle, providing effectively infinite horizontal scalability. There is no capacity planning required, no infrastructure to provision, and no scaling configuration to tune.</p>
+        <p>Content delivery occurs through <a href="../global/index.html">hundreds of edge locations worldwide</a>, ensuring that traffic increases are absorbed geographically rather than concentrated at origin servers. This distributed architecture means a traffic surge in one region has no impact on service availability in others.</p>
+        <p>All core services operate as multi-tenant SaaS infrastructure with strict tenant isolation built into every layer. This shared infrastructure model provides continuous hardening where security improvements and performance optimizations benefit all customers simultaneously. Load from thousands of sites creates natural statistical averaging that prevents individual traffic spikes from affecting overall system capacity. Infrastructure costs scale with actual usage rather than peak capacity reservations.</p>
+        <p>Edge Delivery Services maintains enterprise-grade security controls continuously. All services undergo automated vulnerability scanning every 24 hours. Every code deployment passes through automated security analysis before release. The system provides multi-layered DDoS defense including strict path filtering, rate limiting per project, and automatic traffic shifting during attack patterns. Unlike generic web application firewalls based on deny-lists, Edge Delivery Services uses strict allow-lists of permissible patterns, blocking thousands of attacks per minute. For complete security details, see <a href="../security/index.html">Security Overview</a>.</p>
+        <p>We follow <a href="https://trunkbaseddevelopment.com/"></a><a href="https://trunkbaseddevelopment.com/">Scaled Trunk-based Development</a> for all service code, releasing small atomic updates constantly. Typically 80-100 releases per month roll out automatically to all customers simultaneously after passing 100% test coverage and human code review. The majority of releases are dependency updates that go completely unnoticed. Bug fixes benefit all affected customers immediately. New features or enhancements are delivered feature-flagged and activated only on an opt-in basis through configuration.</p>
+        <p>There is no mechanism to pause service updates for individual customers, nor should there be. Our operational record speaks for itself: in the last 30 days we deployed 84 releases with zero incidents. The continuous deployment model is more stable than quarterly release cycles precisely because each change is small, isolated, and immediately observable.</p>
+        <h2 id="high-visibility-events"><strong>High-Visibility Events</strong></h2>
+        <p>While Edge Delivery Services requires no special preparation for traffic increases, customers planning business-critical events can benefit from enhanced operational awareness.</p>
+        <p>Consider notifying Adobe when you're experiencing your first peak season after migrating to Edge Delivery Services, when you have product launches with significant media coordination, or when you have time-sensitive events where rapid incident response is critical such as elections, live broadcasts, or regulatory deadlines. If you're expecting traffic patterns to exceed previous records by an order of magnitude, we'd appreciate a heads-up. Notification can be provided through <a href="../slack/index.html">Slack</a>, <a href="../../teams/index.html" data-broken-link="true">Teams</a>, or <a href="https://business.adobe.com/customers/consulting-services/premier-support.html"></a><a href="https://business.adobe.com/customers/consulting-services/premier-support.html">Adobe Support</a>. A simple heads-up is sufficient. No formal capacity planning documents or war room invitations required.</p>
+        <p>Adobe maintains continuous operational practices for all customers. Our operations team maintains round-the-clock coverage split into two 12-hour shifts across two continents. Adobe On-Call ensures immediate notification through multiple channels including phone, SMS, and push notifications. We acknowledge every incident within 15 minutes, though actual response times are typically much faster.</p>
+        <p>Our observability infrastructure uses fine-grained synthetic monitors that constantly validate service availability and performance, along with log-based alerts that monitor error rates, latency patterns, and anomaly detection across all services. We run extra synthetic monitoring for our highest-traffic sites to validate that delivery performance scales as intended, and we track the health of all third-party dependencies to detect issues before they impact customers. Error rate thresholds are continuously tuned based on service evolution. The slightest anomaly, whether from our own deployments or third-party vendor issues, triggers immediate escalation to the on-call engineer.</p>
+        <p>We maintain comprehensive runbooks for every incident type, enabling rapid service restoration. Our incident management process includes mandatory root cause analysis and published postmortems for every incident regardless of customer impact.</p>
+        <p>When customers notify us of a high-visibility event, the operations team reviews synthetic monitors and log patterns immediately before and during the event window. On-call engineers receive real-time context about your event, enabling faster diagnosis if issues arise. Any anomaly affecting the notified customer receives immediate attention rather than standard triage procedures. These measures do not change the underlying infrastructure, which already operates at peak reliability. They simply ensure Adobe's human operators have full context to respond most effectively in the unlikely event of disruption.</p>
+        <h2 id="availability-and-disaster-recovery"><strong>Availability and Disaster Recovery</strong></h2>
+        <p>Edge Delivery Services uses active/active replication across multiple cloud providers. Unlike traditional active/standby or multi-region deployments within a single cloud, this architecture ensures no single point of failure exists. Every component runs on at least two different cloud providers with functionally identical but technologically distinct software stacks. Traffic shifts transparently to healthy providers without manual intervention. Content published to one cloud provider replicates synchronously to others before confirming success, preventing data loss even during complete outages.</p>
+        <p>During normal operations, workload distributes roughly equally across providers. During an outage, even a complete control plane failure of one cloud provider, remaining providers absorb the full load without service degradation.</p>
+        <p>Every layer maintains redundancy. Customer-controlled DNS or CDN points to Adobe's multi-cloud delivery infrastructure. Adobe manages traffic distribution across providers based on health monitoring and geographic optimization. Content delivery functions run on multiple CDN providers simultaneously. If one provider experiences issues, requests automatically route to another without manual failover.</p>
+        <p>The Content Hub stores all published content, media, and code redundantly across cloud providers. Each publish operation writes to multiple storage backends before completing. If one storage provider becomes unavailable, reads continue from healthy replicas without interruption. The Admin API for preview and publishing currently uses single-cloud deployment with a 12-hour recovery time objective. Delivery services maintain a 15-minute RTO. Adobe conducts regular disaster recovery drills to validate these objectives.</p>
+        <p>Adobe maintains documented runbooks for every failure scenario including cloud provider regional outages, global control plane failures, third-party CDN degradation, storage backend failures, DDoS attacks at various infrastructure layers, code deployment rollback procedures, and configuration error remediation. These runbooks ensure consistent operational responses regardless of which engineer is on call.</p>
+        <h2 id="service-level-objectives"><strong>Service Level Objectives</strong></h2>
+        <p>Edge Delivery Services targets 99.99% monthly uptime for delivery services, sub-second response times at the 95th percentile globally, and less than 0.01% of requests resulting in 5xx errors. We aim to acknowledge incidents within 15 minutes of detection, maintain a 15-minute recovery time objective for delivery services, and a 12-hour RTO for publishing services. Historical performance data is available at <a href="https://www.aemstatus.net/"></a><a href="https://www.aemstatus.net/">www.aemstatus.net</a>.</p>
+        <p>Your formal Service Level Agreement with Adobe covers exact availability assurances based on contract details. Relevant status reports appear on <a href="https://status.adobe.com/"></a><a href="https://status.adobe.com/">status.adobe.com</a>.</p>
+        <h2 id="what-you-should-focus-on"><strong>What You Should Focus On</strong></h2>
+        <p>Edge Delivery Services requires no peak-season preparation. The architecture that handles Tuesday in March handles Black Friday. The monitoring running at 3 AM Sunday runs during your biggest flash sale.</p>
+        <p>Your attention belongs on custom implementations like Cloudflare Workers, payment processing, and inventory management APIs. Any custom code you've added outside Edge Delivery Services core deserves scrutiny. Review your third-party integrations including marketing pixels, analytics, personalization engines, or other services called from your site. If you're using your own CDN in front of Edge Delivery Services, validate its capacity and failover procedures.</p>
+        <p>The core delivery of your website, the part that actually serves pages to visitors, operates at consistent reliability regardless of traffic volume. No capacity planning required, no scaling configuration needed, no war rooms necessary.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="operations"><a href="../operations/index.html">Operations</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="unsupported"><a href="../unsupported/index.html">Unsupported</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

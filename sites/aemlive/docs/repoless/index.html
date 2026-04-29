@@ -1,0 +1,271 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.130Z
+  page:             docs-repoless
+  pageUrl:          https://www.aem.live/docs/repoless
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Repoless - One codebase, many sites</title>
+  <meta name="description" content="If you have many similar sites that mostly look and behave the same, but have different content, you may want to share code across multiple ...">
+  <meta property="og:title" content="Repoless - One codebase, many sites">
+  <meta property="og:description" content="If you have many similar sites that mostly look and behave the same, but have different content, you may want to share code across multiple ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/repoless/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#how-this-works">How this works</a></li>
+<li class="l-3"><a href="#organization">Organization</a></li>
+<li class="l-3"><a href="#profile">Profile</a></li>
+<li class="l-3"><a href="#github-repository">GitHub Repository</a></li>
+<li class="l-3"><a href="#site">Site</a></li>
+<li class="l-3"><a href="#content-source">Content Source</a></li>
+<li class="l-2"><a href="#preparation">Preparation</a></li>
+<li class="l-3"><a href="#pre-requisites">Pre-requisites</a></li>
+<li class="l-3"><a href="#create-your-first-site">Create your first site</a></li>
+<li class="l-2"><a href="#create-a-repoless-site">Create a repoless site</a></li>
+<li class="l-3"><a href="#pre-requisites-1">Pre-requisites</a></li>
+<li class="l-3"><a href="#create-your-first-repoless-site">Create your first repoless site</a></li>
+<li class="l-2"><a href="#whats-not-needed-once-you-go-repoless">What’s not needed once you go repoless</a></li>
+<li class="l-3"><a href="#developer-tutorial">Developer Tutorial</a></li>
+<li class="l-3"><a href="#config-service-setup">Config Service Setup</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Repoless - One codebase, many sites</h1>
+          <p class="lede">If you have many similar sites that mostly look and behave the same, but have different content, you may want to share code across multiple ...</p>
+        </header>
+        <div class="content">
+        
+        <p>If you have many similar sites that mostly look and behave the same, but have different content, you may want to share code across multiple sites. In the past, the best way to do this was to create multiple GitHub repositories, keep them somehow in sync, and run each site off a dedicated GitHub repository.</p>
+        <p>AEM supports running multiple sites from the same codebase without having to take care of code replication. This ability is also known as "repoless", because all but your first site don't need a GitHub repository of their own.</p>
+        <p>Follow this document to learn how to create and manage multiple sites off the same codebase. Make sure you have followed the <a href="https://www.hlx.live/developer/tutorial">developer tutorial</a>, as it provides the basics of creating a site on AEM.</p>
+        <h2 id="how-this-works">How this works</h2>
+        <p>Repoless sites are enabled by the <a href="../config-service-setup/index.html">Configuration Service</a> in Adobe Experience Manager, which introduces a couple of concepts such as Organization, Profile, Repository, Site, and Content Source. The following diagram shows how the pieces fit together.</p>
+        <p><a href="../architecture-repoless.svg/index.html" data-broken-link="true">https://main--helix-website--adobe.aem.page/docs/architecture-repoless.svg</a></p>
+        <h3 id="organization">Organization</h3>
+        <p>Each site in Adobe Experience Manager belongs to an organization. This organization has the same name as an org on <a href="http://github.com">github.com</a>, so that there is no naming conflict. An organization can have multiple sites, profiles, and users.</p>
+        <h3 id="profile">Profile</h3>
+        <p>Profiles are a way to group and re-use important configurations such as headers, indexes, additional metadata, and so on. A profile can be used by multiple sites within an organization, so that there is consistency among them.</p>
+        <h3 id="github-repository">GitHub Repository</h3>
+        <p>For each codebase in Adobe Experience Manager, there is one GitHub repository. By creating a first site that uses this repository through <a href="https://github.com/apps/aem-code-sync">AEM Code Sync</a>, this code will be made available to Adobe Experience Manager and can then be used by multiple sites. When updates are pushed to the GitHub repository, they apply to all sites that use this codebase.</p>
+        <h3 id="site">Site</h3>
+        <p>A site combines content, code, and configuration to create a new web experience. Configuration can be attached directly to the site, or it can be referenced from a profile. While a profile can be used by multiple sites, each site can have only one profile. When there is a conflict between the configuration settings in a site and in a profile, the site configuration wins.</p>
+        <p>Which content source and which codebase to use for a site are configuration settings, too. This enables the re-use of code and repoless sites.</p>
+        <h3 id="content-source">Content Source</h3>
+        <p>The content that makes up a site is pulled from a content source when authors preview or publish content. Typical sources include Microsoft Sharepoint and Google Drive, or the bring-your-own-markup adapter.</p>
+        <h2 id="preparation">Preparation</h2>
+        <h3 id="pre-requisites">Pre-requisites</h3>
+        <ul>
+          <li>GitHub Repository: <code>https://github.com/{owner}/{repo}</code></li>
+        </ul>
+        <p><strong>Note:</strong> If your organization is unable to use GitHub, see our <a href="../../developer/byo-git/index.html">Bring your own Git</a> documentation.</p>
+        <p>The first step to creating a bunch of sites sharing the same codebase is to create a first canonical site. This site can be used to serve content, but its most important job is to ensure that code is getting synchronized from your GitHub repository to all sites that use the same codebase.</p>
+        <h3 id="create-your-first-site">Create your first site</h3>
+        <p>If this is your very first site, the easiest way to create your first site is to follow the steps of the <a href="../../developer/tutorial/index.html">developer tutorial</a>. It only takes a few minutes and will ensure your org and site will be set up in the <a href="../config-service-setup/index.html">configuration service</a> for you, using the GitHub owner as org and repo as site name.</p>
+        <p>If you already have an <code>aem.live</code> org and other sites configured, you can use the <a href="../admin.html/index.html#tag/siteConfig/operation/createSiteSite" data-broken-link="true">Admin API</a> to create new sites. See below for an example API request.</p>
+        <h2 id="create-a-repoless-site">Create a repoless site</h2>
+        <h3 id="pre-requisites-1">Pre-requisites</h3>
+        <ul>
+          <li>Canonical site configured with code and content repository</li>
+          <li>Content source URL with the content you want to use for the repoless site, e.g. <code>https://content.da.live/{org}/{site2}/</code></li>
+          <li><a href="../admin.html/index.html#tag/authentication" data-broken-link="true">Access token</a> for the Admin API</li>
+        </ul>
+        <h3 id="create-your-first-repoless-site">Create your first repoless site</h3>
+        <p>Using the <a href="../admin.html/index.html#tag/siteConfig/operation/createSiteSite" data-broken-link="true">Admin API</a>, you can create a new configuration for the first repoless site. Replace all variables in curly brackets with your actual details:</p>
+        <pre><code>curl -X PUT https://admin.hlx.page/config/{org}/sites/{site2}.json \
+  -H 'x-auth-token: {token}' \
+  -H 'content-type: application/json' \
+  --data '{
+  "code": {
+    "owner": "{owner}",
+    "repo": "{repo}"
+  },
+  "content": {
+    "source": {
+      "url": "https://content.da.live/{org}/{site2}/"
+    }
+  }
+}'
+</code></pre>
+        <p><br>The new site is instantly available at <a href="../../index.html">https://main--{site2}--{org}.aem.page</a>. On first access, most likely only the <code>404.html</code> will be shown, because no content has been previewed yet. You can preview content directly from the content source, or using the <a href="../sidekick/index.html">AEM Sidekick</a>.</p>
+        <p>Now you have multiple sites with different content repositories but sharing the same code base.</p>
+        <p>To load your new site during local development, use the <code>––url</code> option on the <a href="../../developer/cli-reference/index.html#up">aem up command</a> to specify the new site’s url, like:</p>
+        <pre><code>aem up ––url https://main––{site2}--{org}.aem.page
+</code></pre>
+        <h2 id="whats-not-needed-once-you-go-repoless">What’s not needed once you go repoless</h2>
+        <p>When you start with Adobe Experience Manager, many settings are kept either with your content in the content source, or in the GitHub repository next to your code. With the Configuration Service there is now a central place for these kinds of settings.</p>
+        <p>Below gives you a comparison between how different areas are configured when we use the document mode (the traditional, distributed configuration) vs. using the Configuration Service API.</p>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>What</th>
+                    <th>Document Mode</th>
+                    <th>API Mode</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a href="../../developer/anatomy-of-a-franklin-project/index.html#the-content-connection-fstabyaml" data-broken-link="true">Content Source</a></td>
+                    <td><code>fstab.yaml</code></td>
+                    <td><a href="../admin.html/index.html#schema/ContentConfig" data-broken-link="true">ContentConfig</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="../../developer/folder-mapping/index.html">Folder Mappings</a></td>
+                    <td><code>fstab.yaml</code></td>
+                    <td><a href="../admin.html/index.html#schema/FoldersConfig" data-broken-link="true">FoldersConfig</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="../go-live-checklist/index.html#sitemap--robots">robots.txt</a></td>
+                    <td><code>robots.txt</code> in Github</td>
+                    <td><a href="../admin.html/index.html#schema/RobotsConfig" data-broken-link="true">RobotsConfig</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="../byo-cdn-setup/index.html">CDN</a></td>
+                    <td>.helix/config.xlsx</td>
+                    <td><a href="../admin.html/index.html#schema/CDNConfig" data-broken-link="true">CDNConfig</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="../custom-headers/index.html">Headers</a></td>
+                    <td>.helix/headers.xlsx</td>
+                    <td><a href="../admin.html/index.html#schema/HeadersConfig" data-broken-link="true">HeadersConfig</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="../bulk-metadata/index.html#additional-metadata">Additional Metadata</a></td>
+                    <td>.helix/config.xlsx</td>
+                    <td><a href="../admin.html/index.html#schema/MetadataConfig" data-broken-link="true">MetadataConfig</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="../authentication-setup-authoring/index.html#enable-authentication-for-authors">Access</a></td>
+                    <td>.helix/config.xlsx</td>
+                    <td><a href="../admin.html/index.html#schema/AccessConfig" data-broken-link="true">AccessConfig</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="../../developer/sidekick-customization/index.html#plugins" data-broken-link="true">Sidekick Plugins</a></td>
+                    <td><code>tools/sidekick/config.json</code></td>
+                    <td><a href="../admin.html/index.html#schema/SidekickConfig" data-broken-link="true">SidekickConfig</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="../../developer/indexing/index.html#setting-up-more-index-configurations">Index Definitions</a></td>
+                    <td><code>helix-query.yaml</code> in GitHub</td>
+                    <td><a href="../admin.html/index.html#tag/indexConfig" data-broken-link="true">IndexConfig</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="../../developer/sitemap/index.html#generating-a-sitemap-configuration-based-on-an-index">Sitemap Definition</a></td>
+                    <td><code>helix-sitemap.yaml</code> in GitHub</td>
+                    <td><a href="../admin.html/index.html#schema/SitemapConfig" data-broken-link="true">SitemapConfig</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="developer-tutorial"><a href="../../developer/tutorial/index.html">Developer Tutorial</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="config-service-setup"><a href="../config-service-setup/index.html">Config Service Setup</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

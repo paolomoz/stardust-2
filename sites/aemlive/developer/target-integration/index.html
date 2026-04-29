@@ -1,0 +1,437 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.114Z
+  page:             developer-target-integration
+  pageUrl:          https://www.aem.live/developer/target-integration
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Configuring Adobe Target Integration</title>
+  <meta name="description" content="This article will walk you through the steps of setting up an integration with Adobe Target so you can personalize your pages via the Adobe ...">
+  <meta property="og:title" content="Configuring Adobe Target Integration">
+  <meta property="og:description" content="This article will walk you through the steps of setting up an integration with Adobe Target so you can personalize your pages via the Adobe ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/target-integration/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#considerations">Considerations</a></li>
+<li class="l-3"><a href="#mobile">Mobile</a></li>
+<li class="l-3"><a href="#desktop">Desktop</a></li>
+<li class="l-2"><a href="#adobe-experience-platform-websdk">Adobe Experience Platform WebSDK</a></li>
+<li class="l-2"><a href="#adobe-target-atjs-legacy">Adobe Target at.js (legacy)</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Configuring Adobe Target Integration</h1>
+          <p class="lede">This article will walk you through the steps of setting up an integration with Adobe Target so you can personalize your pages via the Adobe ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>This article will walk you through the steps of setting up an integration with Adobe Target so you can personalize your pages via the Adobe Target Visual Experience Composer (VEC). Before you go further, please also check our native <a href="../../docs/experimentation/index.html">Experimentation</a> capabilities.</p>
+        <p>We support 2 different ways of integrating with Adobe Target. The recommended future-proof approach is via the <a href="https://experienceleague.adobe.com/docs/experience-platform/web-sdk/home.html">Adobe Experience Platform WebSDK</a>, but we also support the legacy <a href="https://experienceleague.adobe.com/docs/target-learn/tutorials/implementation/understanding-how-atjs-20-works.html">Adobe Target at.js</a> approach.</p>
+        <h2 id="considerations">Considerations</h2>
+        <p>Before we dive into the technical implementations, let us quickly recap how Adobe Target works so we set the proper expectations.</p>
+        <p>Adobe Target lets you modify the content of an existing page based on the personalization parameters you define in Adobe Target Visual Experience Composer (VEC) or equivalent. The rules will be dynamically evaluated server-side and Adobe Target will deliver a list of page modifications that will be applied to the rendered page after the blocks have been decorated.</p>
+        <p>There are thus a few things to keep in mind:</p>
+        <ol>
+          <li>Page modifications are done on the final page markup after the blocks have been decorated. So if you want to change block behaviors based on modifications that Adobe Target will be doing (like setting a CSS class or attribute), you’ll have to leverage the <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver">MutationObserver</a> API</li>
+          <li>Adobe Target will be modifying blocks after they have been decorated and shown on the page. In most cases, this is not an issue as applying the modifications takes only a few milliseconds, but if you run complex code snippets this will likely trigger some page flickering and impact the user experience</li>
+          <li>The roundtrip to the Adobe Target backend services to obtain the list of page modifications that need to be applied is done during the eager phase and will impact the overall LCP. The first call to the endpoint is also typically slower, while subsequent calls will be on a warmed-up service with cached responses</li>
+          <li>Since the instrumentation has an overhead, we recommend only enabling it on selected pages that are meant to be experimented on or personalized. The easiest is to add a page metadata, like <code>Target: on</code> that will act as a feature flag.</li>
+        </ol>
+        <p>In our tests, you can expect a baseline performance impact as below. To this you’d also need to add the overhead of more complex page modifications, especially when using custom JavaScript snippets.</p>
+        <h3 id="mobile">Mobile</h3>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td><strong>Largest Contentful Paint</strong></td>
+                    <td><strong>Total Blocking Time</strong></td>
+                    <td><strong>PageSpeed</strong></td>
+                  </tr>
+                  <tr>
+                    <td><strong>1st call</strong></td>
+                    <td>+1.3s</td>
+                    <td>20~40ms</td>
+                    <td>0~5 pts</td>
+                  </tr>
+                  <tr>
+                    <td><strong>subsequent calls</strong></td>
+                    <td>+0.1s</td>
+                    <td>20~40ms</td>
+                    <td>0~3 pts</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h3 id="desktop">Desktop</h3>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td><strong>Largest Contentful Paint</strong></td>
+                    <td><strong>Total Blocking Time</strong></td>
+                    <td><strong>PageSpeed</strong></td>
+                  </tr>
+                  <tr>
+                    <td><strong>1st call</strong></td>
+                    <td>+0.5s</td>
+                    <td>0~20ms</td>
+                    <td>0~3 pts</td>
+                  </tr>
+                  <tr>
+                    <td><strong>subsequent calls</strong></td>
+                    <td>+0.3~0.5s</td>
+                    <td>0~20ms</td>
+                    <td>0~3 pts</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h2 id="adobe-experience-platform-websdk">Adobe Experience Platform WebSDK</h2>
+        <p>To enable Adobe Target integration in your website using the Adobe Experience Platform WebSDK (aka <em>alloy</em>), please follow these steps in your project:</p>
+        <ul>
+          <li>Start by following the steps to <a href="https://experienceleague.adobe.com/docs/experience-platform/web-sdk/personalization/adobe-target/target-overview.html">Use Adobe Target and Web SDK for personalization</a>, and skip all steps related to actual instrumentation at the code level</li>
+          <li>Make sure to note down the Adobe IMS Organization Identifier (<code>orgId</code>) as well as the Adobe Experience Platform Datastream Id (<code>datastreamId</code>, formally <code>edgeConfigId</code>) you want to use. You can get those following the WebSDK configuration documentation (<a href="https://experienceleague.adobe.com/en/docs/experience-platform/web-sdk/commands/configure/orgid">orgId</a>, <a href="https://experienceleague.adobe.com/en/docs/experience-platform/web-sdk/commands/configure/edgeconfigid">edgeConfigId</a>).</li>
+          <li>In your GitHub repository for the website, add the <code>alloy.js</code> file.</li>
+          <li>Then edit your <code>scripts.js</code> file and add the following code somewhere above the <code>loadEager</code> method definition:</li>
+        </ul>
+        <pre><code>function initWebSDK(path, config) {
+  // Preparing the alloy queue
+  if (!window.alloy) {
+    // eslint-disable-next-line no-underscore-dangle
+    (window.__alloyNS ||= []).push('alloy');
+    window.alloy = (...args) =&gt; new Promise((resolve, reject) =&gt; {
+      window.setTimeout(() =&gt; {
+        window.alloy.q.push([resolve, reject, args]);
+      });
+    });
+    window.alloy.q = [];
+  }
+  // Loading and configuring the websdk
+  return new Promise((resolve) =&gt; {
+    import(path)
+      .then(() =&gt; window.alloy('configure', config))
+      .then(resolve);
+  });
+}
+
+function onDecoratedElement(fn) {
+  // Apply propositions to all already decorated blocks/sections
+  if (document.querySelector('[data-block-status="loaded"],[data-section-status="loaded"]')) {
+    fn();
+  }
+
+  const observer = new MutationObserver((mutations) =&gt; {
+    if (mutations.some((m) =&gt; m.target.tagName === 'BODY'
+      || m.target.dataset.sectionStatus === 'loaded'
+      || m.target.dataset.blockStatus === 'loaded')) {
+      fn();
+    }
+  });
+  // Watch sections and blocks being decorated async
+  observer.observe(document.querySelector('main'), {
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['data-block-status', 'data-section-status'],
+  });
+  // Watch anything else added to the body
+  observer.observe(document.querySelector('body'), { childList: true });
+}
+
+function toCssSelector(selector) {
+  return selector.replace(/(\.\S+)?:eq\((\d+)\)/g, (_, clss, i) =&gt; `:nth-child(${Number(i) + 1}${clss ? ` of ${clss})` : ''}`);
+}
+
+async function getElementForProposition(proposition) {
+  const selector = proposition.data.prehidingSelector
+    || toCssSelector(proposition.data.selector);
+  return document.querySelector(selector);
+}
+
+async function getAndApplyRenderDecisions() {
+  // Get the decisions, but don't render them automatically
+  // so we can hook up into the AEM EDS page load sequence
+  const response = await window.alloy('sendEvent', { renderDecisions: false });
+  const { propositions } = response;
+  onDecoratedElement(async () =&gt; {
+    await window.alloy('applyPropositions', { propositions });
+    // keep track of propositions that were applied
+    propositions.forEach((p) =&gt; {
+      p.items = p.items.filter((i) =&gt; i.schema !== 'https://ns.adobe.com/personalization/dom-action' || !getElementForProposition(i));
+    });
+  });
+
+  // Reporting is deferred to avoid long tasks
+  window.setTimeout(() =&gt; {
+    // Report shown decisions
+    window.alloy('sendEvent', {
+      xdm: {
+        eventType: 'decisioning.propositionDisplay',
+        _experience: {
+          decisioning: { propositions },
+        },
+      },
+    });
+  });
+}
+
+let alloyLoadedPromise = initWebSDK('./alloy.js', {
+    datastreamId: '/* your datastream id here, formally edgeConfigId */',
+    orgId: '/* your ims org id here */',
+  });;
+if (getMetadata('target')) {
+  alloyLoadedPromise.then(() =&gt; getAndApplyRenderDecisions());
+}
+</code></pre>
+        <ul>
+          <li>Adjust the path to the library and set the correct values for your <code>datastreamId</code>, formally<code> edgeConfigId</code>, and <code>orgId</code> as per step 2.</li>
+          <li>Then edit the <code>loadEager</code> method to:</li>
+        </ul>
+        <pre><code>if (main) {
+    decorateMain(main);
+    document.body.classList.add('appear');
+    // wait for alloy to finish loading
+    await alloyLoadedPromise;
+    // break up possible long tasks before showing the LCP block to reduce TBT
+    await new Promise((res) =&gt; {
+      window.setTimeout(async () =&gt; {
+        // For newer AEM boilerplate, use this
+        await loadSection(main.querySelector('.section'), waitForFirstImage)
+        // For older AEM boilerplate versions, use this instead
+        // await waitForLCP(LCP_BLOCKS);
+        res();
+      }, 0);
+    });
+  }
+</code></pre>
+        <ul>
+          <li>Commit and push your code</li>
+          <li>Setup up an experiment in Adobe Target and preview the page</li>
+          <li>Add the <code>Target</code> metadata property to your page to trigger the instrumentation, or adjust the <code>getMetadata</code> condition in the code above to your needs. You can typically import <code>getMetadata</code> from <code>aem.js</code> or equivalent in your project if it isn’t yet available in your <code>scripts.js</code></li>
+          <li>If the instrumentation is properly done, you should see a call to <code>https://edge.adobedc.net/ee/v1/interact</code> in your browser’s Network tab when you load the page. Whether the page is actually modified or not will depend on the configuration you set in Adobe Target</li>
+          <li>You are all done!</li>
+        </ul>
+        <h2 id="adobe-target-atjs-legacy">Adobe Target at.js (legacy)</h2>
+        <p>To enable Adobe Target integration in your website using the legacy <code>at.js</code> approach, please follow these steps in your project:</p>
+        <ul>
+          <li>Start by reading the <a href="https://experienceleague.adobe.com/docs/target-dev/developer/client-side/at-js-implementation/overview.html">Adobe Target at.js implementation documentation</a>, and skip all steps related to actual instrumentation at the code level</li>
+          <li>Go to <a href="https://experience.adobe.com/#/target/setup/implementation">https://experience.adobe.com/#/target/setup/implementation</a> and note down your Client Code and IMS Organization Id</li>
+          <li>In your GitHub repository for the website, add the <code>at.js</code> file. We have an optimized version for AEM Edge Delivery Service that you can fetch at <code>https://atjs--wknd--hlxsites.hlx.live/scripts/at.fix.min.js</code> until it is made publicly available</li>
+          <li>Then Edit your <code>scripts.js</code> file and add the following code somewhere above the <code>loadEager</code> method definition:</li>
+        </ul>
+        <pre><code>function initATJS(path, config) {
+  window.targetGlobalSettings = config;
+  return new Promise((resolve) =&gt; {
+    import(path).then(resolve);
+  });
+}
+
+function onDecoratedElement(fn) {
+  // Apply propositions to all already decorated blocks/sections
+  if (document.querySelector('[data-block-status="loaded"],[data-section-status="loaded"]')) {
+    fn();
+  }
+
+  const observer = new MutationObserver((mutations) =&gt; {
+    if (mutations.some((m) =&gt; m.target.tagName === 'BODY'
+      || m.target.dataset.sectionStatus === 'loaded'
+      || m.target.dataset.blockStatus === 'loaded')) {
+      fn();
+    }
+  });
+  // Watch sections and blocks being decorated async
+  observer.observe(document.querySelector('main'), {
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['data-block-status', 'data-section-status'],
+  });
+  // Watch anything else added to the body
+  observer.observe(document.querySelector('body'), { childList: true });
+}
+
+function toCssSelector(selector) {
+  return selector.replace(/(\.\S+)?:eq\((\d+)\)/g, (_, clss, i) =&gt; `:nth-child(${Number(i) + 1}${clss ? ` of ${clss})` : ''}`);
+}
+
+async function getElementForOffer(offer) {
+  const selector = offer.cssSelector || toCssSelector(offer.selector);
+  return document.querySelector(selector);
+}
+
+async function getElementForMetric(metric) {
+  const selector = toCssSelector(metric.selector);
+  return document.querySelector(selector);
+}
+
+async function getAndApplyOffers() {
+  const response = await window.adobe.target.getOffers({ request: { execute: { pageLoad: {} } } });
+  const { options = [], metrics = [] } = response.execute.pageLoad;
+  onDecoratedElement(() =&gt; {
+    window.adobe.target.applyOffers({ response });
+    // keeping track of offers that were already applied
+    options.forEach((o) =&gt; o.content = o.content.filter((c) =&gt; !getElementForOffer(c)));
+    // keeping track of metrics that were already applied
+    metrics.map((m, i) =&gt; getElementForMetric(m) ? i : -1)
+        .filter((i) =&gt; i &gt;= 0)
+        .reverse()
+        .map((i) =&gt; metrics.splice(i, 1));
+  });
+}
+
+let atjsPromise = Promise.resolve();
+if (getMetadata('target')) {
+  atjsPromise = initATJS('./at.js', {
+    clientCode: '/* your client code here */',
+    serverDomain: '/* your client code here */.tt.omtrdc.net',
+    imsOrgId: '/* your ims org id here */',
+    bodyHidingEnabled: false,
+    cookieDomain: window.location.hostname,
+    pageLoadEnabled: false,
+    secureOnly: true,
+    viewsEnabled: false,
+    withWebGLRenderer: false,
+  });
+  document.addEventListener('at-library-loaded', () =&gt; getAndApplyOffers());
+}
+</code></pre>
+        <ul>
+          <li>Adjust the path to the library and set the correct values for the <code>clientCode</code> and <code>imsOrgId</code> as per step 2, and edit the <code>serverDomain</code> so the first part matches your client code.</li>
+          <li>Then edit the <code>loadEager</code> method to:</li>
+        </ul>
+        <pre><code>if (main) {
+    decorateMain(main);
+    document.body.classList.add('appear');
+    // wait for atjs to finish loading
+    await atjsPromise;
+    // break up possible long tasks before showing the LCP block to reduce TBT
+    await new Promise((resolve) =&gt; {
+      window.setTimeout(async () =&gt; {
+        // For newer AEM boilerplate, use this
+        await loadSection(main.querySelector('.section'), waitForFirstImage)
+        // For older AEM boilerplate versions, use this instead
+        // await waitForLCP(LCP_BLOCKS);
+        resolve();
+      }, 0);
+    });
+  }
+</code></pre>
+        <ul>
+          <li>Commit your code</li>
+          <li>Setup up an experiment in Adobe Target and preview the page</li>
+          <li>Add the <code>Target</code> metadata property to your page to trigger the instrumentation, or adjust the <code>getMetadata</code> condition in the code above to your needs. You can typically import <code>getMetadata</code> from <code>aem.js</code> or equivalent in your project if it isn’t yet available in your <code>scripts.js</code></li>
+          <li>If the instrumentation is properly done, you should see a call to <code>https://&lt;client-code&gt;.tt.omtrdc.net/rest/v1/delivery</code> in your browser’s Network tab when you load the page. Whether the page is actually modified or not will depend on the configuration you set in Adobe Target</li>
+          <li>You are all done!</li>
+        </ul>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

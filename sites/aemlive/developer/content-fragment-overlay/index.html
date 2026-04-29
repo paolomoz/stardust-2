@@ -1,0 +1,345 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.324Z
+  page:             developer-content-fragment-overlay
+  pageUrl:          https://www.aem.live/developer/content-fragment-overlay
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Publishing AEM Content Fragments to Edge Delivery Services</title>
+  <meta name="description" content="AEM content fragments are used to create, manage, and deliver content across multiple channels. Until recently, publishing content fragments to Edge Delivery Services only embedded ...">
+  <meta property="og:title" content="Publishing AEM Content Fragments to Edge Delivery Services">
+  <meta property="og:description" content="AEM content fragments are used to create, manage, and deliver content across multiple channels. Until recently, publishing content fragments to Edge Delivery Services only embedded ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/content-fragment-overlay/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#why-does-this-matter">Why Does This Matter?</a></li>
+<li class="l-2"><a href="#how-to-set-it-up">How to Set It Up</a></li>
+<li class="l-3"><a href="#step-1-configure-path-mapping-and-overlay-in-configuration-service">Step 1: Configure Path Mapping and Overlay in Configuration Service</a></li>
+<li class="l-3"><a href="#step-2-configure-the-json2html-service">Step 2: Configure the json2html Service</a></li>
+<li class="l-3"><a href="#step-3-create-a-mustache-template">Step 3: Create a Mustache Template</a></li>
+<li class="l-2"><a href="#test-your-setup">Test Your Setup</a></li>
+<li class="l-2"><a href="#conclusion">Conclusion</a></li>
+<li class="l-3"><a href="#json2html-overview">json2html Overview</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Publishing AEM Content Fragments to Edge Delivery Services</h1>
+          <p class="lede">AEM content fragments are used to create, manage, and deliver content across multiple channels. Until recently, publishing content fragments to Edge Delivery Services only embedded ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1b8d1abb91edbdd62a009761c83acb2c2f17596c3.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1b8d1abb91edbdd62a009761c83acb2c2f17596c3.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1b8d1abb91edbdd62a009761c83acb2c2f17596c3.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1b8d1abb91edbdd62a009761c83acb2c2f17596c3.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>AEM content fragments are used to create, manage, and deliver content across multiple channels. Until recently, publishing content fragments to Edge Delivery Services only embedded a reference to the content fragment—not the actual content—in the semantic HTML. This can limit a LLM agents’ ability to ingest and understand the content or create a meaningful search index for a page.</p>
+        <p>With the approach described next, you can publish AEM Content Fragments to Edge Delivery Services as self-contained semantic HTML.</p>
+        <h2 id="why-does-this-matter">Why Does This Matter?</h2>
+        <p><strong>1. LLM/SEO Optimization</strong></p>
+        <p>LLM and SEO optimization improve because content fragments are now published as self-contained semantic HTML. Previously, only links to fragments were included, so automated agents like search engines and language models could not access the full content. Now, the complete content is directly available without requiring JavaScript.</p>
+        <p><strong>2. Omnichannel Delivery</strong></p>
+        <p>Omnichannel delivery like banners, press releases, blog posts etc. can be managed and published as full web pages instead of only as headless content. Edge Delivery Services acts as the “head” for the headless CMS, providing HTML output for any channel.</p>
+        <p><strong>3. Simplified Workflow</strong></p>
+        <p>In the current approach, GraphQL endpoints and queries must be defined and published together with the fragments. For each content fragment model, a separate block is created and then added to an AEM page. Finally, the page itself is published, containing only a reference to the content fragment rather than the fragment’s full content.</p>
+        <p>The new approach streamlines this significantly. Instead of working with GraphQL endpoints, you define path mapping and overlay directly in the site configuration. The json2html service is then configured, and a Mustache template is applied to transform the JSON output of the fragments into HTML.<br><br>With this setup, the content fragments can be published directly as HTML, eliminating the need for additional blocks, queries or pages.</p>
+        <h2 id="how-to-set-it-up">How to Set It Up</h2>
+        <p>As a prerequisite you need:</p>
+        <ul>
+          <li>An AEM as a Cloud Service (AEMaaCS) environment.</li>
+          <li>To turn on this feature in your AEMaaCS environment, please reach out to your Adobe team on Slack/Teams.</li>
+          <li>A site using the <a href="https://github.com/adobe-rnd/aem-boilerplate-xwalk">aem-boilerplate-xwalk</a> project template or similar.</li>
+          <li><a href="../../docs/config-service-setup/index.html">Configuration Service</a> enabled in Edge Delivery Services.</li>
+          <li>To <a href="../../docs/universal-editor-assets/index.html#assigning-a-proper-configuration-to-an-asset-folder">apply an Edge Delivery configuration to the folder</a> containing the Content Fragments.</li>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/sites/administering/content-fragments/setup">Enable Content Fragments</a> for your site.</li>
+        </ul>
+        <p><strong>Note:</strong> While the steps below refer to a site that was set up with <a href="../../docs/aem-authoring/index.html">AEM authoring</a>, it works for any other <a href="../../docs/authoring-guide/index.html">primary content source</a> as well.</p>
+        <p>For our example we are going to use a content fragment model for press releases with fields like <code>title</code>, <code>author</code>, <code>text</code> and <code>image</code>.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1ed1c5541fb18b52918e130ece493019205e1b43d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1ed1c5541fb18b52918e130ece493019205e1b43d.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1ed1c5541fb18b52918e130ece493019205e1b43d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1ed1c5541fb18b52918e130ece493019205e1b43d.png?width=750&amp;format=png&amp;optimize=medium" width="1392" height="1448">
+          </picture>
+        </p>
+        <p>Next we create Content Fragments in a dedicated assets folder (e.g., below <code>press</code>) using the press release model.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1dc6f3226604ca64d02ce5d8ecf17d05f31e8b170.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1dc6f3226604ca64d02ce5d8ecf17d05f31e8b170.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1dc6f3226604ca64d02ce5d8ecf17d05f31e8b170.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1dc6f3226604ca64d02ce5d8ecf17d05f31e8b170.png?width=750&amp;format=png&amp;optimize=medium" width="1392" height="1527">
+          </picture>
+        </p>
+        <h3 id="step-1-configure-path-mapping-and-overlay-in-configuration-service">Step 1: Configure Path Mapping and Overlay in Configuration Service</h3>
+        <p>In <a href="../../docs/config-service-setup/index.html">Configuration Service</a>, define a <a href="../authoring-path-mapping/index.html">path mapping</a> for your content fragments and allow list the content fragment model to be published to Edge Delivery Service. In our example we publish Press Release fragments in <code>/content/dam/xwalk-omnichannel/press/</code> to <code>/press/</code>.</p>
+        <pre><code>curl --request POST \
+  --url https://admin.hlx.page/config/{org}/sites/{site}/public.json \
+  --header 'Content-Type: application/json' \
+  --header 'x-auth-token: ......' \
+  --data '{
+    "paths": {
+      "mappings": [
+        "/content/xwalk-omnichannel/:/",
+        "/content/dam/xwalk-omnichannel/press/:/press/"
+      ],
+      "includes": [
+        "/content/xwalk-omnichannel/",
+        "/content/dam/xwalk-omnichannel/"
+      ]
+    },
+    "xwalk": {
+      "content-fragment-overlay": {
+        "/content/dam/xwalk-omnichannel/press/**": {
+          "includes": [
+           "/conf/xwalk-omnichannel/settings/dam/cfm/models/press-release"
+          ]
+        }
+      }
+    }
+  }'
+</code></pre>
+        <p>Next, add an overlay to the content source in your site’s configuration, pointing it to the <strong>json2html</strong> service.</p>
+        <pre><code>curl --request POST \
+  --url https://admin.hlx.page/config/{org}/sites/{site}/content.json \
+  --header 'Content-Type: application/json' \
+  --header 'x-auth-token: ......' \
+  --data '{
+    "source": {
+      "url": "https://author-pXXXX-eXXXX.adobeaemcloud.com/bin/franklin.delivery/adobe-rnd/xwalk-omnichannel/main",
+      "type": "markup",
+      "suffix": ".html"
+    },
+    "overlay": {
+      "url": "https://json2html.adobeaem.workers.dev/adobe-rnd/xwalk-omnichannel/main",
+      "type": "markup"
+    }
+  }'
+</code></pre>
+        <p>The URL format for the <a href="../json2html/index.html">json2html service</a> is: <code>https://json2html.adobeaem.workers.dev/ORG/SITE/BRANCH</code></p>
+        <p>How the overlay works:</p>
+        <ul>
+          <li>When a content fragment gets published, the Admin API checks the overlay first.</li>
+          <li>The json2html service fetches the content fragment from AEM as JSON.</li>
+          <li>It transforms the JSON to HTML using a <a href="https://mustache.github.io/">Mustache template</a>.</li>
+          <li>The HTML is ingested in Edge Delivery as page by the Admin API.</li>
+        </ul>
+        <h3 id="step-2-configure-the-json2html-service">Step 2: Configure the json2html Service</h3>
+        <p>The following is the curl command to set up the service for our example use case:</p>
+        <pre><code>curl --request POST \
+ --url https://json2html.adobeaem.workers.dev/config/adobe-rnd/xwalk-omnichannel/main \
+ --header 'Authorization: token &lt;admin-api-token&gt;' \
+ --header 'Content-Type: application/json' \
+ --data '[
+    {
+        "path": "/press/",
+        "endpoint": "https://author-pXXXX-eXXXX.adobeaemcloud.com/api/assets/xwalk-omnichannel/press/{{id}}.json",
+        "regex": "/(?&lt;=\\/press\\/)(.+)$/",
+        "template": "/cf-templates/press.html",
+        "relativeURLPrefix": "https://publish-pXXXX-eXXX.adobeaemcloud.com", 
+	  "headers": {           
+          "Accept": "application/json"
+        },
+        "forwardHeaders":[
+            "Authorization"
+        ]
+    }
+  ]'
+</code></pre>
+        <p>See the documentation for the <a href="../json2html/index.html#configuration-managementhttps://www.aem.live/developer/json2html">json2html Service</a> for a detailed description of the different configuration options. In short:</p>
+        <ul>
+          <li><code>path</code>: Defines the URL paths for which the service should process requests. In our example the root path in Edge Delivery Service where we publish the press releases ,<code> /press/</code>.</li>
+          <li><code>endpoint</code>: The URL of the JSON endpoint that returns the content fragment data from your AEM author instance</li>
+          <li><code>regex</code>: A regular expression to extract a specific part of the published URL (e.g., the Content Fragment ID). The extracted value is used as the <code>{{id}}</code> parameter in the <code>endpoint</code>.</li>
+          <li><code>template</code>: The path to your Mustache.js template file, which <a href="../json2html/index.html#example-template">transforms</a> the JSON data into semantic HTML. Store the template in your Edge Delivery Services github project.</li>
+          <li><code>relativeURLPrefix</code>: Converts relative URLs (for images, videos, or other assets) into absolute URLs, ensuring the admin API can ingest and render all linked assets. Set this to the base URL of your AEM publish instance.</li>
+          <li><code>headers</code>: HTTP headers to include in the request to the JSON endpoint.</li>
+          <li><code>forwardHeaders</code>: Specifies which HTTP headers should be forwarded from the admin API to the JSON endpoint, required for authenticated requests.</li>
+        </ul>
+        <h3 id="step-3-create-a-mustache-template">Step 3: Create a Mustache Template</h3>
+        <p>Without a template, each property in your JSON is rendered as a <code>&lt;div&gt;</code>. To create a more meaningful semantic HTML for our press release example we define a template that renders:</p>
+        <ul>
+          <li>the first image and the press release title as an hero block</li>
+          <li>the author name as default content</li>
+          <li>the news article and two images in a columns block</li>
+        </ul>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;{{properties.title}}&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;header&gt;&lt;/header&gt;
+    &lt;main&gt;
+      &lt;div&gt;
+        &lt;div class="hero"&gt;
+          &lt;div&gt;
+            &lt;div&gt;
+              &lt;p&gt;
+                &lt;picture&gt;
+                  &lt;img src="{{{properties.elements.image.value}}}"&gt;
+                &lt;/picture&gt;
+              &lt;/p&gt;
+              &lt;h1&gt;{{properties.elements.newsTitle.value}}&lt;/h1&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p&gt;&lt;strong&gt;Author:&lt;/strong&gt; {{properties.elements.author.value}}&lt;/p&gt;
+        &lt;div class="columns"&gt;
+          &lt;div&gt;
+            &lt;div&gt;
+              &lt;p&gt;
+                &lt;picture&gt;
+                  &lt;img src="{{{properties.elements.image2.value}}}"&gt;
+                &lt;/picture&gt;
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;p&gt;{{{properties.elements.text.value}}}&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;p&gt;
+                &lt;picture&gt;
+                  &lt;img src="{{{properties.elements.image3.value}}}"&gt;
+                &lt;/picture&gt;
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;&lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        <p><strong>Key Points:</strong></p>
+        <ul>
+          <li>Use <a href="https://github.com/janl/mustache.js?tab=readme-ov-file#variables">Mustache.js</a> syntax.</li>
+          <li>Ensure all asset paths are absolute or use <code>relativeURLPrefix</code> to append the right domain to the relative urls in the content.</li>
+          <li>Follow <a href="../byom/index.html#what-format-should-the-source-bring-to-the-table">Edge Delivery Services semantic HTML guidelines</a> to create valid semantic HTML that can be ingested by the admin API.</li>
+        </ul>
+        <h2 id="test-your-setup">Test Your Setup</h2>
+        <ul>
+          <li>Create and publish a content fragment to Edge Delivery Service.</li>
+          <li>Verify the output is a standalone HTML page with all content rendered.</li>
+        </ul>
+        <p>For our example the output looks as follows:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1b671ac20a2a15864ab55123c657d17efaab39fc9.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1b671ac20a2a15864ab55123c657d17efaab39fc9.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1b671ac20a2a15864ab55123c657d17efaab39fc9.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1b671ac20a2a15864ab55123c657d17efaab39fc9.png?width=750&amp;format=png&amp;optimize=medium" width="1392" height="1307">
+          </picture>
+        </p>
+        <h2 id="conclusion">Conclusion</h2>
+        <p>By setting up an overlay using the json2html service, you can now publish AEM content fragments as self-contained semantic HTML to Edge Delivery Services. This simplifies omnichannel delivery and makes your content LLM-ready—all with minimal setup.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="json2html-overview"><a href="../json2html/index.html">json2html Overview</a></h3>
+            </div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

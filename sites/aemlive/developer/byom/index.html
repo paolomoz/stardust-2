@@ -1,0 +1,330 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.194Z
+  page:             developer-byom
+  pageUrl:          https://www.aem.live/developer/byom
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Bring Your Own Markup</title>
+  <meta name="description" content="Edge Delivery Services is independent of the authoring tooling and supports multiple content sources. This means you could provide your own content source and publish ...">
+  <meta property="og:title" content="Bring Your Own Markup">
+  <meta property="og:description" content="Edge Delivery Services is independent of the authoring tooling and supports multiple content sources. This means you could provide your own content source and publish ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/byom/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#what-format-should-the-source-bring-to-the-table">What format should the source bring to the table</a></li>
+<li class="l-3"><a href="#block-class-names">Block class names</a></li>
+<li class="l-2"><a href="#what-about-sheets">What about sheets?</a></li>
+<li class="l-2"><a href="#setup-byom-as-primary-content-source">Setup BYOM as primary content source</a></li>
+<li class="l-3"><a href="#how-markup-urls-are-constructed">How markup URLs are constructed</a></li>
+<li class="l-2"><a href="#setup-byom-as-content-overlay">Setup BYOM as content overlay</a></li>
+<li class="l-2"><a href="#image-authentication-for-byom-content-sources">Image Authentication for BYOM Content Sources</a></li>
+<li class="l-3"><a href="#how-it-works">How it works</a></li>
+<li class="l-3"><a href="#supported-source-values">Supported source values</a></li>
+<li class="l-3"><a href="#examples">Examples</a></li>
+<li class="l-4"><a href="#allow-all-image-hosts-to-receive-the-authentication-header">Allow all image hosts to receive the authentication header</a></li>
+<li class="l-4"><a href="#allow-a-specific-cdn-host">Allow a specific CDN host</a></li>
+<li class="l-4"><a href="#allow-all-subdomains-of-a-domain">Allow all subdomains of a domain</a></li>
+<li class="l-4"><a href="#allow-multiple-hosts">Allow multiple hosts</a></li>
+<li class="l-4"><a href="#no-header-or-empty-value">No header or empty value</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Bring Your Own Markup</h1>
+          <p class="lede">Edge Delivery Services is independent of the authoring tooling and supports multiple content sources. This means you could provide your own content source and publish ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_163649ea05f49d30d779c990171c0a271f31bab3b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_163649ea05f49d30d779c990171c0a271f31bab3b.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_163649ea05f49d30d779c990171c0a271f31bab3b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_163649ea05f49d30d779c990171c0a271f31bab3b.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Edge Delivery Services is independent of the authoring tooling and supports multiple content sources. This means you could provide your own content source and publish the content from a repository you already have to AEM without having to migrate the content first.</p>
+        <p>The API that enables it is called Bring Your Own Markup (BYOM). It uses HTML as the standard data format.</p>
+        <p>Bring Your Own Markup is widely adopted and two of Adobe's own content sources already implement it. BYOM is generic and easy to implement; it can be used for any content source.</p>
+        <h2 id="what-format-should-the-source-bring-to-the-table">What format should the source bring to the table</h2>
+        <p>The data format for BYOM is HTML - in fact, it is the same semantic HTML structure used by Edge Delivery Services when rendering your website.</p>
+        <p>For each page that is previewed, your BYOM service must return an HTML response. This means that the HTML must follow the semantics of <a href="../markup-sections-blocks/index.html">sections, blocks and default content</a>.</p>
+        <p>A very minimal example of this looks like:</p>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Home&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;header&gt;&lt;/header&gt;
+    &lt;main&gt;
+      &lt;div&gt;
+        &lt;div class="hero"&gt;
+          &lt;div&gt;
+            &lt;div&gt;
+              &lt;p&gt;
+                &lt;picture&gt;
+                  &lt;img loading="lazy" alt="" src="myimage.jpg"&gt;
+                &lt;/picture&gt;
+              &lt;/p&gt;
+              &lt;h1&gt;Hello World&lt;/h1&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p&gt;Welcome to your website.&lt;/p&gt;
+        &lt;div class="metadata"&gt;
+          &lt;div&gt;
+            &lt;div&gt;
+              &lt;p&gt;Description&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;p&gt;Page Description&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;&lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        <p>Extra elements such as <code>span</code> tags, data attributes, or styles are removed when content is ingested. Page metadata can be provided via the common <code>meta</code> tags in the HTML head or via a <code>metadata</code> block with the page content.</p>
+        <p>Image source URLs within the content must be accessible by Edge Delivery Services. The images will be downloaded and ingested during the preview of the page. Image source can be an absolute URL or relative to the page.</p>
+        <h3 id="block-class-names">Block class names</h3>
+        <p>Block class names can only contain alphanumeric characters and single dashes and may not start with a digit. Underscores or double dashes are not supported. A block can have multiple classes. See also <a href="../markup-sections-blocks/index.html#block-options">block options</a> and <a href="../../docs/exploring-blocks/index.html#decorating-blocks">block decoration</a>.</p>
+        <ul>
+          <li>Supported: <code>hero wide</code> or <code>hero hero-wide</code></li>
+          <li>Not supported: <code>hero hero_wide</code> or <code>hero hero--wide</code></li>
+        </ul>
+        <h2 id="what-about-sheets">What about sheets?</h2>
+        <p>Structured data in the form of spreadsheets can be provided via BOYM as well. The data is provided as a JSON. The format of the JSON has to follow the Edge Delivery Services <a href="../spreadsheets/index.html">sheet format</a>.</p>
+        <h2 id="setup-byom-as-primary-content-source">Setup BYOM as primary content source</h2>
+        <p>The configuration of BYOM as the primary content source is carried out as for all projects either via fstab.yaml or via the <a href="../../docs/config-service-setup/index.html">configuration service</a>..</p>
+        <p>A file based setup will use an <code>fstab.yaml</code> like this:</p>
+        <pre><code>mountpoints:
+  /:
+    url: "https://content-service.acme.com/data"
+    type: "markup"
+    suffix: ".html"
+</code></pre>
+        <p>If the site is set up using the configuration service the site config can be created like this:</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/acme/sites/website.json \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: &lt;your-auth-token&gt;' \
+  --data '{
+  "version": 1,
+  "code": {
+    "owner": "acme",
+    "repo": "website"
+  },
+  "content": {
+    "source": {
+      "url": "https://content-service.acme.com/data",
+      "type": "markup",
+      "suffix": ".html"
+    }
+  }
+}'
+</code></pre>
+        <p>The path of the page being published is appended to the provided BYOM source URL.</p>
+        <p>In both configuration options the <code>"type": "markup"</code> must be present to indicate this is a BYOM content source. <code>"suffix": ".html"</code> is an optional configuration, the admin service will add the suffix when requesting the content from the BYOM service URL.</p>
+        <h3 id="how-markup-urls-are-constructed">How markup URLs are constructed</h3>
+        <p>When a page is previewed with a BYOM markup source configured, the admin service constructs the request URL with the format <code>{url.origin}{url.path}{contentPath}{suffix}{url.params}</code>.</p>
+        <p>Where:</p>
+        <ul>
+          <li><code>url.origin</code> - The origin from the source configuration</li>
+          <li><code>url.path</code> - The path from the source configuration</li>
+          <li><code>contentPath</code> - The path of the page being requested</li>
+          <li><code>suffix</code> - The optional suffix from the configuration</li>
+          <li><code>url.params</code> - Any query parameters from the source configuration</li>
+        </ul>
+        <p>For example, given this BYOM configuration:</p>
+        <pre><code>"source": {
+  "url": "https://content-service.acme.com/data?foo=bar",
+  "type": "markup",
+  "suffix": ".html"
+}
+</code></pre>
+        <p>When previewing a page at <code>/products/widget</code> the constructed url will be <code>https://content-service.acme.com/data/products/widget.html?foo=bar</code>.</p>
+        <h2 id="setup-byom-as-content-overlay">Setup BYOM as content overlay</h2>
+        <p>BYOM can also be used as an overlay for another content source. It does not matter whether the primary content source is SharePoint, Google Drive or BYOM. However, the overlay content source must always be BYOM. A typical use case for such a setup is, for example, the automatic publishing of product pages directly from the commerce backend.</p>
+        <p>To use the content overlay the site must use the configuration service. A file based setup via <code>fstab.yaml</code> is not supported.</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/acme/sites/website.json \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: &lt;your-auth-token&gt;' \
+  --data '{
+  "version": 1,
+  "code": {
+    "owner": "acme",
+    "repo": "website"
+  },
+  "content": {
+    "source": {
+      "url": "https://acme.sharepoint.com/sites/aem/Shared%20Documents/website"
+    },
+    "overlay": {
+      "url": "https://content-service.acme.com/data",
+      "type": "markup"
+    }
+  }
+}'
+</code></pre>
+        <h2 id="image-authentication-for-byom-content-sources">Image Authentication for BYOM Content Sources</h2>
+        <p>When Edge Delivery Services previews a page from a BYOM content source, it downloads and uploads all images referenced in the HTML to the media bus. If your content source requires authentication and your images are hosted on external domains that share the same credentials, you need to tell Edge Delivery Services which image hosts are allowed to receive the authentication header.</p>
+        <h3 id="how-it-works">How it works</h3>
+        <p>By default, the authentication header used to fetch the source content is only forwarded to image URLs on the <strong>same host</strong> as the content source (<code>self</code>). Images hosted on other domains are fetched without authentication.</p>
+        <p>To allow the authentication header to be forwarded to additional hosts, the content source must include the <code>x-html2md-img-src</code> response header in its HTTP response. The value is a space-separated list of allowed origins, modeled after the <code>img-src</code> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/Sources">directive</a> of the Content-Security-Policy header.</p>
+        <pre><code>x-html2md-img-src: &lt;source&gt; [&lt;source&gt; ...]
+</code></pre>
+        <p>The <code>self</code> origin is always implicitly included. This means images on the same host as the source URL always receive the authentication header, even if the header is absent or empty.</p>
+        <h3 id="supported-source-values">Supported source values</h3>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td><strong>Value</strong></td>
+                    <td><strong>Description</strong></td>
+                    <td><strong>Example</strong></td>
+                  </tr>
+                  <tr>
+                    <td><code>*</code></td>
+                    <td>Wildcard. Forward the auth header to all image hosts.</td>
+                    <td><code>*</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>self</code></td>
+                    <td>The same host as the source URL. Always implicitly included.</td>
+                    <td><code>self</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>&lt;host&gt;</code></td>
+                    <td>An exact hostname. Auth is forwarded to images served from this host.</td>
+                    <td><code>images.example.com</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>*.&lt;domain&gt;</code></td>
+                    <td>Wildcard subdomain. Auth is forwarded to any subdomain of the domain.</td>
+                    <td><code>*.example.com</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p>A full URL including protocol and path may be provided, but only the host portion is evaluated. The protocol and path are ignored.</p>
+        <h3 id="examples">Examples</h3>
+        <h4 id="allow-all-image-hosts-to-receive-the-authentication-header">Allow all image hosts to receive the authentication header</h4>
+        <p>If all your images require the same credentials as the content source, use the wildcard:</p>
+        <pre><code>x-html2md-img-src: *
+</code></pre>
+        <h4 id="allow-a-specific-cdn-host">Allow a specific CDN host</h4>
+        <p>If your images are served from a dedicated CDN that shares credentials with the content source:</p>
+        <pre><code>x-html2md-img-src: images.example.com
+</code></pre>
+        <h4 id="allow-all-subdomains-of-a-domain">Allow all subdomains of a domain</h4>
+        <pre><code>x-html2md-img-src: *.example.com
+</code></pre>
+        <h4 id="allow-multiple-hosts">Allow multiple hosts</h4>
+        <p>Multiple sources can be combined in a single header value:</p>
+        <pre><code>x-html2md-img-src: self https://images.example.com assets.cdn.net
+</code></pre>
+        <h4 id="no-header-or-empty-value">No header or empty value</h4>
+        <p>If the <code>x-html2md-img-src</code> header is absent or empty, only images on the same host as the content source will receive the authentication header. All other images are fetched without authentication.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

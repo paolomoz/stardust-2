@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.329Z
+  page:             blog-content-document-semantics
+  pageUrl:          https://www.aem.live/blog/content-document-semantics
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Documents that dazzle, content that clicks, and semantics that snap: the pièce de résistance to your content strategy</title>
+  <meta name="description" content="When you put a LEGO model together, there’s a certain feeling you get when you click two pieces together. A visceral satisfaction with the way ...">
+  <meta property="og:title" content="Documents that dazzle, content that clicks, and semantics that snap: the pièce de résistance to your content strategy">
+  <meta property="og:description" content="When you put a LEGO model together, there’s a certain feeling you get when you click two pieces together. A visceral satisfaction with the way ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/blog/content-document-semantics/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../index.html" aria-current="page">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-success)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#what-are-document-semantics">What are Document Semantics?</a></li>
+<li class="l-2"><a href="#whats-in-it-for-you">What’s in it for You?</a></li>
+<li class="l-3"><a href="#agent-friendly">Agent Friendly</a></li>
+<li class="l-3"><a href="#portability-and-re-use">Portability and Re-Use</a></li>
+<li class="l-3"><a href="#cleaner-and-simpler-code">Cleaner and Simpler Code</a></li>
+<li class="l-3"><a href="#content-syndicationapi-consumption">Content Syndication/API Consumption</a></li>
+<li class="l-2"><a href="#a-real-world-example">A Real World Example</a></li>
+<li class="l-3"><a href="#cleaning-it-up">Cleaning it Up</a></li>
+<li class="l-4"><a href="#style-options-as-classes">Style Options as Classes</a></li>
+<li class="l-4"><a href="#grouping-elements">Grouping Elements</a></li>
+<li class="l-4"><a href="#fixing-the-ctas">Fixing the CTAs</a></li>
+<li class="l-2"><a href="#apply-this-to-your-project-today">Apply this to Your Project Today</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog · BLOG</p>
+          <h1>Documents that dazzle, content that clicks, and semantics that snap: the pièce de résistance to your content strategy</h1>
+          <p class="lede">When you put a LEGO model together, there’s a certain feeling you get when you click two pieces together. A visceral satisfaction with the way ...</p>
+        </header>
+        <div>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1e4f9b1d26e972e1ec703a70c2c6226efc8810ab7.jpg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1e4f9b1d26e972e1ec703a70c2c6226efc8810ab7.jpg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="./media_1e4f9b1d26e972e1ec703a70c2c6226efc8810ab7.jpg?width=2000&amp;format=jpg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1e4f9b1d26e972e1ec703a70c2c6226efc8810ab7.jpg?width=750&amp;format=jpg&amp;optimize=medium" width="1024" height="576">
+          </picture>
+        </p>
+        
+        <p>When you put a LEGO model together, there’s a certain feeling you get when you click two pieces together. A visceral satisfaction with the way each brick fits into its counterpart with just the right amount of clutch power, forming one small piece of a larger whole. That feeling comes from the studs, the nubbins on the top of each brick that interlace into the hollows of connecting pieces. If you took the studs away, you may technically still be able to build the model, but it would require a lot of super glue, and you’d surely give up long before you finished.</p>
+        <p>Document semantics play a similar role when it comes to your content in AEM. Sure, you can build a website without them, and it can still technically work, but the overall process is harder, and the end result is fragile. Unfortunately, I’ve all too often worked with customers and partners doing just that, ignoring the document entirely when creating Universal Editor content models.</p>
+        <p>Today, I want to convince you that document semantics are important even if no one is ever going to see the document view of a page, and show you how easy it can be to do.</p>
+        <h2 id="what-are-document-semantics">What are Document Semantics?</h2>
+        <p>Before I go too far, I feel like I should define what document semantics are. For the purposes of this post, think of document semantics as the meaning carried by the document itself and the extent to which the raw, undecorated, content can be easily read, understood, and conveys its meaning to the reader.</p>
+        <p>This should be true at both the page level and the block level. At the page level, this means things like keeping headings in a logical order, and using section breaks to separate content. At a block level, you should group content logically within the blocks “cells,” avoid excessive row and column spans, etc.</p>
+        <p><em>Hint: you can get a document view of any AEM page by using the sidekick. Just right-click and choose “View Document Source.” This is a great way to see what your page looks like as a document and decide for yourself if it can be easily read and understood or not.</em></p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_14a8b04846176b992dab25f9135e848dbdacc246a.jpg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_14a8b04846176b992dab25f9135e848dbdacc246a.jpg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="./media_14a8b04846176b992dab25f9135e848dbdacc246a.jpg?width=2000&amp;format=jpg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="Screenshot of using the AEM Sidekick to view document source" src="./media_14a8b04846176b992dab25f9135e848dbdacc246a.jpg?width=750&amp;format=jpg&amp;optimize=medium" width="640" height="633">
+          </picture>
+        </p>
+        <h2 id="whats-in-it-for-you">What’s in it for You?</h2>
+        <p>When authors manage their content in documents (using <a href="../../docs/setup-sharepoint/index.html">Sharepoint</a>, <a href="../../docs/setup-googledrive/index.html">Google Drive</a>, or <a href="../../developer/da-tutorial/index.html" data-broken-link="true">DA</a>), the need for document semantics become obvious. You want to create an authoring experience that is simple, intuitive, and easy to use. By making sure the documents where authors manage content convey meaning and are easy to understand, you are doing just that.</p>
+        <p>On the other hand, when authors work primarily in <a href="../../developer/ue-tutorial/index.html">Universal Editor</a> (or any other <a href="../../developer/byom/index.html">third-party content source</a>) it can be easy to dismiss, or at least not prioritize, the investment of time it takes to <a href="../../developer/component-model-definitions/index.html#creating-semantic-content-models-for-blocks">create semantic models</a> for your blocks. But, there are a few clear benefits to doing so that make the investment payoff.</p>
+        <h3 id="agent-friendly">Agent Friendly</h3>
+        <p>As new AI agents, voice assistants, and other related technologies emerge, semantic content will be more <a href="https://www.searchenginejournal.com/how-llms-interpret-content-structure-information-for-ai-search/544308/">easily interpretable and usable</a> by these systems.</p>
+        <h3 id="portability-and-re-use">Portability and Re-Use</h3>
+        <p>Edge Delivery Services as a platform is content source agnostic, with native support for many content sources OOTB (Universal Editor, DA, Sharepoint, Google Drive), and can easily support other sources with <a href="../../developer/byom/index.html">BYOM</a>. Your project should strive to be content source agnostic as well, so that it is portable across all the content sources AEM supports.</p>
+        <p>By creating semantic content models, you give authors a great and easy to use experience with any content source they choose to use. This lets you support additional <a href="../../docs/repoless/index.html">repoless sites</a> from the same codebase, even if those sites aren’t authored in the same way. Similarly, you can add a <a href="../../developer/byom/index.html#setup-byom-as-content-overlay">content source overla</a>y to author certain section(s) of your site in a different way.</p>
+        <h3 id="cleaner-and-simpler-code">Cleaner and Simpler Code</h3>
+        <p>When your content structure follows logical document semantics, the underlying code becomes more straightforward to maintain and debug. This is because the starting DOM structures of your blocks are more concise, making the relationships between content elements more predictable and the transformation logic you need to write and maintain more direct and efficient.</p>
+        <h3 id="content-syndicationapi-consumption">Content Syndication/API Consumption</h3>
+        <p>The undecorated <a href="../../developer/markup-reference/index.html">HTML</a> rendered by AEM can be thought of as the contract between AEM and other parts of the system. For the same reasons that semantic structures make your block code cleaner, they also make it easier to consume the content from other systems. This means you can syndicate the content to mobile apps or expose it as an API for use on any number of devices/platforms.</p>
+        <h2 id="a-real-world-example">A Real World Example</h2>
+        <p>Some of the concepts above may seem fuzzy. So let me try to make them concrete with a real-world example. To demonstrate, I’m going to use the hero block I encountered when working with a customer. To protect the innocent, I’ve re-implemented everything on my own and made some minor changes, but the concepts and structures are very much real.</p>
+        <div class="columns contained">
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1ad9e09836322725fcf14fb008479c6a5e7122402.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1ad9e09836322725fcf14fb008479c6a5e7122402.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1ad9e09836322725fcf14fb008479c6a5e7122402.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="Screenshot of the doc view before fixing the document semantics" src="./media_1ad9e09836322725fcf14fb008479c6a5e7122402.png?width=750&amp;format=png&amp;optimize=medium" width="966" height="1600">
+              </picture>
+            </div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_16eeb9a72d744b25bfe6dde9f966372c1b35d1c12.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_16eeb9a72d744b25bfe6dde9f966372c1b35d1c12.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_16eeb9a72d744b25bfe6dde9f966372c1b35d1c12.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_16eeb9a72d744b25bfe6dde9f966372c1b35d1c12.png?width=750&amp;format=png&amp;optimize=medium" width="750" height="711">
+              </picture>
+            </div>
+          </div>
+        </div>
+        <p><em>The document view of our hero block, before and after</em></p>
+        <p>The block in question is relatively complex, supporting image and video backgrounds, various style and layout options, up to 2 CTAs, and more. You can see the original version <a href="https://github.com/shsteimer/xwalk-playground/tree/main/blocks/hero">here</a> and to me, it has a few obvious problems:</p>
+        <ul>
+          <li>Way too many block cells, many of which are optional/empty</li>
+          <li>Block style options not modeled as variants/classes</li>
+          <li>Block decoration javascript is 200+ LOC and relies exclusively on the ordering of elements, making it brittle and hard to maintain</li>
+          <li>While the authoring experience is good in UE, I can’t imagine asking someone to create this structure in a document, or even looking at it in a document and knowing what to change
+            <ul>
+              <li>Even in UE, there are some improvements we can make by not asking the author to input things that can be inferred</li>
+            </ul>
+          </li>
+        </ul>
+        <h3 id="cleaning-it-up">Cleaning it Up</h3>
+        <p>By using <a href="../../developer/component-model-definitions/index.html#type-inference">type inference</a>, <a href="../../developer/component-model-definitions/index.html#field-collapse">field collapse</a>, <a href="../../developer/component-model-definitions/index.html#element-grouping">element grouping</a>, and a few other relatively simple changes, we can devise a content model that fixes all of these problems.</p>
+        <h4 id="style-options-as-classes">Style Options as Classes</h4>
+        <p>The first thing we are going to do is to move all the style options out of the block’s content and render them as classes at the block level. All we need to do is change the name of these fields to start with <code>classes_</code>. This doesn’t change the authoring experience at all, it just fixes how they get mapped to the output html, and therefore how we deal with these values in our code.</p>
+        <h4 id="grouping-elements">Grouping Elements</h4>
+        <p>When I look at this block, I see effectively 3 types of content we can group together.</p>
+        <ul>
+          <li>Background</li>
+          <li>Content</li>
+          <li>CTAs</li>
+        </ul>
+        <p>So let’s group those together by prefixing all the property names with <code>groupName_</code>. Just by doing this, we’ve gone from 20+ block content cells to 4.</p>
+        <h4 id="fixing-the-ctas">Fixing the CTAs</h4>
+        <p>Lastly, I want to fix the CTAs. To do this, we are going to do a few things:</p>
+        <ul>
+          <li>Take advantage of field collapse to render a single link for each CTA instead of a collection of disparate properties</li>
+          <li>Use title instead of aria-label</li>
+          <li>Remove author selection for opening in a new tab and what interstitial content to use, infer these based on the link url instead</li>
+          <li>Make the CTAs items that can be added, so the author doesn’t need to select the number of CTAs, but instead can add the number they need</li>
+        </ul>
+        <p>You can see the final version <a href="https://github.com/shsteimer/xwalk-playground/tree/blog-hero-fixes/blocks/hero">here</a> and the <a href="https://github.com/shsteimer/xwalk-playground/compare/blog-hero-fixes?expand=1">PR with all the changes</a>. The benefits to me are just as obvious as the problems the original had. A simpler and more intuitive block is easier to reason about, both for an author, and for a developer writing the code to decorate it. And it really wasn’t that complicated to do, mostly, it comes down to renaming a few properties to conform to documented conventions.</p>
+        <h2 id="apply-this-to-your-project-today">Apply this to Your Project Today</h2>
+        <p>When it comes to defining content structures that are intuitive, it is definitely more art than science. Even with the final hero block shown above, reasonable minds could disagree about how to best group the elements, etc. But here are some good practices I try to follow that should lead you in the right direction. These principles, when properly applied, deliver that same visceral satisfaction you get from LEGO bricks clicking together. Follow these, and you'll build a semantic masterpiece instead of a fragile tower of digital superglue:</p>
+        <ul>
+          <li><strong>Start with the content model.</strong> Before you write any code for a block, lay the content out in a document. Once you have a model that you are happy with, then start turning that into a UE model definition and writing your block decoration code.</li>
+          <li><strong>You don’t have to like the linter, but you have to live with it.</strong> Never disable or override the <a href="https://github.com/adobe-rnd/eslint-plugin-xwalk/blob/main/docs/rules/max-cells.md">max-cells</a> setting from the boilerplate. If you find yourself doing so, you are likely doing something wrong. Instead, make sure you are using grouping and collapse appropriately.</li>
+          <li><strong>Don’t waste the author's time.</strong> Never ask authors to select properties that can be logically inferred from context</li>
+        </ul>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

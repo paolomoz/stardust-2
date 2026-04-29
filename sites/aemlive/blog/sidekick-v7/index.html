@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.162Z
+  page:             blog-sidekick-v7
+  pageUrl:          https://www.aem.live/blog/sidekick-v7
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>AEM Sidekick v7 – The Story Behind the Latest Release</title>
+  <meta name="description" content="As we are releasing Version 7 of AEM Sidekick, this seems like a good time to tell the story so far.">
+  <meta property="og:title" content="AEM Sidekick v7 – The Story Behind the Latest Release">
+  <meta property="og:description" content="As we are releasing Version 7 of AEM Sidekick, this seems like a good time to tell the story so far.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/blog/sidekick-v7/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../index.html" aria-current="page">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-success)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#side-by-side">Side by side</a></li>
+<li class="l-2"><a href="#being-there-but-not-in-the-way">Being there, but not in the way</a></li>
+<li class="l-2"><a href="#dark-by-default">Dark by default</a></li>
+<li class="l-2"><a href="#keeping-it-tidy">Keeping it tidy</a></li>
+<li class="l-2"><a href="#going-public">Going public</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog · BLOG</p>
+          <h1>AEM Sidekick v7 – The Story Behind the Latest Release</h1>
+          <p class="lede">As we are releasing Version 7 of AEM Sidekick, this seems like a good time to tell the story so far.</p>
+        </header>
+        <div>
+        
+        <p>As we are releasing <a href="https://chromewebstore.google.com/detail/aem-sidekick/igkmdomcgoebiipaifhmpfjhbjccggml">Version 7 of AEM Sidekick</a>, this seems like a good time to tell the story so far.</p>
+        <p>AEM Sidekick started as a collection of project-specific bookmarklets (scripted bookmarks in your browser), and over time got consolidated into a single bookmarklet invoking a toolbar with buttons – the first Sidekick UI. But after about a year of watching authors struggle with installation issues (adding a bookmarklet is no easy feat!) we decided to try turning it into a more manageable browser extension. Since its release in late 2021, the extension has been running circles around the bookmarklet, but the user experience has evolved ever so slightly.</p>
+        <p>When Edge Delivery Services for AEM became generally available, we decided to also give Sidekick an overhaul to align with Adobe’s design principles. But we didn’t want to simply make a few cosmetic changes to the styling and call it a day – we thought that this was a unique opportunity to take a closer look at the usage data and also perform a user experience study with some of the most active authors to learn more about how users were interacting with the tool in their daily work. The combined learnings from these two sources then inspired the first design mockups.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_18637945418177f04e49783c00eb005b3eb346527.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_18637945418177f04e49783c00eb005b3eb346527.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_18637945418177f04e49783c00eb005b3eb346527.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="AEM Sidekick design mockup" src="./media_18637945418177f04e49783c00eb005b3eb346527.png?width=750&amp;format=png&amp;optimize=medium" width="1424" height="268">
+          </picture>
+        </p>
+        <p><em>Early v7 mockup</em></p>
+        <h2 id="side-by-side">Side by side</h2>
+        <p>We soon realized that the outcome would be quite different and potentially disruptive for existing users, so instead of evolving the current version, we decided to make it an entirely new browser extension to give users time to ease into the new experience while always having the ability to fall back to the existing one. Also, if your company invested into author training, it will have time to update it at their own pace.</p>
+        <h2 id="being-there-but-not-in-the-way">Being there, but not in the way</h2>
+        <p>Our data showed that the close button was among the most clicked ones, but we didn’t quite understand why until we observed authors interacting with the sidekick: as a full-width bar covering the top part of the window, it was simply often blocking important things like top menus and editor functionality and therefore users were forced to hide it multiple times throughout their editing flow. That is why we decided to adjust both size and position in order to make it a less obstructive tool which users would be inclined to keep around for longer periods of time.</p>
+        <h2 id="dark-by-default">Dark by default</h2>
+        <p>Making dark mode the default was a consequence of the new smaller size and placement, combined with the fact that the majority of environments you use the sidekick in have dark text on a light background. During early tryouts, we noticed that users sometimes had difficulties finding the light sidekick when hovering on a light backdrop, and vice versa. So instead of continuing to follow the system settings, we decided to keep it dark by default, and give users the ability to freely switch between dark and light mode to match their individual contrast preferences.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_18789ca39c11e3023166161bb315ffea38c097f60.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_18789ca39c11e3023166161bb315ffea38c097f60.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_18789ca39c11e3023166161bb315ffea38c097f60.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="AEM Sidekick in the editor environment" src="./media_18789ca39c11e3023166161bb315ffea38c097f60.png?width=750&amp;format=png&amp;optimize=medium" width="1358" height="592">
+          </picture>
+        </p>
+        <p><em>AEM Sidekick v7</em></p>
+        <h2 id="keeping-it-tidy">Keeping it tidy</h2>
+        <p>Sometimes the number of actions in the toolbar can be quite overwhelming, so we thought of new ways to keep actions manageable. Overflowing actions are now dynamically moving between the toolbar and an action menu depending on the available space, and less frequently used actions can even stay tucked away in the menu permanently to keep your workspace uncluttered.</p>
+        <h2 id="going-public">Going public</h2>
+        <p>On December 10 2024, after incorporating feedback from close to 200 Adobe users, we decided it was time to present the all-new <a href="https://chromewebstore.google.com/detail/aem-sidekick/igkmdomcgoebiipaifhmpfjhbjccggml">AEM Sidekick v7</a> to the world. You can upgrade at your own pace: run both versions side by side and import your existing project configurations at the click of a button from within the onboarding experience or by using the context menu. Also browse our <a href="../../docs/sidekick/index.html">updated user documentation</a> for a full walkthrough.</p>
+        <p><strong><a href="https://chromewebstore.google.com/detail/aem-sidekick/igkmdomcgoebiipaifhmpfjhbjccggml">Install AEM Sidekick v7 today</a></strong></p>
+        <p>Your feedback matters: We hope you love the new sidekick as much as we do and look forward to hearing from our community. Tell us what you think either on <a href="https://discord.com/channels/1131492224371277874/1144495462255185971">Discord</a> or directly via <a href="https://github.com/adobe/aem-sidekick/issues">GitHub issues</a>.</p>
+        <p><em>PS: Those of you who have been in the game long enough to remember AEM’s Classic UI will remember the floating companion assisting them in managing and publishing content. It, too, was amicably called Sidekick, inspired by Batman’s Robin. When introducing the first authoring UI in early iterations of Edge Delivery Services for AEM, we intended to pay tribute to our roots.</em></p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

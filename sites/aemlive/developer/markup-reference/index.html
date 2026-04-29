@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.926Z
+  page:             developer-markup-reference
+  pageUrl:          https://www.aem.live/developer/markup-reference
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>HTML Markup reference</title>
+  <meta name="description" content="While for most development tasks the DOM is the relevant interface for a developer, there are certain situations (eg. Auto Blocking) where a developer interacts ...">
+  <meta property="og:title" content="HTML Markup reference">
+  <meta property="og:description" content="While for most development tasks the DOM is the relevant interface for a developer, there are certain situations (eg. Auto Blocking) where a developer interacts ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/markup-reference/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#general-html-markup-document-structure">General HTML Markup Document structure</a></li>
+<li class="l-2"><a href="#metadata">Metadata</a></li>
+<li class="l-2"><a href="#headhtml">head.html</a></li>
+<li class="l-2"><a href="#main-content">Main Content</a></li>
+<li class="l-3"><a href="#h1-to-h6">&lt;h1&gt; to &lt;h6&gt;</a></li>
+<li class="l-3"><a href="#picture-source-and-img">&lt;picture&gt;, &lt;source&gt; and &lt;img&gt;</a></li>
+<li class="l-3"><a href="#span">&lt;span&gt;</a></li>
+<li class="l-3"><a href="#a">&lt;a&gt;</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>HTML Markup reference</h1>
+          <p class="lede">While for most development tasks the DOM is the relevant interface for a developer, there are certain situations (eg. Auto Blocking) where a developer interacts ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_13fbdffbaac58628cff7959a7e9250a4392764c5f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_13fbdffbaac58628cff7959a7e9250a4392764c5f.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_13fbdffbaac58628cff7959a7e9250a4392764c5f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_13fbdffbaac58628cff7959a7e9250a4392764c5f.png?width=750&amp;format=png&amp;optimize=medium" width="1463" height="1097">
+          </picture>
+        </p>
+        
+        <p>While for most development tasks the <a href="../markup-sections-blocks/index.html">DOM</a> is the relevant interface for a developer, there are certain situations (eg. Auto Blocking) where a developer interacts with the raw HTML markup that is rendered by the Franklin pipeline on the server.</p>
+        <h2 id="general-html-markup-document-structure">General HTML Markup Document structure</h2>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;...&lt;/title&gt;
+    {metadata}
+    {head.html}
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;header&gt;&lt;/header&gt;
+    &lt;main&gt;
+	{main-content}
+    &lt;/main&gt;
+    &lt;footer&gt;&lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        <h2 id="metadata">Metadata</h2>
+        <p>The metadata portion of the document consists of a list of <code>&lt;meta&gt;</code> tags, some of them correspond to well known HTML metadata or metadata data without defined semantics. See more in the <a href="../block-collection/metadata/index.html">metadata block</a> specification.</p>
+        <p>In the simplest case there is a eg.<br><br><code>&lt;meta name="template" content="docs"&gt;</code></p>
+        <p>which maps a metadata property named <code>template</code> to a value of <code>docs</code>.</p>
+        <h2 id="headhtml">head.html</h2>
+        <p>The head.html portion of the document contains verbatim of what’s found in the <code>head.html</code> of the corresponding github branch.</p>
+        <h2 id="main-content">Main Content</h2>
+        <p>All the content that semantically maps to document semantics of an individual page or fragment is found in the <code>main-content</code> content section of the markup. It consists of default content, <a href="../markup-sections-blocks/index.html">sections and blocks</a>.</p>
+        <p>It is important that both default content and any cell of a block can contain the following HTML tags and attributes.</p>
+        <pre><code>&lt;a&gt;
+&lt;br&gt;
+&lt;code&gt;
+&lt;del&gt;
+&lt;em&gt;
+&lt;h1&gt; to &lt;h6&gt;
+&lt;img&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;p&gt;
+&lt;picture&gt;
+&lt;pre&gt;
+&lt;source&gt;
+&lt;span&gt;
+&lt;strong&gt;
+&lt;sub&gt;
+&lt;sup&gt;
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;td&gt;
+&lt;th&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;u&gt;
+&lt;ul&gt;
+</code></pre>
+        <p>While most of those are self explanatory and align very much with their respective semantic definitions there are a couple that are worth calling out.</p>
+        <h3 id="h1-to-h6">&lt;h1&gt; to &lt;h6&gt;</h3>
+        <p>Headings 1 through 6 have an <code>id=</code> attribute containing a sanitized version of the <code>.innerText</code> to allow for direct addressing of a heading in a URL fragment</p>
+        <h3 id="picture-source-and-img">&lt;picture&gt;, &lt;source&gt; and &lt;img&gt;</h3>
+        <p>Images are rendered as a <code>&lt;picture&gt;</code>, <code>&lt;source&gt;</code> and <code>&lt;img&gt;</code> combination, with a mobile and desktop breakpoint, as well as a fallback for browsers that don’t support webp.</p>
+        <p>The <code>&lt;img&gt;</code> element features a <code>height=</code> and <code>width=</code> attribute containing the intrinsic dimensions of the image as well as an <code>alt=</code> attribute with the alt text as provided.</p>
+        <h3 id="span">&lt;span&gt;</h3>
+        <p>The use of <code>&lt;span&gt;</code> is limited to icons, and indicates the icon as part of the <code>class="icon icon-&lt;iconname&gt;"</code> attribute</p>
+        <h3 id="a">&lt;a&gt;</h3>
+        <p>There is special handling for links to AEM preview and live domains (hlx.page, hlx.live, aem.page, aem.live). Any link to one of these domains is rendered as a relative link. This allows authors to link to any of these domain from content pages and still work across preview, live, and production domains.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

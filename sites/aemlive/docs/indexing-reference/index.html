@@ -1,0 +1,245 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.905Z
+  page:             docs-indexing-reference
+  pageUrl:          https://www.aem.live/docs/indexing-reference
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Indexing reference</title>
+  <meta name="description" content="In your helix-query.yaml#, you can define one or more index definitions. A sample index definition looks as follows: https://gist.github.com/dominique-pfister/92cb67b6f95e1edee6a7d6508b124039">
+  <meta property="og:title" content="Indexing reference">
+  <meta property="og:description" content="In your helix-query.yaml#, you can define one or more index definitions. A sample index definition looks as follows: https://gist.github.com/dominique-pfister/92cb67b6f95e1edee6a7d6508b124039">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/indexing-reference/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#innerhtmlel">innerHTML(el)</a></li>
+<li class="l-2"><a href="#textcontentel">textContent(el)</a></li>
+<li class="l-2"><a href="#attributeel-name">attribute(el, name)</a></li>
+<li class="l-2"><a href="#matchel-re">match(el, re)</a></li>
+<li class="l-2"><a href="#charactersel-start-end">characters(el, start, end)</a></li>
+<li class="l-2"><a href="#wordsel-start-end">words(el, start, end)</a></li>
+<li class="l-2"><a href="#replaceel-substr-newsubstr">replace(el, substr, newSubstr)</a></li>
+<li class="l-2"><a href="#replaceallel-substr-newsubstr">replaceAll(el, substr, newSubstr)</a></li>
+<li class="l-2"><a href="#parsetimestampel-format">parseTimestamp(el, format)</a></li>
+<li class="l-2"><a href="#datevalueel-format">dateValue(el, format)</a></li>
+<li class="l-2"><a href="#el">el</a></li>
+<li class="l-2"><a href="#path">path</a></li>
+<li class="l-2"><a href="#headersname">headers[name]</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Indexing reference</h1>
+          <p class="lede">In your helix-query.yaml#, you can define one or more index definitions. A sample index definition looks as follows: https://gist.github.com/dominique-pfister/92cb67b6f95e1edee6a7d6508b124039</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_111eb3455f805ed3f076b9d4519e3123571c8a106.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_111eb3455f805ed3f076b9d4519e3123571c8a106.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_111eb3455f805ed3f076b9d4519e3123571c8a106.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_111eb3455f805ed3f076b9d4519e3123571c8a106.png?width=750&amp;format=png&amp;optimize=medium" width="1463" height="1097">
+          </picture>
+        </p>
+        
+        <p>In your <code>helix-query.yaml</code><sup>#</sup>, you can define one or more index definitions. A sample index definition looks as follows: <a href="https://gist.github.com/dominique-pfister/92cb67b6f95e1edee6a7d6508b124039">https://gist.github.com/dominique-pfister/92cb67b6f95e1edee6a7d6508b124039</a></p>
+        <p>The <code>include</code> and <code>exclude</code> section dictates what documents get indexed. Everything that is included but not excluded gets indexed. The double asterisk <code>**</code> matches everything under a prefix, <strong>including</strong> the prefix, so in the example above, the path <code>/en </code>gets indexed as well. If you leave out that section entirely, <em>everything</em> gets indexed.<br><br>The first index called <code>english</code> defines itself as <strong>default</strong> (using the ampersand). The second index called <code>french</code> uses that default definition and overrides some attributes.</p>
+        <p>The <code>select</code> property is a CSS selector that grabs <em>all</em> matching HTML elements out of your document. The indexer will apply your selectors on the HTML markup, not on the rendered DOM, so you must write them accordingly. (right click -&gt; View Page Source, on the page you want to extract information from, to see the exact HTML the indexer will work on).</p>
+        <p>If you just want the <em>first</em> matching element to be returned, use <code>selectFirst</code> instead of <code>select</code>:</p>
+        <pre><code>first-img:
+  selectFirst: img
+  value: attribute(el, "src")
+</code></pre>
+        <p>To verify that a CSS selector entered is selecting what you expect, you can use the <a href="../../developer/indexing/index.html#debugging-your-index-configuration">aem cli</a> - <code>aem up -–print-index</code>, navigate to the page where the selector should extract a meaningful value and check the console. The cli will use the <code>helix-query.yaml</code> file from your local filesystem and will print the extracted values, or an empty string if it cannot find the information it is looking for.</p>
+        <pre><code>aem up --print-index
+...
+info: Index information for /my/test/page
+info: Index: mysite
+info:            author: "John Smith"
+</code></pre>
+        <p>Note, that not all CSS selectors are supported. Internally, we use a library called <code>hast-util-select</code>, and the list of supported selectors can be found here: <a href="https://github.com/syntax-tree/hast-util-select#support">https://github.com/syntax-tree/hast-util-select#support</a></p>
+        <p>The <code>value</code> or <code>values</code> property contains an expression to apply to all HTML elements selected. The property name <code>value</code> is preferred when you need a string, <code>values</code> on the other hand provides you with an array of all the matches found. The expression can contain a combination of functions and variables:</p>
+        <h2 id="innerhtmlel">innerHTML(el)</h2>
+        <p>Returns the HTML content of an element.</p>
+        <pre><code># Preserve links and formatting in a rich text snippet
+bio:
+ select: main &gt; div:first-child p:first-of-type
+ value: innerHTML(el)
+</code></pre>
+        <h2 id="textcontentel">textContent(el)</h2>
+        <p>Returns the text content of the selected element, and all its descendents.</p>
+        <pre><code># Extract the text of the first h1 on the page
+headline:
+ select: main h1
+ value: textContent(el)
+</code></pre>
+        <h2 id="attributeel-name">attribute(el, name)</h2>
+        <p>Returns the value of the attribute with the specified name of an element.</p>
+        <pre><code>title:
+ select: head &gt; meta[property="og:title"]
+ value: attribute(el, "content")
+</code></pre>
+        <h2 id="matchel-re">match(el, re)</h2>
+        <p>Matches a regular expression containing parentheses to capture items in the passed element. In the author example above, the actual contents of the <code>&lt;p&gt;</code> element selected might contain <code>by John Smith</code>, so it would capture everything following <code>by </code>.</p>
+        <pre><code># Extract year from a date string like "02/15/2025"
+year:
+ select: head &gt; meta[name="publication-date"]
+ value: match(attribute(el, "content"), "\\d{2}\\/\\d{2}\\/(\\d{4})")
+</code></pre>
+        <h2 id="charactersel-start-end">characters(el, start, end)</h2>
+        <p>Returns the substring from <code>start</code> to <code>end</code> of the given element or text. If <code>start</code> or <code>end</code> are negative, they address the position counted from the end of the text. <code>end</code> is optional, and defaults to the length of the text.</p>
+        <pre><code># First 200 characters of a blog post for card previews
+snippet:
+ select: main &gt; div p:first-of-type
+ value: characters(textContent(el), 0, 200)
+</code></pre>
+        <h2 id="wordsel-start-end">words(el, start, end)</h2>
+        <p>Useful for teasers, this selects a range of words out of an HTML element.</p>
+        <pre><code># First 50 words of page content as a teaser
+description:
+ select: main &gt; div p
+ value: words(textContent(el), 0, 50)
+</code></pre>
+        <h2 id="replaceel-substr-newsubstr">replace(el, substr, newSubstr)</h2>
+        <p>Replaces the first occurrence of a substring in a text with a replacement.</p>
+        <pre><code># Remove a prefix from a title
+title:
+ select: head &gt; meta[property="og:title"]
+ value: replace(attribute(el, "content"), "ACME Corp | ", "")
+</code></pre>
+        <h2 id="replaceallel-substr-newsubstr">replaceAll(el, substr, newSubstr)</h2>
+        <p>Replaces all occurrences of a substring in a text with a replacement.</p>
+        <pre><code># Replace all underscores with spaces
+category:
+ select: head &gt; meta[name="category"]
+ value: replaceAll(attribute(el, "content"), "_", " ")
+</code></pre>
+        <h2 id="parsetimestampel-format">parseTimestamp(el, format)</h2>
+        <p>Parses a timestamp given as string in a <a href="https://day.js.org/docs/en/parse/string-format#list-of-all-available-parsing-tokens">custom format</a>, and returns its value as number of seconds since 1 Jan 1970.</p>
+        <pre><code># Parse an authored date in MM/DD/YYYY format
+publicationDate:
+ select: head &gt; meta[name="publication-date"]
+ value: parseTimestamp(attribute(el, "content"), "MM/DD/YYYY")
+</code></pre>
+        <h2 id="datevalueel-format">dateValue(el, format)</h2>
+        <p>Parses a timestamp given as string, and returns its value as serial number, where January 1, 1900 is serial number 1. For more information see <a href="https://support.microsoft.com/en-gb/office/datevalue-function-df8b07d4-7761-4a93-bc33-b7471bbff252">DATEVALUE function</a></p>
+        <pre><code># Returns an Excel serial date number (useful for spreadsheet sorting/filtering)
+lastUpdated:
+ select: head &gt; meta[name="last-updated"]
+ value: dateValue(attribute(el, "content"), "YYYY-MM-DD")
+</code></pre>
+        <h2 id="el">el</h2>
+        <p>Returns the HTML elements selected by the <code>select</code> property.</p>
+        <pre><code># Use el directly when select already targets the value you need
+heading:
+ select: main h1
+ value: textContent(el)
+</code></pre>
+        <h2 id="path">path</h2>
+        <p>Returns the path of the HTML document being indexed.</p>
+        <h2 id="headersname">headers[name]</h2>
+        <p>Returns the value of the HTTP response header with the specified name, at the time the HTML document was fetched.</p>
+        <pre><code>lastModified:
+ select: none
+ value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+</code></pre>
+        <div class="footnotes">
+          <div>
+            <div>The full definition of the <code>helix-query.yaml</code> is available here: <a href="https://github.com/adobe/helix-shared/blob/main/docs/indexconfig.md">https://github.com/adobe/helix-shared/blob/main/docs/indexconfig.md</a></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

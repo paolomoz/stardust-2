@@ -1,0 +1,521 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.972Z
+  page:             docs-sidekick
+  pageUrl:          https://www.aem.live/docs/sidekick
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Using AEM Sidekick</title>
+  <meta name="description" content="AEM Sidekick provides content authors with a toolbar offering context-aware options so that you can edit, preview, and publish your content directly from the pages ...">
+  <meta property="og:title" content="Using AEM Sidekick">
+  <meta property="og:description" content="AEM Sidekick provides content authors with a toolbar offering context-aware options so that you can edit, preview, and publish your content directly from the pages ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/sidekick/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="index.html" aria-current="page">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#installation">Installation</a></li>
+<li class="l-2"><a href="#first-time-use">First Time Use</a></li>
+<li class="l-2"><a href="#environment-switcher-and-modes">Environment Switcher and Modes</a></li>
+<li class="l-3"><a href="#source-mode">Source Mode</a></li>
+<li class="l-3"><a href="#preview-mode">Preview Mode</a></li>
+<li class="l-4"><a href="#previewing-sheets-in-aem-authoring">Previewing Sheets in AEM Authoring</a></li>
+<li class="l-3"><a href="#live-mode">Live Mode</a></li>
+<li class="l-3"><a href="#production-mode">Production Mode</a></li>
+<li class="l-2"><a href="#activating-sheets">Activating Sheets</a></li>
+<li class="l-2"><a href="#bulk-actions">Bulk Actions</a></li>
+<li class="l-3"><a href="#bulk-preview">Bulk Preview</a></li>
+<li class="l-3"><a href="#bulk-publish">Bulk Publish</a></li>
+<li class="l-3"><a href="#copy-urls">Copy URLs</a></li>
+<li class="l-2"><a href="#unpublishing-and-deleting-content">Unpublishing and Deleting Content</a></li>
+<li class="l-2"><a href="#adding-your-project">Adding Your Project</a></li>
+<li class="l-3"><a href="#from-your-source-documents">From your source documents</a></li>
+<li class="l-3"><a href="#from-your-project-url">From your project URL</a></li>
+<li class="l-3"><a href="#removing-projects-and-migration">Removing projects and migration</a></li>
+<li class="l-2"><a href="#managing-projects-experimental">Managing Projects (Experimental)</a></li>
+<li class="l-2"><a href="#error-messages">Error Messages</a></li>
+<li class="l-2"><a href="#customizing-the-sidekick">Customizing the Sidekick</a></li>
+<li class="l-2"><a href="#privacy-and-security">Privacy and Security</a></li>
+<li class="l-2"><a href="#3rd-party-libraries">3rd Party Libraries</a></li>
+<li class="l-3"><a href="#sidekick-library">Sidekick Library</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Using AEM Sidekick</h1>
+          <p class="lede">AEM Sidekick provides content authors with a toolbar offering context-aware options so that you can edit, preview, and publish your content directly from the pages ...</p>
+        </header>
+        <div class="content">
+        
+        <p>AEM Sidekick provides content authors with a toolbar offering context-aware options so that you can edit, preview, and publish your content directly from the pages of your website.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_14c67a991f1384b43a512beca53dd8d1365ee5af8.jpg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_14c67a991f1384b43a512beca53dd8d1365ee5af8.jpg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="./media_14c67a991f1384b43a512beca53dd8d1365ee5af8.jpg?width=2000&amp;format=jpg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_14c67a991f1384b43a512beca53dd8d1365ee5af8.jpg?width=750&amp;format=jpg&amp;optimize=medium" width="750" height="427">
+          </picture>
+        </p>
+        <h2 id="installation">Installation</h2>
+        <p>The Sidekick is available for Google Chrome and chromium-based browsers. <a href="https://chromewebstore.google.com/detail/aem-sidekick/igkmdomcgoebiipaifhmpfjhbjccggml">You can install it from the Chrome web store.</a></p>
+        <div class="accordion">
+          <div>
+            <div>Using Microsoft Edge?</div>
+            <div></div>
+          </div>
+          <div>
+            <div>
+              <p>To install the Sidekick extension into your Microsoft Edge Browser, you need to enable the following option to "Allow extensions from other stores" under <code>edge://extensions</code> in your URL bar.<br>
+                <picture>
+                  <source type="image/webp" srcset="./media_19c3c57a2d8c703634d122f29f0959bd0df7f9515.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                  <source type="image/webp" srcset="./media_19c3c57a2d8c703634d122f29f0959bd0df7f9515.png?width=750&amp;format=webply&amp;optimize=medium">
+                  <source type="image/png" srcset="./media_19c3c57a2d8c703634d122f29f0959bd0df7f9515.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                  <img loading="lazy" alt="" src="./media_19c3c57a2d8c703634d122f29f0959bd0df7f9515.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1036">
+                </picture>
+              </p>
+              <p>Once that setting is enabled the sidekick can be installed <a href="https://chromewebstore.google.com/detail/aem-sidekick/igkmdomcgoebiipaifhmpfjhbjccggml">from the Chrome web store.</a></p>
+            </div>
+            <div></div>
+          </div>
+        </div>
+        <h2 id="first-time-use">First Time Use</h2>
+        <p>Once installed, the Sidekick appears as a toolbar hovering over the bottom portion of your content in the browser on pages that you have authored with AEM. The Sidekick provides you with various tools and actions for navigating and publishing your content.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_11f078d04086d44a3525b51010457d7f88f171788.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_11f078d04086d44a3525b51010457d7f88f171788.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_11f078d04086d44a3525b51010457d7f88f171788.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_11f078d04086d44a3525b51010457d7f88f171788.png?width=750&amp;format=png&amp;optimize=medium" width="647" height="67">
+          </picture>
+        </p>
+        <p>The Sidekick is laid out to make the most common tasks easily accessible (from left to right):</p>
+        <p><strong>Drag handle</strong> - The Sidekick defaults to the bottom of the browser, but you can use the Adobe logo to drag the toolbar to another location. This can be useful to view content that might otherwise be hidden behind it without toggling it off. The new position is not persisted and it will snap back to its original position on window resize or reload.</p>
+        <p><strong><a href="#environment-switcher-and-modes">Environment Switcher</a></strong> - Select from available modes such as production and live based on the status of your content.</p>
+        <p><strong>Actions</strong> - Use these buttons to quickly update or publish your content. What actions are available depends on your current mode and the content source.</p>
+        <p><strong>Menu</strong> - You can show additional options such as <a href="#adding-your-project">adding projects</a> and <a href="#managing-projects-experimental">managing your projects</a>, toggling dark and light mode for the Sidekick, or access help.</p>
+        <p><strong>Sign in</strong> - If your site has <a href="../authentication-setup-authoring/index.html">authentication for authors enabled</a>, you will first need to sign in to authenticate before you can use the Sidekick. Even if your site does not require authentication, you must be signed in if you wish to <a href="#unpublishing-and-deleting-content">unpublish and delete pages</a>.</p>
+        <p><strong>Close</strong> - Click the X to toggle Sidekick off. Toggle back on using the AEM Sidekick icon next to the address bar in your browser.</p>
+        <p>The Sidekick can be invoked in the following contexts:</p>
+        <ul>
+          <li>Within project environments
+            <ul>
+              <li>A preview URL (the domain name ending in <code>.aem.page</code>)</li>
+              <li>A live URL (the domain name ending in <code>.aem.live</code>)</li>
+              <li>A production URL (the domain name being your project’s public host name), custom preview URL, or custom live URL
+                <ul>
+                  <li>Note: This requires <a href="#adding-your-project">adding the project</a> to your configuration</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Within online editors (depending on your project setup)
+            <ul>
+              <li>Google Docs/Sheets</li>
+              <li>Microsoft Word/Excel</li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="environment-switcher-and-modes">Environment Switcher and Modes</h2>
+        <p>When using document-based authoring to create content, content moves from the editor through different environments. The environment switcher allows you to easily jump between them.</p>
+        <h3 id="source-mode">Source Mode</h3>
+        <p>When editing your document and first using the Sidekick, you default to <strong>Source</strong> mode. Click the <strong>Source</strong> button to reveal the additional environments available.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_127727e521763800fdf4c15cdc8888927e606991e.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_127727e521763800fdf4c15cdc8888927e606991e.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_127727e521763800fdf4c15cdc8888927e606991e.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_127727e521763800fdf4c15cdc8888927e606991e.png?width=750&amp;format=png&amp;optimize=medium" width="663" height="303">
+          </picture>
+        </p>
+        <p><sup>The environment switcher on a Sidekick in Google Docs.</sup></p>
+        <p>In <strong>Source</strong> mode, you have the following action available.</p>
+        <ul>
+          <li><strong>Preview</strong> (re)generates the preview page based on the current document and opens it in a separate tab.</li>
+        </ul>
+        <p>If you are using the Sidekick in the preview, live, or production environments, the source switcher may also offer an <strong>Open in</strong> option (a document icon) next to the <strong>Source</strong> mode option, which opens the online editor of the current page’s source (either a document or the AEM editor) in a separate window.</p>
+        <p>At a minimum read access to the document in Google Drive or Microsoft SharePoint is required to use this action.</p>
+        <h3 id="preview-mode">Preview Mode</h3>
+        <p>The preview environment reflects the latest changes of the page rendered from the source document. Preview environments are indicated by a blue label. You can send preview URLs to stakeholders so they can review your content before it gets published. Note that this option is only enabled if the content you are looking at has been previewed before.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_10d3dfde776aa24f237aa3fcae706877b162d5a1a.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_10d3dfde776aa24f237aa3fcae706877b162d5a1a.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_10d3dfde776aa24f237aa3fcae706877b162d5a1a.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_10d3dfde776aa24f237aa3fcae706877b162d5a1a.png?width=750&amp;format=png&amp;optimize=medium" width="658" height="75">
+          </picture>
+        </p>
+        <p>The preview URL follows the pattern <code>https://branch--site--org.aem.page/path</code>.</p>
+        <ul>
+          <li><code>branch</code>, <code>site</code> and <code>org</code> identify the content source and code base to use</li>
+          <li><code>/path</code> corresponds to the location of the content in Google Drive or Microsoft SharePoint, starting from the root folder.</li>
+          <li>A <code>/</code> at the end of a path refers to the index document in a folder.</li>
+        </ul>
+        <p>In Preview mode, the following actions are available:</p>
+        <ul>
+          <li><strong>Edit</strong> is used to open the content source for editing.</li>
+          <li><strong>Update</strong> is used to force a content refresh.
+            <ul>
+              <li>For example if you have <strong>Source</strong> and <strong>Preview</strong> open in side-by-side tabs while working on the content.</li>
+              <li>The effect is identical to the <strong>Preview</strong> action in the editor.</li>
+            </ul>
+          </li>
+          <li><strong>Publish</strong> makes the current preview version of the page available in the live and production environments.
+            <ul>
+              <li>Visitors to your public-facing website will not be able to see changes until they are published.</li>
+            </ul>
+          </li>
+        </ul>
+        <p>If you are previewing a sheet, note that <a href="#previewing-sheets-in-aem-authoring">there may be additional options available.</a></p>
+        <h4 id="previewing-sheets-in-aem-authoring">Previewing Sheets in AEM Authoring</h4>
+        <p><a href="#preview-mode">Preview mode</a> for sheets works the same as other pages, however there are additional options available that make managing changes to sheets within AEM authoring easier.</p>
+        <p>When previewing a page, the preview loads the sheet using the Adobe Experience Manager Sites Data Rendition tool, to show the resulting JSON in a user-friendly way.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1a49abf0bcaeda7ebcd06cbd2fca1b98fdd88b65f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1a49abf0bcaeda7ebcd06cbd2fca1b98fdd88b65f.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1a49abf0bcaeda7ebcd06cbd2fca1b98fdd88b65f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1a49abf0bcaeda7ebcd06cbd2fca1b98fdd88b65f.png?width=750&amp;format=png&amp;optimize=medium" width="1175" height="443">
+          </picture>
+        </p>
+        <p>Tap or click the X in the banner to close the Data Rendition tool and view the raw JSON.</p>
+        <p>The preview lazy loads the first 1000 rows. You can search the entirety of the spreadsheet using the <strong>Search</strong> field.</p>
+        <p>To visualize what has changed since the last publication, tap or click <strong>Show changes</strong>.</p>
+        <ul>
+          <li>This creates a diff, showing what has changed in your sheet between the current published state of the sheet and the content you are previewing.</li>
+          <li>Added lines are in green, prefixed with a plus.</li>
+          <li>Removed lines are in red, prefixed with a minus.</li>
+          <li>To show all rows along with the changes, tap or click <strong>Show all rows</strong>.</li>
+        </ul>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1a50052d9548d2319d56ffd9bcbe277634b981769.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1a50052d9548d2319d56ffd9bcbe277634b981769.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1a50052d9548d2319d56ffd9bcbe277634b981769.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1a50052d9548d2319d56ffd9bcbe277634b981769.png?width=750&amp;format=png&amp;optimize=medium" width="1175" height="426">
+          </picture>
+        </p>
+        <h3 id="live-mode">Live Mode</h3>
+        <p>Live mode is only available if there is no production environment yet. It shows the published content and serves as a stand-in for your project’s production environment. Live environments are indicated by a green label. Note that this option is only enabled if the content you are looking at has been published before.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1ffba7fdeba006aca1a477ce774889b3049d02792.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1ffba7fdeba006aca1a477ce774889b3049d02792.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1ffba7fdeba006aca1a477ce774889b3049d02792.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1ffba7fdeba006aca1a477ce774889b3049d02792.png?width=750&amp;format=png&amp;optimize=medium" width="662" height="73">
+          </picture>
+        </p>
+        <p>The live URL looks almost identical to the preview URL, the only difference being in the 1st level domain: <code>https://main--site--org.aem.live/path</code></p>
+        <p>In Live mode, the following actions are available:</p>
+        <ul>
+          <li><strong>Edit</strong> is used to open the content source for editing.</li>
+          <li><strong>Publish</strong> makes the current preview version of the page available in the live and production environments.
+            <ul>
+              <li>Visitors to your public-facing website will not be able to see changes until they are published.</li>
+            </ul>
+          </li>
+        </ul>
+        <h3 id="production-mode">Production Mode</h3>
+        <p>Production mode takes you to the production environment, which is your project’s public-facing website. Production environments are indicated by a green label.</p>
+        <ul>
+          <li>This option may not be available during the development stage of your project or because no production environment has been configured yet.</li>
+          <li>This environment can be a 3rd-party or “bring your own” CDN.</li>
+        </ul>
+        <p>If your public-facing domain name is <code>yourproject.com</code>, the production URL would be <code>https://yourproject.com/path</code></p>
+        <p>The following action is available in Production mode:</p>
+        <ul>
+          <li><strong>Publish</strong> makes the current preview version of the page available in the live and production environments.
+            <ul>
+              <li>Visitors to your public-facing website will not be able to see changes until they are published.</li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="activating-sheets">Activating Sheets</h2>
+        <p>When editing a document-based sheet in Google Drive or Sharepoint, the Sidekick’s environment selector is disabled. The only option is to <strong>Activate</strong> the sheet.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1f31022954e81e4b9cb48b7e18ccabeb5d2581318.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1f31022954e81e4b9cb48b7e18ccabeb5d2581318.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1f31022954e81e4b9cb48b7e18ccabeb5d2581318.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1f31022954e81e4b9cb48b7e18ccabeb5d2581318.png?width=750&amp;format=png&amp;optimize=medium" width="912" height="189">
+          </picture>
+        </p>
+        <p>Note that sheets created in AEM authoring allow for additional options.</p>
+        <h2 id="bulk-actions">Bulk Actions</h2>
+        <p>Open the Sidekick in Google Drive or Microsoft SharePoint and select one or more files to bulk preview and publish files and conveniently copy their URLs. The Sidekick counts the number of selected files and prompts you to confirm any bulk actions.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1d9bad51c5b2f50b3ffcfb13cd78ab553f8cfbb9b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d9bad51c5b2f50b3ffcfb13cd78ab553f8cfbb9b.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1d9bad51c5b2f50b3ffcfb13cd78ab553f8cfbb9b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d9bad51c5b2f50b3ffcfb13cd78ab553f8cfbb9b.png?width=750&amp;format=png&amp;optimize=medium" width="960" height="443">
+          </picture>
+        </p>
+        <p>The Sidekick provides a status of ongoing bulk actions.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1d9dc3371fe028ffc473b68e9c63ada0ae2602cdf.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d9dc3371fe028ffc473b68e9c63ada0ae2602cdf.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1d9dc3371fe028ffc473b68e9c63ada0ae2602cdf.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d9dc3371fe028ffc473b68e9c63ada0ae2602cdf.png?width=750&amp;format=png&amp;optimize=medium" width="662" height="90">
+          </picture>
+        </p>
+        <p>When the bulk actions are completed successfully, the Sidekick turns green and allows you to copy the URLs of the affected files via the <strong>Copy x URLs</strong> button or preview them via the <strong>Open x URLs</strong> button.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_110c8c9a003ddc57237d18f36d58e791412fde13a.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_110c8c9a003ddc57237d18f36d58e791412fde13a.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_110c8c9a003ddc57237d18f36d58e791412fde13a.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_110c8c9a003ddc57237d18f36d58e791412fde13a.png?width=750&amp;format=png&amp;optimize=medium" width="661" height="82">
+          </picture>
+        </p>
+        <p>If a bulk action fails, it turns red and provides feedback on the failure via the <strong>Details</strong> button.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1146d3d9b1c350aa893caec88f6fdd0cf02902559.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1146d3d9b1c350aa893caec88f6fdd0cf02902559.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1146d3d9b1c350aa893caec88f6fdd0cf02902559.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1146d3d9b1c350aa893caec88f6fdd0cf02902559.png?width=750&amp;format=png&amp;optimize=medium" width="1295" height="140">
+          </picture>
+        </p>
+        <p>You can also use the bulk action feature to preview and publish media files. Adobe continues to extend the support for file formats that can be published directly from your content source (Microsoft SharePoint or Google Drive) based on popular use and security considerations. Currently the supported formats are <code>MP4</code>, <code>PDF</code>, <code>SVG</code>, <code>JPG</code>, <code>PNG</code>. You can learn more about <a href="../limits/index.html#file-size-limits">file size limits here</a>.</p>
+        <p>Limitation: in Microsoft SharePoint, large selections of more than 60 files may not be available to the Sidekick and may therefore need to be split into smaller badges.</p>
+        <h3 id="bulk-preview">Bulk Preview</h3>
+        <p>Selecting multiple documents in Microsoft SharePoint or GDrive allows you to preview multiple documents en masse.</p>
+        <h3 id="bulk-publish">Bulk Publish</h3>
+        <p>Selecting multiple documents in Microsoft SharePoint or GDrive allows you to publish multiple documents en masse. The Sidekick prompts you to confirm before performing bulk actions.</p>
+        <h3 id="copy-urls">Copy URLs</h3>
+        <p>Use this feature to copy the preview, live or production URLs of one or multiple files.</p>
+        <h2 id="unpublishing-and-deleting-content">Unpublishing and Deleting Content</h2>
+        <p>If you no longer require content to be published, you can unpublish it and/or delete it.</p>
+        <ul>
+          <li>Unpublishing content will remove the page from your live and production environments, but still keep it in the preview environment for reference or future republication.</li>
+          <li>Deleting permanently removes the content from all environments, implicitly unpublishing it.</li>
+        </ul>
+        <p>Unpublishing and deleting content require you to be <a href="#first-use-of-the-sidekick">signed into the Sidekick.</a> You must also have the appropriate <a href="../authentication-setup-authoring/index.html">roles assigned to your user.</a></p>
+        <ul>
+          <li>To unpublish you must have the role <code>publish</code>.</li>
+          <li>To delete you must have either the role publish or <code>author</code>.</li>
+        </ul>
+        <p>Because unpublishing and deleting are not as common as previewing and publishing content, these options are kept behind an ellipsis menu, shown only when appropriate. Navigate to a published page or its preview and click the ellipsis button on the Sidekick to show the <strong>Unpublish</strong> option.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1c214c197a74917b419094b01197033c26fa238e0.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1c214c197a74917b419094b01197033c26fa238e0.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1c214c197a74917b419094b01197033c26fa238e0.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1c214c197a74917b419094b01197033c26fa238e0.png?width=750&amp;format=png&amp;optimize=medium" width="673" height="139">
+          </picture>
+        </p>
+        <p>You can only delete pages from the preview environment. Deletion implicitly unpublishes the page if it has been published before.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1fa9804922f3dc541c5f873b34ae036a4d8a15232.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1fa9804922f3dc541c5f873b34ae036a4d8a15232.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1fa9804922f3dc541c5f873b34ae036a4d8a15232.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1fa9804922f3dc541c5f873b34ae036a4d8a15232.png?width=750&amp;format=png&amp;optimize=medium" width="665" height="176">
+          </picture>
+        </p>
+        <p><strong>Caution: The Delete and Unpublish actions cannot be undone! Double-check the URL and page content to make sure it is really OK to delete and/or unpublish a page.</strong></p>
+        <p>Due to the finality of deleting pages, you must confirm your deleting by entering DELETE in a dialog.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1f139304589c5d6c7901694d9fdeb3608c5bc555f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1f139304589c5d6c7901694d9fdeb3608c5bc555f.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1f139304589c5d6c7901694d9fdeb3608c5bc555f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1f139304589c5d6c7901694d9fdeb3608c5bc555f.png?width=750&amp;format=png&amp;optimize=medium" width="343" height="299">
+          </picture>
+        </p>
+        <h2 id="adding-your-project">Adding Your Project</h2>
+        <p>The Sidekick is able to auto-detect if a URL belongs to your project. If you want the Sidekick to also recognize custom domains, such as your project’s production domain, custom preview domain, or custom live domain, you must add the project to the Sidekick.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1e43c7ea2dcecfe2c29810f54bee82c85fd18264c.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1e43c7ea2dcecfe2c29810f54bee82c85fd18264c.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1e43c7ea2dcecfe2c29810f54bee82c85fd18264c.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1e43c7ea2dcecfe2c29810f54bee82c85fd18264c.png?width=750&amp;format=png&amp;optimize=medium" width="662" height="270">
+          </picture>
+        </p>
+        <p>This can be done in two ways:</p>
+        <h3 id="from-your-source-documents">From your source documents</h3>
+        <p>Navigate to any source document associated with your project. Then click the context (<code>≡</code>) menu on the Sidekick and select <strong>Add this project</strong>.</p>
+        <h3 id="from-your-project-url">From your project URL</h3>
+        <p>Navigate to a project URL (similar to <code>https://main--repo--owner.aem.page/</code>) and click the context (<code>≡</code>) menu on the Sidekick and select <strong>Add this project</strong>.</p>
+        <h3 id="removing-projects-and-migration">Removing projects and migration</h3>
+        <p>You can remove projects from the Sidekick by following the same steps, but select <strong>Remove this project</strong> from the context menu instead.</p>
+        <p>If you have used a previous version of the Sidekick, you can migrate your previously-configured projects.</p>
+        <ol>
+          <li>Enable both the previous version of the Sidekick and the new version in your browser.</li>
+          <li>Right-click the Sidekick plugin icon in your browser’s menu bar.</li>
+          <li>Select <strong>Import projects from AEM Sidekick v6</strong> from the context menu.</li>
+        </ol>
+        <h2 id="managing-projects-experimental">Managing Projects (Experimental)</h2>
+        <p>Once you have added at least one project to your sidekick, you Then click the context (<code>≡</code>) menu on the Sidekick and select <strong>Manage projects</strong> to open the <strong>Project Admin</strong>.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1c8858138e594bd3b3fbfdcf8721b9e5117b6e476.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1c8858138e594bd3b3fbfdcf8721b9e5117b6e476.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1c8858138e594bd3b3fbfdcf8721b9e5117b6e476.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1c8858138e594bd3b3fbfdcf8721b9e5117b6e476.png?width=750&amp;format=png&amp;optimize=medium" width="666" height="330">
+          </picture>
+        </p>
+        <p>The Project Admin page lists all projects you added to the sidekick.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1049f7dc9c5be42981f117e15dfe32e055de9464f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1049f7dc9c5be42981f117e15dfe32e055de9464f.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1049f7dc9c5be42981f117e15dfe32e055de9464f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1049f7dc9c5be42981f117e15dfe32e055de9464f.png?width=750&amp;format=png&amp;optimize=medium" width="1545" height="1166">
+          </picture>
+        </p>
+        <p>Each project is listed with:</p>
+        <ul>
+          <li>Convenient links to project resources including
+            <ul>
+              <li>Content location</li>
+              <li>Preview URL</li>
+              <li>Production URL (if configured)</li>
+            </ul>
+          </li>
+          <li><strong>Edit</strong> button to edit the name of the project within the Sidekick or to remove the project from the Sidekick.</li>
+          <li><strong>Sign in</strong> button to sign into the project
+            <ul>
+              <li>A dropdown menu is available from the <strong>Sign in</strong> button to select which IDP is used for signing in</li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="error-messages">Error Messages</h2>
+        <p>For a complete catalog of error messages appearing in the Sidekick, review <a href="../sidekick-errors/index.html">Sidekick Errors</a>.</p>
+        <h2 id="customizing-the-sidekick">Customizing the Sidekick</h2>
+        <p>If you are a developer, you can <a href="../../developer/sidekick-development/index.html">customize the Sidekick</a> for your project.</p>
+        <h2 id="privacy-and-security">Privacy and Security</h2>
+        <p>Review <a href="../sidekick-security/index.html">AEM Sidekick Security</a> for detailed information about how privacy and security are being handled in the Sidekick.</p>
+        <h2 id="3rd-party-libraries">3rd Party Libraries</h2>
+        <table>
+          <thead>
+            <tr>
+              <th><strong>Library</strong></th>
+              <th><strong>License</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="https://github.com/webcomponents/polyfills/tree/master/packages/custom-elements">Custom Elements Polyfill</a></td>
+              <td><a href="https://raw.githubusercontent.com/webcomponents/polyfills/refs/heads/master/packages/custom-elements/LICENSE.md">BSD</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://github.com/lit/lit">Lit</a></td>
+              <td><a href="https://raw.githubusercontent.com/lit/lit/refs/heads/main/LICENSE">BSD 3-Clause</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://github.com/mobxjs/mobx">MobX</a></td>
+              <td><a href="https://raw.githubusercontent.com/mobxjs/mobx/refs/heads/main/LICENSE">MIT</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://github.com/adobe/spectrum-web-components">Spectrum Web Components</a></td>
+              <td><a href="https://raw.githubusercontent.com/adobe/spectrum-web-components/refs/heads/main/LICENSE">Apache 2.0</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pagination contained">
+          <div>
+            <div></div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="sidekick-library"><a href="../sidekick-library/index.html">Sidekick Library</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

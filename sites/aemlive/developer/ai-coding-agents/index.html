@@ -1,0 +1,342 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.333Z
+  page:             developer-ai-coding-agents
+  pageUrl:          https://www.aem.live/developer/ai-coding-agents
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Developing with AI Tools</title>
+  <meta name="description" content="AI coding agents such as Claude Code, Cursor, Codex, Gemini, GitHub Copilot, or Zed and the models they employ generally have good working knowledge of ...">
+  <meta property="og:title" content="Developing with AI Tools">
+  <meta property="og:description" content="AI coding agents such as Claude Code, Cursor, Codex, Gemini, GitHub Copilot, or Zed and the models they employ generally have good working knowledge of ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/ai-coding-agents/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#setting-up-your-project">Setting Up Your Project</a></li>
+<li class="l-3"><a href="#establishing-context">Establishing Context</a></li>
+<li class="l-3"><a href="#helping-the-agents-search">Helping the Agents Search</a></li>
+<li class="l-4"><a href="#without-context">Without Context</a></li>
+<li class="l-4"><a href="#with-context">With Context</a></li>
+<li class="l-2"><a href="#giving-agents-skills">Giving Agents Skills</a></li>
+<li class="l-3"><a href="#using-skills">Using Skills</a></li>
+<li class="l-4"><a href="#sample-prompts">Sample prompts</a></li>
+<li class="l-2"><a href="#helping-the-agents-see">Helping the Agents See</a></li>
+<li class="l-2"><a href="#request-reviews-from-ai">Request Reviews from AI</a></li>
+<li class="l-2"><a href="#useful-tools-for-ai-agents">Useful Tools for AI Agents</a></li>
+<li class="l-2"><a href="#model-context-protocol">Model Context Protocol</a></li>
+<li class="l-3"><a href="#context7">Context7</a></li>
+<li class="l-3"><a href="#helix-mcp-server">Helix MCP Server</a></li>
+<li class="l-3"><a href="#da-mcp-server">DA MCP Server</a></li>
+<li class="l-3"><a href="#browser-mcp">Browser MCP</a></li>
+<li class="l-2"><a href="#aem-experience-modernization-agent">AEM Experience Modernization Agent</a></li>
+<li class="l-2"><a href="#questions-or-want-to-share">Questions or Want to Share?</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Developing with AI Tools</h1>
+          <p class="lede">AI coding agents such as Claude Code, Cursor, Codex, Gemini, GitHub Copilot, or Zed and the models they employ generally have good working knowledge of ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_187e02a1c2db3b2b6641c969122a4e588d41b5657.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_187e02a1c2db3b2b6641c969122a4e588d41b5657.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_187e02a1c2db3b2b6641c969122a4e588d41b5657.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_187e02a1c2db3b2b6641c969122a4e588d41b5657.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>AI coding agents such as <a href="https://www.anthropic.com/claude-code">Claude Code</a>, <a href="https://cursor.com/">Cursor</a>, <a href="https://openai.com/codex/">Codex</a>, <a href="https://github.com/google-gemini/gemini-cli">Gemini</a>, <a href="https://github.com/features/copilot">GitHub Copilot</a>, or <a href="https://zed.dev/">Zed</a> and the models they employ generally have good working knowledge of the core technologies that power AEM. As we use semantic HTML, Vanilla JavaScript, and framework-less CSS, we benefit from the largest possible training set.</p>
+        <p>However, agents start every session from scratch. They don't know your project's conventions, block patterns, and workflows. Without guidance, they'll make reasonable guesses that miss the mark such as wrong DOM structures, skipped verification steps, and content models that don't follow established patterns.</p>
+        <p>This guide covers ways you can enhance that experience to get the most out of these tools and make agentic development with AEM as productive as possible.</p>
+        <h2 id="setting-up-your-project">Setting Up Your Project</h2>
+        <h3 id="establishing-context">Establishing Context</h3>
+        <p>The <a href="https://github.com/adobe/aem-boilerplate">AEM Boilerplate</a> ships with an <a href="https://github.com/adobe/aem-boilerplate/blob/main/AGENTS.md">AGENTS.md</a> that covers project structure, setup commands, coding conventions, and block development patterns. If your project is based on a recent version of the boilerplate, you already have one. If not, use it as a starting point. In either case, don’t be shy about adjusting it to fit your specific projects’ conventions and patterns. Note that Claude Code uses <code>CLAUDE.md</code> for the same purpose, so you may want both for maximum compatibility.</p>
+        <p>We publish an <a href="../../llms.txt/index.html" data-broken-link="true">llms.txt</a> file which provides an overview of AEM and links to key documentation in a format optimized for AI consumption. Most agents don't refer to it proactively, but mentioning this file in a rules file or your prompt allows the agent to quickly include key documentation and APIs in its context to produce better results.</p>
+        <h3 id="helping-the-agents-search">Helping the Agents Search</h3>
+        <p>Modern coding agents have access to web search, but they will often mix up the Java/JCR/OSGi-based technology stack for AEM Sites as a Cloud Service with the lightweight HTML/CSS/JavaScript stack of Edge Delivery Services in Adobe Experience Manager Sites as a Cloud Service when you ask about AEM. When asking about Edge Delivery Services, you often get information about Cloudflare's, Akamai's or Fastly's Edge Compute and CDN infrastructure, and searching for EDS will bring up medical information.</p>
+        <p>The best way to prevent that is to specify "search the <a href="../../index.html">www.aem.live</a> website". Many tools also allow you to index custom documentation, in which case you should add <a href="../../docs/index.html">https://www.aem.live/docs/</a>.</p>
+        <h4 id="without-context">Without Context</h4>
+        <pre><code>&gt; Help me find information about EDS.
+
+⏺ I'll help you find information about EDS. Let me search for relevant
+  information.
+
+⏺ Web Search("EDS Ehlers-Danlos Syndrome medical condition information")
+
+╭─────────────────────────────────────────────────────────────────────────────────╮
+│ Tool use                                                                        │
+│                                                                                 │
+│   Web Search("EDS Ehlers-Danlos Syndrome medical condition information")        │
+│   Claude wants to search the web for: EDS Ehlers-Danlos Syndrome medical        │
+│   condition information                                                         │
+│                                                                                 │
+│ Do you want to proceed?                                                         │
+│ ❯ 1. Yes                                                                        │
+│  2. Yes, and don't ask again for Web Search commands in                         │
+│  /private/tmp/new-project                                                       │
+│   3. No, and tell Claude what to do differently (esc)                           │
+│                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────╯
+</code></pre>
+        <h4 id="with-context">With Context</h4>
+        <pre><code>&gt; Help me find information about Edge Delivery. Search www.aem.live
+
+⏺ I'll help you search for information about Edge Delivery on
+  http://www.aem.live.
+
+⏺ Fetch(https://www.aem.live)
+  ⎿  Fetching…
+
+╭─────────────────────────────────────────────────────────────────────────────────╮
+│ Fetch                                                                           │
+│                                                                                 │
+│   https://www.aem.live                                                          │
+│   Claude wants to fetch content from www.aem.live                               │
+│                                                                                 │
+│ Do you want to allow Claude to fetch this content?                              │
+│ ❯ 1. Yes                                                                        │
+│   2. Yes, and don't ask again for www.aem.live                                  │
+│   3. No, and tell Claude what to do differently (esc)                           │
+│                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────╯
+</code></pre>
+        <h2 id="giving-agents-skills">Giving Agents Skills</h2>
+        <p>Skills are specialized, reusable workflows that help your AI coding agent perform complex, multi-step tasks more effectively. Think of them as mini-playbooks that bundle together instructions, reference materials, and scripts to handle specific scenarios.</p>
+        <p>Skills use progressive disclosure to load detailed instructions only when needed, preserving your agent's context window for what matters.</p>
+        <p>Skills follow an open <a href="https://agentskills.io/home">standard</a> supported by a large and growing number of agents.</p>
+        <p>The full catalog is at <a href="https://github.com/adobe/skills">https://github.com/adobe/skills</a>.</p>
+        <p>- <strong>create-site</strong> — start a brand-new site from scratch: GitHub repo from boilerplate, aem-code-sync, initial DA content (nav, footer, homepage), and live URL handoff<br>- <strong>content-driven-development</strong> — orchestrates the full development workflow for building or modifying blocks on an existing site<br>- <strong>page-import</strong> — imports or migrates pages from an existing website into an EDS site<br>- <strong>docs-search</strong> — searches aem.live documentation<br>- <strong>block-inventory</strong> — surveys blocks available in the project and the Block Collection<br>- <strong>block-collection-and-party</strong> — searches reference block implementations</p>
+        <p>Install all EDS skills:</p>
+        <pre><code>  # GitHub CLI
+  gh extension install ai-ecoverse/gh-upskill
+  gh upskill adobe/skills --all
+
+  # Claude Code
+  /plugin install aem-edge-delivery-services@adobe-skills
+</code></pre>
+        <h3 id="using-skills">Using Skills</h3>
+        <p>Once added, skills are automatically usable. Just prompt as you normally would and your agent should apply the skills where appropriate. General prompt engineering guidance still applies, so you should, for example, mention a specific skill when you know you want the agent to use it.</p>
+        <p><strong>Pro-tip</strong>: If you notice your agent going off-course, or not applying the skills correctly, you can ask the agent to update the skills to avoid repeating the same mistakes.</p>
+        <h4 id="sample-prompts">Sample prompts</h4>
+        <ul>
+          <li>Build an embed block for instagram urls</li>
+          <li>Update the CSS of the hero block to match this style (add screenshot)</li>
+        </ul>
+        <h2 id="helping-the-agents-see">Helping the Agents See</h2>
+        <p>In many cases, your coding agent will make assumptions about what your site looks like without having the ability to actually verify this. You can help the agent in multiple ways:</p>
+        <ul>
+          <li>By taking screenshots of the page rendered on localhost:3000 and adding them to the chat</li>
+          <li>By installing browser automation tools like <a href="https://github.com/microsoft/playwright-cli">playwright-cli</a> or <a href="https://agent-browser.dev/">agent-browser</a> that give agents direct control of a browser to navigate, interact with, and screenshot your site</li>
+          <li>By installing specialized Model Context Protocol servers (see below)</li>
+        </ul>
+        <h2 id="request-reviews-from-ai">Request Reviews from AI</h2>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_11e1071956a4d17ef342030baa7e8e730a88ab038.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_11e1071956a4d17ef342030baa7e8e730a88ab038.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_11e1071956a4d17ef342030baa7e8e730a88ab038.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_11e1071956a4d17ef342030baa7e8e730a88ab038.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1128">
+          </picture>
+        </p>
+        <p>The AEM development flow is centered around GitHub and Pull Requests. This makes it an excellent match for AI code reviews that work both for humans and AI-generated pull requests (don't worry, AI code reviewers don't give other AIs a free LGTM-pass).</p>
+        <ul>
+          <li><a href="https://docs.github.com/copilot/using-github-copilot/code-review/using-copilot-code-review">GitHub Copilot Code Reviews</a> do not require any setup</li>
+          <li><a href="https://docs.anthropic.com/en/docs/claude-code/github-actions">Claude Code Pull Request Reviews</a> are based on GitHub Actions</li>
+          <li><a href="https://developers.openai.com/codex/cloud/code-review/">OpenAI Codex Code Review</a> offers pull request reviews through a dedicated GitHub app</li>
+        </ul>
+        <h2 id="useful-tools-for-ai-agents">Useful Tools for AI Agents</h2>
+        <p>The best AI agents have received massive reinforcement learning on using a set of command line tools that can speed up their development workflow, but which you often don't have pre-installed on your system. Consider installing them, so that your AI agent has more capable tools at their disposal.</p>
+        <ul>
+          <li><a href="https://github.com/BurntSushi/ripgrep">ripgrep (</a><code>rg</code><a href="https://github.com/BurntSushi/ripgrep">)</a> - Fast text search across codebase</li>
+          <li><code>jq</code> - JSON processor and transformer</li>
+          <li><code>gh</code> - GitHub CLI</li>
+          <li><code>curl</code> - Command-line HTTP requests</li>
+          <li><a href="https://ast-grep.github.io/">ast-grep (</a><code>sg</code><a href="https://ast-grep.github.io/">)</a> - Syntax-aware code search and transformation</li>
+          <li><code>httpie</code> - Human-friendly HTTP client</li>
+          <li><code>fzf</code> - Fuzzy finder for interactive file/command selection</li>
+          <li><code>fd</code> - Fast and user-friendly alternative to find</li>
+          <li><code>bat</code> - Syntax-highlighted cat replacement with Git integration</li>
+        </ul>
+        <p>Ask your AI agent if they are installed on your machine and tell them to install if not.</p>
+        <h2 id="model-context-protocol">Model Context Protocol</h2>
+        <p>The Model Context Protocol (MCP) provides extensibility for AI agents and almost all AI agents support it. You can try these MCP tools that work well with AEM. Remember that MCP tools will fill up the available context window, so you should disable tools that you do not use.</p>
+        <pre><code>&gt; /context
+  ⎿
+     ⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛀ ⛀ ⛀
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   Context Usage
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   claude-sonnet-4-20250514 • 17k/200k tokens (8%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ System prompt: 3.0k tokens (1.5%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ System tools: 11.4k tokens (5.7%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ MCP tools: 1.3k tokens (0.7%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ Memory files: 705 tokens (0.4%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ Messages: 91 tokens (0.0%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛶ Free space: 183.4k (91.7%)
+
+     MCP tools · /mcp
+     └ mcp__context7__resolve-library-id (context7): 691 tokens
+     └ mcp__context7__get-library-docs (context7): 652 tokens
+
+     Memory files · /memory
+     └ User (/Users/trieloff/.claude/CLAUDE.md): 705 tokens
+</code></pre>
+        <div class="card-list image-card-listing">
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_175f9ff9235848964f42cd7170f9de0f43bc062d6.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_175f9ff9235848964f42cd7170f9de0f43bc062d6.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_175f9ff9235848964f42cd7170f9de0f43bc062d6.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_175f9ff9235848964f42cd7170f9de0f43bc062d6.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1128">
+              </picture>
+            </div>
+            <div>
+              <h3 id="context7"><a href="https://github.com/upstash/context7">Context7</a></h3>
+              <p>The <a href="https://github.com/upstash/context7">Context7 MCP Server</a> gives your agents access to hundreds of sites of indexed API documentation including for <a href="https://context7.com/www.aem.live/llmstxt">Adobe Experience Manager</a>.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_12e1f01993bdae63acad4178c81320fffb16a59c2.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_12e1f01993bdae63acad4178c81320fffb16a59c2.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_12e1f01993bdae63acad4178c81320fffb16a59c2.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_12e1f01993bdae63acad4178c81320fffb16a59c2.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1128">
+              </picture>
+            </div>
+            <div>
+              <h3 id="helix-mcp-server"><a href="https://github.com/cloudadoption/helix-mcp">Helix MCP Server</a></h3>
+              <p>The (unofficial) Helix MCP Server provides tools and prompts to make your agentic development with AEM easier including docs search, block starters, and administrative tools. Please see the <a href="https://github.com/cloudadoption/helix-mcp/blob/main/README.md">Readme</a> for information on tools and usage.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_12f6e07c23f23d61cd5e2a67c42d58600ce77313e.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_12f6e07c23f23d61cd5e2a67c42d58600ce77313e.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_12f6e07c23f23d61cd5e2a67c42d58600ce77313e.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_12f6e07c23f23d61cd5e2a67c42d58600ce77313e.png?width=750&amp;format=png&amp;optimize=medium" width="1152" height="928">
+              </picture>
+            </div>
+            <div>
+              <h3 id="da-mcp-server"><a href="https://docs.da.live/about/early-access/da-mcp">DA MCP Server</a></h3>
+              <p>The (unofficial) Document Authoring MCP Server provides tools and prompts to make your agentic content creation and management development with DA easier. Please see the docs for information on tools and <a href="https://docs.da.live/about/early-access/da-mcp#what-can-it-do">usage</a>.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1954c4d87773c6103cec27b16e8410197a3da06e5.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1954c4d87773c6103cec27b16e8410197a3da06e5.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1954c4d87773c6103cec27b16e8410197a3da06e5.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1954c4d87773c6103cec27b16e8410197a3da06e5.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1128">
+              </picture>
+            </div>
+            <div>
+              <h3 id="browser-mcp"><a href="https://browsermcp.io/">Browser MCP</a></h3>
+              <p>Browser MCP is a Chrome extension, allowing your AI coding agent to remote-control your web browser and take screenshots.</p>
+            </div>
+          </div>
+        </div>
+        <h2 id="aem-experience-modernization-agent">AEM Experience Modernization Agent</h2>
+        <p>If you want to migrate your site the fastest way Adobe offers, <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/ai-in-aem/agents/modernization/overview">use the AEM Modernization Agent.</a> The Experience Modernization agent combines site creation and migration skills for initial website onboarding and block development capabilities for continuous experience development (style updates, template refinements, landing page creation). In addition, it offers the Experience Modernization Console as a hosted AI-assisted development environment available to you directly.</p>
+        <h2 id="questions-or-want-to-share">Questions or Want to Share?</h2>
+        <p>AI tools for AEM development are evolving fast. Join our community to get help with specific challenges and questions, share effective prompts, tools, and workflows, and connect with other developers using AI and AEM. For a <a href="https://blog.arborydigital.com/en/blog/ai-block-generation">detailed walkthrough of coding an AEM block with Windsurf, read Frank Townsend's blog post</a> over at Arbory Digital.</p>
+        <p>Find us on <a href="https://discord.gg/aem-live">Discord</a>, <a href="../../docs/slack/index.html">Slack</a>, or <a href="../../docs/teams/index.html">Teams</a>.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.084Z
+  page:             docs-davidsmodel
+  pageUrl:          https://www.aem.live/docs/davidsmodel
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>David’s Model, Second take.</title>
+  <meta name="description" content="A long time ago, in a galaxy far, far away, I got to a point where I realized that people had a lot of different ...">
+  <meta property="og:title" content="David’s Model, Second take.">
+  <meta property="og:description" content="A long time ago, in a galaxy far, far away, I got to a point where I realized that people had a lot of different ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/davidsmodel/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#historical-context">Historical Context</a></li>
+<li class="l-2"><a href="#introduction">Introduction</a></li>
+<li class="l-3"><a href="#rule-1-blocks-are-not-great-for-authoring">Rule #1: Blocks are not great for authoring</a></li>
+<li class="l-3"><a href="#rule-2-no-nested-blocks-for-authors">Rule #2: No nested blocks for authors</a></li>
+<li class="l-3"><a href="#rule-3-limit-row-and-column-spans">Rule #3: Limit Row and Column spans</a></li>
+<li class="l-3"><a href="#rule-4-fully-qualified-urls-only">Rule #4: Fully qualified URLs only</a></li>
+<li class="l-3"><a href="#rule-5-lists">Rule #5: Lists?</a></li>
+<li class="l-3"><a href="#rule-6-buttons-need-to-inherit-from-context">Rule #6: Buttons need to inherit from context</a></li>
+<li class="l-3"><a href="#rule-7-filenames-matter-to-authors">Rule #7: Filenames matter to authors</a></li>
+<li class="l-3"><a href="#rule-8-access-controls-and-content-grouping">Rule #8: Access Controls and Content Grouping</a></li>
+<li class="l-3"><a href="#rule-9-number-of-blocks-and-variants">Rule #9: Number of Blocks and Variants</a></li>
+<li class="l-3"><a href="#rule-10-limit-number-of-columns">Rule #10: Limit number of Columns</a></li>
+<li class="l-3"><a href="#rule-11-use-the-block-collection-content-models">Rule #11: Use the block collection content models</a></li>
+<li class="l-3"><a href="#rule-12-fragments-may-be-harmful">Rule #12: Fragments may be harmful</a></li>
+<li class="l-3"><a href="#rule-13-dont-overload-image-alt-text-semantics">Rule #13: Don't overload image alt-text semantics</a></li>
+<li class="l-3"><a href="#rule-14-use-namevalue-pairs-only-for-configuration">Rule #14: Use Name/Value pairs only for configuration</a></li>
+<li class="l-3"><a href="#rule-15-no-html-css-or-json-in-content-documents">Rule #15: No HTML, CSS or JSON in content documents</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>David’s Model, Second take.</h1>
+          <p class="lede">A long time ago, in a galaxy far, far away, I got to a point where I realized that people had a lot of different ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_18b936b5b3cf761db72caaf8658b694e3c5f0ace7.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_18b936b5b3cf761db72caaf8658b694e3c5f0ace7.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_18b936b5b3cf761db72caaf8658b694e3c5f0ace7.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_18b936b5b3cf761db72caaf8658b694e3c5f0ace7.png?width=750&amp;format=png&amp;optimize=medium" width="1463" height="1097">
+          </picture>
+        </p>
+        
+        <p>By: David Nuescheler</p>
+        <h2 id="historical-context">Historical Context</h2>
+        <p>A long time ago, in a galaxy far, far away, I got to a point where I realized that people had a lot of different options on how they could model content in a content repository specification that I was involved in.</p>
+        <p>So in 2007 I started writing up my controversial opinions around content modeling in JCR and to make sure that people considered it “just my opinion” and nothing that would claim universal applicability I called it “<a href="https://jackrabbit.apache.org/archive/wiki/JCR/DavidsModel_115513389.html">David’s Model</a>”.</p>
+        <p>It seems that this has helped people in the context of modeling content on an infrastructure level.</p>
+        <p>Today, I find myself very often in situations that feel the same when arguing “How to model or structure content in Adobe Experience Manager”.</p>
+        <p>The parameters and stakeholders feel very different today, as I am not primarily worried about the underlying infrastructure anymore but about the user experience of a person authoring content and reaching a great authoring experience across different content sources and to a lesser extent the ease of developing against those structures and being able have portable (block) code across projects and content sources.</p>
+        <h2 id="introduction">Introduction</h2>
+        <p>This document should serve as a collection of “Content Modeling” or “Content Structure” best practices as they relate to Adobe Experience Manager and more importantly to an intuitive authoring experience across different authoring platforms. A good way of testing a content model, is to imagine an author working in different environments (eg. Word, Google Docs, AEM, Custom Authoring etc.) and making sure that the content model can easily be constructed in an intuitive manner across all possible content sources.</p>
+        <p>These “rules” are a reflection of lessons learned from first-hand authoring and authoring support and are rooted in the experiences working on real-world limitations of commonly used authoring environments like Microsoft Word Online or Google Docs, but also in the average knowledge of said tooling by the average author.</p>
+        <p>Making the authoring experience intuitive, simple and fast is paramount for the long-term success of any project as lays the foundation of authors enjoying making updates to websites or other digital experiences.</p>
+        <p>These rules are evolving, and I would like to invite discussion and commentary on all of them.</p>
+        <h3 id="rule-1-blocks-are-not-great-for-authoring">Rule #1: Blocks are not great for authoring</h3>
+        <p>Generally blocks are not great as they are surfaced as tables on the authoring side. They provide a necessary framework for an author to indicate some special functionality or design for a certain component. For authors it is often easier to work in “Default Content” wherever possible.<br>For developers blocks are a great way to componentize their work, so there is tension where the developer feels that having something in a block makes their lives easier, sacrificing authoring ease-of-use.</p>
+        <p>The number of blocks and block variants, as well as (section-) metadata that influence layout should be limited by a design system. Often variants or blocks can be inferred, meaning that for example a <code>carousel</code> containing a video or a <code>quote</code> with an image should not be its own (explicit) block or variant but can be inferred automatically from the content.</p>
+        <p>A lot of content that is referenced via URL (e.g. a video, modal, fragment or an embed) can often be auto blocked, and the author may just be able to paste the URL to get the desired result.</p>
+        <p>It is definitely an anti-pattern to have things that are represented natively as default content and put them into a block, so something like a <code>Text</code>, <code>Heading</code> or <code>Image</code> block yields a bad authoring perspective.</p>
+        <h3 id="rule-2-no-nested-blocks-for-authors">Rule #2: No nested blocks for authors</h3>
+        <p>To a developer it might very often be tempting to nest complex structures, which in word document would lead to a table inside a table. As Rule #1 states that blocks are not desirable, nested blocks are definitely a lot worse.</p>
+        <p>Consider fragments (referencing other documents) or links (with auto blocking) to reduce the authoring complexity.</p>
+        <h3 id="rule-3-limit-row-and-column-spans">Rule #3: Limit Row and Column spans</h3>
+        <p>Generally we use a Column Span (merged cells) to denote the header with a block name in it. This is relatively straightforward and works well in word and google docs.<br>There are definitely situations where more complex table structure make sense (eg. a portion of the block content being in two columns and another portion of the block content being in three columns) but it is important to understand that creating and managing these structures can be extremely difficult, especially in word online that has very enigmatic support for complex tables.</p>
+        <p>If you find yourself in a place where you have a non-trivial rows and columns setup with spans / merged cells, it is probably a good idea to consider a different structure.</p>
+        <h3 id="rule-4-fully-qualified-urls-only">Rule #4: Fully qualified URLs only</h3>
+        <p>When referencing content sometimes developers think in references that are relative to host, the content repository or to their sharepoint / google drive. Authors (and most humans) often think of a URL as an opaque token that they copy/paste from their browser without deciphering them into protocol, hostname, pathname, etc.<br>It is always advisable to just let authors work fully qualified URLs and let either AEM or a developer do the work of extracting eg. a pathname where needed. As a bonus the URL can and should link to something that is easily accessible for an author from their document.</p>
+        <h3 id="rule-5-lists">Rule #5: Lists?</h3>
+        <p>I often find myself in a situation where a block has a list of references, something like a list of related articles, or a list of cards. In HTML a lot of those semantically should be considered lists (mostly <code>&lt;ul&gt;&lt;il&gt;</code> combinations). For simple lists, something like some text (possibly with a link) or just regular links, a list in word or google docs may be ideal.</p>
+        <p>It turns out that list items that are more complex, are somewhere between “hard” to “practically impossible” for an author to keep that in a list in word or google drive.<br>In that case it is much easier to have the list items be rows of a block table. A good example of that is <code>cards</code> block in the boilerplate project.</p>
+        <p>For simple lists where it is intuitive to have inferred semantics, eg. a <code>related articles</code> block in a blog post that just contains links to the articles that should be references, it may be easiest to just have a single table cell inside the block containing all the links and dropping the actual list in the word processor. From a code standpoint it is usually easy to just pull all the links from a block and not specifically worry about the details of a structure in that particular block.</p>
+        <h3 id="rule-6-buttons-need-to-inherit-from-context">Rule #6: Buttons need to inherit from context</h3>
+        <p>In many design guides we find buttons as a common element across many blocks and default content. In many cases they are outlined in all their variations (eg. primary vs. secondary, sizes, colors, etc.) at the beginning of a design specification together with the specified colors and fonts.</p>
+        <p>In projects we found that it is intuitive for authors to treat links that are on a line by themselves as for a button. In many cases it is important to inherit from the block and section context that a particular button is in to make the authoring experience easy.</p>
+        <p>As an example, if a button (read, “link by itself on a line”) is a part of a hero block, it might assume a certain bigger size, or if a button is in a section that has an inverted background color it might need to automatically switch to a different foreground / background color combination.</p>
+        <p>There are cases where within a given section / block context the author needs to be offered a set of explicit choices (eg. primary vs. secondary button) and in those cases we use combinations of bold and italic, usually bold for an explicit primary button and italic for an explicit secondary button.</p>
+        <p>It is conceivable that within a given block / section context there are more than four options for an author to choose from, in which case other formatting options could be used like underline, strikethrough etc. however, this is extremely rare and usually an indication that a decision that should be made within the design system is delegated to the author, leading to a less intuitive authoring experience.</p>
+        <h3 id="rule-7-filenames-matter-to-authors">Rule #7: Filenames matter to authors</h3>
+        <p>There are a few content management systems that append trailing slashes to all their URLs and when migrating from websites that are powered by those systems an intuitive approach could be to map every single URL to an <code>index</code> (<code>.docx</code> or gdoc) inside a folder. The downside of this approach is that the filenames are not really useful anymore for authors when they are searching for files in gdrive and sharepoint.</p>
+        <p>A better approach is to remove the trailing slashes from the URLs and redirect with a <code>301</code> (usually from the <code>redirects</code> spreadsheet) from the existing URLs with a trailing slash to the URLs without a trailing slash.</p>
+        <p>(related: the same approach should also be used for other undesirable URLs for example URLs that end in <code>.html</code>)</p>
+        <p>There are situations where this change results in too much a temporary SEO impact, in which case rewriting the URLs on the CDN may be the appropriate option, however this should only be done if there is a quantifiable business impact. long term it is more desirable to have a clean URL that maps directly to the corresponding file in sharepoint or gdrive.</p>
+        <h3 id="rule-8-access-controls-and-content-grouping">Rule #8: Access Controls and Content Grouping</h3>
+        <p>It often makes sense to group content similar to how authoring teams are organized. A good way of thinking about this is that if you have a team that looks after the blog section on your website, technical documentation, support content, a particular country / language or a product it makes sense to keep that content together, and make sure that corresponding team has access to the content.</p>
+        <p>In organizations this often happens naturally, and it is intuitive for organizations to break up their content teams similar to the structure of their URL space. In some cases the URL structure doesn’t align with authoring teams (and the corresponding access control groups). In such a case combining multiple AEM projects on the CDN tier tying together content from different sources may be the right approach if the complexity and size of a site (single domain) gets overwhelming.<br>While your content source (Sharepoint and Google Drive) possibly supports complex access control models, it is desirable to keep Access Control as simple as possible from a management standpoint.</p>
+        <p>Both Sharepoint and Google Drive have a concept for grouping content that helps to manage access control in a simple manner, in Sharepoint they are called “Sites” or “Libraries” and in Google Drive they are called “Shared Drives”. Both of those have predefined access control roles that are advantageous to use for simple group membership based access. Unless there are specific access control requirements it is recommended to keep access control to these OOTB groups.</p>
+        <p>Sites/Libraries and Share Drives are built to work well with a certain team and content size and complexity.</p>
+        <p>Particularly Sharepoint has best practices on access control complexity within a library, and creating access control complexity beyond that may yield undesirable results. In case you get to a place where it becomes unnatural to manage either the size of the content or the size and complexity in a single Site/Library or Shared Drive, it is likely that it makes sense to break things up into multiple different Site/Libraries or Shared Drives and blend the content together from different projects on the CDN.</p>
+        <h3 id="rule-9-number-of-blocks-and-variants">Rule #9: Number of Blocks and Variants</h3>
+        <p>Over the lifecycle of a website it is common that new blocks and variants are added. Especially for developers that are not very familiar with the existing block library of the project it is usually the easiest path to just add net new blocks or variants to make sure that there is no regression with existing content.</p>
+        <p>While it is probably not easy to avoid the sprawl of blocks and variants on projects that have a lot of functionality or justified requirements for a lot of visually diverse content within a single project, it is important to make sure that the core set of blocks and variant combinations that authors need to use commonly is limited. There are situations where special blocks are used infrequently on sites and often those are placed by developers initially, those blocks probably don’t need to be exposed to authors at the same level in documentation or a block library as the commonly used blocks.<br><br>More generally, large block libraries and a lot of variant / section metadata combinations are less desirable. Maintaining a “minimum use” criteria for blocks and variants based on a content report is a good practice to deprecate and remove superfluous code from the block library that’s exposed to authors.</p>
+        <h3 id="rule-10-limit-number-of-columns">Rule #10: Limit number of Columns</h3>
+        <p>A large number of columns is not a good ideal for authoring as there are practical horizontal screen / document size limitations. More importantly this is usually a symptom that content is split into small values that do not reflect a proper use of default content and the implied HTML semantics.<br>There are some exceptions to this rule in cases where data is represented in a table, as opposed to content that should be a part of document semantics, and in those cases it is often useful to go the name-value pair route via a spreadsheet instead.</p>
+        <h3 id="rule-11-use-the-block-collection-content-models">Rule #11: Use the block collection content models</h3>
+        <p>The AEM <a href="../../developer/block-collection/index.html">Block Collection</a> is a great source for well designed content models. If your block is producing a similar feature set as the one of the blocks in the Block Collection, the content model should be similar.</p>
+        <h3 id="rule-12-fragments-may-be-harmful">Rule #12: Fragments may be harmful</h3>
+        <p>Fragments are very useful when the same content is used across a lot of different pages. Obvious good examples are <code>header</code> (navigation) and <code>footer</code> information that is identical throughout a site. These are great examples especially since authors of individual pages do not have to worry about that content showing up on their page, and there is no authoring impact.<br>Using Fragments may also be useful in situations where there is an explicit selection of a content that is used across many pages of a site, such as a sign up form, a legal disclaimer, etc. and the content appears on a page but is not really a part of the canonical content of the page.</p>
+        <p>It is important to note that using a fragment comes at a cost of complexity and indirection for authors. Instead of seeing the actual content that is on a page, an author only sees a reference to a fragment, which makes it much less intuitive for authors to make changes and gauge the impact of their changes across pages. This is even amplified in cases of nested fragments.</p>
+        <p>Along those lines, from an SEO standpoint it is only advisable to use fragments at times where having duplicate content is acceptable (meaning that the content inside a fragment doesn't carry significant SEO weight for that page), hence content that is relevant from an SEO standpoint should always be placed on the page directly.</p>
+        <h3 id="rule-13-dont-overload-image-alt-text-semantics">Rule #13: Don't overload image alt-text semantics</h3>
+        <p>It may be convenient at times to put extra information hidden away into image alt-texts, but this is only recommended in exceptional cases.<br>Alt-texts often cannot be easily discovered by authors, there is very little indication about their existence in common document authoring environments (eg. word or google docs).<br>Depending on the type of copy/paste operation the alt-text may be lost without the author noticing, and if the alt-text contains special semantics, authors will have to be familiar with specific semantics within the value of an alt-text of individual images on a per block basis.</p>
+        <h3 id="rule-14-use-namevalue-pairs-only-for-configuration">Rule #14: Use Name/Value pairs only for configuration</h3>
+        <p>There are situations where name/value pairs can be useful to indicate a configuration for a block similar to a section or page (via metadata). This should only be used in exceptional cases and largely for content that is not displayed as such, and is outside of the well established semantic model of document semantics. In section metadata processing the name value pairs get converted into <code>data-</code> attributes, which illustrates the model on how name/value pairs should be thought of in blocks that require configuration. Related to rule #1, it is definitely not recommended to map "Default Content" concepts and have name/value pairs for content like <code>Heading</code>, <code>Image</code> or <code>Text</code>.</p>
+        <h3 id="rule-15-no-html-css-or-json-in-content-documents">Rule #15: No HTML, CSS or JSON in content documents</h3>
+        <p>Exposing authors to HTML, CSS or JSON, is not just unnecessary but also potentially dangerous. As a simple rule if you see tags <code>&lt;tag&gt;</code> or curly braces <code>{ }</code> in a document you are looking most certainly at a content modeling mistake. Specifically HTML, CSS and JS code should always be managed and deployed through a code versioning system like GitHub.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

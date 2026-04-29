@@ -1,0 +1,248 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.133Z
+  page:             docs-security
+  pageUrl:          https://www.aem.live/docs/security
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Security Overview</title>
+  <meta name="description" content="Adobe Experience Manager Security overview for Software Architects">
+  <meta property="og:title" content="Security Overview">
+  <meta property="og:description" content="Adobe Experience Manager Security overview for Software Architects">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/security/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#overall-considerations">Overall Considerations</a></li>
+<li class="l-3"><a href="#tenant-isolation">Tenant Isolation</a></li>
+<li class="l-3"><a href="#data-encryption">Data Encryption</a></li>
+<li class="l-3"><a href="#vulnerability-management">Vulnerability Management</a></li>
+<li class="l-2"><a href="#preview-and-delivery">Preview and Delivery</a></li>
+<li class="l-3"><a href="#request-filtering">Request Filtering</a></li>
+<li class="l-3"><a href="#rate-and-volume-limiting">Rate and Volume Limiting</a></li>
+<li class="l-3"><a href="#secure-network-routing">Secure Network Routing</a></li>
+<li class="l-3"><a href="#site-authentication">Site Authentication</a></li>
+<li class="l-3"><a href="#content-security-policy-csp">Content Security Policy (CSP)</a></li>
+<li class="l-2"><a href="#admin-api">Admin API</a></li>
+<li class="l-3"><a href="#authentication">Authentication</a></li>
+<li class="l-3"><a href="#roles-and-permissions">Roles and Permissions</a></li>
+<li class="l-3"><a href="#rate-and-volume-limiting-1">Rate and Volume Limiting</a></li>
+<li class="l-2"><a href="#backend-integrations">Backend Integrations</a></li>
+<li class="l-3"><a href="#sharepoint">Sharepoint</a></li>
+<li class="l-3"><a href="#github">GitHub</a></li>
+<li class="l-3"><a href="#backends-with-ip-filtering">Backends with IP Filtering</a></li>
+<li class="l-2"><a href="#author-tooling">Author Tooling</a></li>
+<li class="l-3"><a href="#aem-sidekick">AEM Sidekick</a></li>
+<li class="l-2"><a href="#developer-tooling">Developer Tooling</a></li>
+<li class="l-3"><a href="#aem-command-line-application">AEM Command Line Application</a></li>
+<li class="l-2"><a href="#certifications">Certifications</a></li>
+<li class="l-2"><a href="#trust-but-verify">Trust, but verify</a></li>
+<li class="l-2"><a href="#takedown-requests">Takedown requests</a></li>
+<li class="l-3"><a href="#staging--environments">Staging &amp; Environments</a></li>
+<li class="l-3"><a href="#operations">Operations</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Security Overview</h1>
+          <p class="lede">Adobe Experience Manager Security overview for Software Architects</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_101ca3ee9a7071b2368532d2b6c3b76386e2b2480.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_101ca3ee9a7071b2368532d2b6c3b76386e2b2480.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_101ca3ee9a7071b2368532d2b6c3b76386e2b2480.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_101ca3ee9a7071b2368532d2b6c3b76386e2b2480.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>This security guide covers <a href="../architecture/index.html">Edge Delivery Services in Adobe Experience Manager Sites as a Cloud Service</a>, the <a href="https://www.hlx.live/docs/admin.html">Admin API for Edge Delivery Services</a>, the <a href="../setup-customer-sharepoint/index.html">Sharepoint integration</a>, and the <a href="../../developer/tutorial/index.html">developer tooling for Edge Delivery Services</a>. There is a separate <a href="../sidekick-security/index.html">security guide for the AEM Sidekick</a>. Familiarity with the <a href="../architecture/index.html">overall architecture</a> is recommended and assumed for the rest of this guide.</p>
+        <h2 id="overall-considerations">Overall Considerations</h2>
+        <h3 id="tenant-isolation">Tenant Isolation</h3>
+        <p>All services that are a part of aem.live are multi-tenant. Tenant isolation is built into the publish and delivery services as well as the Content Hub to help ensure required content and data protection.</p>
+        <p>Write operations (preview or publish) require project details (GitHub owner, repository, branch and, if configured, an access token) and content paths be included in requests. This is required to inform the Admin Service which source document to fetch and where to store the processed content in the Content Hub. Similarly, a content request coming from a customer’s CDN must include the project details and path in its URL structure so the delivery service knows which content to deliver.</p>
+        <h3 id="data-encryption">Data Encryption</h3>
+        <p>All data in transit is exchanged over secure, encrypted connections using Transport Layer Security (TLS) 1.2 or greater. All data at rest is encrypted using AES256, with keys managed by two (2) independent cloud service providers.</p>
+        <h3 id="vulnerability-management">Vulnerability Management</h3>
+        <p>We adhere to Adobe's <a href="https://www.adobe.com/trust/security/adobe-splc.html">Secure Product Lifecycle</a> (SPLC) to ensure swift and accurate assessment and mitigation of security vulnerabilities according to their threat rating. Automated dependency management helps us keep our code base safe and quickly update vulnerable dependencies to their mitigated versions, while taking necessary precautions to prevent supply chain attacks.</p>
+        <p>For more details, see <a href="https://www.adobe.com/cc-shared/assets/pdf/trust/adb-incident-response-overview.pdf">The Adobe Incident Response Program</a>.</p>
+        <h2 id="preview-and-delivery">Preview and Delivery</h2>
+        <h3 id="request-filtering">Request Filtering</h3>
+        <p>aem.live applies strict path filtering on the edge for any content it delivers to help reduce potential attack surface. This path filtering is functionally equivalent to a web application firewall (WAF) and prevents thousands of attacks every minute.</p>
+        <p>Other than generic web application firewalls that are based on deny-lists of known security exploits, AEM uses a strict list of permissible patterns to only permit legitimate traffic.</p>
+        <p>The deep integration of the edge layer and the underlying services that make up delivery and preview ensures maximum security and high performance without the overhead of a dedicated web application firewall.</p>
+        <h3 id="rate-and-volume-limiting">Rate and Volume Limiting</h3>
+        <p>All requests and usage of the preview and publish services are subject to <a href="../limits/index.html">rate and volume limits</a> that are applied on a project-by-project basis and continuously monitored. This prevents denial-of-service attacks (DoS), in the form of distributed denial of service (DDoS) attacks, and self-inflicted Denial of Service attacks through misconfigured monitoring, bots, and crawlers. The vast majority of attacks prevented fall into the latter category..</p>
+        <h3 id="secure-network-routing">Secure Network Routing</h3>
+        <p>Edge Delivery services enforces TLS and HTTP Strict Transport Security (HSTS) to help ensure that every request is effectively secured.</p>
+        <h3 id="site-authentication">Site Authentication</h3>
+        <p>Site authentication, once enabled, ensures that only authorized requests can be made to the preview and publish tiers of an AEM site. Requests are required to present one of a list of configured site tokens to be permitted. Users can issue and revoke tokens through the Admin API.</p>
+        <p>Authors can use the AEM Sidekick to access protected sites using transient site tokens.</p>
+        <h3 id="content-security-policy-csp">Content Security Policy (CSP)</h3>
+        <p>AEM Edge Delivery Services includes a Content Security Policy (CSP) by default to help protect sites against cross-site scripting (XSS) and other common web-based attacks. The CSP is automatically applied to all new sites built from the boilerplate and cannot be customized. <a href="../csp-strict-dynamic-cached-nonce/index.html" data-broken-link="true">Learn more about the policy here</a>.</p>
+        <h2 id="admin-api">Admin API</h2>
+        <h3 id="authentication">Authentication</h3>
+        <p>The Admin API strictly requires authentication for all administrative operations and can be set up to require authentication for content operations like previewing or publishing through the sidekick. This requirement extends to the use of the AEM Sidekick.</p>
+        <p>Authentication is delegated to the identity provider (IdP) that backs the content source of the site, such as Microsoft or Google authentication.</p>
+        <h3 id="roles-and-permissions">Roles and Permissions</h3>
+        <p>Users can be assigned different roles based on the tasks they need to perform. The mapping is done in the <a href="../authentication-setup-authoring/index.html">site configuration</a>. The following roles are built-in examples:</p>
+        <ul>
+          <li><code>admin.role.author</code>: This role allows a user to update content in the Preview environment</li>
+          <li><code>admin.role.publish</code>: This role allows a user to update content in the Preview and Live environments</li>
+        </ul>
+        <p>See <a href="../authentication-setup-authoring/index.html#admin-permissions">Admin Permissions</a> and <a href="../authentication-setup-authoring/index.html#admin-roles">Admin Roles</a> for more detailed information.</p>
+        <h3 id="rate-and-volume-limiting-1">Rate and Volume Limiting</h3>
+        <p>All requests and usage of the Admin API are subject to <a href="../limits/index.html">rate and volume limits</a> that ensure smooth operation of the service. In addition to the published limits, Adobe can apply secondary limits on a case-by-case basis.</p>
+        <h2 id="backend-integrations">Backend Integrations</h2>
+        <h3 id="sharepoint">Sharepoint</h3>
+        <p>Please see <a href="../setup-customer-sharepoint/index.html">Sharepoint integration (application)</a> or <a href="../setup-customer-sharepoint-user/index.html">Sharepoint integration (delegated)</a>, depending on your setup.</p>
+        <h3 id="github">GitHub</h3>
+        <p>The <a href="https://github.com/apps/aem-code-sync">AEM Code Sync GitHub application</a> uses GitHub permissions to provide access to your GitHub repository, so that code can be made available for delivery in the Code Bus. Following permissions are requested:</p>
+        <ul>
+          <li><a href="https://docs.github.com/rest/overview/permissions-required-for-github-apps#repository-permissions-for-metadata">read access to metadata</a> – so that code gets assigned to the correct Code Bus space for your repository</li>
+          <li><a href="https://docs.github.com/en/rest/authentication/permissions-required-for-github-apps#user-permissions-for-email-addresses">read access to email addresses</a> – so that users can automatically get assigned to the organization and site in the <a href="../config-service-setup/index.html">configuration service</a> when a new repository is added</li>
+          <li><a href="https://docs.github.com/en/rest/authentication/permissions-required-for-github-apps?apiVersion=2022-11-28#repository-permissions-for-checks">read/write access to checks</a> – so that the pull request status can be set when the Pagespeed Insights performance test passes</li>
+          <li><a href="https://docs.github.com/en/rest/authentication/permissions-required-for-github-apps?apiVersion=2022-11-28#repository-permissions-for-contents">read/write access to content</a> – so that content can be replicated to the Code Bus. Write access is required to send <code>repository_dispatch</code> events and trigger GitHub actions</li>
+          <li><a href="https://docs.github.com/rest/overview/permissions-required-for-github-apps#repository-permissions-for-deployments">read/write access to deployments</a> – so that each branch in your GitHub repository can correspond to a deployment on aum.live</li>
+          <li><a href="https://docs.github.com/rest/overview/permissions-required-for-github-apps#repository-permissions-for-issues">read/write access to issues</a> – so that Adobe can raise issues with your code when detected</li>
+          <li><a href="https://docs.github.com/rest/overview/permissions-required-for-github-apps#repository-permissions-for-pull-requests">read/write access to pull requests</a> – so that Adobe can suggest code updates, if required</li>
+        </ul>
+        <p>The Code Sync GitHub app will not perform writes to your repository, but raise PRs, so that your approval will be given for each code change.</p>
+        <h3 id="backends-with-ip-filtering">Backends with IP Filtering</h3>
+        <p>If your backend only allows connections from a specific list of IPs, add <code>3.227.118.73</code> to ensure AEM is able to connect to it.</p>
+        <h2 id="author-tooling">Author Tooling</h2>
+        <h3 id="aem-sidekick">AEM Sidekick</h3>
+        <p>The AEM Sidekick is a browser extension <a href="https://chromewebstore.google.com/detail/aem-sidekick/ccfggkjabjahcjoljmgmklhpaccedipo">installed via Chrome Web Store</a> or <a href="https://apps.apple.com/ch/app/aem-sidekick/id1605191569">Apple App Store</a> and helps authors preview and publish their content. See <a href="../sidekick-security/index.html">Sidekick Security</a> for more detailed information.</p>
+        <h2 id="developer-tooling">Developer Tooling</h2>
+        <h3 id="aem-command-line-application">AEM Command Line Application</h3>
+        <p>The AEM Command Line Application is <a href="https://www.npmjs.com/package/@adobe/aem-cli">installed via npm</a> and requires access to the developer's file system, so that the site under development can be previewed using code from the developer's working copy.</p>
+        <p>It also requires network access to <code>*.aem.live</code> and <code>*.aem.page</code>, and validates all requests using Transport Layer Security (TLS) against the node.js certificate store. When man-in-the-middle attacks or tampering with request routing are detected, the command line application refuses to serve a preview site.</p>
+        <h2 id="certifications">Certifications</h2>
+        <p>To get an up-to-date overview of certifications applicable to Adobe Experience Manager as a Cloud Service (which includes Edge Delivery Services), including</p>
+        <ul>
+          <li>ISO 9001</li>
+          <li>ISO 27017:2015</li>
+          <li>ISO 20018:2019</li>
+          <li>CSA Star Level 2</li>
+          <li>IRAP</li>
+          <li>CSA CAIQ</li>
+          <li>SOC3</li>
+          <li>SOC2</li>
+          <li>SOC2+HIPAA</li>
+        </ul>
+        <p>Please see <a href="https://www.adobe.com/trust/resources.html?ch_Solution=Experience%2520Cloud&amp;ch_Product=Adobe%2520Experience%2520Manager%2520%28AEM%29%2520Cloud%2520Service#">Adobe Trust Center, specifically for solution Experience Cloud and product Adobe Experience Manager Cloud Service</a>. Additional resources can be found at <a href="https://www.adobe.com/trust/compliance/compliance-list.html">Adobe Compliance Certifications, Standards, and Regulations</a>, and the <a href="https://www.adobe.com/trust/compliance/adobe-ccf.html">Adobe Common Controls Framework (CCF)</a>.</p>
+        <h2 id="trust-but-verify">Trust, but verify</h2>
+        <p>If you'd like to verify our security claims, as a customer, you are allowed to perform penetration tests against our services, even without advance notice. We ask you to stick to the following rules:</p>
+        <ol>
+          <li>Perform load tests incl. simulated (D)DoS attacks only against <strong>production</strong> infrastructure, which includes your CDN</li>
+          <li>If you find a vulnerability, disclose it responsibly to <a href="mailto:psirt@adobe.com">psirt@adobe.com</a> and we'll get back to you</li>
+        </ol>
+        <h2 id="takedown-requests">Takedown requests</h2>
+        <p>If you suspect a site running on AEM is in violation of copyrights or applicable laws, you can send an email to <a href="mailto:abuse@adobe.com">abuse@adobe.com</a> to submit a takedown request. Adobe will promptly verify all claims and remove the offending content. For more information, see also <a href="https://www.adobe.com/legal/dmca.html">Adobe's intellectual property removal policy</a>.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="staging--environments"><a href="../staging/index.html">Staging &amp; Environments</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="operations"><a href="../operations/index.html">Operations</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

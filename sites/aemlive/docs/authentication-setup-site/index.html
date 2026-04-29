@@ -1,0 +1,228 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.076Z
+  page:             docs-authentication-setup-site
+  pageUrl:          https://www.aem.live/docs/authentication-setup-site
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Configuring Site Authentication</title>
+  <meta name="description" content="Learn how to enable visitor authentication on an AEM site.">
+  <meta property="og:title" content="Configuring Site Authentication">
+  <meta property="og:description" content="Learn how to enable visitor authentication on an AEM site.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/authentication-setup-site/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#warning">Warning</a></li>
+<li class="l-2"><a href="#limitations">Limitations</a></li>
+<li class="l-2"><a href="#enable-authentication-for-the-preview-and-publish-sites">Enable Authentication for the Preview and Publish Sites</a></li>
+<li class="l-3"><a href="#enable-the-configuration-service">1. Enable the Configuration Service</a></li>
+<li class="l-3"><a href="#create-a-site-token-to-access-your-protected-site">2. Create a site token to access your protected site</a></li>
+<li class="l-3"><a href="#enable-the-token-to-access-your-site">3. Enable the token to access your site</a></li>
+<li class="l-3"><a href="#verify-that-access-has-been-limited">4. Verify that access has been limited</a></li>
+<li class="l-3"><a href="#make-your-cdn-pass-the-right-authorization-header">5. Make your CDN pass the right Authorization header</a></li>
+<li class="l-2"><a href="#browser-access-to-the-protected-sites">Browser Access to the Protected Sites</a></li>
+<li class="l-2"><a href="#example">Example</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Configuring Site Authentication</h1>
+          <p class="lede">Learn how to enable visitor authentication on an AEM site.</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_184e8fddf29290e971f328b001a01ffcf138ebdef.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_184e8fddf29290e971f328b001a01ffcf138ebdef.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_184e8fddf29290e971f328b001a01ffcf138ebdef.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_184e8fddf29290e971f328b001a01ffcf138ebdef.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>AEM Live supports token-based authentication. Site authentication is usually applied to both the preview and publish sites, but can also be configured to only protect either site individually.</p>
+        <h2 id="warning">Warning</h2>
+        <p>Enabling Site Authentication for the publish sites (<code>*.aem.live</code>) will enforce authentication for all your site visitors (intranet). It will also prevent automatic <a href="https://pagespeed.web.dev/">PSI</a> (Page Speed Insights) checks from running on your pull requests in GitHub. For use cases where your BYO CDN should use no (or different) authentication from your <code>.live</code> origin, you will need to configure <a href="#">preview only authentication</a> or <a href="#">bypass authentication</a> with an <code>API_KEY</code>.</p>
+        <h2 id="limitations">Limitations</h2>
+        <ul>
+          <li>Only <em>authentication</em> is supported. <em>Authorization</em> is not supported.</li>
+          <li>Authentication can only be enabled or disabled for the entire site</li>
+          <li>It is not possible to create a custom error page for denied access</li>
+        </ul>
+        <h2 id="enable-authentication-for-the-preview-and-publish-sites">Enable Authentication for the Preview and Publish Sites</h2>
+        <p>Click <a href="../../previous/authentication-setup-site/index.html" data-broken-link="true">here</a> to view instructions on how to update the configuration in <em>document mode</em></p>
+        <h3 id="enable-the-configuration-service">1. Enable the Configuration Service</h3>
+        <p>All of the following instructions use the <a href="../config-service-setup/index.html">Configuration Service</a> for your site, so follow the linked instructions to enable and authenticate, then perform the following API requests.</p>
+        <h3 id="create-a-site-token-to-access-your-protected-site">2. Create a site token to access your protected site</h3>
+        <p><a href="../admin.html/index.html#tag/siteConfig/operation/updateConfigSite" data-broken-link="true">POST</a> an empty body to <code>http://admin.hlx.page/config/{org}/sites/{site}/secrets.json</code> the response will be a JSON object containing an <code>id</code> and <code>value</code> field. Remember both, you'll need them for the next steps:</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/acme/sites/website/secrets.json \
+  -H 'x-auth-token: &lt;your-auth-token&gt;'
+{
+  "id": "SGFsbG8gVG9iaWFz",
+  "value": "hlx_ZGFzIGlzdCBkZWluIHRva2Vu",
+  "created": "2024-08-21T18:28:54.075Z"
+}
+</code></pre>
+        <p>Note that you now have two tokens:</p>
+        <ol>
+          <li>The auth token for the admin API obtained during login. This one is highly sensitive and cannot be used for site authentication.</li>
+          <li>The site token, which you just created, which can be shared with users and systems than need to access your site</li>
+        </ol>
+        <h3 id="enable-the-token-to-access-your-site">3. Enable the token to access your site</h3>
+        <p><a href="../admin.html/index.html#tag/siteConfig/operation/updateConfigSite" data-broken-link="true">POST</a> to <code>http://admin.hlx.page/config/{org}/sites/{site}/access/site.json</code> so that accessing your site on <code>aem.page</code> and <code>aem.live</code> requires the token value you've retrieved in the previous step.</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/acme/sites/website/access/site.json \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: &lt;your-auth-token&gt;' \
+  --data '{
+    "allow": ["*@acme.com", "*@adobe.com"],
+    "secretId": ["SGFsbG8gVG9iaWFz"]
+  }'
+
+{
+  "allow": ["*@acme.com", "*@adobe.com"]
+  "secretId": ["SGFsbG8gVG9iaWFz"]
+}
+</code></pre>
+        <p>The response contains the content of the <code>access.site</code> object. Each POST request overwrites that object, so if you want to update any content, make sure to perform a GET request to the same URL before and include the original content.</p>
+        <p>The example above sets the <code>site</code> property which controls access to both <code>aem.page</code> and <code>aem.live</code>. This is the most restrictive approach. If you want to limit access to both <code>aem.page</code> and <code>aem.live</code>, POST to <code>.../access/site.json</code>. If you want to limit access to <code>aem.page</code> only, post to <code>.../access/preview.json</code>. In the unlikely case that you want to limit access to <code>aem.live</code> only, and keep <code>aem.page</code>, post to <code>.../access/live.json</code>.</p>
+        <p>If you have set tokens for <code>site</code> and either <code>preview</code> or <code>live</code>, then <code>preview</code> and <code>live</code> will override the <code>site</code>-wide settings.</p>
+        <h3 id="verify-that-access-has-been-limited">4. Verify that access has been limited</h3>
+        <p>When you open your site in your browser, you will see an HTTP 401 status code, indicating that no access is possible without authentication. Next, try to access the site and provide the token value:</p>
+        <pre><code>curl https://main--website--acme.aem.live \
+  -H 'authorization: token hlx_ZGFzIGlzdCBkZWluIHRva2Vu'
+</code></pre>
+        <p>In this request we use the site token value in the <code>Authorization</code> header.</p>
+        <h3 id="make-your-cdn-pass-the-right-authorization-header">5. Make your CDN pass the right Authorization header</h3>
+        <p>With this change, nobody can access your site without the correct authorization header. This includes your CDN, and therefore every visitor to your site. To enable access again, you need to add the Authorization header to each origin request your CDN makes.</p>
+        <p>The <a href="../byo-cdn-setup/index.html">CDN setup instructions</a> explain how to enable the authorization header for each supported Content Delivery Network.</p>
+        <h2 id="browser-access-to-the-protected-sites">Browser Access to the Protected Sites</h2>
+        <p>Accessing protected sites directly from a browser requires users to have an appropriate <a href="../config-service-setup/index.html">role defined in the project configuration</a> and to sign in using the <a href="../sidekick/index.html">AEM Sidekick Extension</a>.</p>
+        <h2 id="example">Example</h2>
+        <p>The following excerpt of the <code>access</code> object of a site configuration for <code>acme/website</code> enforces the following:</p>
+        <ul>
+          <li>Protects <code>*--website--acme.aem.page</code></li>
+          <li>Allows to access <code>*--website--acme.aem.page </code>with a site token that has the id <code>SGFsbG8gVG9iaWFz</code></li>
+          <li>Does not protect <code>*--website--acme.aem.live</code></li>
+          <li>Enforces authentication of the admin API for <code>acme/website</code></li>
+          <li>Allows sidekick authenticated users that have a <code>*@acme.com</code> email to preview, publish, etc.</li>
+          <li>Allows performing admin API operations with an admin token with the JWT jti <code>1kLvEvoipnINAOGDP8NVl3IYbJy2qmUQa5b1Fe23S7tt</code> depending on the included scopes.</li>
+        </ul>
+        <pre><code>{
+ "access": {
+   "preview": {
+     "allow": [
+       "*@acme.com"
+     ],
+     "secretId": [
+       "SGFsbG8gVG9iaWFz",
+     ]
+   },
+   "admin": {
+     "role": {
+       "publish": [
+         "*@acme.com"
+       ]
+     },
+     "requireAuth": "true",
+     "apiKeyId": [
+       "1kLvEvoipnINAOGDP8NVl3IYbJy2qmUQa5b1Fe23S7tt"
+     ]
+   }
+ }
+}
+
+</code></pre>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

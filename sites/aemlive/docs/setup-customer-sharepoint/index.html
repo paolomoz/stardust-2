@@ -1,0 +1,631 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.963Z
+  page:             docs-setup-customer-sharepoint
+  pageUrl:          https://www.aem.live/docs/setup-customer-sharepoint
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>How to use Sharepoint (application)</title>
+  <meta name="description" content="If you use SharePoint as your content source, AEM uses a registered Microsoft Azure application to access your content. This application has delegated permissions defined ...">
+  <meta property="og:title" content="How to use Sharepoint (application)">
+  <meta property="og:description" content="If you use SharePoint as your content source, AEM uses a registered Microsoft Azure application to access your content. This application has delegated permissions defined ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/setup-customer-sharepoint/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#create-or-identify-a-sharepoint-site">1. Create or identify a Sharepoint site</a></li>
+<li class="l-2"><a href="#create-the-website-root-folder">2. Create the website root folder</a></li>
+<li class="l-2"><a href="#set-the-content-source-in-your-site-configuration">3. Set the content source in your site configuration</a></li>
+<li class="l-2"><a href="#access-the-registration-portal">4. Access the Registration Portal</a></li>
+<li class="l-3"><a href="#overview">Overview</a></li>
+<li class="l-2"><a href="#sign-in-in-the-registration-portal">1. Sign-in in the Registration Portal</a></li>
+<li class="l-3"><a href="#view-enterprise-applications-in-azure-portal">View Enterprise Applications in Azure Portal</a></li>
+<li class="l-3"><a href="#access-the-registration-portal-1">Access The Registration Portal</a></li>
+<li class="l-3"><a href="#sign-in-as-non-admin-user">Sign-in as non admin user</a></li>
+<li class="l-3"><a href="#sign-in-as-admin-user">Sign-in as admin user</a></li>
+<li class="l-3"><a href="#aem-content-integration-registration-visible-in-ui">AEM Content Integration Registration visible in UI</a></li>
+<li class="l-3"><a href="#create-application-using-msgraph-or-powershell">Create application using MSGraph or Powershell</a></li>
+<li class="l-3"><a href="#review-permissions">Review permissions</a></li>
+<li class="l-3"><a href="#user-logged-in-registration-portal">User logged in Registration portal</a></li>
+<li class="l-2"><a href="#verify-write-access-to-the-content-source-via-challenge-file">Verify write access to the content source via challenge file</a></li>
+<li class="l-3"><a href="#download-the-challenge-file">Download the challenge file</a></li>
+<li class="l-2"><a href="#adding-the-aem-content-integration-app-with-application-permissions">Adding the AEM Content Integration App with application permissions</a></li>
+<li class="l-3"><a href="#add-enterprise-application">Add Enterprise Application</a></li>
+<li class="l-3"><a href="#add-application-roles">Add Application Roles</a></li>
+<li class="l-3"><a href="#add-application-roles-using-powershell-or-graph-explorer">Add Application Roles using Powershell or Graph Explorer</a></li>
+<li class="l-3"><a href="#validate-permissions">Validate Permissions</a></li>
+<li class="l-3"><a href="#add-permissions-to-sharepoint-site">Add permissions to Sharepoint Site</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>How to use Sharepoint (application)</h1>
+          <p class="lede">If you use SharePoint as your content source, AEM uses a registered Microsoft Azure application to access your content. This application has delegated permissions defined ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1efffe0288d261803d829a5fbc7f0d34748e6dacc.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1efffe0288d261803d829a5fbc7f0d34748e6dacc.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1efffe0288d261803d829a5fbc7f0d34748e6dacc.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="White Adobe logo on a red square." src="./media_1efffe0288d261803d829a5fbc7f0d34748e6dacc.png?width=750&amp;format=png&amp;optimize=medium" width="1463" height="1097">
+          </picture>
+        </p>
+        
+        <p><strong>NOTE</strong>: for projects using Adobe’s Sharepoint please continue <a href="../setup-adobe-sharepoint/index.html">here</a>.</p>
+        <p>If you use SharePoint as your content source, AEM uses a registered Microsoft Azure application to access your content. This application has <strong>delegated permissions</strong> defined that allow the service to access SharePoint on behalf of a user. This user needs to be registered to the project that is using SharePoint.</p>
+        <p>Alternatively, the services can also authenticate as an application and use <strong>application permissions</strong> to access the sites. This needs additional setup by a SharePoint site administrator that can grant the permissions for the application.</p>
+        <p>The preferred setup is to use <strong>application permissions</strong>, as this narrows down the access the service has to a specific SharePoint site and does not require to share any secrets of a technical user. Also, it reduces the problems around password rotation.</p>
+        <p>The following describes how to set up <strong>application permissions</strong> for your project. If you want to set up a technical user, please continue <a href="../setup-customer-sharepoint-user/index.html">here</a>.</p>
+        <p>Setting up SharePoint involves the following steps:</p>
+        <ol>
+          <li>Create or identify a Sharepoint site that will serve as site for the document based authoring</li>
+          <li>Create a folder within SharePoint that will be the website root.</li>
+          <li>Set the content source in your site configuration</li>
+          <li>Access the Registration Portal</li>
+          <li>Register the Application</li>
+          <li>Apply the <code>sites.selected</code> permission to the SharePoint site</li>
+        </ol>
+        <h2 id="create-or-identify-a-sharepoint-site">1. Create or identify a Sharepoint site</h2>
+        <p>Talk to your IT department to either identify or create a Sharepoint site that will be used for document based authoring. One site can “host” multiple websites (projects). This site will later receive the respective permissions so that the publishing services can access it.</p>
+        <h2 id="create-the-website-root-folder">2. Create the website root folder</h2>
+        <p>Navigate to your desired location in the SharePoint site created or identified above and create a root folder that will be your website root. It is best to not use a SharePoint list root directly, so that you have a shared space for your authors to put collateral documents, for example a drafts folder, or how-to-author documentations.</p>
+        <p>An example file structure might look like this, using the <code>website</code> folder as the root:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1a21e5630caea6df81f56b8e57c8f7397e7deae60.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1a21e5630caea6df81f56b8e57c8f7397e7deae60.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1a21e5630caea6df81f56b8e57c8f7397e7deae60.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1a21e5630caea6df81f56b8e57c8f7397e7deae60.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="865">
+          </picture>
+        </p>
+        <h2 id="set-the-content-source-in-your-site-configuration">3. Set the content source in your site configuration</h2>
+        <p>The next step is to set the source property in your site configuration to the corresponding Sharepoint URL<br><br>(see: <a href="../admin.html/index.html#schema/SiteConfig" data-broken-link="true">https://www.aem.live/docs/admin.html#schema/SiteConfig</a> for more detail)<br><br>The expected format usually looks like the example below.</p>
+        <pre><code>https://&lt;tenant&gt;.SharePoint.com/sites/&lt;sp-site&gt;/Shared%20Documents/website
+</code></pre>
+        <p><br>This might vary depending on how you create the SharePoint site and lists. In order to obtain the url, the simplest way is to copy-past the first part from the browser address, eg:<br><br>
+          <picture>
+            <source type="image/webp" srcset="./media_1a39f3177a20c4d3712d6c710c465021fa3267941.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1a39f3177a20c4d3712d6c710c465021fa3267941.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1a39f3177a20c4d3712d6c710c465021fa3267941.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1a39f3177a20c4d3712d6c710c465021fa3267941.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="356">
+          </picture>
+        </p>
+        <p>And then add the rest manually (Note, that copying the sharelink via the UI adds unnecessary information and it is better to use a canonical representation of the url). Once you compose the url, you can test it by entering it again in the browser. You should end up in the folder view of your website root.</p>
+        <p>After that, update the <code>source</code> in your site config service via the API accordingly.</p>
+        <p>An easy way to make this change is to use <code>https://labs.aem.live/tools/site-admin/index.html</code> to either create or update a site configuration.</p>
+        <p>For example:<br><br>
+          <picture>
+            <source type="image/webp" srcset="./media_1b703af395a0ab1792f8541e52850261d58ef904b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1b703af395a0ab1792f8541e52850261d58ef904b.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1b703af395a0ab1792f8541e52850261d58ef904b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1b703af395a0ab1792f8541e52850261d58ef904b.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="410">
+          </picture><br><br>Hit <code>save</code> to persist the change.
+        </p>
+        <h2 id="access-the-registration-portal">4. Access the Registration Portal</h2>
+        <h3 id="overview">Overview</h3>
+        <p>In order for the AEM service to access the authored content it needs a couple of information and setup. The AEM service (a cloud function) accesses the <a href="https://learn.microsoft.com/en-gb/graph/">MS Graph API</a> on behalf of an application (or configured user). In order to do so, it needs to authenticate first in the context of an <a href="https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/what-is-application-management">Application</a>. This is important because the scopes given to the application define what permission the service has on the MS Graph API. For example, it should be allowed to read and write documents, but not to alter access control.</p>
+        <p>An application is represented as an “Enterprise Application” in the respective Active Directory of a tenant. The permissions given to that enterprise application ultimately define what the service can access in that tenant’s resources. Certain permissions need to be approved by an Active Directory administrator before a user can use the application. This so-called “admin consent” is a mechanism to verify and control which permissions apps can have. This is to prevent dubious apps from tricking users into trusting an app that is not official. Having the extra admin consent step allows IT security to control which apps the employees can use.</p>
+        <h2 id="sign-in-in-the-registration-portal">1. Sign-in in the Registration Portal</h2>
+        <div class="columns contained fullscreen-images">
+          <div>
+            <div>
+              <h3 id="view-enterprise-applications-in-azure-portal">View Enterprise Applications in Azure Portal</h3>
+              <p>Assuming that so far no AEM Enterprise Applications are present in Azure (Microsoft Entra Id)</p>
+            </div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1190bb8f4b278ac17607a9a0b6b6a850b9687273b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1190bb8f4b278ac17607a9a0b6b6a850b9687273b.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1190bb8f4b278ac17607a9a0b6b6a850b9687273b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1190bb8f4b278ac17607a9a0b6b6a850b9687273b.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1322">
+              </picture>
+            </div>
+          </div>
+          <div>
+            <div>
+              <h3 id="access-the-registration-portal-1">Access The Registration Portal</h3>
+              <p>Go to <a href="https://admin.hlx.page/register">https://admin.hlx.page/register</a>, enter the github url of the project or the org/site values of your site config.</p>
+            </div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_16cab4000fae428c4c76f206cd38f7ac0f42b1da4.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_16cab4000fae428c4c76f206cd38f7ac0f42b1da4.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_16cab4000fae428c4c76f206cd38f7ac0f42b1da4.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_16cab4000fae428c4c76f206cd38f7ac0f42b1da4.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1318">
+              </picture>
+            </div>
+          </div>
+          <div>
+            <div>
+              <h3 id="sign-in-as-non-admin-user">Sign-in as non admin user</h3>
+              <p>Sign in as a user that <strong>does not</strong> have admin permissions will show an error that it needs approval, i.e. the application needs admin consent.</p>
+              <p><strong>Problem</strong>: Enterprise Application is not registered if a user never logs in.</p>
+            </div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1cf6de0cf406aa1ee075864db83ea8ae0ab0b6649.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1cf6de0cf406aa1ee075864db83ea8ae0ab0b6649.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1cf6de0cf406aa1ee075864db83ea8ae0ab0b6649.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1cf6de0cf406aa1ee075864db83ea8ae0ab0b6649.png?width=750&amp;format=png&amp;optimize=medium" width="932" height="920">
+              </picture>
+            </div>
+          </div>
+          <div>
+            <div>
+              <h3 id="sign-in-as-admin-user">Sign-in as admin user</h3>
+              <p>One solution is to sign in as a user that <strong>does</strong> have admin permissions:</p>
+              <p>(note, at this point the Enterprise Application is still not registered in azure)</p>
+            </div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_12b65935a94412edf20d183e8191ce696e036a03f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_12b65935a94412edf20d183e8191ce696e036a03f.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_12b65935a94412edf20d183e8191ce696e036a03f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_12b65935a94412edf20d183e8191ce696e036a03f.png?width=750&amp;format=png&amp;optimize=medium" width="932" height="920">
+              </picture>
+            </div>
+          </div>
+          <div>
+            <div>
+              <h3 id="aem-content-integration-registration-visible-in-ui">AEM Content Integration Registration visible in UI</h3>
+              <p>If the admin logs in (without checking the checkbox and granting consent for everyone), the Enterprise application is present.</p>
+            </div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_16b51d539119f1d70a06b077e56400387e91eabcb.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_16b51d539119f1d70a06b077e56400387e91eabcb.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_16b51d539119f1d70a06b077e56400387e91eabcb.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_16b51d539119f1d70a06b077e56400387e91eabcb.png?width=750&amp;format=png&amp;optimize=medium" width="1308" height="1032">
+              </picture>
+            </div>
+          </div>
+        </div>
+        <h3 id="create-application-using-msgraph-or-powershell">Create application using MSGraph or Powershell</h3>
+        <p>Alternatively, you can create the Enterprise application via MSGraph or Powershell.</p>
+        <p>In order to make it visible in the azure UI you also need to add the <code>WindowsAzureActiveDirectoryIntegratedApp</code> tag. This can be done directly when creating the application.<br><br>Using graph explorer:</p>
+        <pre><code>POST https://graph.microsoft.com/v1.0/servicePrincipals
+Content-type: application/json
+{
+    "appId": "e34c45c4-0919-43e1-9436-448ad8e81552",
+    "tags": [
+        "WindowsAzureActiveDirectoryIntegratedApp"
+    ]
+}
+</code></pre>
+        <p>Using powershell:</p>
+        <pre><code>PS&gt; connect-MgGraph -Scopes "Application.ReadWrite.All"
+PS&gt; New-MgServicePrincipal -AppId e34c45c4-0919-43e1-9436-448ad8e81552 -Tags WindowsAzureActiveDirectoryIntegratedApp
+</code></pre>
+        <div class="columns contained fullscreen-images">
+          <div>
+            <div>
+              <p>After that you still need to give admin consent, if you want a non admin user to login.</p>
+              <p><br>Also see:</p>
+              <ul>
+                <li><a href="https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/create-service-principal-cross-tenant">https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/create-service-principal-cross-tenant</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/add-application-portal-configure?pivots=ms-graph">https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/add-application-portal-configure?pivots=ms-graph</a></li>
+              </ul>
+            </div>
+            <div>
+              <p>
+                <picture>
+                  <source type="image/webp" srcset="./media_1c7f188ae128dafecf1aa05b89647ab65b22a9988.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                  <source type="image/webp" srcset="./media_1c7f188ae128dafecf1aa05b89647ab65b22a9988.png?width=750&amp;format=webply&amp;optimize=medium">
+                  <source type="image/png" srcset="./media_1c7f188ae128dafecf1aa05b89647ab65b22a9988.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                  <img loading="lazy" alt="" src="./media_1c7f188ae128dafecf1aa05b89647ab65b22a9988.png?width=750&amp;format=png&amp;optimize=medium" width="1308" height="1032">
+                </picture>
+              </p>
+              <p>
+                <picture>
+                  <source type="image/webp" srcset="./media_18ff0191a2d962ebc439d12bd37759aac7e396883.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                  <source type="image/webp" srcset="./media_18ff0191a2d962ebc439d12bd37759aac7e396883.png?width=750&amp;format=webply&amp;optimize=medium">
+                  <source type="image/png" srcset="./media_18ff0191a2d962ebc439d12bd37759aac7e396883.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                  <img loading="lazy" alt="" src="./media_18ff0191a2d962ebc439d12bd37759aac7e396883.png?width=750&amp;format=png&amp;optimize=medium" width="803" height="902">
+                </picture>
+              </p>
+              <p>
+                <picture>
+                  <source type="image/webp" srcset="./media_12ef43856b5964bd7f80caaf49932bec875fd31a7.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                  <source type="image/webp" srcset="./media_12ef43856b5964bd7f80caaf49932bec875fd31a7.png?width=750&amp;format=webply&amp;optimize=medium">
+                  <source type="image/png" srcset="./media_12ef43856b5964bd7f80caaf49932bec875fd31a7.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                  <img loading="lazy" alt="" src="./media_12ef43856b5964bd7f80caaf49932bec875fd31a7.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1322">
+                </picture>
+              </p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <h3 id="review-permissions">Review permissions</h3>
+              <p>Note that the <code>AEM Content Integration Registration (e34c45c4-0919-43e1-9436-448ad8e81552)</code> application is only needed during registration to verify that the user has read access to the sharepoint. It has the following <strong>delegated permissions</strong>:</p>
+              <ul>
+                <li><code>Openid</code><br>Allows users to sign in to the app with their work or school accounts and allows the app to see basic user profile information.</li>
+                <li><code>Profile</code><br>Allows the app to see your users' basic profile (e.g., name, picture, user name, email address)</li>
+                <li><code>Files.ReadWrite.All</code><br>Allows the app to read, create, update and delete all files the signed-in user can access.</li>
+              </ul>
+            </div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_17d2726b0f7853fe8ae2562cd881d577ba9d8bcc6.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_17d2726b0f7853fe8ae2562cd881d577ba9d8bcc6.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_17d2726b0f7853fe8ae2562cd881d577ba9d8bcc6.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_17d2726b0f7853fe8ae2562cd881d577ba9d8bcc6.png?width=750&amp;format=png&amp;optimize=medium" width="1308" height="1032">
+              </picture>
+            </div>
+          </div>
+          <div>
+            <div>
+              <h3 id="user-logged-in-registration-portal">User logged in Registration portal</h3>
+              <p>After completing this initial step, the user is logged in the registration portal</p>
+            </div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_11983dd34d29c068da4ee50882a0f906535b7b93f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_11983dd34d29c068da4ee50882a0f906535b7b93f.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_11983dd34d29c068da4ee50882a0f906535b7b93f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_11983dd34d29c068da4ee50882a0f906535b7b93f.png?width=750&amp;format=png&amp;optimize=medium" width="1373" height="1600">
+              </picture>
+            </div>
+          </div>
+        </div>
+        <h2 id="verify-write-access-to-the-content-source-via-challenge-file">Verify write access to the content source via challenge file</h2>
+        <div class="columns contained fullscreen-images">
+          <div>
+            <div>
+              <h3 id="download-the-challenge-file">Download the challenge file</h3>
+              <p>Before you can register (or change) the registration. You have to prove that you have write access to the respective sharepoint location. For that you need to upload a text file containing the mentioned content. This can easily be done by downloading the file and drop it into the sharepoint folder.</p>
+              <p>After that, click on <code>Validate</code> to continue the registration.</p>
+            </div>
+            <div>
+              <p>
+                <picture>
+                  <source type="image/webp" srcset="./media_187fe82f471856af1d141165fa46cf98b6dbf2ada.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                  <source type="image/webp" srcset="./media_187fe82f471856af1d141165fa46cf98b6dbf2ada.png?width=750&amp;format=webply&amp;optimize=medium">
+                  <source type="image/png" srcset="./media_187fe82f471856af1d141165fa46cf98b6dbf2ada.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                  <img loading="lazy" alt="" src="./media_187fe82f471856af1d141165fa46cf98b6dbf2ada.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1374">
+                </picture>
+              </p>
+              <p>
+                <picture>
+                  <source type="image/webp" srcset="./media_1d8e68ed60aac9e095e8ce086d43d711da0c9061a.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                  <source type="image/webp" srcset="./media_1d8e68ed60aac9e095e8ce086d43d711da0c9061a.png?width=750&amp;format=webply&amp;optimize=medium">
+                  <source type="image/png" srcset="./media_1d8e68ed60aac9e095e8ce086d43d711da0c9061a.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                  <img loading="lazy" alt="" src="./media_1d8e68ed60aac9e095e8ce086d43d711da0c9061a.png?width=750&amp;format=png&amp;optimize=medium" width="1300" height="1600">
+                </picture>
+              </p>
+            </div>
+          </div>
+        </div>
+        <h2 id="adding-the-aem-content-integration-app-with-application-permissions">Adding the AEM Content Integration App with application permissions</h2>
+        <div class="columns contained fullscreen-images">
+          <div>
+            <div>
+              <h3 id="add-enterprise-application">Add Enterprise Application</h3>
+              <p>When logged in the registration portal, the content source that is used by the project needs to be connected to an oauth grant for the <code>AEM Content Integration</code> application. This is needed, so that the system can access the documents in sharepoint and convert them to an internal format (markdown) and store it in Adobe’s storage (S3/R2) for fast delivery.</p>
+              <p>Using application <code>sites.selected</code> permissions is more secure as it limits the scope to a single sharepoint site. In order to connect, click on the <code>Connect Application</code> button.</p>
+              <p>If you never registered an application or a user before, you probably see the following error:</p>
+              <pre><code>Unable to validate access: General exception while processing
+</code></pre>
+              <p>or</p>
+              <pre><code>Unable to validate access: Either scp or roles claim
+need to be present in the token.
+</code></pre>
+            </div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1aae332e3995979a51198e863371a2116f712a62a.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1aae332e3995979a51198e863371a2116f712a62a.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1aae332e3995979a51198e863371a2116f712a62a.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1aae332e3995979a51198e863371a2116f712a62a.png?width=750&amp;format=png&amp;optimize=medium" width="1363" height="1600">
+              </picture>
+            </div>
+          </div>
+        </div>
+        <p>Same as above, the Enterprise application for the <code>AEM Content Integration (83ab2922-5f11-4e4d-96f3-d1e0ff152856)</code> is not present in Azure yet,<br><br>In order to add it, use the graph explorer or powershell to add it:</p>
+        <p><br>Using graph explorer:</p>
+        <pre><code>POST https://graph.microsoft.com/v1.0/servicePrincipals
+Content-type: application/json
+{
+    "appId": "83ab2922-5f11-4e4d-96f3-d1e0ff152856",
+    "tags": [
+        "WindowsAzureActiveDirectoryIntegratedApp"
+    ]
+}
+</code></pre>
+        <p>Using powershell:</p>
+        <pre><code>PS&gt; connect-MgGraph -Scopes "Application.ReadWrite.All"
+PS&gt; New-MgServicePrincipal -AppId 83ab2922-5f11-4e4d-96f3-d1e0ff152856 -Tags WindowsAzureActiveDirectoryIntegratedApp
+</code></pre>
+        <p><br><br>Also see:</p>
+        <ul>
+          <li><a href="https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/create-service-principal-cross-tenant">https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/create-service-principal-cross-tenant</a></li>
+        </ul>
+        <div class="columns contained fullscreen-images">
+          <div>
+            <div>
+              <h3 id="add-application-roles">Add Application Roles</h3>
+              <p>Now the enterprise application <code>AEM Content Integration</code> is visible in azure. But it doesn’t have any <code>Sites.Selected</code> application permissions.</p>
+              <p><strong>Problem</strong>: Using the admin consent UI would grant all application and delegated permissions, which we don’t want.</p>
+              <p>An easy way is to consent to all permissions and then remove the delegated ones again.</p>
+            </div>
+            <div>
+              <p>
+                <picture>
+                  <source type="image/webp" srcset="./media_1e08c17483309293e7e90f74c80c107807a3cc8bd.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                  <source type="image/webp" srcset="./media_1e08c17483309293e7e90f74c80c107807a3cc8bd.png?width=750&amp;format=webply&amp;optimize=medium">
+                  <source type="image/png" srcset="./media_1e08c17483309293e7e90f74c80c107807a3cc8bd.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                  <img loading="lazy" alt="" src="./media_1e08c17483309293e7e90f74c80c107807a3cc8bd.png?width=750&amp;format=png&amp;optimize=medium" width="1311" height="1009">
+                </picture>
+              </p>
+              <p>
+                <picture>
+                  <source type="image/webp" srcset="./media_1b02e614e714532854393c52bf3afab6ad860c3bf.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                  <source type="image/webp" srcset="./media_1b02e614e714532854393c52bf3afab6ad860c3bf.png?width=750&amp;format=webply&amp;optimize=medium">
+                  <source type="image/png" srcset="./media_1b02e614e714532854393c52bf3afab6ad860c3bf.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                  <img loading="lazy" alt="" src="./media_1b02e614e714532854393c52bf3afab6ad860c3bf.png?width=750&amp;format=png&amp;optimize=medium" width="1238" height="1061">
+                </picture>
+              </p>
+            </div>
+          </div>
+        </div>
+        <h3 id="add-application-roles-using-powershell-or-graph-explorer">Add Application Roles using Powershell or Graph Explorer</h3>
+        <p>Alternatively, adding the app roles can be done with the following steps:</p>
+        <ol>
+          <li>Find the service principal of the enterprise application (<code>principalId</code>). This is the one you created above.</li>
+          <li>Find the service principal of the Microsoft Graph API (<code>resourceId</code>)</li>
+          <li>Find the Id for the <code>Sites.Selected </code>Application Role (<code>appRoleId</code>)</li>
+          <li>Assign the Application Role to the Managed Identity (The Enterprise Application)</li>
+        </ol>
+        <p>Using <strong>powershell</strong> this can be done with:</p>
+        <pre><code>$ObjectId = "abcdef-1234-49b6-b660-cc85b34fe516"    &lt;&lt;------ replace with your enterprise app id
+$AAD_SP = Get-AzureADServicePrincipal -SearchString "Microsoft Graph";
+$AAD_SP
+ 
+$MSI = Get-AzureADServicePrincipal -ObjectId $ObjectId
+if($MSI.Count -gt 1)
+  { 
+  Write-Output "More than 1 principal found, please find your principal and copy the right object ID. Now use the syntax $MSI = Get-AzureADServicePrincipal -ObjectId &lt;your_object_id&gt;"
+  Exit
+  }
+ 
+$AAD_AppRole = $AAD_SP.AppRoles | Where-Object {$_.Value -eq "Sites.Selected"}
+New-AzureADServiceAppRoleAssignment -ObjectId $MSI.ObjectId  -PrincipalId $MSI.ObjectId  -ResourceId $AAD_SP.ObjectId[0]  -Id $AAD_AppRole.Id
+
+</code></pre>
+        <p>Using <strong>graph explorer</strong> it involves more steps:</p>
+        <ol>
+          <li>Find the principal of the enterprise application for <code>AEM Content Integration</code> :</li>
+        </ol>
+        <pre><code>  GET https://graph.microsoft.com/v1.0/servicePrincipals?$filter=appId eq '83ab2922-5f11-4e4d-96f3-d1e0ff152856' 
+...
+  "value": [
+        {
+            "id": "6761ada0-733b-4a02-98b2-3db970834fe0",
+...
+</code></pre>
+        <p>This will be our <code>principalId</code></p>
+        <ol>
+          <li>Find the service principal of the Microsoft Graph API</li>
+        </ol>
+        <pre><code>GET https://graph.microsoft.com/v1.0/servicePrincipals?$filter=appId eq '00000003-0000-0000-c000-000000000000'
+...
+  "value": [
+        {
+            "id": "5159db96-7193-414e-9730-b1d1e4448443",
+...
+</code></pre>
+        <p>This is the <code>resourceId</code>. (the resource that defines the application role)</p>
+        <ol>
+          <li>Find the id of the application role.<br><br><code>GET https://graph.microsoft.com/v1.0/servicePrincipals/${resourceId}/appRoles</code></li>
+        </ol>
+        <p><br>Substitute the <code>resourceId</code> with the service principal of the Microsoft Graph API as obtained from the previous step.</p>
+        <pre><code>GET https://graph.microsoft.com/v1.0/servicePrincipals/5159db96-7193-414e-9730-b1d1e4448443/appRoles
+...
+        {
+            "allowedMemberTypes": [
+                "Application"
+            ],
+            "description": "Allow the application to access a subset of site collections without a signed in user.  The specific site collections and the permissions granted will be configured in SharePoint Online.",
+            "displayName": "Access selected site collections",
+            "id": "883ea226-0bf2-4a8f-9f9d-92c9162a727d",
+            "isEnabled": true,
+            "origin": "Application",
+            "value": "Sites.Selected"
+        },
+...
+</code></pre>
+        <p>Find the entry for <code>Sites.Selected</code>. This Id is the <code>appRoleId</code></p>
+        <ol>
+          <li>Assign the Application Role to the Managed Identity. The request has the format:</li>
+        </ol>
+        <pre><code>POST https://graph.microsoft.com/v1.0/servicePrincipals/${principalId}/appRoleAssignedTo
+Content-Type: application/json
+
+{
+  "principalId": "${principalId}",
+  "resourceId": "${resourceId}",
+  "appRoleId": "${appRoleId}"
+}
+</code></pre>
+        <p>For example:</p>
+        <pre><code>https://graph.microsoft.com/v1.0/servicePrincipals/6761ada0-733b-4a02-98b2-3db970834fe0/appRoleAssignedTo
+Content-type: application/json
+{
+    "principalId": "6761ada0-733b-4a02-98b2-3db970834fe0",
+    "resourceId": "5159db96-7193-414e-9730-b1d1e4448443",
+    "appRoleId": "883ea226-0bf2-4a8f-9f9d-92c9162a727d"
+}
+</code></pre>
+        <div class="columns contained fullscreen-images">
+          <div>
+            <div>
+              <h3 id="validate-permissions">Validate Permissions</h3>
+              <p>Eventually you should see the granted application permission in the UI.</p>
+              <p>Back in the registration portal, they should have changed to:</p>
+              <p><em>The content source can't be found or you don't have permission to access it. Please check that the URL is correct, the app "AEM Content Integration (83ab2922-5f11-4e4d-96f3-d1e0ff152856)" has the right permissions, and that the user is allowed to access it..</em></p>
+            </div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_108467abcda4be68630054090a3368d6b3ac529a8.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_108467abcda4be68630054090a3368d6b3ac529a8.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_108467abcda4be68630054090a3368d6b3ac529a8.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_108467abcda4be68630054090a3368d6b3ac529a8.png?width=750&amp;format=png&amp;optimize=medium" width="1355" height="1090">
+              </picture><br>
+              <picture>
+                <source type="image/webp" srcset="./media_1addeb7fe8c51b3fbb4293e05737e6ff788628f7d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1addeb7fe8c51b3fbb4293e05737e6ff788628f7d.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1addeb7fe8c51b3fbb4293e05737e6ff788628f7d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1addeb7fe8c51b3fbb4293e05737e6ff788628f7d.png?width=750&amp;format=png&amp;optimize=medium" width="1363" height="1600">
+              </picture>
+            </div>
+          </div>
+        </div>
+        <h3 id="add-permissions-to-sharepoint-site">Add permissions to Sharepoint Site</h3>
+        <p>In order to add the permissions to the sharepoint site, we need to find its <code>SiteId</code>.</p>
+        <p>This can be done using again the graph explorer:</p>
+        <pre><code>GET https://graph.microsoft.com/v1.0/sites/{host-name}:/{server-relative-path}
+</code></pre>
+        <p><br>Example:</p>
+        <pre><code>GET https://graph.microsoft.com/v1.0/sites/adobeenterprisesupportaem.sharepoint.com:/sites/hlx-test-project
+
+{
+...
+    "id": "adobeenterprisesupportaem.sharepoint.com,03cc3587-0e4d-405e-b06c-ffb0a622b7ac,5fbc1df5-640c-4780-8b59-809e3193c043",
+...
+}
+
+</code></pre>
+        <p>Using the <code>Id</code> we can set the permissions:</p>
+        <pre><code>POST https://graph.microsoft.com/v1.0/sites/adobeenterprisesupportaem.sharepoint.com,03cc3587-0e4d-405e-b06c-ffb0a622b7ac,5fbc1df5-640c-4780-8b59-809e3193c043/permissions
+Content-type: application/json
+
+{
+    "roles": [
+        "write"
+    ],
+    "grantedToIdentities": [
+        {
+            "application": {
+                "id": "83ab2922-5f11-4e4d-96f3-d1e0ff152856",
+                "displayName": "AEM Content Integration"
+            }
+        }
+    ]
+}
+</code></pre>
+        <p><br><strong>Note:</strong> If you get an “Access Denied” error while executing the above request <strong>,</strong> you need to have “Site Admin” permissions in order to run the above step. Also you may need to give additional “consent” from the Graph Explorer’s “Modify Permissions” panel for additional “Sites” scopes.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_18d2eb4327ffc752f17827d833bd1301c3f9e2837.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_18d2eb4327ffc752f17827d833bd1301c3f9e2837.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_18d2eb4327ffc752f17827d833bd1301c3f9e2837.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_18d2eb4327ffc752f17827d833bd1301c3f9e2837.png?width=750&amp;format=png&amp;optimize=medium" width="720" height="230">
+          </picture>
+        </p>
+        <div class="columns contained fullscreen-images">
+          <div>
+            <div>After that, the registration portal should show <code>canRead: ok</code></div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_14dfd407c3cdf6be44b304cbca47df3b0e7b37ae2.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_14dfd407c3cdf6be44b304cbca47df3b0e7b37ae2.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_14dfd407c3cdf6be44b304cbca47df3b0e7b37ae2.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_14dfd407c3cdf6be44b304cbca47df3b0e7b37ae2.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1592">
+              </picture>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

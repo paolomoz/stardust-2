@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.918Z
+  page:             docs-move-project-to-customer-infrastructure
+  pageUrl:          https://www.aem.live/docs/move-project-to-customer-infrastructure
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Migrating a VIP project to your own infrastructure</title>
+  <meta name="description" content="VIP projects typically start out on Adobe’s SharePoint and GitHub. This is a great way to get started and go live quickly. However, eventually you ...">
+  <meta property="og:title" content="Migrating a VIP project to your own infrastructure">
+  <meta property="og:description" content="VIP projects typically start out on Adobe’s SharePoint and GitHub. This is a great way to get started and go live quickly. However, eventually you ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/move-project-to-customer-infrastructure/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#code-migration">Code migration</a></li>
+<li class="l-3"><a href="#if-migrating-your-project-code-from-adobes-github">If migrating your project code from Adobe’s GitHub</a></li>
+<li class="l-3"><a href="#if-your-project-code-is-already-in-your-own-github">If your project code is already in your own GitHub</a></li>
+<li class="l-2"><a href="#content-migration">Content migration</a></li>
+<li class="l-2"><a href="#sidekick-setup">Sidekick setup</a></li>
+<li class="l-3"><a href="#code-and-content-migration">Code and content migration</a></li>
+<li class="l-3"><a href="#content-migration-only">Content migration only</a></li>
+<li class="l-2"><a href="#go-live">Go-live</a></li>
+<li class="l-3"><a href="#you-migrated-your-project-code-from-adobes-github">You migrated your project code from Adobe’s GitHub</a></li>
+<li class="l-3"><a href="#your-project-code-was-already-in-your-own-github">Your project code was already in your own GitHub</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Migrating a VIP project to your own infrastructure</h1>
+          <p class="lede">VIP projects typically start out on Adobe’s SharePoint and GitHub. This is a great way to get started and go live quickly. However, eventually you ...</p>
+        </header>
+        <div class="content">
+        
+        <p>VIP projects typically start out on Adobe’s <a href="https://adobe.sharepoint.com/sites/HelixProjects">SharePoint</a> and <a href="https://github.com/hlxsites/">GitHub</a>. This is a great way to get started and go live quickly. However, eventually you should move your project(s) to your own infrastructure for full ownership and control.</p>
+        <p>A content move from Adobe’s SharePoint to yours is best combined with a code repository move from Adobe’s GitHub organization to yours. Follow the steps below for a side-by-side migration without downtime:</p>
+        <h2 id="code-migration">Code migration</h2>
+        <h3 id="if-migrating-your-project-code-from-adobes-github">If migrating your project code from Adobe’s GitHub</h3>
+        <ol>
+          <li>Create a new, empty GitHub repository in your GitHub organization. By default, the repository should be public for easier collaboration.</li>
+          <li>Configure the <a href="https://github.com/apps/aem-code-sync">AEM Code Sync GitHub App</a>. for your new repository.</li>
+          <li>Copy all files and folders from the repository in <a href="https://github.com/hlxsites/">Adobe’s GitHub organization</a> to your new one.</li>
+          <li>Commit and push the code into the <code>main</code> branch.</li>
+          <li>A copy of your site is now available at <code>https://main--project--customer.hlx.page</code></li>
+          <li>Compare with <code>https://main--project--hlxsites.hlx.page</code> to make sure everything works as expected.</li>
+        </ol>
+        <h3 id="if-your-project-code-is-already-in-your-own-github">If your project code is already in your own GitHub</h3>
+        <p>In this case, create a temporary fork to enable side-by-side migration:</p>
+        <ol>
+          <li>Create a fork of the code repository in your GitHub organization.</li>
+          <li>Configure the <a href="https://github.com/apps/aem-code-sync">AEM Code Sync GitHub App</a>. for your forked repository.</li>
+          <li>A copy of your site is now available at <code>https://main--project-fork--customer.hlx.page</code></li>
+          <li>Compare with <code>https://main--project--customer.hlx.page</code> to make sure everything works as expected.</li>
+        </ol>
+        <h2 id="content-migration">Content migration</h2>
+        <p><em>Note: Skip this step if you are already using your own SharePoint or Google Drive.</em></p>
+        <ol>
+          <li>Prepare your content root folder:
+            <ol>
+              <li>SharePoint: Follow <a href="https://www.hlx.live/docs/setup-customer-sharepoint">this documentation</a> to set up your own SharePoint site, link it to your GitHub repository and register your own SharePoint user.</li>
+              <li>Google Drive: create a new folder and share it with <code>helix@adobe.com</code> as Editor</li>
+            </ol>
+          </li>
+          <li>Copy all content from <a href="https://adobe.sharepoint.com/sites/HelixProjects">Adobe’s SharePoint site</a> to your own. An easy way to do this is using the <a href="https://www.microsoft.com/en/microsoft-365/onedrive/download">OneDrive desktop app</a>.: sync both sites to your local disk, copy the content over and wait until the upload has finished. Don’t forget to copy the <code>.helix</code> folder.</li>
+          <li>Share your root folder</li>
+          <li><a href="https://www.hlx.live/docs/admin.html#tag/preview/operation/bulkPreview">Bulk-preview</a> all content using the Admin API. Don’t forget to include the <code>.helix</code> folder in the <code>paths</code> array.</li>
+          <li>Verify the previewed content on <code>https://main--project--customer.hlx.page</code></li>
+          <li><a href="https://www.hlx.live/docs/admin.html#tag/publish/operation/bulkPublish">Bulk-publish</a> the content using the Admin API. You can use the existing site’s <code>sitemap.xml</code> as a reliable source of published URLs.</li>
+          <li>Verify the published content on <code>https://main--project--customer.hlx.live</code></li>
+        </ol>
+        <h2 id="sidekick-setup">Sidekick setup</h2>
+        <h3 id="code-and-content-migration">Code and content migration</h3>
+        <p>Authors will need to add the new project to their sidekick:</p>
+        <ul>
+          <li>Prepare a sharing URL with an “Add project” button for them using the <a href="https://www.hlx.live/tools/sidekick/">sidekick configurator</a>.</li>
+          <li>Alternatively, authors can also navigate to the project’s new SharePoint URL or <code>https://main--project--customer.hlx.page</code> and then click “Add project” in the extension’s context menu or the “+” button in the tool bar..</li>
+          <li>You can optionally prepare a second sharing URL with the old configuration to give your authors an easy way to remove the old project from their sidekick.</li>
+        </ul>
+        <h3 id="content-migration-only">Content migration only</h3>
+        <p>Authors will need to update the existing project configuration in their sidekick:</p>
+        <ul>
+          <li>Prepare a sharing URL for them using the <a href="https://www.hlx.live/tools/sidekick/">sidekick configurator</a>. Instruct authors to first click the “Remove project”button, followed by a click on the “Add project” button.</li>
+          <li>Alternatively, authors can also select “Options” in the extenstion’s context menu, click “Edit” button on the project, manually enter the new SharePoint URL (same as the mountpoint URL in your <code>fstab.yaml</code>) and click the “Save” button.</li>
+        </ul>
+        <h2 id="go-live">Go-live</h2>
+        <h3 id="you-migrated-your-project-code-from-adobes-github">You migrated your project code from Adobe’s GitHub</h3>
+        <p>To go live, switch the backend for your production domain in your CDN to the new origin <code>https://main--project--customer.hlx.live</code>.</p>
+        <ul>
+          <li>See the <a href="https://www.hlx.live/docs/#launch">launch documentation</a> for instructions on how to do this with various CDNs.</li>
+        </ul>
+        <h3 id="your-project-code-was-already-in-your-own-github">Your project code was already in your own GitHub</h3>
+        <ol>
+          <li>Change the <code>fstab.yaml</code> in your original repository to point to the same mount point URL as in your temporary fork.</li>
+          <li>Commit and push the change into the <code>main</code> branch.</li>
+          <li>Delete the temporary fork.</li>
+        </ol>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

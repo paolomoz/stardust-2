@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.899Z
+  page:             docs-byo-cdn-cloudflare-worker-wrangler-setup
+  pageUrl:          https://www.aem.live/docs/byo-cdn-cloudflare-worker-wrangler-setup
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Cloudflare Setup (with wrangler)</title>
+  <meta name="description" content="The following screenshots illustrate how to configure Cloudflare using the wrangler command line interface to deliver AEM content. Essential settings are marked with a red ...">
+  <meta property="og:title" content="Cloudflare Setup (with wrangler)">
+  <meta property="og:description" content="The following screenshots illustrate how to configure Cloudflare using the wrangler command line interface to deliver AEM content. Essential settings are marked with a red ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/byo-cdn-cloudflare-worker-wrangler-setup/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#create-a-cloudflare-site">Create a Cloudflare site</a></li>
+<li class="l-2"><a href="#dns-setup">DNS Setup</a></li>
+<li class="l-2"><a href="#ssltls-setup">SSL/TLS Setup</a></li>
+<li class="l-2"><a href="#configure-caching">Configure Caching</a></li>
+<li class="l-2"><a href="#create-page-rule">Create Page Rule</a></li>
+<li class="l-2"><a href="#create-worker">Create Worker</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Cloudflare Setup (with wrangler)</h1>
+          <p class="lede">The following screenshots illustrate how to configure Cloudflare using the wrangler command line interface to deliver AEM content. Essential settings are marked with a red ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1bfd2c2f03573acaaddcd537d21275f24ceee9cf4.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1bfd2c2f03573acaaddcd537d21275f24ceee9cf4.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1bfd2c2f03573acaaddcd537d21275f24ceee9cf4.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1bfd2c2f03573acaaddcd537d21275f24ceee9cf4.png?width=750&amp;format=png&amp;optimize=medium" width="1103" height="827">
+          </picture>
+        </p>
+        
+        <p>The following screenshots illustrate how to configure <a href="https://www.cloudflare.com/">Cloudflare</a> using the <code>wrangler</code> command line interface to deliver AEM content. Essential settings are marked with a red circle.</p>
+        <h2 id="create-a-cloudflare-site">Create a Cloudflare site</h2>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_13d06c2eddba394e68156f5f33d19c9b212285f23.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_13d06c2eddba394e68156f5f33d19c9b212285f23.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_13d06c2eddba394e68156f5f33d19c9b212285f23.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_13d06c2eddba394e68156f5f33d19c9b212285f23.png?width=750&amp;format=png&amp;optimize=medium" width="868" height="445">
+          </picture>
+        </p>
+        <p>Enter the domain:<br><br>
+          <picture>
+            <source type="image/webp" srcset="./media_10c6e7597e290eb17b6401e9a5a89688e943616cf.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_10c6e7597e290eb17b6401e9a5a89688e943616cf.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_10c6e7597e290eb17b6401e9a5a89688e943616cf.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_10c6e7597e290eb17b6401e9a5a89688e943616cf.png?width=750&amp;format=png&amp;optimize=medium" width="1004" height="384">
+          </picture>
+        </p>
+        <p>Select a plan:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_19e72b48d58a273c6e5b67696d68784ec93184b7a.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_19e72b48d58a273c6e5b67696d68784ec93184b7a.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_19e72b48d58a273c6e5b67696d68784ec93184b7a.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_19e72b48d58a273c6e5b67696d68784ec93184b7a.png?width=750&amp;format=png&amp;optimize=medium" width="1245" height="886">
+          </picture>
+        </p>
+        <p>For this walk-through we’ll use the <a href="https://www.cloudflare.com/plans/free/">Free plan</a>.</p>
+        <div class="fragment">
+          <div>
+            <div><a href="../setup-byo-cdn-push-invalidation-for-cloudflare/index.html">https://main--helix-website--adobe.hlx.page/docs/setup-byo-cdn-push-invalidation-for-cloudflare</a></div>
+          </div>
+        </div>
+        <h2 id="dns-setup">DNS Setup</h2>
+        <p>We’ll skip the DNS setup step as this would be beyond the scope of this simple walk-through. Make sure the CNAME record is <a href="https://developers.cloudflare.com/dns/manage-dns-records/reference/proxied-dns-records/">Proxied</a>:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1df063537433a9eee3477d158d547f32684419b0f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1df063537433a9eee3477d158d547f32684419b0f.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1df063537433a9eee3477d158d547f32684419b0f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1df063537433a9eee3477d158d547f32684419b0f.png?width=750&amp;format=png&amp;optimize=medium" width="873" height="90">
+          </picture>
+        </p>
+        <h2 id="ssltls-setup">SSL/TLS Setup</h2>
+        <p>Select <strong>SSL/TLS</strong> from the left pane and <strong>Edge Certificates</strong> in the dropdown list:</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_143609e14dd589b032ae98f5d195761d06247e9a5.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_143609e14dd589b032ae98f5d195761d06247e9a5.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_143609e14dd589b032ae98f5d195761d06247e9a5.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_143609e14dd589b032ae98f5d195761d06247e9a5.png?width=750&amp;format=png&amp;optimize=medium" width="267" height="570">
+          </picture>
+        </p>
+        <p>On the right side, scroll down to <strong>Always Use HTTPS</strong> and enable it:<br><br>
+          <picture>
+            <source type="image/webp" srcset="./media_1688be8dceaf872ebd6421493e0c74474e1b9c465.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1688be8dceaf872ebd6421493e0c74474e1b9c465.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1688be8dceaf872ebd6421493e0c74474e1b9c465.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1688be8dceaf872ebd6421493e0c74474e1b9c465.png?width=750&amp;format=png&amp;optimize=medium" width="1038" height="241">
+          </picture>
+        </p>
+        <h2 id="configure-caching">Configure Caching</h2>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1044b56f7bdfb59d324655ddbb1ee3cc244e5701f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1044b56f7bdfb59d324655ddbb1ee3cc244e5701f.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1044b56f7bdfb59d324655ddbb1ee3cc244e5701f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1044b56f7bdfb59d324655ddbb1ee3cc244e5701f.png?width=750&amp;format=png&amp;optimize=medium" width="1214" height="901">
+          </picture>
+        </p>
+        <h2 id="create-page-rule">Create Page Rule</h2>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1d4fd5ef3e7aedafdaa84f43297155c427aea95a2.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d4fd5ef3e7aedafdaa84f43297155c427aea95a2.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1d4fd5ef3e7aedafdaa84f43297155c427aea95a2.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d4fd5ef3e7aedafdaa84f43297155c427aea95a2.png?width=750&amp;format=png&amp;optimize=medium" width="1086" height="813">
+          </picture>
+        </p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1a1ea4b3679cc80166b67dac26432a00655443092.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1a1ea4b3679cc80166b67dac26432a00655443092.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1a1ea4b3679cc80166b67dac26432a00655443092.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1a1ea4b3679cc80166b67dac26432a00655443092.png?width=750&amp;format=png&amp;optimize=medium" width="1122" height="887">
+          </picture>
+        </p>
+        <h2 id="create-worker">Create Worker</h2>
+        <p>Fork or create a new GitHub repository using this <a href="https://github.com/adobe/aem-cloudflare-prod-worker">template</a>.<br><br>Clone the repository and follow the instructions in the <a href="https://github.com/adobe/aem-cloudflare-prod-worker#readme">README</a>. You can skip directly to <a href="https://github.com/adobe/aem-cloudflare-prod-worker#2-edit-wranglertoml">step 2</a>.<br><br>After completing all steps you should be all set.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

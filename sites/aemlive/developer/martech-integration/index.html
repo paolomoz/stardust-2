@@ -1,0 +1,398 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.155Z
+  page:             developer-martech-integration
+  pageUrl:          https://www.aem.live/developer/martech-integration
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Configuring Adobe Experience Cloud Integration</title>
+  <meta name="description" content="This article will walk you through the steps of setting up an integration with the Adobe Marketing Technology stack. The stack combines Adobe Experience Platform ...">
+  <meta property="og:title" content="Configuring Adobe Experience Cloud Integration">
+  <meta property="og:description" content="This article will walk you through the steps of setting up an integration with the Adobe Marketing Technology stack. The stack combines Adobe Experience Platform ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/martech-integration/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#choosing-the-right-integration">Choosing the Right Integration</a></li>
+<li class="l-3"><a href="#when-to-use-this-integration">When to Use This Integration</a></li>
+<li class="l-3"><a href="#integration-comparison">Integration Comparison</a></li>
+<li class="l-2"><a href="#integration-overview">Integration Overview</a></li>
+<li class="l-2"><a href="#how-it-works">How It Works</a></li>
+<li class="l-2"><a href="#rationale">Rationale</a></li>
+<li class="l-2"><a href="#performance-considerations">Performance Considerations</a></li>
+<li class="l-3"><a href="#mobile">Mobile</a></li>
+<li class="l-3"><a href="#desktop">Desktop</a></li>
+<li class="l-2"><a href="#pre-requisites">Pre-requisites</a></li>
+<li class="l-2"><a href="#installation--configuration">Installation &amp; Configuration</a></li>
+<li class="l-3"><a href="#step-1-install-the-plugin">Step 1: Install the Plugin</a></li>
+<li class="l-3"><a href="#step-2-configure-consent-management">Step 2: Configure Consent Management</a></li>
+<li class="l-3"><a href="#step-3-deploy-your-code">Step 3: Deploy Your Code</a></li>
+<li class="l-3"><a href="#step-4-configure-adobe-target">Step 4: Configure Adobe Target</a></li>
+<li class="l-3"><a href="#step-5-enable-instrumentation">Step 5: Enable Instrumentation</a></li>
+<li class="l-2"><a href="#verification--testing">Verification &amp; Testing</a></li>
+<li class="l-3"><a href="#expected-network-calls">Expected Network Calls</a></li>
+<li class="l-3"><a href="#testing-tools">Testing Tools</a></li>
+<li class="l-2"><a href="#privacy--consent-management">Privacy &amp; Consent Management</a></li>
+<li class="l-2"><a href="#troubleshooting">Troubleshooting</a></li>
+<li class="l-3"><a href="#common-issues">Common Issues</a></li>
+<li class="l-2"><a href="#next-steps--related-resources">Next Steps &amp; Related Resources</a></li>
+<li class="l-3"><a href="#additional-documentation">Additional Documentation</a></li>
+<li class="l-3"><a href="#alternative-integration-options">Alternative Integration Options</a></li>
+<li class="l-3"><a href="#technical-resources">Technical Resources</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Configuring Adobe Experience Cloud Integration</h1>
+          <p class="lede">This article will walk you through the steps of setting up an integration with the Adobe Marketing Technology stack. The stack combines Adobe Experience Platform ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1ba5390c0b3026987033e62fe020d3f7dae6c0332.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>This article will walk you through the steps of setting up an integration with the Adobe Marketing Technology stack. The stack combines Adobe Experience Platform WebSDK, Adobe Analytics, Adobe Target or Adobe Journey Optimizer, Adobe Client Data Layer and Adobe Experience Platform Tags. This will let you personalize your pages, automatically track how they perform and track your custom events as well.</p>
+        <h2 id="choosing-the-right-integration">Choosing the Right Integration</h2>
+        <p>This document covers integration with <strong>Adobe's marketing technology stack</strong><br>(Adobe Analytics, Adobe Target/AJO, Adobe Experience Platform).</p>
+        <p><strong>Looking for Google Analytics and Google Tag Manager integration instead?</strong><br>See our <a href="../gtm-martech-integration/index.html">Google Analytics &amp; Tag Manager Integration guide</a>.</p>
+        <h3 id="when-to-use-this-integration">When to Use This Integration</h3>
+        <ul>
+          <li>You're using Adobe Analytics as your primary analytics solution</li>
+          <li>You need Adobe Target or Adobe Journey Optimizer for personalization</li>
+          <li>You want to leverage Adobe Experience Platform's data capabilities</li>
+          <li>You're already invested in the Adobe Experience Cloud ecosystem</li>
+        </ul>
+        <h3 id="integration-comparison">Integration Comparison</h3>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td><strong>Feature</strong></td>
+                    <td><strong>Adobe Experience Cloud</strong></td>
+                    <td><strong>Google Analytics &amp; GTM</strong></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Analytics</strong></td>
+                    <td>Adobe Analytics</td>
+                    <td>Google Analytics 4</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Tag Management</strong></td>
+                    <td>Adobe Experience Platform Tags</td>
+                    <td>Google Tag Manager</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Personalization</strong></td>
+                    <td>Adobe Target/AJO</td>
+                    <td>Limited (via GTM)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Data Layer</strong></td>
+                    <td>Adobe Client Data Layer</td>
+                    <td>Google Data Layer</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Cost</strong></td>
+                    <td>Enterprise licensing</td>
+                    <td>Free tier available</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Privacy</strong></td>
+                    <td>GDPR/CCPA compliant</td>
+                    <td>GDPR/CCPA compliant</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h2 id="integration-overview">Integration Overview</h2>
+        <p>The Adobe Experience Cloud integration provides a comprehensive marketing technology stack that enables:</p>
+        <ul>
+          <li><strong>Real-time personalization</strong> through Adobe Target or Adobe Journey Optimizer</li>
+          <li><strong>Advanced analytics</strong> with Adobe Analytics and Experience Platform</li>
+          <li><strong>Unified data collection</strong> via Adobe Client Data Layer</li>
+          <li><strong>Tag management</strong> through Adobe Experience Platform Tags</li>
+          <li><strong>Cross-channel customer journey tracking</strong></li>
+        </ul>
+        <p>Before you go further, please also check our native <a href="../../docs/experimentation/index.html">Experimentation</a> capabilities.</p>
+        <h2 id="how-it-works">How It Works</h2>
+        <p>The Adobe Experience Cloud stack components work together in a coordinated manner:</p>
+        <ul>
+          <li><strong><a href="https://experienceleague.adobe.com/en/docs/experience-platform/web-sdk/home">Adobe Experience Platform WebSDK</a></strong>: allows the page to interact with the Adobe Experience Platform services</li>
+          <li><strong><a href="https://business.adobe.com/products/target/adobe-target.html">Adobe Target</a></strong> and <strong><a href="https://business.adobe.com/products/journey-optimizer/adobe-journey-optimizer.html">Adobe Journey Optimizer</a></strong>: personalizes and optimizes the page with your desired marketing campaigns</li>
+          <li><strong><a href="https://business.adobe.com/products/analytics/adobe-analytics.html">Adobe Analytics</a></strong>: tracks and analyzes the data for the customer journey</li>
+          <li><strong><a href="https://github.com/adobe/adobe-client-data-layer/wiki">Adobe Client Data Layer</a></strong>: offers a standard method to collect and store client-side events during the customer journey before they are submitted to Adobe Analytics</li>
+          <li><strong><a href="https://experienceleague.adobe.com/en/docs/experience-platform/tags/home">Adobe Experience Platform Tags</a></strong>: lets you deploy and manage the tags that power the customer experience</li>
+        </ul>
+        <p>The personalization rules will be dynamically evaluated server-side by Adobe Target, or Adobe Journey Optimizer, and will be delivered as a list of page modifications that will be applied as the page renders each block in order to minimize content flicker. Once the page is fully rendered, the Adobe Analytics instrumentation is done and key business events are captured. Finally, Adobe Experience Platform Tags is loaded and applies the rules and data elements you defined in a delayed manner to limit the performance impact on the initial page load.</p>
+        <h2 id="rationale">Rationale</h2>
+        <p>A traditional all-in-one instrumentation done solely via Adobe Experience Platform Tags typically either has a performance on the initial page load, or ends up introducing content flicker if delayed when the personalization of the page is applied.</p>
+        <p>Our optimized approach builds on top of:</p>
+        <ul>
+          <li><a href="https://experienceleague.adobe.com/en/docs/experience-platform/web-sdk/use-cases/top-bottom-page-events">Top and bottom of page events</a> so we can enable personalization early in the page load, and wait for the page to fully render to report metrics</li>
+          <li><a href="https://experienceleague.adobe.com/en/docs/analytics/implementation/aep-edge/data-var-mapping">Data object variable mapping</a> so we can gather key page metadata for your page in Adobe Analytics</li>
+        </ul>
+        <p>On top of this, we also fine-tuned the code to:</p>
+        <ul>
+          <li>Avoid content flicker as the DOM is dynamically rendered to support AEM EDS and/or SPA use cases</li>
+          <li>Dynamically load personalization and data layer dependencies only when needed</li>
+          <li>Allow mapping AEM RUM data to Adobe Analytics to enrich your reports</li>
+          <li>Gracefully handling speculative pre-rendering rules</li>
+        </ul>
+        <h2 id="performance-considerations"><strong>Performance Considerations</strong></h2>
+        <p>In our tests, you can expect a baseline performance impact as follows. The performance varies depending on whether Adobe Target or Adobe Journey Optimizer applies personalization changes to your page.</p>
+        <p><strong>Page Modifications Explained:</strong></p>
+        <ul>
+          <li><strong>Without page modifications</strong>: When no personalization rules match the current visitor or page, so the page renders normally without DOM changes</li>
+          <li><strong>With page modifications</strong>: When Adobe Target/AJO identifies matching personalization rules and applies DOM modifications (changing content, layout, or adding elements based on experimentation or personalization campaigns)</li>
+        </ul>
+        <p>To the baseline impact, you'd also need to add the overhead of more complex page modifications, especially when using custom JavaScript snippets in your personalization rules.</p>
+        <h3 id="mobile">Mobile</h3>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td><strong>Largest Contentful Paint</strong></td>
+                    <td><strong>Total Blocking Time</strong></td>
+                    <td><strong>PageSpeed</strong></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Without page modifications</strong></td>
+                    <td>+0.2s</td>
+                    <td>0~10ms</td>
+                    <td>0~1 pts</td>
+                  </tr>
+                  <tr>
+                    <td><strong>With page modifications</strong></td>
+                    <td>+1.2s</td>
+                    <td>0~10ms</td>
+                    <td>1~5 pts</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h3 id="desktop">Desktop</h3>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td><strong>Largest Contentful Paint</strong></td>
+                    <td><strong>Total Blocking Time</strong></td>
+                    <td><strong>PageSpeed</strong></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Without page modifications</strong></td>
+                    <td>+0.2s</td>
+                    <td>0ms</td>
+                    <td>0~1 pts</td>
+                  </tr>
+                  <tr>
+                    <td><strong>With page modifications</strong></td>
+                    <td>+0.6s</td>
+                    <td>0~10ms</td>
+                    <td>0~4 pts</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <h2 id="pre-requisites">Pre-requisites</h2>
+        <p>Before you can leverage this plugin, please make sure you have access to:</p>
+        <ul>
+          <li><strong>Adobe Experience Platform</strong> (no full license needed, just basic permissions for data collection)</li>
+          <li><strong>Adobe Target</strong> or <strong>Adobe Journey Optimizer</strong></li>
+          <li><strong>Adobe Analytics</strong></li>
+        </ul>
+        <p>You’ll also need to have pre-configured your:</p>
+        <ul>
+          <li><strong>Datastream</strong> in the Adobe Experience Platform to connect to your Adobe Target and Adobe Analytics solutions</li>
+          <li><strong>Adobe Experience Platform Tags (Launch) containers</strong>, and make sure that
+            <ul>
+              <li>the Adobe Client Data layer is enabled, and that you have checked the “Inject Adobe Client Data Layer (ACDL) library if not present”</li>
+              <li>you do not add the Adobe Experience Platform Web SDK, the Adobe Analytics or the Adobe Target extensions. Those is added automatically by our plugin</li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="installation--configuration">Installation &amp; Configuration</h2>
+        <h3 id="step-1-install-the-plugin">Step 1: Install the Plugin</h3>
+        <p>Follow the technical steps documented in the <a href="https://github.com/adobe-rnd/aem-martech">aem-martech GitHub repository</a>. Make sure the <code>dataLayerInstanceName</code> in the configuration matches the name you used in the ACDL extension in your Launch container (it will default to <code>adobeDataLayer</code> on both sides).</p>
+        <h3 id="step-2-configure-consent-management">Step 2: Configure Consent Management</h3>
+        <p>Make sure your consent management is properly connected to the plugin as documented in the repository. This is crucial for GDPR/CCPA compliance.</p>
+        <p><strong>Legal Disclaimer</strong>: This library defaults user consent to pending to comply with privacy regulations. Overriding this behavior to grant consent by default (e.g., setting it to <code>in</code>) without explicit user agreement may have significant legal implications under regulations like GDPR and CCPA. We strongly advise consulting with your legal team before altering the default consent handling.</p>
+        <h3 id="step-3-deploy-your-code">Step 3: Deploy Your Code</h3>
+        <p>Commit and push your code to trigger the deployment.</p>
+        <h3 id="step-4-configure-adobe-target">Step 4: Configure Adobe Target</h3>
+        <p>Set up an experiment in Adobe Target and preview the page to ensure the integration is working.</p>
+        <h3 id="step-5-enable-instrumentation">Step 5: Enable Instrumentation</h3>
+        <p>Add the <code>Target</code> metadata property to your page to trigger the instrumentation, or the equivalent solution you used to set the <code>personalization</code> config flag.</p>
+        <h2 id="verification--testing">Verification &amp; Testing</h2>
+        <p>If the instrumentation is properly done, you should see the following calls in your browser's Network tab when you load the page. Whether the page is actually modified or not will depend on the configuration you set in Adobe Target.</p>
+        <h3 id="expected-network-calls">Expected Network Calls</h3>
+        <ul>
+          <li><code>https://edge.adobedc.net/ee/v1/interact</code>: fetches the Adobe Target propositions (i.e. page modifications)</li>
+          <li><code>https://edge.adobedc.net/ee/v1/collect</code>: tracks a page view event in Adobe Analytics</li>
+          <li><code>https://edge.adobedc.net/ee/v1/privacy/set-consent</code>: persists the user consent into Adobe Experience Platform</li>
+        </ul>
+        <h3 id="testing-tools">Testing Tools</h3>
+        <ul>
+          <li>Use your browser's Developer Tools Network tab to monitor API calls</li>
+          <li>Check the Adobe Experience Platform Debugger browser extension</li>
+          <li>Verify data flow in Adobe Analytics reports</li>
+          <li>Test personalization rules in Adobe Target</li>
+        </ul>
+        <h2 id="privacy--consent-management">Privacy &amp; Consent Management</h2>
+        <p>The integration includes comprehensive privacy controls:</p>
+        <ul>
+          <li><strong>Default consent state</strong>: Set to "pending" to comply with privacy regulations</li>
+          <li><strong>Granular consent categories</strong>: Support for collect, marketing, personalize, and share permissions</li>
+          <li><strong>Consent management integration</strong>: Compatible with major consent management platforms</li>
+          <li><strong>Data minimization</strong>: Only collects data when explicit consent is given</li>
+        </ul>
+        <h2 id="troubleshooting">Troubleshooting</h2>
+        <h3 id="common-issues">Common Issues</h3>
+        <p><strong>No personalization appearing:</strong></p>
+        <ul>
+          <li>Check that the Target metadata property is set</li>
+          <li>Verify your Adobe Target configuration</li>
+          <li>Ensure consent is properly granted</li>
+        </ul>
+        <p><strong>Analytics data not flowing:</strong></p>
+        <ul>
+          <li>Verify your datastream configuration</li>
+          <li>Check consent settings</li>
+          <li>Monitor network calls for errors</li>
+        </ul>
+        <p><strong>Performance issues:</strong></p>
+        <ul>
+          <li>Review your personalization rules complexity</li>
+          <li>Consider using lazy loading for non-critical tags</li>
+          <li>Monitor Core Web Vitals impact</li>
+        </ul>
+        <h2 id="next-steps--related-resources">Next Steps &amp; Related Resources</h2>
+        <h3 id="additional-documentation">Additional Documentation</h3>
+        <ul>
+          <li>Comprehensive Tutorial: <a href="https://experienceleague.adobe.com/en/docs/platform-learn/tutorial-one-adobe/assetmgmt/assetm1/ex5">Experience League Tutorial</a></li>
+          <li>Native Experimentation: <a href="../../docs/experimentation/index.html">AEM EDS Experimentation Capabilities</a></li>
+        </ul>
+        <h3 id="alternative-integration-options">Alternative Integration Options</h3>
+        <ul>
+          <li>Google Analytics &amp; GTM: <a href="../gtm-martech-integration/index.html">GTM MarTech Integration</a></li>
+        </ul>
+        <h3 id="technical-resources">Technical Resources</h3>
+        <ul>
+          <li>GitHub Repository: <a href="https://github.com/adobe-rnd/aem-martech">adobe-rnd/aem-martech</a></li>
+          <li>Adobe Experience Platform: <a href="https://experienceleague.adobe.com/en/docs/experience-platform/web-sdk/home">WebSDK Documentation</a></li>
+          <li>Adobe Target: <a href="https://experienceleague.adobe.com/en/docs/target/using/implement-target/implementing-target.html">Implementation Guide</a></li>
+          <li>Adobe Analytics: <a href="https://experienceleague.adobe.com/en/docs/analytics/implementation/home.html">Implementation Guide</a></li>
+        </ul>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

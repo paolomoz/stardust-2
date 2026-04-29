@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.163Z
+  page:             docs-deprecation
+  pageUrl:          https://www.aem.live/docs/deprecation
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Deprecations and Removals</title>
+  <meta name="description" content="Features in AEM that do not have enough use anymore, or have been replaced with better, more reliable solutions will be removed. Before these features ...">
+  <meta property="og:title" content="Deprecations and Removals">
+  <meta property="og:description" content="Features in AEM that do not have enough use anymore, or have been replaced with better, more reliable solutions will be removed. Before these features ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/deprecation/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#deprecated">Deprecated</a></li>
+<li class="l-2"><a href="#removed">Removed</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Deprecations and Removals</h1>
+          <p class="lede">Features in AEM that do not have enough use anymore, or have been replaced with better, more reliable solutions will be removed. Before these features ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_170b9656d143174267db14f90acbc6a6e9f5c6484.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_170b9656d143174267db14f90acbc6a6e9f5c6484.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_170b9656d143174267db14f90acbc6a6e9f5c6484.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_170b9656d143174267db14f90acbc6a6e9f5c6484.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Features in AEM that do not have enough use anymore, or have been replaced with better, more reliable solutions will be removed. Before these features are removed, they are declared deprecated and we provide suggestions for possible replacements.</p>
+        <p>In the next step, Adobe posts an end-of-service date on this page. After the end-of-service date, the respective service or feature will no longer be available.</p>
+        <h2 id="deprecated">Deprecated</h2>
+        <div class="cards alternate deprecated">
+          <div>
+            <div>
+              <p><a href="../byo-dns/index.html" data-broken-link="true">Custom domains without a custom CDN</a></p>
+              <p><strong>Deprecation notice</strong></p>
+              <p>We no longer accept new domains for the Bring-your-own-DNS service. Please use Adobe Managed CDN.</p>
+            </div>
+            <div>
+              <p><a href="../../developer/folder-mapping/index.html">Folder Mapping</a></p>
+              <p><strong>Deprecation notice</strong></p>
+              <p>Please contact us if you have a use case for folder mapping. We will help to find the best solutions. Existing projects using folder mapping may need to migrate to a different solution in the future.</p>
+            </div>
+            <div>
+              <p><a href="../scheduling/index.html">Scheduling</a></p>
+              <p><strong>Deprecation notice</strong></p>
+              <p>Reach out to us if you have a use case for scheduling, we will help to find the best solution. Existing projects using scheduling may need to migrate to a different solution in the future.</p>
+            </div>
+          </div>
+        </div>
+        <h2 id="removed">Removed</h2>
+        <div class="cards alternate deprecated">
+          <div>
+            <div>
+              <p><a href="../../developer/upgrade/index.html">*.hlx.live and *.hlx.page</a></p>
+              <p><strong>End-of-service</strong></p>
+              <p>The <code>*.hlx.*</code> domains have been retired in favor of <code>*.aem.*</code> on December 18, 2025. Click above for upgrade instructions.</p>
+              <p><strong>Note:</strong> <code>admin.hlx.page</code> is excluded from this retirement and will remain operational.</p>
+            </div>
+            <div>
+              <p><a href="../../previous/byo-cdn-cloudflare-setup/index.html" data-broken-link="true">Cloudflare Setup (config only, no worker) for hlx.live</a></p>
+              <p><strong>No longer supported</strong></p>
+              <p>This setup is no longer supported. Please use the cloudflare worker setup instead.</p>
+            </div>
+            <div>
+              <p><a href="../manual-forms-sheet-setup/index.html" data-broken-link="true">Manual Forms Sheet Setup</a></p>
+              <p><strong>No longer supported</strong></p>
+              <p>This feature is retired and has been replaced by Edge Delivery Services for AEM Forms.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p><a href="../../previous/authentication-setup-site/index.html" data-broken-link="true">IDP-Based Site Authentication</a></p>
+              <p><strong>No longer supported</strong></p>
+              <p>IDP-based site authentication has been retired and replaced with token-based authentication.</p>
+            </div>
+            <div>
+              <p><a href="../../previous/sidekick/index.html" data-broken-link="true">AEM Sidekick v6</a></p>
+              <p><strong>End-of-service</strong></p>
+              <p>This version of the sidekick was retired on February 2, 2026. Please use the latest sidekick version instead.</p>
+            </div>
+            <div>
+              <p><a href="../configuration/index.html">File-Based Configuration</a></p>
+              <p><strong>No longer supported</strong></p>
+              <p>Transition your configuration to the configuration service with advanced features and improved inheritance management facilities.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

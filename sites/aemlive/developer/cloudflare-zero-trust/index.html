@@ -1,0 +1,410 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.243Z
+  page:             developer-cloudflare-zero-trust
+  pageUrl:          https://www.aem.live/developer/cloudflare-zero-trust
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Cloudflare Zero Trust Site Protection</title>
+  <meta name="description" content="Integrating Cloudflare Zero Trust provides granular control over who can access your website or applications. Through its authentication and authorization features, you can ensure only ...">
+  <meta property="og:title" content="Cloudflare Zero Trust Site Protection">
+  <meta property="og:description" content="Integrating Cloudflare Zero Trust provides granular control over who can access your website or applications. Through its authentication and authorization features, you can ensure only ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/cloudflare-zero-trust/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#prerequisites">Prerequisites</a></li>
+<li class="l-2"><a href="#create-a-cloudflare-site">Create a Cloudflare Site</a></li>
+<li class="l-2"><a href="#create-a-site-secret">Create a site secret</a></li>
+<li class="l-2"><a href="#enable-site-authentication-using-the-site-token">Enable site authentication using the site token</a></li>
+<li class="l-2"><a href="#set-zero-trust-authentication-methods">Set Zero Trust Authentication methods</a></li>
+<li class="l-2"><a href="#setup-the-zero-trust-policies">Setup the Zero Trust Policies</a></li>
+<li class="l-2"><a href="#create-the-zero-trust-application">Create the Zero Trust Application</a></li>
+<li class="l-2"><a href="#update-the-worker">Update the worker</a></li>
+<li class="l-3"><a href="#install-the-jose-package">Install the jose package</a></li>
+<li class="l-3"><a href="#edit-worker-code">Edit worker code</a></li>
+<li class="l-4"><a href="#import-functions-from-the-jose-package">Import functions from the jose package</a></li>
+<li class="l-4"><a href="#add-token-validation-logic">Add token validation logic</a></li>
+<li class="l-3"><a href="#update-wranglertoml">Update wrangler.toml</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Cloudflare Zero Trust Site Protection</h1>
+          <p class="lede">Integrating Cloudflare Zero Trust provides granular control over who can access your website or applications. Through its authentication and authorization features, you can ensure only ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1b40ff4d5ece5386ad83cb1998da2bc6b2715e3e1.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1b40ff4d5ece5386ad83cb1998da2bc6b2715e3e1.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1b40ff4d5ece5386ad83cb1998da2bc6b2715e3e1.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1b40ff4d5ece5386ad83cb1998da2bc6b2715e3e1.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Integrating <a href="https://developers.cloudflare.com/cloudflare-one/">Cloudflare Zero Trust</a> provides granular control over who can access your website or applications. Through its authentication and authorization features, you can ensure only users that meet your defined security criteria are granted access, which reduces the risk of unauthorized access and potential threats.</p>
+        <h3 id="prerequisites">Prerequisites</h3>
+        <p>To follow this guide you will need the following</p>
+        <ul>
+          <li>A previously setup Edge Delivery Services site, for this demo, we’ll use a site called <code>zero-trust-site </code>in the <code>aemsites</code> github org.</li>
+          <li>You will need to be a configuration administrator of the org or site and have an authorization token to make requests to the configuration service.</li>
+        </ul>
+        <p>If you don’t already have a site to use, create an Edge Delivery Website by following our <a href="../tutorial/index.html">developer tutorial</a>.</p>
+        <h2 id="create-a-cloudflare-site">Create a Cloudflare Site</h2>
+        <p>Follow <a href="../../docs/byo-cdn-cloudflare-worker-wrangler-setup/index.html">the steps</a> to set up a Cloudflare site and worker using the <code>wrangler</code> CLI. If you’re hosting the application on a subdomain, ensure your CNAME record is updated accordingly. In this guide, we configured a CNAME record for our example application at <code>zero-trust.example.com</code>.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_18000558135db7b27fa7338cc30ded83e5b4b950d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_18000558135db7b27fa7338cc30ded83e5b4b950d.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_18000558135db7b27fa7338cc30ded83e5b4b950d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_18000558135db7b27fa7338cc30ded83e5b4b950d.png?width=750&amp;format=png&amp;optimize=medium" width="1397" height="1028">
+          </picture>
+        </p>
+        <h2 id="create-a-site-secret">Create a site secret</h2>
+        <p>Create a site access token, this token can be used to restrict access to your edge delivery site.</p>
+        <pre><code>curl -X POST https://admin.hlx.page/config/aemsites/sites/zero-trust-site/secrets.json \
+  -H 'x-auth-token: &lt;your-auth-token&gt;'
+
+{
+  "id": "MEXwhn7J7m1c29ngZqriA5N9DVIb67R_9394vsJ",
+  "Type": "hashed",
+  "value": "hlx_sQP7218fBcODiUi7NLVUH6VVT",
+  "created": "2024-08-21T18:28:54.075Z",
+  "lastModified": "2025-03-25T12:44:13.235Z"
+}
+</code></pre>
+        <p>In the response you will get back an <code>id</code> and a <code>value</code>. Keep track of these as you will need them in the next steps.</p>
+        <h2 id="enable-site-authentication-using-the-site-token">Enable site authentication using the site token</h2>
+        <p>Use the token <code>id</code> from the response above in place of the <code>TOKEN_ID</code> in the body.</p>
+        <pre><code>curl --request POST \
+  --url https://admin.hlx.page/config/aemsites/sites/zero-trust-site/access/site.json \
+  --header 'Content-Type: application/json' \
+  --header 'x-auth-token: &lt;your-auth-token&gt;' \
+  --data '{
+    "allow": ["*@acme.com"],
+    "secretId": ["MEXwhn7J7m1c29ngZqriA5N9DVIb67R_9394vsJ"]
+}'
+</code></pre>
+        <p>The <code>.page</code> and <code>.live</code> origins will now be protected. Users wanting to access the site directly via these origins will now need to sign into the sidekick.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1d8380dbd6acc87698a8fe20ecdc2625e2074fb2c.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d8380dbd6acc87698a8fe20ecdc2625e2074fb2c.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1d8380dbd6acc87698a8fe20ecdc2625e2074fb2c.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d8380dbd6acc87698a8fe20ecdc2625e2074fb2c.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="982">
+          </picture>
+        </p>
+        <h2 id="set-zero-trust-authentication-methods">Set Zero Trust Authentication methods</h2>
+        <p>Navigate to the Zero Trust home from the left navigation bar in Cloudflare</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1e571d641b9b1376dc44b33f69256f6d651682a90.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1e571d641b9b1376dc44b33f69256f6d651682a90.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1e571d641b9b1376dc44b33f69256f6d651682a90.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1e571d641b9b1376dc44b33f69256f6d651682a90.png?width=750&amp;format=png&amp;optimize=medium" width="1353" height="984">
+          </picture>
+        </p>
+        <p>and select <strong>Settings</strong> and the pick <strong>Authentication</strong></p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_130b35e0333df2baf64790b500fcd085b15424970.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_130b35e0333df2baf64790b500fcd085b15424970.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_130b35e0333df2baf64790b500fcd085b15424970.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_130b35e0333df2baf64790b500fcd085b15424970.png?width=750&amp;format=png&amp;optimize=medium" width="1397" height="1028">
+          </picture>
+        </p>
+        <p>From Login methods select the <strong>Add new</strong> button</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_13e8a54ecd01f73f66f88d7547d3efa7dd0aa5a28.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_13e8a54ecd01f73f66f88d7547d3efa7dd0aa5a28.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_13e8a54ecd01f73f66f88d7547d3efa7dd0aa5a28.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_13e8a54ecd01f73f66f88d7547d3efa7dd0aa5a28.png?width=750&amp;format=png&amp;optimize=medium" width="1397" height="1028">
+          </picture>
+        </p>
+        <p>This is your opportunity to configure the identity provider you want to use for your site. For this demo we will use <strong>One-time PIN</strong>.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1821bcccaa1c4cd6eafbad905ca26a33e1c9306f7.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1821bcccaa1c4cd6eafbad905ca26a33e1c9306f7.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1821bcccaa1c4cd6eafbad905ca26a33e1c9306f7.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1821bcccaa1c4cd6eafbad905ca26a33e1c9306f7.png?width=750&amp;format=png&amp;optimize=medium" width="1353" height="984">
+          </picture>
+        </p>
+        <h2 id="setup-the-zero-trust-policies">Setup the Zero Trust Policies</h2>
+        <p>Select Access → Policies</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_19beb358e20cd5f36c1b45da147cfe5f9fa1855de.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_19beb358e20cd5f36c1b45da147cfe5f9fa1855de.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_19beb358e20cd5f36c1b45da147cfe5f9fa1855de.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_19beb358e20cd5f36c1b45da147cfe5f9fa1855de.png?width=750&amp;format=png&amp;optimize=medium" width="1397" height="1028">
+          </picture>
+        </p>
+        <p>Select the <strong>Add a policy</strong> button</p>
+        <p>Add a policy with the name <code>TestApp_EmailAccessPolicy</code> and duration of 24 hours. Change either of these values as you see fit.<br><br>Under rules, you can pick whether there is an explicit list of emails you want to have access to the application or want to allow an entire domain access. For this example we will allow anyone with an email address ending in <code>adobe.com</code> to access the site.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1913599026a84dd943f2d4794d677711188f6d564.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1913599026a84dd943f2d4794d677711188f6d564.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1913599026a84dd943f2d4794d677711188f6d564.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1913599026a84dd943f2d4794d677711188f6d564.png?width=750&amp;format=png&amp;optimize=medium" width="1397" height="1028">
+          </picture>
+        </p>
+        <p>Select <strong>Save</strong></p>
+        <h2 id="create-the-zero-trust-application">Create the Zero Trust Application</h2>
+        <p>Select Access → Applications and click the <strong>Add an application</strong> button</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_161a11ad45120a84966ad608f858cfb7a00a08da7.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_161a11ad45120a84966ad608f858cfb7a00a08da7.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_161a11ad45120a84966ad608f858cfb7a00a08da7.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_161a11ad45120a84966ad608f858cfb7a00a08da7.png?width=750&amp;format=png&amp;optimize=medium" width="1353" height="984">
+          </picture>
+        </p>
+        <p>Select <strong>Self-hosted</strong></p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1e5d5fba8e34b07e8061a88dc34748bf8fd9348e8.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1e5d5fba8e34b07e8061a88dc34748bf8fd9348e8.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1e5d5fba8e34b07e8061a88dc34748bf8fd9348e8.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1e5d5fba8e34b07e8061a88dc34748bf8fd9348e8.png?width=750&amp;format=png&amp;optimize=medium" width="1353" height="984">
+          </picture>
+        </p>
+        <p>Enter <code>TestApp</code> or any name of your choice for the application name. You can keep the session duration set to <code>24 hours</code>.</p>
+        <p>Select <strong>Add public hostname</strong> and enter in the domain (and optional subdomain) you setup in the first step of this guide. For path enter <code>*</code>. For our demo we are setting out public hostname to <code>zero-trust.example.com</code></p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_12bff01170341dd4403f7fea3797ecb8af38bd88f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_12bff01170341dd4403f7fea3797ecb8af38bd88f.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_12bff01170341dd4403f7fea3797ecb8af38bd88f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_12bff01170341dd4403f7fea3797ecb8af38bd88f.png?width=750&amp;format=png&amp;optimize=medium" width="1397" height="1028">
+          </picture>
+        </p>
+        <p>Under <strong>Access policies</strong> click <strong>Select existing policies</strong></p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1e12073ea20801c5ce659cb90ad528cbd71d08b06.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1e12073ea20801c5ce659cb90ad528cbd71d08b06.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1e12073ea20801c5ce659cb90ad528cbd71d08b06.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1e12073ea20801c5ce659cb90ad528cbd71d08b06.png?width=750&amp;format=png&amp;optimize=medium" width="1397" height="1028">
+          </picture>
+        </p>
+        <p>Select our <code>TestApp_EmailAccessPolicy</code> we previously created and click <strong>Confirm</strong>.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1ab56b3e216ba4ec3b9058f2404ac5a8289e31872.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1ab56b3e216ba4ec3b9058f2404ac5a8289e31872.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1ab56b3e216ba4ec3b9058f2404ac5a8289e31872.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1ab56b3e216ba4ec3b9058f2404ac5a8289e31872.png?width=750&amp;format=png&amp;optimize=medium" width="1397" height="1028">
+          </picture>
+        </p>
+        <p>Select <strong>Next</strong> at the bottom to get to the <strong>Login methods</strong> page</p>
+        <p>Below, you’ll find a list of all the login methods permitted for our application. By default, <strong>Accept all available identity providers</strong> is selected. However, if you deselect this option, you can choose a specific login method from the list of configured options. Currently, only the <strong>One-time PIN</strong> has been set up, so it is the only available choice.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1d7b880a04a05c8c2f357cf47a8e5b8316251bc19.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d7b880a04a05c8c2f357cf47a8e5b8316251bc19.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1d7b880a04a05c8c2f357cf47a8e5b8316251bc19.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d7b880a04a05c8c2f357cf47a8e5b8316251bc19.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="967">
+          </picture>
+        </p>
+        <p>Select <strong>Next</strong> again to get to the advanced settings page.</p>
+        <p>Open the <strong>Cross-Origin Resource Sharing (CORS) settings</strong> and enable <strong>Bypass options requests to origin</strong> to let Edge Delivery handle CORS.<br><br>
+          <picture>
+            <source type="image/webp" srcset="./media_1b7ad3d077b826c2c081674a4bacbb3a16d105c89.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1b7ad3d077b826c2c081674a4bacbb3a16d105c89.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1b7ad3d077b826c2c081674a4bacbb3a16d105c89.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1b7ad3d077b826c2c081674a4bacbb3a16d105c89.png?width=750&amp;format=png&amp;optimize=medium" width="1397" height="1028">
+          </picture>
+        </p>
+        <p>Select <strong>Save</strong></p>
+        <p>Now select the 3 dots on the right of the new application and click <strong>Edit</strong>.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_157517e6488669a2faf52f485efa027be52969fc8.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_157517e6488669a2faf52f485efa027be52969fc8.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_157517e6488669a2faf52f485efa027be52969fc8.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_157517e6488669a2faf52f485efa027be52969fc8.png?width=750&amp;format=png&amp;optimize=medium" width="1397" height="1028">
+          </picture>
+        </p>
+        <p>Take note of the Application Audience Tag, we will need this in a future step.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_102661cb135b0e0b87d233bec07a92f79c036237c.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_102661cb135b0e0b87d233bec07a92f79c036237c.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_102661cb135b0e0b87d233bec07a92f79c036237c.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_102661cb135b0e0b87d233bec07a92f79c036237c.png?width=750&amp;format=png&amp;optimize=medium" width="1353" height="984">
+          </picture>
+        </p>
+        <h2 id="update-the-worker">Update the worker</h2>
+        <p>Next, we’ll update our worker to validate incoming requests, ensuring only approved traffic can access your site.</p>
+        <h3 id="install-the-jose-package">Install the jose package</h3>
+        <p>In the worker code we created at the start of the guide, install the <code>jose</code> package. This library is designed to simplify working with JWT tokens.</p>
+        <p><code>npm install jose</code></p>
+        <h3 id="edit-worker-code">Edit worker code</h3>
+        <p>Copy the content of <a href="https://raw.githubusercontent.com/adobe/helix-cloudflare-prod-worker-template/main/src/index.mjs">this file</a> and paste it into <code>src/index.js</code></p>
+        <h4 id="import-functions-from-the-jose-package">Import functions from the jose package</h4>
+        <p>At the top of the index file, add the following to import the required functions from the jose package.</p>
+        <p><code>import { jwtVerify, createRemoteJWKSet } from "jose";</code></p>
+        <h4 id="add-token-validation-logic">Add token validation logic</h4>
+        <p>Around line 26 at the top of your <code>handleRequest</code> method, insert the following logic to validate the JWT token provided in the <code>cf-access-jwt-assertion</code> header. This snippet retrieves the token, sets up the verification context by referencing your Cloudflare Access domain and audience, and uses a remote JSON Web Key Set (JWKS) to verify the token’s integrity. If the token is missing or fails verification, the worker immediately returns an error response, ensuring that only authenticated and authorized requests proceed.</p>
+        <pre><code>try {
+  const TEAM_DOMAIN = `https://${env.TEAM_DOMAIN}`;
+  const AUD = env.POLICY_AUD;
+  const CERTS_URL = `${TEAM_DOMAIN}/cdn-cgi/access/certs`;
+  const JWKS = createRemoteJWKSet(new URL(CERTS_URL));
+
+  const token = request.headers.get("cf-access-jwt-assertion");
+  if (!token) {
+    return new Response('missing required cf authorization token', { status: 403 });
+  }
+
+  await jwtVerify(token, JWKS, {
+    issuer: TEAM_DOMAIN,
+    audience: AUD,
+  });
+} catch (error) {
+  return new Response(`Token verification failed: ${error.message}`, {status: 401});
+}
+</code></pre>
+        <h3 id="update-wranglertoml">Update wrangler.toml</h3>
+        <p><em>Note: Some of the values below are considered sensitive and must be kept confidential; ensure they are securely stored and never committed to a public repository in GitHub.</em></p>
+        <p>Update route to to match your DNS setup (ex <code>zero-trust.example.com/*</code>)</p>
+        <p>Ensure you have the correct <code>account_id</code> set. To find your <code>account_id</code> visit the <a href="https://dash.cloudflare.com/zones">Websites Dashboard</a> in Cloudflare, select your site and it will be listed on the right hand side of the dashboard under <strong>API</strong>.</p>
+        <p>Ensure the <code>compatibility_date</code> is set to at least <code>2025-03-17</code></p>
+        <p>Update the <code>ORIGIN_HOSTNAME</code> to the edge delivery origin host name (for instance <code>main--zero-trust-site--aemsites.aem.live</code>)</p>
+        <p>If commented out, remove the <code>#</code> in front of <code>PUSH_INVALIDATION</code></p>
+        <p>Update the <code>ORIGIN_AUTHENTICATION</code> to the value from the site token created in a previous step (ex <code>hlx_sQP7218fBcODiUi7NLVUH6VVTpucnHIA51yEuDFS0GE0</code>)</p>
+        <p>Get your team domain by going to the <a href="https://one.dash.cloudflare.com">Zero Trust dashboard</a> and opening Settings → Custom Pages. Create a new variable with the name <code>TEAM_DOMAIN</code> and the your team domain (for instance <code>dylandepass.cloudflareaccess.com</code>)</p>
+        <p>Create a new variable called <code>POLICY_AUD</code> and set it to the AUD value from the Zero Trust application you created above.</p>
+        <p>Your <code>wrangler.toml</code> should look something like this.<br><br><code>name = "zero-trust-worker"</code></p>
+        <pre><code>main = "src/index.mjs"
+route = "zero-trust.example.com/*"
+account_id = "abb72b21b09d6ac32460ac4654da1248"
+
+compatibility_date = "2025-03-17"
+
+[build]
+command = "npm install"
+
+[vars]
+# TODO: set origin host name
+ORIGIN_HOSTNAME = "main--zero-trust-site--aemsites.aem.live"
+
+# Optional, but recommended: enable push invalidation
+# see https://www.aem.live/docs/setup-byo-cdn-push-invalidation#cloudflare
+PUSH_INVALIDATION = "enabled"
+
+# Optional: enable origin authentication
+# see https://www.aem.live/docs/authentication-setup-site
+ORIGIN_AUTHENTICATION = "hlx_sQP7218fBcODiUi7NLVUH6VVTpucnHIA51yEuDFS0GE0"
+
+TEAM_DOMAIN = "example-domain.cloudflareaccess.com"
+
+POLICY_AUD = "94k128458a52641b9a5294d2cebc5kjk124021964fa01e4aal8b5c11d34948e8s0"
+</code></pre>
+        <p>Congratulations, your site should now be protected by Cloudflare Zero Trust. Try navigating to your site and authenticating using a PIN. Upon successful authentication you should see your site.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1ebaecdb8f1895f3b44fc8758225c17f2644f5ea3.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1ebaecdb8f1895f3b44fc8758225c17f2644f5ea3.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1ebaecdb8f1895f3b44fc8758225c17f2644f5ea3.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1ebaecdb8f1895f3b44fc8758225c17f2644f5ea3.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="984">
+          </picture>
+        </p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

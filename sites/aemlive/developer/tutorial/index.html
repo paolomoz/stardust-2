@@ -1,0 +1,270 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.866Z
+  page:             developer-tutorial
+  pageUrl:          https://www.aem.live/developer/tutorial
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Getting Started – Developer Tutorial</title>
+  <meta name="description" content="This tutorial will get you up-and-running with a new Adobe Experience Manager (AEM) project. In ten to twenty minutes, you will have created your own ...">
+  <meta property="og:title" content="Getting Started – Developer Tutorial">
+  <meta property="og:description" content="This tutorial will get you up-and-running with a new Adobe Experience Manager (AEM) project. In ten to twenty minutes, you will have created your own ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/tutorial/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="index.html" aria-current="page">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#get-started-with-the-boilerplate-repository-template">Get started with the boilerplate repository template</a></li>
+<li class="l-2"><a href="#edit-preview-and-publish-your-content">Edit, Preview and Publish your content</a></li>
+<li class="l-2"><a href="#install-sidekick">Install Sidekick</a></li>
+<li class="l-2"><a href="#start-developing-styling-and-functionality">Start developing styling and functionality</a></li>
+<li class="l-2"><a href="#next-steps">Next Steps</a></li>
+<li class="l-3"><a href="#build">Build</a></li>
+<li class="l-3"><a href="#anatomy-of-an-aem-project">Anatomy of an AEM Project</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Getting Started – Developer Tutorial</h1>
+          <p class="lede">This tutorial will get you up-and-running with a new Adobe Experience Manager (AEM) project. In ten to twenty minutes, you will have created your own ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1d00989ba18e942fbddc9bb108add01e153029f22.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d00989ba18e942fbddc9bb108add01e153029f22.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1d00989ba18e942fbddc9bb108add01e153029f22.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d00989ba18e942fbddc9bb108add01e153029f22.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>This tutorial will get you up-and-running with a new Adobe Experience Manager (AEM) project. In ten to twenty minutes, you will have created your own site and be able to create, preview, and publish your own content, styling, and add new blocks.</p>
+        <p>Prerequisites:</p>
+        <ol>
+          <li>You have a GitHub account, and understand Git basics.</li>
+          <li>You understand the basics of HTML, CSS, and JavaScript.</li>
+          <li>You have Node/<code>npm</code> installed for local development.</li>
+        </ol>
+        <p>This tutorial uses macOS, Chrome, and Visual Studio Code as the development environment and the screenshots and instructions reflect that setup. You can use a different operating system, browser, and code editor, but the UI you see and steps you must take may vary accordingly.</p>
+        <p>TIP: If you would like to <strong>get your AEM project started the fastest way Adobe offers with content you already know,</strong> <strong><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/ai-in-aem/agents/modernization/getting-started">use the AEM Modernization Agent.</a></strong> Just create your boilerplate repository and then collaborate with the agent to import your site.</p>
+        <h2 id="get-started-with-the-boilerplate-repository-template">Get started with the boilerplate repository template</h2>
+        <div class="video">
+          <div>
+            <div><a href="../videos/tutorial-step1.mp4/index.html" data-broken-link="true">https://main--helix-website--adobe.aem.page/developer/videos/tutorial-step1.mp4</a></div>
+          </div>
+        </div>
+        <p>The fastest and easiest way to get started following AEM best practices is to create your repository using the Boilerplate GitHub repository as a template.<br><br><a href="https://github.com/adobe/aem-boilerplate">https://github.com/adobe/aem-boilerplate</a></p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1fdc7a94cd82e119b3c87d741d365731d7ccbcfcf.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1fdc7a94cd82e119b3c87d741d365731d7ccbcfcf.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1fdc7a94cd82e119b3c87d741d365731d7ccbcfcf.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1fdc7a94cd82e119b3c87d741d365731d7ccbcfcf.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1210">
+          </picture>
+        </p>
+        <p>Click the <code>Use this template</code> button and select <code>Create a new repository</code>, and select the user org that owns the repository</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_19dfc49f63068dfa832f49743fa98f07379944c44.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_19dfc49f63068dfa832f49743fa98f07379944c44.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_19dfc49f63068dfa832f49743fa98f07379944c44.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_19dfc49f63068dfa832f49743fa98f07379944c44.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1210">
+          </picture>
+        </p>
+        <p>We recommend that the repository is <a href="../../docs/dev-collab-and-good-practices/index.html#keep-the-repository-public">set to public</a>.</p>
+        <p>The only remaining step in GitHub is to install the <a href="https://github.com/apps/aem-code-sync">AEM Code Sync GitHub App</a> on your repository by visiting this link: <a href="https://github.com/apps/aem-code-sync/installations/new">https://github.com/apps/aem-code-sync/installations/new</a></p>
+        <p><br>
+          <picture>
+            <source type="image/webp" srcset="./media_1b900be829ffd16fa59db8cfc234bf84541565758.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1b900be829ffd16fa59db8cfc234bf84541565758.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1b900be829ffd16fa59db8cfc234bf84541565758.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1b900be829ffd16fa59db8cfc234bf84541565758.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1210">
+          </picture>
+        </p>
+        <p>In the <code>Repository access</code> settings of the AEM Code Sync App, make sure you select <code>Only select Repositories</code> (not <code>All Repositories</code>). Then select your newly created repository, and click <code>Save</code>.</p>
+        <p><strong>Note</strong>: If you are using Github Enterprise with IP filtering, you can add the following IP to the allow list: <code>3.227.118.73</code></p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_196c384fa8247a89af448ee289b26711fd3c2314e.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_196c384fa8247a89af448ee289b26711fd3c2314e.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_196c384fa8247a89af448ee289b26711fd3c2314e.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_196c384fa8247a89af448ee289b26711fd3c2314e.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1516">
+          </picture>
+        </p>
+        <p>Congratulations! You have a new website running on <code>https://&lt;branch&gt;--&lt;repo&gt;--&lt;owner&gt;.aem.page/</code> In the example above that’s <code>https://main--mysite--aemtutorial.aem.page/</code></p>
+        <p><br>
+          <picture>
+            <source type="image/webp" srcset="./media_131ece3853f2b2c1a95b9a8508d0a9e12cfeaeee3.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_131ece3853f2b2c1a95b9a8508d0a9e12cfeaeee3.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_131ece3853f2b2c1a95b9a8508d0a9e12cfeaeee3.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_131ece3853f2b2c1a95b9a8508d0a9e12cfeaeee3.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1210">
+          </picture>
+        </p>
+        <h2 id="edit-preview-and-publish-your-content">Edit, Preview and Publish your content</h2>
+        <p>Navigate to Author on <a href="https://da.live/">https://da.live/</a> and find the example content.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_14d555da62ecc834d28567b16d941ab2b780be26b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_14d555da62ecc834d28567b16d941ab2b780be26b.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_14d555da62ecc834d28567b16d941ab2b780be26b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_14d555da62ecc834d28567b16d941ab2b780be26b.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1248">
+          </picture>
+        </p>
+        <p>Edit content and <code>preview</code> and <code>publish</code> content as needed. For more information on authoring see <a href="https://da.live/docs">https://da.live/docs</a>.<br>
+          <picture>
+            <source type="image/webp" srcset="./media_1f2996ba932ac1980183debd610b8f3ddca4e1e97.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1f2996ba932ac1980183debd610b8f3ddca4e1e97.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1f2996ba932ac1980183debd610b8f3ddca4e1e97.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1f2996ba932ac1980183debd610b8f3ddca4e1e97.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1248">
+          </picture>
+        </p>
+        <h2 id="install-sidekick">Install Sidekick</h2>
+        <p><br>To interact with AEM as an author across environments we strongly recommend installing the Sidekick Chrome extension. Find the <a href="https://chromewebstore.google.com/detail/aem-sidekick/igkmdomcgoebiipaifhmpfjhbjccggml">Chrome extension in the Chrome Web Store</a>.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1260919064b2b806e66abdd15fd2d2419a0ea6964.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1260919064b2b806e66abdd15fd2d2419a0ea6964.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1260919064b2b806e66abdd15fd2d2419a0ea6964.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1260919064b2b806e66abdd15fd2d2419a0ea6964.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1210">
+          </picture>
+        </p>
+        <p>After adding the extension to Chrome, don’t forget to pin it, this will make it easier to find it.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_15dd9adf32a7bf3b707b4dc42687e1d644b5a556e.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_15dd9adf32a7bf3b707b4dc42687e1d644b5a556e.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_15dd9adf32a7bf3b707b4dc42687e1d644b5a556e.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_15dd9adf32a7bf3b707b4dc42687e1d644b5a556e.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1210">
+          </picture>
+        </p>
+        <h2 id="start-developing-styling-and-functionality">Start developing styling and functionality</h2>
+        <div class="video">
+          <div>
+            <div><a href="../videos/tutorial-step4.mp4/index.html" data-broken-link="true">https://main--helix-website--adobe.aem.page/developer/videos/tutorial-step4.mp4</a></div>
+          </div>
+        </div>
+        <p>To get started with development, it is easiest to install the <a href="../cli-reference/index.html">AEM Command Line Interface</a> (CLI) and clone your repo locally through using the following.</p>
+        <pre><code>npm install -g @adobe/aem-cli
+git clone https://github.com/&lt;owner&gt;/&lt;repo&gt;
+</code></pre>
+        <p><br><br>From there change into your project folder and start your local development environment using the following.</p>
+        <pre><code>cd &lt;repo&gt;
+aem up
+</code></pre>
+        <p><br><br>This opens <code>http://localhost:3000/</code> and you are ready to make changes.<br>A good place to start is in the <code>blocks</code> folder which is where most of the styling and code lives for a project. Simply make a change in a <code>.css</code> or <code>.js </code>and you should see the changes in your browser immediately.</p>
+        <p>Once you are are ready to push your changes, simply use Git to add, commit, and push and your code to your preview (<code>https://&lt;branch&gt;--&lt;repo&gt;--&lt;owner&gt;.aem.page/</code>) and production (<code>https://&lt;branch&gt;--&lt;repo&gt;--&lt;owner&gt;.aem.live/</code>) sites.</p>
+        <p><strong>That’s it, you made it! Congrats, your first site is up and running. If you need help in the tutorial, please</strong> <strong><a href="https://discord.gg/aem-live">join our Discord channel</a></strong> <strong>or</strong> <strong><a href="../../business/reachout/index.html">get in touch with us.</a></strong><br><br><strong>To get you to a live website as fast as possible, this tutorial uses Document Authoring as the content source.</strong> <strong><a href="https://docs.da.live/developers/reference/universal-editor#enable-your-project-for-universal-editor">Universal Editor can also be configured for your project</a>, to provide a WYSIWYG + Form-based authoring option.</strong></p>
+        <p><strong>NOTE:</strong> <strong><a href="../../docs/authoring-guide/index.html">Edge Delivery Services supports multiple content sources including Google Drive, Microsoft Sharepoint and AEM.</a></strong></p>
+        <h2 id="next-steps">Next Steps</h2>
+        <p>Now that your site is up and running, choose how you want to continue:</p>
+        <ul>
+          <li><strong>Build your first block</strong> - Create, style, and <a href="../../docs/exploring-blocks/index.html">deploy a custom block from scratch</a>.</li>
+          <li><strong>Build with AI</strong> - Configure your project for <a href="../ai-coding-agents/index.html#adding-skills-to-your-project">AI-assisted block creation and development.</a></li>
+        </ul>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="build"><a href="../../docs/index.html#build">Build</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="anatomy-of-an-aem-project"><a href="../anatomy-of-a-helix-project/index.html" data-broken-link="true">Anatomy of an AEM Project</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

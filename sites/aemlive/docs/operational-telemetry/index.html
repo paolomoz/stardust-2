@@ -1,0 +1,389 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.197Z
+  page:             docs-operational-telemetry
+  pageUrl:          https://www.aem.live/docs/operational-telemetry
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Operational Telemetry</title>
+  <meta name="description" content="Adobe Experience Manager uses Operational Telemetry to gather operations data that is strictly necessary to discover and fix functional and performance issues on Adobe Experience ...">
+  <meta property="og:title" content="Operational Telemetry">
+  <meta property="og:description" content="Adobe Experience Manager uses Operational Telemetry to gather operations data that is strictly necessary to discover and fix functional and performance issues on Adobe Experience ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/operational-telemetry/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#privacy">Privacy</a></li>
+<li class="l-3"><a href="#operational-telemetry-data-is-sampled">Operational Telemetry data is sampled</a></li>
+<li class="l-3"><a href="#what-data-is-being-collected">What data is being collected</a></li>
+<li class="l-3"><a href="#what-data-is-being-stored-in-the-visitors-browser">What data is being stored in the visitor's browser</a></li>
+<li class="l-2"><a href="#how-operational-telemetry-data-is-being-used">How Operational Telemetry data is being used</a></li>
+<li class="l-2"><a href="#data-overview">Data Overview</a></li>
+<li class="l-2"><a href="#managing-operational-telemetry">Managing Operational Telemetry</a></li>
+<li class="l-3"><a href="#disabling-operational-telemetry">Disabling Operational Telemetry</a></li>
+<li class="l-3"><a href="#content-security-policy-with-nonce-support">Content Security Policy with Nonce Support</a></li>
+<li class="l-2"><a href="#operational-telemetry-for-developers">Operational Telemetry for Developers</a></li>
+<li class="l-3"><a href="#explorer">Explorer</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Operational Telemetry</h1>
+          <p class="lede">Adobe Experience Manager uses Operational Telemetry to gather operations data that is strictly necessary to discover and fix functional and performance issues on Adobe Experience ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_16b177a242f62f12a8bde010bb080b4463d6469ab.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_16b177a242f62f12a8bde010bb080b4463d6469ab.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_16b177a242f62f12a8bde010bb080b4463d6469ab.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_16b177a242f62f12a8bde010bb080b4463d6469ab.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Adobe Experience Manager uses Operational Telemetry to gather operations data that is strictly necessary to discover and fix functional and performance issues on Adobe Experience Manager-powered sites. Operational Telemetry data can be used to diagnose performance issues. Operational Telemetry preserves the privacy of visitors through <a href="#operational-telemetry-data-is-sampled">sampling</a> (only a small portion of all page views will be monitored).</p>
+        <h2 id="privacy">Privacy</h2>
+        <p>Operational Telemetry in Adobe Experience Manager is designed to preserve visitor privacy and minimize data collection. As a visitor, this means that Adobe will not attempt to collect personal information about you or information that can be tracked back to you. As a site operator, review the data items collected below to understand if they require consent.<br>AEM Operational Telemetry does not use any client-side state or ID, such as cookies or localStorage, sessionStorage or similar, to collect usage metrics. Data is submitted transparently through a <code>Navigator.sendBeacon</code> call, not through pixels or similar techniques. There is no “fingerprinting” of devices or individuals via their IP address, User Agent string, or any other data for the purpose of capturing sampled data.</p>
+        <p>It is not permitted to add any personal data into the Operational Telemetry data collection nor may Operational Telemetry data be used for use cases that go beyond strictly necessary.</p>
+        <h3 id="operational-telemetry-data-is-sampled">Operational Telemetry data is sampled</h3>
+        <p>Traditional web analytics solutions try to collect every single visitor. Adobe Experience Manager’s Operational Telemetry only captures information from a small fraction of activities tied to page views, with no concept of identifying a visitor or a user or even a browser session. Under normal circumstances the sampling rate is one out of one hundred page views , although site operators can decide to increase or decrease this number.</p>
+        <p>As the decision if data will be collected is made on a page view by page view basis, it cannot be used to track interactions across multiple pages. Operational Telemetry has no concept of visits, visitors, or sessions, only checkpoints during a page view. This is by design.</p>
+        <h3 id="what-data-is-being-collected">What data is being collected</h3>
+        <p>Operational Telemetry is designed to prevent the collection of personally identifiable information. The full set of information that can be collected by Adobe Experience Manager’s Operational Telemetry is:</p>
+        <ul>
+          <li>The host name of the site being visited, such as <code>www.aem.live</code></li>
+          <li>The host name of the server responsible for the data collection such as <code>rum.hlx.live</code></li>
+          <li>The user agent (technical name of the browser) that is used to display the page such as <code>Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1</code>. This string is then simplified to <code>desktop</code>, <code>desktop:windows</code>, <code>desktop:mac</code>, <code>desktop:linux</code>, <code>mobile</code>, <code>mobile:android</code>, <code>mobile:ios</code>, <code>mobile:ipados</code>, or <code>bot</code> so that only the device class is stored.</li>
+          <li>The time of the data collection such as <code>2021-06-26 06:00:02.596000 UTC</code> (in order to preserve privacy, we round all minutes to the previous hour, so that only seconds and milliseconds are tracked)</li>
+          <li>The URL of the page being visited, such as <code>https://www.aem.live/docs/operational-telemetry </code>if the URL contains URL parameters, these parameters will not be collected or stored</li>
+          <li>The Referrer URL (the URL of the page that linked to the current page) such as <code>https://www.aem.live/docs</code></li>
+          <li>A randomly generated ID of the page view such as <code>2Ac6</code></li>
+          <li>The weight or inverse of the sampling rate such as <code>100</code> (this means only one in one hundred page views will be recorded)</li>
+          <li>The checkpoint, or name of a particular event in the sequence of loading the page or interacting with it as a visitor such as <code>viewmedia</code> (this particular checkpoint is fired when an image becomes at least 25% visible in the browser)</li>
+          <li>The source, or identifier of the DOM element that the received the interaction event with for the checkpoint mentioned above such as <code>.images</code></li>
+          <li>The target, or link to an external page or resource that received and interaction with for the checkpoint mentioned above such as <code>https://blog.adobe.com/jp/publish/2022/06/29/media_162fb947c7219d0537cce36adf22315d64fb86e94.png</code></li>
+          <li>The <a href="https://web.dev/vitals/">Core Web Vitals (CWV)</a> performance metrics <a href="https://web.dev/lcp/">Largest Contentful Paint (LCP)</a>, <a href="https://web.dev/articles/inp">Interaction to Next Paint (INP)</a> and <a href="https://web.dev/cls/">Cumulative Layout Shift (CLS)</a> that describe the visitor’s quality of experience.</li>
+          <li>The foundational performance metric <a href="https://web.dev/articles/ttfb">Time to First Byte (TTFB)</a> that describes the visitors's quality of experience</li>
+        </ul>
+        <p>No other data is being collected.</p>
+        <h3 id="what-data-is-being-stored-in-the-visitors-browser">What data is being stored in the visitor's browser</h3>
+        <p>For sites that use the built-in experimentation feature, the name of the experiment and variants that the visitor has seen are also stored in the browser's session storage.</p>
+        <h2 id="how-operational-telemetry-data-is-being-used">How Operational Telemetry data is being used</h2>
+        <p>Adobe uses Operational Telemetry data for following purposes:</p>
+        <ul>
+          <li>To identify and fix performance bottlenecks on customer sites</li>
+          <li>To estimate the number of page views to customer sites</li>
+          <li>To understand how Adobe Experience Manager interacts with other scripts (such as analytics, targeting, or external libraries) on the same page to increase compatibility</li>
+        </ul>
+        <p>These use cases are strictly necessary to ensure sites running on AEM are working for their visitors.</p>
+        <h2 id="data-overview">Data Overview</h2>
+        <div class="table">
+          <div>
+            <div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Data</td>
+                    <td>Stored in browser</td>
+                    <td>Sent to data collection</td>
+                    <td>Persisted</td>
+                    <td>Usable for identification/fingerprinting</td>
+                    <td>Strictly neccessary</td>
+                  </tr>
+                  <tr>
+                    <td>Site host name</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>yes</td>
+                  </tr>
+                  <tr>
+                    <td>Data collection server</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>yes</td>
+                  </tr>
+                  <tr>
+                    <td>Client IP address</td>
+                    <td>no</td>
+                    <td>optionally</td>
+                    <td>never</td>
+                    <td>yes</td>
+                    <td>no</td>
+                  </tr>
+                  <tr>
+                    <td>User agent</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>masked</td>
+                    <td>yes, when unmasked</td>
+                    <td>no</td>
+                  </tr>
+                  <tr>
+                    <td>Timestamp</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>masked</td>
+                    <td>yes, when unmasked</td>
+                    <td>yes</td>
+                  </tr>
+                  <tr>
+                    <td>Full URL of page visited</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>no</td>
+                  </tr>
+                  <tr>
+                    <td>URL of page visited, without URL parameters</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>yes</td>
+                  </tr>
+                  <tr>
+                    <td>Referrer URL (without URL parameters)</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>yes</td>
+                  </tr>
+                  <tr>
+                    <td>Page View ID</td>
+                    <td>yes, for the duration of the page view</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>yes</td>
+                  </tr>
+                  <tr>
+                    <td>Weight (Sampling Rate)</td>
+                    <td>yes, for the duration of the page view</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>yes</td>
+                  </tr>
+                  <tr>
+                    <td>Checkpoint</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>yes</td>
+                  </tr>
+                  <tr>
+                    <td>Source</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>yes</td>
+                  </tr>
+                  <tr>
+                    <td>Target</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>yes</td>
+                  </tr>
+                  <tr>
+                    <td>LCP</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>yes</td>
+                  </tr>
+                  <tr>
+                    <td>FID</td>
+                    <td>no</td>
+                    <td>deprecated</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>yes</td>
+                  </tr>
+                  <tr>
+                    <td>CLS</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>yes</td>
+                  </tr>
+                  <tr>
+                    <td>INP</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>yes</td>
+                  </tr>
+                  <tr>
+                    <td>TTFB</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>yes</td>
+                  </tr>
+                  <tr>
+                    <td>Experiment variants (only when using Experimentation)</td>
+                    <td>yes, for the duration of the session</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>yes</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p>The data collected and stored is designed to prevent:</p>
+        <ol>
+          <li>Identification of individual visitors or devices</li>
+          <li>Fingerprinting</li>
+          <li>Tracking of visits or sessions</li>
+          <li>Enrichment or combination with personal identifiable information from other sources</li>
+        </ol>
+        <p>Other than Adobe, following third parties are involved in the collection of Operational Telemetry data:</p>
+        <ul>
+          <li>Fastly, Inc</li>
+          <li>Cloudflare, Inc</li>
+          <li>Coralogix LTD</li>
+          <li>Google LLC</li>
+          <li>Amazon.com, Inc</li>
+        </ul>
+        <h2 id="managing-operational-telemetry"><strong>Managing Operational Telemetry</strong></h2>
+        <p>Adobe Experience Manager as a Cloud Service (outside of Edge Delivery Services) provides environment variables to control Operational Telemetry behavior through Cloud Manager configuration.</p>
+        <h3 id="disabling-operational-telemetry"><strong>Disabling Operational Telemetry</strong></h3>
+        <p>Adobe recommends maintaining Operational Telemetry for its performance and optimization, allowing Adobe to help improve your digital experiences through insights and data, yet you retain control and command over this feature. The service operates with seamlessness and silence, imposing no burden on website performance.</p>
+        <p>To disable Operational Telemetry, set an environment variable in Cloud Manager:</p>
+        <ol>
+          <li>Variable name: <code>AEM_OPTEL_DISABLED</code></li>
+          <li>Value: <code>true</code></li>
+        </ol>
+        <p>To re-enable Operational Telemetry, remove this environment variable.</p>
+        <p>Note that disabling telemetry means forgoing opportunities to identify performance bottlenecks and optimize visitor engagement based on real-world usage patterns.</p>
+        <h3 id="content-security-policy-with-nonce-support"><strong>Content Security Policy with Nonce Support</strong></h3>
+        <p>For sites implementing Content Security Policy (CSP) with nonce-based script validation, Operational Telemetry offers experimental support for CSP nonces.</p>
+        <p>To enable nonce support, set an environment variable in Cloud Manager:</p>
+        <ol>
+          <li>Variable name: <code>AEM_OPTEL_NONCE</code></li>
+          <li>Value: <code>true</code></li>
+        </ol>
+        <p>To disable nonce support, remove this environment variable.</p>
+        <p>This feature remains experimental. For any issues with CSP nonce implementation, contact Adobe Support directly.</p>
+        <h2 id="operational-telemetry-for-developers">Operational Telemetry for Developers</h2>
+        <p>We have <a href="../../developer/rum/index.html" data-broken-link="true">additional in-depth information for developers</a> that want to use data to optimize their own sites, including instructions on how to add Operational Telemetry instrumentation to your site, even if it's not running on AEM.</p>
+        <div class="pagination contained">
+          <div>
+            <div></div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="explorer"><a href="../optel-explorer/index.html" data-broken-link="true">Explorer</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

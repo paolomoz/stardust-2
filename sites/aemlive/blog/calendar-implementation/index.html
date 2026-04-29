@@ -1,0 +1,184 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.181Z
+  page:             blog-calendar-implementation
+  pageUrl:          https://www.aem.live/blog/calendar-implementation
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>A Date with Edge Delivery: Putting Calendars on the Web, Twice</title>
+  <meta name="description" content="For sites that connect the digital world with the real world, calendars are essential. Edge Delivery Services provides multiple ways to implement calendars, and this ...">
+  <meta property="og:title" content="A Date with Edge Delivery: Putting Calendars on the Web, Twice">
+  <meta property="og:description" content="For sites that connect the digital world with the real world, calendars are essential. Edge Delivery Services provides multiple ways to implement calendars, and this ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/blog/calendar-implementation/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../index.html" aria-current="page">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-success)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#lightweight-calendar-for-aem-community-events-dominiks-delight-and-ours">Lightweight Calendar for AEM Community Events: Dominik's Delight (and Ours!)</a></li>
+<li class="l-3"><a href="#the-idea-behind-the-automation">The Idea Behind the Automation:</a></li>
+<li class="l-3"><a href="#how-it-works-streamlining-the-flow">How It Works: Streamlining the Flow</a></li>
+<li class="l-3"><a href="#diving-deeper-into-the-automation">Diving Deeper into the Automation</a></li>
+<li class="l-3"><a href="#the-results-happy-dominik-happy-team">The Results: Happy Dominik, Happy Team</a></li>
+<li class="l-2"><a href="#master-calendar-for-a-local-government-from-single-stream-to-city-wide-schedule">Master Calendar for a Local Government: From Single Stream to City-Wide Schedule</a></li>
+<li class="l-3"><a href="#the-challenge-of-scale">The Challenge of Scale</a></li>
+<li class="l-3"><a href="#our-approach-finding-order-in-complexity">Our Approach: Finding Order in Complexity</a></li>
+<li class="l-3"><a href="#the-workflow-from-spreadsheet-to-screen">The Workflow: From Spreadsheet to Screen</a></li>
+<li class="l-3"><a href="#the-outcome-a-unified-calendar-for-a-diverse-organization">The Outcome: A Unified Calendar for a Diverse Organization</a></li>
+<li class="l-2"><a href="#want-to-see-a-demo-of-how-these-implementations-work">Want to see a demo of how these implementations work?</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog · BLOG</p>
+          <h1>A Date with Edge Delivery: Putting Calendars on the Web, Twice</h1>
+          <p class="lede">For sites that connect the digital world with the real world, calendars are essential. Edge Delivery Services provides multiple ways to implement calendars, and this ...</p>
+        </header>
+        <div>
+        
+        <p>For sites that connect the digital world with the real world, calendars are essential. Edge Delivery Services provides multiple ways to implement calendars, and this post showcases two distinct approaches that are currently in use.</p>
+        <h3 id="lightweight-calendar-for-aem-community-events-dominiks-delight-and-ours">Lightweight Calendar for AEM Community Events: Dominik's Delight (and Ours!)</h3>
+        <p>For those who are regular attendees of our Discord calls, you know Dominik. He's the mastermind behind our event calendar, and he's got a lot on his plate! Not only does he manage the event schedule in Discord, but he also needs to make sure the information is available in our team calendars (so we don't miss a thing!) <em>and</em> published on the AEM.live website (<a href="../../community/index.html">https://www.aem.live/community#recent-recordings</a>).</p>
+        <p>Our goal? To make Dominik's life—and ours—easier by streamlining this entire process. We want it to be smooth, simple, and efficient, reusing existing code and functionality whenever possible. As we like to say, "No code is better than some code, and some code is better than much code!"</p>
+        <h3 id="the-idea-behind-the-automation">The Idea Behind the Automation:</h3>
+        <p>We aimed to minimize manual intervention and save Dominik time. Updating event details manually in multiple places is tedious and error-prone. We needed a solution that would automate as much of the process as possible.</p>
+        <h3 id="how-it-works-streamlining-the-flow">How It Works: Streamlining the Flow</h3>
+        <p>Here's the simplified workflow:</p>
+        <ol>
+          <li>Dominik creates and sets up a Discord event.</li>
+          <li>Dominik hosts the event and records it.</li>
+          <li>The recording, along with all its details, is uploaded to our YouTube channel.</li>
+        </ol>
+        <p>And that's it! The rest is automated. Our Zapier workflow takes over, grabbing the event details and publishing them directly to the "recent-recordings" section of AEM.live. This keeps our site up-to-date without requiring Dominik to lift a finger.</p>
+        <h3 id="diving-deeper-into-the-automation">Diving Deeper into the Automation</h3>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1fe91d2cda33d3311add992de9c2525bbb84a2d21.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1fe91d2cda33d3311add992de9c2525bbb84a2d21.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1fe91d2cda33d3311add992de9c2525bbb84a2d21.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1fe91d2cda33d3311add992de9c2525bbb84a2d21.png?width=750&amp;format=png&amp;optimize=medium" width="1104" height="788">
+          </picture>
+        </p>
+        <p>If you're interested in the specifics, you can find the detailed Zapier workflow setup here: <a href="https://github.com/asthabh23/helix-website/blob/issue-646/blocks/feed/README.md">https://github.com/asthabh23/helix-website/blob/issue-646/blocks/feed/README.md#workflow</a>. The <a href="https://github.com/asthabh23/helix-website/tree/issue-646/blocks/feed">feed block</a> (part of the <a href="../../developer/block-party/index.html">block party</a>) pulls in the recording data and displays it in the correct order, newest first.</p>
+        <h3 id="the-results-happy-dominik-happy-team">The Results: Happy Dominik, Happy Team</h3>
+        <p>This implementation embodies key Edge Delivery Services goals:</p>
+        <ol>
+          <li><strong>Ease of Authoring:</strong> Dominik no longer has to juggle multiple systems.</li>
+          <li><strong>Significant Time Savings:</strong> We've reduced his publishing effort by an estimated 50%.</li>
+          <li><strong>Code Reuse:</strong> We're leveraging existing Zapier workflows and the feed block, reducing the need to write new code.</li>
+        </ol>
+      </div>
+      <div>
+        <h2 id="master-calendar-for-a-local-government-from-single-stream-to-city-wide-schedule">Master Calendar for a Local Government: From Single Stream to City-Wide Schedule</h2>
+        <p>It's one thing to build a calendar for a small team, or even just Dominik, but it's a different challenge entirely to create a comprehensive system for a whole organization. That's exactly what we faced when tasked with building a master calendar for a local government. This wasn't just about listing dates; it was about creating a robust, scalable solution that could handle the complex needs of a large and diverse entity.</p>
+        <h3 id="the-challenge-of-scale">The Challenge of Scale</h3>
+        <p>The task was to create a calendar system that could manage events for over 40 departments, each with unique schedules and requirements. This included providing individual department calendar URLs and aggregating all events onto a central dashboard. The system also needed to support granular user permissions, multiple event design formats, recurring events, and homepage event featuring.</p>
+        <h3 id="our-approach-finding-order-in-complexity">Our Approach: Finding Order in Complexity</h3>
+        <p>To tackle this challenge, we took a thoughtful approach, prioritizing simplicity and scalability. We began by leveraging document-based authoring to create event templates that matched the 10+ existing design variants. This made authoring easy and familiar for content creators. Then, we set up 41 SharePoint folders, one for each department, each containing its own event template and index file. This established a clear organizational structure and defined permission boundaries. Next, we centralized all event data in a single "events spreadsheet." Here's where we embraced a bit of a paradox: sometimes, the best way to author a calendar is to use a spreadsheet! It might seem counterintuitive, but this method allowed for easy data management, indexing, and filtering, which were crucial for this project. Finally, we added a "Featured" column to the spreadsheet, empowering site admins to easily flag key events for homepage display.</p>
+        <h3 id="the-workflow-from-spreadsheet-to-screen">The Workflow: From Spreadsheet to Screen</h3>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1f25ec8a88dfca4c80a4700a71c45732c791715af.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1f25ec8a88dfca4c80a4700a71c45732c791715af.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1f25ec8a88dfca4c80a4700a71c45732c791715af.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1f25ec8a88dfca4c80a4700a71c45732c791715af.png?width=750&amp;format=png&amp;optimize=medium" width="1430" height="574">
+          </picture>
+        </p>
+        <p>The workflow was designed to be as efficient and user-friendly as possible. Users would duplicate the event template within their department's folder, add their event data, and update the metadata in the template. After a quick preview and publish, the event would be added to their department's calendar. Behind the scenes, all events were indexed onto a <code>raw_index</code> sheet, and then automatically copied to the <code>shared-default</code> sheet. Site admins would then review the <code>shared-default</code> sheet and mark important events as "featured." Those "featured" events would automatically appear as cards on the homepage, keeping the community informed about key happenings.</p>
+        <h3 id="the-outcome-a-unified-calendar-for-a-diverse-organization">The Outcome: A Unified Calendar for a Diverse Organization</h3>
+        <p>The implemented calendar solution consolidated events from all departments into a centralized master calendar, with user/group permissions and support for various event formats. The workflow was simplified, and adding new departments or events is easy.</p>
+        <p>For more details, check out this repo: <a href="https://github.com/meejain/calendar-demo/blob/main/templates/calendar/README.md">https://github.com/meejain/calendar-demo/blob/main/templates/calendar/README.md</a> and the live demo linked.</p>
+        <h2 id="want-to-see-a-demo-of-how-these-implementations-work">Want to see a demo of how these implementations work?</h2>
+        <p>Check the recording of the Discord session below where we dived deeper into these workflows. Happy Learning!</p>
+        <p><a href="https://www.youtube.com/watch?v=8vxmLJCbZk4">recording</a></p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

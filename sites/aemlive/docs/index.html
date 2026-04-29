@@ -1,0 +1,659 @@
+<!--
+  stardust:provenance
+  writtenBy:         stardust:migrate (Path A — approved-from-prototype)
+  writtenAt:         2026-04-29T20:39:46.809Z
+  page:              docs
+  pageUrl:           https://www.aem.live/docs
+  source:            stardust/prototypes/docs-proposed.html (approved 2026-04-29)
+  designMd:          DESIGN.md
+  designJson:        DESIGN.json
+  canon:             stardust/canon/
+  unsourcedContent:
+    - selector: 'section[data-section="tracks-overview"] .chapter-count'
+      type: stat (×4)
+    - selector: 'section[data-section="code-preview"] code'
+      type: code-sample
+  stardustVersion:   0.2.0
+--><html><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documentation — aem.live</title>
+<link rel="canonical" href="https://www.aem.live/docs/">
+<meta name="description" content="Documentation hub for authors, developers and operations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;700;900&family=Source+Code+Pro:wght@400;500;700&display=swap');
+
+  :root {
+    --heading-font-family: 'Adobe Clean Display', 'Adobe Clean', 'Source Sans 3', system-ui, -apple-system, sans-serif;
+    --body-font-family:    'Adobe Clean', 'Source Sans 3', system-ui, -apple-system, sans-serif;
+    --heading-xxl: 96px; --heading-xl: 72px; --heading-lg: 56px; --heading-md: 40px;
+    --body: 16px; --body-sm: 14px;
+    --line-height-heading: 1.0;
+    --line-height-body:    1.65;
+    --color-bg: #ffffff; --color-fg: #15171d; --color-accent: #3a4cf5;
+    --spacing-xs: 4px; --spacing-sm: 8px; --spacing-md: 16px; --spacing-lg: 24px; --spacing-xl: 48px; --spacing-2xl: 96px;
+    --section-padding: 48px;
+    --max-width: 1280px;
+    --radius: 16px;
+
+    --ds-color-bg: #ffffff; --ds-color-surface: #f6f6f7; --ds-color-surface-2: #ebecef;
+    --ds-color-text: #15171d; --ds-color-text-muted: #5b5e6a; --ds-color-text-subtle: #8b8e98;
+    --ds-color-border: rgba(20, 22, 30, 0.08); --ds-color-border-strong: rgba(20, 22, 30, 0.16);
+    --ds-color-primary: #3a4cf5; --ds-color-primary-hover: #2d3ae0; --ds-color-primary-on: #ffffff;
+    --ds-color-attribution: #eb1000;
+    --ds-color-success: #0d9d6b; --ds-color-warning: #c46f00;
+    --ds-color-code-bg: #0e1018; --ds-color-code-fg: #d8dce5; --ds-color-code-muted: #6b6f7d;
+    --ds-color-code-string: #9be09b; --ds-color-code-keyword: #b387f5;
+    --ds-color-code-fn: #7fc4ff; --ds-color-code-num: #f5b78c;
+
+    --ds-font-display: var(--heading-font-family);
+    --ds-font-body:    var(--body-font-family);
+    --ds-font-mono:    'Source Code Pro', ui-monospace, 'SF Mono', monospace;
+
+    --ds-type-super: 96px; --ds-type-title-1: 72px; --ds-type-title-2: 56px;
+    --ds-type-title-3: 40px; --ds-type-title-4: 28px; --ds-type-title-5: 20px;
+    --ds-type-title-6: 16px; --ds-type-body-l: 20px; --ds-type-body-m: 16px;
+    --ds-type-body-s: 14px; --ds-type-code: 13.5px; --ds-type-eyebrow: 12px;
+
+    --ds-radius-xs: 4px; --ds-radius-sm: 8px; --ds-radius-md: 12px;
+    --ds-radius-lg: 16px; --ds-radius-xl: 24px; --ds-radius-pill: 999px;
+
+    --ds-shadow-xs: 0 1px 2px rgba(20, 22, 30, 0.06);
+    --ds-shadow-sm: 0 2px 4px rgba(20, 22, 30, 0.08);
+    --ds-shadow-md: 0 4px 12px rgba(20, 22, 30, 0.10);
+    --ds-shadow-lg: 0 12px 32px rgba(20, 22, 30, 0.12);
+    --ds-shadow-glow: 0 0 0 4px rgba(58, 76, 245, 0.18);
+
+    --ds-motion-fast: 150ms cubic-bezier(0.42, 0, 0, 1);
+    --ds-motion-base: 240ms cubic-bezier(0.42, 0, 0, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--body-font-family);
+    color: var(--color-fg); background: var(--color-bg);
+    font-size: var(--body); line-height: var(--line-height-body);
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; background: none; border: 0; color: inherit; }
+  img { display: block; max-width: 100%; }
+
+  .container {
+    max-width: var(--max-width); margin-inline: auto;
+    padding-inline: 8.333%;
+  }
+  @media (max-width: 1023px) { .container { padding-inline: 24px; } }
+
+  .eyebrow {
+    font-family: var(--ds-font-mono);
+    font-size: var(--ds-type-eyebrow); font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ds-color-text-muted); line-height: 1;
+  }
+  .placeholder-eyebrow {
+    display: inline-block; font-family: var(--ds-font-mono);
+    font-size: 9px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ds-color-warning);
+    background: rgba(196, 111, 0, 0.15); padding: 2px 6px;
+    border-radius: 3px; margin-bottom: 6px;
+  }
+  [data-placeholder="true"] {
+    outline: 2px dashed var(--ds-color-warning);
+    outline-offset: 4px; border-radius: var(--ds-radius-sm);
+    position: relative;
+  }
+
+  .skip {
+    position: absolute; top: -40px; left: 0;
+    background: var(--ds-color-primary); color: var(--ds-color-primary-on);
+    padding: 8px 16px; border-radius: 0 0 var(--ds-radius-sm) 0;
+    font-weight: 700; font-size: 13px;
+  }
+  .skip:focus { top: 0; }
+
+  /* HEADER (shared with home) */
+  [data-section="header"] {
+    position: sticky; top: 0; z-index: 80;
+    background: var(--ds-color-bg);
+    border-bottom: 1px solid var(--ds-color-border);
+  }
+  .nav { display: flex; align-items: center; height: 64px; gap: 32px; }
+  .nav__brand {
+    display: inline-flex; align-items: baseline; gap: 10px;
+    font-family: var(--ds-font-display); font-weight: 800;
+    font-size: var(--ds-type-title-5);
+    letter-spacing: -0.01em; color: var(--ds-color-text);
+  }
+  .nav__attribution {
+    font-family: var(--ds-font-mono); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--ds-color-text-muted);
+  }
+  .nav__attribution .adobe-mark {
+    color: var(--ds-color-attribution); font-weight: 800;
+  }
+  .nav__links {
+    display: flex; align-items: center; gap: 24px;
+    margin-inline: auto 0; list-style: none;
+  }
+  .nav__links a {
+    font-size: var(--ds-type-body-s); font-weight: 500;
+    color: var(--ds-color-text-muted);
+    transition: color var(--ds-motion-fast);
+  }
+  .nav__links a[aria-current="page"] {
+    color: var(--ds-color-text); font-weight: 700;
+  }
+  .nav__links a:hover { color: var(--ds-color-text); }
+  .nav__cta-row { display: flex; align-items: center; gap: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: inherit; font-weight: 700;
+    font-size: var(--ds-type-body-m);
+    border-radius: var(--ds-radius-lg);
+    padding: 14px 24px;
+    transition: background var(--ds-motion-fast), box-shadow var(--ds-motion-fast);
+  }
+  .btn--primary {
+    background: var(--ds-color-primary); color: var(--ds-color-primary-on);
+    box-shadow: var(--ds-shadow-xs);
+  }
+  .btn--primary:hover { background: var(--ds-color-primary-hover); box-shadow: var(--ds-shadow-sm); }
+  .btn--primary:focus-visible { outline: 0; box-shadow: var(--ds-shadow-glow), var(--ds-shadow-xs); }
+  @media (max-width: 1023px) { .nav__links { display: none; } }
+  @media (max-width: 600px) {
+    .nav { gap: 16px; }
+    .nav__attribution { display: none; }
+    .nav__brand { font-size: var(--ds-type-title-6); }
+  }
+
+  /* FOOTER (shared with home) */
+  [data-section="footer"] {
+    background: var(--ds-color-bg);
+    border-top: 1px solid var(--ds-color-border);
+    padding-block: 64px 32px;
+  }
+  .footer__grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px; margin-bottom: 48px;
+  }
+  @media (max-width: 768px) {
+    .footer__grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+  .footer__brand {
+    font-family: var(--ds-font-display); font-weight: 800;
+    font-size: var(--ds-type-title-4); letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .footer__brand-attr {
+    font-family: var(--ds-font-mono); font-size: var(--ds-type-body-s);
+    color: var(--ds-color-text-muted);
+  }
+  .footer__brand-attr .adobe-mark {
+    color: var(--ds-color-attribution); font-weight: 800;
+  }
+  .footer__col-title {
+    font-family: var(--ds-font-mono); font-size: var(--ds-type-eyebrow);
+    font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ds-color-text-subtle); margin-bottom: 16px;
+    display: block;
+  }
+  .footer__col ul { list-style: none; display: grid; gap: 10px; }
+  .footer__col a {
+    font-size: var(--ds-type-body-s); color: var(--ds-color-text-muted);
+    transition: color var(--ds-motion-fast);
+  }
+  .footer__col a:hover { color: var(--ds-color-text); }
+  .footer__bottom {
+    border-top: 1px solid var(--ds-color-border);
+    padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: var(--ds-type-body-s); color: var(--ds-color-text-subtle);
+  }
+</style>
+<style>
+  /* DOCS HERO */
+  [data-section="docs-hero"] {
+    padding-block: 80px 48px;
+    border-bottom: 1px solid var(--ds-color-border);
+  }
+  .docs-hero__head { max-width: 800px; }
+  .docs-hero__title {
+    font-family: var(--ds-font-display); font-weight: 900;
+    font-size: clamp(40px, 6vw, var(--ds-type-title-2));
+    line-height: 1.0; letter-spacing: -0.03em;
+    color: var(--ds-color-text); margin-block: 16px 32px;
+  }
+  .search {
+    display: flex; align-items: center; gap: 12px;
+    width: 100%; max-width: 720px;
+    background: var(--ds-color-surface);
+    border: 1px solid var(--ds-color-border);
+    border-radius: var(--ds-radius-md);
+    padding: 0 16px; height: 56px;
+    transition: border-color var(--ds-motion-fast), box-shadow var(--ds-motion-fast);
+  }
+  .search:focus-within {
+    background: var(--ds-color-bg);
+    border-color: var(--ds-color-primary);
+    box-shadow: var(--ds-shadow-glow);
+  }
+  .search__icon { color: var(--ds-color-text-subtle); flex-shrink: 0; }
+  .search__input {
+    flex: 1; background: transparent; border: 0; outline: 0;
+    font-family: var(--ds-font-mono);
+    font-size: var(--ds-type-body-s);
+    color: var(--ds-color-text);
+  }
+  .search__input::placeholder { color: var(--ds-color-text-subtle); }
+  .kbd {
+    display: inline-flex; align-items: center;
+    font-family: var(--ds-font-mono); font-size: 11px; font-weight: 700;
+    color: var(--ds-color-text-muted);
+    background: var(--ds-color-bg);
+    border: 1px solid var(--ds-color-border-strong);
+    border-radius: var(--ds-radius-sm);
+    padding: 3px 8px;
+  }
+  .hint-chips {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px;
+  }
+  .hint-chips a {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--ds-font-mono); font-size: 12px;
+    color: var(--ds-color-text-muted);
+    padding: 6px 12px;
+    border: 1px solid var(--ds-color-border);
+    border-radius: var(--ds-radius-pill);
+    transition: border-color var(--ds-motion-fast), color var(--ds-motion-fast);
+  }
+  .hint-chips a:hover {
+    border-color: var(--ds-color-primary);
+    color: var(--ds-color-primary);
+  }
+  .hint-chips a::before {
+    content: ''; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--chip-color, var(--ds-color-text-subtle));
+  }
+  .hint-chips a.chip--build    { --chip-color: var(--ds-color-primary); }
+  .hint-chips a.chip--publish  { --chip-color: var(--ds-color-success); }
+  .hint-chips a.chip--launch   { --chip-color: var(--ds-color-warning); }
+  .hint-chips a.chip--resources{ --chip-color: var(--ds-color-text-subtle); }
+
+  /* TRACKS-OVERVIEW */
+  [data-section="tracks-overview"] { padding-block: 64px 32px; }
+  .tracks__head { margin-bottom: 32px; }
+  .tracks__head h2 {
+    font-family: var(--ds-font-display); font-weight: 800;
+    font-size: var(--ds-type-title-4); letter-spacing: -0.02em;
+    margin-block: 12px 8px;
+  }
+  .tracks__lede { color: var(--ds-color-text-muted); font-size: var(--ds-type-body-m); }
+  .tracks__grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 768px) { .tracks__grid { grid-template-columns: 1fr; } }
+  .track-card {
+    position: relative;
+    display: grid; grid-template-rows: auto auto auto 1fr auto;
+    gap: 12px;
+    padding: 28px 28px 24px;
+    background: var(--ds-color-bg);
+    border: 1px solid var(--ds-color-border);
+    border-radius: var(--ds-radius-lg);
+    transition: transform var(--ds-motion-base), box-shadow var(--ds-motion-base), border-color var(--ds-motion-base);
+  }
+  .track-card::before {
+    content: ''; position: absolute; left: 0; top: 24px; bottom: 24px;
+    width: 4px; background: var(--track-color);
+    border-radius: 0 4px 4px 0;
+  }
+  .track-card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--ds-shadow-md);
+    border-color: var(--ds-color-border-strong);
+  }
+  .track-card:focus-within {
+    box-shadow: var(--ds-shadow-glow);
+    border-color: var(--ds-color-primary);
+  }
+  .track-card__title {
+    font-family: var(--ds-font-display); font-weight: 800;
+    font-size: var(--ds-type-title-4);
+    line-height: 1.15; letter-spacing: -0.02em;
+    color: var(--ds-color-text);
+  }
+  .track-card__title a { color: inherit; }
+  .track-card__title a::before {
+    content: ''; position: absolute; inset: 0;
+    border-radius: var(--ds-radius-lg);
+  }
+  .track-card__body {
+    color: var(--ds-color-text-muted);
+    font-size: var(--ds-type-body-m);
+    line-height: 1.6;
+  }
+  .track-card__foot {
+    display: flex; align-items: center; gap: 6px;
+    font-family: var(--ds-font-mono); font-size: 12px;
+    color: var(--ds-color-text-subtle);
+    border-top: 1px dashed var(--ds-color-border);
+    padding-top: 12px; margin-top: 4px;
+  }
+  .track-card__foot strong { color: var(--ds-color-text-muted); }
+  .track-card__arrow {
+    margin-left: auto; font-size: 22px;
+    color: var(--track-color); line-height: 1;
+    transition: transform var(--ds-motion-fast);
+  }
+  .track-card:hover .track-card__arrow { transform: translateX(4px); }
+
+  .tc--build    { --track-color: var(--ds-color-primary); }
+  .tc--publish  { --track-color: var(--ds-color-success); }
+  .tc--launch   { --track-color: var(--ds-color-warning); }
+  .tc--resources{ --track-color: var(--ds-color-text-subtle); }
+
+  /* CODE-PREVIEW (the dark moment) */
+  [data-section="code-preview"] {
+    background: var(--ds-color-code-bg);
+    color: var(--ds-color-code-fg);
+    padding-block: 56px;
+    margin-block: 48px;
+  }
+  .codep__grid {
+    display: grid; grid-template-columns: 5fr 7fr;
+    gap: 48px; align-items: center;
+  }
+  @media (max-width: 1023px) { .codep__grid { grid-template-columns: 1fr; gap: 24px; } }
+  .codep__copy .eyebrow { color: var(--ds-color-code-muted); }
+  .codep__title {
+    font-family: var(--ds-font-display); font-weight: 800;
+    font-size: clamp(28px, 4vw, var(--ds-type-title-3));
+    line-height: 1.05; letter-spacing: -0.025em;
+    color: var(--ds-color-code-fg); margin-block: 16px 12px;
+  }
+  .codep__lede { color: var(--ds-color-code-muted); font-size: var(--ds-type-body-m); line-height: 1.6; }
+
+  pre.code-block {
+    font-family: var(--ds-font-mono);
+    font-size: var(--ds-type-code); line-height: 1.7;
+    color: var(--ds-color-code-fg);
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--ds-radius-md);
+    overflow-x: auto;
+  }
+  .code-token--prompt   { color: var(--ds-color-code-muted); user-select: none; }
+  .code-token--keyword  { color: var(--ds-color-code-keyword); }
+  .code-token--fn       { color: var(--ds-color-code-fn); }
+  .code-token--string   { color: var(--ds-color-code-string); }
+  .code-token--num      { color: var(--ds-color-code-num); }
+  .code-token--ok       { color: var(--ds-color-success); }
+  .code-token--comment  { color: var(--ds-color-code-muted); font-style: italic; }
+
+  /* POPULAR-PAGES */
+  [data-section="popular-pages"] { padding-block: 56px 96px; }
+  .popular__head { margin-bottom: 24px; }
+  .popular__head h2 {
+    font-family: var(--ds-font-display); font-weight: 800;
+    font-size: var(--ds-type-title-4); letter-spacing: -0.02em;
+    margin-block: 12px 0;
+  }
+  .popular__grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  @media (max-width: 1023px) { .popular__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 768px)  { .popular__grid { grid-template-columns: 1fr; } }
+  .pop-card {
+    display: grid; gap: 8px;
+    padding: 20px;
+    background: var(--ds-color-bg);
+    border: 1px solid var(--ds-color-border);
+    border-radius: var(--ds-radius-md);
+    transition: border-color var(--ds-motion-fast), transform var(--ds-motion-fast);
+  }
+  .pop-card:hover {
+    border-color: var(--ds-color-primary); transform: translateY(-1px);
+  }
+  .pop-card__title {
+    font-weight: 700; font-size: var(--ds-type-title-6);
+    color: var(--ds-color-text);
+  }
+  .pop-card__title::after {
+    content: ' →'; color: var(--ds-color-primary); font-weight: 500;
+  }
+  .pop-card__meta {
+    font-family: var(--ds-font-mono); font-size: 11px;
+    color: var(--ds-color-text-subtle);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .pop-card__meta::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--meta-color, var(--ds-color-text-subtle));
+  }
+  .pop-card.meta--build    { --meta-color: var(--ds-color-primary); }
+  .pop-card.meta--resources{ --meta-color: var(--ds-color-text-subtle); }
+</style>
+
+
+
+
+<link rel="stylesheet" href="../assets/canon.css">
+</head><body><a class="skip" href="#main">Skip to content</a>
+
+<header data-section="header" data-intent="navigate" data-layout="full-width-light">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="sidekick/index.html">Tools</a></li>
+        <li><a href="../blog/index.html">Blog</a></li>
+        <li><a href="../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="btn btn--primary" href="../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section data-section="docs-hero" data-intent="search-led-IA" data-layout="full-width-search" data-items="1">
+    <div class="container">
+      <div class="docs-hero__head">
+        <p class="eyebrow">Documentation</p>
+        <h1 class="docs-hero__title">Helpful guides for your journey with Adobe Experience Manager</h1>
+      </div>
+      <form class="search" role="search" action="/docs/" method="get">
+        <span class="search__icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </span>
+        <input class="search__input" type="search" name="q" placeholder="Find anything in the docs…" autocomplete="off">
+        <span class="kbd" data-placeholder="true" data-placeholder-type="keyboard-shortcut" data-placeholder-source="visual affordance — keybinding not implemented in prototype">⌘ K</span>
+      </form>
+      <div class="hint-chips">
+        <a class="chip--build" href="#tracks-overview">Build</a>
+        <a class="chip--publish" href="#tracks-overview">Publish</a>
+        <a class="chip--launch" href="#tracks-overview">Launch</a>
+        <a class="chip--resources" href="#tracks-overview">Resources</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="tracks-overview" data-section="tracks-overview" data-intent="track-routing" data-layout="grid-2x2" data-items="4">
+    <div class="container">
+      <header class="tracks__head">
+        <p class="eyebrow">Guides</p>
+        <h2>Build, Publish, Launch.</h2>
+      </header>
+      <div class="tracks__grid">
+
+        <article class="track-card tc--build">
+          <p class="eyebrow">Build</p>
+          <h3 class="track-card__title"><a href="index.html#build">Build</a></h3>
+          <p class="track-card__body">Everything developers need to build fast sites with Adobe Experience Manager, and how to structure content for an optimal experience.</p>
+          <p class="track-card__foot">
+            <strong>Chapters</strong>
+            <span data-placeholder="true" data-placeholder-type="stat" data-placeholder-source="chapter count not in current/pages/docs.json">
+              <span class="placeholder-eyebrow">Placeholder</span>
+              <span class="chapter-count">e.g. 12 chapters</span>
+            </span>
+            <span class="track-card__arrow" aria-hidden="true">→</span>
+          </p>
+        </article>
+
+        <article class="track-card tc--publish">
+          <p class="eyebrow">Publish</p>
+          <h3 class="track-card__title"><a href="index.html#publish">Publish</a></h3>
+          <p class="track-card__body">The in-depth guide for authors looking to create, publish, and manage content with Adobe Experience Manager.</p>
+          <p class="track-card__foot">
+            <strong>Chapters</strong>
+            <span data-placeholder="true" data-placeholder-type="stat" data-placeholder-source="chapter count not in current/pages/docs.json">
+              <span class="placeholder-eyebrow">Placeholder</span>
+              <span class="chapter-count">e.g. 8 chapters</span>
+            </span>
+            <span class="track-card__arrow" aria-hidden="true">→</span>
+          </p>
+        </article>
+
+        <article class="track-card tc--launch">
+          <p class="eyebrow">Launch</p>
+          <h3 class="track-card__title"><a href="index.html#launch">Launch</a></h3>
+          <p class="track-card__body">Get ready to launch with our resources for operating your site with DNS, CDN, and SEO.</p>
+          <p class="track-card__foot">
+            <strong>Chapters</strong>
+            <span data-placeholder="true" data-placeholder-type="stat" data-placeholder-source="chapter count not in current/pages/docs.json">
+              <span class="placeholder-eyebrow">Placeholder</span>
+              <span class="chapter-count">e.g. 6 chapters</span>
+            </span>
+            <span class="track-card__arrow" aria-hidden="true">→</span>
+          </p>
+        </article>
+
+        <article class="track-card tc--resources">
+          <p class="eyebrow">Resources</p>
+          <h3 class="track-card__title"><a href="index.html#resources">Resources</a></h3>
+          <p class="track-card__body">Sidekick · Community · AEM.live Blog — the essentials around the core docs.</p>
+          <p class="track-card__foot">
+            <strong>Quick links</strong>
+            <span style="color:var(--ds-color-text-muted)">3</span>
+            <span class="track-card__arrow" aria-hidden="true">→</span>
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section data-section="code-preview" data-intent="explain mechanic" data-layout="full-bleed-dark" data-items="1">
+    <div class="container">
+      <div class="codep__grid">
+        <div class="codep__copy">
+          <p class="eyebrow">Quickstart</p>
+          <h2 class="codep__title">Create a project from scratch.</h2>
+          <p class="codep__lede">No bundlers. No build pipeline. From terminal to live in three commands.</p>
+        </div>
+        <div data-placeholder="true" data-placeholder-type="code-sample" data-placeholder-source="exact aem-cli command flow not in current/pages/docs.json; rendered as illustrative placeholder">
+          <span class="placeholder-eyebrow">Placeholder · code sample</span>
+          <pre class="code-block"><code><span class="code-token--comment"># Initialise a new aem.live project</span>
+<span class="code-token--prompt">$ </span><span class="code-token--keyword">npx</span> <span class="code-token--fn">@adobe/aem-cli</span> <span class="code-token--keyword">init</span> <span class="code-token--string">my-site</span>
+<span class="code-token--prompt">$ </span><span class="code-token--keyword">cd</span> <span class="code-token--string">my-site</span>
+
+<span class="code-token--comment"># Push your repo — your site is live at the edge</span>
+<span class="code-token--prompt">$ </span><span class="code-token--keyword">git</span> <span class="code-token--keyword">push</span> origin main
+
+<span class="code-token--ok">✓</span> live at <span class="code-token--string">https://my-site.aem.live</span> <span class="code-token--num">in 1.2s</span></code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="popular-pages" data-intent="discovery" data-layout="grid-3" data-items="6">
+    <div class="container">
+      <header class="popular__head">
+        <p class="eyebrow">Popular</p>
+        <h2>Most-read pages</h2>
+      </header>
+      <div class="popular__grid">
+
+        <a class="pop-card meta--build" href="../developer/tutorial/index.html">
+          <span class="pop-card__meta">Build</span>
+          <span class="pop-card__title">Getting Started — Developer Tutorial</span>
+        </a>
+        <a class="pop-card meta--build" href="../developer/setup-google-drive/index.html">
+          <span class="pop-card__meta">Build</span>
+          <span class="pop-card__title">Google Drive Setup</span>
+        </a>
+        <a class="pop-card meta--build" href="setup-customer-sharepoint/index.html">
+          <span class="pop-card__meta">Build</span>
+          <span class="pop-card__title">SharePoint Setup</span>
+        </a>
+        <a class="pop-card meta--build" href="../developer/ue-tutorial/index.html">
+          <span class="pop-card__meta">Build</span>
+          <span class="pop-card__title">AEM Sites Setup</span>
+        </a>
+        <a class="pop-card meta--build" href="../developer/anatomy-of-a-franklin-project/index.html" data-broken-link="true">
+          <span class="pop-card__meta">Build</span>
+          <span class="pop-card__title">Anatomy of a Project</span>
+        </a>
+        <a class="pop-card meta--resources" href="sidekick/index.html">
+          <span class="pop-card__meta">Resources</span>
+          <span class="pop-card__title">AEM Sidekick</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="index.html">Documentation</a></li>
+          <li><a href="../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="sidekick/index.html">Sidekick</a></li>
+          <li><a href="cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../blog/index.html">Blog</a></li>
+          <li><a href="../community/index.html">Community</a></li>
+          <li><a href="../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

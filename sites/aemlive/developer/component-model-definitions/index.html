@@ -1,0 +1,816 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.205Z
+  page:             developer-component-model-definitions
+  pageUrl:          https://www.aem.live/developer/component-model-definitions
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Content modeling for AEM authoring projects</title>
+  <meta name="description" content="Learn how content modeling works for projects using AEM authoring as a content source and how to model your own content.">
+  <meta property="og:title" content="Content modeling for AEM authoring projects">
+  <meta property="og:description" content="Learn how content modeling works for projects using AEM authoring as a content source and how to model your own content.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/component-model-definitions/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="l-2"><a href="#default-content">Default content</a></li>
+<li class="l-2"><a href="#blocks">Blocks</a></li>
+<li class="l-3"><a href="#block-model-definition">Block model definition</a></li>
+<li class="l-3"><a href="#block-structure">Block structure</a></li>
+<li class="l-3"><a href="#simple-blocks">Simple blocks</a></li>
+<li class="l-3"><a href="#key-value-block">Key-value block</a></li>
+<li class="l-4"><a href="#container-blocks">Container blocks</a></li>
+<li class="l-4"><a href="#columns-block">Columns Block</a></li>
+<li class="l-3"><a href="#creating-semantic-content-models-for-blocks">Creating semantic content models for blocks</a></li>
+<li class="l-4"><a href="#type-inference">Type inference</a></li>
+<li class="l-4"><a href="#field-collapse">Field collapse</a></li>
+<li class="l-4"><a href="#element-grouping">Element grouping</a></li>
+<li class="l-4"><a href="#element-grouping-for-block-options">Element Grouping for Block Options</a></li>
+<li class="l-4"><a href="#multi-fields-and-composite-multi-fields">Multi-Fields and Composite Multi-Fields</a></li>
+<li class="l-3"><a href="#early-access-technology">Early-access technology</a></li>
+<li class="l-2"><a href="#sections-and-section-metadata">Sections and section metadata</a></li>
+<li class="l-2"><a href="#page-metadata">Page metadata</a></li>
+<li class="l-3"><a href="#metadata-spreadsheets">Metadata spreadsheets</a></li>
+<li class="l-3"><a href="#page-properties">Page properties</a></li>
+<li class="l-3"><a href="#creating-blocks-instrumented-for-use-with-the-universal-editor">Creating Blocks Instrumented for use with the Universal Editor</a></li>
+<li class="l-3"><a href="#path-mapping">Path Mapping</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Content modeling for AEM authoring projects</h1>
+          <p class="lede">Learn how content modeling works for projects using AEM authoring as a content source and how to model your own content.</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_115e97240aa1291be8c8b62cb784026e02859b231.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_115e97240aa1291be8c8b62cb784026e02859b231.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_115e97240aa1291be8c8b62cb784026e02859b231.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_115e97240aa1291be8c8b62cb784026e02859b231.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Learn how content modeling works for projects using AEM authoring as a content source and how to model your own content.</p>
+        <h2 id="prerequisites">Prerequisites</h2>
+        <p>Projects using AEM authoring as a content source inherit the majority of the mechanics of any other Edge Delivery Services project, independent of the content source or authoring method.</p>
+        <p>Before you begin modeling content for your project, make sure you first read the following documentation.</p>
+        <ul>
+          <li><a href="../ue-tutorial/index.html">Getting Started – Universal Editor Developer Tutorial</a></li>
+          <li><a href="../markup-sections-blocks/index.html">Markup, Sections, Blocks, and Auto Blocking</a></li>
+          <li><a href="../block-collection/index.html">Block Collection</a></li>
+        </ul>
+        <p>It is essential to understand those concepts in order to create a compelling content model that works in a content source-agnostic way. This document provides details about the mechanics implemented specifically for AEM authoring.</p>
+        <h2 id="default-content">Default content</h2>
+        <p><strong>Default content</strong> is content an author intuitively would put on a page without adding any additional semantics. This includes text, headings, links, and images. Such content is self-explanatory in its function and purpose.</p>
+        <p>In AEM, this content is implemented as components with very simple, pre-defined models, which include everything that can be serialized in Markdown and HTML.</p>
+        <ul>
+          <li><strong>Text</strong>: Rich text (including list elements and strong or italic text)</li>
+          <li><strong>Title</strong>: Text, type (h1-h6)</li>
+          <li><strong>Image</strong>: Source, description</li>
+          <li><strong>Button</strong>: Text, title, url, type (default, primary, secondary)</li>
+        </ul>
+        <p>The model of these components is part of the <a href="https://github.com/adobe-rnd/aem-boilerplate-xwalk/blob/main/component-models.json#L2-L112">boilerplate for projects with AEM authoring as the content source.</a></p>
+        <h2 id="blocks">Blocks</h2>
+        <p>Blocks are used to create richer content with specific styles and functionality. In contrast to default content, blocks do require additional semantics.</p>
+        <p>Blocks are essentially pieces of content decorated by JavaScript and styled with a stylesheet.</p>
+        <h3 id="block-model-definition">Block model definition</h3>
+        <p>When using AEM authoring as your content source, the content of blocks must be modelled explicitly in order to provide the author the interface to create content. Essentially you need to create a model so the authoring UI knows what options to present to the author based on the block.</p>
+        <p>The <code>component-models.json</code> file defines the model of blocks. The fields defined in the component model are persisted as properties in AEM and rendered as cells in the table that makes up a block.</p>
+        <pre><code>{
+  "id": "hero",
+  "fields": [
+    {
+      "component": "reference",
+      "valueType": "string",
+      "name": "image",
+      "label": "Image",
+      "multi": false
+    },
+    {
+      "component": "text-input",
+      "valueType": "string",
+      "name": "imageAlt",
+      "label": "Alt",
+      "value": ""
+    },
+    {
+      "component": "text-area",
+      "name": "text",
+      "value": "",
+      "label": "Text",
+      "valueType": "string"
+    }
+  ]
+}
+</code></pre>
+        <p>Note that not every block must have a model. Some blocks are simply <a href="index.html#container-blocks">containers</a> for a list of children, where each child has its own model.</p>
+        <p>It is also necessary to define which blocks exist and can be added to a page using the Universal Editor. The <code>component-definitions.json</code> <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/component-definition">file lists the components as they are made available by the Universal Editor.</a></p>
+        <pre><code>{
+  "title": "Hero",
+  "id": "hero",
+  "plugins": {
+    "xwalk": {
+      "page": {
+        "resourceType": "core/franklin/components/block/v1/block",
+        "template": {
+          "name": "Hero",
+          "model": "hero"
+        }
+      }
+    }
+  }
+}
+</code></pre>
+        <p>It is possible to use one model for many blocks. For example, some blocks may share a model that defines a text and image.</p>
+        <p>For each block, the developer:</p>
+        <ul>
+          <li>Must use the <code>core/franklin/components/block/v1/block</code> resource type, the generic implementation of the block logic in AEM.</li>
+          <li>Must define the block name, which will be rendered in the block’s table header.
+            <ul>
+              <li>The block name is used to fetch the right style and script to decorate the block.</li>
+            </ul>
+          </li>
+          <li>Can define a <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/field-types#model-structure">model ID</a>.
+            <ul>
+              <li>The model ID is a reference to the component’s model, which defines the fields available to the author in the properties panel.</li>
+            </ul>
+          </li>
+          <li>Can define a <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/filtering">filter ID</a>.
+            <ul>
+              <li>The filter ID is a reference to the component’s filter, which allows to change the authoring behavior, for example by limiting which children can be added to the block or section, or which RTE features are enabled.</li>
+            </ul>
+          </li>
+        </ul>
+        <p>All of this information is stored in AEM when a block is added to a page. If either the resource type or block name are missing, the block will not render on the page.</p>
+        <p><strong>WARNING</strong>: While possible, it is not necessary or recommended to implement custom AEM components. The components for Edge Delivery Services provided by AEM are sufficient and offer certain guard rails to ease development.</p>
+        <p>The components provided by AEM render a markup that can be consumed by <a href="https://github.com/adobe/helix-html2md">helix-html2md</a> when publishing to Edge Delivery Services and by <code>aem.js</code> <a href="https://github.com/adobe/aem-boilerplate/blob/main/scripts/aem.js">when loading a page in the Universal Editor.</a> The markup is the stable contract between AEM and the other parts of the system, and does not allow for customizations. For this reason, projects must not change the components and must not use custom components.</p>
+        <h3 id="block-structure">Block structure</h3>
+        <p>The properties of blocks are defined in the component models and persisted as such in AEM. Properties are rendered as cells in the block’s table-like structure.</p>
+        <h3 id="simple-blocks">Simple blocks</h3>
+        <p>In the simplest form, a block renders each property in a single row/column in the order the properties are defined in the model.</p>
+        <p>In the following example, the image is defined first in the model and the text second. They are thus rendered with the image first and text second.</p>
+        <p>With this data:</p>
+        <pre><code>{
+  "name": "Hero",
+  "model": "hero",
+  "image": "/content/dam/image.png",
+  "imageAlt": "Helix - a shape like a corkscrew",
+  "text": "&lt;h1&gt;Welcome to AEM&lt;/h1&gt;"
+}
+</code></pre>
+        <p>You get this markup:</p>
+        <pre><code>&lt;div class="hero"&gt;
+  &lt;div&gt;
+    &lt;div&gt;
+      &lt;picture&gt;
+        &lt;img src="/content/dam/image.png" alt="Helix - a shape like a corkscrew"&gt;
+      &lt;/picture&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;div&gt;
+      &lt;h1&gt;Welcome to AEM&lt;/h1&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+        <p>And it will be turned into this table representation:</p>
+        <pre><code>+---------------------------------------------+
+| Hero                                        |
++=============================================+
+| ![Helix - a shape like a corkscrew][image0] |
++---------------------------------------------+
+| # Welcome to AEM                            |
++---------------------------------------------+
+</code></pre>
+        <p>You may notice that some types of values allow inferring semantics in the markup, and properties are combined into single cells. This behavior is described in the section <a href="index.html#type-inference">Type inference</a>.</p>
+        <h3 id="key-value-block">Key-value block</h3>
+        <p>In many cases, it is recommended to decorate the rendered semantic markup, add CSS class names, add new nodes or move them around in the DOM, and apply styles.</p>
+        <p>In other cases however, the block is read as a key-value pair-like configuration.</p>
+        <p>An example of this is the <a href="../markup-sections-blocks/index.html#sections">section metadata</a>. In this use case, the block can be configured to render as a key-value pair table. Please see the section <a href="index.html#sections-and-section-metadata">Sections and Section Metadata</a> for more information.</p>
+        <p>With this data:</p>
+        <pre><code>{
+  "name": "Featured Articles",
+  "model": "spreadsheet-input",
+  "key-value": true,
+  "source": "/content/site/articles.json",
+  "keywords": ['Developer','Courses'],
+  "limit": 4
+}
+</code></pre>
+        <p>You get this markup:</p>
+        <pre><code>&lt;div class="featured-articles"&gt;
+  &lt;div&gt;
+    &lt;div&gt;source&lt;/div&gt;
+    &lt;div&gt;&lt;a href="/content/site/articles.json"&gt;/content/site/articles.json&lt;/a&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;div&gt;keywords&lt;/div&gt;
+    &lt;div&gt;Developer,Courses&lt;/div&gt;
+  &lt;div&gt;
+  &lt;div&gt;
+    &lt;div&gt;limit&lt;/div&gt;
+    &lt;div&gt;4&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+        <p>And it will be turned into this table representation:</p>
+        <pre><code>+-----------------------------------------------------------------------+
+| Featured Articles                                                     |
++=======================================================================+
+| source   | [/content/site/articles.json](/content/site/articles.json) |
++-----------------------------------------------------------------------+
+| keywords | Developer,Courses                                          |
++-----------------------------------------------------------------------+
+| limit    | 4                                                          |
++-----------------------------------------------------------------------+
+</code></pre>
+        <h4 id="container-blocks">Container blocks</h4>
+        <p>Both of the previous structures have a single dimension: the list of properties. Container blocks allow adding children (usually of the same type or model) and hence are two-dimensional. These blocks still support their own properties rendered as rows with a single column first. But they also allow adding children, for which each item is rendered as a row and each property as a column within that row.</p>
+        <p>In the following example, a block accepts a list of linked icons as children, where each linked icon has an image and a link. Notice the <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/filtering">filter ID</a> set in the data of the block in order to reference the filter configuration.</p>
+        <p>With this data:</p>
+        <pre><code>{
+  "name": "Our Partners",
+  "model": "text-only",
+  "filter": "our-partners",
+  "text": "&lt;p&gt;Our community of partners is ...&lt;/p&gt;",
+  "item_0": {
+    "model": "linked-icon",
+    "image": "/content/dam/partners/foo.png",
+    "imageAlt": "Icon of Foo",
+    "link": "https://foo.com/"
+  },
+  "item_1": {
+    "model": "linked-icon"
+    "image": "/content/dam/partners/bar.png",
+    "imageAlt": "Icon of Bar",
+    "link": "https://bar.com"
+  }
+}
+</code></pre>
+        <p>You get this markup:</p>
+        <pre><code>&lt;div class="our-partners"&gt;
+  &lt;div&gt;
+    &lt;div&gt;
+        Our community of partners is ...
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;div&gt;
+      &lt;picture&gt;
+         &lt;img src="/content/dam/partners/foo.png" alt="Icon of Foo"&gt;
+      &lt;/picture&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;a href="https://foo.com"&gt;https://foo.com&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;div&gt;
+      &lt;picture&gt;
+         &lt;img src="/content/dam/partners/bar.png" alt="Icon of Bar"&gt;
+      &lt;/picture&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;a href="https://bar.com"&gt;https://bar.com&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+        <p>And it will be turned into this table representation:</p>
+        <pre><code>+------------------------------------------------------------ +
+| Our Partners                                                |
++=============================================================+
+| Our community of partners is ...                            |
++-------------------------------------------------------------+
+| ![Icon of Foo][image0] | [https://foo.com](https://foo.com) |
++-------------------------------------------------------------+
+| ![Icon of Bar][image1] | [https://bar.com](https://bar.com) |
++-------------------------------------------------------------+
+</code></pre>
+        <h4 id="columns-block">Columns Block</h4>
+        <p>The columns block is a bit different from the standard block types. Unlike those block types where content modeling is all about creating semantic HTML, the columns block is about defining a layout. If you set the number of rows and/or columns, it accordingly renders an appropriate table you can style with the block option classes.</p>
+        <p>For this reason, columns blocks have the following limitations.</p>
+        <ul>
+          <li>They offer no content modeling.</li>
+          <li>They can only have <code>rows</code>, <code>columns</code> and <code>classes</code> (or <code>classes_*</code>) properties.</li>
+          <li>You can only add default content (text, title, image, link/button) to the cells.</li>
+        </ul>
+        <h3 id="creating-semantic-content-models-for-blocks">Creating semantic content models for blocks</h3>
+        <p>With the mechanics of block structure explained, it is possible to create a content model that maps content persisted in AEM one-to-one to the delivery tier.</p>
+        <p>Early in every project, a content model must be carefully considered for every block. It must be agnostic to the content source and authoring experience in order to allow authors to switch or combine them while reusing block implementations and styles. More details and general guidance can be found in <a href="../../docs/davidsmodel/index.html">David’s Model (take 2).</a> More specifically, <a href="../block-collection/index.html">the block collection</a> contains an extensive set of content models for specific use cases of common user interface patterns.</p>
+        <p>For AEM authoring as your content source, this raises the question how to serve a compelling semantic content model when the information is authored with forms composed of multiple fields instead of editing semantic markup in-context like rich text.</p>
+        <p>To solve this problem, there are three methods that facilitate creating a compelling content model:</p>
+        <ul>
+          <li>Type Inference</li>
+          <li>Field Collapse</li>
+          <li>Element Grouping</li>
+        </ul>
+        <p><strong>NOTE</strong>: Block implementations can deconstruct the content and replace the block with a client-side-rendered DOM. While this is possible and intuitive for a developer, it is not the best practice for Edge Delivery Services.</p>
+        <h4 id="type-inference">Type inference</h4>
+        <p>For some values we can infer the semantic meaning from the values itself. Such values include:</p>
+        <ul>
+          <li><strong>Images</strong> - If a reference to a resource in AEM is an asset with a MIME type starting with <code>image/</code>, the reference is rendered as <code>&lt;picture&gt;&lt;img src="${reference}"&gt;&lt;/picture&gt;</code>.</li>
+          <li><strong>Links</strong> - If a reference exists in AEM and is not an image, or if the value starts with <code>https?://</code> or <code>#,</code> the reference is rendered as <code>&lt;a href="${reference}"&gt;${reference}&lt;/a&gt;</code>.</li>
+          <li><strong>Rich</strong> <strong>text</strong> - If a trimmed value starts with a paragraph (<code>p</code>, <code>ul</code>, <code>ol</code>, <code>h1-h6</code>, etc.), the value is rendered as rich text.</li>
+          <li><strong>Class</strong> <strong>names</strong> - The classes property is treated as <a href="../universal-editor-blocks/index.html#block-options">block options</a> and rendered in the table header for <a href="index.html#simple-blocks">simple blocks</a>, or as value list for items in a <a href="index.html#container-blocks">container block</a>. It is useful if you want to style a block differently, but don’t need to create an entirely new block. It is possible to use multiple properties as block options using Element Grouping.</li>
+          <li><strong>Value</strong> <strong>lists</strong> - If a value is a multi-value property and the first value is none of the previous, all values are concatenated as a comma-separated list.</li>
+        </ul>
+        <p>Everything else will be rendered as plain text.</p>
+        <h4 id="field-collapse">Field collapse</h4>
+        <p>Field collapse is the mechanism to combine multiple field values into a single semantic element based on a naming convention using the suffixes <code>Title</code>, <code>Type</code>, <code>MimeType</code>, <code>Alt</code>, and <code>Text</code> (all case sensitive). Any property ending with any of those suffixes will not be considered a value, but rather as an attribute of another property.</p>
+        <h5 id="images">Images</h5>
+        <p>With this data:</p>
+        <pre><code>{
+  "image": "/content/dam/red-car.png",
+  "imageAlt": "A red card on a road"
+}
+</code></pre>
+        <p>You get this markup:</p>
+        <pre><code>&lt;picture&gt;
+  &lt;img src="/content/dam/red-car.png" alt="A red car on a road"&gt;
+&lt;/picture&gt;
+</code></pre>
+        <p>And it will be turned into this table representation:</p>
+        <p><code>![A red car on a road][image0]</code></p>
+        <h5 id="links-and-buttons">Links and buttons</h5>
+        <p>With this data:</p>
+        <pre><code>{
+  "link": "https://www.adobe.com",
+  "linkTitle": "Navigate to adobe.com",
+  "linkText": "adobe.com",
+  "linkType": "primary"
+}
+</code></pre>
+        <p>You get this markup:</p>
+        <p><code>&lt;a href="https://www.adobe.com" title="Navigate to adobe.com"&gt;adobe.com&lt;/a&gt;</code></p>
+        <p>And it will be turned into this table representation:</p>
+        <pre><code>[adobe.com](https://www.adobe.com "Navigate to adobe.com")
+**[adobe.com](https://www.adobe.com "Navigate to adobe.com")**
+_[adobe.com](https://www.adobe.com "Navigate to adobe.com")_
+</code></pre>
+        <h5 id="headings">Headings</h5>
+        <p>With this data:</p>
+        <pre><code>{
+  "heading": "Getting started",
+  "headingType": "h2"
+}
+</code></pre>
+        <p>You get this markup:</p>
+        <p><code>&lt;h2&gt;Getting started&lt;/h2&gt;</code></p>
+        <p>And it will be turned into this table representation:</p>
+        <p><code>## Getting started</code></p>
+        <h4 id="element-grouping">Element grouping</h4>
+        <p>While <a href="index.html#field-collapse">field collapse</a> is about combining multiple properties into a single semantic element, element grouping is about concatenating multiple semantic elements into a single cell. This is particularly helpful for use cases where the author should be restricted in the type and number of elements that they can create.</p>
+        <p>For example, a teaser component may allow the author to only create a subtitle, title, and a single paragraph description combined with a maximum of two call-to-action buttons. Grouping these elements together yields a semantic markup that can be styled without further action.</p>
+        <p>Element grouping uses a naming convention, where the group name is separated from each property in the group by an underscore. Field collapse of the properties in a group works as previously described.</p>
+        <p>If you add a group and there is already a field that has the group name, the field will become part of the group as well, so that element grouping can be added to blocks that didn’t previously use it, without having to migrate content.</p>
+        <p>With this data:</p>
+        <pre><code>{
+  "name": "teaser",
+  "model": "teaser",
+  "image": "/content/dam/teaser-background.png",
+  "imageAlt": "A group of people sitting on a stage",
+  "teaserText_subtitle": "Adobe Experience Cloud"
+  "teaserText_title": "Meet the Experts"
+  "teaserText_titleType": "h2"
+  "teaserText_description": "&lt;p&gt;Join us in this ask me everything session...&lt;/p&gt;"
+  "teaserText_cta1": "https://link.to/more-details",
+  "teaserText_cta1Text": "More Details"
+  "teaserText_cta2": "https://link.to/sign-up",
+  "teaserText_cta2Text": "RSVP",
+  "teaserText_cta2Type": "primary"
+}
+</code></pre>
+        <p>You get this markup:</p>
+        <pre><code>&lt;div class="teaser"&gt;
+  &lt;div&gt;
+    &lt;div&gt;
+      &lt;picture&gt;
+        &lt;img src="/content/dam/teaser-background.png" alt="A group of people sitting on a stage"&gt;
+      &lt;/picture&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;div&gt;
+      &lt;p&gt;Adobe Experience Cloud&lt;/p&gt;
+      &lt;h2&gt;Meet the Experts&lt;/h2&gt;
+      &lt;p&gt;Join us in this ask me everything session ...&lt;/p&gt;
+      &lt;p&gt;&lt;a href="https://link.to/more-details"&gt;More Details&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;&lt;a href="https://link.to/sign-up"&gt;RSVP&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+        <p>And it will be turned into this table representation:</p>
+        <pre><code>+-------------------------------------------------+
+| Teaser                                          |
++=================================================+
+| ![A group of people sitting on a stage][image0] |
++-------------------------------------------------+
+| Adobe Experience Cloud                          |
+| ## Meet the Experts                             |
+| Join us in this ask me everything session ...   |
+| [More Details](https://link.to/more-details)    |
+| [RSVP](https://link.to/sign-up)                 |
++-------------------------------------------------+
+</code></pre>
+        <h4 id="element-grouping-for-block-options">Element Grouping for Block Options</h4>
+        <p>As previously described, the <code>classes</code> property can be used to specify the block options of a block and children in a container block. Usually a <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/field-types#select"></a><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/field-types#select">select</a> or <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/field-types#multiselect"></a><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/field-types#multiselect">multiselect</a> field is used to author the block options as a single field. However, if there are multiple options and if some of them are mutually exclusive, it is easier for authors to use multiple fields to select from for individual block options. This is possible using the <a href="index.html#element-grouping">element grouping naming convention</a> as described previously.</p>
+        <p>With the data:</p>
+        <pre><code>{
+  "name": "teaser",
+  "model": "teaser",
+  "classes": "variant-a",
+  "classes_background": "light",
+  "classes_fullwidth": true,
+}
+</code></pre>
+        <p>You get this markup:</p>
+        <pre><code>&lt;div class="teaser variant-a light fullwidth"&gt;
+  ...
+&lt;/div&gt;
+</code></pre>
+        <p>Each field in the <code>classes</code> group can be text, an array of texts, or a boolean. In the example above, fields with a boolean value are handled slightly differently than fields with texts. For a boolean field, the property name excluding the classes group name will be added as a block option. This is particularly helpful when a <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/field-types#boolean"></a><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/field-types#boolean">toggle</a> is used to turn a block option on or off.</p>
+        <h4 id="multi-fields-and-composite-multi-fields">Multi-Fields and Composite Multi-Fields</h4>
+        <div class="labs">
+          <div>
+            <div>
+              <h3 id="early-access-technology">Early-access technology</h3>
+              <p>This feature is currently available as an early-access technology and includes breaking changes. It can be enabled upon request through Adobe. Ask us about this feature on your Teams or Slack channel!</p>
+            </div>
+          </div>
+        </div>
+        <p>The Universal Editor supports <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/field-types">advanced modeling scenarios</a> using <code>multi</code> fields and containers. These features allow authors to manage lists of structured or unstructured content elements with flexible rendering.</p>
+        <h5 id="use-cases">Use Cases</h5>
+        <p>Multi-fields and composite multi-fields are ideal for handling structured content in use cases like:</p>
+        <ul>
+          <li>Selecting multiple content fragments in a Tabs block (<code>reference</code> field with <code>multi=true</code>)</li>
+          <li>Creating keyword lists (<code>text</code> field with <code>multi=true</code>)</li>
+          <li>Defining multiple CTAs (<code>container</code> field with <code>multi=true</code>)</li>
+          <li>Building image carousels (either single <code>reference</code> field with <code>multi=true</code> or <code>container</code> field with <code>multi=true</code> including a <code>reference</code> and a <code>text</code> field for the alt text)</li>
+        </ul>
+        <h5 id="rendering-behavior">Rendering Behavior</h5>
+        <ul>
+          <li>When the contained items are single semantic elements (e.g., plain text, links, images), they are rendered as a structured list using <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code> tags. For example:</li>
+        </ul>
+        <pre><code>&lt;ul&gt;
+  &lt;li&gt;dog&lt;/li&gt;
+  &lt;li&gt;cat&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+        <ul>
+          <li>When the contained items include multiple semantic elements (e.g., combinations of text, richtext, links), they are rendered as a flat list, with each item separated by an <code>&lt;hr&gt;</code> tag. For example:</li>
+        </ul>
+        <pre><code>&lt;hr&gt;
+&lt;p&gt;First paragraph&lt;/p&gt;
+&lt;p&gt;Second paragraph&lt;/p&gt;
+&lt;hr&gt;
+&lt;pre&gt;Third paragraph&lt;/pre&gt;
+&lt;p&gt;Fourth paragraph&lt;/p&gt;
+&lt;hr&gt;
+</code></pre>
+        <p><strong>Special Cases</strong></p>
+        <ul>
+          <li>When a multi-field contains only one item, it is rendered as a paragraph rather than a list.</li>
+          <li>For richtext multi-fields inside a composite multi-field, only the first richtext value is rendered. Additional entries are ignored.</li>
+        </ul>
+        <h5 id="examples-for-multi-fields">Examples for Multi-Fields</h5>
+        <h6 id="multi-field-with-links">Multi-Field with Links</h6>
+        <p>With this modelling:</p>
+        <pre><code>{
+    "component": "aem-content",
+    "name": "links",
+    "multi": true
+}
+</code></pre>
+        <p>And this data:</p>
+        <pre><code>links = [ 
+    "https://www.google.com", 
+    "https://www.facebook.com"
+];
+</code></pre>
+        <p>You will get this markup:</p>
+        <pre><code>&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://www.google.com"&gt;https://www.google.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.facebook.com"&gt;https://www.facebook.com&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+        <h6 id="multi-field-with-images">Multi-Field with Images</h6>
+        <p>With this modelling:</p>
+        <pre><code>{
+    "component": "reference",
+    "name": "images",
+    "multi": true
+}
+</code></pre>
+        <p>And this data:</p>
+        <pre><code>images = [ 
+    "/content/dam/images/dog.jpg", 
+    "/content/dam/images/cat.jpg"
+];
+</code></pre>
+        <p>You will get this markup:</p>
+        <pre><code>&lt;ul&gt;
+  &lt;li&gt;&lt;picture&gt;&lt;img src="/content/dam/images/dog.jpg" /&gt;&lt;/picture&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;picture&gt;&lt;img src="/content/dam/images/cat.jpg" /&gt;&lt;/picture&gt;&lt;/li&gt;  
+&lt;/ul&gt;
+</code></pre>
+        <h6 id="multi-field-with-rich-text">Multi-Field with Rich Text</h6>
+        <p>With this modelling:</p>
+        <pre><code>{
+    "component": "richtext",
+    "name": "richtexts",
+    "multi": true
+}
+</code></pre>
+        <p>And this data:</p>
+        <pre><code>richtexts = [ 
+    "&lt;p&gt;First paragraph&lt;/p&gt;&lt;p&gt;Second paragraph&lt;/p&gt;", 
+    "&lt;pre&gt;Third paragraph&lt;/pre&gt;&lt;p&gt;Fourth paragraph&lt;/p&gt;", 
+];
+</code></pre>
+        <p>You will get this markup:</p>
+        <pre><code>&lt;hr&gt;
+&lt;p&gt;First paragraph&lt;/p&gt;
+&lt;p&gt;Second paragraph&lt;/p&gt;
+&lt;hr&gt;
+&lt;pre&gt;Third paragraph&lt;/pre&gt;
+&lt;p&gt;Fourth paragraph&lt;/p&gt;
+&lt;hr&gt;
+</code></pre>
+        <h5 id="examples-for-composite-multi-fields">Examples for Composite Multi-Fields</h5>
+        <h6 id="composite-multi-field-with-an-image-and-an-alt-text">Composite Multi-Field with an Image and an alt Text</h6>
+        <p>With this modelling:</p>
+        <pre><code>{
+ "component": "container",
+ "name": "images",
+ "multi": true,
+ "fields" : [
+   {
+     "component": "reference",
+     "name": "image"
+   },
+   {
+     "component": "text",
+     "name": "imageAlt"
+   }
+ ]
+}
+</code></pre>
+        <p>And this data:</p>
+        <pre><code>images = [
+ {
+   "image": "/content/dam/images/dog.jpg",
+   "imageAlt": "dog"
+ },
+ {
+   "image": "/content/dam/images/cat.jpg",
+   "imageAlt": "cat"
+ }
+];
+</code></pre>
+        <p>You will get this markup:</p>
+        <pre><code>&lt;ul&gt;
+  &lt;li&gt;&lt;picture&gt;&lt;img src="/content/dam/images/dog.jpg" alt="dog" /&gt;&lt;/picture&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;picture&gt;&lt;img src="/content/dam/images/cat.jpg" alt="cat" /&gt;&lt;/picture&gt;&lt;/li&gt;  
+&lt;/ul&gt;
+</code></pre>
+        <h6 id="composite-multi-field-with-a-text-and-a-link">Composite Multi-Field with a Text and a Link</h6>
+        <p>With this modelling:</p>
+        <pre><code>{
+ "component": "container",
+ "name": "ctas",
+ "multi": true,
+ "fields" : [
+   {
+     "component": "richtext",
+     "name": "text"
+   },
+   {
+     "component": "aem-content",
+     "name": "link"
+   },
+   {
+     "component": "text",
+     "name": "linkText"
+   }
+ ]
+}
+</code></pre>
+        <p>And this data:</p>
+        <pre><code>ctas = [
+ {
+   "text": "&lt;p&gt;Find one of our stores near you&lt;/p&gt;" 
+   "link": "https://www.google.com/maps/search/company"
+   "linkText": "Google Maps",
+ },
+ {
+   "text": "&lt;p&gt;Follow us on facebook.com&lt;/p&gt;" 
+   "link": "http://www.facebook.com/company"
+   "linkText": "Facebook",
+ }
+]
+</code></pre>
+        <p>You will get this markup:</p>
+        <pre><code>&lt;hr&gt;
+&lt;p&gt;Find one of our stores near you&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.google.com/maps/search/company"&gt;Google Maps&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Follow us on facebook&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.facebook.com/compoany"&gt;Facebook&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+</code></pre>
+        <h2 id="sections-and-section-metadata">Sections and section metadata</h2>
+        <p>The same way a developer can define and model multiple blocks, they can define different sections.</p>
+        <p>The content model of Edge Delivery Services deliberately allows only a single level of nesting, which is any default content or block contained by a section. This means in order to have more complex visual components that can contain other components, they have to be modelled as sections and combined together using auto-blocking client side. Typical examples of this are tabs and collapsible sections like accordions.</p>
+        <p>A section can be defined in the same way as a block, but with the resource type of <code>core/franklin/components/section/v1/section</code>. Sections can have a name and a <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/filtering">filter ID</a>, which are used by the <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/introduction">Universal Editor</a> only, as well as a <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/field-types#model-structure">model ID</a>, which is used to render the section metadata. The model is in this way the model of the section metadata block, which will automatically be appended to a section as a key-value block if it is not empty.</p>
+        <p>The model ID and filter ID of the default section is section. It can be used to alter the behavior of the default section. The following example adds some styles and a background image to the section metadata model.</p>
+        <pre><code>{
+  "id": "section",
+  "fields": [
+    {
+      "component": "multiselect",
+      "name": "style",
+      "value": "",
+      "label": "Style",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "Fade in Background",
+          "value": "fade-in"
+        },
+        {
+          "name": "Highlight",
+          "value": "highlight"
+        }
+      ]
+    },
+    {
+      "component": "reference",
+      "valueType": "string",
+      "name": "background",
+      "label": "Image",
+      "multi": false
+    }
+  ]
+}
+</code></pre>
+        <p>The following example defines a tab section, which can be used to create a tabs block by combining consecutive sections with a tab title data attribute into a tabs block during auto-blocking.</p>
+        <pre><code>{
+  "title": "Tab",
+  "id": "tab",
+  "plugins": {
+    "xwalk": {
+      "page": {
+        "resourceType": "core/franklin/components/section/v1/section",
+        "template": {
+          "name": "Tab",
+          "model": "tab",
+          "filter": "section"
+        }
+      }
+    }
+  }
+}
+</code></pre>
+        <h2 id="page-metadata">Page metadata</h2>
+        <p>Documents can have a <a href="../block-collection/metadata/index.html">page metadata block</a>, which is used to define which <code>&lt;meta&gt;</code> elements are rendered in the <code>&lt;head&gt;</code> of a page. The page properties of pages in AEM as a Cloud Service map to those that are available out-of-the-box for Edge Delivery Services, like <code>title</code>, <code>description</code>, <code>keywords</code>, etc.</p>
+        <p>Before further exploring how to define your own metadata, please review the following documents to understand the concept of page metadata first.</p>
+        <ul>
+          <li><a href="../block-collection/metadata/index.html">Metadata</a></li>
+          <li><a href="../../docs/bulk-metadata/index.html">Bulk metadata</a></li>
+        </ul>
+        <p>It is also possible to define additional page metadata in two ways.</p>
+        <h3 id="metadata-spreadsheets">Metadata spreadsheets</h3>
+        <p>It is possible to define metadata on a per path or per path pattern basis in a table-like way in AEM as a Cloud Service. There is an authoring UI for table-like data available that is similar to Excel or Google Sheets.</p>
+        <p>For further details, please see the document <a href="../../docs/authoring-tabular-data/index.html">Using Spreadsheets to Manage Tabular Data</a> for more information.</p>
+        <h3 id="page-properties">Page properties</h3>
+        <p>Many of the default page properties available in AEM are mapped to the respective page metadata in a document. That includes for example <code>title</code>, <code>description</code>, <code>robots</code>, <code>canonical</code> <code>url</code> or <code>keywords</code>. Some AEM-specific properties are available as well:</p>
+        <ul>
+          <li><code>cq:lastModified</code> as modified-time in ISO8601 format</li>
+          <li>The time the document was last published as <code>published-time</code> in ISO8601 format</li>
+          <li><code>cq:tags</code> as <code>cq-tags</code> as a comma-separated list of the tag IDs.</li>
+        </ul>
+        <p>It is also possible to define a component model for custom page metadata, which will be made available to the author in the Universal Editor.</p>
+        <p>To do so, create a component model with the ID page-metadata.</p>
+        <pre><code>{
+  "id": "page-metadata",
+  "fields": [
+    {
+      "component": "text",
+      "name": "theme",
+      "label": "Theme"
+    }
+  ]
+}
+</code></pre>
+        <p>You can also create component models per template. To do so, create entries named <code>&lt;template&gt;-metadata</code>, with <code>template</code> being the value stored in the template metadata property. For details on metadata, please see the document <a href="../block-collection/metadata/index.html">Metadata Block.</a></p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="creating-blocks-instrumented-for-use-with-the-universal-editor"><a href="../universal-editor-blocks/index.html">Creating Blocks Instrumented for use with the Universal Editor</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="path-mapping"><a href="../authoring-path-mapping/index.html">Path Mapping</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

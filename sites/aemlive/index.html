@@ -1,0 +1,876 @@
+<!--
+  stardust:provenance
+  writtenBy:         stardust:migrate (Path A — approved-from-prototype)
+  writtenAt:         2026-04-29T20:39:46.819Z
+  page:              home
+  pageUrl:           https://www.aem.live/home
+  source:            stardust/prototypes/home-proposed.html (approved 2026-04-29)
+  designMd:          DESIGN.md
+  designJson:        DESIGN.json
+  canon:             stardust/canon/
+  againstDirection:  stardust/direction.md
+  unsourcedContent:
+    - selector: 'section[data-section="how-it-works"] code'
+      type: code-sample
+      reason: 'Approved with --allow-placeholder; aem-cli command flow not in source'
+  stardustVersion:   0.2.0
+--><html><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>aem.live — Build websites, seriously fast</title>
+<link rel="canonical" href="https://www.aem.live/">
+<meta name="description" content="Frictionless experience management: Build blazing fast websites using tools content creators and developers already know.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;700;900&family=Source+Code+Pro:wght@400;500;700&display=swap');
+
+  /* :root token contract — see skills/stardust/reference/token-contract.md */
+  :root {
+    /* Required token-contract names (MUST be present) */
+    --heading-font-family: 'Adobe Clean Display', 'Adobe Clean', 'Source Sans 3', system-ui, -apple-system, sans-serif;
+    --body-font-family:    'Adobe Clean', 'Source Sans 3', system-ui, -apple-system, sans-serif;
+    --heading-xxl: 96px;
+    --heading-xl:  72px;
+    --heading-lg:  56px;
+    --heading-md:  40px;
+    --body:        16px;
+    --body-sm:     14px;
+    --line-height-heading: 0.96;
+    --line-height-body:    1.65;
+    --color-bg:     #ffffff;
+    --color-fg:     #15171d;
+    --color-accent: #3a4cf5;
+    --spacing-xs:  4px;
+    --spacing-sm:  8px;
+    --spacing-md:  16px;
+    --spacing-lg:  24px;
+    --spacing-xl:  48px;
+    --spacing-2xl: 96px;
+    --section-padding: 64px;
+    --max-width:       1280px;
+    --radius:          16px;
+
+    /* DS namespace — full DESIGN.json surface */
+    --ds-color-bg:           #ffffff;
+    --ds-color-surface:      #f6f6f7;
+    --ds-color-surface-2:    #ebecef;
+    --ds-color-text:         #15171d;
+    --ds-color-text-muted:   #5b5e6a;
+    --ds-color-text-subtle:  #8b8e98;
+    --ds-color-border:       rgba(20, 22, 30, 0.08);
+    --ds-color-border-strong:rgba(20, 22, 30, 0.16);
+    --ds-color-primary:      #3a4cf5;
+    --ds-color-primary-hover:#2d3ae0;
+    --ds-color-primary-on:   #ffffff;
+    --ds-color-attribution:  #eb1000;   /* RESERVED */
+    --ds-color-success:      #0d9d6b;
+    --ds-color-warning:      #c46f00;
+    --ds-color-code-bg:      #0e1018;
+    --ds-color-code-fg:      #d8dce5;
+    --ds-color-code-muted:   #6b6f7d;
+    --ds-color-code-string:  #9be09b;
+    --ds-color-code-keyword: #b387f5;
+    --ds-color-code-fn:      #7fc4ff;
+    --ds-color-code-num:     #f5b78c;
+
+    --ds-font-display: var(--heading-font-family);
+    --ds-font-heading: var(--body-font-family);
+    --ds-font-body:    var(--body-font-family);
+    --ds-font-mono:    'Source Code Pro', ui-monospace, 'SF Mono', monospace;
+
+    --ds-type-super:    96px;
+    --ds-type-title-1:  72px;
+    --ds-type-title-2:  56px;
+    --ds-type-title-3:  40px;
+    --ds-type-title-4:  28px;
+    --ds-type-title-5:  20px;
+    --ds-type-title-6:  16px;
+    --ds-type-body-l:   20px;
+    --ds-type-body-m:   16px;
+    --ds-type-body-s:   14px;
+    --ds-type-code:     13.5px;
+    --ds-type-eyebrow:  12px;
+
+    --ds-radius-xs: 4px;
+    --ds-radius-sm: 8px;
+    --ds-radius-md: 12px;
+    --ds-radius-lg: 16px;
+    --ds-radius-xl: 24px;
+    --ds-radius-pill: 999px;
+
+    --ds-shadow-xs:   0 1px 2px rgba(20, 22, 30, 0.06);
+    --ds-shadow-sm:   0 2px 4px rgba(20, 22, 30, 0.08);
+    --ds-shadow-md:   0 4px 12px rgba(20, 22, 30, 0.10);
+    --ds-shadow-lg:   0 12px 32px rgba(20, 22, 30, 0.12);
+    --ds-shadow-glow: 0 0 0 4px rgba(58, 76, 245, 0.18);
+
+    --ds-motion-fast: 150ms cubic-bezier(0.42, 0, 0, 1);
+    --ds-motion-base: 240ms cubic-bezier(0.42, 0, 0, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--body-font-family);
+    color: var(--color-fg);
+    background: var(--color-bg);
+    font-size: var(--body);
+    line-height: var(--line-height-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; background: none; border: 0; color: inherit; }
+  img { display: block; max-width: 100%; }
+
+  /* Container + grid */
+  .container {
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding-inline: 8.333%;
+  }
+  @media (max-width: 1023px) { .container { padding-inline: 24px; } }
+
+  /* Eyebrow */
+  .eyebrow {
+    font-family: var(--ds-font-mono);
+    font-size: var(--ds-type-eyebrow);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ds-color-text-muted);
+    line-height: 1;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: var(--ds-type-body-m);
+    border-radius: var(--ds-radius-lg);
+    padding: 14px 24px;
+    transition: background var(--ds-motion-fast), box-shadow var(--ds-motion-fast), transform var(--ds-motion-fast);
+  }
+  .btn--primary {
+    background: var(--ds-color-primary);
+    color: var(--ds-color-primary-on);
+    box-shadow: var(--ds-shadow-xs);
+  }
+  .btn--primary:hover { background: var(--ds-color-primary-hover); box-shadow: var(--ds-shadow-sm); }
+  .btn--primary:focus-visible { outline: 0; box-shadow: var(--ds-shadow-glow), var(--ds-shadow-xs); }
+  .btn--ghost {
+    color: var(--ds-color-text);
+    padding-inline: 0;
+    text-decoration: none;
+  }
+  .btn--ghost::after {
+    content: '→';
+    transition: transform var(--ds-motion-fast);
+    margin-left: 4px;
+  }
+  .btn--ghost:hover { color: var(--ds-color-primary); }
+  .btn--ghost:hover::after { transform: translateX(4px); }
+
+  /* Pill status */
+  .pill-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--ds-font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: var(--ds-radius-pill);
+  }
+  .pill-status--live {
+    background: var(--ds-color-attribution);   /* RESERVED — Adobe red, only here and on the wordmark */
+    color: #ffffff;
+  }
+  .pill-status--live::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #ffffff;
+  }
+
+  /* ============================================
+     HEADER
+     ============================================ */
+  [data-section="header"] {
+    position: sticky; top: 0; z-index: 80;
+    background: var(--ds-color-bg);
+    border-bottom: 1px solid var(--ds-color-border);
+    backdrop-filter: saturate(180%);
+  }
+  .nav {
+    display: flex; align-items: center;
+    height: 64px;
+    gap: 32px;
+  }
+  .nav__brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    font-family: var(--ds-font-display);
+    font-weight: 800;
+    font-size: var(--ds-type-title-5);
+    letter-spacing: -0.01em;
+    color: var(--ds-color-text);
+  }
+  .nav__attribution {
+    font-family: var(--ds-font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ds-color-text-muted);
+  }
+  .nav__attribution .adobe-mark {
+    color: var(--ds-color-attribution);     /* RESERVED Adobe red */
+    font-weight: 800;
+  }
+  .nav__links {
+    display: flex; align-items: center;
+    gap: 24px;
+    margin-inline: auto 0;
+    list-style: none;
+  }
+  .nav__links a {
+    font-size: var(--ds-type-body-s);
+    font-weight: 500;
+    color: var(--ds-color-text-muted);
+    transition: color var(--ds-motion-fast);
+  }
+  .nav__links a:hover { color: var(--ds-color-text); }
+  .nav__cta-row { display: flex; align-items: center; gap: 12px; }
+  .nav__search {
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    width: 36px; height: 36px;
+    border-radius: var(--ds-radius-md);
+    color: var(--ds-color-text-muted);
+    transition: background var(--ds-motion-fast);
+  }
+  .nav__search:hover { background: var(--ds-color-surface); color: var(--ds-color-text); }
+  @media (max-width: 1023px) {
+    .nav__links { display: none; }
+  }
+  @media (max-width: 600px) {
+    .nav { gap: 16px; }
+    .nav__attribution { display: none; }
+    .nav__brand { font-size: var(--ds-type-title-6); }
+  }
+
+  /* ============================================
+     HERO
+     ============================================ */
+  [data-section="hero"] {
+    padding-block: 96px 80px;
+  }
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 64px;
+    align-items: center;
+  }
+  @media (max-width: 1023px) {
+    .hero__grid { grid-template-columns: 1fr; gap: 48px; }
+  }
+  .hero__eyebrow { margin-bottom: 24px; }
+  .hero__headline {
+    font-family: var(--ds-font-display);
+    font-weight: 900;
+    font-size: clamp(56px, 9vw, var(--ds-type-super));
+    line-height: 0.94;
+    letter-spacing: -0.04em;
+    color: var(--ds-color-text);
+    margin-bottom: 24px;
+    /* preserve the captured line break */
+    white-space: pre-line;
+  }
+  .hero__subhead {
+    font-size: var(--ds-type-body-l);
+    line-height: 1.5;
+    color: var(--ds-color-text-muted);
+    max-width: 56ch;
+    margin-bottom: 40px;
+  }
+  .hero__ctas {
+    display: flex; align-items: center; gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  /* Hero vignette (right side) — flat layout, no outer card surround */
+  .vignette {
+    display: grid;
+    gap: 12px;
+  }
+  .vignette__step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: center;
+    padding: 16px 20px;
+    background: var(--ds-color-bg);
+    border: 1px solid var(--ds-color-border);
+    border-radius: var(--ds-radius-md);
+  }
+  .vignette__step--live {
+    background: linear-gradient(180deg, #ffffff 0%, #f6f6f7 100%);
+  }
+  .vignette__num {
+    font-family: var(--ds-font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--ds-color-text-subtle);
+  }
+  .vignette__title {
+    font-weight: 700;
+    color: var(--ds-color-text);
+    font-size: var(--ds-type-body-m);
+  }
+  .vignette__sub {
+    font-family: var(--ds-font-mono);
+    font-size: 12px;
+    color: var(--ds-color-text-muted);
+    margin-top: 4px;
+  }
+  .vignette__doc-line {
+    position: relative;
+    font-family: var(--ds-font-mono);
+    font-size: 12px;
+    color: var(--ds-color-text-muted);
+    padding-left: 14px;
+  }
+  .vignette__doc-line::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 2px; bottom: 2px;
+    width: 3px;
+    background: var(--ds-color-primary);
+    border-radius: 0 3px 3px 0;
+  }
+  .vignette__arrow {
+    text-align: center;
+    font-size: 24px;
+    color: var(--ds-color-primary);
+    line-height: 1;
+  }
+
+  /* ============================================
+     HOW-IT-WORKS  (the dark-moment band)
+     ============================================ */
+  [data-section="how-it-works"] {
+    background: var(--ds-color-code-bg);
+    color: var(--ds-color-code-fg);
+    padding-block: 64px;
+    margin-block: 80px;
+  }
+  .how-it-works__grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 64px;
+    align-items: center;
+  }
+  @media (max-width: 1023px) {
+    .how-it-works__grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+  .how-it-works__copy .eyebrow { color: var(--ds-color-code-muted); }
+  .how-it-works__title {
+    font-family: var(--ds-font-display);
+    font-weight: 800;
+    font-size: clamp(28px, 4vw, var(--ds-type-title-3));
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ds-color-code-fg);
+    margin-block: 20px 16px;
+  }
+  .how-it-works__lede {
+    color: var(--ds-color-code-muted);
+    font-size: var(--ds-type-body-m);
+    line-height: 1.6;
+  }
+
+  pre.code-block {
+    font-family: var(--ds-font-mono);
+    font-size: var(--ds-type-code);
+    line-height: 1.7;
+    color: var(--ds-color-code-fg);
+    padding: 28px 28px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--ds-radius-md);
+    overflow-x: auto;
+    position: relative;
+  }
+  .code-token--prompt   { color: var(--ds-color-code-muted); user-select: none; }
+  .code-token--keyword  { color: var(--ds-color-code-keyword); }
+  .code-token--fn       { color: var(--ds-color-code-fn); }
+  .code-token--string   { color: var(--ds-color-code-string); }
+  .code-token--num      { color: var(--ds-color-code-num); }
+  .code-token--ok       { color: var(--ds-color-success); }
+
+  .placeholder-eyebrow {
+    display: inline-block;
+    font-family: var(--ds-font-mono);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ds-color-warning);
+    background: rgba(196, 111, 0, 0.15);
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-bottom: 6px;
+  }
+  [data-placeholder="true"] {
+    outline: 2px dashed var(--ds-color-warning);
+    outline-offset: 4px;
+    border-radius: var(--ds-radius-sm);
+    position: relative;
+  }
+
+  .quick-chips {
+    display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px;
+  }
+  .quick-chips a {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--ds-font-mono);
+    font-size: 12px;
+    color: var(--ds-color-code-fn);
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--ds-radius-sm);
+    transition: background var(--ds-motion-fast);
+  }
+  .quick-chips a:hover {
+    background: rgba(127, 196, 255, 0.08);
+    border-color: rgba(127, 196, 255, 0.2);
+  }
+
+  /* ============================================
+     AUDIENCE-ROUTER
+     ============================================ */
+  [data-section="audience-router"] {
+    padding-block: 64px;
+  }
+  .router__head {
+    margin-bottom: 48px;
+    max-width: 720px;
+  }
+  .router__head h2 {
+    font-family: var(--ds-font-display);
+    font-weight: 900;
+    font-size: clamp(32px, 5vw, var(--ds-type-title-2));
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--ds-color-text);
+    margin-block: 16px 16px;
+  }
+  .router__lede {
+    color: var(--ds-color-text-muted);
+    font-size: var(--ds-type-body-l);
+    line-height: 1.5;
+  }
+  .router__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 1023px) {
+    .router__grid { grid-template-columns: 1fr; }
+  }
+  .tile {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto auto auto 1fr auto;
+    gap: 12px;
+    background: var(--ds-color-bg);
+    border: 1px solid var(--ds-color-border);
+    border-radius: var(--ds-radius-lg);
+    padding: 32px;
+    padding-left: 32px;
+    transition: transform var(--ds-motion-base), box-shadow var(--ds-motion-base), border-color var(--ds-motion-base);
+  }
+  .tile::before {
+    content: ''; position: absolute; left: 0; top: 24px; bottom: 24px;
+    width: 4px;
+    background: var(--track-color, var(--ds-color-text-subtle));
+    border-radius: 0 4px 4px 0;
+  }
+  .tile:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--ds-shadow-md);
+    border-color: var(--ds-color-border-strong);
+  }
+  .tile:focus-within {
+    box-shadow: var(--ds-shadow-glow);
+    border-color: var(--ds-color-primary);
+  }
+  .tile__head {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .tile__title {
+    font-family: var(--ds-font-display);
+    font-weight: 800;
+    font-size: var(--ds-type-title-4);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--ds-color-text);
+  }
+  .tile__title a {
+    color: inherit;
+    /* whole-card click overlay */
+  }
+  .tile__title a::before {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: var(--ds-radius-lg);
+  }
+  .tile__title a:focus-visible { outline: 0; }
+  .tile__body {
+    font-size: var(--ds-type-body-m);
+    color: var(--ds-color-text-muted);
+    line-height: 1.6;
+  }
+  .tile__foot {
+    display: flex; align-items: center; gap: 6px;
+    font-family: var(--ds-font-mono);
+    font-size: 12px;
+    color: var(--ds-color-text-subtle);
+    margin-top: 8px;
+  }
+  .tile__foot strong { color: var(--ds-color-text-muted); }
+  .tile__arrow {
+    font-size: 24px;
+    color: var(--track-color, var(--ds-color-text-subtle));
+    line-height: 1;
+    margin-left: auto;
+    transition: transform var(--ds-motion-fast);
+  }
+  .tile:hover .tile__arrow { transform: translateX(4px); }
+
+  .tile--build    { --track-color: var(--ds-color-primary); }
+  .tile--publish  { --track-color: var(--ds-color-success); }
+  .tile--launch   { --track-color: var(--ds-color-warning); }
+  .tile--resources{ --track-color: var(--ds-color-text-subtle); }
+
+  /* ============================================
+     RESOURCES STRIP
+     ============================================ */
+  [data-section="resources-strip"] {
+    padding-block: 64px;
+    background: var(--ds-color-surface);
+    border-top: 1px solid var(--ds-color-border);
+    border-bottom: 1px solid var(--ds-color-border);
+  }
+  .resources__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+  }
+  @media (max-width: 768px) { .resources__grid { grid-template-columns: 1fr; } }
+  .resource {
+    display: grid; gap: 8px;
+    padding: 24px;
+    background: var(--ds-color-bg);
+    border: 1px solid var(--ds-color-border);
+    border-radius: var(--ds-radius-lg);
+    transition: border-color var(--ds-motion-fast), transform var(--ds-motion-fast);
+  }
+  .resource:hover {
+    border-color: var(--ds-color-primary);
+    transform: translateY(-1px);
+  }
+  .resource__name {
+    font-weight: 700;
+    color: var(--ds-color-text);
+    font-size: var(--ds-type-title-5);
+  }
+  .resource__name::after {
+    content: ' →';
+    color: var(--ds-color-primary);
+    font-weight: 500;
+  }
+  .resource__body {
+    font-size: var(--ds-type-body-s);
+    color: var(--ds-color-text-muted);
+    line-height: 1.6;
+  }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  [data-section="footer"] {
+    background: var(--ds-color-bg);
+    border-top: 1px solid var(--ds-color-border);
+    padding-block: 64px 32px;
+    margin-top: 0;
+  }
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 768px) {
+    .footer__grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+  .footer__brand {
+    font-family: var(--ds-font-display);
+    font-weight: 800;
+    font-size: var(--ds-type-title-4);
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .footer__brand-attr {
+    font-family: var(--ds-font-mono);
+    font-size: var(--ds-type-body-s);
+    color: var(--ds-color-text-muted);
+  }
+  .footer__brand-attr .adobe-mark {
+    color: var(--ds-color-attribution);
+    font-weight: 800;
+  }
+  .footer__col-title {
+    font-family: var(--ds-font-mono);
+    font-size: var(--ds-type-eyebrow);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ds-color-text-subtle);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .footer__col ul { list-style: none; display: grid; gap: 10px; }
+  .footer__col a {
+    font-size: var(--ds-type-body-s);
+    color: var(--ds-color-text-muted);
+    transition: color var(--ds-motion-fast);
+  }
+  .footer__col a:hover { color: var(--ds-color-text); }
+  .footer__bottom {
+    border-top: 1px solid var(--ds-color-border);
+    padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: var(--ds-type-body-s);
+    color: var(--ds-color-text-subtle);
+  }
+
+  /* Skip link */
+  .skip {
+    position: absolute; top: -40px; left: 0;
+    background: var(--ds-color-primary); color: var(--ds-color-primary-on);
+    padding: 8px 16px; border-radius: 0 0 var(--ds-radius-sm) 0;
+    font-weight: 700; font-size: 13px;
+  }
+  .skip:focus { top: 0; }
+</style>
+
+
+
+
+<link rel="stylesheet" href="assets/canon.css">
+</head><body><a class="skip" href="#main">Skip to content</a>
+
+<header data-section="header" data-intent="navigate" data-layout="full-width-light">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="docs/index.html">Documentation</a></li>
+        <li><a href="developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="docs/sidekick/index.html">Tools</a></li>
+        <li><a href="blog/index.html">Blog</a></li>
+        <li><a href="community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="#search" aria-label="Search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section data-section="hero" data-intent="primary-action" data-layout="split-7-5" data-items="2">
+    <div class="container">
+      <div class="hero__grid">
+        <div>
+          <h1 class="hero__headline">Create a website,
+seriously fast.</h1>
+          <p class="hero__subhead">Adobe Experience Manager now integrates the tech you already own, know, and love. Your content, your tech, your audience taken to the next level.</p>
+          <div class="hero__ctas">
+            <a class="btn btn--primary" href="developer/tutorial/index.html">Create your site</a>
+            <a class="btn btn--ghost" href="docs/index.html">Read the docs</a>
+          </div>
+        </div>
+
+        <aside class="vignette" aria-label="How aem.live works">
+          <div class="vignette__step">
+            <span class="vignette__num">01</span>
+            <div>
+              <div class="vignette__title">Author in DA or Google&nbsp;Docs</div>
+              <div class="vignette__doc-line">## Hero — Build websites, seriously fast</div>
+            </div>
+          </div>
+          <div class="vignette__step">
+            <span class="vignette__num">02</span>
+            <div>
+              <div class="vignette__title">Push to the Edge</div>
+              <div class="vignette__sub">git push origin main</div>
+            </div>
+          </div>
+          <div class="vignette__step vignette__step--live">
+            <span class="vignette__num">03</span>
+            <div>
+              <div class="vignette__title">
+                <span class="pill-status pill-status--live">Live</span>
+                <span style="margin-left:8px;">Sub-second first paint</span>
+              </div>
+              <div class="vignette__sub">aem.live · global edge delivery</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="how-it-works" data-intent="explain mechanic" data-layout="full-bleed-dark" data-items="3">
+    <div class="container">
+      <div class="how-it-works__grid">
+        <div class="how-it-works__copy">
+          <p class="eyebrow">Get started in 30 seconds</p>
+          <h2 class="how-it-works__title">From a doc to a live page in three commands.</h2>
+          <p class="how-it-works__lede">No bundlers. No build pipeline. Push markdown or push from a doc — your site is live at the edge in seconds.</p>
+        </div>
+        <div data-placeholder="true" data-placeholder-type="code-sample" data-placeholder-source="exact aem-cli command flow not in current/pages/home.json; rendered as illustrative placeholder">
+          <span class="placeholder-eyebrow">Placeholder · code sample</span>
+          <pre class="code-block"><code><span class="code-token--prompt">$ </span><span class="code-token--keyword">npx</span> <span class="code-token--fn">@adobe/aem-cli</span> <span class="code-token--keyword">init</span> <span class="code-token--string">my-site</span>
+<span class="code-token--prompt">$ </span><span class="code-token--keyword">cd</span> <span class="code-token--string">my-site</span> &amp;&amp; <span class="code-token--keyword">git</span> <span class="code-token--keyword">push</span>
+<span class="code-token--ok">✓</span> <span class="code-token--fn">my-site</span> live at <span class="code-token--string">https://my-site.aem.live</span> <span class="code-token--num">in 1.2s</span>
+<span class="code-token--ok">✓</span> Lighthouse: <span class="code-token--num">100</span> / <span class="code-token--num">100</span> / <span class="code-token--num">100</span> / <span class="code-token--num">100</span></code></pre>
+          <div class="quick-chips">
+            <a href="docs/sidekick/index.html">Sidekick →</a>
+            <a href="docs/cdn-guide/index.html">CDN Guide →</a>
+            <a href="developer/tutorial/index.html">Full Tutorial →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="audience-router" data-intent="audience-routing" data-layout="grid-3" data-items="3">
+    <div class="container">
+      <header class="router__head">
+        <p class="eyebrow">Documentation</p>
+        <h2>Build, publish, launch.</h2>
+        <p class="router__lede">Pick your track. Each guide is a self-contained path from first commit to live in production.</p>
+      </header>
+      <div class="router__grid">
+
+        <article class="tile tile--build">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Build · for developers</p>
+          <h3 class="tile__title"><a href="docs/index.html#build">Build</a></h3>
+          <p class="tile__body">Everything developers need to build fast sites with Adobe Experience Manager, and how to structure content for an optimal experience.</p>
+          <p class="tile__foot"><strong>For</strong>&nbsp;developers · architects</p>
+          <span class="tile__arrow" aria-hidden="true">→</span>
+        </article>
+
+        <article class="tile tile--publish">
+          <p class="eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Publish · for authors</p>
+          <h3 class="tile__title"><a href="docs/index.html#publish">Publish</a></h3>
+          <p class="tile__body">The in-depth guide for authors looking to create, publish, and manage content with Adobe Experience Manager.</p>
+          <p class="tile__foot"><strong>For</strong>&nbsp;authors · content ops</p>
+          <span class="tile__arrow" aria-hidden="true">→</span>
+        </article>
+
+        <article class="tile tile--launch">
+          <p class="eyebrow"><span style="color:var(--ds-color-warning)">●</span>&nbsp; Launch · for ops</p>
+          <h3 class="tile__title"><a href="docs/index.html#launch">Launch</a></h3>
+          <p class="tile__body">Get ready to launch with our resources for operating your site with DNS, CDN, and SEO.</p>
+          <p class="tile__foot"><strong>For</strong>&nbsp;ops · SRE · marketing</p>
+          <span class="tile__arrow" aria-hidden="true">→</span>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section data-section="resources-strip" data-intent="cross-promo" data-layout="grid-3" data-items="3">
+    <div class="container">
+      <p class="eyebrow">Resources</p>
+      <div class="resources__grid">
+        <a class="resource" href="docs/sidekick/index.html">
+          <div class="resource__name">Sidekick</div>
+          <p class="resource__body">Install the AEM Sidekick to author and publish with Adobe Experience Manager.</p>
+        </a>
+        <a class="resource" href="community/index.html">
+          <div class="resource__name">Community</div>
+          <p class="resource__body">The right place to ask questions, share experiences, and learn more about AEM is our online and offline community.</p>
+        </a>
+        <a class="resource" href="blog/index.html">
+          <div class="resource__name">AEM.live Blog</div>
+          <p class="resource__body">Recent blog posts from the AEM team, updated every few weeks.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="docs/index.html">Documentation</a></li>
+          <li><a href="developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="blog/index.html">Blog</a></li>
+          <li><a href="community/index.html">Community</a></li>
+          <li><a href="business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul>
+          <li><a href="https://www.adobe.com">About Adobe</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

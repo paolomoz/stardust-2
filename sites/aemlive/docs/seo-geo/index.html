@@ -1,0 +1,181 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.347Z
+  page:             docs-seo-geo
+  pageUrl:          https://www.aem.live/docs/seo-geo
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>SEO &amp; GEO Best Practices</title>
+  <meta name="description" content="AEM best practices regarding SEO and GEO and page performance.">
+  <meta property="og:title" content="SEO &amp; GEO Best Practices">
+  <meta property="og:description" content="AEM best practices regarding SEO and GEO and page performance.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/seo-geo/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#server-side-vs-client-side-rendering">Server-Side vs Client-Side Rendering</a></li>
+<li class="l-2"><a href="#header--footer">Header &amp; Footer</a></li>
+<li class="l-2"><a href="#fragments">Fragments</a></li>
+<li class="l-2"><a href="#sitemap">Sitemap</a></li>
+<li class="l-2"><a href="#robotstxt">Robots.txt</a></li>
+<li class="l-2"><a href="#google-and-other-search-engines">Google (and other Search Engines)</a></li>
+<li class="l-2"><a href="#large-language-models-llm">Large Language Models (LLM)</a></li>
+<li class="l-2"><a href="#experiments-with-server-side-header-footer-and-fragment-inclusion-and-other-changes-to-server-sided-markup">Experiments with server-side header, footer, and fragment inclusion, and other changes to server-sided markup</a></li>
+<li class="l-3"><a href="#interested-in-experimenting-with-us">Interested in experimenting with us?</a></li>
+<li class="l-4"><a href="#rules-of-engagement">Rules of engagement</a></li>
+<li class="l-3"><a href="#experiment-1-wwwaemlive-includes-header-and-footer-on-the-server-side">Experiment #1: www.aem.live includes header and footer on the server side</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>SEO &amp; GEO Best Practices</h1>
+          <p class="lede">AEM best practices regarding SEO and GEO and page performance.</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_11e458b5336e5b30a8e9ee964040ab34ac38845c9.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_11e458b5336e5b30a8e9ee964040ab34ac38845c9.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_11e458b5336e5b30a8e9ee964040ab34ac38845c9.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_11e458b5336e5b30a8e9ee964040ab34ac38845c9.png?width=750&amp;format=png&amp;optimize=medium" width="1168" height="880">
+          </picture>
+        </p>
+        
+        <h2 id="server-side-vs-client-side-rendering">Server-Side vs Client-Side Rendering</h2>
+        <p>Server-side rendering (SSR) refers to the practice of generating HTML content on the server. Client-side rendering (CSR) means generating DOM elements containing content using JavaScript in the browser by fetching content asynchronously (often as JSON), an example being single-page apps (SPA).</p>
+        <p>AEM uses a surgical approach that includes all the canonical content of a page included in the initial HTML that is served over the wire. Redundant content that doesn't provide a significant signal to a crawler / index, is removed by default to optimize for specificity of the canonical content as well as experience performance, which has a positive SEO impact.</p>
+        <h2 id="header--footer">Header &amp; Footer</h2>
+        <p>Non-canonical content like the header and the footer of a page usually has very different lifecycles from the pages they appear on. They are published and fetched separately, then decorated on the client side for performance reasons.</p>
+        <p>As detailed in our <a href="../../developer/keeping-it-100/index.html">web performance documentation</a>, page loading is separated into three distinct phases: eager, lazy, and delayed. The eager phase should focus on the resources needed to reach the <a href="https://web.dev/articles/lcp">Largest Contentful Paint</a> (LCP). The header and specifically the footer are not in the critical path to the LCP, which is why they are loaded asynchronously. Cumulative Layout Shift (CLS) is not a problem because the space for the header at the top of the page is reserved from the first paint.</p>
+        <h2 id="fragments">Fragments</h2>
+        <p>AEM supports the inclusion of other pages as <a href="../fragments/index.html">fragments</a>. It is important to know <a href="../fragments/index.html#when-to-use-fragments">when to use fragments</a> and <a href="../fragments/index.html#when-to-avoid-fragments">when to avoid</a> them. When used correctly fragments, are not canonical content and are used on a large number of pages, and hence do not provide real significance for any particular page.</p>
+        <h2 id="sitemap">Sitemap</h2>
+        <p>It is crucial to maintain an up-to-date <a href="../../developer/sitemap/index.html">sitemap</a> for your site. AEM comes with an out-of-the-box sitemap that is updated automatically as you publish content. It helps search engines understand your site's structure and crawl all its relevant pages. You can decide to exclude pages from the sitemap by setting their <code>robots</code> <a href="../metadata/index.html">metadata property</a> to <code>noindex</code>.</p>
+        <h2 id="robotstxt">Robots.txt</h2>
+        <p>The <code>robots.txt</code> provides a <a href="https://en.wikipedia.org/wiki/Robots.txt">standardized way</a> of telling crawlers which parts of your site they are free to crawl and which parts are off limits. It also typically contains a link to your sitemap(s). AEM allows you to specify a <code>robots.txt</code> in the <a href="../config-service-setup/index.html#update-robotstxt">site configuration</a>. Note that this file will only be delivered by AEM on your production domain. The <code>aem.page</code> and <code>aem.live</code> URLs of your site are protected from crawlers by a combination of prohibitive <code>robots.txt</code> and an <code>x-robots</code> header to prevent those sites from being indexed..</p>
+        <h2 id="google-and-other-search-engines">Google (and other Search Engines)</h2>
+        <p>Google's first pass of indexing your page only consumes the initial HTML payload, which is why it is recommended that all of the primary content of your page is part of it. Header, footer and fragments are typically not considered primary – or canonical – page content.</p>
+        <p>In a second pass, Google will load your page in a headless browser, allowing it to index the full page content, including secondary content being decorated on the client side. This pass is time-boxed, so it is imperative that your page loads fast and all the relevant secondary content is added in a timely fashion.</p>
+        <p>Leveraging from the <a href="https://github.com/adobe/aem-boilerplate">AEM Boilerplate</a> and following the <a href="../../developer/keeping-it-100/index.html">web performance best practices</a> will ensure that your page can be fully indexed by Google and other search engines.</p>
+        <h2 id="large-language-models-llm">Large Language Models (LLM)</h2>
+        <p>LLM agents and bots (e.g. <code>ChatGPT-User</code>) need access to content as quickly as possible and therefore do not render pages. They need the relevant content to be part of the initial HTML payload when requesting a page. The Header and footer of a page are not important to them.</p>
+        <p>Adobe recommends using <a href="https://experienceleague.adobe.com/en/docs/llm-optimizer/using/home">LLM Optimizer</a> to ensure your site is represented in the best possible light when users search for relevant keywords in LLMs.</p>
+        <h2 id="experiments-with-server-side-header-footer-and-fragment-inclusion-and-other-changes-to-server-sided-markup">Experiments with server-side header, footer, and fragment inclusion, and other changes to server-sided markup</h2>
+        <p>As explained above, AEM already renders all canonical content that is relevant to the page on the server side and provides an optimal data set for SEO and GEO purposes.</p>
+        <p>Nevertheless, we frequently find ourselves in conversations involving claims diverging from our own observations. For instance, using server-side techniques for entire pages – including headers, footers and fragments – keeps coming back as a recommendation in the SEO domain. We are open to improving the server-side output of AEM through experimentation, tied to validation through measurable positive outcomes via authoritative tooling.</p>
+        <h3 id="interested-in-experimenting-with-us">Interested in experimenting with us?</h3>
+        <p>We are looking for participants who are willing to run server-side rendering experiments on their production environments. If you are interested and agree to the following rules of engagement, we are looking forward to hearing from you on Slack or Teams:</p>
+        <h4 id="rules-of-engagement">Rules of engagement</h4>
+        <ul>
+          <li>Agreement on pre-defined goals based on numbers from Google Search Console as the authoritative source</li>
+          <li>Experiment runtime should be around 3 months</li>
+          <li>Access to Google Search Console must be provided for the duration of the experiment</li>
+          <li>During the experiment, the SLO will be reduced from 99.99% 99.9%</li>
+          <li>Revert to boilerplate rendering if pre-defined goals are not met at the end of the experiment</li>
+          <li>Anonymized experiment data will be published here on <code>www.aem.live</code></li>
+        </ul>
+        <h3 id="experiment-1-wwwaemlive-includes-header-and-footer-on-the-server-side">Experiment #1: www.aem.live includes header and footer on the server side</h3>
+        <p><strong>Goal:</strong> Validate the recommendation that the inclusion of headers and footers on the server side improves SEO performance.</p>
+        <p><strong>Execution:</strong> On November 14, 2025, we started including headers and footers on the server side on all of <code>www.aem.live</code>. The following charts show authoritative data from Google Search Console after 60 days of runtime:<br>
+          <picture>
+            <source type="image/webp" srcset="./media_131e53d608b18718fe32fb5596ebc504a5c62ebf9.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_131e53d608b18718fe32fb5596ebc504a5c62ebf9.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_131e53d608b18718fe32fb5596ebc504a5c62ebf9.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_131e53d608b18718fe32fb5596ebc504a5c62ebf9.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="952">
+          </picture>
+        </p>
+        <p><strong>Preliminary conclusion:</strong> There is no measurable upside on any SEO metric. Data even shows a decline which could be attributed to a theoretical performance degradation via slower LCP (Largest Contentful Paint).</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

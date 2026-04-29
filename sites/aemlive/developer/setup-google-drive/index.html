@@ -1,0 +1,249 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.325Z
+  page:             developer-setup-google-drive
+  pageUrl:          https://www.aem.live/developer/setup-google-drive
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Setup Google Drive as a Content Source</title>
+  <meta name="description" content="This is a follow-up step for sites that would like to use google drive (docs and spreadsheets) as a content source. It assumes that the ...">
+  <meta property="og:title" content="Setup Google Drive as a Content Source">
+  <meta property="og:description" content="This is a follow-up step for sites that would like to use google drive (docs and spreadsheets) as a content source. It assumes that the ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/setup-google-drive/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#link-your-own-content-source-using-google-drive">Link your own content source using Google Drive</a></li>
+<li class="l-2"><a href="#preview-and-publish-your-content">Preview and publish your content</a></li>
+<li class="l-3"><a href="#build">Build</a></li>
+<li class="l-3"><a href="#anatomy-of-an-aem-project">Anatomy of an AEM Project</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Setup Google Drive as a Content Source</h1>
+          <p class="lede">This is a follow-up step for sites that would like to use google drive (docs and spreadsheets) as a content source. It assumes that the ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1d00989ba18e942fbddc9bb108add01e153029f22.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d00989ba18e942fbddc9bb108add01e153029f22.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1d00989ba18e942fbddc9bb108add01e153029f22.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d00989ba18e942fbddc9bb108add01e153029f22.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>This is a follow-up step for sites that would like to use google drive (docs and spreadsheets) as a content source. It assumes that the <a href="http://main--helix-website--adobe.aem.live/developer/tutorial">Developer Tutorial</a> has already been completed</p>
+        <p>Prerequisites:</p>
+        <ol>
+          <li>Completed the <a href="http://main--helix-website--adobe.aem.live/developer/tutorial">Developer Tutorial</a></li>
+          <li>You have a Google account.</li>
+        </ol>
+        <h2 id="link-your-own-content-source-using-google-drive">Link your own content source using Google Drive</h2>
+        <p>In your fork of the <code>aem-boilerplate</code> GitHub repository, the site by default points to Document Authoring. To replicate the default content in Google Drive we recommend to use <a href="https://drive.google.com/drive/folders/1MGzOt7ubUh3gu7zhZIPb7R7dyRzG371j">this folder</a> for some example content.</p>
+        <p><br>This content is read-only, but it can be copied into your Google Drive folder to serve as a starting point.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_10e0da4e435126fd3da7443ff8825dd914f43dd5e.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_10e0da4e435126fd3da7443ff8825dd914f43dd5e.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_10e0da4e435126fd3da7443ff8825dd914f43dd5e.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_10e0da4e435126fd3da7443ff8825dd914f43dd5e.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1210">
+          </picture>
+        </p>
+        <p>To author your own content, create a folder in your own Google Drive and share the folder with the Adobe Experience Manager user (<code>helix@adobe.com</code>).</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_114c77cf7cc69b3d0a5246af9b077c64aa8af00d5.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_114c77cf7cc69b3d0a5246af9b077c64aa8af00d5.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_114c77cf7cc69b3d0a5246af9b077c64aa8af00d5.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_114c77cf7cc69b3d0a5246af9b077c64aa8af00d5.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1210">
+          </picture>
+        </p>
+        <p>A good way to start authoring your own content is to copy <code>index</code>, <code>nav</code> and <code>footer</code> from the sample content and familiarize yourself with the content structure. <code>nav</code> and <code>footer</code> are not changed frequently in a project and have a special structure. Most of the files in a project look more similar to <code>index</code>.</p>
+        <p>Open the files and copy/paste the entire content into corresponding files in your own Google Drive. You can also download the files via <code>Download All</code> or download individual files. However, remember to convert the downloaded <code>.docx</code> files back into native Google Docs, when you upload them to your folder in your Google Drive.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1d16cd4e3a7bcb87802a2f9be9736e38c535de143.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d16cd4e3a7bcb87802a2f9be9736e38c535de143.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1d16cd4e3a7bcb87802a2f9be9736e38c535de143.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d16cd4e3a7bcb87802a2f9be9736e38c535de143.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1210">
+          </picture>
+        </p>
+        <p>Now that you have your content, you need to connect that content to your GitHub repo. You do this by changing the reference in Site Configuration in the configuration service.</p>
+        <p>(see: <a href="../../docs/admin.html/index.html#schema/SiteConfig" data-broken-link="true">https://www.aem.live/docs/admin.html#schema/SiteConfig</a> for more detail)</p>
+        <p>An easy way to make this change is to use <a href="https://labs.aem.live/tools/site-admin/index.html">https://labs.aem.live/tools/site-admin/index.html</a> to either create or update a site configuration.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1809eb41fbbb91d19abd2b807998fb90fb9ec2de0.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1809eb41fbbb91d19abd2b807998fb90fb9ec2de0.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1809eb41fbbb91d19abd2b807998fb90fb9ec2de0.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1809eb41fbbb91d19abd2b807998fb90fb9ec2de0.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1574">
+          </picture>
+        </p>
+        <p>Be aware that after you make that change, you will see <code>404 not found </code>errors as your content has not been previewed yet. Please refer to the next section to see how to start authoring and previewing your content. If you copied over <code>index</code>, <code>nav</code> and <code>footer</code> all three of those are separate documents with their own preview and publish cycles, so make sure you preview (and publish) all of them if needed.</p>
+        <h2 id="preview-and-publish-your-content">Preview and publish your content</h2>
+        <div class="video">
+          <div>
+            <div><a href="../videos/tutorial-step3.mp4/index.html" data-broken-link="true">https://main--helix-website--adobe.aem.page/developer/videos/tutorial-step3.mp4</a></div>
+          </div>
+        </div>
+        <p>After completing the last step, your new content source is not empty, but no content has been promoted to the <code>preview</code> or <code>live </code>stages, which means your website serves 404s.<br><br>To preview content, an author has to install the Sidekick Chrome extension. Find the <a href="https://chromewebstore.google.com/detail/aem-sidekick/igkmdomcgoebiipaifhmpfjhbjccggml">Chrome extension in the Chrome Web Store</a>.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1fc5cc7c038201a2e39f5d8eb399ef40174069bd6.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1fc5cc7c038201a2e39f5d8eb399ef40174069bd6.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1fc5cc7c038201a2e39f5d8eb399ef40174069bd6.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1fc5cc7c038201a2e39f5d8eb399ef40174069bd6.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1210">
+          </picture>
+        </p>
+        <p>After adding the extension to Chrome, don’t forget to pin it, this will make it easier to find it.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_18d37a247e0a84daa1323eabd7496dddca1d9b733.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_18d37a247e0a84daa1323eabd7496dddca1d9b733.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_18d37a247e0a84daa1323eabd7496dddca1d9b733.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_18d37a247e0a84daa1323eabd7496dddca1d9b733.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1210">
+          </picture>
+        </p>
+        <p>To set up the Chrome extension, go to your previously shared Google Drive folder and click the extension icon in the browser toolbar and select <code>Add this project</code>.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_106325dc3f12a3373ccc6b484823ab3e2f01d879b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_106325dc3f12a3373ccc6b484823ab3e2f01d879b.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_106325dc3f12a3373ccc6b484823ab3e2f01d879b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_106325dc3f12a3373ccc6b484823ab3e2f01d879b.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1210">
+          </picture>
+        </p>
+        <p>As soon as the extension is installed and your project is added, you are ready to preview and publish your content from your Google Drive.<br><br>Select all three docs and activate the AEM Sidekick by clicking on your pinned extension. A new toolbar will appear. Clicking the <code>preview</code> or <code>publish</code> buttons will trigger the corresponding operation.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1d79dc616694185bf0198b0143485237e83ef801c.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d79dc616694185bf0198b0143485237e83ef801c.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1d79dc616694185bf0198b0143485237e83ef801c.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d79dc616694185bf0198b0143485237e83ef801c.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1210">
+          </picture>
+        </p>
+        <p><br>Open the <code>index</code> doc and make some changes. Activate the Sidekick by clicking on your pinned extension and then click the <code>Preview</code> button which will trigger the preview operation and open a new tab with the preview rendition of the content.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_16a5836fecd2be7c9d127931bbe9351679155803c.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_16a5836fecd2be7c9d127931bbe9351679155803c.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_16a5836fecd2be7c9d127931bbe9351679155803c.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_16a5836fecd2be7c9d127931bbe9351679155803c.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1210">
+          </picture>
+        </p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_10773ce4bcda1d237f6b477e8181234797bfe95f6.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_10773ce4bcda1d237f6b477e8181234797bfe95f6.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_10773ce4bcda1d237f6b477e8181234797bfe95f6.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_10773ce4bcda1d237f6b477e8181234797bfe95f6.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1210">
+          </picture>
+        </p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="build"><a href="../../docs/index.html#build">Build</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="anatomy-of-an-aem-project"><a href="../anatomy-of-a-helix-project/index.html" data-broken-link="true">Anatomy of an AEM Project</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

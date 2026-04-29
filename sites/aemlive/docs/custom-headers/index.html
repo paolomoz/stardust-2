@@ -1,0 +1,162 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.107Z
+  page:             docs-custom-headers
+  pageUrl:          https://www.aem.live/docs/custom-headers
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Custom HTTP Response Headers</title>
+  <meta name="description" content="In some cases, it is useful to apply custom HTTP response headers to resources, for example to allow CORS. Headers can be specified in the ...">
+  <meta property="og:title" content="Custom HTTP Response Headers">
+  <meta property="og:description" content="In some cases, it is useful to apply custom HTTP response headers to resources, for example to allow CORS. Headers can be specified in the ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/custom-headers/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#security-warning">Security Warning</a></li>
+<li class="l-3"><a href="#block-party">Block Party</a></li>
+<li class="l-3"><a href="#indexing">Indexing</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Custom HTTP Response Headers</h1>
+          <p class="lede">In some cases, it is useful to apply custom HTTP response headers to resources, for example to allow CORS. Headers can be specified in the ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_10acfc1a9e5c8bbbb728e0b1e6dc193847c000b0c.jpg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_10acfc1a9e5c8bbbb728e0b1e6dc193847c000b0c.jpg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="./media_10acfc1a9e5c8bbbb728e0b1e6dc193847c000b0c.jpg?width=2000&amp;format=jpg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_10acfc1a9e5c8bbbb728e0b1e6dc193847c000b0c.jpg?width=750&amp;format=jpg&amp;optimize=medium" width="1103" height="827">
+          </picture>
+        </p>
+        
+        <p>In some cases, it is useful to apply custom HTTP response headers to resources, for example to allow CORS. Headers can be specified in the <code>headers</code> object of your <a href="../admin.html/index.html#tag/siteConfig" data-broken-link="true">site configuration</a> like this:</p>
+        <pre><code>{
+  "/fragments/**": [
+    {
+      "key": "access-control-allow-origin",
+      "value": "https://www.example.com"
+    }
+  ]
+}
+</code></pre>
+        <p>Try our <a href="https://labs.aem.live/tools/headers-edit/index.html">HTTP Headers Editor</a> or see here for <a href="../config-service-setup/index.html#update-custom-headers">instructions how to apply custom headers</a> from your command line.</p>
+        <p>The URL property is a glob pattern matching the pages the custom header should be applied to. A wildcard <code>*</code> can be used as a prefix or suffix, allowing for flexible matches on the URL pathname. You can use <code>**</code> for deep path matching. Typical examples include <code>/foo/**</code> or <code>**/bar/**.</code></p>
+        <div class="deprecation">
+          <div>
+            <div>
+              <h3 id="security-warning">Security Warning</h3>
+              <p>Adding an <code>access-control-allow-origin</code> header with value <code>*</code> may render your protected preview and live environments vulnerable to CSRF attacks against authors logged in via AEM Sidekick, which can potentially lead to disclosure of sensitive information. If you do have a use case where it is not possible to restrict access to a single origin, try to limit the header to specific URLs to minimize the attack surface.</p>
+            </div>
+          </div>
+        </div>
+        <p>Note that the headers are applied to both the preview and live versions of the content. For changes applying to content, caches will be purged automatically and your changes will take effect immediately. If the changes apply to code resources, they won’t take effect until the next code sync, either by updating the code in the <code>main</code> branch of the repository or by manually triggering a resync via <a href="https://www.hlx.live/docs/admin.html#tag/code/operation/updateCode">Admin API</a>.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="block-party"><a href="../../developer/block-party/index.html">Block Party</a></h3>
+            </div>
+            <div>
+              <p>Up Next<span class="icon icon-icon-arrow"></span></p>
+              <h3 id="indexing"><a href="../../developer/indexing/index.html">Indexing</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

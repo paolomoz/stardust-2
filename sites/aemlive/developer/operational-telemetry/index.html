@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.327Z
+  page:             developer-operational-telemetry
+  pageUrl:          https://www.aem.live/developer/operational-telemetry
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Developing Operational Telemetry in AEM</title>
+  <meta name="description" content="Adobe Experience Manager uses Operational Telemetry to diagnose usage and performance of web sites running on Adobe Experience Manager. As a developer, you can use ...">
+  <meta property="og:title" content="Developing Operational Telemetry in AEM">
+  <meta property="og:description" content="Adobe Experience Manager uses Operational Telemetry to diagnose usage and performance of web sites running on Adobe Experience Manager. As a developer, you can use ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/operational-telemetry/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#how-to-add-operational-telemetry-instrumentation-to-your-site">How to add Operational Telemetry Instrumentation to your Site</a></li>
+<li class="l-2"><a href="#key-concepts">Key Concepts</a></li>
+<li class="l-3"><a href="#checkpoints">Checkpoints</a></li>
+<li class="l-3"><a href="#operational-telemetry-explorer">Operational Telemetry Explorer</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Developing Operational Telemetry in AEM</h1>
+          <p class="lede">Adobe Experience Manager uses Operational Telemetry to diagnose usage and performance of web sites running on Adobe Experience Manager. As a developer, you can use ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1591c6c4c19f9332f0842209ec733a7cd50e9b69d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1591c6c4c19f9332f0842209ec733a7cd50e9b69d.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1591c6c4c19f9332f0842209ec733a7cd50e9b69d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1591c6c4c19f9332f0842209ec733a7cd50e9b69d.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Adobe Experience Manager uses Operational Telemetry to diagnose usage and performance of web sites running on Adobe Experience Manager. As a developer, you can use the Operational Telemetry APIs to observe additional events about how your site is used.</p>
+        <p>This document describes the key concepts of strictly necessary Operational Telemetry, details the client-side APIs that you can use to send additional data to the Operational Telemetry collection service and alludes to the fact that the data can be queried.</p>
+        <h2 id="how-to-add-operational-telemetry-instrumentation-to-your-site">How to add Operational Telemetry Instrumentation to your Site</h2>
+        <p>If your website is not built using AEM Edge Delivery Services, it is recommended to set up Operational Telemetry in standalone mode. To set up , simply add the following script to your pages.</p>
+        <p><code>&lt;script defer type="text/javascript" src="https://ot.aem.live/.rum/@adobe/helix-rum-js@^2/dist/rum-standalone.js"&gt;&lt;/script&gt;</code></p>
+        <p>For better performance, it is recommended loading the script after the <a href="https://web.dev/articles/lcp">Largest Contentful Paint</a> (LCP) event</p>
+        <h2 id="key-concepts">Key Concepts</h2>
+        <p>Every data point collected by Operational Telemetry is made up of following key parts:</p>
+        <ul>
+          <li><code>id</code> – a unique identifier, generated by the Operational Telemetry library that identifies the current page view</li>
+          <li><code>checkpoint</code> – a named event in the sequence of loading the page, and interacting with the page</li>
+          <li><code>source</code> – identifies the DOM element that caused a particular interaction (optional)</li>
+          <li><code>target</code> – identifies an external resource or link that is the subject of an interaction (optional)</li>
+        </ul>
+        <h3 id="checkpoints">Checkpoints</h3>
+        <p>By convention, checkpoint names are lowercase letters, without any special characters. The most common checkpoints used in Adobe Experience Manager projects are:</p>
+        <ul>
+          <li><code>top</code> – the page loading sequence has begun and first JavaScript code is being executed by the page. This event fires even before blocks are decorated or content is visible</li>
+          <li><code>loadresource</code> – tracks what fragments and JSON API endpoints are loaded for the site and how much time they take to load.</li>
+          <li><code>cwv</code> – indicates that either the page is ready to collect <a href="https://web.dev/vitals/">Core Web Vitals (CWV)</a> readings or that either the LCP, CLS, or FID CWV reading has been recorded. As these readings are asynchronous, multiple of these checkpoints can be passed during one page view</li>
+          <li><code>lcp</code> – the <a href="https://web.dev/lcp/">Largest Contentful Paint (LCP)</a> has been made by the browser, this is usually the most prominent image on the page</li>
+          <li><code>viewblock</code> – a block has scrolled into view and there is a chance that the content of that block is seen. The class name of the block will be shared in the <code>source</code> property.</li>
+          <li><code>viewmedia</code> – an image or video has scrolled into view and there is a chance that the content of that block is seen. The URL of the image or video is shared in the <code>target</code> property.</li>
+          <li><code>navigate</code> - Helps discover internal navigation paths.</li>
+          <li><code>enter</code> - Helps discover external referrers. The value direct subsumes visitors entering the URL directly into their address bar, following browser bookmarks, or opening the page from iOS applications.</li>
+          <li><code>language</code> - content languages that are used and what the users choose to select as their preferred language.</li>
+          <li><code>ally</code> - tracks what accessibility features are detected on the site.</li>
+          <li><code>consent</code> - consent provider enabled on the site and how user interacts with it.</li>
+          <li><code>acquisition</code> - all the inorganic traffic sources for the site.</li>
+          <li><code>redirect</code> - the number of hops it took to reach the destination URL the user was looking for.</li>
+          <li><code>click</code> – a click event has been triggered, not just on links or buttons. If the element clicked is a link, then the link target is recorded in the <code>target</code> property. The <code>source</code> property contains information about which element of the DOM was clicked.</li>
+          <li><code>error</code> – a JavaScript error has occurred on the page and has not been handled by the application code. This usually indicates a bug.</li>
+          <li><code>404</code> – a 404, page not found page has been served. This checkpoint can indicate missing content or broken links</li>
+          <li><code>search</code> – a site search on the page is performed, typically using a search input field</li>
+          <li><code>fill</code> - indicates that a form field was filled by the user. The source property contains the css selector of the field that was filled. The data that user entered is not captured.</li>
+          <li><code>formsubmit</code> – a form is submitted on the page. The form action is recorded in the <code>target</code> property, while the <code>source</code> property keeps information of which form of the page was submitted.</li>
+        </ul>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="operational-telemetry-explorer"><a href="../../docs/optel-explorer/index.html" data-broken-link="true">Operational Telemetry Explorer</a></h3>
+            </div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

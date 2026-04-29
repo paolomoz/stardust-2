@@ -1,0 +1,272 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.331Z
+  page:             developer-byo-git
+  pageUrl:          https://www.aem.live/developer/byo-git
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Bring your own git</title>
+  <meta name="description" content="The following steps illustrate how Cloud Manager enables organisations to use their own Git repositories, beyond GitHub.com, for deploying code to Edge Delivery Services.">
+  <meta property="og:title" content="Bring your own git">
+  <meta property="og:description" content="The following steps illustrate how Cloud Manager enables organisations to use their own Git repositories, beyond GitHub.com, for deploying code to Edge Delivery Services.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/byo-git/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#prepare-your-edge-delivery-services-site">1. Prepare your Edge Delivery Services Site</a></li>
+<li class="l-2"><a href="#configure-your-external-repository-in-cloud-manager">2. Configure your External Repository in Cloud Manager</a></li>
+<li class="l-2"><a href="#configure-your-edge-delivery-site-in-cloud-manager">3. Configure your Edge Delivery Site in Cloud Manager</a></li>
+<li class="l-2"><a href="#configure-your-aem-site-to-use-cloud-manager">4. Configure your AEM Site to use Cloud Manager</a></li>
+<li class="l-2"><a href="#trigger-your-first-sync">5. Trigger your first sync</a></li>
+<li class="l-2"><a href="#verify-your-aem-site">6. Verify your AEM Site</a></li>
+<li class="l-2"><a href="#the-site-is-still-showing-the-old-code-even-after-a-new-commit-has-been-pushed-to-git">The site is still showing the old code even after a new commit has been pushed to git</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Bring Your Own Git</h1>
+          <p class="lede">The following steps illustrate how Cloud Manager enables organisations to use their own Git repositories, beyond GitHub.com, for deploying code to Edge Delivery Services.</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_10dd64f8ce455a4d7d4248e17eca3ce3a5602a040.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_10dd64f8ce455a4d7d4248e17eca3ce3a5602a040.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_10dd64f8ce455a4d7d4248e17eca3ce3a5602a040.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_10dd64f8ce455a4d7d4248e17eca3ce3a5602a040.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Edge Delivery Services recommends using <a href="https://github.com/">GitHub</a> or GitHub Enterprise Cloud to host and deploy project code for frictionless adoption and seamless integration. If you are already an AEM customer and your organization is unable to use GitHub for the source code, you can now use Cloud Manager as an intermediary and configure your own git based repository service there.</p>
+        <p>The following git based repository vendors are currently supported via Cloud Manager:</p>
+        <ul>
+          <li><strong>GitHub Enterprise</strong> (self-hosted version only)</li>
+          <li><strong>BitBucket</strong> (cloud version only)</li>
+          <li><strong>GitLab</strong> (cloud and self-hosted version)</li>
+          <li><strong>Azure DevOps</strong> (cloud version only)</li>
+        </ul>
+        <p>We’re currently supporting additional vendors in an Alpha phase. To enable support for them, contact us at <code>cloudmanager_byog@adobe.com</code></p>
+        <ul>
+          <li><strong>Adobe Hosted Repository</strong> (via Cloud Manager)</li>
+        </ul>
+        <p><strong>Note:</strong> Edge Delivery Services expects a <code>main</code> branch to be present in your repository for production code.</p>
+        <h2 id="prepare-your-edge-delivery-services-site">1. Prepare your Edge Delivery Services Site</h2>
+        <p>Before you can configure your external repository, you need to have an <code>aem.live</code> org registered in the <a href="../../docs/config-service-setup/index.html">configuration service</a> and have an admin user who can perform updates to the site configuration.</p>
+        <p>If you created the site using the <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/edge-delivery-sites/create-edge-delivery-site">one-click</a> functionality in Cloud Manager, you will not have admin permissions for the resulting site, which will prevent you from running certain API calls. The simplest way to begin is by following the <a href="../tutorial/index.html">developer tutorial</a>, which will create a site and automatically assigns you the admin role within your organization.</p>
+        <p><strong>Please note:</strong> even if you don’t use <a href="http://github.com">github.com</a> as the source repository, the name of the <code>aem.live</code> org still needs to exist as a <a href="http://github.com">github.com</a> org controlled by you. This ensures that nobody can (ab)use the same organization name.</p>
+        <h2 id="configure-your-external-repository-in-cloud-manager">2. Configure your External Repository in Cloud Manager</h2>
+        <p>As a first step, <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-manager/content/managing-code/external-repositories">configure your external repository</a> in Cloud Manager. If you are new to AEM, see <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-manager/content/introduction">here</a> for an introduction and to find out how to access Cloud Manager.</p>
+        <p>Once the repository ownership is confirmed and the status is set to ready, you will need to set up a webhook for your git repository. This will allow Cloud Manager to receive push event notifications whenever changes are made to your repository. You can find the webhook details in Cloud Manager, and they are unique for each repository.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_11bbe909b8737025530f0c242b2012ce41f837a7a.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_11bbe909b8737025530f0c242b2012ce41f837a7a.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_11bbe909b8737025530f0c242b2012ce41f837a7a.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_11bbe909b8737025530f0c242b2012ce41f837a7a.png?width=750&amp;format=png&amp;optimize=medium" width="1346" height="818">
+          </picture>
+        </p>
+        <p>The webhook requires an API key, which is the same key used for interacting with any Cloud Manager API. For more details on generating the Cloud Manager public API key, refer to the <a href="https://developer.adobe.com/experience-cloud/cloud-manager/guides/getting-started/create-api-integration/">public documentation</a>. Additionally, a webhook secret must be configured in your git vendor solution when creating the webhook. This secret will be used to sign each event sent to Cloud Manager.</p>
+        <p>If your git repository is not publicly accessible, you can request a list of IPs used by Cloud Manager. To do this, send an email to <code>cloudmanager_byog@adobe.com</code> from the email address associated with your Adobe ID. Be sure to specify which Git platform you want to use and whether you are using a private, public, or enterprise repository structure.</p>
+        <h2 id="configure-your-edge-delivery-site-in-cloud-manager">3. Configure your Edge Delivery Site in Cloud Manager</h2>
+        <p>Once you have your <code>aem.live</code> site, you need to onboard it into Cloud Manager and validate its ownership. For more details, please refer to the Cloud Manager <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/edge-delivery-sites/add-edge-delivery-site">public documentation</a>.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1e6f7759e229f5175c1ef398353284fdb25fd7d57.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1e6f7759e229f5175c1ef398353284fdb25fd7d57.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1e6f7759e229f5175c1ef398353284fdb25fd7d57.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1e6f7759e229f5175c1ef398353284fdb25fd7d57.png?width=750&amp;format=png&amp;optimize=medium" width="1438" height="636">
+          </picture>
+        </p>
+        <p>If at least one external Git repository with a READY status is onboarded in Cloud Manager, the "Bring Your Own Git" option will become available on an Edge Delivery site. When this option is selected, a pop-up window will appear, allowing you to choose which repository to use as the source code for the site.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_135696e84be0138a9d97a10edeaaa0348bba00fad.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_135696e84be0138a9d97a10edeaaa0348bba00fad.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_135696e84be0138a9d97a10edeaaa0348bba00fad.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_135696e84be0138a9d97a10edeaaa0348bba00fad.png?width=750&amp;format=png&amp;optimize=medium" width="1190" height="570">
+          </picture>
+        </p>
+        <p>Once the repository is selected, Cloud Manager will provide a secret that must be added in your site configuration. Be sure to copy the secret and store it securely, as it won't be visible again in Cloud Manager. If you reconfigure the site, Cloud Manager will generate a new secret.</p>
+        <h2 id="configure-your-aem-site-to-use-cloud-manager">4. Configure your AEM Site to use Cloud Manager</h2>
+        <p>Next, you need to add the code repository to your site configuration. If you are new to Edge Delivery Services, it is recommended that you familiarize yourself with the <a href="../../docs/admin.html/index.html#tag/siteConfig" data-broken-link="true">Admin API</a>.</p>
+        <pre><code>curl -v -X POST https://admin.hlx.page/config/&lt;org&gt;/sites/&lt;site&gt;/code.json \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: &lt;your-auth-token&gt;' \
+  --data '{
+    "source": {
+      "url": "https://cm-repo.adobe.io/api",
+      "raw_url": "https://cm-repo.adobe.io/api/raw",
+      "owner": "&lt;program-id&gt;",
+      "repo": "&lt;repository-id&gt;",
+      "type": "byogit",
+      "secretId": "cm-byog"
+    }
+  }'
+</code></pre>
+        <p>You will need to replace <code>&lt;org&gt;</code> and <code>&lt;site&gt;</code> with your actual values from the <a href="../../docs/config-service-setup/index.html">configuration service</a>, and <code>&lt;program-id&gt;</code> and <code>&lt;repository-id&gt;</code> with the actual values from Cloud Manager. The latter details can be easily found in the “Configure Webhook” section of the repository.</p>
+        <p>You also need to create a secret named "cm-byog" using the Admin API. The value of this secret should be the one provided by Cloud Manager in the previous step.</p>
+        <pre><code>curl -v -X POST https://admin.hlx.page/config/&lt;org&gt;/sites/&lt;site&gt;/secrets/cm-byog.json \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: &lt;your-auth-token&gt;' \
+  --data '{
+    "value": "&lt;secret from cloud manager&gt;"
+  }'
+</code></pre>
+        <h2 id="trigger-your-first-sync">5. Trigger your first sync</h2>
+        <p>In Cloud Manager, select the "Sync Code" option from your site's dropdown menu. 
+          <picture>
+            <source type="image/webp" srcset="./media_1d5d23af1195952bdaa69a223720955c736e9936b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d5d23af1195952bdaa69a223720955c736e9936b.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1d5d23af1195952bdaa69a223720955c736e9936b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d5d23af1195952bdaa69a223720955c736e9936b.png?width=750&amp;format=png&amp;optimize=medium" width="728" height="346">
+          </picture>
+        </p>
+        <p>In the popup that appears, choose the branch you wish to sync.</p>
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_11b328972f8b57cd234ed4d7ac55e28b0844caad4.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_11b328972f8b57cd234ed4d7ac55e28b0844caad4.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_11b328972f8b57cd234ed4d7ac55e28b0844caad4.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_11b328972f8b57cd234ed4d7ac55e28b0844caad4.png?width=750&amp;format=png&amp;optimize=medium" width="678" height="387">
+          </picture>
+        </p>
+        <p>This action will update your Edge Delivery Site with the code from your private git repository and the selected branch. For more details about the sync jobs, you can use the following <a href="../../docs/admin.html/index.html#tag/job/operation/getJobList" data-broken-link="true">Admin API</a>.</p>
+        <pre><code>curl -X GET https://admin.hlx.page/job/&lt;org&gt;/&lt;site&gt;/&lt;branch&gt;/code \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: &lt;your-auth-token&gt;'
+</code></pre>
+        <h2 id="verify-your-aem-site">6. Verify your AEM Site</h2>
+        <p>Browse your site at <code>https://main–{site}--{org}.aem.page</code><br>to ensure the initial synchronization from your external repository has worked as expected.</p>
+        <p>To test continuous code synchronization, make a change to one of your code files (ideally something easy to spot in the browser) and push it to the <code>main</code> branch of your external repository and ensure the change is reflected on your AEM Site.</p>
+        <p><strong>Note:</strong> Code synchronization happens asynchronously and your changes may not be reflected immediately. Disable your browser cache or use an incognito window for testing to circumvent your browser’s cache and force it to fetch all resources from the server.</p>
+        <h1 id="repoless---one-codebase-many-sites">Repoless - One codebase, many sites</h1>
+        <p>If you want to use the same code across multiple sites, you can leverage the <a href="../../docs/repoless/index.html">Repoless</a> feature in Edge Delivery Services, which is fully compatible with any external Git repository.</p>
+        <p>For the second site, configure it as shown below. There is no need to set the “cm-byog” secret. Make sure to reuse the same <code>&lt;program-id&gt;</code> and <code>&lt;repository-id&gt;</code> as in the first site.</p>
+        <pre><code>curl -v -X POST https://admin.hlx.page/config/&lt;org&gt;/sites/&lt;site_2&gt;/code.json \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: &lt;your-auth-token&gt;' \
+  --data '{
+    "source": {
+      "url": "https://cm-repo.adobe.io/api",
+      "raw_url": "https://cm-repo.adobe.io/api/raw",
+      "owner": "&lt;program-id&gt;",
+      "repo": "&lt;repository-id&gt;",
+      "type": "byogit"
+    }
+  }'
+</code></pre>
+        <p>All code changes will now be automatically propagated to every site configured to use the repository onboarded in Cloud Manager as its code source.</p>
+        <h1 id="troubleshooting">Troubleshooting</h1>
+        <h2 id="the-site-is-still-showing-the-old-code-even-after-a-new-commit-has-been-pushed-to-git">The site is still showing the old code even after a new commit has been pushed to git</h2>
+        <p>Steps to check:</p>
+        <ul>
+          <li>Verify the webhook configured in Step 2 (Configure your External Repository in Cloud Manager) to confirm that events are being sent to Cloud Manager.</li>
+          <li>If events are reaching Cloud Manager, use the following API call to check the status of the latest code sync job:</li>
+        </ul>
+        <pre><code>curl -X GET https://admin.hlx.page/job/&lt;org&gt;/&lt;site&gt;/&lt;branch&gt;/code \
+  -H 'content-type: application/json' \
+  -H 'x-auth-token: &lt;your-auth-token&gt;'
+</code></pre>
+        <ul>
+          <li>If you see the error message <code>Unable to fetch hlxignore: 401</code>, it indicates that the secret configured in Step 4 (Configure your AEM Site to use Cloud Manager) is incorrect.</li>
+        </ul>
+        <p>Important notes:</p>
+        <ul>
+          <li>A repository onboarded in Cloud Manager can only be linked to one site at a time.</li>
+          <li>If the same repository is connected to another site from Cloud Manager, the original configuration (including the secret generated for the first site) will be revoked.</li>
+          <li>To use a single repository with multiple sites, you must use the repoless feature.</li>
+        </ul>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

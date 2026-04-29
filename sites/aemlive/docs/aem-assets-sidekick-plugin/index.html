@@ -1,0 +1,357 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.075Z
+  page:             docs-aem-assets-sidekick-plugin
+  pageUrl:          https://www.aem.live/docs/aem-assets-sidekick-plugin
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Adobe Experience Manager Assets Sidekick Plugin</title>
+  <meta name="description" content="With the Experience Manager Assets Sidekick plugin, you can use assets from your Experience Manager Assets repository while authoring documents in Microsoft Word or Google ...">
+  <meta property="og:title" content="Adobe Experience Manager Assets Sidekick Plugin">
+  <meta property="og:description" content="With the Experience Manager Assets Sidekick plugin, you can use assets from your Experience Manager Assets repository while authoring documents in Microsoft Word or Google ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/aem-assets-sidekick-plugin/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#supported-experience-manager-assets-versions">Supported Experience Manager Assets Versions</a></li>
+<li class="l-2"><a href="#grant-users-access-to-assets">Grant Users Access to Assets</a></li>
+<li class="l-2"><a href="#assets-sidekick-plugin-for-content-authors">Assets Sidekick Plugin for Content Authors</a></li>
+<li class="l-2"><a href="#delivering-assets-via-dynamic-media-with-openapi">Delivering Assets via Dynamic Media with OpenAPI</a></li>
+<li class="l-3"><a href="#prerequisites">Prerequisites</a></li>
+<li class="l-3"><a href="#using-image-references-when-authoring-content">Using Image References when Authoring Content</a></li>
+<li class="l-3"><a href="#using-video-references-when-authoring-content">Using Video References when Authoring Content</a></li>
+<li class="l-3"><a href="#using-asset-references-for-pdf-zip-etc-when-authoring-content">Using Asset References for PDF, Zip, etc. when Authoring Content</a></li>
+<li class="l-2"><a href="#customizing-the-aem-assets-sidekick-plugin">Customizing the AEM Assets Sidekick Plugin</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>Adobe Experience Manager Assets Sidekick Plugin</h1>
+          <p class="lede">With the Experience Manager Assets Sidekick plugin, you can use assets from your Experience Manager Assets repository while authoring documents in Microsoft Word or Google ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_17dc5f4102113dfa4f96b6520d011cb9328b2cd47.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_17dc5f4102113dfa4f96b6520d011cb9328b2cd47.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_17dc5f4102113dfa4f96b6520d011cb9328b2cd47.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_17dc5f4102113dfa4f96b6520d011cb9328b2cd47.png?width=750&amp;format=png&amp;optimize=medium" width="1103" height="827">
+          </picture>
+        </p>
+        
+        <p>With the Experience Manager Assets Sidekick plugin, you can use assets from your Experience Manager Assets repository while authoring documents in Microsoft Word or Google Docs.</p>
+        <p><strong>Important Note:</strong> For using assets while authoring a page using <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/wysiwyg-authoring/authoring">Universal Editor based WYSIWYG authoring</a>, please refer to Universal <a href="https://developer.adobe.com/uix/docs/extension-manager/extension-developed-by-adobe/configurable-asset-picker/">Editor Custom Asset Picker</a>. The documentation here is specifically for document based authoring experience.</p>
+        <h2 id="supported-experience-manager-assets-versions">Supported Experience Manager Assets Versions</h2>
+        <p>The Sidekick plugin for Assets supports access to:</p>
+        <ul>
+          <li><a href="https://experienceleague.adobe.com/docs/experience-manager-cloud-service/content/assets/home.html?lang=en">Adobe Experience Manager Assets as a Cloud Service</a></li>
+          <li><a href="https://experienceleague.adobe.com/docs/experience-manager-assets-essentials/help/introduction.html?lang=en">Adobe Experience Manager Assets Essentials</a></li>
+        </ul>
+        <p>Note: To simplify access to Experience Manager Assets version 6.5 (Adobe Managed Services or on-premises), you can implement a project-based plugin using the <a href="https://experienceleague.adobe.com/docs/experience-manager-65/assets/managing/asset-selector.html?lang=en">asset selector from version 6.5</a>.</p>
+        <h2 id="grant-users-access-to-assets">Grant Users Access to Assets</h2>
+        <p>Content authors who need access to assets using the plugin, must be entitled to an Experience Manager Assets environment by assigning them to the respective product profile.</p>
+        <p>Please see <a href="https://experienceleague.adobe.com/docs/experience-manager-cloud-service/content/onboarding/journey/assign-profiles-aem.html?lang=en">Assigning AEM Product Profiles</a> for details.</p>
+        <h2 id="assets-sidekick-plugin-for-content-authors">Assets Sidekick Plugin for Content Authors</h2>
+        <p>Content authors can access assets from Experience Manager Assets without having to leave Microsoft Word or Google Docs.</p>
+        <ol>
+          <li>Open up the Sidekick browser extension and find the “<strong>My Assets</strong>” button.
+            <ol>
+              <li>Note that the name of the button may vary depending on your project’s configuration.</li>
+              <li>Please see the document <a href="../../developer/configuring-aem-assets-sidekick-plugin/index.html">Configuring AEM Assets Sidekick Plugin</a> to configure this plugin.
+                <picture>
+                  <source type="image/webp" srcset="./media_139a71679798ff0c9137525431030d297e583f293.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                  <source type="image/webp" srcset="./media_139a71679798ff0c9137525431030d297e583f293.png?width=750&amp;format=webply&amp;optimize=medium">
+                  <source type="image/png" srcset="./media_139a71679798ff0c9137525431030d297e583f293.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                  <img loading="lazy" alt="" src="./media_139a71679798ff0c9137525431030d297e583f293.png?width=750&amp;format=png&amp;optimize=medium" width="826" height="756">
+                </picture>
+              </li>
+            </ol>
+          </li>
+          <li>The Asset Selector opens.</li>
+          <li>You must log in to the Asset Selector using your Adobe login credentials for Assets.
+            <ol>
+              <li>For more details, please see the section <a href="index.html#give-users-access-to-assets#grant-users-access-to-assets">Give users access to assets</a>.</li>
+              <li>Depending on how authentication is set up for your project, these credentials might be different from those you use to log in to Microsoft Word / Google Doc.</li>
+            </ol>
+          </li>
+          <li>Search for the asset that you need in the Asset Selector.
+            <ol>
+              <li>You can use keyword search, filter for specific asset formats, sort results, and use different views (list, grid, gallery, and waterfall).</li>
+              <li>The assets view shows basic properties of the asset including approval status, if set.</li>
+              <li>When hovering over assets, you will see the info icon, which shows additional asset metadata.
+                <picture>
+                  <source type="image/webp" srcset="./media_13de3f77be038b0dd466d2873e183d83015ba1aad.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                  <source type="image/webp" srcset="./media_13de3f77be038b0dd466d2873e183d83015ba1aad.png?width=750&amp;format=webply&amp;optimize=medium">
+                  <source type="image/png" srcset="./media_13de3f77be038b0dd466d2873e183d83015ba1aad.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                  <img loading="lazy" alt="" src="./media_13de3f77be038b0dd466d2873e183d83015ba1aad.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="778">
+                </picture>
+              </li>
+            </ol>
+          </li>
+          <li>Selecting an asset copies it to your clipboard.</li>
+          <li>You can then paste the copied asset to your Microsoft Word or Google Doc document.</li>
+          <li>After using the Sidekick to preview and publish the document, the new asset is displayed as part of your web page</li>
+        </ol>
+        <p>Note: Non-image assets like videos, PDF documents, zip files etc. cannot be copied to Word / Google Docs documents. To use such assets, the reference URL for those assets should be copied instead. For enabling this reference URL-based copying of the asset, please refer to the section <a href="index.html#using-asset-references-pdf-zip-etc-when-authoring-content">Using Asset References for PDF, Zip, etc. when Authoring Content</a>.</p>
+        <h2 id="delivering-assets-via-dynamic-media-with-openapi">Delivering Assets via Dynamic Media with OpenAPI</h2>
+        <p>Using the Assets Sidekick plugin, you can also include Dynamic Media delivery with OpenAPI. This offers a number of benefits.</p>
+        <ul>
+          <li>Access to brand-approved assets only (images, videos, pdfs, other formats) from AEM Assets Cloud Services</li>
+          <li>Governance (references vs. copies of the asset), which helps with auto-propagation of asset lifecycle events like expiration, deletion, and updates</li>
+          <li>Dynamic image renditions and smart crop</li>
+          <li>Rich media optimization and delivery (e.g., adaptive video streaming OOTB, and original asset delivery for PDFs)</li>
+          <li>Asset-level impressions report <em>(Coming Soon)</em></li>
+        </ul>
+        <p>For more information on capabilities offered by Dynamic Media with OpenAPI, please see <a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/assets/dynamicmedia/dynamic-media-open-apis/dynamic-media-open-apis-overview">the Dynamic Media with OpenAPI capabilities documentation.</a></p>
+        <h3 id="prerequisites">Prerequisites</h3>
+        <p>To use asset references you must have:</p>
+        <ul>
+          <li>An Assets Cloud Service environment where Dynamic Media with Open API is enabled.</li>
+          <li>A Dynamic Media license.</li>
+          <li>The AEM Assets sidekick plugin enabled with copy reference for image assets enabled <a href="../../developer/configuring-aem-assets-sidekick-plugin/index.html#copymode">as documented here</a>.</li>
+          <li>Assets that are approved, i.e. <code>dam:status="Approved"</code> via the Assets Cloud Services backend or UI actions.</li>
+        </ul>
+        <p><strong>Dynamic Media with OpenAPI is now in an Early Adopter program. Please reach out to your account team or Adobe support Slack channel for more information.</strong></p>
+        <h3 id="using-image-references-when-authoring-content">Using Image References when Authoring Content</h3>
+        <p>If your project meets the prerequisites, you can use image assets by copying their reference URL.</p>
+        <ol>
+          <li>Open the Sidekick and the Assets Selector and choose a repository with the prefix “Delivery-” in the repository switcher and filter for image assets.<br>
+            <picture>
+              <source type="image/webp" srcset="./media_1c897ed1a2a3a71b77fc17609006137f96b856366.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+              <source type="image/webp" srcset="./media_1c897ed1a2a3a71b77fc17609006137f96b856366.png?width=750&amp;format=webply&amp;optimize=medium">
+              <source type="image/png" srcset="./media_1c897ed1a2a3a71b77fc17609006137f96b856366.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+              <img loading="lazy" alt="" src="./media_1c897ed1a2a3a71b77fc17609006137f96b856366.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="780">
+            </picture>
+          </li>
+          <li>Select an image asset.
+            <ol>
+              <li>A single click on the image asset card copies the details to clipboard.</li>
+              <li>This is confirmed via a <strong>Copied</strong> banner.<br>
+                <picture>
+                  <source type="image/webp" srcset="./media_1b84525c4e02db401106f590ef3cebe418fb7cd6b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                  <source type="image/webp" srcset="./media_1b84525c4e02db401106f590ef3cebe418fb7cd6b.png?width=750&amp;format=webply&amp;optimize=medium">
+                  <source type="image/png" srcset="./media_1b84525c4e02db401106f590ef3cebe418fb7cd6b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                  <img loading="lazy" alt="" src="./media_1b84525c4e02db401106f590ef3cebe418fb7cd6b.png?width=750&amp;format=png&amp;optimize=medium" width="342" height="748">
+                </picture>
+              </li>
+            </ol>
+          </li>
+          <li>Paste the link into your source document.
+            <ol>
+              <li>The link points to the original rendition delivery URL of the image.<br>
+                <picture>
+                  <source type="image/webp" srcset="./media_17c74f75419064f613d6911863c4dfe658b3069e4.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                  <source type="image/webp" srcset="./media_17c74f75419064f613d6911863c4dfe658b3069e4.png?width=750&amp;format=webply&amp;optimize=medium">
+                  <source type="image/png" srcset="./media_17c74f75419064f613d6911863c4dfe658b3069e4.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                  <img loading="lazy" alt="" src="./media_17c74f75419064f613d6911863c4dfe658b3069e4.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="805">
+                </picture>
+              </li>
+            </ol>
+          </li>
+          <li>Preview the site and the link is rendered as an image.<br><br>
+            <picture>
+              <source type="image/webp" srcset="./media_1144da193c647c7be00f05114ac730770a05a9f3b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+              <source type="image/webp" srcset="./media_1144da193c647c7be00f05114ac730770a05a9f3b.png?width=750&amp;format=webply&amp;optimize=medium">
+              <source type="image/png" srcset="./media_1144da193c647c7be00f05114ac730770a05a9f3b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+              <img loading="lazy" alt="" src="./media_1144da193c647c7be00f05114ac730770a05a9f3b.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="833">
+            </picture>
+          </li>
+          <li>If all looks good, publish the document.
+            <picture>
+              <source type="image/webp" srcset="./media_1938324736b46cb049d4b18909853859a0369f1fb.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+              <source type="image/webp" srcset="./media_1938324736b46cb049d4b18909853859a0369f1fb.png?width=750&amp;format=webply&amp;optimize=medium">
+              <source type="image/png" srcset="./media_1938324736b46cb049d4b18909853859a0369f1fb.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+              <img loading="lazy" alt="" src="./media_1938324736b46cb049d4b18909853859a0369f1fb.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="802">
+            </picture>
+          </li>
+        </ol>
+        <p>Additional image transformations like, crop, rotate, flip, etc. are available using Dynamic Media with OpenAPI by appending query parameters at the end of the URL copied from the AEM Asset Selector. Available query parameters are detailed in the <a href="https://adobe-aem-assets-delivery-experimental.redoc.ly/#operation/getAssetSeoFormat">Assets Delivery API documentation</a>.</p>
+        <h3 id="using-video-references-when-authoring-content">Using Video References when Authoring Content</h3>
+        <p><br>If your project meets the prerequisites, you can use video assets by copying their reference URL.</p>
+        <ol>
+          <li>Open the Sidekick and the Assets Selector and choose a repository with the prefix “Delivery-” in the repository switcher and filter for video assets.<br>
+            <picture>
+              <source type="image/webp" srcset="./media_10b853e79c942f49db5ed55b86bf52bdff453e16b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+              <source type="image/webp" srcset="./media_10b853e79c942f49db5ed55b86bf52bdff453e16b.png?width=750&amp;format=webply&amp;optimize=medium">
+              <source type="image/png" srcset="./media_10b853e79c942f49db5ed55b86bf52bdff453e16b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+              <img loading="lazy" alt="" src="./media_10b853e79c942f49db5ed55b86bf52bdff453e16b.png?width=750&amp;format=png&amp;optimize=medium" width="405" height="923">
+            </picture>
+          </li>
+          <li>Select a video asset.
+            <ol>
+              <li>A single click on the video asset card copies the details to clipboard.</li>
+              <li>This is confirmed via a <strong>Copied</strong> banner.</li>
+            </ol>
+          </li>
+          <li>Paste the link into your source document.
+            <ol>
+              <li>The link is pasted as an embed block, which includes a hyperlink.</li>
+              <li>The hyperlink is the video player URL for the selected video asset.<br>
+                <picture>
+                  <source type="image/webp" srcset="./media_18f8a68c89188497664bec1a8feade9edb05e11a3.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                  <source type="image/webp" srcset="./media_18f8a68c89188497664bec1a8feade9edb05e11a3.png?width=750&amp;format=webply&amp;optimize=medium">
+                  <source type="image/png" srcset="./media_18f8a68c89188497664bec1a8feade9edb05e11a3.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                  <img loading="lazy" alt="" src="./media_18f8a68c89188497664bec1a8feade9edb05e11a3.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="808">
+                </picture>
+              </li>
+            </ol>
+          </li>
+          <li>Preview the site and the video block and link are rendered as a video.<br>
+            <picture>
+              <source type="image/webp" srcset="./media_1db909e87a429bc544d046b9ebaf86355fd2901c1.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+              <source type="image/webp" srcset="./media_1db909e87a429bc544d046b9ebaf86355fd2901c1.png?width=750&amp;format=webply&amp;optimize=medium">
+              <source type="image/png" srcset="./media_1db909e87a429bc544d046b9ebaf86355fd2901c1.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+              <img loading="lazy" alt="" src="./media_1db909e87a429bc544d046b9ebaf86355fd2901c1.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="807">
+            </picture>
+          </li>
+          <li>If all looks good, publish the document.</li>
+        </ol>
+        <h3 id="using-asset-references-for-pdf-zip-etc-when-authoring-content">Using Asset References for PDF, Zip, etc. when Authoring Content<br></h3>
+        <p>If your project meets the prerequisites, you can use assets for other media types such as PDF, Zip, etc. by copying their reference URL.</p>
+        <ol>
+          <li>Open the Sidekick and the Assets Selector and choose a repository with the prefix “Delivery-” in the repository switcher and filter for the asset you want to select.<br>
+            <picture>
+              <source type="image/webp" srcset="./media_15a319d5b53f0e16b3bac4afc2fea6fbac727ad9a.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+              <source type="image/webp" srcset="./media_15a319d5b53f0e16b3bac4afc2fea6fbac727ad9a.png?width=750&amp;format=webply&amp;optimize=medium">
+              <source type="image/png" srcset="./media_15a319d5b53f0e16b3bac4afc2fea6fbac727ad9a.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+              <img loading="lazy" alt="" src="./media_15a319d5b53f0e16b3bac4afc2fea6fbac727ad9a.png?width=750&amp;format=png&amp;optimize=medium" width="399" height="917">
+            </picture>
+          </li>
+          <li>Select the asset such as a PDF.
+            <ol>
+              <li>A single click on the asset card copies the details to clipboard.<br>
+                <picture>
+                  <source type="image/webp" srcset="./media_1da08caa33af60843e0416f42524c5fbc5018d122.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                  <source type="image/webp" srcset="./media_1da08caa33af60843e0416f42524c5fbc5018d122.png?width=750&amp;format=webply&amp;optimize=medium">
+                  <source type="image/png" srcset="./media_1da08caa33af60843e0416f42524c5fbc5018d122.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                  <img loading="lazy" alt="" src="./media_1da08caa33af60843e0416f42524c5fbc5018d122.png?width=750&amp;format=png&amp;optimize=medium" width="408" height="886">
+                </picture>
+              </li>
+            </ol>
+          </li>
+          <li>Paste the link into your source document.
+            <ol>
+              <li>The link is pasted as an embed block, which includes a hyperlink.</li>
+              <li>The hyperlink points to the original rendition delivery of the URL of the asset.<br>
+                <picture>
+                  <source type="image/webp" srcset="./media_194777fcf3283c4c40b23e75e1344be2d5b8b6715.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                  <source type="image/webp" srcset="./media_194777fcf3283c4c40b23e75e1344be2d5b8b6715.png?width=750&amp;format=webply&amp;optimize=medium">
+                  <source type="image/png" srcset="./media_194777fcf3283c4c40b23e75e1344be2d5b8b6715.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                  <img loading="lazy" alt="" src="./media_194777fcf3283c4c40b23e75e1344be2d5b8b6715.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="808">
+                </picture>
+              </li>
+            </ol>
+          </li>
+          <li>Preview the site and verify that the PDF link is rendered.<br><br>
+            <picture>
+              <source type="image/webp" srcset="./media_194777fcf3283c4c40b23e75e1344be2d5b8b6715.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+              <source type="image/webp" srcset="./media_194777fcf3283c4c40b23e75e1344be2d5b8b6715.png?width=750&amp;format=webply&amp;optimize=medium">
+              <source type="image/png" srcset="./media_194777fcf3283c4c40b23e75e1344be2d5b8b6715.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+              <img loading="lazy" alt="" src="./media_194777fcf3283c4c40b23e75e1344be2d5b8b6715.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="808">
+            </picture>
+          </li>
+          <li>If all looks good, publish the document. Clicking on the PDF link in the published page should open up the PDF delivered from AEM Asset Dynamic Media Open API delivery in a new tab.</li>
+        </ol>
+        <h2 id="customizing-the-aem-assets-sidekick-plugin">Customizing the AEM Assets Sidekick Plugin</h2>
+        <p>The AEM Assets Sidekick Plugin can be customized to better fit your project’s specific needs. Available customization options include:</p>
+        <ul>
+          <li>Customizing block structure including block title, number of rows, columns etc. that gets copied over to the document when copying an asset from the assets addon to it.</li>
+          <li>Controlling if an asset is copied over as binary or a url from where the asset can be delivered</li>
+          <li>Set up the default filter schema to show only assets relevant to the page being authored.</li>
+          <li>And more options like specifying asset’s delivery domain etc.</li>
+        </ul>
+        <p>Please see the document <a href="../../developer/configuring-aem-assets-sidekick-plugin/index.html#extconfigurl-optional">Configuring Adobe Experience Manager Assets Sidekick Plugin</a> for details on customization and extension options available.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

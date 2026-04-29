@@ -1,0 +1,320 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.234Z
+  page:             developer-repoless-multisite-manager
+  pageUrl:          https://www.aem.live/developer/repoless-multisite-manager
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Multi site management with AEM authoring as your content source</title>
+  <meta name="description" content="Multi Site Manager (MSM) and its Live Copy features enable you to use the same site content in multiple locations, while allowing for variations. You ...">
+  <meta property="og:title" content="Multi site management with AEM authoring as your content source">
+  <meta property="og:description" content="Multi Site Manager (MSM) and its Live Copy features enable you to use the same site content in multiple locations, while allowing for variations. You ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/repoless-multisite-manager/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#requirements">Requirements</a></li>
+<li class="l-2"><a href="#use-case">Use case</a></li>
+<li class="l-2"><a href="#configuration">Configuration</a></li>
+<li class="l-3"><a href="#update-aem-site-configurations">Update AEM site configurations</a></li>
+<li class="l-3"><a href="#create-new-edge-delivery-services-sites-for-your-localized-pages">Create new Edge Delivery Services sites for your localized pages</a></li>
+<li class="l-3"><a href="#update-cloud-configurations-in-aem-for-your-localized-pages">Update Cloud Configurations in AEM for Your Localized Pages</a></li>
+<li class="l-2"><a href="#verify-your-setup">Verify your setup</a></li>
+<li class="l-3"><a href="#reusing-code-across-sites-with-aem-authoring-as-your-content-source">Reusing code across sites with AEM authoring as your content source</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Multi site management with AEM authoring as your content source</h1>
+          <p class="lede">Multi Site Manager (MSM) and its Live Copy features enable you to use the same site content in multiple locations, while allowing for variations. You ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1d1908452b63ceba075d440ca33359295be93b76b.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1d1908452b63ceba075d440ca33359295be93b76b.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1d1908452b63ceba075d440ca33359295be93b76b.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1d1908452b63ceba075d440ca33359295be93b76b.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/sites/administering/reusing-content/msm/overview">Multi Site Manager (MSM)</a> and its Live Copy features enable you to use the same site content in multiple locations, while allowing for variations. You can author content once and create Live Copies. MSM maintains live relationships between your source content and its Live Copies so that when you change the source content, the source and Live Copies can be synchronized.</p>
+        <p>You can use MSM to create an entire content structure for your brand across locales and languages, authoring the content centrally. Your localized sites can then each be delivered by Edge Delivery Services, leveraging a central code base.</p>
+        <p>In order to leverage MSM on Edge Delivery Services with AEM authoring, you must enable the repoless feature.</p>
+        <h2 id="requirements">Requirements</h2>
+        <p>To configure MSM, you must first complete the following tasks:</p>
+        <ul>
+          <li>This document assumes that you have already created a site for your project based on the <a href="../ue-tutorial/index.html">Getting Started – Universal Editor Developer Tutorial</a></li>
+          <li>You must have already <a href="../repoless-authoring/index.html">enabled the repoless feature for your project.</a></li>
+        </ul>
+        <h2 id="use-case">Use case</h2>
+        <p>This document assumes that you have already created a basic localized site structure for your project. It uses the following structure for the <code>website</code> brand with a presence in Switzerland and Germany as an example.</p>
+        <pre><code>/content/website
+/content/website/language-masters
+/content/website/language-masters/en
+/content/website/language-masters/de
+/content/website/language-masters/fr
+/content/website/language-masters/it
+/content/website/ch
+/content/website/ch/de
+/content/website/ch/fr
+/content/website/ch/it
+/content/website/ch/en
+/content/website/de
+/content/website/de/de
+/content/website/de/en
+</code></pre>
+        <p>Content in <code>language-masters</code> is the source of Live Copies for the localized sites: Germany (<code>de</code>) and Switzerland (<code>ch</code>). The goal of this document is to create Edge Delivery Services sites that all use the same code base for each localized site.</p>
+        <h2 id="configuration">Configuration</h2>
+        <p>There are several steps to configuring the MSM repoless use case.</p>
+        <ol>
+          <li>Update AEM site configurations.</li>
+          <li>Create new Edge Delivery Services sites for your localized pages.</li>
+          <li>Update cloud configuration in AEM for your localized sites.</li>
+        </ol>
+        <p>This document details these steps.</p>
+        <h3 id="update-aem-site-configurations">Update AEM site configurations</h3>
+        <p><a href="https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/configurations">Configurations</a> can be thought of as workspaces that can be used to gather groups of settings and their associated content for organizational purposes. When you create a site in AEM, a configuration is automatically created for it.</p>
+        <p>You generally want to share certain content between sites such as:</p>
+        <ul>
+          <li>Templates created from content in the blueprint</li>
+          <li>Content Fragment models, persisted, queries etc.</li>
+        </ul>
+        <p>You can create additional configurations to facilitate such sharing. For the <code>website</code> use case, we would need configurations for the following paths.</p>
+        <pre><code>/content/website
+/content/website/ch
+/content/website/de
+</code></pre>
+        <p>That is, you will have a configuration for the root of the <code>website</code> brand’s content (<code>/content/website</code>) used by the blueprints and a configuration used by each localized site (Switzerland and Germany).</p>
+        <ol>
+          <li>Sign into your AEM authoring instance.</li>
+          <li>Navigate to the Configuration Browser by going to <strong>Tools</strong> → <strong>General</strong> → <strong>Configuration Browser</strong>.</li>
+          <li>Select the configuration that was automatically created for your project (in this case <code>website</code>) and then tap or click <strong>Create</strong> in the toolbar.</li>
+          <li>In the <strong>Create Configuration</strong> dialog, provide a descriptive <strong>Name</strong> for your localized site (such as <strong>Switzerland</strong>) and for the <strong>Title</strong> use the same title of the localized size (in this case <code>ch</code>).</li>
+          <li>Select the <strong>Cloud Configuration</strong> feature and any additional features you may need for your project such as Editable Templates.</li>
+          <li>Tap or click <strong>Create</strong>.</li>
+        </ol>
+        <p>Create configurations for each localized site you need. In the case of <code>website</code>, you would need to create a configuration for <code>de</code> as well alongside the <code>ch</code> configuration.</p>
+        <p>Once the configurations are created, you need to ensure that the localized sites use them.</p>
+        <ol>
+          <li>Sign into your AEM authoring instance.</li>
+          <li>Navigate to the <strong>Sites</strong> console by going to <strong>Navigation</strong> → <strong>Sites</strong>.</li>
+          <li>Select the localized site such as <strong>Switzerland</strong>.</li>
+          <li>Tap or click <strong>Properties</strong> in the tool bar.</li>
+          <li>In the page properties window, select the <strong>Advanced</strong> tab and under the <strong>Configuration</strong> heading, unselect the option <strong>Inherited from /content/website</strong>, where <code>website</code> is the site root.</li>
+          <li>In <strong>Cloud Configuration</strong> field, use the path browser to select the configuration you created for your localized site such as <strong>Switzerland</strong> under <code>/conf/website/ch</code>.</li>
+          <li>Tap or click <strong>Save &amp; Close</strong>.</li>
+        </ol>
+        <p>Assign the respective configurations to the additional localized sites. In the case of <code>website</code>, you would need to assign the <code>/conf/website/de</code> configuration to the Germany site as well.</p>
+        <h3 id="create-new-edge-delivery-services-sites-for-your-localized-pages">Create new Edge Delivery Services sites for your localized pages</h3>
+        <p>To connect more sites to Edge Delivery Services for a multi-region, multi-language site setup, you must set up a new aem.live site for each of your AEM MSM sites. There is a 1:1 relationship between AEM MSM sites and aem.live sites with a shared Git repository and code base.</p>
+        <p>For this example, we will create the site <code>website-ch</code> for the Swiss presence of <code>website</code>, whose localized content is under the AEM path <code>/content/website/ch</code>.</p>
+        <ol>
+          <li>Retrieve your auth token and the technical account for your program.
+            <ul>
+              <li>Please see the document <strong>Reusing Code Across Sites</strong> for details on <a href="../repoless-authoring/index.html#retrieve-access-token">how to obtain your access token</a> and the <a href="../repoless-authoring/index.html#add-path-mapping-for-site-configuration-and-set-technical-account">technical account</a> for your program.</li>
+            </ul>
+          </li>
+          <li>Create a new site by making the following call to the configuration service. Please consider:
+            <ul>
+              <li>The project name in the POST URL must be the new site name you are creating. In this example, it is <code>website-ch</code>.</li>
+              <li>The code configuration should be the same as you used for the initial project creation.</li>
+              <li>The <code>content → source → url</code> must be adapted to the name of the new site you are creating. In this example, it is <code>website-ch</code>.</li>
+              <li>I.e., the site name in POST URL and the <code>content → source → url</code> must be the same.</li>
+              <li>Adapt the admin block to define the users who should have full administrative access to the site.
+                <ul>
+                  <li>It is an array of email addresses.</li>
+                  <li>The wildcard <code>*</code> can be used.</li>
+                  <li>See the document <a href="../../docs/authentication-setup-authoring/index.html#default-roles">Configuring Authentication for Authors</a> for more information.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ol>
+        <pre><code>curl --request POST \
+  --url https://admin.hlx.page/config/&lt;your-github-org&gt;/sites/website-ch.json \
+  --header 'Content-Type: application/json' \
+  --header 'x-auth-token: &lt;your-token&gt;' \
+  --data '{
+    "code": {
+        "owner": "&lt;your-github-org&gt;",
+        "repo": "website",
+        "source": {
+            "type": "github",
+            "url": "https://github.com/&lt;your-github-org&gt;/website"
+        }
+    },
+    "content": {
+        "source": {
+            "url": "https://author-p&lt;programID&gt;-e&lt;environmentID&gt;.adobeaemcloud.com/bin/franklin.delivery/&lt;your-github-org&gt;/website-ch/main",
+            "type": "markup",
+            "suffix": ".html"
+        }
+    },
+    "access": {
+        "admin": {
+            "role": {
+                "admin": [
+                    "&lt;email&gt;@&lt;domain&gt;.&lt;tld&gt;"
+                ],
+                "config_admin": [
+                    "&lt;tech-account-id&gt;@techacct.adobe.com"
+                ]
+            },
+            "requireAuth": "auto"
+        }
+    }
+}’
+</code></pre>
+        <ol start="3">
+          <li>Add the path mapping for your new site by making the following call to the configuration service.</li>
+        </ol>
+        <pre><code>curl --request POST \
+  --url https://admin.hlx.page/config/&lt;your-github-org&gt;/sites/website-ch/public.json \
+  --header 'Content-Type: application/json' \
+  --header 'x-auth-token: &lt;your-token&gt;' \
+  --data '{
+    "paths": {
+        "mappings": [
+            "/content/website/ch/:/"
+        ],
+        "includes": [
+            "/content/website/ch/"
+        ]
+    }
+}’
+</code></pre>
+        <ol start="4">
+          <li>Verify that the public configuration of your new site is working by calling <code>https://main--website-ch--&lt;your-github-org&gt;.aem.page/config.json</code> and verifying the content of the returned JSON.</li>
+        </ol>
+        <p>Repeat the steps to create additional localized sites. In the case of <code>website</code>, you would need to create a <code>website-de</code> site for the German presence as well.</p>
+        <h3 id="update-cloud-configurations-in-aem-for-your-localized-pages">Update Cloud Configurations in AEM for Your Localized Pages</h3>
+        <p>Your pages in AEM must be configured to use the new Edge Delivery Sites you created in the previous section for your localized presence. In this example, content under <code>/content/website/ch</code> needs to know to use the <code>website-ch</code> site you created. Similarly content under <code>/content/website/de</code> needs to use the <code>website-de</code> site.</p>
+        <ol>
+          <li>Sign into the AEM author instance and go to <strong>Tools</strong> → <strong>Cloud Services</strong> → <strong>Edge Delivery Services Configuration</strong>.</li>
+          <li>Select the configuration that was automatically created for your project and then the folder that was created for the localized page. In this case, that would be Switzerland (<code>ch</code>).</li>
+          <li>Tap or click <strong>Create</strong> &gt; <strong>Configuration</strong> in the tool bar.</li>
+          <li>In the <strong>Edge Delivery Services Configuration</strong> window:
+            <ul>
+              <li>Provide your GitHub organization in the <strong>Organization</strong> field.</li>
+              <li>Change the site name to the name of the site you created in the previous section. In this case, that would be <code>website-ch</code>.</li>
+              <li>Change project type to <strong>aem.live with repoless config setup</strong>.</li>
+            </ul>
+          </li>
+          <li>Tap or click <strong>Save &amp; Close</strong>.</li>
+        </ol>
+        <h2 id="verify-your-setup">Verify your setup</h2>
+        <p>Now that you have made all of the necessary configuration changes, verify that everything is working as expected.</p>
+        <ol>
+          <li>Sign into your AEM authoring instance.</li>
+          <li>Navigate to the <strong>Sites</strong> console by going to <strong>Navigation</strong> → <strong>Sites</strong>.</li>
+          <li>Select the localized site such as <strong>Switzerland</strong>.</li>
+          <li>Tap or click <strong>Edit</strong> in the toolbar.</li>
+          <li>Ensure that the page properly renders in the Universal Editor and uses the same code as your site root.</li>
+          <li>Make a change to the page and re-publish.</li>
+          <li>Visit your new Edge Delivery Services site for that localized page at <code>https://main--website-ch--&lt;your-github-org&gt;.aem.page</code>.</li>
+        </ol>
+        <p>If you see the changes that you made, your MSM setup is working properly.</p>
+        <div class="pagination contained">
+          <div>
+            <div>
+              <p><span class="icon icon-icon-arrow"></span>Previous</p>
+              <h3 id="reusing-code-across-sites-with-aem-authoring-as-your-content-source"><a href="../repoless-authoring/index.html">Reusing code across sites with AEM authoring as your content source</a></h3>
+            </div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

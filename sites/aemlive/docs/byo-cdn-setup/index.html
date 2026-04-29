@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:46.944Z
+  page:             docs-byo-cdn-setup
+  pageUrl:          https://www.aem.live/docs/byo-cdn-setup
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>BYO CDN Setup</title>
+  <meta name="description" content="Customers may use their own CDN to deliver AEM content under their own domain (aka BYO Production CDN). While customers are generally free to configure ...">
+  <meta property="og:title" content="BYO CDN Setup">
+  <meta property="og:description" content="Customers may use their own CDN to deliver AEM content under their own domain (aka BYO Production CDN). While customers are generally free to configure ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/docs/byo-cdn-setup/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../index.html" aria-current="page">Documentation</a></li>
+        <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+        <li><a href="../sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../../developer/tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#vendor-specific-setup-instructions">Vendor-specific setup instructions</a></li>
+<li class="l-3"><a href="#cloudflare-worker-setup">Cloudflare Worker Setup</a></li>
+<li class="l-3"><a href="#akamai-setup">Akamai Setup</a></li>
+<li class="l-3"><a href="#fastly-setup">Fastly Setup</a></li>
+<li class="l-3"><a href="#cloudfront-setup">CloudFront Setup</a></li>
+<li class="l-3"><a href="#adobe-managed-cdn">Adobe-managed CDN</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Docs · DOCS</p>
+          <h1>BYO CDN Setup</h1>
+          <p class="lede">Customers may use their own CDN to deliver AEM content under their own domain (aka BYO Production CDN). While customers are generally free to configure ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_141d72765656534440a69d2bf6e223feef96def5d.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_141d72765656534440a69d2bf6e223feef96def5d.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_141d72765656534440a69d2bf6e223feef96def5d.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_141d72765656534440a69d2bf6e223feef96def5d.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Customers may use their own CDN to deliver AEM content under their own domain (aka <em>BYO Production CDN</em>). While customers are generally free to configure their CDN according to their own needs there are some settings mandated/recommended by Adobe Experience Manager:</p>
+        <ul>
+          <li>Origin url<br><code>https://main--&lt;yoursite&gt;--&lt;yourorg&gt;.aem.live</code></li>
+          <li>Headers sent to origin
+            <ul>
+              <li><code>X-Forwarded-Host: &lt;production domain&gt;</code></li>
+              <li><code>X-Push-Invalidation: enabled</code><br>(see <a href="https://www.hlx.live/docs/setup-byo-cdn-push-invalidation">Configuring Push Invalidation</a>)</li>
+            </ul>
+          </li>
+          <li>Origin cache control<br>I.e. Cache TTL on the production CDN is controlled via origin cache control response headers. This should be enabled (if available).</li>
+          <li>Compression (gzip)<br>Should be enabled</li>
+          <li>Query parameters
+            <ul>
+              <li>Must be forwarded to origin</li>
+              <li>Must be included in cache key</li>
+            </ul>
+          </li>
+          <li><code>Age</code> response header<br>The <code>Age</code> response header must be either suppressed or overridden (<code>Age: 0</code>)</li>
+        </ul>
+        <h2 id="vendor-specific-setup-instructions">Vendor-specific setup instructions</h2>
+        <p>If you already have a CDN, follow the instructions below. If you are not sure which CDN to pick, follow <a href="../cdn-guide/index.html">our guide to CDN selection</a>.</p>
+        <div class="card-list image-card-listing">
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_166354c764e0ed9a1fd0f09189d8e17993763eddf.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_166354c764e0ed9a1fd0f09189d8e17993763eddf.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_166354c764e0ed9a1fd0f09189d8e17993763eddf.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_166354c764e0ed9a1fd0f09189d8e17993763eddf.png?width=750&amp;format=png&amp;optimize=medium" width="492" height="370">
+              </picture>
+            </div>
+            <div>
+              <h3 id="cloudflare-worker-setup"><a href="../byo-cdn-cloudflare-worker-setup/index.html">Cloudflare Worker Setup</a></h3>
+              <p>Learn how to configure Cloudflare to deliver content.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_114c9f41e14d1a9497f2026b53854f8dff6681f99.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_114c9f41e14d1a9497f2026b53854f8dff6681f99.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_114c9f41e14d1a9497f2026b53854f8dff6681f99.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_114c9f41e14d1a9497f2026b53854f8dff6681f99.png?width=750&amp;format=png&amp;optimize=medium" width="492" height="370">
+              </picture>
+            </div>
+            <div>
+              <h3 id="akamai-setup"><a href="../byo-cdn-akamai-setup/index.html">Akamai Setup</a></h3>
+              <p>Discover how to use the Akamai Property Manager to configure a property to deliver content</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_11bde7b20e8d2b43afb6748559ab2c9d315df05d1.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_11bde7b20e8d2b43afb6748559ab2c9d315df05d1.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_11bde7b20e8d2b43afb6748559ab2c9d315df05d1.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_11bde7b20e8d2b43afb6748559ab2c9d315df05d1.png?width=750&amp;format=png&amp;optimize=medium" width="492" height="370">
+              </picture>
+            </div>
+            <div>
+              <h3 id="fastly-setup"><a href="../byo-cdn-fastly-setup/index.html">Fastly Setup</a></h3>
+              <p>This guide illustrates how to configure Fastly to deliver content.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_14f7e30bdfd5f95c1e5fca4e6ca48ccd78ff5d3c1.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_14f7e30bdfd5f95c1e5fca4e6ca48ccd78ff5d3c1.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_14f7e30bdfd5f95c1e5fca4e6ca48ccd78ff5d3c1.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_14f7e30bdfd5f95c1e5fca4e6ca48ccd78ff5d3c1.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="cloudfront-setup"><a href="../byo-cdn-cloudfront-setup/index.html">CloudFront Setup</a></h3>
+              <p>Set up Amazon Web Services Cloudfront to deliver your AEM site with push invalidation</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="./media_1581b6aee2f43df1d92f83787350d56a1adea76ea.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+                <source type="image/webp" srcset="./media_1581b6aee2f43df1d92f83787350d56a1adea76ea.png?width=750&amp;format=webply&amp;optimize=medium">
+                <source type="image/png" srcset="./media_1581b6aee2f43df1d92f83787350d56a1adea76ea.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+                <img loading="lazy" alt="" src="./media_1581b6aee2f43df1d92f83787350d56a1adea76ea.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+              </picture>
+            </div>
+            <div>
+              <h3 id="adobe-managed-cdn"><a href="../byo-cdn-adobe-managed/index.html">Adobe-managed CDN</a></h3>
+              <p>Use the CDN included in your Adobe Experience Manager Sites as a Cloud Service license.</p>
+            </div>
+          </div>
+        </div>
+        <p><br><br><br><strong>IMPORTANT</strong>: The production CDN setup should be validated and tested in a stage environment prior to going public.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../index.html">Documentation</a></li>
+          <li><a href="../../developer/tutorial/index.html">Tutorial</a></li>
+          <li><a href="../sidekick/index.html">Sidekick</a></li>
+          <li><a href="../cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

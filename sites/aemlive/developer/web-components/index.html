@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="en"><head>
+<!--
+  stardust:provenance
+  writtenBy:        stardust:migrate
+  writtenAt:        2026-04-29T20:39:47.121Z
+  page:             developer-web-components
+  pageUrl:          https://www.aem.live/developer/web-components
+  designMd:         DESIGN.md
+  designJson:       DESIGN.json
+  canon:            stardust/canon/{header.html,footer.html,canon.css}
+  againstDirection: stardust/direction.md (Active 2026-04-29)
+  stardustVersion:  0.2.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Web Components</title>
+  <meta name="description" content="Web Components are a collection of web standards that allow the creation and use of reusable, modular functionality in web sites and web apps. They ...">
+  <meta property="og:title" content="Web Components">
+  <meta property="og:description" content="Web Components are a collection of web standards that allow the creation and use of reusable, modular functionality in web sites and web apps. They ...">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aem.live">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+<link rel="stylesheet" href="../../assets/canon.css">
+<link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/developer/web-components/">
+</head>
+<body data-template="article">
+<a class="skip" href="#main">Skip to content</a>
+<header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav__brand" href="../../index.html">
+        aem.live
+        <span class="nav__attribution">· powered by <span class="adobe-mark">Adobe</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="../../docs/index.html">Documentation</a></li>
+        <li><a href="../tutorial/index.html">Tutorial</a></li>
+        <li><a href="../../docs/sidekick/index.html">Tools</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../community/index.html">Community</a></li>
+      </ul>
+      <div class="nav__cta-row">
+        <a class="nav__search" href="../../docs/index.html" aria-label="Search docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+        </a>
+        <a class="btn btn--primary" href="../tutorial/index.html">Create your site</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container">
+    <article class="article" data-section="article" data-intent="long-form" data-layout="sidebar-content" data-template="article" style="--track-color: var(--ds-color-primary)">
+      <aside class="article__toc" data-canon="">
+  <h4>On this page</h4>
+  <ol><li class="l-2"><a href="#documentation">Documentation</a></li>
+<li class="l-2"><a href="#resources">Resources</a></li>
+<li class="l-2"><a href="#concepts-and-usage">Concepts and usage</a></li>
+<li class="l-2"><a href="#how-to-use-web-components-in-aem-projects">How to use Web Components in AEM projects?</a></li>
+<li class="l-3"><a href="#example-page-publication-time">Example: page publication time</a></li>
+<li class="l-2"><a href="#performance-concerns-loading-and-lifecycle">Performance concerns, loading and lifecycle</a></li>
+<li class="l-3"><a href="#adobe-experience-manager">Adobe Experience Manager</a></li>
+<li class="l-3"><a href="#guides">Guides</a></li>
+<li class="l-3"><a href="#resources">Resources</a></li>
+<li class="l-3"><a href="#help">Help</a></li></ol>
+</aside>
+      <div class="article__body">
+        <header class="article__hero">
+          <p class="eyebrow"><span style="color:var(--ds-color-primary)">●</span>&nbsp; Developer · BUILD</p>
+          <h1>Web Components</h1>
+          <p class="lede">Web Components are a collection of web standards that allow the creation and use of reusable, modular functionality in web sites and web apps. They ...</p>
+        </header>
+        <div class="content">
+        <p>
+          <picture>
+            <source type="image/webp" srcset="./media_1f9f5f5fc53b56eac9e20247e5abdf61381f30a7f.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="./media_1f9f5f5fc53b56eac9e20247e5abdf61381f30a7f.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="./media_1f9f5f5fc53b56eac9e20247e5abdf61381f30a7f.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="./media_1f9f5f5fc53b56eac9e20247e5abdf61381f30a7f.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1200">
+          </picture>
+        </p>
+        
+        <p>Web Components are a collection of web standards that allow the creation and use of reusable, modular functionality in web sites and web apps. They can be used in Adobe Experience Manager projects.</p>
+        <h2 id="concepts-and-usage">Concepts and usage</h2>
+        <p>There are three distinct web standards that make up <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components">Web Components</a>. In order of relevance for AEM projects, these are:</p>
+        <ol>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements">Custom elements</a> allow the use of custom behavior and functionality in your existing site</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots">HTML templates</a> enable the creation of DOM elements that are not displayed in the page</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM">Shadow DOM</a> isolates a branch of the DOM tree from its parent, enabling re-use across a wide range of sites</li>
+        </ol>
+        <p>Depending on how Web Components are written, their code and styles can be largely isolated from the rest of the page, which allows custom elements written by different teams to coexist on the same page, as well as sharing components between independent projects or teams.</p>
+        <p>They are often used for design systems in large organizations, but can also provide useful functionality such as dynamic loading of content, data retrieval from third-party sources, client-side content processing, etc.</p>
+        <h2 id="how-to-use-web-components-in-aem-projects">How to use Web Components in AEM projects?</h2>
+        <p>To activate a Web Component, you need to load <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements">the JavaScript code that defines it</a> and have your AEM blocks code generate the corresponding custom HTML elements.</p>
+        <p>The code loading is similar to adding any existing JavaScript/CSS code to your project, but please read the “performance concerns” section below to avoid surprises.</p>
+        <h3 id="example-page-publication-time">Example: page publication time</h3>
+        <p>The following paragraph uses a <em>publication-time</em> AEM block that leverages GitHub’s <a href="https://github.com/github/relative-time-element">relative-time</a> Web Component to display the page publication time in a friendly format:</p>
+        <div class="publication-time highlight">
+          <div>
+            <div>This page was published</div>
+          </div>
+        </div>
+        <p>This would typically be used in the website footer if you want to indicate when each page was last published.</p>
+        <p>Reusing existing code makes total sense to compute friendly relative time strings like “two days ago”, “five hours ago”, so a Web Component is helpful, as our <em>publication-time</em> AEM block only needs to output something like:</p>
+        <pre><code>&lt;relative-time
+  datetime="2024-03-28T17:00:28.000Z"&gt;
+  28.03.2024
+&lt;/relative-time&gt;
+</code></pre>
+        <p>To let the <em>relative-time</em> Web Component do all the (somewhat) hard work.</p>
+        <p>From a coding standpoint, we only need to make the <em>relative-time</em> component code available and write the pretty simple glue code in the AEM <em>publication-time</em> block.</p>
+        <h2 id="performance-concerns-loading-and-lifecycle">Performance concerns, loading and lifecycle</h2>
+        <p>To keep your Web Performance at the required level, your pages need to be frugal about how much JavaScript and CSS code they load, and if needed control when that loading occurs.</p>
+        <p>If your Web Components are written with performance in mind, there’s no reason for them to be less performant than AEM blocks, which are also backed by client-side JavaScript. Unfortunately, this cannot be taken for granted and you should test the performance of any Web Component before using it.</p>
+        <p>The AEM blocks code needs to translate the AEM semantic HTML to generate the custom HTML elements, but that’s no different from generating other HTML elements, so shouldn’t significantly affect performance.</p>
+        <p>If you want to use components from an existing library, you should make sure to load only JavaScript and CSS code that the current page actually requires, to avoid any extra baggage. Some libraries do that naturally, and others will require jumping through hoops to repackage their components in an optimized way. Your mileage may vary, and as always you’ll need to measure results to verify that the components code does not hamper performance.</p>
+        <p>You also need to be aware of the AEM <a href="../keeping-it-100/index.html#three-phase-loading-e-l-d">Three-Phase-Loading principle</a>, and if needed explicitly define when your Web Components code and styles are loaded.</p>
+        <p>One nice feature of Web Components that helps with lazy loading is that they take care of the asynchronicity and lifecycle concerns. Provided your components use the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements">lifecycle callbacks</a> in the correct way, it does not matter whether their code becomes active before or after the corresponding elements are added to the DOM, the browser does the right thing.</p>
+      </div>
+      </div>
+    </article>
+  </div>
+</main>
+<footer data-section="footer" data-intent="navigate" data-layout="grid-3" data-canon="">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">aem.live</div>
+        <div class="footer__brand-attr">Powered by <span class="adobe-mark">Adobe</span> Experience Manager</div>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Product</p>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../tutorial/index.html">Tutorial</a></li>
+          <li><a href="../../docs/sidekick/index.html">Sidekick</a></li>
+          <li><a href="../../docs/cdn-guide/index.html">CDN Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Community</p>
+        <ul>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../community/index.html">Community</a></li>
+          <li><a href="../../business/reachout/index.html">Reach out</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">About</p>
+        <ul><li><a href="https://www.adobe.com">About Adobe</a></li></ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Adobe. All rights reserved.</span>
+      <span>aem.live · global edge delivery</span>
+    </div>
+  </div>
+</footer>
+
+
+</body></html>
