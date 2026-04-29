@@ -24,6 +24,13 @@ downstream sub-commands.
   pages per `skills/stardust/reference/state-machine.md`. Default
   behaviour without the flag is additive: if a direction already
   exists, the agent asks before replacing.
+- `--rebrand` — optional. Force rebrand mode (full divergence-seed
+  roll, no Mode A inheritance) regardless of whether the captured
+  brand surface has signal. The default mode is brand-faithful
+  whenever `_brand-extraction.json` is `signal-strong` (see § Setup
+  step 5 and Phase 2 § Mode-detection precedence); pass `--rebrand`
+  to opt out explicitly when the user's phrase is ambiguous about
+  whether they want a refresh or a clean-slate redesign.
 
 ## Setup
 
@@ -38,6 +45,23 @@ downstream sub-commands.
 4. Read `stardust/direction.md` if present. If a prior direction
    exists and `--re-direct` was not passed, ask whether the user wants
    to refine the existing direction or replace it.
+5. **Classify the captured brand signal.** Read
+   `_brand-extraction.json` and stamp one of:
+   - `signal-strong` — palette has ≥ 3 distinct colors (after
+     near-duplicate clustering and excluding pure black/white if they
+     are the only entries) **AND** at least one captured type family
+     is named in `type.headingFamily.name` or `type.bodyFamily.name`.
+     This is the common case for any extracted commercial site.
+   - `signal-thin` — palette has 2 colors OR no captured type family
+     OR `type.scaleAudit.kind === "ad-hoc"` with fewer than 3
+     distinct heading sizes. The brand exists but cannot fully
+     anchor a refresh.
+   - `signal-absent` — palette has 1 color or 0, or
+     `_brand-extraction.json._provenance.notes` flags the extraction
+     as failed / login-walled / iframe-dominated.
+   The classification feeds the Mode-detection precedence in Phase 2.
+   Surface the classification in the plan when it would change the
+   default mode.
 
 ## Procedure
 
@@ -92,15 +116,82 @@ plan) before moving on.
 
 Once the plan is confirmed, resolve the divergence-toolkit inputs
 from `skills/stardust/reference/divergence-toolkit.md`. Before
-rolling the seed, check for two **mode-shifting conditions** that
-narrow what the toolkit needs to do:
+rolling the seed, run the mode-detection precedence below to decide
+whether the seed needs rolling at all.
+
+#### Mode-detection precedence (run first)
+
+The default mode for `direct` is determined by whether an extracted
+brand surface exists with usable signal — **not** by the user's
+freeform phrase alone. Stardust's primary use case is migrating an
+existing site with a design refresh; "make it modern" / "stunning new
+version" / "design fatigue cure" are migration-shaped asks. Treating
+those phrases as rebrand triggers (rolling a fresh divergence seed)
+produces output that is recognisably a different brand from the one
+that asked for the refresh — a published failure mode. The
+precedence below catches the common case as the default and reserves
+divergence-seed rolls for explicit rebrand requests.
+
+The precedence is asymmetric on purpose: the safer mode (Mode A —
+brand-faithful) catches ambiguous phrases, and the riskier mode
+(rebrand / full divergence-seed) requires the user to name it.
+
+1. **Site migration / refresh — DEFAULT.** When the captured brand
+   signal stamped in § Setup step 5 is `signal-strong`, Mode A is
+   active by default. The user's phrase moves *expressive*,
+   *distinctiveness*, *tone*, and *density* axes inside Mode A — but
+   palette and type are pinned to the captured surface, and the
+   image-reuse contract (below) holds. Surface in the plan:
+   *"Brand-faithful mode active — palette and type pinned to the
+   captured brand surface. Pass `--rebrand` to override."*
+
+2. **Rebrand — explicit opt-in.** Mode A is overridden when **any**
+   of the following triggers fire:
+   - The user's phrase contains an explicit rebrand signal: any of
+     `rebrand`, `new brand`, `clean slate`, `start over`,
+     `from scratch`, `replace the brand`, `not brand-faithful`,
+     `editorial reimagination`, `completely new`, `redo the brand`.
+   - The `--rebrand` flag is passed.
+   - Captured signal is `signal-absent` (no usable inheritance).
+     Surface this case as an automatic switch with reason; the user
+     can correct.
+
+   In rebrand mode, run the standard divergence-seed roll per
+   "Default mode (no constraints)" below. Surface in the plan:
+   *"Rebrand mode active — full divergence-seed roll. Mode A
+   bypassed because <reason>."*
+
+3. **Brand-faithful + targeted exploration.** When the user requests
+   N variants (e.g. *"3 variants"*, *"4 directions"*) and Mode A is
+   active, the variant role contract in § Multi-variant fork
+   applies. Variant A is locked to **strict Mode A** (palette and
+   type pinned, IA preserved, every improvements-list item applied).
+   Variants B+ may amplify one **captured** trait (a motif, a photo
+   treatment, an IA priority the current site underplays) but
+   cannot:
+   - introduce a font outside the captured surface,
+   - introduce a color outside the captured palette,
+   - shift the register from PRODUCT.md.
+
+4. **Signal-thin fallback.** When captured signal is `signal-thin`,
+   Mode A activates but warns: *"Captured brand surface is thin —
+   {reason}. Variants will inherit what is available; some
+   dimensions will need to be filled by the divergence toolkit."*
+   The user may either re-run extract with a wider crawl
+   (`--cap 25`) or proceed with reduced fidelity.
+
+After mode-detection completes, run the existing mode definitions
+below (Mode A procedure, Mode B anchor-reference precedence, Mode C
+ground-family override) as applicable.
 
 #### Mode A — Brand-faithful mode
 
-Triggered when the user pinned **both** type and palette (via
-explicit phrase: "keep typography and palette", "preserve the
-existing brand", "brand-faithful redesign"; or via constraints
-listing both as anchors).
+Triggered automatically when the captured brand signal is
+`signal-strong` and no rebrand-mode override fired (see
+§ Mode-detection precedence above), OR when the user pinned **both**
+type and palette (via explicit phrase: "keep typography and palette",
+"preserve the existing brand", "brand-faithful redesign"; or via
+constraints listing both as anchors).
 
 In this mode, direct does **not** roll the type or palette
 dimensions of the seed — they are already locked. Going through
@@ -141,13 +232,50 @@ The mode procedure:
      palette          inherited   → existing 5-color set
    ```
 
-Mode A activates automatically when the resolved direction's
+6. **Image-reuse contract.** Captured images are reused via their
+   public URLs (or the local copies in
+   `stardust/current/assets/media/` written by extract Phase 2)
+   **at the same semantic position** as on the source site. Hero
+   stays hero. Story-tile portrait stays story-tile portrait.
+   Program-card image stays program-card image. Background-motif
+   image stays background motif.
+
+   This is part of brand-faithful inheritance, not a separate
+   content rule. A variant that swaps a captured subject portrait
+   for a gradient placeholder, or moves the captured hero photo to
+   a card thumbnail, erases the brand's most load-bearing trust
+   signal — the named-people stories that almost every nonprofit /
+   service-led site has spent years building.
+
+   The only legitimate ways to deviate from semantic
+   position-preservation under Mode A:
+
+   - The captured image is broken (404, blocked by `referrer-policy`,
+     CORS-walled, or recorded with `localPath: null` and a
+     `downloadError`).
+   - The brand-review surfaced the image as a tension (e.g.
+     `T-stock-photography` when added — flagging the captured
+     image as obviously templated stock that the brand team would
+     replace anyway).
+   - The improvements list (Phase 2.5) explicitly notes a crop or
+     positioning fix for that image — in which case the same
+     image is reused at the corrected crop or position.
+
+   Synthesised placeholders are forbidden under Mode A. When a
+   captured image cannot be reused, the prototype shape brief
+   declares the gap explicitly and the rendered prototype shows a
+   placeholder-with-signature element so reviewers see the gap
+   rather than a fabricated photo.
+
+Mode A is the default whenever § Mode-detection precedence step 1
+applies (captured signal is `signal-strong` and no rebrand override
+fires). It also activates explicitly when the resolved direction's
 constraints list contains `brand-faithful` AND explicit type AND
 palette anchors, OR when the user's phrase contains "keep
 typography" / "preserve the palette" / equivalent. The agent
-surfaces "switching to brand-faithful mode" in the plan it shows
-the user before executing — the user can correct (e.g. "actually
-let me move the palette") before it locks.
+surfaces "Brand-faithful mode active" in the plan it shows the
+user before executing — the user can correct (e.g. "actually let
+me move the palette" or "actually rebrand it") before it locks.
 
 #### Mode B — Anchor-reference precedence
 
@@ -233,6 +361,207 @@ procedure:
 
 Record every resolution in `DESIGN.json.extensions.divergence` per
 the v2 storage shape at the bottom of `divergence-toolkit.md`.
+
+### Phase 2.5 — Improvements list (Mode A only)
+
+Before any variant is rendered downstream, write
+`stardust/prototypes/<slug>-improvements.md` listing **3–5 specific
+weaknesses** observed in the captured site. This is the load-bearing
+artifact for variant A: without it, *"make it better"* has no claim
+the agent can defend, and each variant ends up inventing its own
+"better" — producing rebrand-shaped output even with Mode A active.
+
+The improvements list is the brief variant A renders against. It is
+**not** prescriptive (it does not declare visual targets); it is
+**descriptive of the gap** between the existing site and a competent
+2026 execution of the same brand. Variant A's job is to close the
+gap; variants B+ honor the list as a floor (they may go further but
+not contradict it).
+
+Skip this phase when the resolved mode is rebrand — the improvements
+list assumes brand-faithful inheritance, and a rebrand replaces the
+site rather than fixing it.
+
+#### What goes in the list
+
+The list draws from five categories. Items should be specific enough
+that a downstream `prototype` shape brief can cite them by number.
+
+1. **Dated patterns the design world has moved past.** Specific:
+   *"centered hero with stock photo + double CTA in primary blue
+   is the SaaS template circa 2019"* — not *"the hero feels dated."*
+2. **Cluttered IA, unclear hierarchy, weak CTAs, redundant sections.**
+   E.g. *"home page has 4 different donor CTAs, each with a different
+   verb (DONATE / GIVE / SUPPORT / CONTRIBUTE), fragmenting the
+   conversion funnel."*
+3. **Contrast failures, accessibility gaps, density issues.** Pull
+   from `brand-review.html` Tensions when present (`T-color-imbalance`,
+   `T-img-alt-empty`, etc.). E.g. *"Primary CTA `#008192` on white
+   passes AA at 4.6:1 but the same teal on light-grey card surfaces
+   drops to 3.1:1 — fails AA on those instances."*
+4. **Cliché conventions the brand could move past while staying
+   recognisably itself.** E.g. *"All headings render uppercase via
+   CSS — the brand voice survives mixed-case headlines, and mixed-case
+   reads as more current without changing identity."*
+5. **Missed opportunities the existing site doesn't capitalise on.**
+   E.g. *"The captured photography of named program participants is
+   excellent but the home page renders all 6 portraits as 280×180
+   thumbnails in a slick-slider; the photographs support full-bleed
+   editorial treatment that would carry the trust signal far more
+   effectively."*
+
+#### Specificity bar
+
+A weakness is specific enough when it cites:
+- a measurable observation (size, ratio, contrast value, count, or
+  named tension ID) drawn from the per-page JSON, the brand-review,
+  or the brand-extraction;
+- the design pattern at fault (named, e.g. "centered hero + dual CTA");
+- one concrete fix the variant A brief will apply.
+
+*"The hero needs work"* fails all three. *"Hero photo is cropped to
+280×180 in a 1440-wide viewport when the captured source supports
+16:9 full-bleed at 1440×810; variant A fix: render at full-bleed and
+move the headline to a left-anchored two-column overlay"* passes all
+three.
+
+#### Format
+
+Markdown, with a `_provenance` frontmatter block per the artifact-map
+convention. Each item is a numbered list entry with a category tag, a
+weakness statement, and a one-line fix. Example:
+
+```markdown
+<!--
+_provenance:
+  writtenBy: stardust:direct
+  writtenAt: 2026-04-29T11:00:00Z
+  readArtifacts:
+    - stardust/current/_brand-extraction.json
+    - stardust/current/brand-review.html
+    - stardust/current/pages/<slug>.json
+  stardustVersion: 0.2.x
+-->
+
+# Improvements — <slug>
+
+1. **[dated-pattern]** Centered hero with double CTA pair (DONATE +
+   LEARN MORE) is the 2019 nonprofit-template silhouette.
+   *Fix:* Replace with a left-anchored editorial composition; one
+   primary CTA, one secondary text-link.
+
+2. **[ia-clutter]** 4 distinct donor verbs across the home page
+   (DONATE, GIVE, SUPPORT, CONTRIBUTE) fragment the funnel.
+   *Fix:* Pick one canonical verb (DONATE, per the CTA frequency
+   table); other instances become secondary "see all ways to give"
+   links.
+
+3. **[contrast]** Brand teal on light-grey card surfaces resolves to
+   3.1:1 — fails WCAG AA. (See `T-color-imbalance` in brand-review.)
+   *Fix:* Reserve teal for white-ground only; use deepened teal
+   (#005a68) on grey surfaces.
+
+4. **[cliché]** All headings render uppercase via CSS, including
+   long-form section openers ("OFFICIAL FOUR STAR CHARITY"). The
+   shout reads as urgency at first heading and as fatigue by the
+   third.
+   *Fix:* Mixed-case for headings ≥3 words; preserve uppercase only
+   for short imperative CTAs and eyebrow labels.
+
+5. **[missed-opportunity]** Six named-participant portraits render
+   as 280×180 thumbnails in a slick-slider; the captured source
+   supports editorial-scale treatment.
+   *Fix:* Replace carousel with a 3-column grid; portraits at 4:5
+   aspect, 1:1 minimum 480px wide.
+```
+
+#### Stopping condition
+
+If after reading the brand-review, the per-page JSON, and the
+brand-extraction the agent **cannot name 3 specific weaknesses**
+that meet the specificity bar, stop. Variant A has no brief; the
+"better" claim fails. See § Failure modes (d).
+
+The agent should not rationalise — *"the hero is dated"* is not an
+item, *"the typography could be more modern"* is not an item.
+Genuine empty-list cases occur when the captured site is already at
+a high execution level on observable dimensions. In that case the
+honest answer is to surface the empty list and propose reduced
+scope (density-and-contrast adjustments only, or pivot to a single
+exploratory variant rather than three).
+
+### Phase 2.6 — Multi-variant fork (when N > 1)
+
+When the user requests N variants (phrase contains *"3 variants"*,
+*"4 directions"*, or equivalent), variant slots are
+**role-differentiated**, not seed-differentiated. Each slot serves a
+distinct decision the customer is making — variants exist to
+de-risk a brand decision, not to fan out into N rebrand
+explorations.
+
+The previous default behavior (each variant rolls a fresh divergence
+seed with anchor references picked per slot) produced what the
+internal review called *"three rebrands"* output: each variant was
+defensible standalone but none felt like the same brand. The
+variant role contract below addresses this directly.
+
+#### Variant role contract
+
+| Slot | Role | Brief |
+|---|---|---|
+| **A** | **Faithful + improvements** — *"this is what your site should be tomorrow."* | Same IA. Same section sequence. Same composition strategy. Apply every item from `<slug>-improvements.md` exactly — no extras, no embellishment, no creative reach. The brand team should react *"yes, that's us, with the obvious fixes."* This is the variant a risk-averse stakeholder green-lights. |
+| **B** | **One captured trait amplified** — *"what if we leaned into X?"* | Pick one specific trait already in the captured brand surface — a motif underused in current execution, a photographic treatment the site doesn't fully exploit, an IA priority the current site underplays, a tonal register that survives in copy but not in layout. Justify in one sentence in the variant's shape brief: *"This variant amplifies <captured trait> in service of <brand personality move from PRODUCT.md>."* |
+| **C+** | **Different captured trait amplified** — *"what if we leaned into Y?"* | Different from B by definition. Different captured trait. Different brand-personality move. Forbidden definitions: *"B but more"*, *"bolder fonts"*, *"more empty space"*, *"more brutalist"*, *"more editorial"*. Each subsequent variant must be a defensible standalone proposition. |
+
+Variants beyond C (D, E, …) follow the C+ contract — each amplifies
+a distinct captured trait, declared in the shape brief.
+
+#### Variant differentiation contract
+
+Each pair of variants must differ by **≥ 2 substantive changes**
+drawn from this set:
+
+- section sequence (which sections appear in which order),
+- section presence / absence (a section in one variant, not in another),
+- layout strategy of a major section (e.g. hero is split-half vs.
+  full-bleed-photo vs. type-led),
+- IA priority (which audience leads the home — donor vs. recipient
+  vs. volunteer for nonprofits; product vs. story for commerce).
+
+Variants that fail the ≥ 2 changes test are rendered as the same
+variant under different chrome — *"variants are barely different"*
+is the published failure mode and is grounds for refusing render.
+See § Failure modes (b) — when only 1–2 captured traits are
+distinct enough to amplify, the agent surfaces this and proposes
+1 or 2 variants rather than producing 3 weak ones.
+
+#### The C-cliff failure mode
+
+When defining variant C+, the following definitions are
+**render-refusal conditions**:
+
+- *"Everything from B but more"* (B+more is not a direction).
+- *"120pt+ display fonts"* (size-as-personality is not a captured
+  trait).
+- *"96px+ section padding everywhere"* (padding-as-personality is
+  not a captured trait — and conflicts with the density floor in
+  `intent-dimensions.md` § 4 anyway).
+- *"Extreme airy"* / *"extreme dense"* / *"extreme [axis]"* — slider
+  positions pushed past the prior variant are not directions.
+- Editorial-register vocabulary (*atelier*, *the studio*,
+  *mise-en-place*, *the journal*) when the brand register is
+  product / commerce / direct-services. See
+  `divergence-toolkit.md` § 1 → *Voice-rule moves* →
+  `Editorial-register vocabulary applied to non-editorial brands`.
+
+C+ must answer *"what if we leaned into Y?"* with a specific Y
+from the captured surface, not a slider position pushed past B.
+
+The C-cliff name comes from the observed pattern where a
+3-variant fork has A defensible, B defensible, and C reading as
+*"unprofessional"* rather than *"a third proposition."* The fix is
+not to soften C — it is to define C against a captured trait
+instead of against B.
 
 ### Phase 3 — Author target PRODUCT.md
 
@@ -334,6 +663,19 @@ Token sources:
   was resolved in Phase 1 (asked once when the phrase didn't move
   the axis, defaulted to balanced for brand register if unanswered).
   Pick the value deterministically from the stamp.
+
+  **Hard floor enforcement.** When the captured page inventory shows
+  >5 sections OR >2 audience tracks (per
+  `reference/intent-dimensions.md` § 4 → "Hard floor for
+  brand-register multi-audience sites"), the resolved
+  `sectionPadding.desktop` is bounded at ≤ 64px and ≥ 40px on every
+  variant including the highest-divergence one. If Phase 1 stamped
+  `airy` despite the trigger conditions firing, surface the conflict
+  before writing tokens — *"density tier `airy` was selected but the
+  captured inventory triggers the multi-audience hard floor; pick (a)
+  override floor (`density: airy (user-pinned)` in direction.md) or
+  (b) accept the floor (sectionPadding capped at 64px)."* Default to
+  (b) when the user does not respond.
 - **`components`** — 4-6 canonical components (`button-primary`,
   `button-secondary`, `card`, `input`, `badge`, `link`) populated
   from extracted brand-surface `componentStyle`, with values
@@ -367,6 +709,56 @@ self-contained, use `ds-` class prefixes, and respect impeccable's
 hard rules (OKLCH only, no pure black/white, no glassmorphism, no
 side stripes, no gradient text, ≥ 1.25 type ratio for brand
 register).
+
+#### IA-priority preservation audit (Mode A)
+
+After tokens are drafted but before they land in the variant DESIGN
+files, run the IA-priority preservation audit per
+`reference/intent-dimensions.md` § 8. For each captured signal that
+fires a trigger condition (commercial conversion, search-led IA,
+donation funnel, crisis affordance, audience routing), record an
+`extensions.iaPriorities[]` entry in `DESIGN.json`:
+
+```json
+[
+  {
+    "signal": "crisis-affordance",
+    "evidence": "pages/home.json#landmarks[hero] contains heading 'Looking for immediate shelter?' + phone 801-990-9999",
+    "preserveAs": "first-viewport",
+    "scope": "site-wide"
+  }
+]
+```
+
+Each entry is a constraint that downstream `prototype` and `migrate`
+must honor — a variant whose home shape brief omits the crisis
+affordance from the first viewport fails the audit and is rejected.
+The audit is the structural enforcement of § 8; without it, IA-
+priority preservation is a guideline rather than a contract.
+
+#### Multi-variant DESIGN files (when N > 1)
+
+When the user requested N variants (Phase 2.6 active), Phase 4
+writes per-variant design files at the project root instead of a
+single pair:
+
+```
+PRODUCT.md                  ← shared across variants (strategy doesn't change)
+DESIGN-A.md / DESIGN-A.json ← variant A (faithful + improvements)
+DESIGN-B.md / DESIGN-B.json ← variant B (one captured trait amplified)
+DESIGN-C.md / DESIGN-C.json ← variant C (different captured trait amplified)
+```
+
+`PRODUCT.md` is shared because audience, register, and content
+strategy are per-brand, not per-variant. Each variant's DESIGN
+files inherit the shared `extensions.iaPriorities[]` audit from the
+above step — variants cannot opt out of IA-priority preservation
+within Mode A.
+
+When the resolved mode is rebrand (`--rebrand` or rebrand-trigger
+phrase), the multi-variant fork still writes per-variant DESIGN
+files but PRODUCT.md may also vary — rebrand permits the strategy
+to shift, not just the visual treatment.
 
 ### Phase 5 — Write direction.md and update state
 
@@ -424,13 +816,16 @@ Next: $stardust prototype  (defaults to home page)
 
 ## Outputs
 
-| Path                        | Purpose                                            |
-|-----------------------------|----------------------------------------------------|
-| `PRODUCT.md`                | Target strategy (impeccable format).               |
-| `DESIGN.md`                 | Target visual system (Stitch frontmatter + 6 sections). |
-| `DESIGN.json`               | Sidecar with extensions (divergence, componentStyle, voice) and narrative. |
-| `stardust/direction.md`     | Resolved direction + full reasoning trace.         |
-| `stardust/state.json`       | Updated with direction + per-page status changes.  |
+| Path                                  | Purpose                                            |
+|---------------------------------------|----------------------------------------------------|
+| `PRODUCT.md`                          | Target strategy (impeccable format). Shared across variants when N > 1 under Mode A. |
+| `DESIGN.md`                           | Target visual system (Stitch frontmatter + 6 sections). Single-variant runs only. |
+| `DESIGN.json`                         | Sidecar with extensions (divergence, componentStyle, voice, iaPriorities) and narrative. Single-variant runs only. |
+| `DESIGN-{A,B,C,…}.md`                 | Per-variant DESIGN files when the user requested N > 1 variants (Phase 2.6 active). |
+| `DESIGN-{A,B,C,…}.json`               | Per-variant DESIGN sidecars matching the .md files. |
+| `stardust/prototypes/<slug>-improvements.md` | Improvements list (Mode A only, written in Phase 2.5). The load-bearing artifact for variant A. |
+| `stardust/direction.md`               | Resolved direction + full reasoning trace + per-variant resolutions when N > 1. |
+| `stardust/state.json`                 | Updated with direction + per-page status changes + `direction.variantMode` + `direction.variants[]` when N > 1. |
 
 ## Failure modes
 
@@ -448,16 +843,72 @@ Next: $stardust prototype  (defaults to home page)
   direction collapses to defaults after the audit strips
   unjustifiable hits, surface this to the user and re-prompt for
   reference anchors before writing tokens.
+- **(b) Insufficient brand signal for N variants.** When the
+  captured brand surface has fewer than 3 distinct moves to
+  amplify (e.g., monochrome palette, single type face, no
+  distinctive motifs, or `signal-thin` per § Setup step 5), refuse
+  to render N ≥ 3 variants under Mode A. Surface honestly:
+  *"the captured surface has 2 distinct traits to amplify; producing
+  3 variants would force one to invent moves not present in the
+  brand."* Propose 1 or 2 variants and let the user choose, or
+  recommend extract with a wider crawl. Better one strong variant
+  than three weak ones.
+- **(c) Hard rule conflict.** When Mode A is active *and* the
+  user's phrase requires violating a Mode A pin (e.g., the user
+  asks for *"a completely different palette"* while migration mode
+  is active and `--rebrand` was not passed), stop. Name the
+  conflict explicitly: *"You asked to keep the brand and to change
+  the palette — those are not compatible. Did you mean (a) keep the
+  current palette and only refresh execution, (b) rebrand
+  (`--rebrand`) and roll a new palette, or (c) Mode A with a
+  targeted palette move (single role recolored, rest pinned)?"*
+  Wait for explicit answer.
+- **(d) Empty improvements list.** When Phase 2.5 produces fewer
+  than 3 weaknesses meeting the specificity bar, stop before
+  rendering any variant. Variant A's brief depends on the list;
+  without it, the *"better"* claim fails. Surface honestly:
+  *"the captured site is already at a competent execution level on
+  observable dimensions — variant A would reduce to spacing and
+  contrast adjustments only."* Ask the user whether to (a) proceed
+  with reduced scope (density + contrast only), (b) extract
+  additional pages (`extract --cap 25` or higher) to surface more
+  weaknesses, or (c) pivot to rebrand mode (`--rebrand`) where the
+  brand-fidelity floor doesn't apply.
 
 ## References
 
-- `skills/stardust/reference/intent-dimensions.md` — the 7 axes.
+- `skills/stardust/reference/intent-dimensions.md` — the 8 axes
+  (the 7 axes plus § 8 IA-priority preservation, the Mode A
+  constraint that fires on captured commercial-conversion / crisis /
+  audience-routing signals).
 - `skills/stardust/reference/intent-reasoning.md` — the procedure.
 - `skills/stardust/reference/intent-examples.md` — worked examples.
 - `skills/stardust/reference/impeccable-command-map.md` — when to
   reach for each impeccable command (used when building the plan).
 - `skills/stardust/reference/divergence-toolkit.md` — anti-mediocrity
-  inputs and the v2 storage shape for the audit trail.
+  inputs and the v2 storage shape for the audit trail. Contains the
+  anti-toolbox additions for multi-variant moves
+  (`C-cliff overshoot`, `Anonymous middle variant`, `Variant
+  homogeneity`) and universal hardening (`Fabricated content`,
+  `Hero text on photographic background without contrast scrim`,
+  `Editorial-register vocabulary applied to non-editorial brands`).
 - `skills/stardust/reference/artifact-map.md` — provenance shape.
 - `reference/direction-format.md` — schema for `stardust/direction.md`.
 - `reference/palette-picker.md` — palette resolution procedure.
+
+## Default-mode-flip note (2026-04-29)
+
+This skill changed its default behavior in 2026-04-29 to make Mode A
+(brand-faithful) the default whenever the captured brand surface is
+`signal-strong`, rather than activating only on explicit user
+signals. The full rationale and prior-state migration notes live in
+`notes/brand-faithful-default-2026-04-29.md`. Behavior summary:
+
+- Before: ambiguous phrases like *"make it more modern"* rolled the
+  full divergence seed and produced rebrand-shaped output.
+- After: ambiguous phrases default to Mode A; rebrand requires
+  explicit phrase signal or `--rebrand` flag.
+
+The flip was driven by dogfood evidence that the typical stardust
+use case (presales refresh of an existing site for a brand owner
+with design fatigue) was getting the wrong default.

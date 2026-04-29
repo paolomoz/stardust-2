@@ -84,6 +84,7 @@ defaults.
 - "Sentences earn their length / a short one and a long one" cadence rule
 - Quartermaster / examiner / curator register as the default voice stance
 - Triplet-cadence pull-quote or section-headline copy — three short clauses of comparable length separated by period or em-dash (e.g. *"Same press. Same shop. Same eight years."* · *"Dated, classified, cross-linked."* · *"Saturday. Bar Beach. We dance."*). Detection: a display-level sentence that breaks into exactly 3 clauses with no subordinate structure. At most one per page before it becomes a tell.
+- **Editorial-register vocabulary applied to non-editorial brands** — *"atelier"*, *"the studio"*, *"the journal"*, *"mise-en-place"*, *"dispatches"*, *"catalogue"*, *"the field guide"*, *"the manifesto"*, *"the broadcast"*, *"the bulletin"* applied to product-commerce, direct-services, civic, B2B, or healthcare brands whose register is not editorial. The assistant reaches for editorial vocabulary regardless of the brand's actual register; the result reads as cosplay, not as voice. Detection: any of the listed terms appears in `voice.do` / section eyebrows / nav labels / page sub-titles when `register != editorial` and `register != memoir-adjacent` per the resolved direction.
 
 (The "ban marketing adjectives", "no exclamation points except …", and "em-dashes welcome / semicolons earned" rules were in v0.1. They are sensible universal voice rules and have moved to § 7 Optional House Standards. They no longer count against the budget.)
 
@@ -97,6 +98,64 @@ defaults.
 - Archival footer strip with batch + serial
 - **Generic-2026-SaaS silhouette** — oversized sans-serif hero (clamp(72px, 10vw, 140px)) + two-button CTA pair (solid primary + outlined secondary) + sticky top-nav + serial-marker footer, rendering as a Linear / Notion / Stripe / Arc landing page. This is a composite move: **any 3 of those 4 together** counts as a hit.
 - **Stat-callout bar** — 3–4 large numbers with short all-caps labels arranged horizontally as a "trust bar" ("61 firms · 34 patents · 17 years"). Very Stripe press page.
+- **Hero text on photographic background without contrast scrim** — display headline overlaid on a photographic image without a darkening scrim (≥0.4 opacity black layer, or a directional gradient that brings the headline area to ≥4.5:1 contrast against the photo's average luminance under the headline). Almost always fails WCAG AA on photos with high-luminance regions (sky, snow, faces). Cheap to enforce: any hero where computed contrast under the headline drops below 4.5:1 against the rendered background pixel average is a hit. Add a scrim or move the headline off the photo.
+
+### Multi-variant moves
+
+Failure modes specific to multi-variant forks (`direct` invoked with N>1
+variants, per `direct/SKILL.md` § Phase 2.6 — Multi-variant fork). These
+fire on the *definition* of a variant, not on its rendered output, so
+they are caught by reading the variant's shape brief / direction
+section rather than scanning the prototype HTML.
+
+- **C-cliff overshoot** — variant N>1 defined as *"everything from B
+  but more"*, *"120pt+ display fonts"*, *"96px+ section padding
+  everywhere"*, *"extreme airy"*, *"more brutalist"*, *"more
+  editorial"*, or any *"more <axis>"* framing. Slider positions
+  pushed past the previous variant are not directions. C+ must
+  amplify a specific captured trait, not push a slider further. The
+  failure mode is named for the observed pattern where a 3-variant
+  fork has A defensible, B defensible, and C reading as
+  *"unprofessional"* rather than *"a third proposition"*. The fix
+  is not to soften C — it is to redefine C against a captured trait
+  instead of against B.
+
+- **Anonymous middle variant** — variant B (or any non-A variant)
+  whose shape brief does not declare *which* captured trait is being
+  amplified *in service of which* brand-personality move. *"B leans
+  into IA rearrangement"* is not a declaration — *"B amplifies the
+  named-people story treatment that the captured site underplays
+  (rendered as 280×180 thumbnails) in service of the
+  trust-through-faces personality trait from PRODUCT.md"* is. Refuse
+  render until the declaration lands in the variant's shape brief or
+  in `direction.md` § Variants.
+
+- **Variant homogeneity** — two variants in the same fork that
+  differ by fewer than 2 substantive changes (section sequence,
+  section presence, layout strategy of a major section, IA priority).
+  Per `direct/SKILL.md` § Variant differentiation contract,
+  variants that differ by < 2 changes are the same variant under
+  different chrome. Refuse render and either collapse the redundant
+  pair into one variant or redefine one of them against a different
+  captured trait.
+
+### Universal hardening
+
+- **Fabricated content** — stats, addresses, named-customer logos,
+  named-person quotes, dollar amounts, percentages, and dates
+  invented to fill design space. Detection: any number, name, or
+  citation in the rendered prototype that does not appear in
+  `stardust/current/pages/<slug>.json`,
+  `stardust/current/_brand-extraction.json`, or the user's explicit
+  input. Placeholders are mandatory when real data is absent — use
+  an explicit `data-placeholder="true"` attribute and a visible
+  signature treatment (dashed outline, "PLACEHOLDER" eyebrow label,
+  or the F-002 visual signature when defined) so reviewers see the
+  gap rather than a fabricated value. *"100 YEARS · 18,400 PEOPLE
+  HOUSED · 87% STABLY HOUSED"* invented for a stat-row when the
+  captured site doesn't carry those numbers is the canonical
+  violation; it surfaces in the prototype as a confident claim that
+  the brand team will then have to disavow to a stakeholder.
 
 ### Palette-role moves
 - Role vocabulary: *Primary / Secondary / Alarm / Warning / Shadow / Hardware / Ink*
