@@ -2,7 +2,7 @@
 <!--
   stardust:provenance
   writtenBy:        stardust:migrate
-  writtenAt:        2026-04-29T20:39:47.134Z
+  writtenAt:        2026-04-29T20:48:16.322Z
   page:             docs-scheduling
   pageUrl:          https://www.aem.live/docs/scheduling
   designMd:         DESIGN.md
@@ -86,20 +86,20 @@
         <div class="content">
         <p>
           <picture>
-            <source type="image/webp" srcset="./media_1c7b0ed48ddf9d19abb4a4d6e5f5494a878ce54b7.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
-            <source type="image/webp" srcset="./media_1c7b0ed48ddf9d19abb4a4d6e5f5494a878ce54b7.png?width=750&amp;format=webply&amp;optimize=medium">
-            <source type="image/png" srcset="./media_1c7b0ed48ddf9d19abb4a4d6e5f5494a878ce54b7.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
-            <img loading="lazy" alt="" src="./media_1c7b0ed48ddf9d19abb4a4d6e5f5494a878ce54b7.png?width=750&amp;format=png&amp;optimize=medium" width="720" height="540">
+            <source type="image/webp" srcset="https://www.aem.live/docs/scheduling/media_1c7b0ed48ddf9d19abb4a4d6e5f5494a878ce54b7.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="https://www.aem.live/docs/scheduling/media_1c7b0ed48ddf9d19abb4a4d6e5f5494a878ce54b7.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="https://www.aem.live/docs/scheduling/media_1c7b0ed48ddf9d19abb4a4d6e5f5494a878ce54b7.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="https://www.aem.live/docs/scheduling/media_1c7b0ed48ddf9d19abb4a4d6e5f5494a878ce54b7.png?width=750&amp;format=png&amp;optimize=medium" width="720" height="540">
           </picture>
         </p>
         
         <p>AEM offers a way to execute certain tasks, such as previewing, publishing or purging pages at certain times during the day or in certain periodic intervals. It also allows publishing a query index, which makes entries public in the JSON representation that may have only been available in the underlying Excel workbook or Google spreadsheet.<br><br>The tasks to execute and the time they should be executed at are configurable with a <code>crontab</code> sheet, located in the project’s <code>.helix</code> folder, that looks as follows:</p>
         <p>
           <picture>
-            <source type="image/webp" srcset="./media_15967b28507c6b7d2858acf916781e4442a4c76d6.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
-            <source type="image/webp" srcset="./media_15967b28507c6b7d2858acf916781e4442a4c76d6.png?width=750&amp;format=webply&amp;optimize=medium">
-            <source type="image/png" srcset="./media_15967b28507c6b7d2858acf916781e4442a4c76d6.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
-            <img loading="lazy" alt="" src="./media_15967b28507c6b7d2858acf916781e4442a4c76d6.png?width=750&amp;format=png&amp;optimize=medium" width="1151" height="710">
+            <source type="image/webp" srcset="https://www.aem.live/docs/scheduling/media_15967b28507c6b7d2858acf916781e4442a4c76d6.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="https://www.aem.live/docs/scheduling/media_15967b28507c6b7d2858acf916781e4442a4c76d6.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="https://www.aem.live/docs/scheduling/media_15967b28507c6b7d2858acf916781e4442a4c76d6.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="https://www.aem.live/docs/scheduling/media_15967b28507c6b7d2858acf916781e4442a4c76d6.png?width=750&amp;format=png&amp;optimize=medium" width="1151" height="710">
           </picture><br><br>The sheet should have two columns named <code>when</code> and <code>command</code>, containing time and command to execute.
         </p>
         <h2 id="specifying-time">Specifying time</h2>
@@ -178,10 +178,10 @@
         <p>Process a previewed JSON document line by line, interpreting it as a list of commands and their arguments, where the columns are commands and the cell values are arguments.<br><br>For example, given the following JSON document called <code>/tasks.json</code>:</p>
         <p>
           <picture>
-            <source type="image/webp" srcset="./media_1b896ad4aea8a07526e66ac5a15ec167f61b63eaf.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
-            <source type="image/webp" srcset="./media_1b896ad4aea8a07526e66ac5a15ec167f61b63eaf.png?width=750&amp;format=webply&amp;optimize=medium">
-            <source type="image/png" srcset="./media_1b896ad4aea8a07526e66ac5a15ec167f61b63eaf.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
-            <img loading="lazy" alt="" src="./media_1b896ad4aea8a07526e66ac5a15ec167f61b63eaf.png?width=750&amp;format=png&amp;optimize=medium" width="1196" height="192">
+            <source type="image/webp" srcset="https://www.aem.live/docs/scheduling/media_1b896ad4aea8a07526e66ac5a15ec167f61b63eaf.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="https://www.aem.live/docs/scheduling/media_1b896ad4aea8a07526e66ac5a15ec167f61b63eaf.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="https://www.aem.live/docs/scheduling/media_1b896ad4aea8a07526e66ac5a15ec167f61b63eaf.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="https://www.aem.live/docs/scheduling/media_1b896ad4aea8a07526e66ac5a15ec167f61b63eaf.png?width=750&amp;format=png&amp;optimize=medium" width="1196" height="192">
           </picture>
         </p>
         <p>Adding a command <code>process /tasks.json</code> to your <code>crontab</code> will preview and publish <code>/document1</code>, and then preview and publish <code>/document2</code>.</p>

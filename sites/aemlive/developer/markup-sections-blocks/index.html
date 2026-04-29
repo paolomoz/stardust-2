@@ -2,7 +2,7 @@
 <!--
   stardust:provenance
   writtenBy:        stardust:migrate
-  writtenAt:        2026-04-29T20:39:46.875Z
+  writtenAt:        2026-04-29T20:48:16.187Z
   page:             developer-markup-sections-blocks
   pageUrl:          https://www.aem.live/developer/markup-sections-blocks
   designMd:         DESIGN.md
@@ -83,10 +83,10 @@
         <div class="content">
         <p>
           <picture>
-            <source type="image/webp" srcset="./media_1a70c29a5d772d0dc5f0cd8d513af41df5bb8177d.jpeg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
-            <source type="image/webp" srcset="./media_1a70c29a5d772d0dc5f0cd8d513af41df5bb8177d.jpeg?width=750&amp;format=webply&amp;optimize=medium">
-            <source type="image/jpeg" srcset="./media_1a70c29a5d772d0dc5f0cd8d513af41df5bb8177d.jpeg?width=2000&amp;format=jpeg&amp;optimize=medium" media="(min-width: 600px)">
-            <img loading="lazy" alt="" src="./media_1a70c29a5d772d0dc5f0cd8d513af41df5bb8177d.jpeg?width=750&amp;format=jpeg&amp;optimize=medium" width="1103" height="827">
+            <source type="image/webp" srcset="https://www.aem.live/developer/markup-sections-blocks/media_1a70c29a5d772d0dc5f0cd8d513af41df5bb8177d.jpeg?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="https://www.aem.live/developer/markup-sections-blocks/media_1a70c29a5d772d0dc5f0cd8d513af41df5bb8177d.jpeg?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/jpeg" srcset="https://www.aem.live/developer/markup-sections-blocks/media_1a70c29a5d772d0dc5f0cd8d513af41df5bb8177d.jpeg?width=2000&amp;format=jpeg&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="https://www.aem.live/developer/markup-sections-blocks/media_1a70c29a5d772d0dc5f0cd8d513af41df5bb8177d.jpeg?width=750&amp;format=jpeg&amp;optimize=medium" width="1103" height="827">
           </picture>
         </p>
         
@@ -97,10 +97,10 @@
         <p>A document follows the following structure in the abstract.</p>
         <p>
           <picture>
-            <source type="image/webp" srcset="./media_125ee1e7dbebdfdac6eb972fdbeff2a361d4e85cf.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
-            <source type="image/webp" srcset="./media_125ee1e7dbebdfdac6eb972fdbeff2a361d4e85cf.png?width=750&amp;format=webply&amp;optimize=medium">
-            <source type="image/png" srcset="./media_125ee1e7dbebdfdac6eb972fdbeff2a361d4e85cf.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
-            <img loading="lazy" alt="" src="./media_125ee1e7dbebdfdac6eb972fdbeff2a361d4e85cf.png?width=750&amp;format=png&amp;optimize=medium" width="950" height="1092">
+            <source type="image/webp" srcset="https://www.aem.live/developer/markup-sections-blocks/media_125ee1e7dbebdfdac6eb972fdbeff2a361d4e85cf.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="https://www.aem.live/developer/markup-sections-blocks/media_125ee1e7dbebdfdac6eb972fdbeff2a361d4e85cf.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="https://www.aem.live/developer/markup-sections-blocks/media_125ee1e7dbebdfdac6eb972fdbeff2a361d4e85cf.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="https://www.aem.live/developer/markup-sections-blocks/media_125ee1e7dbebdfdac6eb972fdbeff2a361d4e85cf.png?width=750&amp;format=png&amp;optimize=medium" width="950" height="1092">
           </picture>
         </p>
         <p>A page as authored in Word or a Google Doc document uses the well-understood semantic model like headings, body text, lists, images, links, etc. that is shared between HTML, markdown, and Google Doc / Word. We call this <strong>default content</strong>. In an ideal situation one would leave as much of the content authored as default content as possible, since this is the natural way for authors to treat documents.<br><br>In addition to default content, we have a concept of page <strong>sections</strong>, separated by horizontal rules or <code>---</code> to group certain elements of a page together. There may be both semantic and design reasons to group content together. A simple case could be that a section of a page has a different background color.<br><br>In addition to that there is concept of <strong>blocks</strong> which are authored as a table with a heading as the first row that identifies the type of block. This concept is the easiest approach to componentize your code.</p>
@@ -110,20 +110,20 @@
         <p>The JavaScript library used in <code>scripts.js</code> takes the markup and enhances it into a DOM that is then used for most development tasks, specifically to build blocks. To create a DOM that’s easy to work with for custom project code, it is best to view it as a two-step process.</p>
         <p><br>In the first step, we create the markup with sections, blocks, and default content that will look similar to this.<br><br>
           <picture>
-            <source type="image/webp" srcset="./media_147eb4f680b068670fbc2e8bc7f2d7a697b2940ed.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
-            <source type="image/webp" srcset="./media_147eb4f680b068670fbc2e8bc7f2d7a697b2940ed.png?width=750&amp;format=webply&amp;optimize=medium">
-            <source type="image/png" srcset="./media_147eb4f680b068670fbc2e8bc7f2d7a697b2940ed.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
-            <img loading="lazy" alt="" src="./media_147eb4f680b068670fbc2e8bc7f2d7a697b2940ed.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="991">
+            <source type="image/webp" srcset="https://www.aem.live/developer/markup-sections-blocks/media_147eb4f680b068670fbc2e8bc7f2d7a697b2940ed.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="https://www.aem.live/developer/markup-sections-blocks/media_147eb4f680b068670fbc2e8bc7f2d7a697b2940ed.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="https://www.aem.live/developer/markup-sections-blocks/media_147eb4f680b068670fbc2e8bc7f2d7a697b2940ed.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="https://www.aem.live/developer/markup-sections-blocks/media_147eb4f680b068670fbc2e8bc7f2d7a697b2940ed.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="991">
           </picture>
         </p>
         <p>In the second step, the above mark-up is augmented into the following example DOM, which then can be used for styling and adding functionality. The differences between the markup that’s delivered from the server and the augmented DOM that is used for most of the development tasks is highlighted below.</p>
         <p>It primarily consists of introducing a wrapper <code>&lt;div&gt;</code> for blocks and default content and dynamically adding additional helpful CSS classes and data attributes that are used by the AEM block loader.</p>
         <p>
           <picture>
-            <source type="image/webp" srcset="./media_11e4f14204c1a0b5796ce1b86bf40c015682be287.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
-            <source type="image/webp" srcset="./media_11e4f14204c1a0b5796ce1b86bf40c015682be287.png?width=750&amp;format=webply&amp;optimize=medium">
-            <source type="image/png" srcset="./media_11e4f14204c1a0b5796ce1b86bf40c015682be287.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
-            <img loading="lazy" alt="" src="./media_11e4f14204c1a0b5796ce1b86bf40c015682be287.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1082">
+            <source type="image/webp" srcset="https://www.aem.live/developer/markup-sections-blocks/media_11e4f14204c1a0b5796ce1b86bf40c015682be287.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="https://www.aem.live/developer/markup-sections-blocks/media_11e4f14204c1a0b5796ce1b86bf40c015682be287.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="https://www.aem.live/developer/markup-sections-blocks/media_11e4f14204c1a0b5796ce1b86bf40c015682be287.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="https://www.aem.live/developer/markup-sections-blocks/media_11e4f14204c1a0b5796ce1b86bf40c015682be287.png?width=750&amp;format=png&amp;optimize=medium" width="1600" height="1082">
           </picture>
         </p>
         <h2 id="sections">Sections</h2>

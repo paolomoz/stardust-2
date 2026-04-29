@@ -2,7 +2,7 @@
 <!--
   stardust:provenance
   writtenBy:        stardust:migrate
-  writtenAt:        2026-04-29T20:39:47.181Z
+  writtenAt:        2026-04-29T20:48:16.344Z
   page:             blog-calendar-implementation
   pageUrl:          https://www.aem.live/blog/calendar-implementation
   designMd:         DESIGN.md
@@ -101,10 +101,10 @@
         <h3 id="diving-deeper-into-the-automation">Diving Deeper into the Automation</h3>
         <p>
           <picture>
-            <source type="image/webp" srcset="./media_1fe91d2cda33d3311add992de9c2525bbb84a2d21.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
-            <source type="image/webp" srcset="./media_1fe91d2cda33d3311add992de9c2525bbb84a2d21.png?width=750&amp;format=webply&amp;optimize=medium">
-            <source type="image/png" srcset="./media_1fe91d2cda33d3311add992de9c2525bbb84a2d21.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
-            <img loading="lazy" alt="" src="./media_1fe91d2cda33d3311add992de9c2525bbb84a2d21.png?width=750&amp;format=png&amp;optimize=medium" width="1104" height="788">
+            <source type="image/webp" srcset="https://www.aem.live/blog/calendar-implementation/media_1fe91d2cda33d3311add992de9c2525bbb84a2d21.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="https://www.aem.live/blog/calendar-implementation/media_1fe91d2cda33d3311add992de9c2525bbb84a2d21.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="https://www.aem.live/blog/calendar-implementation/media_1fe91d2cda33d3311add992de9c2525bbb84a2d21.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="https://www.aem.live/blog/calendar-implementation/media_1fe91d2cda33d3311add992de9c2525bbb84a2d21.png?width=750&amp;format=png&amp;optimize=medium" width="1104" height="788">
           </picture>
         </p>
         <p>If you're interested in the specifics, you can find the detailed Zapier workflow setup here: <a href="https://github.com/asthabh23/helix-website/blob/issue-646/blocks/feed/README.md">https://github.com/asthabh23/helix-website/blob/issue-646/blocks/feed/README.md#workflow</a>. The <a href="https://github.com/asthabh23/helix-website/tree/issue-646/blocks/feed">feed block</a> (part of the <a href="../../developer/block-party/index.html">block party</a>) pulls in the recording data and displays it in the correct order, newest first.</p>
@@ -126,10 +126,10 @@
         <h3 id="the-workflow-from-spreadsheet-to-screen">The Workflow: From Spreadsheet to Screen</h3>
         <p>
           <picture>
-            <source type="image/webp" srcset="./media_1f25ec8a88dfca4c80a4700a71c45732c791715af.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
-            <source type="image/webp" srcset="./media_1f25ec8a88dfca4c80a4700a71c45732c791715af.png?width=750&amp;format=webply&amp;optimize=medium">
-            <source type="image/png" srcset="./media_1f25ec8a88dfca4c80a4700a71c45732c791715af.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
-            <img loading="lazy" alt="" src="./media_1f25ec8a88dfca4c80a4700a71c45732c791715af.png?width=750&amp;format=png&amp;optimize=medium" width="1430" height="574">
+            <source type="image/webp" srcset="https://www.aem.live/blog/calendar-implementation/media_1f25ec8a88dfca4c80a4700a71c45732c791715af.png?width=2000&amp;format=webply&amp;optimize=medium" media="(min-width: 600px)">
+            <source type="image/webp" srcset="https://www.aem.live/blog/calendar-implementation/media_1f25ec8a88dfca4c80a4700a71c45732c791715af.png?width=750&amp;format=webply&amp;optimize=medium">
+            <source type="image/png" srcset="https://www.aem.live/blog/calendar-implementation/media_1f25ec8a88dfca4c80a4700a71c45732c791715af.png?width=2000&amp;format=png&amp;optimize=medium" media="(min-width: 600px)">
+            <img loading="lazy" alt="" src="https://www.aem.live/blog/calendar-implementation/media_1f25ec8a88dfca4c80a4700a71c45732c791715af.png?width=750&amp;format=png&amp;optimize=medium" width="1430" height="574">
           </picture>
         </p>
         <p>The workflow was designed to be as efficient and user-friendly as possible. Users would duplicate the event template within their department's folder, add their event data, and update the metadata in the template. After a quick preview and publish, the event would be added to their department's calendar. Behind the scenes, all events were indexed onto a <code>raw_index</code> sheet, and then automatically copied to the <code>shared-default</code> sheet. Site admins would then review the <code>shared-default</code> sheet and mark important events as "featured." Those "featured" events would automatically appear as cards on the homepage, keeping the community informed about key happenings.</p>
