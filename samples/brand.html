@@ -57,12 +57,10 @@
   /* HTML [hidden] must beat author display:flex/etc — otherwise hidden overlays still capture pointer/wheel events. */
   [hidden] { display: none !important; }
 
-  /* --- HEADER ---------------------------------------------------- */
+  /* --- HEADER (browser-chrome row above the iframe) -------------- */
   header.chrome {
     position: fixed; top: 0; left: 0; right: 0; z-index: 30;
-    background: rgba(6,10,20,0.86);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: var(--ink-deep);
     border-bottom: 1px solid var(--dust-08);
     height: var(--header-h);
     display: flex; align-items: center;
@@ -114,13 +112,13 @@
   }
   #toast.shown { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  /* --- STAGE (full-bleed preview area) --------------------------- */
-  /* Desktop: iframe fills the entire viewport — header + sidekick
-     overlay it. Tablet/mobile: stardust ground shows through, device
-     is centered with margin to clear the header. */
+  /* --- STAGE (full preview area, starts BELOW the header) -------- */
+  /* The header is treated like browser chrome — it sits above the
+     stage; the iframe never goes under it. Tablet/mobile: stardust
+     ground shows around the device. */
   .stage {
     position: fixed;
-    inset: 0;
+    inset: var(--header-h) 0 0 0;
     overflow: auto;
     background: var(--ink-deep);
     text-align: center;
@@ -136,8 +134,8 @@
                 margin 280ms;
   }
   .device.desktop {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     margin: 0;
     border-radius: 0;
     border: 0;
@@ -148,7 +146,7 @@
     width: 768px;
     height: calc(100vh - var(--header-h) - 48px);
     max-height: 1024px;
-    margin: var(--header-h) auto 24px;
+    margin: 24px auto;
     border-radius: 22px;
     border: 8px solid #0e1426;
     box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px var(--dust-15);
@@ -157,7 +155,7 @@
     width: 390px;
     height: calc(100vh - var(--header-h) - 48px);
     max-height: 844px;
-    margin: var(--header-h) auto 24px;
+    margin: 24px auto;
     border-radius: 36px;
     border: 10px solid #0e1426;
     box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px var(--dust-15);
