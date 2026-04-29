@@ -82,11 +82,26 @@
   .crumb .sep { color: var(--dust-30); padding: 0 8px; }
   .crumb .here { color: var(--dust); }
   header .actions { margin-left: auto; display: flex; gap: 14px; align-items: center; }
-  header .actions a {
+  header .actions a, header .actions button {
     color: var(--dust-50); text-decoration: none;
     font: 11px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase;
+    background: transparent; border: 0; padding: 0; cursor: pointer;
   }
-  header .actions a:hover { color: var(--amber); }
+  header .actions a:hover, header .actions button:hover { color: var(--amber); }
+
+  /* toast */
+  #toast {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--amber); color: var(--ink);
+    padding: 10px 18px; border-radius: 8px;
+    font: 500 12px/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+    opacity: 0; pointer-events: none;
+    transition: opacity 200ms, transform 200ms;
+    z-index: 100;
+  }
+  #toast.shown { opacity: 1; transform: translateX(-50%) translateY(0); }
 
   /* --- STAGE (full-bleed preview area) --------------------------- */
   /* Desktop: iframe fills the entire viewport — header + sidekick
@@ -411,9 +426,12 @@
     <span class="actions">
       <a href="#" id="open-source" target="_blank" rel="noopener" hidden>SOURCE ↗</a>
       <a href="#" id="open-direction" target="_blank" rel="noopener" hidden>DIRECTION ↗</a>
+      <button type="button" id="copy-link" title="Copy permalink to this variant">COPY LINK ⎘</button>
     </span>
   </div>
 </header>
+
+<div id="toast" role="status" aria-live="polite"></div>
 
 <main class="stage" id="stage" hidden>
   <div class="device desktop" id="device">
@@ -567,12 +585,41 @@
       vsw.append(btn);
     });
 
-    // Default to primary, else first
+    // Default to primary, else first; permalinks (location.hash) override.
     const primaryIdx = Math.max(0, variants.findIndex(v => v.isPrimary));
     let activeIdx = primaryIdx === -1 ? 0 : primaryIdx;
     let mode = 'prototype';
 
-    activate(activeIdx);
+    function applyHash() {
+      const h = location.hash.slice(1);
+      if (h === 'review' && meta.brandReview) {
+        mode = 'review';
+      } else if (h) {
+        const i = variants.findIndex(v => v.id === h);
+        if (i >= 0) { activeIdx = i; mode = 'prototype'; }
+      }
+    }
+    applyHash();
+
+    function syncHash() {
+      const hash = mode === 'review' ? 'review' : variants[activeIdx].id;
+      const url = `${location.pathname}${location.search}#${hash}`;
+      if (location.pathname + location.search + location.hash !== url) {
+        history.replaceState(null, '', url);
+      }
+    }
+
+    function syncTitle() {
+      if (mode === 'review') {
+        document.title = `Stardust — ${meta.title || slug} · Brand review`;
+      } else {
+        const v = variants[activeIdx];
+        document.title = `Stardust — ${meta.title || slug} · Variant ${v.id}${v.name ? ' · ' + v.name : ''}`;
+      }
+    }
+
+    if (mode === 'review') applyMode();
+    else activate(activeIdx);
 
     // Brand-review toggle (only when meta.brandReview is set)
     if (meta.brandReview) {
@@ -584,6 +631,18 @@
         });
       });
     }
+
+    // React to back/forward + manually pasted hash
+    window.addEventListener('hashchange', () => {
+      const wasMode = mode;
+      const wasIdx = activeIdx;
+      applyHash();
+      if (mode !== wasMode || activeIdx !== wasIdx) {
+        if (mode === 'review') applyMode();
+        else if (wasMode === 'review') applyMode();
+        else activate(activeIdx);
+      }
+    });
 
     function applyMode() {
       const preview = document.getElementById('preview');
@@ -601,6 +660,8 @@
         sectConcept.hidden = false;
         activate(activeIdx);
       }
+      syncHash();
+      syncTitle();
     }
 
     function activate(i) {
@@ -628,6 +689,8 @@
         concept.insertAdjacentHTML('beforeend',
           `<div class="pair fixed"><span class="lbl">${lbl}</span><p>${richEscape(fix)}</p></div>`);
       }
+      syncHash();
+      syncTitle();
     }
 
     // Device switch
@@ -643,6 +706,27 @@
     // Sidekick collapse
     const sidekick = document.getElementById('sidekick');
     document.getElementById('sk-toggle').addEventListener('click', () => sidekick.classList.toggle('collapsed'));
+
+    // Copy permalink
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('shown');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('shown'), 1600);
+    }
+    document.getElementById('copy-link').addEventListener('click', () => {
+      const url = location.href;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(
+          () => showToast('Link copied'),
+          () => showToast(url)
+        );
+      } else {
+        showToast(url);
+      }
+    });
   }
 })();
 </script>
