@@ -2,7 +2,7 @@
 <!--
   stardust:provenance
   writtenBy:        stardust:migrate
-  writtenAt:        2026-04-29T21:05:48.574Z
+  writtenAt:        2026-04-30T06:33:05.712Z
   page:             blog
   pageUrl:          https://www.aem.live/blog
   designMd:         DESIGN.md
@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="../assets/canon.css">
 <link rel="canonical" href="https://paolomoz.github.io/stardust-2/sites/aemlive/blog/">
 </head>
-<body data-template="listing">
+<body data-template="blog-index">
 <a class="skip" href="#main">Skip to content</a>
 <header data-section="header" data-intent="navigate" data-layout="full-width-light" data-canon="">
   <div class="container">
@@ -53,112 +53,131 @@
     </nav>
   </div>
 </header>
-<main id="main" data-template="listing">
-  <section data-section="hero" data-intent="navigate" data-layout="contained" style="padding-block: 64px 32px; border-bottom: 1px solid var(--ds-color-border);">
+<main id="main" data-template="blog-index">
+  <section data-section="hero" data-intent="navigate" data-layout="contained" class="blog-hero">
     <div class="container">
-      <p class="eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; BLOG</p>
-      <h1 style="font-family: var(--ds-font-display); font-weight:900; font-size: clamp(36px, 5vw, var(--ds-type-title-2)); line-height: 1.0; letter-spacing: -0.03em; margin-block: 16px 16px;">AEM.live Blog</h1>
-      <p style="color: var(--ds-color-text-muted); font-size: var(--ds-type-body-l);">Recent blog posts from the AEM team, updated every few weeks</p>
+      <p class="eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
+      <h1 class="blog-hero__title">Posts from the AEM team.</h1>
+      <p class="blog-hero__lede">Stories from the engineers, authors, and architects building Edge Delivery Services.</p>
     </div>
   </section>
-  <section data-section="listing" data-intent="discovery" data-layout="grid">
+  <section data-section="featured" data-intent="lead-story" data-layout="split-7-5" data-items="1">
     <div class="container">
-      <div class="listing__grid"><a class="listing__item" href="byom-content-overlays/">
-      <p class="listing__eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
-      <h3 class="listing__title">↑↑↓↓←→←→ B A START: The Konami Code for Dynamic Publishing at Scale</h3>
-      <p class="listing__desc">Last week spelled deprecation for folder mapping. This week, two developers showed us what rises from its ashes.</p>
-      <span class="listing__arrow" aria-hidden="true">→</span>
-    </a>
-<a class="listing__item" href="calendar-implementation/">
-      <p class="listing__eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
-      <h3 class="listing__title">A Date with Edge Delivery: Putting Calendars on the Web, Twice</h3>
-      <p class="listing__desc">For sites that connect the digital world with the real world, calendars are essential. Edge Delivery Services provides multiple ways to implement calendars, and…</p>
-      <span class="listing__arrow" aria-hidden="true">→</span>
-    </a>
-<a class="listing__item" href="hlx-is-now-aem-live/">
-      <p class="listing__eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
-      <h3 class="listing__title">A high-five for aem.live</h3>
-      <p class="listing__desc">If you've been using Adobe Experience Manager for a short while, you may have wondered what the hlx.live and hlx.page in the preview and live ...</p>
-      <span class="listing__arrow" aria-hidden="true">→</span>
-    </a>
-<a class="listing__item" href="sidekick-v7/">
-      <p class="listing__eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
-      <h3 class="listing__title">AEM Sidekick v7 – The Story Behind the Latest Release</h3>
-      <p class="listing__desc">As we are releasing Version 7 of AEM Sidekick, this seems like a good time to tell the story so far.</p>
-      <span class="listing__arrow" aria-hidden="true">→</span>
-    </a>
-<a class="listing__item" href="aem-live-at-dev-live/">
-      <p class="listing__eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
-      <h3 class="listing__title">aem.live at Adobe Developers Live 2024</h3>
-      <p class="listing__desc">For years, Adobe Developers Live has been a live, but virtual event. But real-world events have a special vibe for me and that's why I ...</p>
-      <span class="listing__arrow" aria-hidden="true">→</span>
-    </a>
-<a class="listing__item" href="archive/">
-      <p class="listing__eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
-      <h3 class="listing__title">AEM.live Blog: All posts, ever</h3>
-      <p class="listing__desc">All blog posts from the AEM team, updated every few weeks</p>
-      <span class="listing__arrow" aria-hidden="true">→</span>
-    </a>
-<a class="listing__item" href="adapt-to-2025/">
-      <p class="listing__eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
-      <h3 class="listing__title">Best of adaptTo() 2025</h3>
-      <p class="listing__desc">As every late September, it’s adaptTo() time! Europe’s leading AEM developer conference hosted by diva-e Conclusion.</p>
-      <span class="listing__arrow" aria-hidden="true">→</span>
-    </a>
-<a class="listing__item" href="future-proof-multilingual-website-edge-ensemble/">
-      <p class="listing__eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
-      <h3 class="listing__title">Bonjour! Hola! Hello! – Creating Multilingual Sites with Ease</h3>
-      <p class="listing__desc">For businesses looking to reach a broad audience or customer base, multilingual support is often an essential requirement. The dominant approach is often to cre…</p>
-      <span class="listing__arrow" aria-hidden="true">→</span>
-    </a>
-<a class="listing__item" href="content-document-semantics/">
-      <p class="listing__eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
-      <h3 class="listing__title">Documents that dazzle, content that clicks, and semantics that snap: the pièce de résistance to your content strategy</h3>
-      <p class="listing__desc">When you put a LEGO model together, there’s a certain feeling you get when you click two pieces together. A visceral satisfaction with the way ...</p>
-      <span class="listing__arrow" aria-hidden="true">→</span>
-    </a>
-<a class="listing__item" href="built-ready-for-the-season/">
-      <p class="listing__eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
-      <h3 class="listing__title">How Edge Delivery Services handles peak season (hint: like Canadians handle winter)</h3>
-      <p class="listing__desc">How does a Canadian prepare for winter weather? Trick question: we don't. We're born ready.</p>
-      <span class="listing__arrow" aria-hidden="true">→</span>
-    </a>
-<a class="listing__item" href="roadmaps/">
-      <p class="listing__eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
-      <h3 class="listing__title">Roadmaps, Marty? Where we’re going, we don't need Roadmaps!</h3>
-      <p class="listing__desc">When asked, “Can you share your product roadmap?” our answer isn’t as simple as you might expect. And that's because we don't have a traditional ...</p>
-      <span class="listing__arrow" aria-hidden="true">→</span>
-    </a>
-<a class="listing__item" href="toms-developer-dilemma/">
-      <p class="listing__eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
-      <h3 class="listing__title">The Architecture Problem That's Breaking AIs for Content Management (and the Secret Sauce to Fix It)</h3>
-      <p class="listing__desc">The Martin-Gropius-Bau sticks out in my commute to Adobe's Berlin office: a russet neo-Renaissance masterpiece from 1881. Martin built it after the Paris Commun…</p>
-      <span class="listing__arrow" aria-hidden="true">→</span>
-    </a>
-<a class="listing__item" href="folder-mapping-deprecated/">
-      <p class="listing__eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
-      <h3 class="listing__title">The One Template That Broke the Internet (And My Heart)</h3>
-      <p class="listing__desc">I fell in love with folder mapping when it solved an impossible problem: serving 5,000+ dynamic stock pages with one elegant template. No more managing ...</p>
-      <span class="listing__arrow" aria-hidden="true">→</span>
-    </a>
-<a class="listing__item" href="edge-next/">
-      <p class="listing__eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
-      <h3 class="listing__title">The Performance Paradox: When Simple Architecture Beats Complex Frameworks</h3>
-      <p class="listing__desc">Web performance and developer experience often pull in opposite directions. As frameworks like Next.js have grown more powerful, they've also become more comple…</p>
-      <span class="listing__arrow" aria-hidden="true">→</span>
-    </a>
-<a class="listing__item" href="organizing-source-code-ensemble/">
-      <p class="listing__eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
-      <h3 class="listing__title">Unlocking Efficiency with Helix 5: A Scalable Approach to Multi-Site Development</h3>
-      <p class="listing__desc">Imagine needing to launch four websites rapidly - while maintaining quality, consistency, and performance. One of our customers faced this exact challenge. They…</p>
-      <span class="listing__arrow" aria-hidden="true">→</span>
-    </a>
-<a class="listing__item" href="testing-in-aem/">
-      <p class="listing__eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
-      <h3 class="listing__title">Why I don’t recommend UI testing in AEM (even though I write tests for my own projects)</h3>
-      <p class="listing__desc">When customers or partners ask me, “Should we write UI tests for our AEM projects?”, I usually say, “No, probably not.” But here’s the twist: ...</p>
-      <span class="listing__arrow" aria-hidden="true">→</span>
-    </a></div>
+      <a class="featured" href="byom-content-overlays/">
+        <div class="featured__media">
+          <img loading="lazy" src="https://www.aem.live/blog/media_167b5904a48c7a46084398a7d2457cae99c401ef1.png?width=1200&amp;format=pjpg&amp;optimize=medium" alt="">
+        </div>
+        <div class="featured__body">
+          <p class="eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Featured · Blog</p>
+          <h2 class="featured__title">↑↑↓↓←→←→ B A START: The Konami Code for Dynamic Publishing at Scale</h2>
+          <p class="featured__desc">Last week spelled deprecation for folder mapping. This week, two developers showed us what rises from its ashes.</p>
+          <span class="featured__more">Read the post →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+  <section data-section="recent" data-intent="discovery" data-layout="grid-3" data-items="6">
+    <div class="container">
+      <header class="section__head">
+        <p class="eyebrow">Recent</p>
+        <h2 class="section__title">From the team</h2>
+      </header>
+      <div class="post-grid">
+        <a class="post-card" href="calendar-implementation/">
+          <div class="post-card__media"><img loading="lazy" src="https://www.aem.live/blog/media_15671ff55581a2670adc890cb884498bcefc2b165.png?width=1200&amp;format=pjpg&amp;optimize=medium" alt=""></div>
+          <div class="post-card__body">
+            <p class="eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
+            <h3 class="post-card__title">A Date with Edge Delivery: Putting Calendars on the Web, Twice</h3>
+            <p class="post-card__desc">For sites that connect the digital world with the real world, calendars are essential. Edge Delivery Services …</p>
+          </div>
+        </a>
+<a class="post-card" href="hlx-is-now-aem-live/">
+          <div class="post-card__media"><img loading="lazy" src="https://www.aem.live/blog/media_1c4c7dc09ea738d661e244ec26968945fd8473d95.png?width=1200&amp;format=pjpg&amp;optimize=medium" alt=""></div>
+          <div class="post-card__body">
+            <p class="eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
+            <h3 class="post-card__title">A high-five for aem.live</h3>
+            <p class="post-card__desc">If you've been using Adobe Experience Manager for a short while, you may have wondered what the hlx.live and h…</p>
+          </div>
+        </a>
+<a class="post-card" href="sidekick-v7/">
+          <div class="post-card__media"><img loading="lazy" src="https://www.aem.live/blog/media_177d3360462f1c20f904f4ce601da7d4053a80b68.png?width=1200&amp;format=pjpg&amp;optimize=medium" alt=""></div>
+          <div class="post-card__body">
+            <p class="eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
+            <h3 class="post-card__title">AEM Sidekick v7 – The Story Behind the Latest Release</h3>
+            <p class="post-card__desc">As we are releasing Version 7 of AEM Sidekick, this seems like a good time to tell the story so far.</p>
+          </div>
+        </a>
+<a class="post-card" href="aem-live-at-dev-live/">
+          <div class="post-card__media"><img loading="lazy" src="https://www.aem.live/blog/media_12328c8946c83ed9c0bcc8200c0a6d9a2d99fc387.png?width=1200&amp;format=pjpg&amp;optimize=medium" alt=""></div>
+          <div class="post-card__body">
+            <p class="eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
+            <h3 class="post-card__title">aem.live at Adobe Developers Live 2024</h3>
+            <p class="post-card__desc">For years, Adobe Developers Live has been a live, but virtual event. But real-world events have a special vibe…</p>
+          </div>
+        </a>
+<a class="post-card" href="archive/">
+          <div class="post-card__media"><img loading="lazy" src="https://www.aem.live/blog/media_1d0a67dde9bbe81948c14183d96176cfc2f907a0b.png?width=1200&amp;format=pjpg&amp;optimize=medium" alt=""></div>
+          <div class="post-card__body">
+            <p class="eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
+            <h3 class="post-card__title">AEM.live Blog: All posts, ever</h3>
+            <p class="post-card__desc">All blog posts from the AEM team, updated every few weeks</p>
+          </div>
+        </a>
+<a class="post-card" href="adapt-to-2025/">
+          <div class="post-card__media"><img loading="lazy" src="https://www.aem.live/blog/media_134522bf1f696a9ccde70efb2d824c56e939636d3.jpg?width=1200&amp;format=pjpg&amp;optimize=medium" alt=""></div>
+          <div class="post-card__body">
+            <p class="eyebrow"><span style="color:var(--ds-color-success)">●</span>&nbsp; Blog</p>
+            <h3 class="post-card__title">Best of adaptTo() 2025</h3>
+            <p class="post-card__desc">As every late September, it’s adaptTo() time! Europe’s leading AEM developer conference hosted by diva-e Concl…</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section data-section="archive" data-intent="discovery" data-layout="stack" data-items="9">
+    <div class="container">
+      <header class="section__head">
+        <p class="eyebrow">Archive</p>
+        <h2 class="section__title">Earlier reads</h2>
+      </header>
+      <ul class="archive-list" role="list">
+        <li><a class="archive__item" href="future-proof-multilingual-website-edge-ensemble/">
+          <span class="archive__title">Bonjour! Hola! Hello! – Creating Multilingual Sites with Ease</span>
+          <span class="archive__arrow" aria-hidden="true">→</span>
+        </a></li>
+<li><a class="archive__item" href="content-document-semantics/">
+          <span class="archive__title">Documents that dazzle, content that clicks, and semantics that snap: the pièce de résistance to your content strategy</span>
+          <span class="archive__arrow" aria-hidden="true">→</span>
+        </a></li>
+<li><a class="archive__item" href="built-ready-for-the-season/">
+          <span class="archive__title">How Edge Delivery Services handles peak season (hint: like Canadians handle winter)</span>
+          <span class="archive__arrow" aria-hidden="true">→</span>
+        </a></li>
+<li><a class="archive__item" href="roadmaps/">
+          <span class="archive__title">Roadmaps, Marty? Where we’re going, we don't need Roadmaps!</span>
+          <span class="archive__arrow" aria-hidden="true">→</span>
+        </a></li>
+<li><a class="archive__item" href="toms-developer-dilemma/">
+          <span class="archive__title">The Architecture Problem That's Breaking AIs for Content Management (and the Secret Sauce to Fix It)</span>
+          <span class="archive__arrow" aria-hidden="true">→</span>
+        </a></li>
+<li><a class="archive__item" href="folder-mapping-deprecated/">
+          <span class="archive__title">The One Template That Broke the Internet (And My Heart)</span>
+          <span class="archive__arrow" aria-hidden="true">→</span>
+        </a></li>
+<li><a class="archive__item" href="edge-next/">
+          <span class="archive__title">The Performance Paradox: When Simple Architecture Beats Complex Frameworks</span>
+          <span class="archive__arrow" aria-hidden="true">→</span>
+        </a></li>
+<li><a class="archive__item" href="organizing-source-code-ensemble/">
+          <span class="archive__title">Unlocking Efficiency with Helix 5: A Scalable Approach to Multi-Site Development</span>
+          <span class="archive__arrow" aria-hidden="true">→</span>
+        </a></li>
+<li><a class="archive__item" href="testing-in-aem/">
+          <span class="archive__title">Why I don’t recommend UI testing in AEM (even though I write tests for my own projects)</span>
+          <span class="archive__arrow" aria-hidden="true">→</span>
+        </a></li>
+      </ul>
     </div>
   </section>
 </main>
